@@ -1,18 +1,52 @@
 // =======================================================
 // src/utils/routeWeather.js
-// Meteo sul tragitto: campiona N punti lungo polyline, fallback start/end
+// Meteo sul tragitto: campiona N punti lungo polyline,
+// fallback: start/end (array [lat,lng] o object {lat,lng})
 // Env: VITE_OWM_KEY
 // =======================================================
 const OWM_KEY = import.meta.env.VITE_OWM_KEY;
 
+function asLatLng(v) {
+  // accetta [lat,lng] oppure {lat,lng}/{lat,lon}/{latitude,longitude}
+  if (Array.isArray(v) && v.length >= 2) {
+    const lat = Number(v[0]);
+    const lng = Number(v[1]);
+    return Number.isFinite(lat) && Number.isFinite(lng) ? [lat, lng] : null;
+  }
+  if (v && typeof v === "object") {
+    const lat = Number(v.lat ?? v.latitude);
+    const lng = Number(v.lng ?? v.lon ?? v.longitude);
+    return Number.isFinite(lat) && Number.isFinite(lng) ? [lat, lng] : null;
+  }
+  return null;
+}
+
 function pickSamplePoints(polyline = [], count = 7) {
   if (!Array.isArray(polyline) || polyline.length === 0) return [];
-  if (polyline.length <= count) return polyline;
+  const norm = polyline.map(asLatLng).filter(Boolean);
+  if (norm.length === 0) return [];
+  if (norm.length <= count) return norm;
 
   const idxs = [];
-  const last = polyline.length - 1;
+  const last = norm.length - 1;
   for (let i = 0; i < count; i++) idxs.push(Math.round((i / (count - 1)) * last));
-  return Array.from(new Set(idxs)).map((i) => polyline[i]);
+  return Array.from(new Set(idxs)).map((i) => norm[i]);
+}
+
+function lerp(a, b, t) {
+  return a + (b - a) * t;
+}
+
+function sampleBetween(start, end, count = 7) {
+  const s = asLatLng(start);
+  const e = asLatLng(end);
+  if (!s || !e) return [];
+  const pts = [];
+  for (let i = 0; i < count; i++) {
+    const t = count === 1 ? 0 : i / (count - 1);
+    pts.push([lerp(s[0], e[0], t), lerp(s[1], e[1], t)]);
+  }
+  return pts;
 }
 
 function normalizeMain(m) {
@@ -26,32 +60,60 @@ function normalizeMain(m) {
   return s || "variabile";
 }
 
-const rank = (k) => ["sereno","nuvoloso","variabile","nebbia","pioggia","neve","temporale"].indexOf(k);
+const order = ["sereno", "nuvoloso", "variabile", "nebbia", "pioggia", "neve", "temporale"];
+const rank = (k) => Math.max(0, order.indexOf(k));
+
+async function fetchOWM(lat, lon, timeoutMs = 9000) {
+  const url = `https://api.openweathermap.org/data/2.5/weather?lat=${encodeURIComponent(
+    lat
+  )}&lon=${encodeURIComponent(lon)}&appid=${encodeURIComponent(OWM_KEY)}&units=metric`;
+
+  const ctrl = new AbortController();
+  const to = setTimeout(() => ctrl.abort(), timeoutMs);
+
+  try {
+    const r = await fetch(url, { signal: ctrl.signal });
+    const j = await r.json().catch(() => null);
+    return j;
+  } catch {
+    return null;
+  } finally {
+    clearTimeout(to);
+  }
+}
+
+function okOWM(j) {
+  if (!j || typeof j !== "object") return false;
+  const cod = j.cod;
+  // OpenWeather: successo = cod 200 (number o string)
+  if (cod === 200 || cod === "200") return true;
+  // fallback (alcune risposte possono non avere cod ma avere main/weather)
+  if (j.main && j.weather && Array.isArray(j.weather)) return true;
+  return false;
+}
+
+const avg = (a) => (a.length ? a.reduce((s, n) => s + n, 0) / a.length : null);
 
 export async function getRouteWeatherSummary(route) {
   if (!OWM_KEY) return { ok: false, note: "Manca VITE_OWM_KEY (OpenWeather)." };
 
-  // punti: polyline > start/end
+  // 1) punti: polyline > start/end (campionati)
   let pts = [];
   if (Array.isArray(route?.polyline) && route.polyline.length >= 2) {
     pts = pickSamplePoints(route.polyline, 7);
-  } else if (route?.start?.lat && route?.end?.lat) {
-    pts = [
-      [route.start.lat, route.start.lng],
-      [route.end.lat, route.end.lng],
-    ];
+  } else if (route?.start && route?.end) {
+    pts = sampleBetween(route.start, route.end, 7);
   }
 
-  if (pts.length === 0) return { ok: false, note: "Mancano polyline o start/end per calcolare meteo." };
+  if (!pts.length) return { ok: false, note: "Mancano polyline o start/end per calcolare meteo." };
 
-  const calls = pts.map(([lat, lon]) =>
-    fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${OWM_KEY}&units=metric`)
-      .then((r) => r.json())
+  // 2) fetch
+  const res = await Promise.allSettled(
+    pts.map(([lat, lon]) => fetchOWM(lat, lon, 9000))
   );
 
-  const res = await Promise.allSettled(calls);
   const ok = res
-    .filter((x) => x.status === "fulfilled" && x.value && !x.value.cod)
+    .filter((x) => x.status === "fulfilled" && okOWM(x.value))
     .map((x) => x.value);
 
   if (!ok.length) return { ok: false, note: "Meteo non disponibile." };
@@ -63,16 +125,17 @@ export async function getRouteWeatherSummary(route) {
   let worst = "variabile";
   for (const k of kinds) if (rank(k) > rank(worst)) worst = k;
 
-  const avg = (a) => a.reduce((s, n) => s + n, 0) / a.length;
+  const tAvg = avg(temps);
+  const wAvg = avg(winds);
 
   return {
     ok: true,
     points: ok.length,
     worst,
-    temp: temps.length ? Math.round(avg(temps)) : null,
+    temp: tAvg !== null ? Math.round(tAvg) : null,
     tempMin: temps.length ? Math.round(Math.min(...temps)) : null,
     tempMax: temps.length ? Math.round(Math.max(...temps)) : null,
-    windAvgKmh: winds.length ? Math.round(avg(winds) * 3.6) : null,
+    windAvgKmh: wAvg !== null ? Math.round(wAvg * 3.6) : null,
     windMaxKmh: winds.length ? Math.round(Math.max(...winds) * 3.6) : null,
     updatedAt: new Date().toISOString(),
   };
