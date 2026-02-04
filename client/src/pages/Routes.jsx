@@ -136,38 +136,56 @@ export default function Routes() {
     return ["ALL", ...Array.from(set).sort()];
   }, [routes]);
 
-  const filtered = useMemo(() => {
-    const query = q.trim().toLowerCase();
+const filtered = useMemo(() => {
+  let out = [...routes];
 
-    let out = routes;
+  // ricerca testo
+  const query = q.trim().toLowerCase();
+  if (query) {
+    out = out.filter((r) => {
+      const blob = [
+        r.name,
+        r.region,
+        r.country,
+        r.description,
+        r.pace,
+      ]
+        .join(" ")
+        .toLowerCase();
+      return blob.includes(query);
+    });
+  }
 
-    if (query) {
-      out = out.filter((r) => {
-        const blob = [r.name, r.region, r.country, r.bestSeason, r.description, r.pace]
-          .join(" ")
-          .toLowerCase();
-        return blob.includes(query);
-      });
-    }
+  // paese
+  if (country !== "ALL") {
+    out = out.filter(
+      (r) => String(r.country || "").toUpperCase() === country
+    );
+  }
 
-    if (country !== "ALL") {
-      out = out.filter((r) => String(r.country || "").toUpperCase() === country);
-    }
+  // ritmo
+  if (pace !== "ALL") {
+    out = out.filter(
+      (r) => String(r.pace || "").toLowerCase() === pace.toLowerCase()
+    );
+  }
 
-    if (pace !== "ALL") {
-      out = out.filter((r) => String(r.pace || "").toLowerCase() === pace);
-    }
+  // curve min
+  out = out.filter(
+    (r) => Number(r.curvesScore || 0) >= Number(minCurves || 0)
+  );
 
-    out = out.filter((r) => Number(r.curvesScore || 0) >= Number(minCurves || 0));
+  // ordinamento
+  const sorter = {
+    curves: (a, b) => Number(b.curvesScore || 0) - Number(a.curvesScore || 0),
+    asphalt: (a, b) =>
+      Number(b.asphaltScore || 0) - Number(a.asphaltScore || 0),
+    distance: (a, b) =>
+      Number(a.distanceKm || 0) - Number(b.distanceKm || 0),
+  }[sortBy];
 
-    const sorter = {
-      curves: (a, b) => Number(b.curvesScore || 0) - Number(a.curvesScore || 0),
-      asphalt: (a, b) => Number(b.asphaltScore || 0) - Number(a.asphaltScore || 0),
-      distance: (a, b) => Number(a.distanceKm || 0) - Number(b.distanceKm || 0),
-    }[sortBy];
-
-    return [...out].sort(sorter);
-  }, [routes, q, country, pace, minCurves, sortBy]);
+  return out.sort(sorter);
+}, [routes, q, country, pace, minCurves, sortBy]);
 
   return (
     <div style={{ padding: 20, maxWidth: 1250, margin: "0 auto" }}>
@@ -412,6 +430,24 @@ function RouteDetail({ route }) {
 
   const cPill = scorePill(curves);
   const aPill = scorePill(asphalt);
+<div style={{ marginTop: 12 }}>
+  <a
+    href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(route.name + " " + route.region)}`}
+    target="_blank"
+    rel="noreferrer"
+    style={{
+      display: "inline-block",
+      padding: "10px 12px",
+      borderRadius: 12,
+      border: "1px solid rgba(0,0,0,0.15)",
+      background: "white",
+      fontSize: 13,
+      textDecoration: "none",
+    }}
+  >
+    📍 Apri in Google Maps
+  </a>
+</div>
 
   // ✅ METEO (campionamento punti)
   const [wx, setWx] = useState(null);
@@ -454,6 +490,7 @@ function RouteDetail({ route }) {
         <div style={{ marginTop: 10, padding: 12, borderRadius: 16, background: "rgba(0,0,0,0.04)" }}>
           {wx.note || "Meteo non disponibile."}
         </div>
+        
       );
     }
 
@@ -495,6 +532,7 @@ function RouteDetail({ route }) {
           Aggiornato: {String(wx.updatedAt || "").slice(0, 16).replace("T", " ")}
         </div>
       </div>
+      
     );
   })();
 
