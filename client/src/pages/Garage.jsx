@@ -1,6 +1,7 @@
 // =======================================================
 // src/pages/Garage.jsx
 // ✅ FIX: puoi salvare documenti anche SENZA file (solo tipo+scadenza+note)
+// ✅ NEW: Storico Tagliandi / Interventi (offline) per ogni moto
 // =======================================================
 import { useEffect, useMemo, useState } from "react";
 import { loadBikes, saveBikes, fileToDataUrl } from "../utils/storage";
@@ -80,6 +81,13 @@ export default function Garage() {
   const [docFile, setDocFile] = useState(null);
   const [docBusy, setDocBusy] = useState(false);
 
+  // ✅ Storico tagliandi/interventi
+  const [svcDate, setSvcDate] = useState("");
+  const [svcKm, setSvcKm] = useState("");
+  const [svcType, setSvcType] = useState("Tagliando");
+  const [svcCost, setSvcCost] = useState("");
+  const [svcNote, setSvcNote] = useState("");
+
   useEffect(() => {
     if (bikes.length === 0) {
       if (activeId !== null) setActiveId(null);
@@ -98,9 +106,15 @@ export default function Garage() {
     if (!activeBike) return null;
 
     const currentKm = Number(activeBike.km || 0);
-    const oilInterval = Number(activeBike.maintenance?.oilEveryKm ?? DEFAULTS.oilEveryKm);
-    const chainInterval = Number(activeBike.maintenance?.chainEveryKm ?? DEFAULTS.chainEveryKm);
-    const tiresInterval = Number(activeBike.maintenance?.tiresEveryKm ?? DEFAULTS.tiresEveryKm);
+    const oilInterval = Number(
+      activeBike.maintenance?.oilEveryKm ?? DEFAULTS.oilEveryKm
+    );
+    const chainInterval = Number(
+      activeBike.maintenance?.chainEveryKm ?? DEFAULTS.chainEveryKm
+    );
+    const tiresInterval = Number(
+      activeBike.maintenance?.tiresEveryKm ?? DEFAULTS.tiresEveryKm
+    );
 
     const oilNext = nextDueAt(currentKm, oilInterval);
     const chainNext = nextDueAt(currentKm, chainInterval);
@@ -108,9 +122,24 @@ export default function Garage() {
 
     return {
       currentKm,
-      oil: { interval: oilInterval, next: oilNext, left: oilNext - currentKm, ...statusFor(oilNext, currentKm) },
-      chain: { interval: chainInterval, next: chainNext, left: chainNext - currentKm, ...statusFor(chainNext, currentKm) },
-      tires: { interval: tiresInterval, next: tiresNext, left: tiresNext - currentKm, ...statusFor(tiresNext, currentKm) },
+      oil: {
+        interval: oilInterval,
+        next: oilNext,
+        left: oilNext - currentKm,
+        ...statusFor(oilNext, currentKm),
+      },
+      chain: {
+        interval: chainInterval,
+        next: chainNext,
+        left: chainNext - currentKm,
+        ...statusFor(chainNext, currentKm),
+      },
+      tires: {
+        interval: tiresInterval,
+        next: tiresNext,
+        left: tiresNext - currentKm,
+        ...statusFor(tiresNext, currentKm),
+      },
     };
   }, [activeBike]);
 
@@ -127,7 +156,9 @@ export default function Garage() {
       return;
     }
 
-    const y = year ? clampNum(year, 1950, new Date().getFullYear() + 1) : "";
+    const y = year
+      ? clampNum(year, 1950, new Date().getFullYear() + 1)
+      : "";
     const k = km ? clampNum(km, 0, 9999999) : 0;
 
     const newBike = {
@@ -139,6 +170,7 @@ export default function Garage() {
       createdAt: new Date().toISOString(),
       maintenance: { ...DEFAULTS },
       documents: [],
+      serviceLog: [], // ✅ nuovo: storico tagliandi
     };
 
     const next = [newBike, ...bikes];
@@ -166,7 +198,9 @@ export default function Garage() {
     const newKm = clampNum(raw, 0, 9999999);
 
     const next = bikes.map((b) =>
-      b.id === activeBike.id ? { ...b, km: newKm, updatedAt: new Date().toISOString() } : b
+      b.id === activeBike.id
+        ? { ...b, km: newKm, updatedAt: new Date().toISOString() }
+        : b
     );
 
     setBikesAndPersist(next);
@@ -205,7 +239,6 @@ export default function Garage() {
     try {
       const typeMeta = DOC_TYPES.find((d) => d.key === docType);
 
-      // se esiste file → convertiamo in dataUrl, altrimenti null
       let dataUrl = null;
       let fileName = "";
 
@@ -221,7 +254,7 @@ export default function Garage() {
         expiry: docExpiry || "",
         note,
         fileName,
-        dataUrl, // null se non c'è allegato
+        dataUrl,
         createdAt: new Date().toISOString(),
       };
 
@@ -237,7 +270,6 @@ export default function Garage() {
 
       setBikesAndPersist(next);
 
-      // reset form
       setDocType("insurance");
       setDocExpiry("");
       setDocNote("");
@@ -261,7 +293,78 @@ export default function Garage() {
       b.id === activeBike.id
         ? {
             ...b,
-            documents: (Array.isArray(b.documents) ? b.documents : []).filter((d) => d.id !== docId),
+            documents: (Array.isArray(b.documents) ? b.documents : []).filter(
+              (d) => d.id !== docId
+            ),
+            updatedAt: new Date().toISOString(),
+          }
+        : b
+    );
+
+    setBikesAndPersist(next);
+  };
+
+  // ✅ Storico tagliandi: add/delete
+  const addServiceEntry = () => {
+    if (!activeBike) return;
+
+    const date = String(svcDate || "").trim();
+    const kmRaw = String(svcKm || "").trim();
+
+    if (!date) {
+      alert("Inserisci la data dell'intervento.");
+      return;
+    }
+    if (!kmRaw) {
+      alert("Inserisci i km dell'intervento.");
+      return;
+    }
+
+    const kmNum = clampNum(kmRaw, 0, 9999999);
+    const costRaw = String(svcCost || "").trim();
+    const normalizedCost = costRaw.replace(",", ".");
+    const costNum = normalizedCost === "" ? "" : clampNum(normalizedCost, 0, 999999);
+
+    const entry = {
+      id: `svc-${Math.random().toString(16).slice(2)}-${Date.now()}`,
+      date, // YYYY-MM-DD
+      km: kmNum,
+      type: String(svcType || "Intervento").trim() || "Intervento",
+      cost: costNum, // number o ""
+      note: String(svcNote || "").trim(),
+      createdAt: new Date().toISOString(),
+    };
+
+    const next = bikes.map((b) =>
+      b.id === activeBike.id
+        ? {
+            ...b,
+            serviceLog: [entry, ...(Array.isArray(b.serviceLog) ? b.serviceLog : [])],
+            updatedAt: new Date().toISOString(),
+          }
+        : b
+    );
+
+    setBikesAndPersist(next);
+
+    setSvcDate("");
+    setSvcKm("");
+    setSvcType("Tagliando");
+    setSvcCost("");
+    setSvcNote("");
+  };
+
+  const deleteServiceEntry = (entryId) => {
+    if (!activeBike) return;
+    if (!confirm("Eliminare questo intervento dallo storico?")) return;
+
+    const next = bikes.map((b) =>
+      b.id === activeBike.id
+        ? {
+            ...b,
+            serviceLog: (Array.isArray(b.serviceLog) ? b.serviceLog : []).filter(
+              (x) => x.id !== entryId
+            ),
             updatedAt: new Date().toISOString(),
           }
         : b
@@ -273,7 +376,20 @@ export default function Garage() {
   const docsSorted = useMemo(() => {
     if (!activeBike) return [];
     const docs = Array.isArray(activeBike.documents) ? activeBike.documents : [];
-    return [...docs].sort((a, b) => String(b.createdAt).localeCompare(String(a.createdAt)));
+    return [...docs].sort((a, b) =>
+      String(b.createdAt).localeCompare(String(a.createdAt))
+    );
+  }, [activeBike]);
+
+  const serviceSorted = useMemo(() => {
+    if (!activeBike) return [];
+    const arr = Array.isArray(activeBike.serviceLog) ? activeBike.serviceLog : [];
+    return [...arr].sort((a, b) => {
+      const ad = String(a.date || "");
+      const bd = String(b.date || "");
+      if (ad !== bd) return bd.localeCompare(ad);
+      return String(b.createdAt || "").localeCompare(String(a.createdAt || ""));
+    });
   }, [activeBike]);
 
   const expiryLists = useMemo(() => {
@@ -289,8 +405,12 @@ export default function Garage() {
       })
       .filter((d) => d.days !== null);
 
-    const expired = enriched.filter((d) => d.days < 0).sort((a, b) => a.days - b.days);
-    const dueSoon = enriched.filter((d) => d.days >= 0 && d.days <= 45).sort((a, b) => a.days - b.days);
+    const expired = enriched
+      .filter((d) => d.days < 0)
+      .sort((a, b) => a.days - b.days);
+    const dueSoon = enriched
+      .filter((d) => d.days >= 0 && d.days <= 45)
+      .sort((a, b) => a.days - b.days);
 
     return { dueSoon, expired };
   }, [activeBike]);
@@ -299,7 +419,9 @@ export default function Garage() {
     <div style={{ padding: 24, maxWidth: 1100, margin: "0 auto" }}>
       <div style={{ display: "flex", alignItems: "baseline", gap: 12, flexWrap: "wrap" }}>
         <h1 style={{ margin: 0 }}>Garage 🧰</h1>
-        <span style={{ opacity: 0.75 }}>Libretto digitale offline (foto + scadenze). Niente login.</span>
+        <span style={{ opacity: 0.75 }}>
+          Libretto digitale offline (foto + scadenze). Niente login.
+        </span>
       </div>
 
       {/* Add bike */}
@@ -327,7 +449,9 @@ export default function Garage() {
           <strong>Le tue moto</strong>
           <div style={{ marginTop: 10, display: "grid", gap: 10 }}>
             {bikes.length === 0 && (
-              <div style={{ padding: 10, borderRadius: 12, background: "rgba(0,0,0,0.04)" }}>Nessuna moto. Aggiungine una sopra.</div>
+              <div style={{ padding: 10, borderRadius: 12, background: "rgba(0,0,0,0.04)" }}>
+                Nessuna moto. Aggiungine una sopra.
+              </div>
             )}
             {bikes.map((b) => (
               <div key={b.id} onClick={() => setActiveId(b.id)}
@@ -415,6 +539,85 @@ export default function Garage() {
                     onChange={(v) => updateIntervals({ chainEveryKm: clampNum(v, 100, 10000) })} />
                   <IntervalInput label="Gomme ogni" value={String(activeBike.maintenance?.tiresEveryKm ?? DEFAULTS.tiresEveryKm)}
                     onChange={(v) => updateIntervals({ tiresEveryKm: clampNum(v, 1000, 50000) })} />
+                </div>
+              </div>
+
+              {/* ✅ Storico Tagliandi / Interventi */}
+              <div style={{ marginTop: 16, paddingTop: 14, borderTop: "1px solid rgba(0,0,0,0.10)" }}>
+                <strong>📒 Storico Tagliandi / Interventi</strong>
+
+                <div style={{ marginTop: 10, border: "1px solid rgba(0,0,0,0.12)", borderRadius: 14, padding: 12, background: "rgba(0,0,0,0.02)" }}>
+                  <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(180px, 1fr))", gap: 10 }}>
+                    <label style={{ display: "grid", gap: 6 }}>
+                      <span style={{ fontSize: 12, opacity: 0.8 }}>Data</span>
+                      <input type="date" value={svcDate} onChange={(e) => setSvcDate(e.target.value)}
+                        style={{ padding: "10px 12px", borderRadius: 12, border: "1px solid rgba(0,0,0,0.15)" }} />
+                    </label>
+
+                    <label style={{ display: "grid", gap: 6 }}>
+                      <span style={{ fontSize: 12, opacity: 0.8 }}>Km</span>
+                      <input value={svcKm} onChange={(e) => setSvcKm(e.target.value)} inputMode="numeric" placeholder="es. 12500"
+                        style={{ padding: "10px 12px", borderRadius: 12, border: "1px solid rgba(0,0,0,0.15)" }} />
+                    </label>
+
+                    <label style={{ display: "grid", gap: 6 }}>
+                      <span style={{ fontSize: 12, opacity: 0.8 }}>Tipo</span>
+                      <input value={svcType} onChange={(e) => setSvcType(e.target.value)} placeholder="Tagliando / Olio / Gomme..."
+                        style={{ padding: "10px 12px", borderRadius: 12, border: "1px solid rgba(0,0,0,0.15)" }} />
+                    </label>
+
+                    <label style={{ display: "grid", gap: 6 }}>
+                      <span style={{ fontSize: 12, opacity: 0.8 }}>Costo € (opz.)</span>
+                      <input value={svcCost} onChange={(e) => setSvcCost(e.target.value)} inputMode="decimal" placeholder="es. 180"
+                        style={{ padding: "10px 12px", borderRadius: 12, border: "1px solid rgba(0,0,0,0.15)" }} />
+                    </label>
+
+                    <label style={{ display: "grid", gap: 6, gridColumn: "1 / -1" }}>
+                      <span style={{ fontSize: 12, opacity: 0.8 }}>Note (opz.)</span>
+                      <input value={svcNote} onChange={(e) => setSvcNote(e.target.value)} placeholder="es. Olio Motul 7100, filtro…"
+                        style={{ padding: "10px 12px", borderRadius: 12, border: "1px solid rgba(0,0,0,0.15)" }} />
+                    </label>
+                  </div>
+
+                  <div style={{ marginTop: 10, display: "flex", gap: 10, flexWrap: "wrap" }}>
+                    <button type="button" onClick={addServiceEntry}
+                      style={{ padding: "10px 12px", borderRadius: 12, border: "1px solid rgba(0,0,0,0.15)", background: "white", cursor: "pointer" }}>
+                      Aggiungi intervento
+                    </button>
+                    <span style={{ fontSize: 12, opacity: 0.75 }}>
+                      Inserisci sempre data + km, il resto è opzionale.
+                    </span>
+                  </div>
+                </div>
+
+                <div style={{ marginTop: 10, display: "grid", gap: 10 }}>
+                  {serviceSorted.length === 0 ? (
+                    <div style={{ padding: 10, borderRadius: 12, background: "rgba(0,0,0,0.04)" }}>
+                      Nessun intervento registrato.
+                    </div>
+                  ) : (
+                    serviceSorted.map((s) => (
+                      <div key={s.id}
+                        style={{ border: "1px solid rgba(0,0,0,0.12)", borderRadius: 14, padding: 12, background: "white" }}>
+                        <div style={{ display: "flex", justifyContent: "space-between", gap: 10, flexWrap: "wrap" }}>
+                          <div>
+                            <div style={{ fontWeight: 800 }}>
+                              {s.type} · {s.date} · {Number(s.km || 0).toLocaleString()} km
+                            </div>
+                            <div style={{ fontSize: 12, opacity: 0.75 }}>
+                              {s.cost !== "" ? `Costo: €${Number(s.cost).toLocaleString()} · ` : ""}
+                              {s.note ? s.note : "—"}
+                            </div>
+                          </div>
+
+                          <button type="button" onClick={() => deleteServiceEntry(s.id)}
+                            style={{ padding: "6px 10px", borderRadius: 12, border: "1px solid rgba(0,0,0,0.15)", background: "white", cursor: "pointer", height: "fit-content" }}>
+                            Elimina
+                          </button>
+                        </div>
+                      </div>
+                    ))
+                  )}
                 </div>
               </div>
 
@@ -514,7 +717,9 @@ function HealthRow({ title, item }) {
           Prossima: <strong>{item.next.toLocaleString()} km</strong> · Mancano <strong>{item.left.toLocaleString()} km</strong>
         </span>
       </div>
-      <div style={{ marginTop: 6, fontSize: 12, opacity: 0.75 }}>Intervallo: {item.interval.toLocaleString()} km</div>
+      <div style={{ marginTop: 6, fontSize: 12, opacity: 0.75 }}>
+        Intervallo: {item.interval.toLocaleString()} km
+      </div>
       <div style={{ marginTop: 8 }}>
         <span style={pillStyle(item.level)}>{item.label}</span>
       </div>
