@@ -1,0 +1,26 @@
+[
+  {
+    "id": "fuel-001",
+    "name": "Q8 - Milano",
+    "lat": 45.4642,
+    "lng": 9.19,
+    "type": "fuel",
+    "brand": "Q8"
+  },
+  {
+    "id": "fuel-002",
+    "name": "ENI - Bologna",
+    "lat": 44.4949,
+    "lng": 11.3426,
+    "type": "fuel",
+    "brand": "ENI"
+  },
+  {
+    "id": "fuel-003",
+    "name": "Shell - Verona",
+    "lat": 45.4384,
+    "lng": 10.9916,
+    "type": "fuel",
+    "brand": "Shell"
+  }
+]
