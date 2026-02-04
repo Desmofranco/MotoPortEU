@@ -1,4 +1,5 @@
 import { NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const linkStyle = ({ isActive }) => ({
   padding: "8px 12px",
@@ -28,10 +29,11 @@ export default function Navbar() {
       <NavLink to="/" style={linkStyle} end>Home</NavLink>
       <NavLink to="/map" style={linkStyle}>Mappa</NavLink>
       <NavLink to="/routes" style={linkStyle}>Itinerari</NavLink>
+      <Link to="/tracks">🏁 Piste</Link>
       <NavLink to="/garage" style={linkStyle}>Garage</NavLink>
       <NavLink to="/suppliers" style={linkStyle}>Fornitori</NavLink>
       <NavLink to="/pass" style={linkStyle}>Pass</NavLink>
-
+     
       <div style={{ marginLeft: "auto", display: "flex", gap: 10 }}>
         <NavLink to="/login" style={linkStyle}>Login</NavLink>
         <NavLink to="/register" style={linkStyle}>Register</NavLink>

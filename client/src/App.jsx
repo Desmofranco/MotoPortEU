@@ -10,7 +10,7 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import SupplierPage from "./pages/SupplierPage";
 import RoutesPage from "./pages/Routes";
-
+import Tracks from "./pages/Tracks";
 export default function App() {
   return (
     <BrowserRouter>
@@ -25,7 +25,7 @@ export default function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/supplier/:id" element={<SupplierPage />} />
         <Route path="/routes" element={<RoutesPage />} />
-
+        <Route path="/tracks" element={<Tracks />} />
       </Routes>
     </BrowserRouter>
   );
