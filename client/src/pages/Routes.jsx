@@ -1,9 +1,12 @@
 // =======================================================
 // src/pages/Routes.jsx
 // UI Touring emozionale: foto + rating + curve + pace + filtri
+// ✅ Aggiunta: MAPPA (traccia) + METEO sul tragitto (campionamento punti)
 // Carica dati da: /public/data/routes.json
 // =======================================================
 import { useEffect, useMemo, useState } from "react";
+import RouteMap from "../components/RouteMap";
+import { getRouteWeatherSummary } from "../utils/routeWeather";
 
 const FALLBACK_PHOTO =
   "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1600&q=80";
@@ -140,14 +143,7 @@ export default function Routes() {
 
     if (query) {
       out = out.filter((r) => {
-        const blob = [
-          r.name,
-          r.region,
-          r.country,
-          r.bestSeason,
-          r.description,
-          r.pace,
-        ]
+        const blob = [r.name, r.region, r.country, r.bestSeason, r.description, r.pace]
           .join(" ")
           .toLowerCase();
         return blob.includes(query);
@@ -176,11 +172,19 @@ export default function Routes() {
   return (
     <div style={{ padding: 20, maxWidth: 1250, margin: "0 auto" }}>
       {/* Header */}
-      <div style={{ display: "flex", justifyContent: "space-between", gap: 12, flexWrap: "wrap", alignItems: "baseline" }}>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+          gap: 12,
+          flexWrap: "wrap",
+          alignItems: "baseline",
+        }}
+      >
         <div>
           <h1 style={{ margin: 0 }}>Itinerari 🗺️</h1>
           <div style={{ opacity: 0.75, marginTop: 4 }}>
-            Touring emozionale: foto, voto, curve e ritmo. (Meteo sul tragitto dopo.)
+            Touring emozionale: foto, voto, curve e ritmo. (Con mappa + meteo.)
           </div>
         </div>
 
@@ -216,7 +220,11 @@ export default function Routes() {
           <select
             value={country}
             onChange={(e) => setCountry(e.target.value)}
-            style={{ padding: "10px 12px", borderRadius: 12, border: "1px solid rgba(0,0,0,0.15)" }}
+            style={{
+              padding: "10px 12px",
+              borderRadius: 12,
+              border: "1px solid rgba(0,0,0,0.15)",
+            }}
           >
             {countries.map((c) => (
               <option key={c} value={c}>
@@ -231,7 +239,11 @@ export default function Routes() {
           <select
             value={pace}
             onChange={(e) => setPace(e.target.value)}
-            style={{ padding: "10px 12px", borderRadius: 12, border: "1px solid rgba(0,0,0,0.15)" }}
+            style={{
+              padding: "10px 12px",
+              borderRadius: 12,
+              border: "1px solid rgba(0,0,0,0.15)",
+            }}
           >
             {paces.map((p) => (
               <option key={p} value={p}>
@@ -260,7 +272,11 @@ export default function Routes() {
           <select
             value={sortBy}
             onChange={(e) => setSortBy(e.target.value)}
-            style={{ padding: "10px 12px", borderRadius: 12, border: "1px solid rgba(0,0,0,0.15)" }}
+            style={{
+              padding: "10px 12px",
+              borderRadius: 12,
+              border: "1px solid rgba(0,0,0,0.15)",
+            }}
           >
             <option value="curves">Curve (desc)</option>
             <option value="asphalt">Asfalto (desc)</option>
@@ -271,11 +287,25 @@ export default function Routes() {
 
       {/* Content */}
       {loading ? (
-        <div style={{ marginTop: 14, padding: 12, borderRadius: 16, background: "rgba(0,0,0,0.04)" }}>
+        <div
+          style={{
+            marginTop: 14,
+            padding: 12,
+            borderRadius: 16,
+            background: "rgba(0,0,0,0.04)",
+          }}
+        >
           Carico itinerari…
         </div>
       ) : err ? (
-        <div style={{ marginTop: 14, padding: 12, borderRadius: 16, background: "rgba(255,0,0,0.08)" }}>
+        <div
+          style={{
+            marginTop: 14,
+            padding: 12,
+            borderRadius: 16,
+            background: "rgba(255,0,0,0.08)",
+          }}
+        >
           {err}
         </div>
       ) : (
@@ -287,12 +317,7 @@ export default function Routes() {
             </div>
 
             {filtered.map((r) => (
-              <RouteCard
-                key={r.id}
-                route={r}
-                active={r.id === activeId}
-                onClick={() => setActiveId(r.id)}
-              />
+              <RouteCard key={r.id} route={r} active={r.id === activeId} onClick={() => setActiveId(r.id)} />
             ))}
 
             {filtered.length === 0 && (
@@ -312,11 +337,7 @@ export default function Routes() {
               height: "fit-content",
             }}
           >
-            {!active ? (
-              <div style={{ padding: 14 }}>Seleziona un itinerario.</div>
-            ) : (
-              <RouteDetail route={active} />
-            )}
+            {!active ? <div style={{ padding: 14 }}>Seleziona un itinerario.</div> : <RouteDetail route={active} />}
           </div>
         </div>
       )}
@@ -367,15 +388,17 @@ function RouteCard({ route, active, onClick }) {
         </div>
 
         <div style={{ marginTop: 10, display: "flex", gap: 8, flexWrap: "wrap" }}>
-          <span style={pillStyle(cPill.level)}>🌀 Curve {curves}/10 · {cPill.label}</span>
-          <span style={pillStyle(aPill.level)}>🛣️ Asfalto {asphalt}/10 · {aPill.label}</span>
+          <span style={pillStyle(cPill.level)}>
+            🌀 Curve {curves}/10 · {cPill.label}
+          </span>
+          <span style={pillStyle(aPill.level)}>
+            🛣️ Asfalto {asphalt}/10 · {aPill.label}
+          </span>
           <span style={pillStyle("ok")}>🏍 {paceLabel(route.pace)}</span>
         </div>
 
         {route.description ? (
-          <div style={{ marginTop: 10, fontSize: 13, opacity: 0.85 }}>
-            {route.description}
-          </div>
+          <div style={{ marginTop: 10, fontSize: 13, opacity: 0.85 }}>{route.description}</div>
         ) : null}
       </div>
     </div>
@@ -389,6 +412,91 @@ function RouteDetail({ route }) {
 
   const cPill = scorePill(curves);
   const aPill = scorePill(asphalt);
+
+  // ✅ METEO (campionamento punti)
+  const [wx, setWx] = useState(null);
+  const [wxBusy, setWxBusy] = useState(false);
+
+  useEffect(() => {
+    let alive = true;
+    async function run() {
+      setWxBusy(true);
+      try {
+        const out = await getRouteWeatherSummary(route);
+        if (alive) setWx(out);
+      } finally {
+        if (alive) setWxBusy(false);
+      }
+    }
+    run();
+    return () => {
+      alive = false;
+    };
+  }, [route?.id]);
+
+  const wxBox = (() => {
+    if (wxBusy) {
+      return (
+        <div style={{ marginTop: 10, padding: 12, borderRadius: 16, background: "rgba(0,0,0,0.04)" }}>
+          Carico meteo sul tragitto…
+        </div>
+      );
+    }
+    if (!wx) {
+      return (
+        <div style={{ marginTop: 10, padding: 12, borderRadius: 16, background: "rgba(0,0,0,0.04)" }}>
+          Meteo non disponibile.
+        </div>
+      );
+    }
+    if (!wx.ok) {
+      return (
+        <div style={{ marginTop: 10, padding: 12, borderRadius: 16, background: "rgba(0,0,0,0.04)" }}>
+          {wx.note || "Meteo non disponibile."}
+        </div>
+      );
+    }
+
+    const worstLevel =
+      wx.worst === "sereno"
+        ? "ok"
+        : wx.worst === "nuvoloso"
+        ? "soon"
+        : wx.worst === "variabile"
+        ? "soon"
+        : wx.worst === "nebbia"
+        ? "warn"
+        : wx.worst === "pioggia"
+        ? "warn"
+        : wx.worst === "neve"
+        ? "warn"
+        : "bad";
+
+    return (
+      <div style={{ marginTop: 10, display: "grid", gap: 10 }}>
+        <div style={{ display: "flex", gap: 10, flexWrap: "wrap", alignItems: "center" }}>
+          <span style={pillStyle(worstLevel)}>
+            Condizione peggiore: <strong>{wx.worst}</strong>
+          </span>
+          {wx.tempMin !== null && wx.tempMax !== null ? (
+            <span style={pillStyle("ok")}>
+              🌡 {wx.tempMin}° / {wx.tempMax}° (avg {wx.temp}°)
+            </span>
+          ) : null}
+          {wx.windAvgKmh !== null && wx.windMaxKmh !== null ? (
+            <span style={pillStyle(wx.windMaxKmh >= 50 ? "warn" : "ok")}>
+              💨 vento avg {wx.windAvgKmh} km/h · max {wx.windMaxKmh} km/h
+            </span>
+          ) : null}
+          <span style={pillStyle("ok")}>📍 punti: {wx.points}</span>
+        </div>
+
+        <div style={{ fontSize: 12, opacity: 0.7 }}>
+          Aggiornato: {String(wx.updatedAt || "").slice(0, 16).replace("T", " ")}
+        </div>
+      </div>
+    );
+  })();
 
   return (
     <>
@@ -413,14 +521,18 @@ function RouteDetail({ route }) {
           <div style={{ fontSize: 13, opacity: 0.92 }}>
             {countryFlag(route.country)} {route.country} · {route.region}
           </div>
-          <div style={{ fontSize: 30, fontWeight: 950, letterSpacing: 0.2 }}>
-            {route.name}
-          </div>
+          <div style={{ fontSize: 30, fontWeight: 950, letterSpacing: 0.2 }}>{route.name}</div>
 
           <div style={{ marginTop: 10, display: "flex", gap: 8, flexWrap: "wrap" }}>
-            <span style={pillStyle(cPill.level)}>🌀 Curve {curves}/10 · {cPill.label}</span>
-            <span style={pillStyle(aPill.level)}>🛣️ Asfalto {asphalt}/10 · {aPill.label}</span>
-            <span style={pillStyle("ok")}>🏍 Ritmo: <strong>{paceLabel(route.pace)}</strong></span>
+            <span style={pillStyle(cPill.level)}>
+              🌀 Curve {curves}/10 · {cPill.label}
+            </span>
+            <span style={pillStyle(aPill.level)}>
+              🛣️ Asfalto {asphalt}/10 · {aPill.label}
+            </span>
+            <span style={pillStyle("ok")}>
+              🏍 Ritmo: <strong>{paceLabel(route.pace)}</strong>
+            </span>
             <span style={pillStyle("ok")}>📏 {route.distanceKm} km</span>
             <span style={pillStyle("ok")}>🗓 {route.bestSeason || "—"}</span>
           </div>
@@ -442,10 +554,23 @@ function RouteDetail({ route }) {
           </div>
         </div>
 
-        <div style={{ marginTop: 14, padding: 12, borderRadius: 16, background: "rgba(0,0,0,0.04)" }}>
-          <div style={{ fontWeight: 800 }}>🌤 Meteo sul tragitto</div>
-          <div style={{ marginTop: 6, fontSize: 13, opacity: 0.85 }}>
-            Prossimo step: meteo lungo percorso (campionamento punti). UI pronta.
+        {/* ✅ MAPPA (traccia) */}
+        <div style={{ marginTop: 14, borderTop: "1px solid rgba(0,0,0,0.08)", paddingTop: 14 }}>
+          <strong>🗺️ Percorso</strong>
+          <div style={{ marginTop: 10 }}>
+            <RouteMap route={route} />
+          </div>
+          <div style={{ marginTop: 8, fontSize: 12, opacity: 0.7 }}>
+            Suggerimento: per traccia precisa aggiungi <code>polyline</code> (array di [lat,lng]) oppure <code>start/end</code> nel routes.json.
+          </div>
+        </div>
+
+        {/* ✅ METEO */}
+        <div style={{ marginTop: 14, borderTop: "1px solid rgba(0,0,0,0.08)", paddingTop: 14 }}>
+          <strong>🌤 Meteo sul tragitto</strong>
+          {wxBox}
+          <div style={{ marginTop: 8, fontSize: 12, opacity: 0.7 }}>
+            Nota: serve <code>VITE_OWM_KEY</code> (OpenWeather). Se manca polyline/start-end il meteo non può campionare il percorso.
           </div>
         </div>
       </div>
