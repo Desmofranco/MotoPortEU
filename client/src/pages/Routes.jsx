@@ -1,139 +1,463 @@
+// =======================================================
+// src/pages/Routes.jsx
+// UI Touring emozionale: foto + rating + curve + pace + filtri
+// Carica dati da: /public/data/routes.json
+// =======================================================
 import { useEffect, useMemo, useState } from "react";
+
+const FALLBACK_PHOTO =
+  "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1600&q=80";
+
+const paceLabel = (p) => {
+  const s = String(p || "").toLowerCase();
+  if (s === "lento") return "Lento";
+  if (s === "misto") return "Misto";
+  if (s === "veloce") return "Veloce";
+  if (s === "tecnico") return "Tecnico";
+  if (s === "touring") return "Touring";
+  if (s === "avventura") return "Avventura";
+  return p ? String(p) : "—";
+};
+
+const curveLabel = (n) => {
+  const v = Number(n || 0);
+  if (v >= 9) return "Tornanti";
+  if (v >= 7) return "Curve";
+  if (v >= 5) return "Misto";
+  return "Scorrevole";
+};
+
+const scorePill = (v) => {
+  const n = Number(v || 0);
+  if (n >= 9) return { label: "TOP", level: "ok" };
+  if (n >= 7) return { label: "OTTIMO", level: "soon" };
+  if (n >= 5) return { label: "BUONO", level: "warn" };
+  return { label: "BASIC", level: "bad" };
+};
+
+function pillStyle(level) {
+  const base = {
+    display: "inline-flex",
+    alignItems: "center",
+    gap: 6,
+    padding: "6px 10px",
+    borderRadius: 999,
+    fontSize: 12,
+    border: "1px solid rgba(0,0,0,0.14)",
+    background: "rgba(255,255,255,0.78)",
+    backdropFilter: "blur(6px)",
+    whiteSpace: "nowrap",
+  };
+  if (level === "bad") return { ...base, background: "rgba(255,0,0,0.10)" };
+  if (level === "warn") return { ...base, background: "rgba(255,140,0,0.12)" };
+  if (level === "soon") return { ...base, background: "rgba(255,215,0,0.16)" };
+  return base;
+}
+
+function countryFlag(cc) {
+  const c = String(cc || "").toUpperCase();
+  const map = {
+    IT: "🇮🇹",
+    FR: "🇫🇷",
+    DE: "🇩🇪",
+    AT: "🇦🇹",
+    CH: "🇨🇭",
+    ES: "🇪🇸",
+    NO: "🇳🇴",
+    SE: "🇸🇪",
+    FI: "🇫🇮",
+    RO: "🇷🇴",
+    SI: "🇸🇮",
+    HR: "🇭🇷",
+    BA: "🇧🇦",
+    ME: "🇲🇪",
+    AL: "🇦🇱",
+    GR: "🇬🇷",
+  };
+  return map[c] || "🏍️";
+}
 
 export default function Routes() {
   const [routes, setRoutes] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [query, setQuery] = useState("");
+  const [err, setErr] = useState("");
 
+  // filtri UI
+  const [q, setQ] = useState("");
+  const [country, setCountry] = useState("ALL");
+  const [pace, setPace] = useState("ALL");
+  const [minCurves, setMinCurves] = useState(0); // 0..10
+  const [sortBy, setSortBy] = useState("curves"); // curves | asphalt | distance
+
+  const [activeId, setActiveId] = useState(null);
+
+  // load
   useEffect(() => {
-    const load = async () => {
+    let alive = true;
+    async function run() {
+      setLoading(true);
+      setErr("");
       try {
-        setLoading(true);
-        const res = await fetch("/data/routes.json");
-        const data = await res.json();
-        setRoutes(Array.isArray(data) ? data : []);
+        const r = await fetch("/data/routes.json", { cache: "no-store" });
+        if (!r.ok) throw new Error("Impossibile caricare /data/routes.json");
+        const data = await r.json();
+        const arr = Array.isArray(data) ? data : [];
+        if (!alive) return;
+        setRoutes(arr);
+        setActiveId((prev) => prev || arr?.[0]?.id || null);
       } catch (e) {
-        console.error("Routes load error", e);
-        setRoutes([]);
+        if (!alive) return;
+        setErr(e?.message || "Errore caricamento itinerari");
       } finally {
-        setLoading(false);
+        if (alive) setLoading(false);
       }
+    }
+    run();
+    return () => {
+      alive = false;
     };
-    load();
   }, []);
 
+  const active = useMemo(
+    () => routes.find((r) => r.id === activeId) || null,
+    [routes, activeId]
+  );
+
+  const countries = useMemo(() => {
+    const set = new Set(routes.map((r) => String(r.country || "").toUpperCase()).filter(Boolean));
+    return ["ALL", ...Array.from(set).sort()];
+  }, [routes]);
+
+  const paces = useMemo(() => {
+    const set = new Set(routes.map((r) => String(r.pace || "").toLowerCase()).filter(Boolean));
+    return ["ALL", ...Array.from(set).sort()];
+  }, [routes]);
+
   const filtered = useMemo(() => {
-    const q = query.trim().toLowerCase();
-    if (!q) return routes;
-    return routes.filter((r) => {
-      const hay = `${r.name || ""} ${r.region || ""} ${r.country || ""} ${r.description || ""}`.toLowerCase();
-      return hay.includes(q);
-    });
-  }, [routes, query]);
+    const query = q.trim().toLowerCase();
+
+    let out = routes;
+
+    if (query) {
+      out = out.filter((r) => {
+        const blob = [
+          r.name,
+          r.region,
+          r.country,
+          r.bestSeason,
+          r.description,
+          r.pace,
+        ]
+          .join(" ")
+          .toLowerCase();
+        return blob.includes(query);
+      });
+    }
+
+    if (country !== "ALL") {
+      out = out.filter((r) => String(r.country || "").toUpperCase() === country);
+    }
+
+    if (pace !== "ALL") {
+      out = out.filter((r) => String(r.pace || "").toLowerCase() === pace);
+    }
+
+    out = out.filter((r) => Number(r.curvesScore || 0) >= Number(minCurves || 0));
+
+    const sorter = {
+      curves: (a, b) => Number(b.curvesScore || 0) - Number(a.curvesScore || 0),
+      asphalt: (a, b) => Number(b.asphaltScore || 0) - Number(a.asphaltScore || 0),
+      distance: (a, b) => Number(a.distanceKm || 0) - Number(b.distanceKm || 0),
+    }[sortBy];
+
+    return [...out].sort(sorter);
+  }, [routes, q, country, pace, minCurves, sortBy]);
 
   return (
-    <div style={{ padding: 24, maxWidth: 1100, margin: "0 auto" }}>
-      <div style={{ display: "flex", alignItems: "baseline", gap: 12, flexWrap: "wrap" }}>
-        <h1 style={{ margin: 0 }}>Itinerari 🗺️</h1>
-        <span style={{ opacity: 0.75 }}>
-          {loading ? "Caricamento…" : `${filtered.length} / ${routes.length}`}
-        </span>
-      </div>
+    <div style={{ padding: 20, maxWidth: 1250, margin: "0 auto" }}>
+      {/* Header */}
+      <div style={{ display: "flex", justifyContent: "space-between", gap: 12, flexWrap: "wrap", alignItems: "baseline" }}>
+        <div>
+          <h1 style={{ margin: 0 }}>Itinerari 🗺️</h1>
+          <div style={{ opacity: 0.75, marginTop: 4 }}>
+            Touring emozionale: foto, voto, curve e ritmo. (Meteo sul tragitto dopo.)
+          </div>
+        </div>
 
-      <div
-        style={{
-          marginTop: 14,
-          border: "1px solid rgba(0,0,0,0.12)",
-          borderRadius: 16,
-          padding: 14,
-          background: "white",
-        }}
-      >
         <input
-          value={query}
-          onChange={(e) => setQuery(e.target.value)}
-          placeholder="Cerca itinerario (nome, regione, descrizione)…"
+          value={q}
+          onChange={(e) => setQ(e.target.value)}
+          placeholder="Cerca: Stelvio, Dolomiti, Capo Nord, neve…"
           style={{
-            width: "100%",
+            minWidth: 320,
             padding: "10px 12px",
-            borderRadius: 12,
+            borderRadius: 14,
             border: "1px solid rgba(0,0,0,0.15)",
             outline: "none",
           }}
         />
+      </div>
 
-        <div style={{ marginTop: 10, opacity: 0.8, fontSize: 13 }}>
-          (Offline: qui metteremo “Scarica itinerario” con salvataggio locale.)
+      {/* Filters */}
+      <div
+        style={{
+          marginTop: 12,
+          display: "grid",
+          gridTemplateColumns: "repeat(auto-fit, minmax(170px, 1fr))",
+          gap: 10,
+          padding: 12,
+          borderRadius: 18,
+          border: "1px solid rgba(0,0,0,0.12)",
+          background: "white",
+        }}
+      >
+        <label style={{ display: "grid", gap: 6 }}>
+          <span style={{ fontSize: 12, opacity: 0.75 }}>Paese</span>
+          <select
+            value={country}
+            onChange={(e) => setCountry(e.target.value)}
+            style={{ padding: "10px 12px", borderRadius: 12, border: "1px solid rgba(0,0,0,0.15)" }}
+          >
+            {countries.map((c) => (
+              <option key={c} value={c}>
+                {c === "ALL" ? "Tutti" : `${countryFlag(c)} ${c}`}
+              </option>
+            ))}
+          </select>
+        </label>
+
+        <label style={{ display: "grid", gap: 6 }}>
+          <span style={{ fontSize: 12, opacity: 0.75 }}>Ritmo</span>
+          <select
+            value={pace}
+            onChange={(e) => setPace(e.target.value)}
+            style={{ padding: "10px 12px", borderRadius: 12, border: "1px solid rgba(0,0,0,0.15)" }}
+          >
+            {paces.map((p) => (
+              <option key={p} value={p}>
+                {p === "ALL" ? "Tutti" : paceLabel(p)}
+              </option>
+            ))}
+          </select>
+        </label>
+
+        <label style={{ display: "grid", gap: 6 }}>
+          <span style={{ fontSize: 12, opacity: 0.75 }}>Curve min</span>
+          <input
+            type="range"
+            min="0"
+            max="10"
+            value={minCurves}
+            onChange={(e) => setMinCurves(Number(e.target.value))}
+          />
+          <div style={{ fontSize: 12, opacity: 0.7 }}>
+            {minCurves}/10 (da {curveLabel(minCurves)})
+          </div>
+        </label>
+
+        <label style={{ display: "grid", gap: 6 }}>
+          <span style={{ fontSize: 12, opacity: 0.75 }}>Ordina</span>
+          <select
+            value={sortBy}
+            onChange={(e) => setSortBy(e.target.value)}
+            style={{ padding: "10px 12px", borderRadius: 12, border: "1px solid rgba(0,0,0,0.15)" }}
+          >
+            <option value="curves">Curve (desc)</option>
+            <option value="asphalt">Asfalto (desc)</option>
+            <option value="distance">Distanza (asc)</option>
+          </select>
+        </label>
+      </div>
+
+      {/* Content */}
+      {loading ? (
+        <div style={{ marginTop: 14, padding: 12, borderRadius: 16, background: "rgba(0,0,0,0.04)" }}>
+          Carico itinerari…
+        </div>
+      ) : err ? (
+        <div style={{ marginTop: 14, padding: 12, borderRadius: 16, background: "rgba(255,0,0,0.08)" }}>
+          {err}
+        </div>
+      ) : (
+        <div style={{ marginTop: 14, display: "grid", gridTemplateColumns: "420px 1fr", gap: 14 }}>
+          {/* Cards */}
+          <div style={{ display: "grid", gap: 12, height: "fit-content" }}>
+            <div style={{ fontSize: 12, opacity: 0.7 }}>
+              Trovati: <strong>{filtered.length}</strong>
+            </div>
+
+            {filtered.map((r) => (
+              <RouteCard
+                key={r.id}
+                route={r}
+                active={r.id === activeId}
+                onClick={() => setActiveId(r.id)}
+              />
+            ))}
+
+            {filtered.length === 0 && (
+              <div style={{ padding: 12, borderRadius: 16, background: "rgba(0,0,0,0.04)" }}>
+                Nessun itinerario trovato.
+              </div>
+            )}
+          </div>
+
+          {/* Detail */}
+          <div
+            style={{
+              borderRadius: 22,
+              overflow: "hidden",
+              border: "1px solid rgba(0,0,0,0.12)",
+              background: "white",
+              height: "fit-content",
+            }}
+          >
+            {!active ? (
+              <div style={{ padding: 14 }}>Seleziona un itinerario.</div>
+            ) : (
+              <RouteDetail route={active} />
+            )}
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
+function RouteCard({ route, active, onClick }) {
+  const photo = route.photo || FALLBACK_PHOTO;
+  const curves = Number(route.curvesScore || 0);
+  const asphalt = Number(route.asphaltScore || 0);
+
+  const cPill = scorePill(curves);
+  const aPill = scorePill(asphalt);
+
+  return (
+    <div
+      onClick={onClick}
+      style={{
+        cursor: "pointer",
+        borderRadius: 18,
+        overflow: "hidden",
+        border: active ? "2px solid rgba(0,0,0,0.35)" : "1px solid rgba(0,0,0,0.12)",
+        background: "white",
+        boxShadow: active ? "0 10px 30px rgba(0,0,0,0.12)" : "none",
+      }}
+    >
+      <div
+        style={{
+          height: 130,
+          backgroundImage: `url(${photo})`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+        }}
+      />
+      <div style={{ padding: 12 }}>
+        <div style={{ display: "flex", justifyContent: "space-between", gap: 10 }}>
+          <div style={{ fontWeight: 900, lineHeight: 1.15 }}>
+            {countryFlag(route.country)} {route.name}
+          </div>
+          <div style={{ fontSize: 12, opacity: 0.75, whiteSpace: "nowrap" }}>
+            {route.distanceKm} km
+          </div>
+        </div>
+
+        <div style={{ marginTop: 4, fontSize: 12, opacity: 0.75 }}>
+          {route.region} · stagione: {route.bestSeason || "—"}
+        </div>
+
+        <div style={{ marginTop: 10, display: "flex", gap: 8, flexWrap: "wrap" }}>
+          <span style={pillStyle(cPill.level)}>🌀 Curve {curves}/10 · {cPill.label}</span>
+          <span style={pillStyle(aPill.level)}>🛣️ Asfalto {asphalt}/10 · {aPill.label}</span>
+          <span style={pillStyle("ok")}>🏍 {paceLabel(route.pace)}</span>
+        </div>
+
+        {route.description ? (
+          <div style={{ marginTop: 10, fontSize: 13, opacity: 0.85 }}>
+            {route.description}
+          </div>
+        ) : null}
+      </div>
+    </div>
+  );
+}
+
+function RouteDetail({ route }) {
+  const photo = route.photo || FALLBACK_PHOTO;
+  const curves = Number(route.curvesScore || 0);
+  const asphalt = Number(route.asphaltScore || 0);
+
+  const cPill = scorePill(curves);
+  const aPill = scorePill(asphalt);
+
+  return (
+    <>
+      {/* Hero */}
+      <div
+        style={{
+          position: "relative",
+          height: 280,
+          backgroundImage: `url(${photo})`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+        }}
+      >
+        <div
+          style={{
+            position: "absolute",
+            inset: 0,
+            background: "linear-gradient(180deg, rgba(0,0,0,0.12), rgba(0,0,0,0.72))",
+          }}
+        />
+        <div style={{ position: "absolute", left: 16, right: 16, bottom: 14, color: "white" }}>
+          <div style={{ fontSize: 13, opacity: 0.92 }}>
+            {countryFlag(route.country)} {route.country} · {route.region}
+          </div>
+          <div style={{ fontSize: 30, fontWeight: 950, letterSpacing: 0.2 }}>
+            {route.name}
+          </div>
+
+          <div style={{ marginTop: 10, display: "flex", gap: 8, flexWrap: "wrap" }}>
+            <span style={pillStyle(cPill.level)}>🌀 Curve {curves}/10 · {cPill.label}</span>
+            <span style={pillStyle(aPill.level)}>🛣️ Asfalto {asphalt}/10 · {aPill.label}</span>
+            <span style={pillStyle("ok")}>🏍 Ritmo: <strong>{paceLabel(route.pace)}</strong></span>
+            <span style={pillStyle("ok")}>📏 {route.distanceKm} km</span>
+            <span style={pillStyle("ok")}>🗓 {route.bestSeason || "—"}</span>
+          </div>
         </div>
       </div>
 
-      <div style={{ marginTop: 16, display: "grid", gap: 12 }}>
-        {!loading && filtered.length === 0 && (
-          <div style={{ padding: 14, borderRadius: 14, background: "rgba(0,0,0,0.04)" }}>
-            Nessun itinerario trovato.
+      {/* Body */}
+      <div style={{ padding: 14 }}>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(3, minmax(0, 1fr))", gap: 10 }}>
+          <Stat label="Curve" value={`${curves}/10 (${curveLabel(curves)})`} />
+          <Stat label="Asfalto" value={`${asphalt}/10`} />
+          <Stat label="Ritmo" value={paceLabel(route.pace)} />
+        </div>
+
+        <div style={{ marginTop: 14, borderTop: "1px solid rgba(0,0,0,0.08)", paddingTop: 14 }}>
+          <strong>📌 Descrizione</strong>
+          <div style={{ marginTop: 8, fontSize: 14, opacity: 0.9, lineHeight: 1.4 }}>
+            {route.description || "—"}
           </div>
-        )}
+        </div>
 
-        {filtered.map((r) => (
-          <div
-            key={r.id}
-            style={{
-              border: "1px solid rgba(0,0,0,0.12)",
-              borderRadius: 16,
-              padding: 14,
-              background: "white",
-              display: "grid",
-              gap: 6,
-            }}
-          >
-            <div style={{ display: "flex", gap: 10, alignItems: "center", flexWrap: "wrap" }}>
-              <strong style={{ fontSize: 16 }}>{r.name}</strong>
-              <span style={{ fontSize: 12, opacity: 0.75 }}>
-                {r.country} · {r.region}
-              </span>
-            </div>
-
-            {r.description && <div style={{ opacity: 0.9 }}>{r.description}</div>}
-
-            <div style={{ display: "flex", gap: 12, flexWrap: "wrap", fontSize: 13, opacity: 0.85 }}>
-              {typeof r.distanceKm === "number" && <span>📏 {r.distanceKm} km</span>}
-              {typeof r.curvesScore === "number" && <span>🌀 Pieghe: {r.curvesScore}/10</span>}
-              {typeof r.asphaltScore === "number" && <span>🛣️ Asfalto: {r.asphaltScore}/10</span>}
-              {r.bestSeason && <span>☀️ Stagione: {r.bestSeason}</span>}
-            </div>
-
-            <div style={{ display: "flex", gap: 10, marginTop: 6, flexWrap: "wrap" }}>
-              <button
-                type="button"
-                onClick={() => alert("Qui: apriamo mappa con traccia itinerario (step successivo).")}
-                style={{
-                  padding: "10px 12px",
-                  borderRadius: 12,
-                  border: "1px solid rgba(0,0,0,0.15)",
-                  background: "white",
-                  cursor: "pointer",
-                }}
-              >
-                Apri su mappa
-              </button>
-
-              <button
-                type="button"
-                onClick={() => alert("Qui: scarica offline (IndexedDB) (step successivo).")}
-                style={{
-                  padding: "10px 12px",
-                  borderRadius: 12,
-                  border: "1px solid rgba(0,0,0,0.15)",
-                  background: "white",
-                  cursor: "pointer",
-                }}
-              >
-                Scarica offline
-              </button>
-            </div>
+        <div style={{ marginTop: 14, padding: 12, borderRadius: 16, background: "rgba(0,0,0,0.04)" }}>
+          <div style={{ fontWeight: 800 }}>🌤 Meteo sul tragitto</div>
+          <div style={{ marginTop: 6, fontSize: 13, opacity: 0.85 }}>
+            Prossimo step: meteo lungo percorso (campionamento punti). UI pronta.
           </div>
-        ))}
+        </div>
       </div>
+    </>
+  );
+}
+
+function Stat({ label, value }) {
+  return (
+    <div style={{ padding: 12, borderRadius: 16, border: "1px solid rgba(0,0,0,0.12)" }}>
+      <div style={{ fontSize: 12, opacity: 0.7 }}>{label}</div>
+      <div style={{ fontWeight: 950, marginTop: 2 }}>{value}</div>
     </div>
   );
 }
