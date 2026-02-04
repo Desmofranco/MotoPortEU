@@ -1,10 +1,7 @@
 // =======================================================
 // src/pages/Garage.jsx
-// ✅ AGGIUNTA: "Scadenze in arrivo" (entro 45gg) + "Scaduti"
-// - Tutto offline: legge da activeBike.documents
-// - Nessuna notifica, solo lista dentro app
+// ✅ FIX: puoi salvare documenti anche SENZA file (solo tipo+scadenza+note)
 // =======================================================
-
 import { useEffect, useMemo, useState } from "react";
 import { loadBikes, saveBikes, fileToDataUrl } from "../utils/storage";
 
@@ -192,26 +189,39 @@ export default function Garage() {
     setBikesAndPersist(next);
   };
 
+  // ✅ FIX QUI: puoi salvare anche senza file
   const addDocument = async () => {
     if (!activeBike) return;
-    if (!docFile) {
-      alert("Carica una foto o PDF del documento.");
+
+    const note = docNote.trim();
+    const hasAnyInfo = !!docExpiry || !!note || !!docFile;
+
+    if (!hasAnyInfo) {
+      alert("Inserisci almeno una Scadenza o una Nota (oppure carica un file).");
       return;
     }
 
     setDocBusy(true);
     try {
-      const dataUrl = await fileToDataUrl(docFile);
       const typeMeta = DOC_TYPES.find((d) => d.key === docType);
+
+      // se esiste file → convertiamo in dataUrl, altrimenti null
+      let dataUrl = null;
+      let fileName = "";
+
+      if (docFile) {
+        dataUrl = await fileToDataUrl(docFile);
+        fileName = docFile.name || "";
+      }
 
       const doc = {
         id: `doc-${Math.random().toString(16).slice(2)}-${Date.now()}`,
         type: docType,
         label: typeMeta?.label || "Documento",
         expiry: docExpiry || "",
-        note: docNote.trim(),
-        fileName: docFile.name || "",
-        dataUrl,
+        note,
+        fileName,
+        dataUrl, // null se non c'è allegato
         createdAt: new Date().toISOString(),
       };
 
@@ -227,6 +237,7 @@ export default function Garage() {
 
       setBikesAndPersist(next);
 
+      // reset form
       setDocType("insurance");
       setDocExpiry("");
       setDocNote("");
@@ -236,7 +247,7 @@ export default function Garage() {
       if (el) el.value = "";
     } catch (e) {
       console.error(e);
-      alert("Errore nel caricamento documento.");
+      alert("Errore nel salvataggio documento.");
     } finally {
       setDocBusy(false);
     }
@@ -265,7 +276,6 @@ export default function Garage() {
     return [...docs].sort((a, b) => String(b.createdAt).localeCompare(String(a.createdAt)));
   }, [activeBike]);
 
-  // ✅ Scadenze: entro 45gg + scaduti (per moto attiva)
   const expiryLists = useMemo(() => {
     if (!activeBike) return { dueSoon: [], expired: [] };
     const docs = Array.isArray(activeBike.documents) ? activeBike.documents : [];
@@ -279,13 +289,8 @@ export default function Garage() {
       })
       .filter((d) => d.days !== null);
 
-    const expired = enriched
-      .filter((d) => d.days < 0)
-      .sort((a, b) => a.days - b.days);
-
-    const dueSoon = enriched
-      .filter((d) => d.days >= 0 && d.days <= 45)
-      .sort((a, b) => a.days - b.days);
+    const expired = enriched.filter((d) => d.days < 0).sort((a, b) => a.days - b.days);
+    const dueSoon = enriched.filter((d) => d.days >= 0 && d.days <= 45).sort((a, b) => a.days - b.days);
 
     return { dueSoon, expired };
   }, [activeBike]);
@@ -359,7 +364,7 @@ export default function Garage() {
                 </span>
               </div>
 
-              {/* ✅ Scadenze in arrivo */}
+              {/* Scadenze in arrivo */}
               <div style={{ marginTop: 12, padding: 12, borderRadius: 14, border: "1px solid rgba(0,0,0,0.12)", background: "rgba(0,0,0,0.02)" }}>
                 <div style={{ display: "flex", alignItems: "baseline", justifyContent: "space-between", gap: 10, flexWrap: "wrap" }}>
                   <strong>📅 Scadenze in arrivo (45gg)</strong>
@@ -375,12 +380,8 @@ export default function Garage() {
                   </div>
                 ) : (
                   <div style={{ marginTop: 10, display: "grid", gap: 8 }}>
-                    {expiryLists.expired.map((d) => (
-                      <ExpiryRow key={d.id} doc={d} />
-                    ))}
-                    {expiryLists.dueSoon.map((d) => (
-                      <ExpiryRow key={d.id} doc={d} />
-                    ))}
+                    {expiryLists.expired.map((d) => <ExpiryRow key={d.id} doc={d} />)}
+                    {expiryLists.dueSoon.map((d) => <ExpiryRow key={d.id} doc={d} />)}
                   </div>
                 )}
               </div>
@@ -395,6 +396,7 @@ export default function Garage() {
                 </button>
               </div>
 
+              {/* Health cards */}
               {computed && (
                 <div style={{ marginTop: 14, display: "grid", gap: 10 }}>
                   <HealthRow title="🛢️ Olio" item={computed.oil} />
@@ -446,7 +448,7 @@ export default function Garage() {
                       </label>
 
                       <label style={{ display: "grid", gap: 6 }}>
-                        <span style={{ fontSize: 12, opacity: 0.8 }}>Foto/PDF</span>
+                        <span style={{ fontSize: 12, opacity: 0.8 }}>Foto/PDF (opz.)</span>
                         <input id="docFileInput" type="file" accept="image/*,application/pdf"
                           onChange={(e) => setDocFile(e.target.files?.[0] || null)}
                           style={{ padding: "8px 0" }} />
@@ -456,10 +458,10 @@ export default function Garage() {
                     <div style={{ marginTop: 10, display: "flex", gap: 10, flexWrap: "wrap", alignItems: "center" }}>
                       <button type="button" onClick={addDocument} disabled={docBusy}
                         style={{ padding: "10px 12px", borderRadius: 12, border: "1px solid rgba(0,0,0,0.15)", background: "white", cursor: docBusy ? "not-allowed" : "pointer", opacity: docBusy ? 0.7 : 1 }}>
-                        {docBusy ? "Caricamento..." : "Aggiungi documento"}
+                        {docBusy ? "Salvataggio..." : "Aggiungi documento"}
                       </button>
                       <span style={{ fontSize: 12, opacity: 0.75 }}>
-                        ⚠️ Se carichi file enormi puoi saturare lo storage del browser.
+                        ✅ Ora puoi salvare anche senza allegato (solo dati).
                       </span>
                     </div>
                   </div>
@@ -535,7 +537,9 @@ function IntervalInput({ label, value, onChange }) {
 }
 
 function DocCard({ doc, onDelete }) {
-  const isPdf = String(doc.dataUrl || "").startsWith("data:application/pdf");
+  const dataUrl = doc.dataUrl || null;
+  const isPdf = dataUrl ? String(dataUrl).startsWith("data:application/pdf") : false;
+  const hasAttachment = !!dataUrl;
 
   let expiryBadge = null;
   if (doc.expiry) {
@@ -558,6 +562,7 @@ function DocCard({ doc, onDelete }) {
           </div>
           <div style={{ fontSize: 12, opacity: 0.75 }}>
             {doc.fileName ? `${doc.fileName} · ` : ""}
+            {hasAttachment ? "" : "Solo dati (nessun allegato) · "}
             Salvato: {String(doc.createdAt || "").slice(0, 10)}
             {doc.note ? ` · ${doc.note}` : ""}
           </div>
@@ -570,13 +575,17 @@ function DocCard({ doc, onDelete }) {
       </div>
 
       <div style={{ marginTop: 10 }}>
-        {isPdf ? (
-          <a href={doc.dataUrl} target="_blank" rel="noreferrer" style={{ fontSize: 13 }}>
+        {!hasAttachment ? (
+          <div style={{ padding: 12, borderRadius: 12, border: "1px dashed rgba(0,0,0,0.18)", background: "rgba(0,0,0,0.02)", fontSize: 13, opacity: 0.85 }}>
+            Nessun file allegato. (Documento salvato solo con dati.)
+          </div>
+        ) : isPdf ? (
+          <a href={dataUrl} target="_blank" rel="noreferrer" style={{ fontSize: 13 }}>
             Apri PDF
           </a>
         ) : (
           <img
-            src={doc.dataUrl}
+            src={dataUrl}
             alt={doc.label}
             style={{ width: "100%", maxHeight: 360, objectFit: "contain", borderRadius: 12, border: "1px solid rgba(0,0,0,0.10)", background: "rgba(0,0,0,0.02)" }}
           />
