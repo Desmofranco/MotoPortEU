@@ -253,15 +253,32 @@ export default function EuropeMap() {
               position={[s.lat, s.lng]}
               icon={icons[s.category] || icons.bar}
             >
-              <Popup>
-                <div style={{ minWidth: 200 }}>
-                  <div style={{ fontWeight: 700 }}>⭐ {s.name}</div>
-                  <div style={{ fontSize: 12, opacity: 0.8 }}>
-                    {s.city} · {CATEGORY_LABELS[s.category] || s.category}
-                  </div>
-                  {s.description && <p style={{ marginTop: 6 }}>{s.description}</p>}
-                </div>
-              </Popup>
+<Popup>
+  <div style={{ minWidth: 220 }}>
+    <div style={{ fontWeight: 700 }}>⭐ {s.name}</div>
+    <div style={{ fontSize: 12, opacity: 0.8 }}>
+      {s.city} · {CATEGORY_LABELS[s.category] || s.category}
+    </div>
+    {s.description && <p style={{ marginTop: 6 }}>{s.description}</p>}
+
+    <a
+      href={`/supplier/${s.id}`}
+      style={{
+        display: "inline-block",
+        marginTop: 8,
+        padding: "6px 10px",
+        borderRadius: 10,
+        border: "1px solid rgba(0,0,0,0.15)",
+        textDecoration: "none",
+        color: "inherit",
+        background: "white",
+        fontSize: 12,
+      }}
+    >
+      Apri scheda →
+    </a>
+  </div>
+</Popup>
             </Marker>
           ))}
       </MapContainer>

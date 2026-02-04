@@ -8,7 +8,7 @@ import Suppliers from "./pages/Suppliers";
 import Pass from "./pages/Pass";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
-
+import SupplierPage from "./pages/SupplierPage";
 export default function App() {
   return (
     <BrowserRouter>
@@ -21,6 +21,8 @@ export default function App() {
         <Route path="/pass" element={<Pass />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/supplier/:id" element={<SupplierPage />} />
+
       </Routes>
     </BrowserRouter>
   );
