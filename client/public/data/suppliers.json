@@ -1,0 +1,38 @@
+[
+  {
+    "id": "sup-001",
+    "name": "Bar Curva 46",
+    "category": "bar",
+    "lat": 44.1386,
+    "lng": 12.2464,
+    "city": "Misano",
+    "description": "Bar biker-friendly, colazioni e panini veloci."
+  },
+  {
+    "id": "sup-002",
+    "name": "Trattoria del Passo",
+    "category": "restaurant",
+    "lat": 44.2147,
+    "lng": 10.4829,
+    "city": "Abetone",
+    "description": "Cucina locale, parcheggio moto davanti."
+  },
+  {
+    "id": "sup-003",
+    "name": "MotoGear Shop",
+    "category": "accessories",
+    "lat": 45.0703,
+    "lng": 7.6869,
+    "city": "Torino",
+    "description": "Accessori e ricambi moto."
+  },
+  {
+    "id": "sup-004",
+    "name": "Rider Wear",
+    "category": "apparel",
+    "lat": 45.4642,
+    "lng": 9.19,
+    "city": "Milano",
+    "description": "Abbigliamento tecnico moto."
+  }
+]

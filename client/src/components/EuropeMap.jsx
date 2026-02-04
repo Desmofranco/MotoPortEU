@@ -2,52 +2,62 @@ import { useEffect, useMemo, useState } from "react";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import L from "leaflet";
 
-// Bounding box Europa (SW, NE)
+// Bounds Europa
 const EUROPE_BOUNDS = [
   [34.5, -11.0],
   [72.5, 40.0],
 ];
-
 const EUROPE_CENTER = [50.5, 10.0];
 
-// Icona marker semplice (fix classico per Leaflet con bundler)
-const fuelIcon = new L.Icon({
-  iconUrl:
-    "https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png",
-  iconRetinaUrl:
-    "https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon-2x.png",
-  shadowUrl:
-    "https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png",
-  iconSize: [25, 41],
-  iconAnchor: [12, 41],
-  popupAnchor: [1, -34],
-  shadowSize: [41, 41],
-});
+// Icona base Leaflet (fuel)
+const baseIcon = (color = "blue") =>
+  new L.Icon({
+    iconUrl: `https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png`,
+    iconRetinaUrl:
+      "https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon-2x.png",
+    shadowUrl:
+      "https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png",
+    iconSize: [25, 41],
+    iconAnchor: [12, 41],
+    popupAnchor: [1, -34],
+    shadowSize: [41, 41],
+    className: `marker-${color}`,
+  });
+
+// Icone fornitori (stesso marker, colore logico via CSS class)
+const icons = {
+  fuel: baseIcon("blue"),
+  bar: baseIcon("green"),
+  restaurant: baseIcon("red"),
+  accessories: baseIcon("orange"),
+  apparel: baseIcon("violet"),
+};
 
 export default function EuropeMap() {
   const [fuelPoints, setFuelPoints] = useState([]);
-  const [loadingFuel, setLoadingFuel] = useState(true);
+  const [suppliers, setSuppliers] = useState([]);
+  const [showFuel, setShowFuel] = useState(true);
+  const [showSuppliers, setShowSuppliers] = useState(true);
 
   useEffect(() => {
-    const loadFuel = async () => {
-      try {
-        setLoadingFuel(true);
-        const res = await fetch("/data/fuel_points.json");
-        if (!res.ok) throw new Error(`fuel_points.json not found (${res.status})`);
-        const data = await res.json();
-        setFuelPoints(Array.isArray(data) ? data : []);
-      } catch (err) {
-        console.error("⛽ Fuel load error:", err);
-        setFuelPoints([]);
-      } finally {
-        setLoadingFuel(false);
-      }
-    };
+    fetch("/data/fuel_points.json")
+      .then((r) => r.json())
+      .then(setFuelPoints)
+      .catch(() => setFuelPoints([]));
 
-    loadFuel();
+    fetch("/data/suppliers.json")
+      .then((r) => r.json())
+      .then(setSuppliers)
+      .catch(() => setSuppliers([]));
   }, []);
 
-  const fuelCount = useMemo(() => fuelPoints.length, [fuelPoints]);
+  const counts = useMemo(
+    () => ({
+      fuel: fuelPoints.length,
+      suppliers: suppliers.length,
+    }),
+    [fuelPoints, suppliers]
+  );
 
   return (
     <div style={{ height: "calc(100vh - 64px)", width: "100%" }}>
@@ -61,11 +71,11 @@ export default function EuropeMap() {
         style={{ height: "100%", width: "100%" }}
       >
         <TileLayer
-          attribution='&copy; OpenStreetMap contributors'
+          attribution="&copy; OpenStreetMap contributors"
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
 
-        {/* Badge semplice in alto a sinistra */}
+        {/* Pannello layer */}
         <div
           style={{
             position: "absolute",
@@ -73,34 +83,74 @@ export default function EuropeMap() {
             left: 12,
             zIndex: 1000,
             background: "white",
-            padding: "8px 10px",
+            padding: 10,
             borderRadius: 10,
             border: "1px solid rgba(0,0,0,0.12)",
             fontSize: 12,
+            minWidth: 190,
           }}
         >
-          <div><strong>Europa</strong></div>
-          <div>⛽ Benzinai: {loadingFuel ? "..." : fuelCount}</div>
+          <strong>Layer</strong>
+          <div>
+            <label>
+              <input
+                type="checkbox"
+                checked={showFuel}
+                onChange={(e) => setShowFuel(e.target.checked)}
+              />{" "}
+              ⛽ Benzinai ({counts.fuel})
+            </label>
+          </div>
+          <div>
+            <label>
+              <input
+                type="checkbox"
+                checked={showSuppliers}
+                onChange={(e) => setShowSuppliers(e.target.checked)}
+              />{" "}
+              ⭐ Fornitori ({counts.suppliers})
+            </label>
+          </div>
         </div>
 
-        {/* Marker benzinai */}
-        {fuelPoints.map((p) => (
-          <Marker
-            key={p.id || `${p.lat},${p.lng}`}
-            position={[p.lat, p.lng]}
-            icon={fuelIcon}
-          >
-            <Popup>
-              <div style={{ minWidth: 180 }}>
-                <div style={{ fontWeight: 700 }}>⛽ {p.name || "Benzinaio"}</div>
+        {/* Benzinai */}
+        {showFuel &&
+          fuelPoints.map((p) => (
+            <Marker
+              key={p.id || `${p.lat},${p.lng}`}
+              position={[p.lat, p.lng]}
+              icon={icons.fuel}
+            >
+              <Popup>
+                <strong>⛽ {p.name}</strong>
                 {p.brand && <div>Brand: {p.brand}</div>}
-                <div style={{ opacity: 0.75, marginTop: 6, fontSize: 12 }}>
-                  {Number(p.lat).toFixed(4)}, {Number(p.lng).toFixed(4)}
+              </Popup>
+            </Marker>
+          ))}
+
+        {/* Fornitori */}
+        {showSuppliers &&
+          suppliers.map((s) => (
+            <Marker
+              key={s.id}
+              position={[s.lat, s.lng]}
+              icon={icons[s.category] || icons.bar}
+            >
+              <Popup>
+                <div style={{ minWidth: 200 }}>
+                  <div style={{ fontWeight: 700 }}>
+                    ⭐ {s.name}
+                  </div>
+                  <div style={{ fontSize: 12, opacity: 0.8 }}>
+                    {s.city} · {s.category}
+                  </div>
+                  {s.description && (
+                    <p style={{ marginTop: 6 }}>{s.description}</p>
+                  )}
                 </div>
-              </div>
-            </Popup>
-          </Marker>
-        ))}
+              </Popup>
+            </Marker>
+          ))}
       </MapContainer>
     </div>
   );
