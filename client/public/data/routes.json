@@ -1,0 +1,35 @@
+[
+  {
+    "id": "rt-001",
+    "name": "Passo dello Stelvio Classic",
+    "country": "IT",
+    "region": "Lombardia / Alto Adige",
+    "distanceKm": 58,
+    "curvesScore": 9,
+    "asphaltScore": 8,
+    "bestSeason": "May–Oct",
+    "description": "Tornanti iconici, panorama assurdo. Partenza consigliata presto."
+  },
+  {
+    "id": "rt-002",
+    "name": "Dolomiti Loop",
+    "country": "IT",
+    "region": "Dolomiti",
+    "distanceKm": 180,
+    "curvesScore": 8,
+    "asphaltScore": 8,
+    "bestSeason": "Jun–Sep",
+    "description": "Giro panoramico con passi e punti foto. Perfetto per una giornata."
+  },
+  {
+    "id": "rt-003",
+    "name": "Route des Grandes Alpes",
+    "country": "FR",
+    "region": "Alpi Francesi",
+    "distanceKm": 680,
+    "curvesScore": 9,
+    "asphaltScore": 7,
+    "bestSeason": "Jun–Sep",
+    "description": "Mitica traversata alpina. Da fare in 2–4 giorni con tappe."
+  }
+]
