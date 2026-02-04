@@ -1,7 +1,9 @@
 // =======================================================
 // src/pages/Routes.jsx
 // UI Touring emozionale: foto + rating + curve + pace + filtri
-// ✅ Aggiunta: MAPPA (traccia) + METEO sul tragitto (campionamento punti)
+// ✅ MAPPA (traccia) + METEO sul tragitto (campionamento punti)
+// ✅ FIX: filtri paese/ricerca funzionanti
+// ✅ Google Maps link ripristinato (nel posto giusto)
 // Carica dati da: /public/data/routes.json
 // =======================================================
 import { useEffect, useMemo, useState } from "react";
@@ -107,6 +109,8 @@ export default function Routes() {
         const arr = Array.isArray(data) ? data : [];
         if (!alive) return;
         setRoutes(arr);
+
+        // se avevi un activeId che dopo filtro scompare, qui rimaniamo su primo disponibile
         setActiveId((prev) => prev || arr?.[0]?.id || null);
       } catch (e) {
         if (!alive) return;
@@ -121,71 +125,80 @@ export default function Routes() {
     };
   }, []);
 
-  const active = useMemo(
-    () => routes.find((r) => r.id === activeId) || null,
-    [routes, activeId]
-  );
-
   const countries = useMemo(() => {
-    const set = new Set(routes.map((r) => String(r.country || "").toUpperCase()).filter(Boolean));
+    const set = new Set(
+      routes.map((r) => String(r.country || "").toUpperCase()).filter(Boolean)
+    );
     return ["ALL", ...Array.from(set).sort()];
   }, [routes]);
 
   const paces = useMemo(() => {
-    const set = new Set(routes.map((r) => String(r.pace || "").toLowerCase()).filter(Boolean));
+    const set = new Set(
+      routes.map((r) => String(r.pace || "").toLowerCase()).filter(Boolean)
+    );
     return ["ALL", ...Array.from(set).sort()];
   }, [routes]);
 
-const filtered = useMemo(() => {
-  let out = [...routes];
+  // ✅ FILTRO + RICERCA (fix)
+  const filtered = useMemo(() => {
+    let out = [...routes];
 
-  // ricerca testo
-  const query = q.trim().toLowerCase();
-  if (query) {
-    out = out.filter((r) => {
-      const blob = [
-        r.name,
-        r.region,
-        r.country,
-        r.description,
-        r.pace,
-      ]
-        .join(" ")
-        .toLowerCase();
-      return blob.includes(query);
-    });
-  }
+    const query = q.trim().toLowerCase();
+    if (query) {
+      out = out.filter((r) => {
+        const blob = [
+          r.name,
+          r.region,
+          r.country,
+          r.bestSeason,
+          r.description,
+          r.pace,
+        ]
+          .join(" ")
+          .toLowerCase();
+        return blob.includes(query);
+      });
+    }
 
-  // paese
-  if (country !== "ALL") {
+    if (country !== "ALL") {
+      out = out.filter(
+        (r) => String(r.country || "").toUpperCase() === country
+      );
+    }
+
+    if (pace !== "ALL") {
+      out = out.filter(
+        (r) => String(r.pace || "").toLowerCase() === String(pace).toLowerCase()
+      );
+    }
+
     out = out.filter(
-      (r) => String(r.country || "").toUpperCase() === country
+      (r) => Number(r.curvesScore || 0) >= Number(minCurves || 0)
     );
-  }
 
-  // ritmo
-  if (pace !== "ALL") {
-    out = out.filter(
-      (r) => String(r.pace || "").toLowerCase() === pace.toLowerCase()
-    );
-  }
+    const sorter = {
+      curves: (a, b) =>
+        Number(b.curvesScore || 0) - Number(a.curvesScore || 0),
+      asphalt: (a, b) =>
+        Number(b.asphaltScore || 0) - Number(a.asphaltScore || 0),
+      distance: (a, b) =>
+        Number(a.distanceKm || 0) - Number(b.distanceKm || 0),
+    }[sortBy];
 
-  // curve min
-  out = out.filter(
-    (r) => Number(r.curvesScore || 0) >= Number(minCurves || 0)
+    return sorter ? out.sort(sorter) : out;
+  }, [routes, q, country, pace, minCurves, sortBy]);
+
+  // ✅ active: se filtro cambia e active non è più presente, scegli il primo
+  useEffect(() => {
+    if (!filtered.length) return;
+    const exists = filtered.some((r) => r.id === activeId);
+    if (!exists) setActiveId(filtered[0].id);
+  }, [filtered, activeId]);
+
+  const active = useMemo(
+    () => routes.find((r) => r.id === activeId) || null,
+    [routes, activeId]
   );
-
-  // ordinamento
-  const sorter = {
-    curves: (a, b) => Number(b.curvesScore || 0) - Number(a.curvesScore || 0),
-    asphalt: (a, b) =>
-      Number(b.asphaltScore || 0) - Number(a.asphaltScore || 0),
-    distance: (a, b) =>
-      Number(a.distanceKm || 0) - Number(b.distanceKm || 0),
-  }[sortBy];
-
-  return out.sort(sorter);
-}, [routes, q, country, pace, minCurves, sortBy]);
 
   return (
     <div style={{ padding: 20, maxWidth: 1250, margin: "0 auto" }}>
@@ -327,7 +340,14 @@ const filtered = useMemo(() => {
           {err}
         </div>
       ) : (
-        <div style={{ marginTop: 14, display: "grid", gridTemplateColumns: "420px 1fr", gap: 14 }}>
+        <div
+          style={{
+            marginTop: 14,
+            display: "grid",
+            gridTemplateColumns: "420px 1fr",
+            gap: 14,
+          }}
+        >
           {/* Cards */}
           <div style={{ display: "grid", gap: 12, height: "fit-content" }}>
             <div style={{ fontSize: 12, opacity: 0.7 }}>
@@ -335,11 +355,22 @@ const filtered = useMemo(() => {
             </div>
 
             {filtered.map((r) => (
-              <RouteCard key={r.id} route={r} active={r.id === activeId} onClick={() => setActiveId(r.id)} />
+              <RouteCard
+                key={r.id}
+                route={r}
+                active={r.id === activeId}
+                onClick={() => setActiveId(r.id)}
+              />
             ))}
 
             {filtered.length === 0 && (
-              <div style={{ padding: 12, borderRadius: 16, background: "rgba(0,0,0,0.04)" }}>
+              <div
+                style={{
+                  padding: 12,
+                  borderRadius: 16,
+                  background: "rgba(0,0,0,0.04)",
+                }}
+              >
                 Nessun itinerario trovato.
               </div>
             )}
@@ -355,7 +386,11 @@ const filtered = useMemo(() => {
               height: "fit-content",
             }}
           >
-            {!active ? <div style={{ padding: 14 }}>Seleziona un itinerario.</div> : <RouteDetail route={active} />}
+            {!active ? (
+              <div style={{ padding: 14 }}>Seleziona un itinerario.</div>
+            ) : (
+              <RouteDetail route={active} />
+            )}
           </div>
         </div>
       )}
@@ -378,7 +413,9 @@ function RouteCard({ route, active, onClick }) {
         cursor: "pointer",
         borderRadius: 18,
         overflow: "hidden",
-        border: active ? "2px solid rgba(0,0,0,0.35)" : "1px solid rgba(0,0,0,0.12)",
+        border: active
+          ? "2px solid rgba(0,0,0,0.35)"
+          : "1px solid rgba(0,0,0,0.12)",
         background: "white",
         boxShadow: active ? "0 10px 30px rgba(0,0,0,0.12)" : "none",
       }}
@@ -416,7 +453,9 @@ function RouteCard({ route, active, onClick }) {
         </div>
 
         {route.description ? (
-          <div style={{ marginTop: 10, fontSize: 13, opacity: 0.85 }}>{route.description}</div>
+          <div style={{ marginTop: 10, fontSize: 13, opacity: 0.85 }}>
+            {route.description}
+          </div>
         ) : null}
       </div>
     </div>
@@ -430,26 +469,8 @@ function RouteDetail({ route }) {
 
   const cPill = scorePill(curves);
   const aPill = scorePill(asphalt);
-<div style={{ marginTop: 12 }}>
-  <a
-    href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(route.name + " " + route.region)}`}
-    target="_blank"
-    rel="noreferrer"
-    style={{
-      display: "inline-block",
-      padding: "10px 12px",
-      borderRadius: 12,
-      border: "1px solid rgba(0,0,0,0.15)",
-      background: "white",
-      fontSize: 13,
-      textDecoration: "none",
-    }}
-  >
-    📍 Apri in Google Maps
-  </a>
-</div>
 
-  // ✅ METEO (campionamento punti)
+  // ✅ METEO (campionamento punti) — usa routeWeather.js
   const [wx, setWx] = useState(null);
   const [wxBusy, setWxBusy] = useState(false);
 
@@ -490,7 +511,6 @@ function RouteDetail({ route }) {
         <div style={{ marginTop: 10, padding: 12, borderRadius: 16, background: "rgba(0,0,0,0.04)" }}>
           {wx.note || "Meteo non disponibile."}
         </div>
-        
       );
     }
 
@@ -515,16 +535,19 @@ function RouteDetail({ route }) {
           <span style={pillStyle(worstLevel)}>
             Condizione peggiore: <strong>{wx.worst}</strong>
           </span>
+
           {wx.tempMin !== null && wx.tempMax !== null ? (
             <span style={pillStyle("ok")}>
               🌡 {wx.tempMin}° / {wx.tempMax}° (avg {wx.temp}°)
             </span>
           ) : null}
+
           {wx.windAvgKmh !== null && wx.windMaxKmh !== null ? (
             <span style={pillStyle(wx.windMaxKmh >= 50 ? "warn" : "ok")}>
               💨 vento avg {wx.windAvgKmh} km/h · max {wx.windMaxKmh} km/h
             </span>
           ) : null}
+
           <span style={pillStyle("ok")}>📍 punti: {wx.points}</span>
         </div>
 
@@ -532,7 +555,6 @@ function RouteDetail({ route }) {
           Aggiornato: {String(wx.updatedAt || "").slice(0, 16).replace("T", " ")}
         </div>
       </div>
-      
     );
   })();
 
@@ -590,16 +612,39 @@ function RouteDetail({ route }) {
           <div style={{ marginTop: 8, fontSize: 14, opacity: 0.9, lineHeight: 1.4 }}>
             {route.description || "—"}
           </div>
+
+          {/* ✅ Google Maps link (messo nel posto giusto) */}
+          <div style={{ marginTop: 12 }}>
+            <a
+              href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
+                `${route.name} ${route.region || ""}`
+              )}`}
+              target="_blank"
+              rel="noreferrer"
+              style={{
+                display: "inline-block",
+                padding: "10px 12px",
+                borderRadius: 12,
+                border: "1px solid rgba(0,0,0,0.15)",
+                background: "white",
+                fontSize: 13,
+                textDecoration: "none",
+              }}
+            >
+              📍 Apri in Google Maps
+            </a>
+          </div>
         </div>
 
-        {/* ✅ MAPPA (traccia) */}
+        {/* ✅ MAPPA (traccia reale se nel JSON c'è polyline; fallback start/end) */}
         <div style={{ marginTop: 14, borderTop: "1px solid rgba(0,0,0,0.08)", paddingTop: 14 }}>
           <strong>🗺️ Percorso</strong>
           <div style={{ marginTop: 10 }}>
             <RouteMap route={route} />
           </div>
           <div style={{ marginTop: 8, fontSize: 12, opacity: 0.7 }}>
-            Suggerimento: per traccia precisa aggiungi <code>polyline</code> (array di [lat,lng]) oppure <code>start/end</code> nel routes.json.
+            Traccia reale: aggiungi <code>polyline</code> (array di [lat,lng]) nel routes.json.
+            Fallback: <code>start/end</code>.
           </div>
         </div>
 
@@ -608,7 +653,7 @@ function RouteDetail({ route }) {
           <strong>🌤 Meteo sul tragitto</strong>
           {wxBox}
           <div style={{ marginTop: 8, fontSize: 12, opacity: 0.7 }}>
-            Nota: serve <code>VITE_OWM_KEY</code> (OpenWeather). Se manca polyline/start-end il meteo non può campionare il percorso.
+            Serve <code>VITE_OWM_KEY</code>. Se manca polyline/start-end il meteo non può campionare.
           </div>
         </div>
       </div>
