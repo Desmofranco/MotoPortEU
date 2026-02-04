@@ -1,0 +1,587 @@
+// =======================================================
+// src/pages/Tracks.jsx
+// Piste: supersport / enduro / cross
+// UI emozionale: foto + rating + mappa + meteo + Google Maps
+// Dati: /public/data/tracks.json
+// =======================================================
+import { useEffect, useMemo, useState } from "react";
+import TrackMap from "../components/TrackMap";
+import { getTrackWeatherSummary } from "../utils/trackWeather";
+
+const FALLBACK_PHOTO =
+  "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1600&q=80";
+
+function pillStyle(level) {
+  const base = {
+    display: "inline-flex",
+    alignItems: "center",
+    gap: 6,
+    padding: "6px 10px",
+    borderRadius: 999,
+    fontSize: 12,
+    border: "1px solid rgba(0,0,0,0.14)",
+    background: "rgba(255,255,255,0.78)",
+    backdropFilter: "blur(6px)",
+    whiteSpace: "nowrap",
+  };
+  if (level === "bad") return { ...base, background: "rgba(255,0,0,0.10)" };
+  if (level === "warn") return { ...base, background: "rgba(255,140,0,0.12)" };
+  if (level === "soon") return { ...base, background: "rgba(255,215,0,0.16)" };
+  return base;
+}
+
+function countryFlag(cc) {
+  const c = String(cc || "").toUpperCase();
+  const map = {
+    IT: "🇮🇹",
+    FR: "🇫🇷",
+    DE: "🇩🇪",
+    AT: "🇦🇹",
+    CH: "🇨🇭",
+    ES: "🇪🇸",
+    NO: "🇳🇴",
+    SE: "🇸🇪",
+    FI: "🇫🇮",
+    RO: "🇷🇴",
+    NL: "🇳🇱",
+    BE: "🇧🇪",
+    PT: "🇵🇹",
+    GB: "🇬🇧",
+    IE: "🇮🇪",
+    PL: "🇵🇱",
+    CZ: "🇨🇿",
+    SK: "🇸🇰",
+    HU: "🇭🇺",
+    SI: "🇸🇮",
+    HR: "🇭🇷",
+    GR: "🇬🇷",
+  };
+  return map[c] || "🏁";
+}
+
+function typeLabel(t) {
+  const s = String(t || "").toLowerCase();
+  if (s === "supersport") return "SuperSport";
+  if (s === "enduro") return "Enduro";
+  if (s === "cross") return "Cross";
+  return t ? String(t) : "—";
+}
+
+function surfaceLabel(s) {
+  const v = String(s || "").toLowerCase();
+  if (v === "asphalt") return "Asfalto";
+  if (v === "dirt") return "Terra";
+  if (v === "mixed") return "Misto";
+  return s ? String(s) : "—";
+}
+
+function scorePill(v) {
+  const n = Number(v || 0);
+  if (n >= 9) return { label: "TOP", level: "ok" };
+  if (n >= 7.5) return { label: "OTTIMA", level: "soon" };
+  if (n >= 6) return { label: "BUONA", level: "warn" };
+  return { label: "BASIC", level: "bad" };
+}
+
+function weatherLevel(worst) {
+  const s = String(worst || "").toLowerCase();
+  if (!s) return "ok";
+  if (s.includes("temporale")) return "bad";
+  if (s.includes("neve")) return "warn";
+  if (s.includes("pioggia")) return "warn";
+  if (s.includes("nebbia")) return "warn";
+  if (s.includes("variabile")) return "soon";
+  if (s.includes("nuvoloso")) return "soon";
+  return "ok";
+}
+
+export default function Tracks() {
+  const [tracks, setTracks] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [err, setErr] = useState("");
+
+  // filtri
+  const [q, setQ] = useState("");
+  const [country, setCountry] = useState("ALL");
+  const [type, setType] = useState("ALL");
+  const [surface, setSurface] = useState("ALL");
+  const [sortBy, setSortBy] = useState("rating"); // rating | difficulty | length
+  const [activeId, setActiveId] = useState(null);
+
+  useEffect(() => {
+    let alive = true;
+    async function run() {
+      setLoading(true);
+      setErr("");
+      try {
+        const r = await fetch("/data/tracks.json", { cache: "no-store" });
+        if (!r.ok) throw new Error("Impossibile caricare /data/tracks.json");
+        const data = await r.json();
+        const arr = Array.isArray(data) ? data : [];
+        if (!alive) return;
+
+        // de-dup hard su id (se incolli roba doppia, qui non esplode)
+        const seen = new Set();
+        const dedup = [];
+        for (const t of arr) {
+          const id = String(t?.id || "");
+          if (!id || seen.has(id)) continue;
+          seen.add(id);
+          dedup.push(t);
+        }
+
+        setTracks(dedup);
+        setActiveId((prev) => prev || dedup?.[0]?.id || null);
+      } catch (e) {
+        if (!alive) return;
+        setErr(e?.message || "Errore caricamento piste");
+      } finally {
+        if (alive) setLoading(false);
+      }
+    }
+    run();
+    return () => {
+      alive = false;
+    };
+  }, []);
+
+  const active = useMemo(
+    () => tracks.find((t) => t.id === activeId) || null,
+    [tracks, activeId]
+  );
+
+  const countries = useMemo(() => {
+    const set = new Set(tracks.map((t) => String(t.country || "").toUpperCase()).filter(Boolean));
+    return ["ALL", ...Array.from(set).sort()];
+  }, [tracks]);
+
+  const types = useMemo(() => {
+    const set = new Set(tracks.map((t) => String(t.type || "").toLowerCase()).filter(Boolean));
+    return ["ALL", ...Array.from(set).sort()];
+  }, [tracks]);
+
+  const surfaces = useMemo(() => {
+    const set = new Set(tracks.map((t) => String(t.surface || "").toLowerCase()).filter(Boolean));
+    return ["ALL", ...Array.from(set).sort()];
+  }, [tracks]);
+
+  const filtered = useMemo(() => {
+    const query = q.trim().toLowerCase();
+    let out = [...tracks];
+
+    if (query) {
+      out = out.filter((t) => {
+        const blob = [
+          t.name,
+          t.region,
+          t.country,
+          t.type,
+          t.surface,
+          t.description,
+          t.bestSeason,
+        ]
+          .join(" ")
+          .toLowerCase();
+        return blob.includes(query);
+      });
+    }
+
+    if (country !== "ALL") {
+      out = out.filter((t) => String(t.country || "").toUpperCase() === country);
+    }
+
+    if (type !== "ALL") {
+      out = out.filter((t) => String(t.type || "").toLowerCase() === String(type).toLowerCase());
+    }
+
+    if (surface !== "ALL") {
+      out = out.filter((t) => String(t.surface || "").toLowerCase() === String(surface).toLowerCase());
+    }
+
+    const sorter =
+      {
+        rating: (a, b) => Number(b.rating || 0) - Number(a.rating || 0),
+        difficulty: (a, b) => Number(b.difficulty || 0) - Number(a.difficulty || 0),
+        length: (a, b) => Number(b.lengthKm || 0) - Number(a.lengthKm || 0),
+      }[sortBy] || ((a, b) => 0);
+
+    out.sort(sorter);
+    return out;
+  }, [tracks, q, country, type, surface, sortBy]);
+
+  // se filtro e active sparisce, riallineo
+  useEffect(() => {
+    if (!filtered.length) return;
+    const exists = filtered.some((t) => t.id === activeId);
+    if (!exists) setActiveId(filtered[0].id);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [filtered.length, country, type, surface, q, sortBy]);
+
+  return (
+    <div style={{ padding: 20, maxWidth: 1250, margin: "0 auto" }}>
+      {/* Header */}
+      <div style={{ display: "flex", justifyContent: "space-between", gap: 12, flexWrap: "wrap", alignItems: "baseline" }}>
+        <div>
+          <h1 style={{ margin: 0 }}>Piste 🏁</h1>
+          <div style={{ opacity: 0.75, marginTop: 4 }}>
+            SuperSport, Enduro e Cross: mappa, meteo e link Google.
+          </div>
+        </div>
+
+        <input
+          value={q}
+          onChange={(e) => setQ(e.target.value)}
+          placeholder="Cerca: Mugello, Misano, enduro, cross…"
+          style={{
+            minWidth: 320,
+            padding: "10px 12px",
+            borderRadius: 14,
+            border: "1px solid rgba(0,0,0,0.15)",
+            outline: "none",
+          }}
+        />
+      </div>
+
+      {/* Filters */}
+      <div
+        style={{
+          marginTop: 12,
+          display: "grid",
+          gridTemplateColumns: "repeat(auto-fit, minmax(170px, 1fr))",
+          gap: 10,
+          padding: 12,
+          borderRadius: 18,
+          border: "1px solid rgba(0,0,0,0.12)",
+          background: "white",
+        }}
+      >
+        <label style={{ display: "grid", gap: 6 }}>
+          <span style={{ fontSize: 12, opacity: 0.75 }}>Paese</span>
+          <select
+            value={country}
+            onChange={(e) => setCountry(e.target.value)}
+            style={{ padding: "10px 12px", borderRadius: 12, border: "1px solid rgba(0,0,0,0.15)" }}
+          >
+            {countries.map((c) => (
+              <option key={c} value={c}>
+                {c === "ALL" ? "Tutti" : `${countryFlag(c)} ${c}`}
+              </option>
+            ))}
+          </select>
+        </label>
+
+        <label style={{ display: "grid", gap: 6 }}>
+          <span style={{ fontSize: 12, opacity: 0.75 }}>Tipo</span>
+          <select
+            value={type}
+            onChange={(e) => setType(e.target.value)}
+            style={{ padding: "10px 12px", borderRadius: 12, border: "1px solid rgba(0,0,0,0.15)" }}
+          >
+            {types.map((t) => (
+              <option key={t} value={t}>
+                {t === "ALL" ? "Tutti" : typeLabel(t)}
+              </option>
+            ))}
+          </select>
+        </label>
+
+        <label style={{ display: "grid", gap: 6 }}>
+          <span style={{ fontSize: 12, opacity: 0.75 }}>Fondo</span>
+          <select
+            value={surface}
+            onChange={(e) => setSurface(e.target.value)}
+            style={{ padding: "10px 12px", borderRadius: 12, border: "1px solid rgba(0,0,0,0.15)" }}
+          >
+            {surfaces.map((s) => (
+              <option key={s} value={s}>
+                {s === "ALL" ? "Tutti" : surfaceLabel(s)}
+              </option>
+            ))}
+          </select>
+        </label>
+
+        <label style={{ display: "grid", gap: 6 }}>
+          <span style={{ fontSize: 12, opacity: 0.75 }}>Ordina</span>
+          <select
+            value={sortBy}
+            onChange={(e) => setSortBy(e.target.value)}
+            style={{ padding: "10px 12px", borderRadius: 12, border: "1px solid rgba(0,0,0,0.15)" }}
+          >
+            <option value="rating">Rating (desc)</option>
+            <option value="difficulty">Difficoltà (desc)</option>
+            <option value="length">Lunghezza (desc)</option>
+          </select>
+        </label>
+      </div>
+
+      {/* Content */}
+      {loading ? (
+        <div style={{ marginTop: 14, padding: 12, borderRadius: 16, background: "rgba(0,0,0,0.04)" }}>
+          Carico piste…
+        </div>
+      ) : err ? (
+        <div style={{ marginTop: 14, padding: 12, borderRadius: 16, background: "rgba(255,0,0,0.08)" }}>
+          {err}
+        </div>
+      ) : (
+        <div style={{ marginTop: 14, display: "grid", gridTemplateColumns: "420px 1fr", gap: 14 }}>
+          {/* Cards */}
+          <div style={{ display: "grid", gap: 12, height: "fit-content" }}>
+            <div style={{ fontSize: 12, opacity: 0.7 }}>
+              Trovate: <strong>{filtered.length}</strong>
+            </div>
+
+            {filtered.map((t) => (
+              <TrackCard
+                key={t.id}
+                track={t}
+                active={t.id === activeId}
+                onClick={() => setActiveId(t.id)}
+              />
+            ))}
+
+            {filtered.length === 0 && (
+              <div style={{ padding: 12, borderRadius: 16, background: "rgba(0,0,0,0.04)" }}>
+                Nessuna pista trovata.
+              </div>
+            )}
+          </div>
+
+          {/* Detail */}
+          <div
+            style={{
+              borderRadius: 22,
+              overflow: "hidden",
+              border: "1px solid rgba(0,0,0,0.12)",
+              background: "white",
+              height: "fit-content",
+            }}
+          >
+            {!active ? <div style={{ padding: 14 }}>Seleziona una pista.</div> : <TrackDetail track={active} />}
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
+function TrackCard({ track, active, onClick }) {
+  const photo = track.photo || FALLBACK_PHOTO;
+  const rating = Number(track.rating || 0);
+  const p = scorePill(rating);
+
+  return (
+    <div
+      onClick={onClick}
+      style={{
+        cursor: "pointer",
+        borderRadius: 18,
+        overflow: "hidden",
+        border: active ? "2px solid rgba(0,0,0,0.35)" : "1px solid rgba(0,0,0,0.12)",
+        background: "white",
+        boxShadow: active ? "0 10px 30px rgba(0,0,0,0.12)" : "none",
+      }}
+    >
+      <div
+        style={{
+          height: 130,
+          backgroundImage: `url(${photo})`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+        }}
+      />
+      <div style={{ padding: 12 }}>
+        <div style={{ display: "flex", justifyContent: "space-between", gap: 10 }}>
+          <div style={{ fontWeight: 900, lineHeight: 1.15 }}>
+            {countryFlag(track.country)} {track.name}
+          </div>
+          <div style={{ fontSize: 12, opacity: 0.75, whiteSpace: "nowrap" }}>
+            {typeLabel(track.type)}
+          </div>
+        </div>
+
+        <div style={{ marginTop: 4, fontSize: 12, opacity: 0.75 }}>
+          {track.region} · fondo: {surfaceLabel(track.surface)} · stagione: {track.bestSeason || "—"}
+        </div>
+
+        <div style={{ marginTop: 10, display: "flex", gap: 8, flexWrap: "wrap" }}>
+          <span style={pillStyle(p.level)}>⭐ {rating.toFixed(1)} · {p.label}</span>
+          <span style={pillStyle("ok")}>🧠 diff {Number(track.difficulty || 0)}/10</span>
+          <span style={pillStyle("ok")}>⚡ speed {Number(track.speed || 0)}/10</span>
+          <span style={pillStyle("ok")}>🧩 tech {Number(track.technique || 0)}/10</span>
+        </div>
+
+        {track.description ? (
+          <div style={{ marginTop: 10, fontSize: 13, opacity: 0.85 }}>
+            {track.description}
+          </div>
+        ) : null}
+      </div>
+    </div>
+  );
+}
+
+function TrackDetail({ track }) {
+  const photo = track.photo || FALLBACK_PHOTO;
+
+  // ✅ meteo: 1 punto (coords)
+  const [wx, setWx] = useState(null);
+  const [wxBusy, setWxBusy] = useState(false);
+
+  useEffect(() => {
+    let alive = true;
+    async function run() {
+      setWxBusy(true);
+      try {
+        const out = await getTrackWeatherSummary(track);
+        if (alive) setWx(out);
+      } finally {
+        if (alive) setWxBusy(false);
+      }
+    }
+    run();
+    return () => {
+      alive = false;
+    };
+  }, [track?.id]);
+
+  const googleHref = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
+    `${track.name} ${track.region} ${track.country}`
+  )}`;
+
+  const wxBox = (() => {
+    if (wxBusy) {
+      return (
+        <div style={{ marginTop: 10, padding: 12, borderRadius: 16, background: "rgba(0,0,0,0.04)" }}>
+          Carico meteo…
+        </div>
+      );
+    }
+    if (!wx || !wx.ok) {
+      return (
+        <div style={{ marginTop: 10, padding: 12, borderRadius: 16, background: "rgba(0,0,0,0.04)" }}>
+          {wx?.note || "Meteo non disponibile."}
+        </div>
+      );
+    }
+
+    return (
+      <div style={{ marginTop: 10, display: "grid", gap: 10 }}>
+        <div style={{ display: "flex", gap: 10, flexWrap: "wrap", alignItems: "center" }}>
+          <span style={pillStyle(weatherLevel(wx.worst))}>
+            Condizione: <strong>{wx.worst}</strong>
+          </span>
+          {wx.temp !== null ? (
+            <span style={pillStyle("ok")}>🌡 {wx.temp}° (min {wx.tempMin}° / max {wx.tempMax}°)</span>
+          ) : null}
+          {wx.windKmh !== null ? (
+            <span style={pillStyle(wx.windKmh >= 50 ? "warn" : "ok")}>💨 vento {wx.windKmh} km/h</span>
+          ) : null}
+        </div>
+
+        <div style={{ fontSize: 12, opacity: 0.7 }}>
+          Aggiornato: {String(wx.updatedAt || "").slice(0, 16).replace("T", " ")}
+        </div>
+      </div>
+    );
+  })();
+
+  return (
+    <>
+      {/* Hero */}
+      <div
+        style={{
+          position: "relative",
+          height: 280,
+          backgroundImage: `url(${photo})`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+        }}
+      >
+        <div
+          style={{
+            position: "absolute",
+            inset: 0,
+            background: "linear-gradient(180deg, rgba(0,0,0,0.12), rgba(0,0,0,0.72))",
+          }}
+        />
+        <div style={{ position: "absolute", left: 16, right: 16, bottom: 14, color: "white" }}>
+          <div style={{ fontSize: 13, opacity: 0.92 }}>
+            {countryFlag(track.country)} {track.country} · {track.region} · {typeLabel(track.type)}
+          </div>
+          <div style={{ fontSize: 30, fontWeight: 950, letterSpacing: 0.2 }}>{track.name}</div>
+
+          <div style={{ marginTop: 10, display: "flex", gap: 8, flexWrap: "wrap" }}>
+            <span style={pillStyle("ok")}>⭐ {Number(track.rating || 0).toFixed(1)}</span>
+            <span style={pillStyle("ok")}>🧠 diff {Number(track.difficulty || 0)}/10</span>
+            <span style={pillStyle("ok")}>⚡ speed {Number(track.speed || 0)}/10</span>
+            <span style={pillStyle("ok")}>🧩 tech {Number(track.technique || 0)}/10</span>
+            <span style={pillStyle("ok")}>🗓 {track.bestSeason || "—"}</span>
+            {track.lengthKm ? <span style={pillStyle("ok")}>📏 {track.lengthKm} km</span> : null}
+          </div>
+        </div>
+      </div>
+
+      {/* Body */}
+      <div style={{ padding: 14 }}>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(3, minmax(0, 1fr))", gap: 10 }}>
+          <Stat label="Tipo" value={typeLabel(track.type)} />
+          <Stat label="Fondo" value={surfaceLabel(track.surface)} />
+          <Stat label="Rating" value={`${Number(track.rating || 0).toFixed(1)} / 10`} />
+        </div>
+
+        <div style={{ marginTop: 12 }}>
+          <a
+            href={googleHref}
+            target="_blank"
+            rel="noreferrer"
+            style={{
+              display: "inline-block",
+              padding: "10px 12px",
+              borderRadius: 12,
+              border: "1px solid rgba(0,0,0,0.15)",
+              background: "white",
+              fontSize: 13,
+              textDecoration: "none",
+            }}
+          >
+            📍 Apri in Google Maps
+          </a>
+        </div>
+
+        <div style={{ marginTop: 14, borderTop: "1px solid rgba(0,0,0,0.08)", paddingTop: 14 }}>
+          <strong>📌 Descrizione</strong>
+          <div style={{ marginTop: 8, fontSize: 14, opacity: 0.9, lineHeight: 1.4 }}>
+            {track.description || "—"}
+          </div>
+        </div>
+
+        {/* MAPPA */}
+        <div style={{ marginTop: 14, borderTop: "1px solid rgba(0,0,0,0.08)", paddingTop: 14 }}>
+          <strong>🗺️ Mappa</strong>
+          <div style={{ marginTop: 10 }}>
+            <TrackMap track={track} />
+          </div>
+        </div>
+
+        {/* METEO */}
+        <div style={{ marginTop: 14, borderTop: "1px solid rgba(0,0,0,0.08)", paddingTop: 14 }}>
+          <strong>🌤 Meteo</strong>
+          {wxBox}
+          <div style={{ marginTop: 8, fontSize: 12, opacity: 0.7 }}>
+            Nota: serve <code>VITE_OWM_KEY</code> (OpenWeather).
+          </div>
+        </div>
+      </div>
+    </>
+  );
+}
+
+function Stat({ label, value }) {
+  return (
+    <div style={{ padding: 12, borderRadius: 16, border: "1px solid rgba(0,0,0,0.12)" }}>
+      <div style={{ fontSize: 12, opacity: 0.7 }}>{label}</div>
+      <div style={{ fontWeight: 950, marginTop: 2 }}>{value}</div>
+    </div>
+  );
+}
