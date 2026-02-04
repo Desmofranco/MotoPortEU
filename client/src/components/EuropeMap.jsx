@@ -9,14 +9,12 @@ const EUROPE_BOUNDS = [
 ];
 const EUROPE_CENTER = [50.5, 10.0];
 
-// Icona base Leaflet (fuel)
+// Icona base Leaflet (placeholder)
 const baseIcon = (color = "blue") =>
   new L.Icon({
-    iconUrl: `https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png`,
-    iconRetinaUrl:
-      "https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon-2x.png",
-    shadowUrl:
-      "https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png",
+    iconUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png",
+    iconRetinaUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon-2x.png",
+    shadowUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png",
     iconSize: [25, 41],
     iconAnchor: [12, 41],
     popupAnchor: [1, -34],
@@ -24,7 +22,6 @@ const baseIcon = (color = "blue") =>
     className: `marker-${color}`,
   });
 
-// Icone fornitori (stesso marker, colore logico via CSS class)
 const icons = {
   fuel: baseIcon("blue"),
   bar: baseIcon("green"),
@@ -33,31 +30,83 @@ const icons = {
   apparel: baseIcon("violet"),
 };
 
+const CATEGORY_LABELS = {
+  bar: "Bar",
+  restaurant: "Ristoranti",
+  accessories: "Accessori",
+  apparel: "Abbigliamento",
+};
+
 export default function EuropeMap() {
   const [fuelPoints, setFuelPoints] = useState([]);
   const [suppliers, setSuppliers] = useState([]);
+
   const [showFuel, setShowFuel] = useState(true);
   const [showSuppliers, setShowSuppliers] = useState(true);
+
+  // Filtri categoria fornitori
+  const [catFilter, setCatFilter] = useState({
+    bar: true,
+    restaurant: true,
+    accessories: true,
+    apparel: true,
+  });
 
   useEffect(() => {
     fetch("/data/fuel_points.json")
       .then((r) => r.json())
-      .then(setFuelPoints)
+      .then((d) => setFuelPoints(Array.isArray(d) ? d : []))
       .catch(() => setFuelPoints([]));
 
     fetch("/data/suppliers.json")
       .then((r) => r.json())
-      .then(setSuppliers)
+      .then((d) => setSuppliers(Array.isArray(d) ? d : []))
       .catch(() => setSuppliers([]));
   }, []);
+
+  // Conteggi fornitori per categoria
+  const supplierCountsByCat = useMemo(() => {
+    const counts = { bar: 0, restaurant: 0, accessories: 0, apparel: 0 };
+    for (const s of suppliers) {
+      if (counts[s.category] !== undefined) counts[s.category] += 1;
+    }
+    return counts;
+  }, [suppliers]);
+
+  // Lista filtrata fornitori
+  const filteredSuppliers = useMemo(() => {
+    return suppliers.filter((s) => !!catFilter[s.category]);
+  }, [suppliers, catFilter]);
 
   const counts = useMemo(
     () => ({
       fuel: fuelPoints.length,
-      suppliers: suppliers.length,
+      suppliersTotal: suppliers.length,
+      suppliersVisible: filteredSuppliers.length,
     }),
-    [fuelPoints, suppliers]
+    [fuelPoints, suppliers, filteredSuppliers]
   );
+
+  const setAllCats = (value) => {
+    setCatFilter({
+      bar: value,
+      restaurant: value,
+      accessories: value,
+      apparel: value,
+    });
+  };
+
+  const allCatsOn =
+    catFilter.bar &&
+    catFilter.restaurant &&
+    catFilter.accessories &&
+    catFilter.apparel;
+
+  const allCatsOff =
+    !catFilter.bar &&
+    !catFilter.restaurant &&
+    !catFilter.accessories &&
+    !catFilter.apparel;
 
   return (
     <div style={{ height: "calc(100vh - 64px)", width: "100%" }}>
@@ -75,7 +124,7 @@ export default function EuropeMap() {
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
 
-        {/* Pannello layer */}
+        {/* Pannello layer + filtri */}
         <div
           style={{
             position: "absolute",
@@ -87,11 +136,12 @@ export default function EuropeMap() {
             borderRadius: 10,
             border: "1px solid rgba(0,0,0,0.12)",
             fontSize: 12,
-            minWidth: 190,
+            minWidth: 220,
           }}
         >
           <strong>Layer</strong>
-          <div>
+
+          <div style={{ marginTop: 6 }}>
             <label>
               <input
                 type="checkbox"
@@ -101,16 +151,83 @@ export default function EuropeMap() {
               ⛽ Benzinai ({counts.fuel})
             </label>
           </div>
-          <div>
+
+          <div style={{ marginTop: 6 }}>
             <label>
               <input
                 type="checkbox"
                 checked={showSuppliers}
                 onChange={(e) => setShowSuppliers(e.target.checked)}
               />{" "}
-              ⭐ Fornitori ({counts.suppliers})
+              ⭐ Fornitori ({counts.suppliersVisible}/{counts.suppliersTotal})
             </label>
           </div>
+
+          {/* Filtri categoria (solo se fornitori attivi) */}
+          {showSuppliers && (
+            <div
+              style={{
+                marginTop: 10,
+                paddingTop: 10,
+                borderTop: "1px solid rgba(0,0,0,0.10)",
+              }}
+            >
+              <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
+                <strong>Categorie</strong>
+                <button
+                  type="button"
+                  onClick={() => setAllCats(true)}
+                  disabled={allCatsOn}
+                  style={{
+                    marginLeft: "auto",
+                    fontSize: 11,
+                    padding: "4px 8px",
+                    borderRadius: 8,
+                    border: "1px solid rgba(0,0,0,0.15)",
+                    background: allCatsOn ? "rgba(0,0,0,0.06)" : "white",
+                    cursor: allCatsOn ? "not-allowed" : "pointer",
+                  }}
+                >
+                  Tutte
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setAllCats(false)}
+                  disabled={allCatsOff}
+                  style={{
+                    fontSize: 11,
+                    padding: "4px 8px",
+                    borderRadius: 8,
+                    border: "1px solid rgba(0,0,0,0.15)",
+                    background: allCatsOff ? "rgba(0,0,0,0.06)" : "white",
+                    cursor: allCatsOff ? "not-allowed" : "pointer",
+                  }}
+                >
+                  Nessuna
+                </button>
+              </div>
+
+              <div style={{ marginTop: 8, display: "grid", gap: 6 }}>
+                {Object.keys(CATEGORY_LABELS).map((key) => (
+                  <label key={key} style={{ display: "flex", gap: 8, alignItems: "center" }}>
+                    <input
+                      type="checkbox"
+                      checked={catFilter[key]}
+                      onChange={(e) =>
+                        setCatFilter((prev) => ({ ...prev, [key]: e.target.checked }))
+                      }
+                    />
+                    <span>
+                      {CATEGORY_LABELS[key]}{" "}
+                      <span style={{ opacity: 0.7 }}>
+                        ({supplierCountsByCat[key] || 0})
+                      </span>
+                    </span>
+                  </label>
+                ))}
+              </div>
+            </div>
+          )}
         </div>
 
         {/* Benzinai */}
@@ -128,9 +245,9 @@ export default function EuropeMap() {
             </Marker>
           ))}
 
-        {/* Fornitori */}
+        {/* Fornitori filtrati */}
         {showSuppliers &&
-          suppliers.map((s) => (
+          filteredSuppliers.map((s) => (
             <Marker
               key={s.id}
               position={[s.lat, s.lng]}
@@ -138,15 +255,11 @@ export default function EuropeMap() {
             >
               <Popup>
                 <div style={{ minWidth: 200 }}>
-                  <div style={{ fontWeight: 700 }}>
-                    ⭐ {s.name}
-                  </div>
+                  <div style={{ fontWeight: 700 }}>⭐ {s.name}</div>
                   <div style={{ fontSize: 12, opacity: 0.8 }}>
-                    {s.city} · {s.category}
+                    {s.city} · {CATEGORY_LABELS[s.category] || s.category}
                   </div>
-                  {s.description && (
-                    <p style={{ marginTop: 6 }}>{s.description}</p>
-                  )}
+                  {s.description && <p style={{ marginTop: 6 }}>{s.description}</p>}
                 </div>
               </Popup>
             </Marker>
