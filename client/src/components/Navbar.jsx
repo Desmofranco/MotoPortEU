@@ -1,5 +1,5 @@
-import { NavLink, useNavigate, useLocation } from "react-router-dom";
-import React from "react";
+// client/src/components/Navbar.jsx
+import { NavLink, useNavigate } from "react-router-dom";
 
 const TOKEN_KEY = "token";
 
@@ -13,9 +13,8 @@ const linkStyle = ({ isActive }) => ({
 
 export default function Navbar() {
   const navigate = useNavigate();
-  const location = useLocation();
 
-  // ✅ sempre aggiornato
+  // ✅ sempre aggiornato (render ad ogni route change comunque)
   const isLogged = Boolean(localStorage.getItem(TOKEN_KEY));
 
   const logout = () => {
@@ -23,7 +22,7 @@ export default function Navbar() {
     navigate("/", { replace: true });
   };
 
-  // se non loggato, non mostrare niente (ma con AppShell desktop-only è ok)
+  // se non loggato, non mostrare niente (AppShell desktop-only lo gestisce già)
   if (!isLogged) return null;
 
   return (
@@ -44,7 +43,7 @@ export default function Navbar() {
 
       <NavLink to="/map" style={linkStyle}>Mappa</NavLink>
       <NavLink to="/routes" style={linkStyle}>Itinerari</NavLink>
-      <NavLink to="/tracks" style={linkStyle}>🏁 Piste</NavLink>
+      <NavLink to="/tracks" style={linkStyle}>🏁 Circuiti</NavLink>
       <NavLink to="/garage" style={linkStyle}>Garage</NavLink>
       <NavLink to="/suppliers" style={linkStyle}>Fornitori</NavLink>
       <NavLink to="/passes" style={linkStyle}>Pass</NavLink>
