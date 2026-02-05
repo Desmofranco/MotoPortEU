@@ -32,8 +32,7 @@ export default function Register() {
       // ✅ DEMO REGISTER: salva token finto e vai dashboard
       const fakeToken = `demo_${Date.now()}_${btoa(email).slice(0, 10)}`;
       localStorage.setItem(TOKEN_KEY, fakeToken);
-
-      navigate("/dashboard", { replace: true });
+navigate("/routes", { replace: true });
     } catch (ex) {
       setErr(ex.message || "Errore registrazione");
     } finally {

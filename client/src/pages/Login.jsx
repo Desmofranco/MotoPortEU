@@ -15,7 +15,7 @@ export default function Login() {
   // Se già loggato → dashboard
   useEffect(() => {
     const token = localStorage.getItem(TOKEN_KEY);
-    if (token) navigate("/dashboard", { replace: true });
+navigate("/routes", { replace: true });
   }, [navigate]);
 
   const fromPath = location.state?.from || "/dashboard";

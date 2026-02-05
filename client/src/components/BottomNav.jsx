@@ -1,6 +1,8 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-
+<div className="max-w-5xl mx-auto px-4 py-4 md:py-6">
+  ...
+</div>
 const tabStyle = ({ isActive }) => ({
   textDecoration: "none",
   color: "inherit",
@@ -9,14 +11,13 @@ const tabStyle = ({ isActive }) => ({
 });
 
 export default function BottomNav() {
-  const tabs = [
-    { to: "/dashboard", label: "Dash", icon: "🏠" },
-    { to: "/map", label: "Mappa", icon: "🗺️" },
-    { to: "/routes", label: "Routes", icon: "📍" },
-    { to: "/garage", label: "Garage", icon: "🛠️" },
-    { to: "/my-tracks", label: "Storico", icon: "📡" },
-  ];
-
+const tabs = [
+  { to: "/map", label: "Mappa", icon: "🗺️" },
+  { to: "/routes", label: "Routes", icon: "📍" },
+  { to: "/tracks", label: "Circuiti", icon: "🏁" },
+  { to: "/garage", label: "Garage", icon: "🛠️" },
+  { to: "/my-tracks", label: "Storico", icon: "📡" },
+];
   return (
     <div className="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-white border-t border-black/10">
       <div className="max-w-5xl mx-auto flex justify-around py-2">

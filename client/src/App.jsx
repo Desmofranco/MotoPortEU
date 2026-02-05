@@ -12,7 +12,6 @@ import RoutesPage from "./pages/Routes";
 import Tracks from "./pages/Tracks";
 import Passes from "./pages/Passes";
 
-import Dashboard from "./pages/Dashboard";
 import MyTracks from "./pages/MyTracks";
 import MyTrackDetail from "./pages/MyTrackDetail";
 
@@ -36,7 +35,6 @@ export default function App() {
             </RequireAuth>
           }
         >
-          <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/map" element={<Map />} />
           <Route path="/garage" element={<Garage />} />
           <Route path="/suppliers" element={<Suppliers />} />
