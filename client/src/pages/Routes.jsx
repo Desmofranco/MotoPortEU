@@ -3,6 +3,7 @@
 // UI Touring emozionale: foto + rating + curve + pace + filtri
 // ✅ MAPPA (traccia) + METEO sul tragitto (campionamento punti)
 // ✅ FIX: filtri paese/ricerca funzionanti
+// ✅ FIX: filtro Ritmo funziona anche per itinerari senza "pace" (fallback Touring)
 // ✅ Google Maps link ripristinato (nel posto giusto)
 // Carica dati da: /public/data/routes.json
 // =======================================================
@@ -12,6 +13,8 @@ import { getRouteWeatherSummary } from "../utils/routeWeather";
 
 const FALLBACK_PHOTO =
   "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1600&q=80";
+
+const FALLBACK_PACE = "touring"; // ✅ IMPORTANTISSIMO: default per i 38 curati senza pace
 
 const paceLabel = (p) => {
   const s = String(p || "").toLowerCase();
@@ -82,6 +85,11 @@ function countryFlag(cc) {
   return map[c] || "🏍️";
 }
 
+// ✅ normalizza pace SEMPRE (evita null/undefined)
+function normPace(v) {
+  return String(v || FALLBACK_PACE).toLowerCase();
+}
+
 export default function Routes() {
   const [routes, setRoutes] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -108,9 +116,8 @@ export default function Routes() {
         const data = await r.json();
         const arr = Array.isArray(data) ? data : [];
         if (!alive) return;
-        setRoutes(arr);
 
-        // se avevi un activeId che dopo filtro scompare, qui rimaniamo su primo disponibile
+        setRoutes(arr);
         setActiveId((prev) => prev || arr?.[0]?.id || null);
       } catch (e) {
         if (!alive) return;
@@ -133,13 +140,12 @@ export default function Routes() {
   }, [routes]);
 
   const paces = useMemo(() => {
-    const set = new Set(
-      routes.map((r) => String(r.pace || "").toLowerCase()).filter(Boolean)
-    );
+    // ✅ include anche fallback touring se alcuni non hanno pace
+    const set = new Set(routes.map((r) => normPace(r.pace)).filter(Boolean));
     return ["ALL", ...Array.from(set).sort()];
   }, [routes]);
 
-  // ✅ FILTRO + RICERCA (fix)
+  // ✅ FILTRO + RICERCA (fix + fallback pace)
   const filtered = useMemo(() => {
     let out = [...routes];
 
@@ -152,7 +158,7 @@ export default function Routes() {
           r.country,
           r.bestSeason,
           r.description,
-          r.pace,
+          normPace(r.pace), // ✅ così "touring" matcha anche senza pace
         ]
           .join(" ")
           .toLowerCase();
@@ -161,28 +167,20 @@ export default function Routes() {
     }
 
     if (country !== "ALL") {
-      out = out.filter(
-        (r) => String(r.country || "").toUpperCase() === country
-      );
+      out = out.filter((r) => String(r.country || "").toUpperCase() === country);
     }
 
     if (pace !== "ALL") {
-      out = out.filter(
-        (r) => String(r.pace || "").toLowerCase() === String(pace).toLowerCase()
-      );
+      const want = String(pace).toLowerCase();
+      out = out.filter((r) => normPace(r.pace) === want); // ✅ FIX PRINCIPALE
     }
 
-    out = out.filter(
-      (r) => Number(r.curvesScore || 0) >= Number(minCurves || 0)
-    );
+    out = out.filter((r) => Number(r.curvesScore || 0) >= Number(minCurves || 0));
 
     const sorter = {
-      curves: (a, b) =>
-        Number(b.curvesScore || 0) - Number(a.curvesScore || 0),
-      asphalt: (a, b) =>
-        Number(b.asphaltScore || 0) - Number(a.asphaltScore || 0),
-      distance: (a, b) =>
-        Number(a.distanceKm || 0) - Number(b.distanceKm || 0),
+      curves: (a, b) => Number(b.curvesScore || 0) - Number(a.curvesScore || 0),
+      asphalt: (a, b) => Number(b.asphaltScore || 0) - Number(a.asphaltScore || 0),
+      distance: (a, b) => Number(a.distanceKm || 0) - Number(b.distanceKm || 0),
     }[sortBy];
 
     return sorter ? out.sort(sorter) : out;
@@ -234,6 +232,14 @@ export default function Routes() {
       </div>
 
       {/* Filters */}
+      <div
+        style={{
+          marginTop: 12,
+          display: "grid",
+          resultingTemplateColumns: "repeat(auto-fit, minmax(170px, 1fr))",
+        }}
+      />
+
       <div
         style={{
           marginTop: 12,
@@ -413,9 +419,7 @@ function RouteCard({ route, active, onClick }) {
         cursor: "pointer",
         borderRadius: 18,
         overflow: "hidden",
-        border: active
-          ? "2px solid rgba(0,0,0,0.35)"
-          : "1px solid rgba(0,0,0,0.12)",
+        border: active ? "2px solid rgba(0,0,0,0.35)" : "1px solid rgba(0,0,0,0.12)",
         background: "white",
         boxShadow: active ? "0 10px 30px rgba(0,0,0,0.12)" : "none",
       }}
@@ -449,7 +453,7 @@ function RouteCard({ route, active, onClick }) {
           <span style={pillStyle(aPill.level)}>
             🛣️ Asfalto {asphalt}/10 · {aPill.label}
           </span>
-          <span style={pillStyle("ok")}>🏍 {paceLabel(route.pace)}</span>
+          <span style={pillStyle("ok")}>🏍 {paceLabel(normPace(route.pace))}</span>
         </div>
 
         {route.description ? (
@@ -470,7 +474,7 @@ function RouteDetail({ route }) {
   const cPill = scorePill(curves);
   const aPill = scorePill(asphalt);
 
-  // ✅ METEO (campionamento punti) — usa routeWeather.js
+  // ✅ METEO (campionamento punti)
   const [wx, setWx] = useState(null);
   const [wxBusy, setWxBusy] = useState(false);
 
@@ -591,7 +595,7 @@ function RouteDetail({ route }) {
               🛣️ Asfalto {asphalt}/10 · {aPill.label}
             </span>
             <span style={pillStyle("ok")}>
-              🏍 Ritmo: <strong>{paceLabel(route.pace)}</strong>
+              🏍 Ritmo: <strong>{paceLabel(normPace(route.pace))}</strong>
             </span>
             <span style={pillStyle("ok")}>📏 {route.distanceKm} km</span>
             <span style={pillStyle("ok")}>🗓 {route.bestSeason || "—"}</span>
@@ -604,7 +608,7 @@ function RouteDetail({ route }) {
         <div style={{ display: "grid", gridTemplateColumns: "repeat(3, minmax(0, 1fr))", gap: 10 }}>
           <Stat label="Curve" value={`${curves}/10 (${curveLabel(curves)})`} />
           <Stat label="Asfalto" value={`${asphalt}/10`} />
-          <Stat label="Ritmo" value={paceLabel(route.pace)} />
+          <Stat label="Ritmo" value={paceLabel(normPace(route.pace))} />
         </div>
 
         <div style={{ marginTop: 14, borderTop: "1px solid rgba(0,0,0,0.08)", paddingTop: 14 }}>
@@ -613,7 +617,7 @@ function RouteDetail({ route }) {
             {route.description || "—"}
           </div>
 
-          {/* ✅ Google Maps link (messo nel posto giusto) */}
+          {/* ✅ Google Maps link */}
           <div style={{ marginTop: 12 }}>
             <a
               href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
@@ -636,15 +640,15 @@ function RouteDetail({ route }) {
           </div>
         </div>
 
-        {/* ✅ MAPPA (traccia reale se nel JSON c'è polyline; fallback start/end) */}
+        {/* ✅ MAPPA */}
         <div style={{ marginTop: 14, borderTop: "1px solid rgba(0,0,0,0.08)", paddingTop: 14 }}>
           <strong>🗺️ Percorso</strong>
           <div style={{ marginTop: 10 }}>
             <RouteMap route={route} />
           </div>
           <div style={{ marginTop: 8, fontSize: 12, opacity: 0.7 }}>
-            Traccia reale: aggiungi <code>polyline</code> (array di [lat,lng]) nel routes.json.
-            Fallback: <code>start/end</code>.
+            Traccia reale: aggiungi <code>polyline</code> (array di [lat,lng]) nel routes.json. Fallback:{" "}
+            <code>start/end</code>.
           </div>
         </div>
 

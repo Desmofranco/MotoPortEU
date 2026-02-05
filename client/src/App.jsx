@@ -11,6 +11,7 @@ import Register from "./pages/Register";
 import SupplierPage from "./pages/SupplierPage";
 import RoutesPage from "./pages/Routes";
 import Tracks from "./pages/Tracks";
+import Passes from "./pages/Passes";
 export default function App() {
   return (
     <BrowserRouter>
@@ -26,6 +27,7 @@ export default function App() {
         <Route path="/supplier/:id" element={<SupplierPage />} />
         <Route path="/routes" element={<RoutesPage />} />
         <Route path="/tracks" element={<Tracks />} />
+        <Route path="/passes" element={<Passes />} />
       </Routes>
     </BrowserRouter>
   );

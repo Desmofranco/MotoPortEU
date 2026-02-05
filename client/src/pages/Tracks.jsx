@@ -2,8 +2,9 @@
 // src/pages/Tracks.jsx
 // Piste: supersport / enduro / cross
 // UI emozionale: foto + rating + mappa + meteo + Google Maps
-// Dati: /public/data/tracks.json
+// Dati: /public/data/tracks.json + /public/data/tracks.eu.json
 // =======================================================
+
 import { useEffect, useMemo, useState } from "react";
 import TrackMap from "../components/TrackMap";
 import { getTrackWeatherSummary } from "../utils/trackWeather";
@@ -95,6 +96,43 @@ function weatherLevel(worst) {
   return "ok";
 }
 
+function normalizeIncomingTrack(t) {
+  // Supporta dataset "curato" e dataset OSM importato
+  const id = String(t?.id || "").trim();
+  const name = t?.name || t?.title || "Senza nome";
+  const country = String(t?.country || "").toUpperCase();
+  const region = t?.region || "";
+  const type = String(t?.type || t?.kind || "").toLowerCase(); // supersport/enduro/cross
+  const surface = String(t?.surface || "").toLowerCase();
+
+  const lat = t?.coords?.lat ?? t?.start?.lat ?? null;
+  const lng = t?.coords?.lng ?? t?.start?.lng ?? null;
+
+  return {
+    ...t,
+    id,
+    name,
+    country,
+    region,
+    type,
+    surface,
+    coords: {
+      lat: lat ?? t?.coords?.lat,
+      lng: lng ?? t?.coords?.lng,
+    },
+  };
+}
+
+function buildDedupeKey(t) {
+  // dedup più intelligente: id se presente, altrimenti name+coords
+  const id = String(t?.id || "").trim();
+  if (id) return `id:${id}`;
+  const name = String(t?.name || "").trim().toLowerCase();
+  const lat = t?.coords?.lat != null ? Number(t.coords.lat).toFixed(6) : "";
+  const lng = t?.coords?.lng != null ? Number(t.coords.lng).toFixed(6) : "";
+  return `n:${name}|${lat}|${lng}`;
+}
+
 export default function Tracks() {
   const [tracks, setTracks] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -110,25 +148,37 @@ export default function Tracks() {
 
   useEffect(() => {
     let alive = true;
+
     async function run() {
       setLoading(true);
       setErr("");
-      try {
-        const r = await fetch("/data/tracks.json", { cache: "no-store" });
-        if (!r.ok) throw new Error("Impossibile caricare /data/tracks.json");
-        const data = await r.json();
-        const arr = Array.isArray(data) ? data : [];
-        if (!alive) return;
 
-        // de-dup hard su id (se incolli roba doppia, qui non esplode)
+      try {
+        const [a, b] = await Promise.all([
+          fetch("/data/tracks.json", { cache: "no-store" })
+            .then((r) => (r.ok ? r.json() : []))
+            .catch(() => []),
+          fetch("/data/tracks.eu.json", { cache: "no-store" })
+            .then((r) => (r.ok ? r.json() : []))
+            .catch(() => []),
+        ]);
+
+        const arrA = Array.isArray(a) ? a : [];
+        const arrB = Array.isArray(b) ? b : [];
+
+        const merged = [...arrA, ...arrB].map(normalizeIncomingTrack);
+
+        // dedup hard
         const seen = new Set();
         const dedup = [];
-        for (const t of arr) {
-          const id = String(t?.id || "");
-          if (!id || seen.has(id)) continue;
-          seen.add(id);
+        for (const t of merged) {
+          const key = buildDedupeKey(t);
+          if (!key || seen.has(key)) continue;
+          seen.add(key);
           dedup.push(t);
         }
+
+        if (!alive) return;
 
         setTracks(dedup);
         setActiveId((prev) => prev || dedup?.[0]?.id || null);
@@ -139,29 +189,46 @@ export default function Tracks() {
         if (alive) setLoading(false);
       }
     }
+
     run();
     return () => {
       alive = false;
     };
   }, []);
 
-  const active = useMemo(
-    () => tracks.find((t) => t.id === activeId) || null,
-    [tracks, activeId]
-  );
+  const active = useMemo(() => {
+    if (!tracks.length) return null;
+    if (activeId) {
+      const found = tracks.find((t) => t.id === activeId);
+      if (found) return found;
+    }
+    return tracks[0] || null;
+  }, [tracks, activeId]);
 
   const countries = useMemo(() => {
-    const set = new Set(tracks.map((t) => String(t.country || "").toUpperCase()).filter(Boolean));
+    const set = new Set(
+      tracks
+        .map((t) => String(t.country || "").toUpperCase())
+        .filter(Boolean)
+    );
     return ["ALL", ...Array.from(set).sort()];
   }, [tracks]);
 
   const types = useMemo(() => {
-    const set = new Set(tracks.map((t) => String(t.type || "").toLowerCase()).filter(Boolean));
+    const set = new Set(
+      tracks
+        .map((t) => String(t.type || "").toLowerCase())
+        .filter(Boolean)
+    );
     return ["ALL", ...Array.from(set).sort()];
   }, [tracks]);
 
   const surfaces = useMemo(() => {
-    const set = new Set(tracks.map((t) => String(t.surface || "").toLowerCase()).filter(Boolean));
+    const set = new Set(
+      tracks
+        .map((t) => String(t.surface || "").toLowerCase())
+        .filter(Boolean)
+    );
     return ["ALL", ...Array.from(set).sort()];
   }, [tracks]);
 
@@ -187,23 +254,33 @@ export default function Tracks() {
     }
 
     if (country !== "ALL") {
-      out = out.filter((t) => String(t.country || "").toUpperCase() === country);
+      out = out.filter(
+        (t) => String(t.country || "").toUpperCase() === country
+      );
     }
 
     if (type !== "ALL") {
-      out = out.filter((t) => String(t.type || "").toLowerCase() === String(type).toLowerCase());
+      out = out.filter(
+        (t) =>
+          String(t.type || "").toLowerCase() === String(type).toLowerCase()
+      );
     }
 
     if (surface !== "ALL") {
-      out = out.filter((t) => String(t.surface || "").toLowerCase() === String(surface).toLowerCase());
+      out = out.filter(
+        (t) =>
+          String(t.surface || "").toLowerCase() ===
+          String(surface).toLowerCase()
+      );
     }
 
     const sorter =
       {
         rating: (a, b) => Number(b.rating || 0) - Number(a.rating || 0),
-        difficulty: (a, b) => Number(b.difficulty || 0) - Number(a.difficulty || 0),
+        difficulty: (a, b) =>
+          Number(b.difficulty || 0) - Number(a.difficulty || 0),
         length: (a, b) => Number(b.lengthKm || 0) - Number(a.lengthKm || 0),
-      }[sortBy] || ((a, b) => 0);
+      }[sortBy] || (() => 0);
 
     out.sort(sorter);
     return out;
@@ -220,7 +297,15 @@ export default function Tracks() {
   return (
     <div style={{ padding: 20, maxWidth: 1250, margin: "0 auto" }}>
       {/* Header */}
-      <div style={{ display: "flex", justifyContent: "space-between", gap: 12, flexWrap: "wrap", alignItems: "baseline" }}>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+          gap: 12,
+          flexWrap: "wrap",
+          alignItems: "baseline",
+        }}
+      >
         <div>
           <h1 style={{ margin: 0 }}>Piste 🏁</h1>
           <div style={{ opacity: 0.75, marginTop: 4 }}>
@@ -260,7 +345,11 @@ export default function Tracks() {
           <select
             value={country}
             onChange={(e) => setCountry(e.target.value)}
-            style={{ padding: "10px 12px", borderRadius: 12, border: "1px solid rgba(0,0,0,0.15)" }}
+            style={{
+              padding: "10px 12px",
+              borderRadius: 12,
+              border: "1px solid rgba(0,0,0,0.15)",
+            }}
           >
             {countries.map((c) => (
               <option key={c} value={c}>
@@ -275,7 +364,11 @@ export default function Tracks() {
           <select
             value={type}
             onChange={(e) => setType(e.target.value)}
-            style={{ padding: "10px 12px", borderRadius: 12, border: "1px solid rgba(0,0,0,0.15)" }}
+            style={{
+              padding: "10px 12px",
+              borderRadius: 12,
+              border: "1px solid rgba(0,0,0,0.15)",
+            }}
           >
             {types.map((t) => (
               <option key={t} value={t}>
@@ -290,7 +383,11 @@ export default function Tracks() {
           <select
             value={surface}
             onChange={(e) => setSurface(e.target.value)}
-            style={{ padding: "10px 12px", borderRadius: 12, border: "1px solid rgba(0,0,0,0.15)" }}
+            style={{
+              padding: "10px 12px",
+              borderRadius: 12,
+              border: "1px solid rgba(0,0,0,0.15)",
+            }}
           >
             {surfaces.map((s) => (
               <option key={s} value={s}>
@@ -305,7 +402,11 @@ export default function Tracks() {
           <select
             value={sortBy}
             onChange={(e) => setSortBy(e.target.value)}
-            style={{ padding: "10px 12px", borderRadius: 12, border: "1px solid rgba(0,0,0,0.15)" }}
+            style={{
+              padding: "10px 12px",
+              borderRadius: 12,
+              border: "1px solid rgba(0,0,0,0.15)",
+            }}
           >
             <option value="rating">Rating (desc)</option>
             <option value="difficulty">Difficoltà (desc)</option>
@@ -316,24 +417,45 @@ export default function Tracks() {
 
       {/* Content */}
       {loading ? (
-        <div style={{ marginTop: 14, padding: 12, borderRadius: 16, background: "rgba(0,0,0,0.04)" }}>
+        <div
+          style={{
+            marginTop: 14,
+            padding: 12,
+            borderRadius: 16,
+            background: "rgba(0,0,0,0.04)",
+          }}
+        >
           Carico piste…
         </div>
       ) : err ? (
-        <div style={{ marginTop: 14, padding: 12, borderRadius: 16, background: "rgba(255,0,0,0.08)" }}>
+        <div
+          style={{
+            marginTop: 14,
+            padding: 12,
+            borderRadius: 16,
+            background: "rgba(255,0,0,0.08)",
+          }}
+        >
           {err}
         </div>
       ) : (
-        <div style={{ marginTop: 14, display: "grid", gridTemplateColumns: "420px 1fr", gap: 14 }}>
+        <div
+          style={{
+            marginTop: 14,
+            display: "grid",
+            gridTemplateColumns: "420px 1fr",
+            gap: 14,
+          }}
+        >
           {/* Cards */}
           <div style={{ display: "grid", gap: 12, height: "fit-content" }}>
             <div style={{ fontSize: 12, opacity: 0.7 }}>
-              Trovate: <strong>{filtered.length}</strong>
+              Trovate: <strong>{filtered.length}</strong> (EU import incluse)
             </div>
 
             {filtered.map((t) => (
               <TrackCard
-                key={t.id}
+                key={t.id || `${t.name}-${t.country}`}
                 track={t}
                 active={t.id === activeId}
                 onClick={() => setActiveId(t.id)}
@@ -341,7 +463,13 @@ export default function Tracks() {
             ))}
 
             {filtered.length === 0 && (
-              <div style={{ padding: 12, borderRadius: 16, background: "rgba(0,0,0,0.04)" }}>
+              <div
+                style={{
+                  padding: 12,
+                  borderRadius: 16,
+                  background: "rgba(0,0,0,0.04)",
+                }}
+              >
                 Nessuna pista trovata.
               </div>
             )}
@@ -357,7 +485,11 @@ export default function Tracks() {
               height: "fit-content",
             }}
           >
-            {!active ? <div style={{ padding: 14 }}>Seleziona una pista.</div> : <TrackDetail track={active} />}
+            {!active ? (
+              <div style={{ padding: 14 }}>Seleziona una pista.</div>
+            ) : (
+              <TrackDetail track={active} />
+            )}
           </div>
         </div>
       )}
@@ -377,7 +509,9 @@ function TrackCard({ track, active, onClick }) {
         cursor: "pointer",
         borderRadius: 18,
         overflow: "hidden",
-        border: active ? "2px solid rgba(0,0,0,0.35)" : "1px solid rgba(0,0,0,0.12)",
+        border: active
+          ? "2px solid rgba(0,0,0,0.35)"
+          : "1px solid rgba(0,0,0,0.12)",
         background: "white",
         boxShadow: active ? "0 10px 30px rgba(0,0,0,0.12)" : "none",
       }}
@@ -401,11 +535,14 @@ function TrackCard({ track, active, onClick }) {
         </div>
 
         <div style={{ marginTop: 4, fontSize: 12, opacity: 0.75 }}>
-          {track.region} · fondo: {surfaceLabel(track.surface)} · stagione: {track.bestSeason || "—"}
+          {track.region} · fondo: {surfaceLabel(track.surface)} · stagione:{" "}
+          {track.bestSeason || "—"}
         </div>
 
         <div style={{ marginTop: 10, display: "flex", gap: 8, flexWrap: "wrap" }}>
-          <span style={pillStyle(p.level)}>⭐ {rating.toFixed(1)} · {p.label}</span>
+          <span style={pillStyle(p.level)}>
+            ⭐ {rating.toFixed(1)} · {p.label}
+          </span>
           <span style={pillStyle("ok")}>🧠 diff {Number(track.difficulty || 0)}/10</span>
           <span style={pillStyle("ok")}>⚡ speed {Number(track.speed || 0)}/10</span>
           <span style={pillStyle("ok")}>🧩 tech {Number(track.technique || 0)}/10</span>
@@ -424,42 +561,75 @@ function TrackCard({ track, active, onClick }) {
 function TrackDetail({ track }) {
   const photo = track.photo || FALLBACK_PHOTO;
 
-  // ✅ meteo: 1 punto (coords)
+  const lat = track?.coords?.lat;
+  const lng = track?.coords?.lng;
+
+  const googleHref =
+    lat != null && lng != null
+      ? `https://www.google.com/maps?q=${lat},${lng}`
+      : "https://www.google.com/maps";
+
+  // ✅ meteo: per pista selezionata
   const [wx, setWx] = useState(null);
   const [wxBusy, setWxBusy] = useState(false);
 
   useEffect(() => {
     let alive = true;
+
     async function run() {
-      setWxBusy(true);
       try {
-        const out = await getTrackWeatherSummary(track);
-        if (alive) setWx(out);
+        setWxBusy(true);
+        const res = await getTrackWeatherSummary(track);
+        if (!alive) return;
+        setWx(res);
+      } catch (e) {
+        if (!alive) return;
+        setWx({ ok: false, note: e?.message || "Meteo non disponibile." });
       } finally {
         if (alive) setWxBusy(false);
       }
     }
+
+    // se mancano coords, evita chiamate inutili
+    if (track?.coords?.lat == null || track?.coords?.lng == null) {
+      setWx({ ok: false, note: "Coordinate mancanti." });
+      setWxBusy(false);
+      return () => {
+        alive = false;
+      };
+    }
+
     run();
     return () => {
       alive = false;
     };
-  }, [track?.id]);
-
-  const googleHref = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
-    `${track.name} ${track.region} ${track.country}`
-  )}`;
+  }, [track?.id]); // cambia pista -> ricarica meteo
 
   const wxBox = (() => {
     if (wxBusy) {
       return (
-        <div style={{ marginTop: 10, padding: 12, borderRadius: 16, background: "rgba(0,0,0,0.04)" }}>
+        <div
+          style={{
+            marginTop: 10,
+            padding: 12,
+            borderRadius: 16,
+            background: "rgba(0,0,0,0.04)",
+          }}
+        >
           Carico meteo…
         </div>
       );
     }
     if (!wx || !wx.ok) {
       return (
-        <div style={{ marginTop: 10, padding: 12, borderRadius: 16, background: "rgba(0,0,0,0.04)" }}>
+        <div
+          style={{
+            marginTop: 10,
+            padding: 12,
+            borderRadius: 16,
+            background: "rgba(0,0,0,0.04)",
+          }}
+        >
           {wx?.note || "Meteo non disponibile."}
         </div>
       );
@@ -471,11 +641,15 @@ function TrackDetail({ track }) {
           <span style={pillStyle(weatherLevel(wx.worst))}>
             Condizione: <strong>{wx.worst}</strong>
           </span>
-          {wx.temp !== null ? (
-            <span style={pillStyle("ok")}>🌡 {wx.temp}° (min {wx.tempMin}° / max {wx.tempMax}°)</span>
+          {wx.temp !== null && wx.temp !== undefined ? (
+            <span style={pillStyle("ok")}>
+              🌡 {wx.temp}° (min {wx.tempMin}° / max {wx.tempMax}°)
+            </span>
           ) : null}
-          {wx.windKmh !== null ? (
-            <span style={pillStyle(wx.windKmh >= 50 ? "warn" : "ok")}>💨 vento {wx.windKmh} km/h</span>
+          {wx.windKmh !== null && wx.windKmh !== undefined ? (
+            <span style={pillStyle(wx.windKmh >= 50 ? "warn" : "ok")}>
+              💨 vento {wx.windKmh} km/h
+            </span>
           ) : null}
         </div>
 
