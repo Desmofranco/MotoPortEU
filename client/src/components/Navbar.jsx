@@ -1,5 +1,6 @@
-import { NavLink } from "react-router-dom";
-import { Link } from "react-router-dom";
+import { NavLink, Link, useNavigate } from "react-router-dom";
+
+const TOKEN_KEY = "token";
 
 const linkStyle = ({ isActive }) => ({
   padding: "8px 12px",
@@ -10,6 +11,15 @@ const linkStyle = ({ isActive }) => ({
 });
 
 export default function Navbar() {
+  const navigate = useNavigate();
+  const token = localStorage.getItem(TOKEN_KEY);
+  const isLogged = Boolean(token);
+
+  const logout = () => {
+    localStorage.removeItem(TOKEN_KEY);
+    navigate("/", { replace: true });
+  };
+
   return (
     <div
       style={{
@@ -26,17 +36,39 @@ export default function Navbar() {
     >
       <strong style={{ marginRight: 8 }}>MotoPortEU</strong>
 
-      <NavLink to="/" style={linkStyle} end>Home</NavLink>
-      <NavLink to="/map" style={linkStyle}>Mappa</NavLink>
-      <NavLink to="/routes" style={linkStyle}>Itinerari</NavLink>
-      <Link to="/tracks">🏁 Piste</Link>
-      <NavLink to="/garage" style={linkStyle}>Garage</NavLink>
-      <NavLink to="/suppliers" style={linkStyle}>Fornitori</NavLink>
-      <NavLink to="/pass" style={linkStyle}>Pass</NavLink>
-     
+      {isLogged && (
+        <>
+          <NavLink to="/dashboard" style={linkStyle}>Dashboard</NavLink>
+          <NavLink to="/map" style={linkStyle}>Mappa</NavLink>
+          <NavLink to="/routes" style={linkStyle}>Itinerari</NavLink>
+          <NavLink to="/tracks" style={linkStyle}>🏁 Piste</NavLink>
+          <NavLink to="/garage" style={linkStyle}>Garage</NavLink>
+          <NavLink to="/suppliers" style={linkStyle}>Fornitori</NavLink>
+          <NavLink to="/passes" style={linkStyle}>Pass</NavLink>
+          <NavLink to="/my-tracks" style={linkStyle}>📡 Storico</NavLink>
+        </>
+      )}
+
       <div style={{ marginLeft: "auto", display: "flex", gap: 10 }}>
-        <NavLink to="/login" style={linkStyle}>Login</NavLink>
-        <NavLink to="/register" style={linkStyle}>Register</NavLink>
+        {!isLogged ? (
+          <>
+            <NavLink to="/login" style={linkStyle}>Login</NavLink>
+            <NavLink to="/register" style={linkStyle}>Register</NavLink>
+          </>
+        ) : (
+          <button
+            onClick={logout}
+            style={{
+              padding: "8px 12px",
+              borderRadius: 8,
+              border: "1px solid rgba(0,0,0,0.15)",
+              background: "transparent",
+              cursor: "pointer",
+            }}
+          >
+            Logout
+          </button>
+        )}
       </div>
     </div>
   );

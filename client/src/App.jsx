@@ -1,5 +1,4 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Navbar from "./components/Navbar";
 
 import Home from "./pages/Home";
 import Map from "./pages/Map";
@@ -12,22 +11,45 @@ import SupplierPage from "./pages/SupplierPage";
 import RoutesPage from "./pages/Routes";
 import Tracks from "./pages/Tracks";
 import Passes from "./pages/Passes";
+
+import Dashboard from "./pages/Dashboard";
+import MyTracks from "./pages/MyTracks";
+import MyTrackDetail from "./pages/MyTrackDetail";
+
+import AppShell from "./components/AppShell";
+import RequireAuth from "./components/RequireAuth";
+
 export default function App() {
   return (
     <BrowserRouter>
-      <Navbar />
       <Routes>
+        {/* Public (no navbar) */}
         <Route path="/" element={<Home />} />
-        <Route path="/map" element={<Map />} />
-        <Route path="/garage" element={<Garage />} />
-        <Route path="/suppliers" element={<Suppliers />} />
-        <Route path="/pass" element={<Pass />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-        <Route path="/supplier/:id" element={<SupplierPage />} />
-        <Route path="/routes" element={<RoutesPage />} />
-        <Route path="/tracks" element={<Tracks />} />
-        <Route path="/passes" element={<Passes />} />
+
+        {/* Private (with navbar) */}
+        <Route
+          element={
+            <RequireAuth>
+              <AppShell />
+            </RequireAuth>
+          }
+        >
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/map" element={<Map />} />
+          <Route path="/garage" element={<Garage />} />
+          <Route path="/suppliers" element={<Suppliers />} />
+          <Route path="/supplier/:id" element={<SupplierPage />} />
+          <Route path="/pass" element={<Pass />} />
+          <Route path="/routes" element={<RoutesPage />} />
+          <Route path="/tracks" element={<Tracks />} />
+          <Route path="/passes" element={<Passes />} />
+
+          {/* GPS history */}
+          <Route path="/my-tracks" element={<MyTracks />} />
+          <Route path="/my-tracks/:id" element={<MyTrackDetail />} />
+        </Route>
       </Routes>
     </BrowserRouter>
   );
