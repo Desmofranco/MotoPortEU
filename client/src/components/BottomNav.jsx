@@ -20,9 +20,7 @@ export default function BottomNav() {
   return (
     <div
       className="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-white border-t border-black/10"
-      style={{
-        backdropFilter: "blur(10px)",
-      }}
+      style={{ backdropFilter: "blur(10px)" }}
     >
       <div className="max-w-5xl mx-auto flex justify-around py-2">
         {tabs.map((t) => (

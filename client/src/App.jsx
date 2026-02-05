@@ -4,13 +4,11 @@ import Home from "./pages/Home";
 import Map from "./pages/Map";
 import Garage from "./pages/Garage";
 import Suppliers from "./pages/Suppliers";
-import Pass from "./pages/Pass";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import SupplierPage from "./pages/SupplierPage";
 import RoutesPage from "./pages/Routes";
 import Tracks from "./pages/Tracks";
-import Passes from "./pages/Passes";
 
 import MyTracks from "./pages/MyTracks";
 import MyTrackDetail from "./pages/MyTrackDetail";
@@ -22,7 +20,6 @@ export default function App() {
   return (
     <BrowserRouter>
       <Routes>
-
         {/* Public */}
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
@@ -40,15 +37,12 @@ export default function App() {
           <Route path="/garage" element={<Garage />} />
           <Route path="/suppliers" element={<Suppliers />} />
           <Route path="/supplier/:id" element={<SupplierPage />} />
-          <Route path="/pass" element={<Pass />} />
           <Route path="/routes" element={<RoutesPage />} />
           <Route path="/tracks" element={<Tracks />} />
-          <Route path="/passes" element={<Passes />} />
 
           <Route path="/my-tracks" element={<MyTracks />} />
           <Route path="/my-tracks/:id" element={<MyTrackDetail />} />
         </Route>
-
       </Routes>
     </BrowserRouter>
   );

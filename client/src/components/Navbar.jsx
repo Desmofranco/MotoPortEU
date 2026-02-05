@@ -1,4 +1,4 @@
-// client/src/components/Navbar.jsx
+import React from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 
 const TOKEN_KEY = "token";
@@ -14,7 +14,6 @@ const linkStyle = ({ isActive }) => ({
 export default function Navbar() {
   const navigate = useNavigate();
 
-  // ✅ sempre aggiornato (render ad ogni route change comunque)
   const isLogged = Boolean(localStorage.getItem(TOKEN_KEY));
 
   const logout = () => {
@@ -22,7 +21,6 @@ export default function Navbar() {
     navigate("/", { replace: true });
   };
 
-  // se non loggato, non mostrare niente (AppShell desktop-only lo gestisce già)
   if (!isLogged) return null;
 
   return (
@@ -46,7 +44,6 @@ export default function Navbar() {
       <NavLink to="/tracks" style={linkStyle}>🏁 Circuiti</NavLink>
       <NavLink to="/garage" style={linkStyle}>Garage</NavLink>
       <NavLink to="/suppliers" style={linkStyle}>Fornitori</NavLink>
-      <NavLink to="/passes" style={linkStyle}>Pass</NavLink>
       <NavLink to="/my-tracks" style={linkStyle}>📡 Storico</NavLink>
 
       <div style={{ marginLeft: "auto" }}>
