@@ -1,6 +1,5 @@
 import React, { useMemo, useState } from "react";
 import { deleteTrack, getTracks } from "../utils/gpsTrackStore";
-import GpsRecorder from "../components/GpsRecorder";
 import { useNavigate } from "react-router-dom";
 
 export default function MyTracks() {
@@ -22,7 +21,6 @@ export default function MyTracks() {
           </button>
         </div>
 
-        <GpsRecorder onSaved={() => setRefresh((x) => x + 1)} />
 
         <div className="mt-6 space-y-3">
           {tracks.length === 0 ? (
