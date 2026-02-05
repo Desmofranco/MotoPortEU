@@ -1,12 +1,16 @@
 import React from "react";
 import { Outlet } from "react-router-dom";
 import Navbar from "./Navbar";
+import BottomNav from "./BottomNav";
 
 export default function AppShell() {
   return (
     <>
       <Navbar />
-      <Outlet />
+      <div className="pb-16 md:pb-0">
+        <Outlet />
+      </div>
+      <BottomNav />
     </>
   );
 }
