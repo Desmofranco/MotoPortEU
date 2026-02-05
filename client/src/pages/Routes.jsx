@@ -5,16 +5,18 @@
 // ✅ FIX: filtri paese/ricerca funzionanti
 // ✅ FIX: filtro Ritmo funziona anche per itinerari senza "pace" (fallback Touring)
 // ✅ Google Maps link ripristinato (nel posto giusto)
+// ✅ Responsive: mobile-first (1 colonna), desktop (2 colonne)
 // Carica dati da: /public/data/routes.json
 // =======================================================
-import { useEffect, useMemo, useState } from "react";
+
+import React, { useEffect, useMemo, useState } from "react";
 import RouteMap from "../components/RouteMap";
 import { getRouteWeatherSummary } from "../utils/routeWeather";
 
 const FALLBACK_PHOTO =
   "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1600&q=80";
 
-const FALLBACK_PACE = "touring"; // ✅ IMPORTANTISSIMO: default per i 38 curati senza pace
+const FALLBACK_PACE = "touring"; // default se manca pace
 
 const paceLabel = (p) => {
   const s = String(p || "").toLowerCase();
@@ -85,9 +87,29 @@ function countryFlag(cc) {
   return map[c] || "🏍️";
 }
 
-// ✅ normalizza pace SEMPRE (evita null/undefined)
 function normPace(v) {
   return String(v || FALLBACK_PACE).toLowerCase();
+}
+
+function SkeletonLoading() {
+  return (
+    <div
+      style={{
+        marginTop: 14,
+        padding: 16,
+        borderRadius: 18,
+        border: "1px solid rgba(0,0,0,0.10)",
+        background: "rgba(0,0,0,0.03)",
+      }}
+    >
+      <div style={{ fontSize: 16, fontWeight: 800 }}>Carico itinerari…</div>
+      <div style={{ marginTop: 10, display: "grid", gap: 8 }}>
+        <div style={{ height: 12, background: "rgba(0,0,0,0.08)", borderRadius: 8, width: "70%" }} />
+        <div style={{ height: 12, background: "rgba(0,0,0,0.08)", borderRadius: 8, width: "55%" }} />
+        <div style={{ height: 12, background: "rgba(0,0,0,0.08)", borderRadius: 8, width: "80%" }} />
+      </div>
+    </div>
+  );
 }
 
 export default function Routes() {
@@ -140,12 +162,10 @@ export default function Routes() {
   }, [routes]);
 
   const paces = useMemo(() => {
-    // ✅ include anche fallback touring se alcuni non hanno pace
     const set = new Set(routes.map((r) => normPace(r.pace)).filter(Boolean));
     return ["ALL", ...Array.from(set).sort()];
   }, [routes]);
 
-  // ✅ FILTRO + RICERCA (fix + fallback pace)
   const filtered = useMemo(() => {
     let out = [...routes];
 
@@ -158,7 +178,7 @@ export default function Routes() {
           r.country,
           r.bestSeason,
           r.description,
-          normPace(r.pace), // ✅ così "touring" matcha anche senza pace
+          normPace(r.pace),
         ]
           .join(" ")
           .toLowerCase();
@@ -172,7 +192,7 @@ export default function Routes() {
 
     if (pace !== "ALL") {
       const want = String(pace).toLowerCase();
-      out = out.filter((r) => normPace(r.pace) === want); // ✅ FIX PRINCIPALE
+      out = out.filter((r) => normPace(r.pace) === want);
     }
 
     out = out.filter((r) => Number(r.curvesScore || 0) >= Number(minCurves || 0));
@@ -186,7 +206,6 @@ export default function Routes() {
     return sorter ? out.sort(sorter) : out;
   }, [routes, q, country, pace, minCurves, sortBy]);
 
-  // ✅ active: se filtro cambia e active non è più presente, scegli il primo
   useEffect(() => {
     if (!filtered.length) return;
     const exists = filtered.some((r) => r.id === activeId);
@@ -199,141 +218,132 @@ export default function Routes() {
   );
 
   return (
-    <div style={{ padding: 20, maxWidth: 1250, margin: "0 auto" }}>
+    <div style={{ padding: 16, maxWidth: 1250, margin: "0 auto" }}>
       {/* Header */}
       <div
         style={{
-          display: "flex",
-          justifyContent: "space-between",
-          gap: 12,
-          flexWrap: "wrap",
-          alignItems: "baseline",
+          display: "grid",
+          gridTemplateColumns: "1fr",
+          gap: 10,
+          alignItems: "start",
         }}
       >
-        <div>
-          <h1 style={{ margin: 0 }}>Itinerari 🗺️</h1>
-          <div style={{ opacity: 0.75, marginTop: 4 }}>
-            Touring emozionale: foto, voto, curve e ritmo. (Con mappa + meteo.)
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            gap: 12,
+            flexWrap: "wrap",
+            alignItems: "baseline",
+          }}
+        >
+          <div>
+            <h1 style={{ margin: 0, fontSize: 44, letterSpacing: -0.5 }}>Itinerari 🗺️</h1>
+            <div style={{ opacity: 0.75, marginTop: 6 }}>
+              Touring emozionale: foto, voto, curve e ritmo. (Con mappa + meteo.)
+            </div>
           </div>
+
+          <input
+            value={q}
+            onChange={(e) => setQ(e.target.value)}
+            placeholder="Cerca: Stelvio, Dolomiti, Capo Nord, neve…"
+            style={{
+              width: "min(520px, 100%)",
+              padding: "10px 12px",
+              borderRadius: 14,
+              border: "1px solid rgba(0,0,0,0.15)",
+              outline: "none",
+            }}
+          />
         </div>
 
-        <input
-          value={q}
-          onChange={(e) => setQ(e.target.value)}
-          placeholder="Cerca: Stelvio, Dolomiti, Capo Nord, neve…"
+        {/* Filters */}
+        <div
           style={{
-            minWidth: 320,
-            padding: "10px 12px",
-            borderRadius: 14,
-            border: "1px solid rgba(0,0,0,0.15)",
-            outline: "none",
+            display: "grid",
+            gridTemplateColumns: "repeat(auto-fit, minmax(170px, 1fr))",
+            gap: 10,
+            padding: 12,
+            borderRadius: 18,
+            border: "1px solid rgba(0,0,0,0.12)",
+            background: "white",
           }}
-        />
-      </div>
+        >
+          <label style={{ display: "grid", gap: 6 }}>
+            <span style={{ fontSize: 12, opacity: 0.75 }}>Paese</span>
+            <select
+              value={country}
+              onChange={(e) => setCountry(e.target.value)}
+              style={{
+                padding: "10px 12px",
+                borderRadius: 12,
+                border: "1px solid rgba(0,0,0,0.15)",
+              }}
+            >
+              {countries.map((c) => (
+                <option key={c} value={c}>
+                  {c === "ALL" ? "Tutti" : `${countryFlag(c)} ${c}`}
+                </option>
+              ))}
+            </select>
+          </label>
 
-      {/* Filters */}
-      <div
-        style={{
-          marginTop: 12,
-          display: "grid",
-          resultingTemplateColumns: "repeat(auto-fit, minmax(170px, 1fr))",
-        }}
-      />
+          <label style={{ display: "grid", gap: 6 }}>
+            <span style={{ fontSize: 12, opacity: 0.75 }}>Ritmo</span>
+            <select
+              value={pace}
+              onChange={(e) => setPace(e.target.value)}
+              style={{
+                padding: "10px 12px",
+                borderRadius: 12,
+                border: "1px solid rgba(0,0,0,0.15)",
+              }}
+            >
+              {paces.map((p) => (
+                <option key={p} value={p}>
+                  {p === "ALL" ? "Tutti" : paceLabel(p)}
+                </option>
+              ))}
+            </select>
+          </label>
 
-      <div
-        style={{
-          marginTop: 12,
-          display: "grid",
-          gridTemplateColumns: "repeat(auto-fit, minmax(170px, 1fr))",
-          gap: 10,
-          padding: 12,
-          borderRadius: 18,
-          border: "1px solid rgba(0,0,0,0.12)",
-          background: "white",
-        }}
-      >
-        <label style={{ display: "grid", gap: 6 }}>
-          <span style={{ fontSize: 12, opacity: 0.75 }}>Paese</span>
-          <select
-            value={country}
-            onChange={(e) => setCountry(e.target.value)}
-            style={{
-              padding: "10px 12px",
-              borderRadius: 12,
-              border: "1px solid rgba(0,0,0,0.15)",
-            }}
-          >
-            {countries.map((c) => (
-              <option key={c} value={c}>
-                {c === "ALL" ? "Tutti" : `${countryFlag(c)} ${c}`}
-              </option>
-            ))}
-          </select>
-        </label>
+          <label style={{ display: "grid", gap: 6 }}>
+            <span style={{ fontSize: 12, opacity: 0.75 }}>Curve min</span>
+            <input
+              type="range"
+              min="0"
+              max="10"
+              value={minCurves}
+              onChange={(e) => setMinCurves(Number(e.target.value))}
+            />
+            <div style={{ fontSize: 12, opacity: 0.7 }}>
+              {minCurves}/10 (da {curveLabel(minCurves)})
+            </div>
+          </label>
 
-        <label style={{ display: "grid", gap: 6 }}>
-          <span style={{ fontSize: 12, opacity: 0.75 }}>Ritmo</span>
-          <select
-            value={pace}
-            onChange={(e) => setPace(e.target.value)}
-            style={{
-              padding: "10px 12px",
-              borderRadius: 12,
-              border: "1px solid rgba(0,0,0,0.15)",
-            }}
-          >
-            {paces.map((p) => (
-              <option key={p} value={p}>
-                {p === "ALL" ? "Tutti" : paceLabel(p)}
-              </option>
-            ))}
-          </select>
-        </label>
-
-        <label style={{ display: "grid", gap: 6 }}>
-          <span style={{ fontSize: 12, opacity: 0.75 }}>Curve min</span>
-          <input
-            type="range"
-            min="0"
-            max="10"
-            value={minCurves}
-            onChange={(e) => setMinCurves(Number(e.target.value))}
-          />
-          <div style={{ fontSize: 12, opacity: 0.7 }}>
-            {minCurves}/10 (da {curveLabel(minCurves)})
-          </div>
-        </label>
-
-        <label style={{ display: "grid", gap: 6 }}>
-          <span style={{ fontSize: 12, opacity: 0.75 }}>Ordina</span>
-          <select
-            value={sortBy}
-            onChange={(e) => setSortBy(e.target.value)}
-            style={{
-              padding: "10px 12px",
-              borderRadius: 12,
-              border: "1px solid rgba(0,0,0,0.15)",
-            }}
-          >
-            <option value="curves">Curve (desc)</option>
-            <option value="asphalt">Asfalto (desc)</option>
-            <option value="distance">Distanza (asc)</option>
-          </select>
-        </label>
+          <label style={{ display: "grid", gap: 6 }}>
+            <span style={{ fontSize: 12, opacity: 0.75 }}>Ordina</span>
+            <select
+              value={sortBy}
+              onChange={(e) => setSortBy(e.target.value)}
+              style={{
+                padding: "10px 12px",
+                borderRadius: 12,
+                border: "1px solid rgba(0,0,0,0.15)",
+              }}
+            >
+              <option value="curves">Curve (desc)</option>
+              <option value="asphalt">Asfalto (desc)</option>
+              <option value="distance">Distanza (asc)</option>
+            </select>
+          </label>
+        </div>
       </div>
 
       {/* Content */}
       {loading ? (
-        <div
-          style={{
-            marginTop: 14,
-            padding: 12,
-            borderRadius: 16,
-            background: "rgba(0,0,0,0.04)",
-          }}
-        >
-          Carico itinerari…
-        </div>
+        <SkeletonLoading />
       ) : err ? (
         <div
           style={{
@@ -350,56 +360,84 @@ export default function Routes() {
           style={{
             marginTop: 14,
             display: "grid",
-            gridTemplateColumns: "420px 1fr",
+            gridTemplateColumns: "1fr",
             gap: 14,
           }}
         >
-          {/* Cards */}
-          <div style={{ display: "grid", gap: 12, height: "fit-content" }}>
-            <div style={{ fontSize: 12, opacity: 0.7 }}>
-              Trovati: <strong>{filtered.length}</strong>
-            </div>
-
-            {filtered.map((r) => (
-              <RouteCard
-                key={r.id}
-                route={r}
-                active={r.id === activeId}
-                onClick={() => setActiveId(r.id)}
-              />
-            ))}
-
-            {filtered.length === 0 && (
-              <div
-                style={{
-                  padding: 12,
-                  borderRadius: 16,
-                  background: "rgba(0,0,0,0.04)",
-                }}
-              >
-                Nessun itinerario trovato.
-              </div>
-            )}
-          </div>
-
-          {/* Detail */}
+          {/* Desktop split */}
           <div
             style={{
-              borderRadius: 22,
-              overflow: "hidden",
-              border: "1px solid rgba(0,0,0,0.12)",
-              background: "white",
-              height: "fit-content",
+              display: "grid",
+              gridTemplateColumns: "1fr",
+              gap: 14,
             }}
           >
-            {!active ? (
-              <div style={{ padding: 14 }}>Seleziona un itinerario.</div>
-            ) : (
-              <RouteDetail route={active} />
-            )}
+            {/* Desktop becomes 2 cols via media query inline trick */}
+            <div
+              style={{
+                display: "grid",
+                gap: 14,
+                gridTemplateColumns: "1fr",
+              }}
+              className="routes-split"
+            >
+              {/* List */}
+              <div style={{ display: "grid", gap: 12, height: "fit-content" }}>
+                <div style={{ fontSize: 12, opacity: 0.7 }}>
+                  Trovati: <strong>{filtered.length}</strong>
+                </div>
+
+                {filtered.map((r) => (
+                  <RouteCard
+                    key={r.id}
+                    route={r}
+                    active={r.id === activeId}
+                    onClick={() => setActiveId(r.id)}
+                  />
+                ))}
+
+                {filtered.length === 0 && (
+                  <div
+                    style={{
+                      padding: 12,
+                      borderRadius: 16,
+                      background: "rgba(0,0,0,0.04)",
+                    }}
+                  >
+                    Nessun itinerario trovato.
+                  </div>
+                )}
+              </div>
+
+              {/* Detail */}
+              <div
+                style={{
+                  borderRadius: 22,
+                  overflow: "hidden",
+                  border: "1px solid rgba(0,0,0,0.12)",
+                  background: "white",
+                  height: "fit-content",
+                }}
+              >
+                {!active ? (
+                  <div style={{ padding: 14 }}>Seleziona un itinerario.</div>
+                ) : (
+                  <RouteDetail route={active} />
+                )}
+              </div>
+            </div>
           </div>
         </div>
       )}
+
+      {/* Inline responsive rule (no extra css file needed) */}
+      <style>{`
+        @media (min-width: 1024px){
+          .routes-split{
+            grid-template-columns: 420px 1fr !important;
+          }
+        }
+      `}</style>
     </div>
   );
 }
@@ -413,15 +451,19 @@ function RouteCard({ route, active, onClick }) {
   const aPill = scorePill(asphalt);
 
   return (
-    <div
+    <button
+      type="button"
       onClick={onClick}
       style={{
+        textAlign: "left",
         cursor: "pointer",
         borderRadius: 18,
         overflow: "hidden",
+        width: "100%",
         border: active ? "2px solid rgba(0,0,0,0.35)" : "1px solid rgba(0,0,0,0.12)",
         background: "white",
         boxShadow: active ? "0 10px 30px rgba(0,0,0,0.12)" : "none",
+        padding: 0,
       }}
     >
       <div
@@ -462,7 +504,7 @@ function RouteCard({ route, active, onClick }) {
           </div>
         ) : null}
       </div>
-    </div>
+    </button>
   );
 }
 
@@ -474,7 +516,7 @@ function RouteDetail({ route }) {
   const cPill = scorePill(curves);
   const aPill = scorePill(asphalt);
 
-  // ✅ METEO (campionamento punti)
+  // METEO
   const [wx, setWx] = useState(null);
   const [wxBusy, setWxBusy] = useState(false);
 
@@ -498,21 +540,42 @@ function RouteDetail({ route }) {
   const wxBox = (() => {
     if (wxBusy) {
       return (
-        <div style={{ marginTop: 10, padding: 12, borderRadius: 16, background: "rgba(0,0,0,0.04)" }}>
+        <div
+          style={{
+            marginTop: 10,
+            padding: 12,
+            borderRadius: 16,
+            background: "rgba(0,0,0,0.04)",
+          }}
+        >
           Carico meteo sul tragitto…
         </div>
       );
     }
     if (!wx) {
       return (
-        <div style={{ marginTop: 10, padding: 12, borderRadius: 16, background: "rgba(0,0,0,0.04)" }}>
+        <div
+          style={{
+            marginTop: 10,
+            padding: 12,
+            borderRadius: 16,
+            background: "rgba(0,0,0,0.04)",
+          }}
+        >
           Meteo non disponibile.
         </div>
       );
     }
     if (!wx.ok) {
       return (
-        <div style={{ marginTop: 10, padding: 12, borderRadius: 16, background: "rgba(0,0,0,0.04)" }}>
+        <div
+          style={{
+            marginTop: 10,
+            padding: 12,
+            borderRadius: 16,
+            background: "rgba(0,0,0,0.04)",
+          }}
+        >
           {wx.note || "Meteo non disponibile."}
         </div>
       );
@@ -605,7 +668,13 @@ function RouteDetail({ route }) {
 
       {/* Body */}
       <div style={{ padding: 14 }}>
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(3, minmax(0, 1fr))", gap: 10 }}>
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(auto-fit, minmax(160px, 1fr))",
+            gap: 10,
+          }}
+        >
           <Stat label="Curve" value={`${curves}/10 (${curveLabel(curves)})`} />
           <Stat label="Asfalto" value={`${asphalt}/10`} />
           <Stat label="Ritmo" value={paceLabel(normPace(route.pace))} />
@@ -617,7 +686,6 @@ function RouteDetail({ route }) {
             {route.description || "—"}
           </div>
 
-          {/* ✅ Google Maps link */}
           <div style={{ marginTop: 12 }}>
             <a
               href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
@@ -640,7 +708,6 @@ function RouteDetail({ route }) {
           </div>
         </div>
 
-        {/* ✅ MAPPA */}
         <div style={{ marginTop: 14, borderTop: "1px solid rgba(0,0,0,0.08)", paddingTop: 14 }}>
           <strong>🗺️ Percorso</strong>
           <div style={{ marginTop: 10 }}>
@@ -652,7 +719,6 @@ function RouteDetail({ route }) {
           </div>
         </div>
 
-        {/* ✅ METEO */}
         <div style={{ marginTop: 14, borderTop: "1px solid rgba(0,0,0,0.08)", paddingTop: 14 }}>
           <strong>🌤 Meteo sul tragitto</strong>
           {wxBox}
