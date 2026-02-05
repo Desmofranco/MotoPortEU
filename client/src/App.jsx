@@ -22,12 +22,13 @@ export default function App() {
   return (
     <BrowserRouter>
       <Routes>
-        {/* Public (no navbar) */}
+
+        {/* Public */}
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
 
-        {/* Private (with navbar) */}
+        {/* Private */}
         <Route
           element={
             <RequireAuth>
@@ -44,10 +45,10 @@ export default function App() {
           <Route path="/tracks" element={<Tracks />} />
           <Route path="/passes" element={<Passes />} />
 
-          {/* GPS history */}
           <Route path="/my-tracks" element={<MyTracks />} />
           <Route path="/my-tracks/:id" element={<MyTrackDetail />} />
         </Route>
+
       </Routes>
     </BrowserRouter>
   );

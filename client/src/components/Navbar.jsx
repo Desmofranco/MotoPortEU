@@ -1,4 +1,5 @@
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink, useNavigate, useLocation } from "react-router-dom";
+import React from "react";
 
 const TOKEN_KEY = "token";
 
@@ -12,11 +13,18 @@ const linkStyle = ({ isActive }) => ({
 
 export default function Navbar() {
   const navigate = useNavigate();
+  const location = useLocation();
+
+  // ✅ sempre aggiornato
+  const isLogged = Boolean(localStorage.getItem(TOKEN_KEY));
 
   const logout = () => {
     localStorage.removeItem(TOKEN_KEY);
     navigate("/", { replace: true });
   };
+
+  // se non loggato, non mostrare niente (ma con AppShell desktop-only è ok)
+  if (!isLogged) return null;
 
   return (
     <div
