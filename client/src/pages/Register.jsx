@@ -19,15 +19,13 @@ export default function Register() {
     setLoading(true);
 
     try {
-      // 👉 QUI integra la tua API reale di registrazione
-      // esempio:
-      // const res = await fetch(`${API_URL}/auth/register`, {...})
-      // if (!res.ok) throw new Error("Registrazione fallita")
-      // const data = await res.json()
-      // localStorage.setItem("token", data.token)
-
+      // DEMO: simulazione register
       await new Promise((r) => setTimeout(r, 400));
-navigate("/routes", { replace: true });
+
+      // ✅ IMPORTANTISSIMO: senza token, /routes (protetta) ti ributta in Home
+      localStorage.setItem("token", "dev-token");
+
+      navigate("/routes", { replace: true });
     } catch (err) {
       setError(err?.message || "Errore durante la registrazione.");
     } finally {
@@ -43,8 +41,7 @@ navigate("/routes", { replace: true });
       <div className="auth-content">
         <div className="auth-container">
           <div style={{ textAlign: "center", marginBottom: 16 }}>
-            <div className="auth-badge">
-            </div>
+            {/* tolto badge vuoto */}
             <h1 className="auth-title">Register</h1>
             <p className="auth-subtitle">
               Crea un account e inizia a registrare i giri.
@@ -93,13 +90,7 @@ navigate("/routes", { replace: true });
                   placeholder="••••••••"
                   required
                 />
-                <p
-                  style={{
-                    marginTop: 4,
-                    fontSize: 12,
-                    color: "#64748b",
-                  }}
-                >
+                <p style={{ marginTop: 4, fontSize: 12, color: "#64748b" }}>
                   Suggerito: almeno 8 caratteri.
                 </p>
               </div>
