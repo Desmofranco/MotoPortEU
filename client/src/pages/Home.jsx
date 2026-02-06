@@ -2,20 +2,13 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 
 function EUCrown({ size = 30, opacity = 0.95 }) {
-  // 12 stelle in cerchio (stile UE)
   const stars = Array.from({ length: 12 });
   const r = 12;
   const cx = 16;
   const cy = 16;
 
   return (
-    <svg
-      width={size}
-      height={size}
-      viewBox="0 0 32 32"
-      aria-hidden="true"
-      style={{ opacity }}
-    >
+    <svg width={size} height={size} viewBox="0 0 32 32" style={{ opacity }}>
       {stars.map((_, i) => {
         const a = (i * 360) / 12;
         const rad = (a * Math.PI) / 180;
@@ -50,12 +43,8 @@ export default function Home() {
         inset: 0,
         width: "100vw",
         height: "100vh",
-        margin: 0,
-        padding: 0,
-        zIndex: 0,
       }}
     >
-      {/* background */}
       <img
         src="/home-moto.jpg"
         alt=""
@@ -68,7 +57,6 @@ export default function Home() {
         }}
       />
 
-      {/* overlay */}
       <div
         style={{
           position: "absolute",
@@ -77,7 +65,6 @@ export default function Home() {
         }}
       />
 
-      {/* content: TOP + BOTTOM */}
       <div
         style={{
           position: "relative",
@@ -99,14 +86,13 @@ export default function Home() {
               alignItems: "center",
               justifyContent: "center",
               gap: 10,
-              marginBottom: 10,
+              marginBottom: 12,
             }}
           >
             <h1
               style={{
                 fontSize: 48,
                 fontWeight: 900,
-                letterSpacing: 0.5,
                 margin: 0,
                 textShadow: "0 6px 18px rgba(0,0,0,0.65)",
               }}
@@ -124,26 +110,31 @@ export default function Home() {
               textShadow: "0 4px 12px rgba(0,0,0,0.6)",
             }}
           >
-            La rete dei motociclisti europei. Strade.
+            La rete dei motociclisti europei.
             <br />
-            Viaggi. Libertà.
+            Strade. Viaggi. Libertà.
           </p>
         </div>
 
         {/* BOTTOM */}
-        <div style={{ width: "100%", maxWidth: 520, margin: "0 auto 8px" }}>
-          <div style={{ display: "grid", gap: 14, marginBottom: 6 }}>
+        <div
+          style={{
+            width: "100%",
+            maxWidth: 520,
+            margin: "0 auto 40px", // 🔥 bottoni leggermente più alti
+          }}
+        >
+          <div style={{ display: "grid", gap: 14 }}>
             <button
               onClick={() => navigate("/routes")}
               style={{
                 background: "white",
                 color: "black",
                 fontWeight: 800,
-                padding: "16px 18px",
+                padding: "16px",
                 borderRadius: 18,
                 border: "none",
                 fontSize: 18,
-                boxShadow: "0 10px 26px rgba(0,0,0,0.35)",
               }}
             >
               Entra
@@ -155,20 +146,14 @@ export default function Home() {
                 background: "rgba(0,0,0,0.10)",
                 color: "white",
                 fontWeight: 800,
-                padding: "16px 18px",
+                padding: "16px",
                 borderRadius: 18,
                 border: "1px solid rgba(255,255,255,0.9)",
                 fontSize: 18,
-                boxShadow: "0 10px 26px rgba(0,0,0,0.25)",
-                backdropFilter: "blur(6px)",
               }}
             >
               Accedi
             </button>
-          </div>
-
-          <div style={{ fontSize: 12, opacity: 0.55, marginTop: 8 }}>
-            Touring • Tracks • Garage • Meteo
           </div>
         </div>
       </div>
