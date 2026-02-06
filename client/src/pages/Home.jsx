@@ -42,7 +42,7 @@ export default function Home() {
           {/* background */}
           <img
             src="/home-moto.jpg"
-            alt=""
+            alt="MotoPortEU"
             style={{
               position: "absolute",
               inset: 0,
@@ -70,13 +70,13 @@ export default function Home() {
               display: "flex",
               alignItems: "flex-end",
               justifyContent: "center",
-              padding: "0 24px 64px", // 🔥 rialzati
+              padding: "0 24px 64px",
             }}
           >
             <div style={{ width: "100%", maxWidth: 360 }}>
               <div style={{ display: "grid", gap: 10 }}>
                 <button
-                  onClick={() => navigate("/routes")}
+                  onClick={() => navigate("/login")}
                   style={{
                     background: "white",
                     color: "black",
@@ -85,13 +85,14 @@ export default function Home() {
                     borderRadius: 14,
                     border: "none",
                     fontSize: 15,
+                    cursor: "pointer",
                   }}
                 >
-                  Entra
+                  Accedi
                 </button>
 
                 <button
-                  onClick={() => navigate("/login")}
+                  onClick={() => navigate("/register")}
                   style={{
                     background: "rgba(0,0,0,0.15)",
                     color: "white",
@@ -100,9 +101,10 @@ export default function Home() {
                     borderRadius: 14,
                     border: "1px solid rgba(255,255,255,0.85)",
                     fontSize: 15,
+                    cursor: "pointer",
                   }}
                 >
-                  Accedi
+                  Registrati
                 </button>
               </div>
             </div>
