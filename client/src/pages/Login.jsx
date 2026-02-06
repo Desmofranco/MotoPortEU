@@ -19,7 +19,7 @@ export default function Login() {
     try {
       // tua API login...
       await new Promise((r) => setTimeout(r, 300));
-      navigate("/", { replace: true });
+navigate("/routes", { replace: true });
     } catch (err) {
       setError(err?.message || "Errore durante il login.");
     } finally {

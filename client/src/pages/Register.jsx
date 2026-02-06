@@ -27,8 +27,7 @@ export default function Register() {
       // localStorage.setItem("token", data.token)
 
       await new Promise((r) => setTimeout(r, 400));
-
-      navigate("/", { replace: true });
+navigate("/routes", { replace: true });
     } catch (err) {
       setError(err?.message || "Errore durante la registrazione.");
     } finally {
