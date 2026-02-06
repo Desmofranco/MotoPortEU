@@ -1,19 +1,21 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import BG from "../assets/home-moto.jpg";
+
+const BG_URL = "/home-moto.jpg"; // preso da client/public
 
 export default function Home() {
   const navigate = useNavigate();
 
   return (
     <div className="fixed inset-0 overflow-hidden">
-      {/* background */}
+      {/* background (fallback nero se l'immagine non carica) */}
+      <div className="absolute inset-0 bg-black" />
       <div
         className="absolute inset-0 bg-cover bg-center"
-        style={{ backgroundImage: `url(${BG})` }}
+        style={{ backgroundImage: `url(${BG_URL})` }}
       />
 
-      {/* overlay scuro */}
+      {/* overlay scuro cinematico */}
       <div className="absolute inset-0 bg-black/70" />
 
       {/* contenuto */}
@@ -24,8 +26,7 @@ export default function Home() {
           </h1>
 
           <p className="text-lg md:text-xl opacity-90 mb-8">
-            La rete dei motociclisti europei.
-            Strade. Viaggi. Libertà.
+            La rete dei motociclisti europei. Strade. Viaggi. Libertà.
           </p>
 
           <div className="flex flex-col gap-4">
