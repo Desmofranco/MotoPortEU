@@ -16,10 +16,15 @@ export default function Login() {
     e.preventDefault();
     setError("");
     setLoading(true);
+
     try {
-      // tua API login...
+      // DEMO login
       await new Promise((r) => setTimeout(r, 300));
-navigate("/routes", { replace: true });
+
+      // ✅ SENZA QUESTO /routes ti rimanda in home
+      localStorage.setItem("token", "dev-token");
+
+      navigate("/routes", { replace: true });
     } catch (err) {
       setError(err?.message || "Errore durante il login.");
     } finally {
@@ -35,8 +40,6 @@ navigate("/routes", { replace: true });
       <div className="auth-content">
         <div className="auth-container">
           <div style={{ textAlign: "center", marginBottom: 16 }}>
-            <div className="auth-badge">
-            </div>
             <h1 className="auth-title">Login</h1>
             <p className="auth-subtitle">
               Bentornato. Accedi e riparti con i tuoi giri.
@@ -97,7 +100,9 @@ navigate("/routes", { replace: true });
             </div>
           </div>
 
-          <div className="auth-footer">© {new Date().getFullYear()} MotoPortEU</div>
+          <div className="auth-footer">
+            © {new Date().getFullYear()} MotoPortEU
+          </div>
         </div>
       </div>
     </div>
