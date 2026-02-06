@@ -1,34 +1,43 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useNavigate } from "react-router-dom";
-
-const TOKEN_KEY = "token";
+import BG from "../assets/home-moto.jpg";
 
 export default function Home() {
   const navigate = useNavigate();
 
-  useEffect(() => {
-    const token = localStorage.getItem(TOKEN_KEY);
-    if (token) navigate("/dashboard", { replace: true });
-  }, [navigate]);
-
   return (
-    <div className="min-h-screen bg-[#061417] flex items-center justify-center p-6 text-white">
-      <div className="w-full max-w-md text-center">
-        <h1 className="text-5xl font-extrabold tracking-widest mb-10">MOTOPORT</h1>
+    <div
+      className="min-h-screen bg-cover bg-center relative flex items-center justify-center text-white"
+      style={{ backgroundImage: `url(${BG})` }}
+    >
+      {/* overlay scuro cinematico */}
+      <div className="absolute inset-0 bg-black/65" />
 
-        <button
-          onClick={() => navigate("/login")}
-          className="w-full rounded-2xl bg-white/15 border border-white/20 py-4 text-xl mb-4"
-        >
-          Sign In
-        </button>
+      <div className="relative z-10 text-center px-6 max-w-xl">
+        <h1 className="text-4xl md:text-6xl font-bold tracking-wide mb-4">
+          MotoPortEU
+        </h1>
 
-        <button
-          onClick={() => navigate("/register")}
-          className="w-full rounded-2xl bg-white/15 border border-white/20 py-4 text-xl"
-        >
-          Register
-        </button>
+        <p className="text-lg md:text-xl opacity-90 mb-8">
+          La rete dei motociclisti europei.
+          Strade. Viaggi. Libertà.
+        </p>
+
+        <div className="flex flex-col gap-4">
+          <button
+            onClick={() => navigate("/routes")}
+            className="bg-white text-black font-semibold py-3 rounded-xl hover:opacity-90 transition"
+          >
+            Entra
+          </button>
+
+          <button
+            onClick={() => navigate("/login")}
+            className="border border-white py-3 rounded-xl hover:bg-white hover:text-black transition"
+          >
+            Accedi
+          </button>
+        </div>
       </div>
     </div>
   );
