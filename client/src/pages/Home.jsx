@@ -5,7 +5,7 @@ export default function Home() {
   const navigate = useNavigate();
 
   return (
-    // OUTER: sfondo desktop + centratura
+    // OUTER: centra sempre il frame perfettamente
     <div
       style={{
         position: "fixed",
@@ -13,12 +13,13 @@ export default function Home() {
         width: "100vw",
         height: "100vh",
         background: "#0b0f14",
-        display: "grid",
-        placeItems: "center",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center", // ✅ centrato vero
         padding: 16,
       }}
     >
-      {/* FRAME: simulazione telefono su desktop */}
+      {/* FRAME */}
       <div
         className="_frameFix"
         style={{
@@ -30,7 +31,7 @@ export default function Home() {
           boxShadow: "0 30px 90px rgba(0,0,0,0.6)",
         }}
       >
-        {/* background con titolo stampato */}
+        {/* background */}
         <img
           src="/home-moto.jpg"
           alt=""
@@ -61,7 +62,7 @@ export default function Home() {
             display: "flex",
             alignItems: "flex-end",
             justifyContent: "center",
-            padding: "0 24px 56px",
+            padding: "0 24px 80px", // ✅ bottoni più alti
           }}
         >
           <div style={{ width: "100%", maxWidth: 360 }}>
