@@ -45,7 +45,6 @@ export default function Register() {
         <div className="auth-container">
           <div style={{ textAlign: "center", marginBottom: 16 }}>
             <div className="auth-badge">
-              <span>🏍️</span> <span>MotoPortEU</span>
             </div>
             <h1 className="auth-title">Register</h1>
             <p className="auth-subtitle">

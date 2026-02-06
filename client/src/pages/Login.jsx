@@ -36,7 +36,6 @@ export default function Login() {
         <div className="auth-container">
           <div style={{ textAlign: "center", marginBottom: 16 }}>
             <div className="auth-badge">
-              <span>🏍️</span> <span>MotoPortEU</span>
             </div>
             <h1 className="auth-title">Login</h1>
             <p className="auth-subtitle">
