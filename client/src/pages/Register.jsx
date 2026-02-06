@@ -1,8 +1,9 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import authBg from "../assets/auth-bg.jpg";
+import "../styles/auth.css";
 
-const BG =
-  "https://images.unsplash.com/photo-1525609004556-c46c7d6cf023?auto=format&fit=crop&w=2400&q=80";
+const BG = authBg;
 
 export default function Register() {
   const navigate = useNavigate();
@@ -18,15 +19,14 @@ export default function Register() {
     setLoading(true);
 
     try {
-      // TODO: integra la tua API qui
+      // 👉 QUI integra la tua API reale di registrazione
       // esempio:
-      // const res = await fetch(`${API_URL}/auth/register`, { ... })
-      // if (!res.ok) throw new Error("Registrazione fallita");
-      // const data = await res.json();
-      // localStorage.setItem("token", data.token);
+      // const res = await fetch(`${API_URL}/auth/register`, {...})
+      // if (!res.ok) throw new Error("Registrazione fallita")
+      // const data = await res.json()
+      // localStorage.setItem("token", data.token)
 
-      // DEMO: simulazione
-      await new Promise((r) => setTimeout(r, 500));
+      await new Promise((r) => setTimeout(r, 400));
 
       navigate("/", { replace: true });
     } catch (err) {
@@ -37,96 +37,88 @@ export default function Register() {
   };
 
   return (
-    <div className="min-h-screen relative overflow-hidden">
-      {/* Background */}
-      <div
-        className="absolute inset-0 bg-cover bg-center"
-        style={{ backgroundImage: `url(${BG})` }}
-      />
-      {/* Overlay + blur */}
-      <div className="absolute inset-0 bg-black/45 backdrop-blur-[2px]" />
+    <div className="auth-wrap">
+      <div className="auth-bg" style={{ backgroundImage: `url(${BG})` }} />
+      <div className="auth-overlay" />
 
-      {/* Content */}
-      <div className="relative min-h-screen flex items-center justify-center px-4 py-10">
-        <div className="w-full max-w-md">
-          {/* Brand */}
-          <div className="mb-6 text-center">
-            <div className="inline-flex items-center gap-2 rounded-full bg-white/10 px-4 py-2 text-white">
-              <span className="text-lg">🏍️</span>
-              <span className="font-semibold tracking-wide">MotoPortEU</span>
+      <div className="auth-content">
+        <div className="auth-container">
+          <div style={{ textAlign: "center", marginBottom: 16 }}>
+            <div className="auth-badge">
+              <span>🏍️</span> <span>MotoPortEU</span>
             </div>
-            <h1 className="mt-4 text-3xl font-bold text-white">Register</h1>
-            <p className="mt-2 text-white/80">
+            <h1 className="auth-title">Register</h1>
+            <p className="auth-subtitle">
               Crea un account e inizia a registrare i giri.
             </p>
           </div>
 
-          {/* Card */}
-          <div className="rounded-2xl bg-white/95 shadow-2xl border border-black/5 p-6">
+          <div className="auth-card">
             {error && (
-              <div className="mb-4 rounded-xl bg-red-50 border border-red-200 px-4 py-3 text-red-700 text-sm">
+              <div
+                style={{
+                  marginBottom: 12,
+                  padding: "10px 12px",
+                  borderRadius: 12,
+                  background: "#fef2f2",
+                  border: "1px solid #fecaca",
+                  color: "#b91c1c",
+                  fontSize: 13,
+                }}
+              >
                 {error}
               </div>
             )}
 
-            <form onSubmit={onSubmit} className="space-y-4">
-              <div>
-                <label className="block text-sm font-medium text-slate-700">
-                  Email
-                </label>
+            <form onSubmit={onSubmit}>
+              <div className="auth-row">
+                <label className="auth-label">Email</label>
                 <input
+                  className="auth-input"
                   type="email"
                   autoComplete="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="you@email.com"
-                  className="mt-1 w-full rounded-xl border border-slate-300 bg-white px-3 py-2 outline-none focus:ring-2 focus:ring-black/20 focus:border-slate-400"
                   required
                 />
               </div>
 
-              <div>
-                <label className="block text-sm font-medium text-slate-700">
-                  Password
-                </label>
+              <div className="auth-row">
+                <label className="auth-label">Password</label>
                 <input
+                  className="auth-input"
                   type="password"
                   autoComplete="new-password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   placeholder="••••••••"
-                  className="mt-1 w-full rounded-xl border border-slate-300 bg-white px-3 py-2 outline-none focus:ring-2 focus:ring-black/20 focus:border-slate-400"
                   required
                 />
-                <p className="mt-1 text-xs text-slate-500">
+                <p
+                  style={{
+                    marginTop: 4,
+                    fontSize: 12,
+                    color: "#64748b",
+                  }}
+                >
                   Suggerito: almeno 8 caratteri.
                 </p>
               </div>
 
-              <button
-                type="submit"
-                disabled={loading}
-                className="w-full rounded-xl bg-black text-white py-2.5 font-semibold shadow-md hover:bg-black/90 disabled:opacity-60 disabled:cursor-not-allowed"
-              >
+              <button className="auth-btn" type="submit" disabled={loading}>
                 {loading ? "Creazione..." : "Register"}
               </button>
             </form>
 
-            <div className="mt-4 text-sm text-slate-700">
-              Hai già un account?{" "}
-              <Link
-                to="/login"
-                className="font-semibold text-blue-600 hover:underline"
-              >
-                Login
-              </Link>
+            <div className="auth-linkrow">
+              Hai già un account? <Link to="/login">Login</Link>
             </div>
           </div>
 
-          {/* Footer micro */}
-          <p className="mt-6 text-center text-xs text-white/70">
+          <div className="auth-footer">
             © {new Date().getFullYear()} MotoPortEU
-          </p>
+          </div>
         </div>
       </div>
     </div>
