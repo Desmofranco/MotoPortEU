@@ -39,12 +39,10 @@ export default function Navbar() {
     >
       <strong style={{ marginRight: 8 }}>MotoPortEU</strong>
 
-      <NavLink to="/map" style={linkStyle}>Mappa</NavLink>
       <NavLink to="/routes" style={linkStyle}>Itinerari</NavLink>
       <NavLink to="/tracks" style={linkStyle}>🏁 Circuiti</NavLink>
       <NavLink to="/garage" style={linkStyle}>Garage</NavLink>
       <NavLink to="/suppliers" style={linkStyle}>Fornitori</NavLink>
-      <NavLink to="/my-tracks" style={linkStyle}>📡 Storico</NavLink>
 
       <div style={{ marginLeft: "auto" }}>
         <button
