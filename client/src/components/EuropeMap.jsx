@@ -1,5 +1,5 @@
 // src/components/EuropeMap.jsx
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState, useCallback } from "react";
 import {
   MapContainer,
   TileLayer,
@@ -86,7 +86,6 @@ function FitBounds({ points }) {
 
     const latlngs = points.map((p) => [p.lat, p.lng]);
     const bounds = L.latLngBounds(latlngs);
-    // padding per topbar
     map.fitBounds(bounds, { padding: [40, 140] });
   }, [map, points]);
   return null;
@@ -124,7 +123,7 @@ export default function EuropeMap() {
     return 65;
   }, [pace]);
 
-  // Meteo rotta (Open-Meteo util)
+  // Meteo rotta
   const [weatherLoading, setWeatherLoading] = useState(false);
   const [weatherSummary, setWeatherSummary] = useState(null);
   const [weatherNote, setWeatherNote] = useState("");
@@ -132,12 +131,35 @@ export default function EuropeMap() {
   // evita che la geolocalizzazione sovrascriva un percorso caricato
   const loadedFromRouteRef = useRef(false);
 
-  // ✅ FIX: blocca click/scroll della TOP BAR verso Leaflet (evita “tappa fantasma”)
+  // ✅ FIX HARD: blocca propagation (click/touch/pointer) dalla topbar verso Leaflet
   const topBarRef = useRef(null);
+
   useEffect(() => {
     if (!topBarRef.current) return;
+
+    // Leaflet-level stop
     L.DomEvent.disableClickPropagation(topBarRef.current);
     L.DomEvent.disableScrollPropagation(topBarRef.current);
+
+    // extra safety: impedisci drag/tap “fantasma” su mobile
+    const el = topBarRef.current;
+    const stop = (e) => {
+      e.preventDefault?.();
+      e.stopPropagation?.();
+    };
+
+    // capture-phase listeners
+    el.addEventListener("pointerdown", stop, { capture: true, passive: false });
+    el.addEventListener("touchstart", stop, { capture: true, passive: false });
+    el.addEventListener("mousedown", stop, { capture: true, passive: false });
+    el.addEventListener("click", stop, { capture: true, passive: false });
+
+    return () => {
+      el.removeEventListener("pointerdown", stop, { capture: true });
+      el.removeEventListener("touchstart", stop, { capture: true });
+      el.removeEventListener("mousedown", stop, { capture: true });
+      el.removeEventListener("click", stop, { capture: true });
+    };
   }, []);
 
   // 1) Se arrivo da Storico con routeId: carica percorso salvato
@@ -147,7 +169,6 @@ export default function EuropeMap() {
     const r = findRouteById(routeId);
     if (!r || !Array.isArray(r.points) || r.points.length < 2) return;
 
-    // points: [start, ...stops, end]
     const pts = r.points;
     const s = pts[0];
     const e = pts[pts.length - 1];
@@ -166,7 +187,6 @@ export default function EuropeMap() {
     setAddStopsMode(false);
     setShowStopsPanel(true);
 
-    // reset meteo (lo ricalcoli a comando)
     setWeatherSummary(null);
     setWeatherNote("");
 
@@ -209,19 +229,21 @@ export default function EuropeMap() {
     return `${h} h ${m} min`;
   }, [estHours]);
 
-  const setPointFromMapTap = (p) => {
-    // primo tap = arrivo
-    if (!end) {
+  const setPointFromMapTap = useCallback(
+    (p) => {
+      if (!end) {
+        setEnd(p);
+        setAddStopsMode(true);
+        return;
+      }
+      if (addStopsMode) {
+        setStops((prev) => [...prev, p]);
+        return;
+      }
       setEnd(p);
-      setAddStopsMode(true);
-      return;
-    }
-    if (addStopsMode) {
-      setStops((prev) => [...prev, p]);
-      return;
-    }
-    setEnd(p);
-  };
+    },
+    [end, addStopsMode]
+  );
 
   const undoLast = () => {
     if (stops.length) return setStops((prev) => prev.slice(0, -1));
@@ -299,7 +321,6 @@ export default function EuropeMap() {
     setWeatherNote("");
 
     try {
-      // ✅ utility: array punti [{lat,lng}, ...]
       const summary = await getRouteWeatherSummary(routePoints, { maxSamples: 8 });
       setWeatherSummary(summary);
     } catch {
@@ -310,9 +331,10 @@ export default function EuropeMap() {
     }
   };
 
+  // ✅ FIX MOBILE: sposta topbar sotto la navbar + safe area
   const topBarStyle = {
     position: "absolute",
-    top: 12,
+    top: "calc(12px + env(safe-area-inset-top) + 56px)",
     left: 12,
     right: 12,
     zIndex: 1000,
@@ -323,6 +345,9 @@ export default function EuropeMap() {
     fontSize: 13,
     display: "grid",
     gap: 8,
+    maxHeight: "calc(100dvh - 120px)",
+    overflowY: "auto",
+    WebkitOverflowScrolling: "touch",
   };
 
   const btn = (primary = false) => ({
@@ -345,7 +370,7 @@ export default function EuropeMap() {
   };
 
   return (
-    <div style={{ height: "calc(100vh - 64px)", width: "100%" }}>
+    <div style={{ height: "calc(100dvh - 64px)", width: "100%" }}>
       <MapContainer
         center={start ? [start.lat, start.lng] : EUROPE_CENTER}
         zoom={6}
