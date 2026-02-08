@@ -132,6 +132,14 @@ export default function EuropeMap() {
   // evita che la geolocalizzazione sovrascriva un percorso caricato
   const loadedFromRouteRef = useRef(false);
 
+  // ✅ FIX: blocca click/scroll della TOP BAR verso Leaflet (evita “tappa fantasma”)
+  const topBarRef = useRef(null);
+  useEffect(() => {
+    if (!topBarRef.current) return;
+    L.DomEvent.disableClickPropagation(topBarRef.current);
+    L.DomEvent.disableScrollPropagation(topBarRef.current);
+  }, []);
+
   // 1) Se arrivo da Storico con routeId: carica percorso salvato
   useEffect(() => {
     if (!routeId) return;
@@ -170,8 +178,7 @@ export default function EuropeMap() {
     if (loadedFromRouteRef.current) return;
 
     navigator.geolocation?.getCurrentPosition(
-      (pos) =>
-        setStart({ lat: pos.coords.latitude, lng: pos.coords.longitude }),
+      (pos) => setStart({ lat: pos.coords.latitude, lng: pos.coords.longitude }),
       () => setStart({ lat: EUROPE_CENTER[0], lng: EUROPE_CENTER[1] }),
       { enableHighAccuracy: true, timeout: 8000 }
     );
@@ -292,7 +299,7 @@ export default function EuropeMap() {
     setWeatherNote("");
 
     try {
-      // ✅ la tua utility ora vuole array punti [{lat,lng}, ...]
+      // ✅ utility: array punti [{lat,lng}, ...]
       const summary = await getRouteWeatherSummary(routePoints, { maxSamples: 8 });
       setWeatherSummary(summary);
     } catch {
@@ -379,7 +386,7 @@ export default function EuropeMap() {
         )}
 
         {/* TOP BAR */}
-        <div style={topBarStyle}>
+        <div ref={topBarRef} style={topBarStyle}>
           <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
             <strong style={{ fontSize: 14 }}>Planner</strong>
 
