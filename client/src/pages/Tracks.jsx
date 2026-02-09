@@ -751,4 +751,44 @@ function Stat({ label, value }) {
       <div style={{ fontWeight: 950, marginTop: 2 }}>{value}</div>
     </div>
   );
-}
+}{isOpen && selected && (
+  <div
+    className="fixed inset-0 z-[9999] bg-black/50 flex items-end md:hidden"
+    onClick={closeTrack}
+  >
+    <div
+      className="w-full max-h-[85vh] rounded-t-3xl bg-white p-4 overflow-auto"
+      onClick={(e) => e.stopPropagation()}
+    >
+      <div className="flex items-center justify-between gap-3">
+        <div className="font-bold text-lg">{selected.name || "Circuito"}</div>
+        <button
+          type="button"
+          onClick={closeTrack}
+          className="px-3 py-2 rounded-xl border"
+        >
+          ✕
+        </button>
+      </div>
+
+      <div className="mt-2 text-sm opacity-80">
+        {selected.country} {selected.region ? `• ${selected.region}` : ""}
+      </div>
+
+      {/* QUI ci metti il tuo componente dettaglio / mappa */}
+      <div className="mt-4">
+        {/* esempio */}
+        {selected.mapUrl && (
+          <a
+            href={selected.mapUrl}
+            target="_blank"
+            rel="noreferrer"
+            className="inline-flex items-center gap-2 px-4 py-3 rounded-2xl border"
+          >
+            📍 Apri in Google Maps
+          </a>
+        )}
+      </div>
+    </div>
+  </div>
+)}
