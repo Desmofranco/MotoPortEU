@@ -6,6 +6,7 @@
 // ✅ Responsive: mobile-first (1 colonna), desktop (2 colonne)
 // ✅ Loading skeleton (niente elementi UI “fantasma” durante fetch)
 // ✅ Fix selezione anche se mancano id (fallback key stabile)
+// ✅ Mobile: bottom-sheet dettaglio (circuito selezionato visibile)
 // =======================================================
 
 import React, { useEffect, useMemo, useState } from "react";
@@ -106,7 +107,6 @@ function normalizeIncomingTrack(t) {
   const region = t?.region || "";
   const type = String(t?.type || t?.kind || "").toLowerCase();
   const surface = String(t?.surface || "").toLowerCase();
-
   const lat = t?.coords?.lat ?? t?.start?.lat ?? null;
   const lng = t?.coords?.lng ?? t?.start?.lng ?? null;
 
@@ -134,7 +134,6 @@ function buildDedupeKey(t) {
   return `n:${name}|${lat}|${lng}`;
 }
 
-// ✅ chiave stabile per selezione/active anche senza id
 function getTrackKey(t) {
   return buildDedupeKey(t);
 }
@@ -173,6 +172,11 @@ export default function Tracks() {
   const [sortBy, setSortBy] = useState("rating"); // rating | difficulty | length
 
   const [activeKey, setActiveKey] = useState(null);
+
+  // ✅ Mobile modal
+  const [isOpen, setIsOpen] = useState(false);
+  const openModal = () => setIsOpen(true);
+  const closeModal = () => setIsOpen(false);
 
   useEffect(() => {
     let alive = true;
@@ -302,6 +306,14 @@ export default function Tracks() {
     }
     return tracks[0] || null;
   }, [tracks, activeKey]);
+
+  const handleSelect = (key) => {
+    setActiveKey(key);
+    // su mobile apri subito il dettaglio
+    if (window.matchMedia && window.matchMedia("(max-width: 767px)").matches) {
+      openModal();
+    }
+  };
 
   return (
     <div style={{ padding: 16, maxWidth: 1250, margin: "0 auto" }}>
@@ -441,14 +453,7 @@ export default function Tracks() {
         </div>
       ) : (
         <div style={{ marginTop: 14, display: "grid", gridTemplateColumns: "1fr", gap: 14 }}>
-          <div
-            style={{
-              display: "grid",
-              gap: 14,
-              gridTemplateColumns: "1fr",
-            }}
-            className="tracks-split"
-          >
+          <div style={{ display: "grid", gap: 14, gridTemplateColumns: "1fr" }} className="tracks-split">
             {/* List */}
             <div style={{ display: "grid", gap: 12, height: "fit-content" }}>
               <div style={{ fontSize: 12, opacity: 0.7 }}>
@@ -462,26 +467,21 @@ export default function Tracks() {
                     key={key}
                     track={t}
                     active={key === activeKey}
-                    onClick={() => setActiveKey(key)}
+                    onClick={() => handleSelect(key)}
                   />
                 );
               })}
 
               {filtered.length === 0 && (
-                <div
-                  style={{
-                    padding: 12,
-                    borderRadius: 16,
-                    background: "rgba(0,0,0,0.04)",
-                  }}
-                >
+                <div style={{ padding: 12, borderRadius: 16, background: "rgba(0,0,0,0.04)" }}>
                   Nessuna pista trovata.
                 </div>
               )}
             </div>
 
-            {/* Detail */}
+            {/* Detail (desktop/tablet) */}
             <div
+              className="track-detail-desktop"
               style={{
                 borderRadius: 22,
                 overflow: "hidden",
@@ -490,11 +490,32 @@ export default function Tracks() {
                 height: "fit-content",
               }}
             >
-              {!active ? (
-                <div style={{ padding: 14 }}>Seleziona una pista.</div>
-              ) : (
-                <TrackDetail track={active} />
-              )}
+              {!active ? <div style={{ padding: 14 }}>Seleziona una pista.</div> : <TrackDetail track={active} />}
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* ✅ Mobile Bottom Sheet */}
+      {isOpen && active && (
+        <div
+          className="fixed inset-0 z-[9999] bg-black/50 flex items-end md:hidden"
+          onClick={closeModal}
+        >
+          <div
+            className="w-full max-h-[85vh] rounded-t-3xl bg-white overflow-auto"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="p-3 border-b flex items-center justify-between gap-3">
+              <div className="font-bold text-base">
+                {countryFlag(active.country)} {active.name}
+              </div>
+              <button type="button" onClick={closeModal} className="px-3 py-2 rounded-xl border">
+                ✕
+              </button>
+            </div>
+            <div className="p-2">
+              <TrackDetail track={active} />
             </div>
           </div>
         </div>
@@ -505,6 +526,12 @@ export default function Tracks() {
         @media (min-width: 1024px){
           .tracks-split{
             grid-template-columns: 420px 1fr !important;
+          }
+        }
+        /* su mobile nascondo il pannello detail fisso */
+        @media (max-width: 767px){
+          .track-detail-desktop{
+            display: none !important;
           }
         }
       `}</style>
@@ -574,7 +601,6 @@ function TrackCard({ track, active, onClick }) {
 
 function TrackDetail({ track }) {
   const photo = track.photo || FALLBACK_PHOTO;
-
   const lat = track?.coords?.lat;
   const lng = track?.coords?.lng;
 
@@ -751,44 +777,4 @@ function Stat({ label, value }) {
       <div style={{ fontWeight: 950, marginTop: 2 }}>{value}</div>
     </div>
   );
-}{isOpen && selected && (
-  <div
-    className="fixed inset-0 z-[9999] bg-black/50 flex items-end md:hidden"
-    onClick={closeTrack}
-  >
-    <div
-      className="w-full max-h-[85vh] rounded-t-3xl bg-white p-4 overflow-auto"
-      onClick={(e) => e.stopPropagation()}
-    >
-      <div className="flex items-center justify-between gap-3">
-        <div className="font-bold text-lg">{selected.name || "Circuito"}</div>
-        <button
-          type="button"
-          onClick={closeTrack}
-          className="px-3 py-2 rounded-xl border"
-        >
-          ✕
-        </button>
-      </div>
-
-      <div className="mt-2 text-sm opacity-80">
-        {selected.country} {selected.region ? `• ${selected.region}` : ""}
-      </div>
-
-      {/* QUI ci metti il tuo componente dettaglio / mappa */}
-      <div className="mt-4">
-        {/* esempio */}
-        {selected.mapUrl && (
-          <a
-            href={selected.mapUrl}
-            target="_blank"
-            rel="noreferrer"
-            className="inline-flex items-center gap-2 px-4 py-3 rounded-2xl border"
-          >
-            📍 Apri in Google Maps
-          </a>
-        )}
-      </div>
-    </div>
-  </div>
-)}
+}
