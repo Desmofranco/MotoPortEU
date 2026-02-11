@@ -3,10 +3,10 @@
 // Piste: supersport / enduro / cross
 // UI emozionale: foto + rating + mappa + meteo + Google Maps
 // Dati: /public/data/tracks.json + /public/data/tracks.eu.json
-// ✅ Responsive: mobile-first (1 colonna), desktop (2 colonne)
-// ✅ Loading skeleton (niente elementi UI “fantasma” durante fetch)
+// ✅ Responsive: mobile-first (lista full-screen), desktop (2 colonne)
+// ✅ Loading skeleton
 // ✅ Fix selezione anche se mancano id (fallback key stabile)
-// ✅ Mobile: bottom-sheet dettaglio (circuito selezionato visibile)
+// ✅ Mobile: FULL SCREEN detail (back) — niente bottom-sheet
 // =======================================================
 
 import React, { useEffect, useMemo, useState } from "react";
@@ -151,11 +151,41 @@ function SkeletonLoading() {
     >
       <div style={{ fontSize: 16, fontWeight: 800 }}>Carico piste…</div>
       <div style={{ marginTop: 10, display: "grid", gap: 8 }}>
-        <div style={{ height: 12, background: "rgba(0,0,0,0.08)", borderRadius: 8, width: "70%" }} />
-        <div style={{ height: 12, background: "rgba(0,0,0,0.08)", borderRadius: 8, width: "55%" }} />
-        <div style={{ height: 12, background: "rgba(0,0,0,0.08)", borderRadius: 8, width: "80%" }} />
+        <div
+          style={{
+            height: 12,
+            background: "rgba(0,0,0,0.08)",
+            borderRadius: 8,
+            width: "70%",
+          }}
+        />
+        <div
+          style={{
+            height: 12,
+            background: "rgba(0,0,0,0.08)",
+            borderRadius: 8,
+            width: "55%",
+          }}
+        />
+        <div
+          style={{
+            height: 12,
+            background: "rgba(0,0,0,0.08)",
+            borderRadius: 8,
+            width: "80%",
+          }}
+        />
       </div>
     </div>
+  );
+}
+
+// helper: mobile check
+function isMobileNow() {
+  return (
+    typeof window !== "undefined" &&
+    window.matchMedia &&
+    window.matchMedia("(max-width: 767px)").matches
   );
 }
 
@@ -171,12 +201,21 @@ export default function Tracks() {
   const [surface, setSurface] = useState("ALL");
   const [sortBy, setSortBy] = useState("rating"); // rating | difficulty | length
 
+  // selezione
   const [activeKey, setActiveKey] = useState(null);
 
-  // ✅ Mobile modal
+  // mobile full-screen detail
+  const [selected, setSelected] = useState(null);
   const [isOpen, setIsOpen] = useState(false);
-  const openModal = () => setIsOpen(true);
-  const closeModal = () => setIsOpen(false);
+
+  const openTrack = (t) => {
+    setSelected(t);
+    if (isMobileNow()) setIsOpen(true);
+  };
+
+  const closeTrack = () => {
+    setIsOpen(false);
+  };
 
   useEffect(() => {
     let alive = true;
@@ -213,7 +252,12 @@ export default function Tracks() {
         if (!alive) return;
 
         setTracks(dedup);
-        setActiveKey((prev) => prev || (dedup[0] ? getTrackKey(dedup[0]) : null));
+
+        const firstKey = dedup[0] ? getTrackKey(dedup[0]) : null;
+        setActiveKey((prev) => prev || firstKey);
+
+        // imposta selected iniziale coerente
+        if (!selected && dedup[0]) setSelected(dedup[0]);
       } catch (e) {
         if (!alive) return;
         setErr(e?.message || "Errore caricamento piste");
@@ -226,6 +270,7 @@ export default function Tracks() {
     return () => {
       alive = false;
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const countries = useMemo(() => {
@@ -236,12 +281,16 @@ export default function Tracks() {
   }, [tracks]);
 
   const types = useMemo(() => {
-    const set = new Set(tracks.map((t) => String(t.type || "").toLowerCase()).filter(Boolean));
+    const set = new Set(
+      tracks.map((t) => String(t.type || "").toLowerCase()).filter(Boolean)
+    );
     return ["ALL", ...Array.from(set).sort()];
   }, [tracks]);
 
   const surfaces = useMemo(() => {
-    const set = new Set(tracks.map((t) => String(t.surface || "").toLowerCase()).filter(Boolean));
+    const set = new Set(
+      tracks.map((t) => String(t.surface || "").toLowerCase()).filter(Boolean)
+    );
     return ["ALL", ...Array.from(set).sort()];
   }, [tracks]);
 
@@ -267,23 +316,31 @@ export default function Tracks() {
     }
 
     if (country !== "ALL") {
-      out = out.filter((t) => String(t.country || "").toUpperCase() === country);
+      out = out.filter(
+        (t) => String(t.country || "").toUpperCase() === country
+      );
     }
 
     if (type !== "ALL") {
-      out = out.filter((t) => String(t.type || "").toLowerCase() === String(type).toLowerCase());
+      out = out.filter(
+        (t) =>
+          String(t.type || "").toLowerCase() === String(type).toLowerCase()
+      );
     }
 
     if (surface !== "ALL") {
       out = out.filter(
-        (t) => String(t.surface || "").toLowerCase() === String(surface).toLowerCase()
+        (t) =>
+          String(t.surface || "").toLowerCase() ===
+          String(surface).toLowerCase()
       );
     }
 
     const sorter =
       {
         rating: (a, b) => Number(b.rating || 0) - Number(a.rating || 0),
-        difficulty: (a, b) => Number(b.difficulty || 0) - Number(a.difficulty || 0),
+        difficulty: (a, b) =>
+          Number(b.difficulty || 0) - Number(a.difficulty || 0),
         length: (a, b) => Number(b.lengthKm || 0) - Number(a.lengthKm || 0),
       }[sortBy] || (() => 0);
 
@@ -295,7 +352,11 @@ export default function Tracks() {
   useEffect(() => {
     if (!filtered.length) return;
     const exists = filtered.some((t) => getTrackKey(t) === activeKey);
-    if (!exists) setActiveKey(getTrackKey(filtered[0]));
+    if (!exists) {
+      const k = getTrackKey(filtered[0]);
+      setActiveKey(k);
+      setSelected(filtered[0]);
+    }
   }, [filtered, activeKey]);
 
   const active = useMemo(() => {
@@ -307,18 +368,24 @@ export default function Tracks() {
     return tracks[0] || null;
   }, [tracks, activeKey]);
 
-  const handleSelect = (key) => {
+  const handleSelect = (t) => {
+    const key = getTrackKey(t);
     setActiveKey(key);
-    // su mobile apri subito il dettaglio
-    if (window.matchMedia && window.matchMedia("(max-width: 767px)").matches) {
-      openModal();
-    }
+    setSelected(t);
+    openTrack(t); // apre solo su mobile
   };
 
   return (
     <div style={{ padding: 16, maxWidth: 1250, margin: "0 auto" }}>
       {/* Header */}
-      <div style={{ display: "grid", gridTemplateColumns: "1fr", gap: 10, alignItems: "start" }}>
+      <div
+        style={{
+          display: "grid",
+          gridTemplateColumns: "1fr",
+          gap: 10,
+          alignItems: "start",
+        }}
+      >
         <div
           style={{
             display: "flex",
@@ -329,7 +396,9 @@ export default function Tracks() {
           }}
         >
           <div>
-            <h1 style={{ margin: 0, fontSize: 44, letterSpacing: -0.5 }}>Piste 🏁</h1>
+            <h1 style={{ margin: 0, fontSize: 44, letterSpacing: -0.5 }}>
+              Piste 🏁
+            </h1>
             <div style={{ opacity: 0.75, marginTop: 6 }}>
               SuperSport, Enduro e Cross: mappa, meteo e link Google.
             </div>
@@ -452,8 +521,15 @@ export default function Tracks() {
           {err}
         </div>
       ) : (
-        <div style={{ marginTop: 14, display: "grid", gridTemplateColumns: "1fr", gap: 14 }}>
-          <div style={{ display: "grid", gap: 14, gridTemplateColumns: "1fr" }} className="tracks-split">
+        <div
+          style={{
+            marginTop: 14,
+            display: "grid",
+            gridTemplateColumns: "1fr",
+            gap: 14,
+          }}
+        >
+          <div className="tracks-split" style={{ display: "grid", gap: 14 }}>
             {/* List */}
             <div style={{ display: "grid", gap: 12, height: "fit-content" }}>
               <div style={{ fontSize: 12, opacity: 0.7 }}>
@@ -462,18 +538,25 @@ export default function Tracks() {
 
               {filtered.map((t) => {
                 const key = getTrackKey(t);
+                const isActive = key === activeKey;
                 return (
                   <TrackCard
                     key={key}
                     track={t}
-                    active={key === activeKey}
-                    onClick={() => handleSelect(key)}
+                    active={isActive}
+                    onClick={() => handleSelect(t)}
                   />
                 );
               })}
 
               {filtered.length === 0 && (
-                <div style={{ padding: 12, borderRadius: 16, background: "rgba(0,0,0,0.04)" }}>
+                <div
+                  style={{
+                    padding: 12,
+                    borderRadius: 16,
+                    background: "rgba(0,0,0,0.04)",
+                  }}
+                >
                   Nessuna pista trovata.
                 </div>
               )}
@@ -490,33 +573,46 @@ export default function Tracks() {
                 height: "fit-content",
               }}
             >
-              {!active ? <div style={{ padding: 14 }}>Seleziona una pista.</div> : <TrackDetail track={active} />}
+              {!active ? (
+                <div style={{ padding: 14 }}>Seleziona una pista.</div>
+              ) : (
+                <TrackDetail track={active} />
+              )}
             </div>
           </div>
         </div>
       )}
 
-      {/* ✅ Mobile Bottom Sheet */}
-      {isOpen && active && (
-        <div
-          className="fixed inset-0 z-[9999] bg-black/50 flex items-end md:hidden"
-          onClick={closeModal}
-        >
+      {/* ✅ MOBILE: FULL SCREEN DETAIL */}
+      {isOpen && selected && (
+        <div className="fixed inset-0 z-[9999] bg-white md:hidden">
           <div
-            className="w-full max-h-[85vh] rounded-t-3xl bg-white overflow-auto"
-            onClick={(e) => e.stopPropagation()}
+            className="sticky top-0 z-10 bg-white/95 backdrop-blur border-b"
+            style={{ paddingTop: "env(safe-area-inset-top)" }}
           >
-            <div className="p-3 border-b flex items-center justify-between gap-3">
-              <div className="font-bold text-base">
-                {countryFlag(active.country)} {active.name}
-              </div>
-              <button type="button" onClick={closeModal} className="px-3 py-2 rounded-xl border">
-                ✕
+            <div className="flex items-center gap-2 p-3">
+              <button
+                type="button"
+                onClick={closeTrack}
+                className="px-3 py-2 rounded-xl border"
+              >
+                ← Indietro
               </button>
+              <div className="font-black text-base truncate">
+                {countryFlag(selected.country)} {selected.name || "Circuito"}
+              </div>
             </div>
-            <div className="p-2">
-              <TrackDetail track={active} />
-            </div>
+          </div>
+
+          <div
+            className="overflow-y-auto overflow-x-hidden"
+            style={{
+              height: "calc(100dvh - 56px - env(safe-area-inset-top))",
+              WebkitOverflowScrolling: "touch",
+              paddingBottom: "env(safe-area-inset-bottom)",
+            }}
+          >
+            <TrackDetail track={selected} />
           </div>
         </div>
       )}
@@ -528,7 +624,6 @@ export default function Tracks() {
             grid-template-columns: 420px 1fr !important;
           }
         }
-        /* su mobile nascondo il pannello detail fisso */
         @media (max-width: 767px){
           .track-detail-desktop{
             display: none !important;
@@ -554,7 +649,9 @@ function TrackCard({ track, active, onClick }) {
         borderRadius: 18,
         overflow: "hidden",
         width: "100%",
-        border: active ? "2px solid rgba(0,0,0,0.35)" : "1px solid rgba(0,0,0,0.12)",
+        border: active
+          ? "2px solid rgba(0,0,0,0.35)"
+          : "1px solid rgba(0,0,0,0.12)",
         background: "white",
         boxShadow: active ? "0 10px 30px rgba(0,0,0,0.12)" : "none",
         padding: 0,
@@ -569,7 +666,13 @@ function TrackCard({ track, active, onClick }) {
         }}
       />
       <div style={{ padding: 12 }}>
-        <div style={{ display: "flex", justifyContent: "space-between", gap: 10 }}>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            gap: 10,
+          }}
+        >
           <div style={{ fontWeight: 900, lineHeight: 1.15 }}>
             {countryFlag(track.country)} {track.name}
           </div>
@@ -579,20 +682,29 @@ function TrackCard({ track, active, onClick }) {
         </div>
 
         <div style={{ marginTop: 4, fontSize: 12, opacity: 0.75 }}>
-          {track.region} · fondo: {surfaceLabel(track.surface)} · stagione: {track.bestSeason || "—"}
+          {track.region} · fondo: {surfaceLabel(track.surface)} · stagione:{" "}
+          {track.bestSeason || "—"}
         </div>
 
         <div style={{ marginTop: 10, display: "flex", gap: 8, flexWrap: "wrap" }}>
           <span style={pillStyle(p.level)}>
             ⭐ {Number.isFinite(rating) ? rating.toFixed(1) : "0.0"} · {p.label}
           </span>
-          <span style={pillStyle("ok")}>🧠 diff {Number(track.difficulty || 0)}/10</span>
-          <span style={pillStyle("ok")}>⚡ speed {Number(track.speed || 0)}/10</span>
-          <span style={pillStyle("ok")}>🧩 tech {Number(track.technique || 0)}/10</span>
+          <span style={pillStyle("ok")}>
+            🧠 diff {Number(track.difficulty || 0)}/10
+          </span>
+          <span style={pillStyle("ok")}>
+            ⚡ speed {Number(track.speed || 0)}/10
+          </span>
+          <span style={pillStyle("ok")}>
+            🧩 tech {Number(track.technique || 0)}/10
+          </span>
         </div>
 
         {track.description ? (
-          <div style={{ marginTop: 10, fontSize: 13, opacity: 0.85 }}>{track.description}</div>
+          <div style={{ marginTop: 10, fontSize: 13, opacity: 0.85 }}>
+            {track.description}
+          </div>
         ) : null}
       </div>
     </button>
@@ -605,7 +717,9 @@ function TrackDetail({ track }) {
   const lng = track?.coords?.lng;
 
   const googleHref =
-    lat != null && lng != null ? `https://www.google.com/maps?q=${lat},${lng}` : "https://www.google.com/maps";
+    lat != null && lng != null
+      ? `https://www.google.com/maps?q=${lat},${lng}`
+      : "https://www.google.com/maps";
 
   // meteo
   const [wx, setWx] = useState(null);
@@ -645,14 +759,28 @@ function TrackDetail({ track }) {
   const wxBox = (() => {
     if (wxBusy) {
       return (
-        <div style={{ marginTop: 10, padding: 12, borderRadius: 16, background: "rgba(0,0,0,0.04)" }}>
+        <div
+          style={{
+            marginTop: 10,
+            padding: 12,
+            borderRadius: 16,
+            background: "rgba(0,0,0,0.04)",
+          }}
+        >
           Carico meteo…
         </div>
       );
     }
     if (!wx || !wx.ok) {
       return (
-        <div style={{ marginTop: 10, padding: 12, borderRadius: 16, background: "rgba(0,0,0,0.04)" }}>
+        <div
+          style={{
+            marginTop: 10,
+            padding: 12,
+            borderRadius: 16,
+            background: "rgba(0,0,0,0.04)",
+          }}
+        >
           {wx?.note || "Meteo non disponibile."}
         </div>
       );
@@ -660,7 +788,14 @@ function TrackDetail({ track }) {
 
     return (
       <div style={{ marginTop: 10, display: "grid", gap: 10 }}>
-        <div style={{ display: "flex", gap: 10, flexWrap: "wrap", alignItems: "center" }}>
+        <div
+          style={{
+            display: "flex",
+            gap: 10,
+            flexWrap: "wrap",
+            alignItems: "center",
+          }}
+        >
           <span style={pillStyle(weatherLevel(wx.worst))}>
             Condizione: <strong>{wx.worst}</strong>
           </span>
@@ -670,12 +805,15 @@ function TrackDetail({ track }) {
             </span>
           ) : null}
           {wx.windKmh != null ? (
-            <span style={pillStyle(wx.windKmh >= 50 ? "warn" : "ok")}>💨 vento {wx.windKmh} km/h</span>
+            <span style={pillStyle(wx.windKmh >= 50 ? "warn" : "ok")}>
+              💨 vento {wx.windKmh} km/h
+            </span>
           ) : null}
         </div>
 
         <div style={{ fontSize: 12, opacity: 0.7 }}>
-          Aggiornato: {String(wx.updatedAt || "").slice(0, 16).replace("T", " ")}
+          Aggiornato:{" "}
+          {String(wx.updatedAt || "").slice(0, 16).replace("T", " ")}
         </div>
       </div>
     );
@@ -697,29 +835,57 @@ function TrackDetail({ track }) {
           style={{
             position: "absolute",
             inset: 0,
-            background: "linear-gradient(180deg, rgba(0,0,0,0.12), rgba(0,0,0,0.72))",
+            background:
+              "linear-gradient(180deg, rgba(0,0,0,0.12), rgba(0,0,0,0.72))",
           }}
         />
-        <div style={{ position: "absolute", left: 16, right: 16, bottom: 14, color: "white" }}>
+        <div
+          style={{
+            position: "absolute",
+            left: 16,
+            right: 16,
+            bottom: 14,
+            color: "white",
+          }}
+        >
           <div style={{ fontSize: 13, opacity: 0.92 }}>
-            {countryFlag(track.country)} {track.country} · {track.region} · {typeLabel(track.type)}
+            {countryFlag(track.country)} {track.country} · {track.region} ·{" "}
+            {typeLabel(track.type)}
           </div>
-          <div style={{ fontSize: 30, fontWeight: 950, letterSpacing: 0.2 }}>{track.name}</div>
+          <div style={{ fontSize: 30, fontWeight: 950, letterSpacing: 0.2 }}>
+            {track.name}
+          </div>
 
           <div style={{ marginTop: 10, display: "flex", gap: 8, flexWrap: "wrap" }}>
-            <span style={pillStyle("ok")}>⭐ {Number(track.rating || 0).toFixed(1)}</span>
-            <span style={pillStyle("ok")}>🧠 diff {Number(track.difficulty || 0)}/10</span>
-            <span style={pillStyle("ok")}>⚡ speed {Number(track.speed || 0)}/10</span>
-            <span style={pillStyle("ok")}>🧩 tech {Number(track.technique || 0)}/10</span>
+            <span style={pillStyle("ok")}>
+              ⭐ {Number(track.rating || 0).toFixed(1)}
+            </span>
+            <span style={pillStyle("ok")}>
+              🧠 diff {Number(track.difficulty || 0)}/10
+            </span>
+            <span style={pillStyle("ok")}>
+              ⚡ speed {Number(track.speed || 0)}/10
+            </span>
+            <span style={pillStyle("ok")}>
+              🧩 tech {Number(track.technique || 0)}/10
+            </span>
             <span style={pillStyle("ok")}>🗓 {track.bestSeason || "—"}</span>
-            {track.lengthKm ? <span style={pillStyle("ok")}>📏 {track.lengthKm} km</span> : null}
+            {track.lengthKm ? (
+              <span style={pillStyle("ok")}>📏 {track.lengthKm} km</span>
+            ) : null}
           </div>
         </div>
       </div>
 
       {/* Body */}
       <div style={{ padding: 14 }}>
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(160px, 1fr))", gap: 10 }}>
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(auto-fit, minmax(160px, 1fr))",
+            gap: 10,
+          }}
+        >
           <Stat label="Tipo" value={typeLabel(track.type)} />
           <Stat label="Fondo" value={surfaceLabel(track.surface)} />
           <Stat label="Rating" value={`${Number(track.rating || 0).toFixed(1)} / 10`} />
@@ -744,25 +910,45 @@ function TrackDetail({ track }) {
           </a>
         </div>
 
-        <div style={{ marginTop: 14, borderTop: "1px solid rgba(0,0,0,0.08)", paddingTop: 14 }}>
+        <div
+          style={{
+            marginTop: 14,
+            borderTop: "1px solid rgba(0,0,0,0.08)",
+            paddingTop: 14,
+          }}
+        >
           <strong>📌 Descrizione</strong>
           <div style={{ marginTop: 8, fontSize: 14, opacity: 0.9, lineHeight: 1.4 }}>
             {track.description || "—"}
           </div>
         </div>
 
-        <div style={{ marginTop: 14, borderTop: "1px solid rgba(0,0,0,0.08)", paddingTop: 14 }}>
+        <div
+          style={{
+            marginTop: 14,
+            borderTop: "1px solid rgba(0,0,0,0.08)",
+            paddingTop: 14,
+          }}
+        >
           <strong>🗺️ Mappa</strong>
           <div style={{ marginTop: 10 }}>
             <TrackMap track={track} />
           </div>
         </div>
 
-        <div style={{ marginTop: 14, borderTop: "1px solid rgba(0,0,0,0.08)", paddingTop: 14 }}>
+        <div
+          style={{
+            marginTop: 14,
+            borderTop: "1px solid rgba(0,0,0,0.08)",
+            paddingTop: 14,
+          }}
+        >
           <strong>🌤 Meteo</strong>
           {wxBox}
+
           <div style={{ marginTop: 8, fontSize: 12, opacity: 0.7 }}>
-            Nota: serve <code>VITE_OWM_KEY</code> (OpenWeather).
+            ✅ Chiave già pronta: imposta <code>VITE_OWM_KEY</code> nel <code>client/.env</code>{" "}
+            (OpenWeather).
           </div>
         </div>
       </div>
