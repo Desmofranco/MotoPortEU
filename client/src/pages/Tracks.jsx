@@ -16,6 +16,8 @@ import { getTrackWeatherSummary } from "../utils/trackWeather";
 const FALLBACK_PHOTO =
   "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1600&q=80";
 
+const HAS_OWM_KEY = Boolean((import.meta?.env?.VITE_OWM_KEY || "").trim());
+
 function pillStyle(level) {
   const base = {
     display: "inline-flex",
@@ -151,36 +153,14 @@ function SkeletonLoading() {
     >
       <div style={{ fontSize: 16, fontWeight: 800 }}>Carico piste…</div>
       <div style={{ marginTop: 10, display: "grid", gap: 8 }}>
-        <div
-          style={{
-            height: 12,
-            background: "rgba(0,0,0,0.08)",
-            borderRadius: 8,
-            width: "70%",
-          }}
-        />
-        <div
-          style={{
-            height: 12,
-            background: "rgba(0,0,0,0.08)",
-            borderRadius: 8,
-            width: "55%",
-          }}
-        />
-        <div
-          style={{
-            height: 12,
-            background: "rgba(0,0,0,0.08)",
-            borderRadius: 8,
-            width: "80%",
-          }}
-        />
+        <div style={{ height: 12, background: "rgba(0,0,0,0.08)", borderRadius: 8, width: "70%" }} />
+        <div style={{ height: 12, background: "rgba(0,0,0,0.08)", borderRadius: 8, width: "55%" }} />
+        <div style={{ height: 12, background: "rgba(0,0,0,0.08)", borderRadius: 8, width: "80%" }} />
       </div>
     </div>
   );
 }
 
-// helper: mobile check
 function isMobileNow() {
   return (
     typeof window !== "undefined" &&
@@ -213,9 +193,7 @@ export default function Tracks() {
     if (isMobileNow()) setIsOpen(true);
   };
 
-  const closeTrack = () => {
-    setIsOpen(false);
-  };
+  const closeTrack = () => setIsOpen(false);
 
   useEffect(() => {
     let alive = true;
@@ -239,7 +217,6 @@ export default function Tracks() {
 
         const merged = [...arrA, ...arrB].map(normalizeIncomingTrack);
 
-        // dedup hard
         const seen = new Set();
         const dedup = [];
         for (const t of merged) {
@@ -253,11 +230,10 @@ export default function Tracks() {
 
         setTracks(dedup);
 
-        const firstKey = dedup[0] ? getTrackKey(dedup[0]) : null;
+        const first = dedup[0] || null;
+        const firstKey = first ? getTrackKey(first) : null;
         setActiveKey((prev) => prev || firstKey);
-
-        // imposta selected iniziale coerente
-        if (!selected && dedup[0]) setSelected(dedup[0]);
+        setSelected((prev) => prev || first);
       } catch (e) {
         if (!alive) return;
         setErr(e?.message || "Errore caricamento piste");
@@ -270,27 +246,20 @@ export default function Tracks() {
     return () => {
       alive = false;
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const countries = useMemo(() => {
-    const set = new Set(
-      tracks.map((t) => String(t.country || "").toUpperCase()).filter(Boolean)
-    );
+    const set = new Set(tracks.map((t) => String(t.country || "").toUpperCase()).filter(Boolean));
     return ["ALL", ...Array.from(set).sort()];
   }, [tracks]);
 
   const types = useMemo(() => {
-    const set = new Set(
-      tracks.map((t) => String(t.type || "").toLowerCase()).filter(Boolean)
-    );
+    const set = new Set(tracks.map((t) => String(t.type || "").toLowerCase()).filter(Boolean));
     return ["ALL", ...Array.from(set).sort()];
   }, [tracks]);
 
   const surfaces = useMemo(() => {
-    const set = new Set(
-      tracks.map((t) => String(t.surface || "").toLowerCase()).filter(Boolean)
-    );
+    const set = new Set(tracks.map((t) => String(t.surface || "").toLowerCase()).filter(Boolean));
     return ["ALL", ...Array.from(set).sort()];
   }, [tracks]);
 
@@ -300,47 +269,21 @@ export default function Tracks() {
 
     if (query) {
       out = out.filter((t) => {
-        const blob = [
-          t.name,
-          t.region,
-          t.country,
-          t.type,
-          t.surface,
-          t.description,
-          t.bestSeason,
-        ]
+        const blob = [t.name, t.region, t.country, t.type, t.surface, t.description, t.bestSeason]
           .join(" ")
           .toLowerCase();
         return blob.includes(query);
       });
     }
 
-    if (country !== "ALL") {
-      out = out.filter(
-        (t) => String(t.country || "").toUpperCase() === country
-      );
-    }
-
-    if (type !== "ALL") {
-      out = out.filter(
-        (t) =>
-          String(t.type || "").toLowerCase() === String(type).toLowerCase()
-      );
-    }
-
-    if (surface !== "ALL") {
-      out = out.filter(
-        (t) =>
-          String(t.surface || "").toLowerCase() ===
-          String(surface).toLowerCase()
-      );
-    }
+    if (country !== "ALL") out = out.filter((t) => String(t.country || "").toUpperCase() === country);
+    if (type !== "ALL") out = out.filter((t) => String(t.type || "").toLowerCase() === String(type).toLowerCase());
+    if (surface !== "ALL") out = out.filter((t) => String(t.surface || "").toLowerCase() === String(surface).toLowerCase());
 
     const sorter =
       {
         rating: (a, b) => Number(b.rating || 0) - Number(a.rating || 0),
-        difficulty: (a, b) =>
-          Number(b.difficulty || 0) - Number(a.difficulty || 0),
+        difficulty: (a, b) => Number(b.difficulty || 0) - Number(a.difficulty || 0),
         length: (a, b) => Number(b.lengthKm || 0) - Number(a.lengthKm || 0),
       }[sortBy] || (() => 0);
 
@@ -348,14 +291,13 @@ export default function Tracks() {
     return out;
   }, [tracks, q, country, type, surface, sortBy]);
 
-  // riallineo active se sparisce dai filtri
   useEffect(() => {
     if (!filtered.length) return;
     const exists = filtered.some((t) => getTrackKey(t) === activeKey);
     if (!exists) {
-      const k = getTrackKey(filtered[0]);
-      setActiveKey(k);
-      setSelected(filtered[0]);
+      const first = filtered[0];
+      setActiveKey(getTrackKey(first));
+      setSelected(first);
     }
   }, [filtered, activeKey]);
 
@@ -372,36 +314,17 @@ export default function Tracks() {
     const key = getTrackKey(t);
     setActiveKey(key);
     setSelected(t);
-    openTrack(t); // apre solo su mobile
+    openTrack(t);
   };
 
   return (
     <div style={{ padding: 16, maxWidth: 1250, margin: "0 auto" }}>
       {/* Header */}
-      <div
-        style={{
-          display: "grid",
-          gridTemplateColumns: "1fr",
-          gap: 10,
-          alignItems: "start",
-        }}
-      >
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "space-between",
-            gap: 12,
-            flexWrap: "wrap",
-            alignItems: "baseline",
-          }}
-        >
+      <div style={{ display: "grid", gridTemplateColumns: "1fr", gap: 10, alignItems: "start" }}>
+        <div style={{ display: "flex", justifyContent: "space-between", gap: 12, flexWrap: "wrap", alignItems: "baseline" }}>
           <div>
-            <h1 style={{ margin: 0, fontSize: 44, letterSpacing: -0.5 }}>
-              Piste 🏁
-            </h1>
-            <div style={{ opacity: 0.75, marginTop: 6 }}>
-              SuperSport, Enduro e Cross: mappa, meteo e link Google.
-            </div>
+            <h1 style={{ margin: 0, fontSize: 44, letterSpacing: -0.5 }}>Piste 🏁</h1>
+            <div style={{ opacity: 0.75, marginTop: 6 }}>SuperSport, Enduro e Cross: mappa, meteo e link Google.</div>
           </div>
 
           <input
@@ -435,11 +358,7 @@ export default function Tracks() {
             <select
               value={country}
               onChange={(e) => setCountry(e.target.value)}
-              style={{
-                padding: "10px 12px",
-                borderRadius: 12,
-                border: "1px solid rgba(0,0,0,0.15)",
-              }}
+              style={{ padding: "10px 12px", borderRadius: 12, border: "1px solid rgba(0,0,0,0.15)" }}
             >
               {countries.map((c) => (
                 <option key={c} value={c}>
@@ -454,11 +373,7 @@ export default function Tracks() {
             <select
               value={type}
               onChange={(e) => setType(e.target.value)}
-              style={{
-                padding: "10px 12px",
-                borderRadius: 12,
-                border: "1px solid rgba(0,0,0,0.15)",
-              }}
+              style={{ padding: "10px 12px", borderRadius: 12, border: "1px solid rgba(0,0,0,0.15)" }}
             >
               {types.map((t) => (
                 <option key={t} value={t}>
@@ -473,11 +388,7 @@ export default function Tracks() {
             <select
               value={surface}
               onChange={(e) => setSurface(e.target.value)}
-              style={{
-                padding: "10px 12px",
-                borderRadius: 12,
-                border: "1px solid rgba(0,0,0,0.15)",
-              }}
+              style={{ padding: "10px 12px", borderRadius: 12, border: "1px solid rgba(0,0,0,0.15)" }}
             >
               {surfaces.map((s) => (
                 <option key={s} value={s}>
@@ -492,11 +403,7 @@ export default function Tracks() {
             <select
               value={sortBy}
               onChange={(e) => setSortBy(e.target.value)}
-              style={{
-                padding: "10px 12px",
-                borderRadius: 12,
-                border: "1px solid rgba(0,0,0,0.15)",
-              }}
+              style={{ padding: "10px 12px", borderRadius: 12, border: "1px solid rgba(0,0,0,0.15)" }}
             >
               <option value="rating">Rating (desc)</option>
               <option value="difficulty">Difficoltà (desc)</option>
@@ -510,25 +417,9 @@ export default function Tracks() {
       {loading ? (
         <SkeletonLoading />
       ) : err ? (
-        <div
-          style={{
-            marginTop: 14,
-            padding: 12,
-            borderRadius: 16,
-            background: "rgba(255,0,0,0.08)",
-          }}
-        >
-          {err}
-        </div>
+        <div style={{ marginTop: 14, padding: 12, borderRadius: 16, background: "rgba(255,0,0,0.08)" }}>{err}</div>
       ) : (
-        <div
-          style={{
-            marginTop: 14,
-            display: "grid",
-            gridTemplateColumns: "1fr",
-            gap: 14,
-          }}
-        >
+        <div style={{ marginTop: 14, display: "grid", gridTemplateColumns: "1fr", gap: 14 }}>
           <div className="tracks-split" style={{ display: "grid", gap: 14 }}>
             {/* List */}
             <div style={{ display: "grid", gap: 12, height: "fit-content" }}>
@@ -539,26 +430,11 @@ export default function Tracks() {
               {filtered.map((t) => {
                 const key = getTrackKey(t);
                 const isActive = key === activeKey;
-                return (
-                  <TrackCard
-                    key={key}
-                    track={t}
-                    active={isActive}
-                    onClick={() => handleSelect(t)}
-                  />
-                );
+                return <TrackCard key={key} track={t} active={isActive} onClick={() => handleSelect(t)} />;
               })}
 
               {filtered.length === 0 && (
-                <div
-                  style={{
-                    padding: 12,
-                    borderRadius: 16,
-                    background: "rgba(0,0,0,0.04)",
-                  }}
-                >
-                  Nessuna pista trovata.
-                </div>
+                <div style={{ padding: 12, borderRadius: 16, background: "rgba(0,0,0,0.04)" }}>Nessuna pista trovata.</div>
               )}
             </div>
 
@@ -573,11 +449,7 @@ export default function Tracks() {
                 height: "fit-content",
               }}
             >
-              {!active ? (
-                <div style={{ padding: 14 }}>Seleziona una pista.</div>
-              ) : (
-                <TrackDetail track={active} />
-              )}
+              {!active ? <div style={{ padding: 14 }}>Seleziona una pista.</div> : <TrackDetail track={active} />}
             </div>
           </div>
         </div>
@@ -586,16 +458,9 @@ export default function Tracks() {
       {/* ✅ MOBILE: FULL SCREEN DETAIL */}
       {isOpen && selected && (
         <div className="fixed inset-0 z-[9999] bg-white md:hidden">
-          <div
-            className="sticky top-0 z-10 bg-white/95 backdrop-blur border-b"
-            style={{ paddingTop: "env(safe-area-inset-top)" }}
-          >
+          <div className="sticky top-0 z-10 bg-white/95 backdrop-blur border-b" style={{ paddingTop: "env(safe-area-inset-top)" }}>
             <div className="flex items-center gap-2 p-3">
-              <button
-                type="button"
-                onClick={closeTrack}
-                className="px-3 py-2 rounded-xl border"
-              >
+              <button type="button" onClick={closeTrack} className="px-3 py-2 rounded-xl border">
                 ← Indietro
               </button>
               <div className="font-black text-base truncate">
@@ -649,63 +514,35 @@ function TrackCard({ track, active, onClick }) {
         borderRadius: 18,
         overflow: "hidden",
         width: "100%",
-        border: active
-          ? "2px solid rgba(0,0,0,0.35)"
-          : "1px solid rgba(0,0,0,0.12)",
+        border: active ? "2px solid rgba(0,0,0,0.35)" : "1px solid rgba(0,0,0,0.12)",
         background: "white",
         boxShadow: active ? "0 10px 30px rgba(0,0,0,0.12)" : "none",
         padding: 0,
       }}
     >
-      <div
-        style={{
-          height: 130,
-          backgroundImage: `url(${photo})`,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-        }}
-      />
+      <div style={{ height: 130, backgroundImage: `url(${photo})`, backgroundSize: "cover", backgroundPosition: "center" }} />
       <div style={{ padding: 12 }}>
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "space-between",
-            gap: 10,
-          }}
-        >
+        <div style={{ display: "flex", justifyContent: "space-between", gap: 10 }}>
           <div style={{ fontWeight: 900, lineHeight: 1.15 }}>
             {countryFlag(track.country)} {track.name}
           </div>
-          <div style={{ fontSize: 12, opacity: 0.75, whiteSpace: "nowrap" }}>
-            {typeLabel(track.type)}
-          </div>
+          <div style={{ fontSize: 12, opacity: 0.75, whiteSpace: "nowrap" }}>{typeLabel(track.type)}</div>
         </div>
 
         <div style={{ marginTop: 4, fontSize: 12, opacity: 0.75 }}>
-          {track.region} · fondo: {surfaceLabel(track.surface)} · stagione:{" "}
-          {track.bestSeason || "—"}
+          {track.region} · fondo: {surfaceLabel(track.surface)} · stagione: {track.bestSeason || "—"}
         </div>
 
         <div style={{ marginTop: 10, display: "flex", gap: 8, flexWrap: "wrap" }}>
           <span style={pillStyle(p.level)}>
             ⭐ {Number.isFinite(rating) ? rating.toFixed(1) : "0.0"} · {p.label}
           </span>
-          <span style={pillStyle("ok")}>
-            🧠 diff {Number(track.difficulty || 0)}/10
-          </span>
-          <span style={pillStyle("ok")}>
-            ⚡ speed {Number(track.speed || 0)}/10
-          </span>
-          <span style={pillStyle("ok")}>
-            🧩 tech {Number(track.technique || 0)}/10
-          </span>
+          <span style={pillStyle("ok")}>🧠 diff {Number(track.difficulty || 0)}/10</span>
+          <span style={pillStyle("ok")}>⚡ speed {Number(track.speed || 0)}/10</span>
+          <span style={pillStyle("ok")}>🧩 tech {Number(track.technique || 0)}/10</span>
         </div>
 
-        {track.description ? (
-          <div style={{ marginTop: 10, fontSize: 13, opacity: 0.85 }}>
-            {track.description}
-          </div>
-        ) : null}
+        {track.description ? <div style={{ marginTop: 10, fontSize: 13, opacity: 0.85 }}>{track.description}</div> : null}
       </div>
     </button>
   );
@@ -716,12 +553,8 @@ function TrackDetail({ track }) {
   const lat = track?.coords?.lat;
   const lng = track?.coords?.lng;
 
-  const googleHref =
-    lat != null && lng != null
-      ? `https://www.google.com/maps?q=${lat},${lng}`
-      : "https://www.google.com/maps";
+  const googleHref = lat != null && lng != null ? `https://www.google.com/maps?q=${lat},${lng}` : "https://www.google.com/maps";
 
-  // meteo
   const [wx, setWx] = useState(null);
   const [wxBusy, setWxBusy] = useState(false);
 
@@ -758,63 +591,23 @@ function TrackDetail({ track }) {
 
   const wxBox = (() => {
     if (wxBusy) {
-      return (
-        <div
-          style={{
-            marginTop: 10,
-            padding: 12,
-            borderRadius: 16,
-            background: "rgba(0,0,0,0.04)",
-          }}
-        >
-          Carico meteo…
-        </div>
-      );
+      return <div style={{ marginTop: 10, padding: 12, borderRadius: 16, background: "rgba(0,0,0,0.04)" }}>Carico meteo…</div>;
     }
     if (!wx || !wx.ok) {
-      return (
-        <div
-          style={{
-            marginTop: 10,
-            padding: 12,
-            borderRadius: 16,
-            background: "rgba(0,0,0,0.04)",
-          }}
-        >
-          {wx?.note || "Meteo non disponibile."}
-        </div>
-      );
+      return <div style={{ marginTop: 10, padding: 12, borderRadius: 16, background: "rgba(0,0,0,0.04)" }}>{wx?.note || "Meteo non disponibile."}</div>;
     }
 
     return (
       <div style={{ marginTop: 10, display: "grid", gap: 10 }}>
-        <div
-          style={{
-            display: "flex",
-            gap: 10,
-            flexWrap: "wrap",
-            alignItems: "center",
-          }}
-        >
+        <div style={{ display: "flex", gap: 10, flexWrap: "wrap", alignItems: "center" }}>
           <span style={pillStyle(weatherLevel(wx.worst))}>
             Condizione: <strong>{wx.worst}</strong>
           </span>
-          {wx.temp != null ? (
-            <span style={pillStyle("ok")}>
-              🌡 {wx.temp}° (min {wx.tempMin}° / max {wx.tempMax}°)
-            </span>
-          ) : null}
-          {wx.windKmh != null ? (
-            <span style={pillStyle(wx.windKmh >= 50 ? "warn" : "ok")}>
-              💨 vento {wx.windKmh} km/h
-            </span>
-          ) : null}
+          {wx.temp != null ? <span style={pillStyle("ok")}>🌡 {wx.temp}° (min {wx.tempMin}° / max {wx.tempMax}°)</span> : null}
+          {wx.windKmh != null ? <span style={pillStyle(wx.windKmh >= 50 ? "warn" : "ok")}>💨 vento {wx.windKmh} km/h</span> : null}
         </div>
 
-        <div style={{ fontSize: 12, opacity: 0.7 }}>
-          Aggiornato:{" "}
-          {String(wx.updatedAt || "").slice(0, 16).replace("T", " ")}
-        </div>
+        <div style={{ fontSize: 12, opacity: 0.7 }}>Aggiornato: {String(wx.updatedAt || "").slice(0, 16).replace("T", " ")}</div>
       </div>
     );
   })();
@@ -822,70 +615,28 @@ function TrackDetail({ track }) {
   return (
     <>
       {/* Hero */}
-      <div
-        style={{
-          position: "relative",
-          height: 280,
-          backgroundImage: `url(${photo})`,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-        }}
-      >
-        <div
-          style={{
-            position: "absolute",
-            inset: 0,
-            background:
-              "linear-gradient(180deg, rgba(0,0,0,0.12), rgba(0,0,0,0.72))",
-          }}
-        />
-        <div
-          style={{
-            position: "absolute",
-            left: 16,
-            right: 16,
-            bottom: 14,
-            color: "white",
-          }}
-        >
+      <div style={{ position: "relative", height: 280, backgroundImage: `url(${photo})`, backgroundSize: "cover", backgroundPosition: "center" }}>
+        <div style={{ position: "absolute", inset: 0, background: "linear-gradient(180deg, rgba(0,0,0,0.12), rgba(0,0,0,0.72))" }} />
+        <div style={{ position: "absolute", left: 16, right: 16, bottom: 14, color: "white" }}>
           <div style={{ fontSize: 13, opacity: 0.92 }}>
-            {countryFlag(track.country)} {track.country} · {track.region} ·{" "}
-            {typeLabel(track.type)}
+            {countryFlag(track.country)} {track.country} · {track.region} · {typeLabel(track.type)}
           </div>
-          <div style={{ fontSize: 30, fontWeight: 950, letterSpacing: 0.2 }}>
-            {track.name}
-          </div>
+          <div style={{ fontSize: 30, fontWeight: 950, letterSpacing: 0.2 }}>{track.name}</div>
 
           <div style={{ marginTop: 10, display: "flex", gap: 8, flexWrap: "wrap" }}>
-            <span style={pillStyle("ok")}>
-              ⭐ {Number(track.rating || 0).toFixed(1)}
-            </span>
-            <span style={pillStyle("ok")}>
-              🧠 diff {Number(track.difficulty || 0)}/10
-            </span>
-            <span style={pillStyle("ok")}>
-              ⚡ speed {Number(track.speed || 0)}/10
-            </span>
-            <span style={pillStyle("ok")}>
-              🧩 tech {Number(track.technique || 0)}/10
-            </span>
+            <span style={pillStyle("ok")}>⭐ {Number(track.rating || 0).toFixed(1)}</span>
+            <span style={pillStyle("ok")}>🧠 diff {Number(track.difficulty || 0)}/10</span>
+            <span style={pillStyle("ok")}>⚡ speed {Number(track.speed || 0)}/10</span>
+            <span style={pillStyle("ok")}>🧩 tech {Number(track.technique || 0)}/10</span>
             <span style={pillStyle("ok")}>🗓 {track.bestSeason || "—"}</span>
-            {track.lengthKm ? (
-              <span style={pillStyle("ok")}>📏 {track.lengthKm} km</span>
-            ) : null}
+            {track.lengthKm ? <span style={pillStyle("ok")}>📏 {track.lengthKm} km</span> : null}
           </div>
         </div>
       </div>
 
       {/* Body */}
       <div style={{ padding: 14 }}>
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(160px, 1fr))",
-            gap: 10,
-          }}
-        >
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(160px, 1fr))", gap: 10 }}>
           <Stat label="Tipo" value={typeLabel(track.type)} />
           <Stat label="Fondo" value={surfaceLabel(track.surface)} />
           <Stat label="Rating" value={`${Number(track.rating || 0).toFixed(1)} / 10`} />
@@ -910,45 +661,32 @@ function TrackDetail({ track }) {
           </a>
         </div>
 
-        <div
-          style={{
-            marginTop: 14,
-            borderTop: "1px solid rgba(0,0,0,0.08)",
-            paddingTop: 14,
-          }}
-        >
+        <div style={{ marginTop: 14, borderTop: "1px solid rgba(0,0,0,0.08)", paddingTop: 14 }}>
           <strong>📌 Descrizione</strong>
-          <div style={{ marginTop: 8, fontSize: 14, opacity: 0.9, lineHeight: 1.4 }}>
-            {track.description || "—"}
-          </div>
+          <div style={{ marginTop: 8, fontSize: 14, opacity: 0.9, lineHeight: 1.4 }}>{track.description || "—"}</div>
         </div>
 
-        <div
-          style={{
-            marginTop: 14,
-            borderTop: "1px solid rgba(0,0,0,0.08)",
-            paddingTop: 14,
-          }}
-        >
+        <div style={{ marginTop: 14, borderTop: "1px solid rgba(0,0,0,0.08)", paddingTop: 14 }}>
           <strong>🗺️ Mappa</strong>
           <div style={{ marginTop: 10 }}>
             <TrackMap track={track} />
           </div>
         </div>
 
-        <div
-          style={{
-            marginTop: 14,
-            borderTop: "1px solid rgba(0,0,0,0.08)",
-            paddingTop: 14,
-          }}
-        >
+        <div style={{ marginTop: 14, borderTop: "1px solid rgba(0,0,0,0.08)", paddingTop: 14 }}>
           <strong>🌤 Meteo</strong>
           {wxBox}
 
-          <div style={{ marginTop: 8, fontSize: 12, opacity: 0.7 }}>
-            ✅ Chiave già pronta: imposta <code>VITE_OWM_KEY</code> nel <code>client/.env</code>{" "}
-            (OpenWeather).
+          <div style={{ marginTop: 8, fontSize: 12, opacity: 0.75 }}>
+            {HAS_OWM_KEY ? (
+              <>
+                ✅ <strong>VITE_OWM_KEY</strong> (OpenWeather) presente.
+              </>
+            ) : (
+              <>
+                ⚠️ Manca <strong>VITE_OWM_KEY</strong> (OpenWeather): aggiungila in <code>client/.env</code> e riavvia Vite.
+              </>
+            )}
           </div>
         </div>
       </div>
