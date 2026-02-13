@@ -7,6 +7,8 @@
 // ✅ Loading skeleton
 // ✅ Fix selezione anche se mancano id (fallback key stabile)
 // ✅ Mobile: FULL SCREEN detail (back) — niente bottom-sheet
+// ✅ FIX: card MINI su mobile + tap affordance
+// ✅ FIX: warning VITE_OWM_KEY solo se manca key E non c’è meteo
 // =======================================================
 
 import React, { useEffect, useMemo, useState } from "react";
@@ -15,8 +17,6 @@ import { getTrackWeatherSummary } from "../utils/trackWeather";
 
 const FALLBACK_PHOTO =
   "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1600&q=80";
-
-const HAS_OWM_KEY = Boolean((import.meta?.env?.VITE_OWM_KEY || "").trim());
 
 function pillStyle(level) {
   const base = {
@@ -190,7 +190,11 @@ export default function Tracks() {
 
   const openTrack = (t) => {
     setSelected(t);
-    if (isMobileNow()) setIsOpen(true);
+    if (isMobileNow()) {
+      setIsOpen(true);
+      // feedback immediato che si è “aperta” un’altra view
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
   };
 
   const closeTrack = () => setIsOpen(false);
@@ -499,6 +503,11 @@ export default function Tracks() {
   );
 }
 
+/**
+ * ✅ TrackCard: MINI su mobile, “grande” su desktop.
+ * - Mobile: row compatta, thumb a sinistra, poche info + “Tocca per dettagli →”
+ * - Desktop: immagine grande sopra (come prima), più “vetrina”
+ */
 function TrackCard({ track, active, onClick }) {
   const photo = track.photo || FALLBACK_PHOTO;
   const rating = Number(track.rating || 0);
@@ -508,6 +517,7 @@ function TrackCard({ track, active, onClick }) {
     <button
       type="button"
       onClick={onClick}
+      className="track-card"
       style={{
         textAlign: "left",
         cursor: "pointer",
@@ -518,32 +528,80 @@ function TrackCard({ track, active, onClick }) {
         background: "white",
         boxShadow: active ? "0 10px 30px rgba(0,0,0,0.12)" : "none",
         padding: 0,
+        WebkitTapHighlightColor: "transparent",
       }}
     >
-      <div style={{ height: 130, backgroundImage: `url(${photo})`, backgroundSize: "cover", backgroundPosition: "center" }} />
-      <div style={{ padding: 12 }}>
-        <div style={{ display: "flex", justifyContent: "space-between", gap: 10 }}>
-          <div style={{ fontWeight: 900, lineHeight: 1.15 }}>
-            {countryFlag(track.country)} {track.name}
+      {/* MOBILE layout (row) */}
+      <div className="track-card-mobile" style={{ display: "none", padding: 10, gap: 10, alignItems: "center" }}>
+        <div
+          style={{
+            width: 88,
+            height: 64,
+            borderRadius: 14,
+            overflow: "hidden",
+            background: "rgba(0,0,0,0.05)",
+            flex: "0 0 auto",
+          }}
+        >
+          <img src={photo} alt="" style={{ width: "100%", height: "100%", objectFit: "cover" }} loading="lazy" />
+        </div>
+
+        <div style={{ minWidth: 0, flex: "1 1 auto" }}>
+          <div style={{ display: "flex", justifyContent: "space-between", gap: 8, alignItems: "start" }}>
+            <div style={{ fontWeight: 950, lineHeight: 1.15, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
+              {countryFlag(track.country)} {track.name}
+            </div>
+            <div style={{ fontSize: 12, opacity: 0.75, whiteSpace: "nowrap" }}>{typeLabel(track.type)}</div>
           </div>
-          <div style={{ fontSize: 12, opacity: 0.75, whiteSpace: "nowrap" }}>{typeLabel(track.type)}</div>
-        </div>
 
-        <div style={{ marginTop: 4, fontSize: 12, opacity: 0.75 }}>
-          {track.region} · fondo: {surfaceLabel(track.surface)} · stagione: {track.bestSeason || "—"}
-        </div>
+          <div style={{ marginTop: 4, fontSize: 12, opacity: 0.75, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
+            {track.region || "—"} · {surfaceLabel(track.surface)} · {track.bestSeason || "—"}
+          </div>
 
-        <div style={{ marginTop: 10, display: "flex", gap: 8, flexWrap: "wrap" }}>
-          <span style={pillStyle(p.level)}>
-            ⭐ {Number.isFinite(rating) ? rating.toFixed(1) : "0.0"} · {p.label}
-          </span>
-          <span style={pillStyle("ok")}>🧠 diff {Number(track.difficulty || 0)}/10</span>
-          <span style={pillStyle("ok")}>⚡ speed {Number(track.speed || 0)}/10</span>
-          <span style={pillStyle("ok")}>🧩 tech {Number(track.technique || 0)}/10</span>
+          <div style={{ marginTop: 8, display: "flex", gap: 8, alignItems: "center", flexWrap: "wrap" }}>
+            <span style={pillStyle(p.level)}>
+              ⭐ {Number.isFinite(rating) ? rating.toFixed(1) : "0.0"} · {p.label}
+            </span>
+            <span style={{ marginLeft: "auto", fontSize: 12, opacity: 0.6, whiteSpace: "nowrap" }}>Tocca per dettagli →</span>
+          </div>
         </div>
-
-        {track.description ? <div style={{ marginTop: 10, fontSize: 13, opacity: 0.85 }}>{track.description}</div> : null}
       </div>
+
+      {/* DESKTOP layout (vetrina) */}
+      <div className="track-card-desktop" style={{ display: "block" }}>
+        <div style={{ height: 130, backgroundImage: `url(${photo})`, backgroundSize: "cover", backgroundPosition: "center" }} />
+        <div style={{ padding: 12 }}>
+          <div style={{ display: "flex", justifyContent: "space-between", gap: 10 }}>
+            <div style={{ fontWeight: 900, lineHeight: 1.15 }}>
+              {countryFlag(track.country)} {track.name}
+            </div>
+            <div style={{ fontSize: 12, opacity: 0.75, whiteSpace: "nowrap" }}>{typeLabel(track.type)}</div>
+          </div>
+
+          <div style={{ marginTop: 4, fontSize: 12, opacity: 0.75 }}>
+            {track.region} · fondo: {surfaceLabel(track.surface)} · stagione: {track.bestSeason || "—"}
+          </div>
+
+          <div style={{ marginTop: 10, display: "flex", gap: 8, flexWrap: "wrap" }}>
+            <span style={pillStyle(p.level)}>
+              ⭐ {Number.isFinite(rating) ? rating.toFixed(1) : "0.0"} · {p.label}
+            </span>
+            <span style={pillStyle("ok")}>🧠 diff {Number(track.difficulty || 0)}/10</span>
+            <span style={pillStyle("ok")}>⚡ speed {Number(track.speed || 0)}/10</span>
+            <span style={pillStyle("ok")}>🧩 tech {Number(track.technique || 0)}/10</span>
+          </div>
+
+          {track.description ? <div style={{ marginTop: 10, fontSize: 13, opacity: 0.85 }}>{track.description}</div> : null}
+        </div>
+      </div>
+
+      {/* CSS per switch mobile/desktop */}
+      <style>{`
+        @media (max-width: 767px){
+          .track-card-mobile{ display: flex !important; }
+          .track-card-desktop{ display: none !important; }
+        }
+      `}</style>
     </button>
   );
 }
@@ -612,6 +670,14 @@ function TrackDetail({ track }) {
     );
   })();
 
+  // ✅ FIX CHIAVE: warning solo se manca key E non abbiamo meteo
+  const OWM_KEY = (import.meta?.env?.VITE_OWM_KEY || "").trim();
+  const keyMissing = !OWM_KEY;
+  const hasWeather =
+    !!wx &&
+    wx.ok &&
+    (wx.temp != null || wx.tempMin != null || wx.tempMax != null || wx.windKmh != null || !!wx.worst);
+
   return (
     <>
       {/* Hero */}
@@ -677,17 +743,16 @@ function TrackDetail({ track }) {
           <strong>🌤 Meteo</strong>
           {wxBox}
 
-          <div style={{ marginTop: 8, fontSize: 12, opacity: 0.75 }}>
-            {HAS_OWM_KEY ? (
-              <>
-                ✅ <strong>VITE_OWM_KEY</strong> (OpenWeather) presente.
-              </>
-            ) : (
-              <>
-                ⚠️ Manca <strong>VITE_OWM_KEY</strong> (OpenWeather): aggiungila in <code>client/.env</code> e riavvia Vite.
-              </>
-            )}
-          </div>
+          {/* ✅ messaggio chiave: mai “falso allarme” se meteo già mostrato */}
+          {!keyMissing ? (
+            <div style={{ marginTop: 8, fontSize: 12, opacity: 0.75 }}>
+              ✅ <strong>VITE_OWM_KEY</strong> (OpenWeather) presente.
+            </div>
+          ) : !hasWeather ? (
+            <div style={{ marginTop: 8, fontSize: 12, opacity: 0.75 }}>
+              ⚠️ Manca <strong>VITE_OWM_KEY</strong> (OpenWeather): aggiungila in <code>client/.env</code> e riavvia Vite.
+            </div>
+          ) : null}
         </div>
       </div>
     </>
