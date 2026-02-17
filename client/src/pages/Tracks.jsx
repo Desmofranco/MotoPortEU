@@ -458,8 +458,8 @@ const openTrack = (t) => {
 
       {/* ✅ MOBILE: FULL SCREEN DETAIL */}
       {isOpen && selected && (
-        <div className="fixed inset-0 z-[9999] bg-white md:hidden">
-          <div className="sticky top-0 z-10 bg-white/95 backdrop-blur border-b" style={{ paddingTop: "env(safe-area-inset-top)" }}>
+<div className="fixed inset-0 z-[9999] bg-white track-detail-mobile">
+<div className="sticky top-0 z-10 bg-white/95 backdrop-blur border-b" style={{ paddingTop: "env(safe-area-inset-top)" }}>
             <div className="flex items-center gap-2 p-3">
               <button type="button" onClick={closeTrack} className="px-3 py-2 rounded-xl border">
                 ← Indietro
@@ -496,15 +496,20 @@ const openTrack = (t) => {
       display: none !important;
     }
 
-    /* padding più stretto su smartphone */
     .tracks-root{
       padding: 10px !important;
     }
 
-    /* header più compatto */
     .tracks-root h1{
       font-size: 30px !important;
       line-height: 1.05 !important;
+    }
+  }
+
+  /* ✅ overlay mobile: mostrato < 768, nascosto >= 768 (senza Tailwind) */
+  @media (min-width: 768px){
+    .track-detail-mobile{
+      display: none !important;
     }
   }
 `}</style>
