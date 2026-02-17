@@ -162,13 +162,11 @@ function SkeletonLoading() {
 }
 
 function isMobileNow() {
-  return (
-    typeof window !== "undefined" &&
-    window.matchMedia &&
-    window.matchMedia("(max-width: 767px)").matches
-  );
-}
+  if (typeof window === "undefined" || !window.matchMedia) return false;
 
+  // width + touch device detection
+  return window.matchMedia("(max-width: 767px), (pointer: coarse)").matches;
+}
 export default function Tracks() {
   const [tracks, setTracks] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -188,15 +186,14 @@ export default function Tracks() {
   const [selected, setSelected] = useState(null);
   const [isOpen, setIsOpen] = useState(false);
 
-  const openTrack = (t) => {
-    setSelected(t);
-    if (isMobileNow()) {
-      setIsOpen(true);
-      // feedback immediato che si è “aperta” un’altra view
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    }
-  };
+const openTrack = (t) => {
+  setSelected(t);
 
+  if (isMobileNow()) {
+    setIsOpen(true);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+};
   const closeTrack = () => setIsOpen(false);
 
   useEffect(() => {
@@ -322,8 +319,8 @@ export default function Tracks() {
   };
 
   return (
-    <div style={{ padding: 16, maxWidth: 1250, margin: "0 auto" }}>
-      {/* Header */}
+<div className="tracks-root" style={{ padding: 16, maxWidth: 1250, margin: "0 auto" }}>
+    {/* Header */}
       <div style={{ display: "grid", gridTemplateColumns: "1fr", gap: 10, alignItems: "start" }}>
         <div style={{ display: "flex", justifyContent: "space-between", gap: 12, flexWrap: "wrap", alignItems: "baseline" }}>
           <div>
@@ -487,18 +484,30 @@ export default function Tracks() {
       )}
 
       {/* Inline responsive rule */}
-      <style>{`
-        @media (min-width: 1024px){
-          .tracks-split{
-            grid-template-columns: 420px 1fr !important;
-          }
-        }
-        @media (max-width: 767px){
-          .track-detail-desktop{
-            display: none !important;
-          }
-        }
-      `}</style>
+<style>{`
+  @media (min-width: 1024px){
+    .tracks-split{
+      grid-template-columns: 420px 1fr !important;
+    }
+  }
+
+  @media (max-width: 767px){
+    .track-detail-desktop{
+      display: none !important;
+    }
+
+    /* padding più stretto su smartphone */
+    .tracks-root{
+      padding: 10px !important;
+    }
+
+    /* header più compatto */
+    .tracks-root h1{
+      font-size: 30px !important;
+      line-height: 1.05 !important;
+    }
+  }
+`}</style>
     </div>
   );
 }
