@@ -8,9 +8,9 @@
 // ✅ Dedup key stabile (id o name+coords)
 // ✅ Meteo + Google Maps
 // ✅ Warning VITE_OWM_KEY solo se manca key E non c’è meteo
-// ✅ Mobile: filtri collassabili inline (opzione 1)
+// ✅ Mobile: filtri collassabili inline
 // ✅ Mobile detail: mini header sticky + swipe down close + hero che si riduce
-// ✅ Mobile: layout veramente compatto (hero/pills/stat/list)
+// ✅ Mobile ULTRA COMPACT: header + lista più piccoli
 // =======================================================
 
 import React, { useEffect, useMemo, useRef, useState } from "react";
@@ -20,7 +20,7 @@ import { getTrackWeatherSummary } from "../utils/trackWeather";
 const FALLBACK_PHOTO =
   "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1600&q=80";
 
-/** Pill "chiaro" (per sezioni normali, non su foto) */
+/** Pill "chiaro" (sezioni normali) */
 function pillStyle(level) {
   const base = {
     display: "inline-flex",
@@ -41,7 +41,7 @@ function pillStyle(level) {
   return base;
 }
 
-/** Pill "dark glass" SOLO per la fascia hero sopra immagine */
+/** Pill "dark glass" SOLO su hero foto */
 function pillStyleHero(level) {
   const base = {
     display: "inline-flex",
@@ -175,9 +175,9 @@ function SkeletonLoading() {
   return (
     <div
       style={{
-        marginTop: 14,
-        padding: 16,
-        borderRadius: 18,
+        marginTop: 12,
+        padding: 14,
+        borderRadius: 16,
         border: "1px solid rgba(0,0,0,0.10)",
         background: "rgba(0,0,0,0.03)",
       }}
@@ -216,6 +216,9 @@ export default function Tracks() {
 
   // sticky mini header (mobile detail)
   const [miniHeader, setMiniHeader] = useState(false);
+
+  const isMobile = isMobileNow();
+  const showDetailMobile = isMobile && mobileView === "detail" && selected;
 
   useEffect(() => {
     let alive = true;
@@ -350,9 +353,6 @@ export default function Tracks() {
     }
   };
 
-  const isMobile = isMobileNow();
-  const showDetailMobile = isMobile && mobileView === "detail" && selected;
-
   // Sticky mini header: quando scrolli abbastanza nel dettaglio mobile
   useEffect(() => {
     if (!showDetailMobile) return;
@@ -368,17 +368,20 @@ export default function Tracks() {
 
   return (
     <div className="tracks-root" style={{ padding: 16, maxWidth: 1250, margin: "0 auto" }}>
-      {/* HEADER + FILTRI: li nascondiamo nel dettaglio mobile (così non occupano mezza schermata) */}
+      {/* HEADER + FILTRI: nascosti nel dettaglio mobile */}
       {!showDetailMobile && (
         <div style={{ display: "grid", gridTemplateColumns: "1fr", gap: 10, alignItems: "start" }}>
           <div style={{ display: "flex", justifyContent: "space-between", gap: 12, flexWrap: "wrap", alignItems: "baseline" }}>
             <div>
               <h1 style={{ margin: 0, fontSize: 44, letterSpacing: -0.5 }}>Piste 🏁</h1>
-              <div style={{ opacity: 0.75, marginTop: 6 }}>SuperSport, Enduro e Cross: mappa, meteo e link Google.</div>
+              <div className="tracks-subtitle" style={{ opacity: 0.75, marginTop: 6 }}>
+                SuperSport, Enduro e Cross: mappa, meteo e link Google.
+              </div>
             </div>
 
             <div style={{ display: "flex", gap: 10, alignItems: "center", flexWrap: "wrap", justifyContent: "flex-end" }}>
               <input
+                className="tracks-search"
                 value={q}
                 onChange={(e) => setQ(e.target.value)}
                 placeholder="Cerca: Mugello, Misano, enduro, cross…"
@@ -394,6 +397,7 @@ export default function Tracks() {
               {/* Mobile: bottone filtri */}
               {isMobile && (
                 <button
+                  className="tracks-filters-btn"
                   type="button"
                   onClick={() => setShowFilters((v) => !v)}
                   style={{
@@ -490,7 +494,7 @@ export default function Tracks() {
       {loading ? (
         <SkeletonLoading />
       ) : err ? (
-        <div style={{ marginTop: 14, padding: 12, borderRadius: 16, background: "rgba(255,0,0,0.08)" }}>{err}</div>
+        <div style={{ marginTop: 12, padding: 12, borderRadius: 16, background: "rgba(255,0,0,0.08)" }}>{err}</div>
       ) : (
         <>
           {/* MOBILE: dettaglio single-screen */}
@@ -568,10 +572,10 @@ export default function Tracks() {
             </div>
           ) : (
             /* DESKTOP: split + MOBILE: lista */
-            <div style={{ marginTop: 14 }} className="tracks-split">
+            <div style={{ marginTop: 12 }} className="tracks-split">
               {/* LIST */}
               <div className="tracks-list">
-                <div style={{ fontSize: 12, opacity: 0.7, marginBottom: 10 }}>
+                <div style={{ fontSize: 12, opacity: 0.7, marginBottom: 8 }}>
                   Trovate: <strong>{filtered.length}</strong> (EU import incluse)
                 </div>
 
@@ -622,21 +626,29 @@ export default function Tracks() {
           .tracks-split{
             display: grid;
             grid-template-columns: 1fr;
-            gap: 14px;
+            gap: 12px;
           }
           .tracks-detail{ display: none; }
         }
 
+        /* ✅ MOBILE ULTRA COMPACT */
         @media (max-width: 767px){
-          .tracks-root{ padding: 10px !important; }
-          .tracks-root h1{ font-size: 28px !important; line-height: 1.05 !important; }
+          .tracks-root{ padding: 8px !important; }
+          .tracks-root h1{
+            font-size: 22px !important;
+            line-height: 1.05 !important;
+            margin-bottom: 4px !important;
+          }
+          .tracks-subtitle{ display:none !important; }
+          .tracks-search{ padding: 8px 10px !important; border-radius: 12px !important; }
+          .tracks-filters-btn{ padding: 8px 10px !important; border-radius: 12px !important; }
         }
       `}</style>
     </div>
   );
 }
 
-/** Card: mobile compatta, desktop “vetrina” */
+/** Card: mobile COMPATTA, desktop “vetrina” */
 function TrackCard({ track, active, onSelect }) {
   const photo = track.photo || FALLBACK_PHOTO;
   const rating = Number(track.rating || 0);
@@ -659,34 +671,34 @@ function TrackCard({ track, active, onSelect }) {
         borderRadius: 16,
         overflow: "hidden",
         width: "100%",
-        border: active ? "2px solid rgba(0,0,0,0.35)" : "1px solid rgba(0,0,0,0.10)",
+        border: active ? "2px solid rgba(0,0,0,0.30)" : "1px solid rgba(0,0,0,0.10)",
         background: "white",
-        boxShadow: active ? "0 10px 26px rgba(0,0,0,0.10)" : "none",
+        boxShadow: active ? "0 10px 22px rgba(0,0,0,0.08)" : "none",
         cursor: "pointer",
         WebkitTapHighlightColor: "transparent",
         touchAction: "manipulation",
       }}
     >
-      {/* MOBILE ROW (più piccola) */}
-      <div className="track-card-mobile" style={{ display: "none", padding: 8, gap: 10, alignItems: "center" }}>
-        <div style={{ width: 56, height: 56, borderRadius: 14, overflow: "hidden", background: "rgba(0,0,0,0.05)", flex: "0 0 auto" }}>
+      {/* MOBILE ROW (ULTRA COMPATTA) */}
+      <div className="track-card-mobile" style={{ display: "none", padding: 6, gap: 10, alignItems: "center" }}>
+        <div style={{ width: 46, height: 46, borderRadius: 12, overflow: "hidden", background: "rgba(0,0,0,0.05)", flex: "0 0 auto" }}>
           <img src={photo} alt="" style={{ width: "100%", height: "100%", objectFit: "cover" }} loading="lazy" />
         </div>
 
         <div style={{ minWidth: 0, flex: "1 1 auto" }}>
           <div style={{ display: "flex", justifyContent: "space-between", gap: 8, alignItems: "start" }}>
-            <div style={{ fontWeight: 950, fontSize: 15, lineHeight: 1.15, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
+            <div style={{ fontWeight: 950, fontSize: 14, lineHeight: 1.15, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
               {countryFlag(track.country)} {track.name}
             </div>
-            <div style={{ fontSize: 12, opacity: 0.75, whiteSpace: "nowrap" }}>{typeLabel(track.type)}</div>
+            <div style={{ fontSize: 11, opacity: 0.75, whiteSpace: "nowrap" }}>{typeLabel(track.type)}</div>
           </div>
 
-          <div style={{ marginTop: 3, fontSize: 12, opacity: 0.75, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
+          <div style={{ marginTop: 2, fontSize: 11, opacity: 0.75, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
             {track.region || "—"} · {surfaceLabel(track.surface)} · {track.bestSeason || "—"}
           </div>
 
-          <div style={{ marginTop: 6, display: "flex", gap: 8, alignItems: "center", flexWrap: "wrap" }}>
-            <span style={{ ...pillStyle(p.level), fontSize: 11, padding: "5px 8px" }}>
+          <div style={{ marginTop: 5, display: "flex", gap: 8, alignItems: "center", flexWrap: "wrap" }}>
+            <span style={{ ...pillStyle(p.level), fontSize: 10, padding: "4px 7px" }}>
               ⭐ {Number.isFinite(rating) ? rating.toFixed(1) : "0.0"} · {p.label}
             </span>
           </div>
@@ -778,7 +790,7 @@ function TrackDetail({ track, onClose }) {
     touchRef.current.active = false;
   };
 
-  // HERO HEIGHT (mobile collapse effect) — più compatto
+  // HERO HEIGHT — più compatto
   const heroMax = isMobile ? 140 : 280;
   const heroMin = isMobile ? 84 : 280;
   const heroH = isMobile ? Math.max(heroMin, heroMax - Math.min(scrollY, heroMax - heroMin)) : heroMax;
@@ -867,7 +879,7 @@ function TrackDetail({ track, onClose }) {
             {track.name}
           </div>
 
-          {/* PILL HERO: una riga scrollabile (non allunga) */}
+          {/* PILL HERO: una riga scrollabile */}
           <div
             style={{
               marginTop: 8,
