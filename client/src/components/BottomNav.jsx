@@ -4,7 +4,7 @@ import { NavLink } from "react-router-dom";
 const tabStyle = ({ isActive }) => ({
   textDecoration: "none",
   color: "inherit",
-  fontWeight: isActive ? 700 : 500,
+  fontWeight: isActive ? 800 : 600,
   opacity: isActive ? 1 : 0.75,
 });
 
@@ -19,15 +19,21 @@ export default function BottomNav() {
 
   return (
     <div
-      className="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-white border-t border-black/10"
+      className="md:hidden fixed bottom-0 inset-x-0 z-50 bg-white border-t border-black/10 w-full overflow-x-hidden"
       style={{ backdropFilter: "blur(10px)" }}
     >
-      <div className="max-w-5xl mx-auto flex justify-around py-2">
+      {/* FULL WIDTH: niente max-w, niente mx-auto */}
+      <div className="w-full flex items-stretch justify-between px-2 py-2">
         {tabs.map((t) => (
-          <NavLink key={t.to} to={t.to} style={tabStyle}>
-            <div className="flex flex-col items-center text-xs px-2">
+          <NavLink
+            key={t.to}
+            to={t.to}
+            style={tabStyle}
+            className="flex-1"
+          >
+            <div className="flex flex-col items-center text-[11px] px-1">
               <div className="text-lg leading-none">{t.icon}</div>
-              <div>{t.label}</div>
+              <div className="leading-none">{t.label}</div>
             </div>
           </NavLink>
         ))}
