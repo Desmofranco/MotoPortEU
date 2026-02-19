@@ -1,12 +1,12 @@
 // =======================================================
 // src/pages/Routes.jsx
-// UI Touring emozionale: foto + rating + curve + pace + filtri
-// ✅ MAPPA (traccia) + METEO sul tragitto (campionamento punti)
-// ✅ FIX: filtri paese/ricerca funzionanti
-// ✅ FIX: filtro Ritmo funziona anche per itinerari senza "pace" (fallback Touring)
-// ✅ Google Maps link ripristinato (nel posto giusto)
-// ✅ Responsive: mobile-first (1 colonna), desktop (2 colonne)
-// Carica dati da: /public/data/routes.json
+// Itinerari Touring
+// UI: split-view su desktop (lista + dettaglio)
+// Mobile: lista -> dettaglio (full screen) con back
+// Dati: /public/data/routes.json
+// ✅ Loading skeleton
+// ✅ Dedup key stabile (id o name+start/end)
+// ✅ Meteo + Google Maps
 // =======================================================
 
 import React, { useEffect, useMemo, useState } from "react";
@@ -16,93 +16,24 @@ import { getRouteWeatherSummary } from "../utils/routeWeather";
 const FALLBACK_PHOTO =
   "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1600&q=80";
 
-const FALLBACK_PACE = "touring"; // default se manca pace
-
-const paceLabel = (p) => {
-  const s = String(p || "").toLowerCase();
-  if (s === "lento") return "Lento";
-  if (s === "misto") return "Misto";
-  if (s === "veloce") return "Veloce";
-  if (s === "tecnico") return "Tecnico";
-  if (s === "touring") return "Touring";
-  if (s === "avventura") return "Avventura";
-  return p ? String(p) : "—";
-};
-
-const curveLabel = (n) => {
-  const v = Number(n || 0);
-  if (v >= 9) return "Tornanti";
-  if (v >= 7) return "Curve";
-  if (v >= 5) return "Misto";
-  return "Scorrevole";
-};
-
-const scorePill = (v) => {
-  const n = Number(v || 0);
-  if (n >= 9) return { label: "TOP", level: "ok" };
-  if (n >= 7) return { label: "OTTIMO", level: "soon" };
-  if (n >= 5) return { label: "BUONO", level: "warn" };
-  return { label: "BASIC", level: "bad" };
-};
-
-function pillStyle(level) {
-  const base = {
-    display: "inline-flex",
-    alignItems: "center",
-    gap: 6,
-    padding: "6px 10px",
-    borderRadius: 999,
-    fontSize: 12,
-    border: "1px solid rgba(0,0,0,0.14)",
-    background: "rgba(255,255,255,0.78)",
-    backdropFilter: "blur(6px)",
-    whiteSpace: "nowrap",
-  };
-  if (level === "bad") return { ...base, background: "rgba(255,0,0,0.10)" };
-  if (level === "warn") return { ...base, background: "rgba(255,140,0,0.12)" };
-  if (level === "soon") return { ...base, background: "rgba(255,215,0,0.16)" };
-  return base;
+function isMobileNow() {
+  if (typeof window === "undefined" || !window.matchMedia) return false;
+  return window.matchMedia("(max-width: 767px), (pointer: coarse)").matches;
 }
 
-function countryFlag(cc) {
-  const c = String(cc || "").toUpperCase();
-  const map = {
-    IT: "🇮🇹",
-    FR: "🇫🇷",
-    DE: "🇩🇪",
-    AT: "🇦🇹",
-    CH: "🇨🇭",
-    ES: "🇪🇸",
-    NO: "🇳🇴",
-    SE: "🇸🇪",
-    FI: "🇫🇮",
-    RO: "🇷🇴",
-    SI: "🇸🇮",
-    HR: "🇭🇷",
-    BA: "🇧🇦",
-    ME: "🇲🇪",
-    AL: "🇦🇱",
-    GR: "🇬🇷",
-  };
-  return map[c] || "🏍️";
-}
-
-function normPace(v) {
-  return String(v || FALLBACK_PACE).toLowerCase();
+function buildRouteKey(r) {
+  const id = String(r?.id || "").trim();
+  if (id) return `id:${id}`;
+  const name = String(r?.name || "").trim().toLowerCase();
+  const s = Array.isArray(r?.start) ? `${Number(r.start[0]).toFixed(5)},${Number(r.start[1]).toFixed(5)}` : "";
+  const e = Array.isArray(r?.end) ? `${Number(r.end[0]).toFixed(5)},${Number(r.end[1]).toFixed(5)}` : "";
+  return `n:${name}|${s}|${e}`;
 }
 
 function SkeletonLoading() {
   return (
-    <div
-      style={{
-        marginTop: 14,
-        padding: 16,
-        borderRadius: 18,
-        border: "1px solid rgba(0,0,0,0.10)",
-        background: "rgba(0,0,0,0.03)",
-      }}
-    >
-      <div style={{ fontSize: 16, fontWeight: 800 }}>Carico itinerari…</div>
+    <div style={{ marginTop: 12, padding: 14, borderRadius: 16, border: "1px solid rgba(0,0,0,0.10)", background: "rgba(0,0,0,0.03)" }}>
+      <div style={{ fontSize: 16, fontWeight: 900 }}>Carico itinerari…</div>
       <div style={{ marginTop: 10, display: "grid", gap: 8 }}>
         <div style={{ height: 12, background: "rgba(0,0,0,0.08)", borderRadius: 8, width: "70%" }} />
         <div style={{ height: 12, background: "rgba(0,0,0,0.08)", borderRadius: 8, width: "55%" }} />
@@ -117,30 +48,53 @@ export default function Routes() {
   const [loading, setLoading] = useState(true);
   const [err, setErr] = useState("");
 
-  // filtri UI
+  // filtri base
   const [q, setQ] = useState("");
   const [country, setCountry] = useState("ALL");
-  const [pace, setPace] = useState("ALL");
-  const [minCurves, setMinCurves] = useState(0); // 0..10
-  const [sortBy, setSortBy] = useState("curves"); // curves | asphalt | distance
+  const [sortBy, setSortBy] = useState("rating"); // rating | distance | curves
 
-  const [activeId, setActiveId] = useState(null);
+  // selezione
+  const [activeKey, setActiveKey] = useState(null);
+  const [selected, setSelected] = useState(null);
 
-  // load
+  // mobile view: "list" | "detail"
+  const [mobileView, setMobileView] = useState("list");
+
+  const isMobile = isMobileNow();
+  const showDetailMobile = isMobile && mobileView === "detail" && selected;
+
   useEffect(() => {
     let alive = true;
+
     async function run() {
       setLoading(true);
       setErr("");
       try {
-        const r = await fetch("/data/routes.json", { cache: "no-store" });
-        if (!r.ok) throw new Error("Impossibile caricare /data/routes.json");
-        const data = await r.json();
+        const data = await fetch("/data/routes.json", { cache: "no-store" })
+          .then((r) => (r.ok ? r.json() : []))
+          .catch(() => []);
+
         const arr = Array.isArray(data) ? data : [];
+
+        // dedup
+        const seen = new Set();
+        const dedup = [];
+        for (const r of arr) {
+          const key = buildRouteKey(r);
+          if (!key || seen.has(key)) continue;
+          seen.add(key);
+          dedup.push(r);
+        }
+
         if (!alive) return;
 
-        setRoutes(arr);
-        setActiveId((prev) => prev || arr?.[0]?.id || null);
+        setRoutes(dedup);
+
+        const first = dedup[0] || null;
+        const firstKey = first ? buildRouteKey(first) : null;
+        setActiveKey((prev) => prev || firstKey);
+        setSelected((prev) => prev || first);
+        setMobileView("list");
       } catch (e) {
         if (!alive) return;
         setErr(e?.message || "Errore caricamento itinerari");
@@ -148,6 +102,7 @@ export default function Routes() {
         if (alive) setLoading(false);
       }
     }
+
     run();
     return () => {
       alive = false;
@@ -155,587 +110,458 @@ export default function Routes() {
   }, []);
 
   const countries = useMemo(() => {
-    const set = new Set(
-      routes.map((r) => String(r.country || "").toUpperCase()).filter(Boolean)
-    );
-    return ["ALL", ...Array.from(set).sort()];
-  }, [routes]);
-
-  const paces = useMemo(() => {
-    const set = new Set(routes.map((r) => normPace(r.pace)).filter(Boolean));
+    const set = new Set(routes.map((r) => String(r.country || "").toUpperCase()).filter(Boolean));
     return ["ALL", ...Array.from(set).sort()];
   }, [routes]);
 
   const filtered = useMemo(() => {
+    const query = q.trim().toLowerCase();
     let out = [...routes];
 
-    const query = q.trim().toLowerCase();
     if (query) {
       out = out.filter((r) => {
-        const blob = [
-          r.name,
-          r.region,
-          r.country,
-          r.bestSeason,
-          r.description,
-          normPace(r.pace),
-        ]
-          .join(" ")
-          .toLowerCase();
+        const blob = [r.name, r.region, r.country, r.description, r.bestSeason, r.pace].join(" ").toLowerCase();
         return blob.includes(query);
       });
     }
 
-    if (country !== "ALL") {
-      out = out.filter((r) => String(r.country || "").toUpperCase() === country);
-    }
+    if (country !== "ALL") out = out.filter((r) => String(r.country || "").toUpperCase() === country);
 
-    if (pace !== "ALL") {
-      const want = String(pace).toLowerCase();
-      out = out.filter((r) => normPace(r.pace) === want);
-    }
+    const sorter =
+      {
+        rating: (a, b) => Number(b.rating || 0) - Number(a.rating || 0),
+        distance: (a, b) => Number(b.distanceKm || 0) - Number(a.distanceKm || 0),
+        curves: (a, b) => Number(b.curvesScore || 0) - Number(a.curvesScore || 0),
+      }[sortBy] || (() => 0);
 
-    out = out.filter((r) => Number(r.curvesScore || 0) >= Number(minCurves || 0));
+    out.sort(sorter);
+    return out;
+  }, [routes, q, country, sortBy]);
 
-    const sorter = {
-      curves: (a, b) => Number(b.curvesScore || 0) - Number(a.curvesScore || 0),
-      asphalt: (a, b) => Number(b.asphaltScore || 0) - Number(a.asphaltScore || 0),
-      distance: (a, b) => Number(a.distanceKm || 0) - Number(b.distanceKm || 0),
-    }[sortBy];
-
-    return sorter ? out.sort(sorter) : out;
-  }, [routes, q, country, pace, minCurves, sortBy]);
-
+  // se selezione sparisce coi filtri: ripiega sul primo
   useEffect(() => {
     if (!filtered.length) return;
-    const exists = filtered.some((r) => r.id === activeId);
-    if (!exists) setActiveId(filtered[0].id);
-  }, [filtered, activeId]);
+    const exists = filtered.some((r) => buildRouteKey(r) === activeKey);
+    if (!exists) {
+      const first = filtered[0];
+      setActiveKey(buildRouteKey(first));
+      setSelected(first);
+      if (isMobileNow()) setMobileView("list");
+    }
+  }, [filtered, activeKey]);
 
-  const active = useMemo(
-    () => routes.find((r) => r.id === activeId) || null,
-    [routes, activeId]
-  );
+  const active = useMemo(() => {
+    if (!routes.length) return null;
+    if (activeKey) {
+      const found = routes.find((r) => buildRouteKey(r) === activeKey);
+      if (found) return found;
+    }
+    return routes[0] || null;
+  }, [routes, activeKey]);
+
+  const selectRoute = (r) => {
+    const key = buildRouteKey(r);
+    setActiveKey(key);
+    setSelected(r);
+
+    if (isMobileNow()) {
+      setMobileView("detail");
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  };
 
   return (
-    <div style={{ padding: 16, maxWidth: 1250, margin: "0 auto" }}>
-      {/* Header */}
-      <div
-        style={{
-          display: "grid",
-          gridTemplateColumns: "1fr",
-          gap: 10,
-          alignItems: "start",
-        }}
-      >
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "space-between",
-            gap: 12,
-            flexWrap: "wrap",
-            alignItems: "baseline",
-          }}
-        >
-          <div>
-            <h1 style={{ margin: 0, fontSize: 44, letterSpacing: -0.5 }}>Itinerari 🗺️</h1>
-            <div style={{ opacity: 0.75, marginTop: 6 }}>
-              Touring emozionale: foto, voto, curve e ritmo. (Con mappa + meteo.)
+    <div className="routes-root" style={{ padding: 12, maxWidth: 1250, margin: "0 auto" }}>
+      {/* Header (nascosto nel dettaglio mobile) */}
+      {!showDetailMobile && (
+        <>
+          <div style={{ display: "flex", justifyContent: "space-between", gap: 12, flexWrap: "wrap", alignItems: "baseline" }}>
+            <div>
+              <h1 style={{ margin: 0, fontSize: 34, letterSpacing: -0.5 }}>Itinerari 📍</h1>
+              <div className="routes-subtitle" style={{ opacity: 0.75, marginTop: 6 }}>
+                Touring emozionale: mappa, meteo e Google Maps.
+              </div>
             </div>
+
+            <input
+              className="routes-search"
+              value={q}
+              onChange={(e) => setQ(e.target.value)}
+              placeholder="Cerca: Stelvio, Dolomiti, curve…"
+              style={{
+                width: "min(520px, 100%)",
+                padding: "10px 12px",
+                borderRadius: 14,
+                border: "1px solid rgba(0,0,0,0.15)",
+                outline: "none",
+              }}
+            />
           </div>
 
-          <input
-            value={q}
-            onChange={(e) => setQ(e.target.value)}
-            placeholder="Cerca: Stelvio, Dolomiti, Capo Nord, neve…"
+          <div
             style={{
-              width: "min(520px, 100%)",
-              padding: "10px 12px",
-              borderRadius: 14,
-              border: "1px solid rgba(0,0,0,0.15)",
-              outline: "none",
+              marginTop: 10,
+              display: "grid",
+              gridTemplateColumns: "repeat(auto-fit, minmax(160px, 1fr))",
+              gap: 10,
+              padding: 12,
+              borderRadius: 18,
+              border: "1px solid rgba(0,0,0,0.12)",
+              background: "white",
             }}
-          />
-        </div>
+          >
+            <label style={{ display: "grid", gap: 6 }}>
+              <span style={{ fontSize: 12, opacity: 0.75 }}>Paese</span>
+              <select
+                value={country}
+                onChange={(e) => setCountry(e.target.value)}
+                style={{ padding: "10px 12px", borderRadius: 12, border: "1px solid rgba(0,0,0,0.15)" }}
+              >
+                {countries.map((c) => (
+                  <option key={c} value={c}>
+                    {c === "ALL" ? "Tutti" : c}
+                  </option>
+                ))}
+              </select>
+            </label>
 
-        {/* Filters */}
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(170px, 1fr))",
-            gap: 10,
-            padding: 12,
-            borderRadius: 18,
-            border: "1px solid rgba(0,0,0,0.12)",
-            background: "white",
-          }}
-        >
-          <label style={{ display: "grid", gap: 6 }}>
-            <span style={{ fontSize: 12, opacity: 0.75 }}>Paese</span>
-            <select
-              value={country}
-              onChange={(e) => setCountry(e.target.value)}
-              style={{
-                padding: "10px 12px",
-                borderRadius: 12,
-                border: "1px solid rgba(0,0,0,0.15)",
-              }}
-            >
-              {countries.map((c) => (
-                <option key={c} value={c}>
-                  {c === "ALL" ? "Tutti" : `${countryFlag(c)} ${c}`}
-                </option>
-              ))}
-            </select>
-          </label>
+            <label style={{ display: "grid", gap: 6 }}>
+              <span style={{ fontSize: 12, opacity: 0.75 }}>Ordina</span>
+              <select
+                value={sortBy}
+                onChange={(e) => setSortBy(e.target.value)}
+                style={{ padding: "10px 12px", borderRadius: 12, border: "1px solid rgba(0,0,0,0.15)" }}
+              >
+                <option value="rating">Rating (desc)</option>
+                <option value="distance">Distanza (desc)</option>
+                <option value="curves">Curve (desc)</option>
+              </select>
+            </label>
+          </div>
+        </>
+      )}
 
-          <label style={{ display: "grid", gap: 6 }}>
-            <span style={{ fontSize: 12, opacity: 0.75 }}>Ritmo</span>
-            <select
-              value={pace}
-              onChange={(e) => setPace(e.target.value)}
-              style={{
-                padding: "10px 12px",
-                borderRadius: 12,
-                border: "1px solid rgba(0,0,0,0.15)",
-              }}
-            >
-              {paces.map((p) => (
-                <option key={p} value={p}>
-                  {p === "ALL" ? "Tutti" : paceLabel(p)}
-                </option>
-              ))}
-            </select>
-          </label>
-
-          <label style={{ display: "grid", gap: 6 }}>
-            <span style={{ fontSize: 12, opacity: 0.75 }}>Curve min</span>
-            <input
-              type="range"
-              min="0"
-              max="10"
-              value={minCurves}
-              onChange={(e) => setMinCurves(Number(e.target.value))}
-            />
-            <div style={{ fontSize: 12, opacity: 0.7 }}>
-              {minCurves}/10 (da {curveLabel(minCurves)})
-            </div>
-          </label>
-
-          <label style={{ display: "grid", gap: 6 }}>
-            <span style={{ fontSize: 12, opacity: 0.75 }}>Ordina</span>
-            <select
-              value={sortBy}
-              onChange={(e) => setSortBy(e.target.value)}
-              style={{
-                padding: "10px 12px",
-                borderRadius: 12,
-                border: "1px solid rgba(0,0,0,0.15)",
-              }}
-            >
-              <option value="curves">Curve (desc)</option>
-              <option value="asphalt">Asfalto (desc)</option>
-              <option value="distance">Distanza (asc)</option>
-            </select>
-          </label>
-        </div>
-      </div>
-
-      {/* Content */}
       {loading ? (
         <SkeletonLoading />
       ) : err ? (
-        <div
-          style={{
-            marginTop: 14,
-            padding: 12,
-            borderRadius: 16,
-            background: "rgba(255,0,0,0.08)",
-          }}
-        >
-          {err}
-        </div>
+        <div style={{ marginTop: 12, padding: 12, borderRadius: 16, background: "rgba(255,0,0,0.08)" }}>{err}</div>
       ) : (
-        <div
-          style={{
-            marginTop: 14,
-            display: "grid",
-            gridTemplateColumns: "1fr",
-            gap: 14,
-          }}
-        >
-          {/* Desktop split */}
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: "1fr",
-              gap: 14,
-            }}
-          >
-            {/* Desktop becomes 2 cols via media query inline trick */}
-            <div
-              style={{
-                display: "grid",
-                gap: 14,
-                gridTemplateColumns: "1fr",
-              }}
-              className="routes-split"
-            >
-              {/* List */}
-              <div style={{ display: "grid", gap: 12, height: "fit-content" }}>
-                <div style={{ fontSize: 12, opacity: 0.7 }}>
+        <>
+          {/* Mobile detail full screen */}
+          {showDetailMobile ? (
+            <div style={{ marginTop: 10 }}>
+              <div
+                style={{
+                  position: "sticky",
+                  top: 0,
+                  zIndex: 20,
+                  background: "rgba(255,255,255,0.96)",
+                  backdropFilter: "blur(10px)",
+                  borderBottom: "1px solid rgba(0,0,0,0.10)",
+                  padding: 10,
+                  borderRadius: 16,
+                  display: "flex",
+                  alignItems: "center",
+                  gap: 10,
+                }}
+              >
+                <button
+                  type="button"
+                  onClick={() => {
+                    setMobileView("list");
+                    window.scrollTo({ top: 0, behavior: "auto" });
+                  }}
+                  style={{
+                    padding: "9px 10px",
+                    borderRadius: 12,
+                    border: "1px solid rgba(0,0,0,0.15)",
+                    background: "white",
+                    cursor: "pointer",
+                    fontWeight: 900,
+                  }}
+                >
+                  ← Indietro
+                </button>
+
+                <div style={{ fontWeight: 950, fontSize: 15, whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>
+                  {selected.name}
+                </div>
+              </div>
+
+              <div style={{ marginTop: 10, borderRadius: 18, overflow: "hidden", border: "1px solid rgba(0,0,0,0.10)", background: "white" }}>
+                <RouteDetail route={selected} />
+              </div>
+            </div>
+          ) : (
+            /* Desktop split + mobile list */
+            <div style={{ marginTop: 12 }} className="routes-split">
+              <div className="routes-list">
+                <div style={{ fontSize: 12, opacity: 0.7, marginBottom: 8 }}>
                   Trovati: <strong>{filtered.length}</strong>
                 </div>
 
-                {filtered.map((r) => (
-                  <RouteCard
-                    key={r.id}
-                    route={r}
-                    active={r.id === activeId}
-                    onClick={() => setActiveId(r.id)}
-                  />
-                ))}
-
-                {filtered.length === 0 && (
-                  <div
-                    style={{
-                      padding: 12,
-                      borderRadius: 16,
-                      background: "rgba(0,0,0,0.04)",
-                    }}
-                  >
-                    Nessun itinerario trovato.
-                  </div>
-                )}
+                <div style={{ display: "grid", gap: 10 }}>
+                  {filtered.map((r) => {
+                    const key = buildRouteKey(r);
+                    const isActive = key === activeKey;
+                    return <RouteCard key={key} route={r} active={isActive} onSelect={() => selectRoute(r)} />;
+                  })}
+                </div>
               </div>
 
-              {/* Detail */}
-              <div
-                style={{
-                  borderRadius: 22,
-                  overflow: "hidden",
-                  border: "1px solid rgba(0,0,0,0.12)",
-                  background: "white",
-                  height: "fit-content",
-                }}
-              >
-                {!active ? (
-                  <div style={{ padding: 14 }}>Seleziona un itinerario.</div>
-                ) : (
-                  <RouteDetail route={active} />
-                )}
+              <div className="routes-detail">
+                <div style={{ borderRadius: 22, overflow: "hidden", border: "1px solid rgba(0,0,0,0.12)", background: "white" }}>
+                  {!active ? <div style={{ padding: 14 }}>Seleziona un itinerario.</div> : <RouteDetail route={active} />}
+                </div>
               </div>
             </div>
-          </div>
-        </div>
+          )}
+        </>
       )}
 
-      {/* Inline responsive rule (no extra css file needed) */}
       <style>{`
         @media (min-width: 1024px){
           .routes-split{
-            grid-template-columns: 420px 1fr !important;
+            display: grid;
+            grid-template-columns: 420px 1fr;
+            gap: 14px;
+            align-items: start;
           }
+          .routes-list{
+            position: sticky;
+            top: 10px;
+            height: calc(100dvh - 20px);
+            overflow: auto;
+            padding-right: 6px;
+          }
+        }
+
+        @media (max-width: 1023px){
+          .routes-split{ display: grid; grid-template-columns: 1fr; gap: 12px; }
+          .routes-detail{ display:none; }
+        }
+
+        @media (max-width: 767px){
+          .routes-root h1{ font-size: 22px !important; line-height: 1.05 !important; margin-bottom: 4px !important; }
+          .routes-subtitle{ display:none !important; }
+          .routes-search{ padding: 8px 10px !important; border-radius: 12px !important; }
         }
       `}</style>
     </div>
   );
 }
 
-function RouteCard({ route, active, onClick }) {
+function RouteCard({ route, active, onSelect }) {
   const photo = route.photo || FALLBACK_PHOTO;
-  const curves = Number(route.curvesScore || 0);
-  const asphalt = Number(route.asphaltScore || 0);
 
-  const cPill = scorePill(curves);
-  const aPill = scorePill(asphalt);
+  const click = (e) => {
+    e?.preventDefault?.();
+    e?.stopPropagation?.();
+    onSelect?.();
+  };
 
   return (
-    <button
-      type="button"
-      onClick={onClick}
+    <div
+      role="button"
+      tabIndex={0}
+      onClick={click}
+      onTouchStart={click}
+      onKeyDown={(e) => (e.key === "Enter" || e.key === " " ? click(e) : null)}
       style={{
-        textAlign: "left",
-        cursor: "pointer",
-        borderRadius: 18,
+        borderRadius: 16,
         overflow: "hidden",
         width: "100%",
-        border: active ? "2px solid rgba(0,0,0,0.35)" : "1px solid rgba(0,0,0,0.12)",
+        border: active ? "2px solid rgba(0,0,0,0.30)" : "1px solid rgba(0,0,0,0.10)",
         background: "white",
-        boxShadow: active ? "0 10px 30px rgba(0,0,0,0.12)" : "none",
-        padding: 0,
+        cursor: "pointer",
+        WebkitTapHighlightColor: "transparent",
+        touchAction: "manipulation",
       }}
     >
-      <div
-        style={{
-          height: 130,
-          backgroundImage: `url(${photo})`,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-        }}
-      />
-      <div style={{ padding: 12 }}>
-        <div style={{ display: "flex", justifyContent: "space-between", gap: 10 }}>
-          <div style={{ fontWeight: 900, lineHeight: 1.15 }}>
-            {countryFlag(route.country)} {route.name}
-          </div>
-          <div style={{ fontSize: 12, opacity: 0.75, whiteSpace: "nowrap" }}>
-            {route.distanceKm} km
-          </div>
+      {/* MOBILE */}
+      <div className="route-card-mobile" style={{ display: "none", padding: 6, gap: 10, alignItems: "center" }}>
+        <div style={{ width: 46, height: 46, borderRadius: 12, overflow: "hidden", background: "rgba(0,0,0,0.05)", flex: "0 0 auto" }}>
+          <img src={photo} alt="" style={{ width: "100%", height: "100%", objectFit: "cover" }} loading="lazy" />
         </div>
 
-        <div style={{ marginTop: 4, fontSize: 12, opacity: 0.75 }}>
-          {route.region} · stagione: {route.bestSeason || "—"}
-        </div>
-
-        <div style={{ marginTop: 10, display: "flex", gap: 8, flexWrap: "wrap" }}>
-          <span style={pillStyle(cPill.level)}>
-            🌀 Curve {curves}/10 · {cPill.label}
-          </span>
-          <span style={pillStyle(aPill.level)}>
-            🛣️ Asfalto {asphalt}/10 · {aPill.label}
-          </span>
-          <span style={pillStyle("ok")}>🏍 {paceLabel(normPace(route.pace))}</span>
-        </div>
-
-        {route.description ? (
-          <div style={{ marginTop: 10, fontSize: 13, opacity: 0.85 }}>
-            {route.description}
+        <div style={{ minWidth: 0, flex: "1 1 auto" }}>
+          <div style={{ display: "flex", justifyContent: "space-between", gap: 8, alignItems: "start" }}>
+            <div style={{ fontWeight: 950, fontSize: 14, lineHeight: 1.15, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
+              {route.country ? `${route.country} ` : ""}{route.name}
+            </div>
+            <div style={{ fontSize: 11, opacity: 0.75, whiteSpace: "nowrap" }}>
+              ⭐ {Number(route.rating || 0).toFixed(1)}
+            </div>
           </div>
-        ) : null}
+
+          <div style={{ marginTop: 2, fontSize: 11, opacity: 0.75, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
+            {route.region || "—"} · {route.bestSeason || "—"} · {route.distanceKm ? `${route.distanceKm} km` : ""}
+          </div>
+        </div>
       </div>
-    </button>
+
+      {/* DESKTOP */}
+      <div className="route-card-desktop" style={{ display: "block" }}>
+        <div style={{ height: 130, backgroundImage: `url(${photo})`, backgroundSize: "cover", backgroundPosition: "center" }} />
+        <div style={{ padding: 12 }}>
+          <div style={{ display: "flex", justifyContent: "space-between", gap: 10 }}>
+            <div style={{ fontWeight: 900, lineHeight: 1.15 }}>{route.country ? `${route.country} ` : ""}{route.name}</div>
+            <div style={{ fontSize: 12, opacity: 0.75, whiteSpace: "nowrap" }}>⭐ {Number(route.rating || 0).toFixed(1)}</div>
+          </div>
+
+          <div style={{ marginTop: 4, fontSize: 12, opacity: 0.75 }}>
+            {route.region || "—"} · {route.bestSeason || "—"} · {route.distanceKm ? `${route.distanceKm} km` : "—"}
+          </div>
+        </div>
+      </div>
+
+      <style>{`
+        @media (max-width: 1023px){
+          .route-card-mobile{ display:flex !important; }
+          .route-card-desktop{ display:none !important; }
+        }
+      `}</style>
+    </div>
   );
 }
 
 function RouteDetail({ route }) {
   const photo = route.photo || FALLBACK_PHOTO;
-  const curves = Number(route.curvesScore || 0);
-  const asphalt = Number(route.asphaltScore || 0);
 
-  const cPill = scorePill(curves);
-  const aPill = scorePill(asphalt);
+  const start = Array.isArray(route?.start) ? route.start : null;
+  const end = Array.isArray(route?.end) ? route.end : null;
 
-  // METEO
+  const googleHref =
+    start && end
+      ? `https://www.google.com/maps/dir/${start[0]},${start[1]}/${end[0]},${end[1]}`
+      : "https://www.google.com/maps";
+
   const [wx, setWx] = useState(null);
   const [wxBusy, setWxBusy] = useState(false);
 
   useEffect(() => {
     let alive = true;
+
     async function run() {
-      setWxBusy(true);
       try {
-        const out = await getRouteWeatherSummary(route);
-        if (alive) setWx(out);
+        setWxBusy(true);
+        const res = await getRouteWeatherSummary(route);
+        if (!alive) return;
+        setWx(res);
+      } catch (e) {
+        if (!alive) return;
+        setWx({ ok: false, note: e?.message || "Meteo non disponibile." });
       } finally {
         if (alive) setWxBusy(false);
       }
     }
+
     run();
     return () => {
       alive = false;
     };
-  }, [route?.id]);
-
-  const wxBox = (() => {
-    if (wxBusy) {
-      return (
-        <div
-          style={{
-            marginTop: 10,
-            padding: 12,
-            borderRadius: 16,
-            background: "rgba(0,0,0,0.04)",
-          }}
-        >
-          Carico meteo sul tragitto…
-        </div>
-      );
-    }
-    if (!wx) {
-      return (
-        <div
-          style={{
-            marginTop: 10,
-            padding: 12,
-            borderRadius: 16,
-            background: "rgba(0,0,0,0.04)",
-          }}
-        >
-          Meteo non disponibile.
-        </div>
-      );
-    }
-    if (!wx.ok) {
-      return (
-        <div
-          style={{
-            marginTop: 10,
-            padding: 12,
-            borderRadius: 16,
-            background: "rgba(0,0,0,0.04)",
-          }}
-        >
-          {wx.note || "Meteo non disponibile."}
-        </div>
-      );
-    }
-
-    const worstLevel =
-      wx.worst === "sereno"
-        ? "ok"
-        : wx.worst === "nuvoloso"
-        ? "soon"
-        : wx.worst === "variabile"
-        ? "soon"
-        : wx.worst === "nebbia"
-        ? "warn"
-        : wx.worst === "pioggia"
-        ? "warn"
-        : wx.worst === "neve"
-        ? "warn"
-        : "bad";
-
-    return (
-      <div style={{ marginTop: 10, display: "grid", gap: 10 }}>
-        <div style={{ display: "flex", gap: 10, flexWrap: "wrap", alignItems: "center" }}>
-          <span style={pillStyle(worstLevel)}>
-            Condizione peggiore: <strong>{wx.worst}</strong>
-          </span>
-
-          {wx.tempMin !== null && wx.tempMax !== null ? (
-            <span style={pillStyle("ok")}>
-              🌡 {wx.tempMin}° / {wx.tempMax}° (avg {wx.temp}°)
-            </span>
-          ) : null}
-
-          {wx.windAvgKmh !== null && wx.windMaxKmh !== null ? (
-            <span style={pillStyle(wx.windMaxKmh >= 50 ? "warn" : "ok")}>
-              💨 vento avg {wx.windAvgKmh} km/h · max {wx.windMaxKmh} km/h
-            </span>
-          ) : null}
-
-          <span style={pillStyle("ok")}>📍 punti: {wx.points}</span>
-        </div>
-
-        <div style={{ fontSize: 12, opacity: 0.7 }}>
-          Aggiornato: {String(wx.updatedAt || "").slice(0, 16).replace("T", " ")}
-        </div>
-      </div>
-    );
-  })();
+  }, [buildRouteKey(route)]);
 
   return (
     <>
       {/* Hero */}
-      <div
-        style={{
-          position: "relative",
-          height: 280,
-          backgroundImage: `url(${photo})`,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-        }}
-      >
-        <div
-          style={{
-            position: "absolute",
-            inset: 0,
-            background: "linear-gradient(180deg, rgba(0,0,0,0.12), rgba(0,0,0,0.72))",
-          }}
-        />
-        <div style={{ position: "absolute", left: 16, right: 16, bottom: 14, color: "white" }}>
-          <div style={{ fontSize: 13, opacity: 0.92 }}>
-            {countryFlag(route.country)} {route.country} · {route.region}
+      <div style={{ position: "relative", height: 240, backgroundImage: `url(${photo})`, backgroundSize: "cover", backgroundPosition: "center" }}>
+        <div style={{ position: "absolute", inset: 0, background: "linear-gradient(180deg, rgba(0,0,0,0.10), rgba(0,0,0,0.76))" }} />
+        <div style={{ position: "absolute", left: 12, right: 12, bottom: 10, color: "white" }}>
+          <div style={{ fontSize: 12, opacity: 0.92 }}>
+            {route.country || "—"} · {route.region || "—"} · {route.bestSeason || "—"}
           </div>
-          <div style={{ fontSize: 30, fontWeight: 950, letterSpacing: 0.2 }}>{route.name}</div>
+          <div style={{ fontSize: 26, fontWeight: 950, lineHeight: 1.05 }}>{route.name}</div>
 
-          <div style={{ marginTop: 10, display: "flex", gap: 8, flexWrap: "wrap" }}>
-            <span style={pillStyle(cPill.level)}>
-              🌀 Curve {curves}/10 · {cPill.label}
-            </span>
-            <span style={pillStyle(aPill.level)}>
-              🛣️ Asfalto {asphalt}/10 · {aPill.label}
-            </span>
-            <span style={pillStyle("ok")}>
-              🏍 Ritmo: <strong>{paceLabel(normPace(route.pace))}</strong>
-            </span>
-            <span style={pillStyle("ok")}>📏 {route.distanceKm} km</span>
-            <span style={pillStyle("ok")}>🗓 {route.bestSeason || "—"}</span>
+          <div style={{ marginTop: 8, display: "flex", gap: 8, flexWrap: "wrap" }}>
+            <span style={pill("dark")}>⭐ {Number(route.rating || 0).toFixed(1)}</span>
+            <span style={pill("dark")}>📏 {route.distanceKm ? `${route.distanceKm} km` : "—"}</span>
+            <span style={pill("dark")}>🌀 curve {Number(route.curvesScore || 0)}/10</span>
+            <span style={pill("dark")}>🛣️ asfalto {Number(route.asphaltScore || 0)}/10</span>
           </div>
         </div>
       </div>
 
-      {/* Body */}
-      <div style={{ padding: 14 }}>
-        <div
+      <div style={{ padding: 12 }}>
+        <a
+          href={googleHref}
+          target="_blank"
+          rel="noreferrer"
           style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(160px, 1fr))",
-            gap: 10,
+            display: "inline-block",
+            padding: "10px 12px",
+            borderRadius: 12,
+            border: "1px solid rgba(0,0,0,0.15)",
+            background: "white",
+            fontSize: 13,
+            textDecoration: "none",
           }}
         >
-          <Stat label="Curve" value={`${curves}/10 (${curveLabel(curves)})`} />
-          <Stat label="Asfalto" value={`${asphalt}/10`} />
-          <Stat label="Ritmo" value={paceLabel(normPace(route.pace))} />
-        </div>
+          📍 Apri itinerario in Google Maps
+        </a>
 
-        <div style={{ marginTop: 14, borderTop: "1px solid rgba(0,0,0,0.08)", paddingTop: 14 }}>
+        <div style={{ marginTop: 12, borderTop: "1px solid rgba(0,0,0,0.08)", paddingTop: 12 }}>
           <strong>📌 Descrizione</strong>
-          <div style={{ marginTop: 8, fontSize: 14, opacity: 0.9, lineHeight: 1.4 }}>
-            {route.description || "—"}
-          </div>
-
-          <div style={{ marginTop: 12 }}>
-            <a
-              href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
-                `${route.name} ${route.region || ""}`
-              )}`}
-              target="_blank"
-              rel="noreferrer"
-              style={{
-                display: "inline-block",
-                padding: "10px 12px",
-                borderRadius: 12,
-                border: "1px solid rgba(0,0,0,0.15)",
-                background: "white",
-                fontSize: 13,
-                textDecoration: "none",
-              }}
-            >
-              📍 Apri in Google Maps
-            </a>
-          </div>
+          <div style={{ marginTop: 8, fontSize: 14, opacity: 0.9, lineHeight: 1.4 }}>{route.description || "—"}</div>
         </div>
 
-        <div style={{ marginTop: 14, borderTop: "1px solid rgba(0,0,0,0.08)", paddingTop: 14 }}>
-          <strong>🗺️ Percorso</strong>
+        <div style={{ marginTop: 12, borderTop: "1px solid rgba(0,0,0,0.08)", paddingTop: 12 }}>
+          <strong>🗺️ Mappa</strong>
           <div style={{ marginTop: 10 }}>
             <RouteMap route={route} />
           </div>
-          <div style={{ marginTop: 8, fontSize: 12, opacity: 0.7 }}>
-            Traccia reale: aggiungi <code>polyline</code> (array di [lat,lng]) nel routes.json. Fallback:{" "}
-            <code>start/end</code>.
-          </div>
         </div>
 
-        <div style={{ marginTop: 14, borderTop: "1px solid rgba(0,0,0,0.08)", paddingTop: 14 }}>
-          <strong>🌤 Meteo sul tragitto</strong>
-          {wxBox}
-          <div style={{ marginTop: 8, fontSize: 12, opacity: 0.7 }}>
-            Serve <code>VITE_OWM_KEY</code>. Se manca polyline/start-end il meteo non può campionare.
-          </div>
+        <div style={{ marginTop: 12, borderTop: "1px solid rgba(0,0,0,0.08)", paddingTop: 12 }}>
+          <strong>🌤 Meteo</strong>
+
+          {wxBusy ? (
+            <div style={{ marginTop: 10, padding: 12, borderRadius: 16, background: "rgba(0,0,0,0.04)" }}>Carico meteo…</div>
+          ) : !wx || !wx.ok ? (
+            <div style={{ marginTop: 10, padding: 12, borderRadius: 16, background: "rgba(0,0,0,0.04)" }}>{wx?.note || "Meteo non disponibile."}</div>
+          ) : (
+            <div style={{ marginTop: 10, display: "grid", gap: 10 }}>
+              <div style={{ display: "flex", gap: 10, flexWrap: "wrap", alignItems: "center" }}>
+                <span style={pill("light")}>Condizione: <strong>{wx.worst}</strong></span>
+                {wx.temp != null ? <span style={pill("light")}>🌡 {wx.temp}°</span> : null}
+                {wx.windKmh != null ? <span style={pill("light")}>💨 {wx.windKmh} km/h</span> : null}
+              </div>
+              <div style={{ fontSize: 12, opacity: 0.7 }}>Aggiornato: {String(wx.updatedAt || "").slice(0, 16).replace("T", " ")}</div>
+            </div>
+          )}
         </div>
       </div>
     </>
   );
 }
 
-function Stat({ label, value }) {
-  return (
-    <div style={{ padding: 12, borderRadius: 16, border: "1px solid rgba(0,0,0,0.12)" }}>
-      <div style={{ fontSize: 12, opacity: 0.7 }}>{label}</div>
-      <div style={{ fontWeight: 950, marginTop: 2 }}>{value}</div>
-    </div>
-  );
+function pill(kind) {
+  const base = {
+    display: "inline-flex",
+    alignItems: "center",
+    gap: 6,
+    padding: "6px 10px",
+    borderRadius: 999,
+    fontSize: 12,
+    whiteSpace: "nowrap",
+  };
+
+  if (kind === "dark") {
+    return {
+      ...base,
+      border: "1px solid rgba(255,255,255,0.20)",
+      background: "rgba(0,0,0,0.38)",
+      color: "rgba(255,255,255,0.95)",
+      backdropFilter: "blur(10px)",
+      textShadow: "0 1px 2px rgba(0,0,0,0.35)",
+    };
+  }
+
+  return {
+    ...base,
+    border: "1px solid rgba(0,0,0,0.14)",
+    background: "rgba(255,255,255,0.86)",
+    color: "rgba(10,10,10,0.92)",
+    backdropFilter: "blur(6px)",
+  };
 }
