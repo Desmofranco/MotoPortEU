@@ -2,16 +2,19 @@
 // src/pages/Tracks.jsx
 // Piste: supersport / enduro / cross
 // UI: split-view su desktop (lista + dettaglio)
-// Mobile: lista -> dettaglio (full screen) con back, senza overlay fixed
+// Mobile: lista -> dettaglio (full screen) con back
 // Dati: /public/data/tracks.json + /public/data/tracks.eu.json
 // ✅ Loading skeleton
 // ✅ Dedup key stabile (id o name+coords)
 // ✅ Meteo + Google Maps
 // ✅ Warning VITE_OWM_KEY solo se manca key E non c’è meteo
-// ✅ FIX: Hero mobile più compatto + pill hero "dark glass"
+// ✅ Mobile: hero più compatto + pill hero "dark glass"
+// ✅ NEW: swipe down per chiudere dettaglio (se sei in cima)
+// ✅ NEW: sticky mini header dopo scroll (compatto)
+// ✅ NEW: hero che si riduce scrollando (tipo Instagram)
 // =======================================================
 
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import TrackMap from "../components/TrackMap";
 import { getTrackWeatherSummary } from "../utils/trackWeather";
 
@@ -133,6 +136,8 @@ function normalizeIncomingTrack(t) {
   const region = t?.region || "";
   const type = String(t?.type || t?.kind || "").toLowerCase();
   const surface = String(t?.surface || "").toLowerCase();
+
+  // support: coords come oggetto (lat/lng) o start come oggetto
   const lat = t?.coords?.lat ?? t?.start?.lat ?? null;
   const lng = t?.coords?.lng ?? t?.start?.lng ?? null;
 
@@ -182,30 +187,9 @@ function SkeletonLoading() {
     >
       <div style={{ fontSize: 16, fontWeight: 800 }}>Carico piste…</div>
       <div style={{ marginTop: 10, display: "grid", gap: 8 }}>
-        <div
-          style={{
-            height: 12,
-            background: "rgba(0,0,0,0.08)",
-            borderRadius: 8,
-            width: "70%",
-          }}
-        />
-        <div
-          style={{
-            height: 12,
-            background: "rgba(0,0,0,0.08)",
-            borderRadius: 8,
-            width: "55%",
-          }}
-        />
-        <div
-          style={{
-            height: 12,
-            background: "rgba(0,0,0,0.08)",
-            borderRadius: 8,
-            width: "80%",
-          }}
-        />
+        <div style={{ height: 12, background: "rgba(0,0,0,0.08)", borderRadius: 8, width: "70%" }} />
+        <div style={{ height: 12, background: "rgba(0,0,0,0.08)", borderRadius: 8, width: "55%" }} />
+        <div style={{ height: 12, background: "rgba(0,0,0,0.08)", borderRadius: 8, width: "80%" }} />
       </div>
     </div>
   );
@@ -229,6 +213,9 @@ export default function Tracks() {
 
   // mobile view: "list" | "detail"
   const [mobileView, setMobileView] = useState("list");
+
+  // sticky mini header (mobile detail)
+  const [miniHeader, setMiniHeader] = useState(false);
 
   useEffect(() => {
     let alive = true;
@@ -270,8 +257,9 @@ export default function Tracks() {
         setActiveKey((prev) => prev || firstKey);
         setSelected((prev) => prev || first);
 
-        // se siamo su mobile, rimani in lista di default
+        // su mobile, parti sempre dalla lista
         setMobileView("list");
+        setMiniHeader(false);
       } catch (e) {
         if (!alive) return;
         setErr(e?.message || "Errore caricamento piste");
@@ -287,23 +275,17 @@ export default function Tracks() {
   }, []);
 
   const countries = useMemo(() => {
-    const set = new Set(
-      tracks.map((t) => String(t.country || "").toUpperCase()).filter(Boolean)
-    );
+    const set = new Set(tracks.map((t) => String(t.country || "").toUpperCase()).filter(Boolean));
     return ["ALL", ...Array.from(set).sort()];
   }, [tracks]);
 
   const types = useMemo(() => {
-    const set = new Set(
-      tracks.map((t) => String(t.type || "").toLowerCase()).filter(Boolean)
-    );
+    const set = new Set(tracks.map((t) => String(t.type || "").toLowerCase()).filter(Boolean));
     return ["ALL", ...Array.from(set).sort()];
   }, [tracks]);
 
   const surfaces = useMemo(() => {
-    const set = new Set(
-      tracks.map((t) => String(t.surface || "").toLowerCase()).filter(Boolean)
-    );
+    const set = new Set(tracks.map((t) => String(t.surface || "").toLowerCase()).filter(Boolean));
     return ["ALL", ...Array.from(set).sort()];
   }, [tracks]);
 
@@ -313,42 +295,22 @@ export default function Tracks() {
 
     if (query) {
       out = out.filter((t) => {
-        const blob = [
-          t.name,
-          t.region,
-          t.country,
-          t.type,
-          t.surface,
-          t.description,
-          t.bestSeason,
-        ]
+        const blob = [t.name, t.region, t.country, t.type, t.surface, t.description, t.bestSeason]
           .join(" ")
           .toLowerCase();
         return blob.includes(query);
       });
     }
 
-    if (country !== "ALL")
-      out = out.filter(
-        (t) => String(t.country || "").toUpperCase() === country
-      );
-    if (type !== "ALL")
-      out = out.filter(
-        (t) =>
-          String(t.type || "").toLowerCase() === String(type).toLowerCase()
-      );
+    if (country !== "ALL") out = out.filter((t) => String(t.country || "").toUpperCase() === country);
+    if (type !== "ALL") out = out.filter((t) => String(t.type || "").toLowerCase() === String(type).toLowerCase());
     if (surface !== "ALL")
-      out = out.filter(
-        (t) =>
-          String(t.surface || "").toLowerCase() ===
-          String(surface).toLowerCase()
-      );
+      out = out.filter((t) => String(t.surface || "").toLowerCase() === String(surface).toLowerCase());
 
     const sorter =
       {
         rating: (a, b) => Number(b.rating || 0) - Number(a.rating || 0),
-        difficulty: (a, b) =>
-          Number(b.difficulty || 0) - Number(a.difficulty || 0),
+        difficulty: (a, b) => Number(b.difficulty || 0) - Number(a.difficulty || 0),
         length: (a, b) => Number(b.lengthKm || 0) - Number(a.lengthKm || 0),
       }[sortBy] || (() => 0);
 
@@ -384,6 +346,7 @@ export default function Tracks() {
 
     if (isMobileNow()) {
       setMobileView("detail");
+      setMiniHeader(false);
       window.scrollTo({ top: 0, behavior: "smooth" });
     }
   };
@@ -391,36 +354,28 @@ export default function Tracks() {
   const isMobile = isMobileNow();
   const showDetailMobile = isMobile && mobileView === "detail" && selected;
 
+  // Sticky mini header: quando scrolli abbastanza nel dettaglio mobile
+  useEffect(() => {
+    if (!showDetailMobile) return;
+
+    const onScroll = () => {
+      // soglia: appena superi la parte alta dell'hero (effetto mini)
+      setMiniHeader(window.scrollY > 110);
+    };
+
+    window.addEventListener("scroll", onScroll, { passive: true });
+    onScroll();
+    return () => window.removeEventListener("scroll", onScroll);
+  }, [showDetailMobile]);
+
   return (
-    <div
-      className="tracks-root"
-      style={{ padding: 16, maxWidth: 1250, margin: "0 auto" }}
-    >
+    <div className="tracks-root" style={{ padding: 16, maxWidth: 1250, margin: "0 auto" }}>
       {/* HEADER */}
-      <div
-        style={{
-          display: "grid",
-          gridTemplateColumns: "1fr",
-          gap: 10,
-          alignItems: "start",
-        }}
-      >
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "space-between",
-            gap: 12,
-            flexWrap: "wrap",
-            alignItems: "baseline",
-          }}
-        >
+      <div style={{ display: "grid", gridTemplateColumns: "1fr", gap: 10, alignItems: "start" }}>
+        <div style={{ display: "flex", justifyContent: "space-between", gap: 12, flexWrap: "wrap", alignItems: "baseline" }}>
           <div>
-            <h1 style={{ margin: 0, fontSize: 44, letterSpacing: -0.5 }}>
-              Piste 🏁
-            </h1>
-            <div style={{ opacity: 0.75, marginTop: 6 }}>
-              SuperSport, Enduro e Cross: mappa, meteo e link Google.
-            </div>
+            <h1 style={{ margin: 0, fontSize: 44, letterSpacing: -0.5 }}>Piste 🏁</h1>
+            <div style={{ opacity: 0.75, marginTop: 6 }}>SuperSport, Enduro e Cross: mappa, meteo e link Google.</div>
           </div>
 
           <input
@@ -454,11 +409,7 @@ export default function Tracks() {
             <select
               value={country}
               onChange={(e) => setCountry(e.target.value)}
-              style={{
-                padding: "10px 12px",
-                borderRadius: 12,
-                border: "1px solid rgba(0,0,0,0.15)",
-              }}
+              style={{ padding: "10px 12px", borderRadius: 12, border: "1px solid rgba(0,0,0,0.15)" }}
             >
               {countries.map((c) => (
                 <option key={c} value={c}>
@@ -473,11 +424,7 @@ export default function Tracks() {
             <select
               value={type}
               onChange={(e) => setType(e.target.value)}
-              style={{
-                padding: "10px 12px",
-                borderRadius: 12,
-                border: "1px solid rgba(0,0,0,0.15)",
-              }}
+              style={{ padding: "10px 12px", borderRadius: 12, border: "1px solid rgba(0,0,0,0.15)" }}
             >
               {types.map((t) => (
                 <option key={t} value={t}>
@@ -492,11 +439,7 @@ export default function Tracks() {
             <select
               value={surface}
               onChange={(e) => setSurface(e.target.value)}
-              style={{
-                padding: "10px 12px",
-                borderRadius: 12,
-                border: "1px solid rgba(0,0,0,0.15)",
-              }}
+              style={{ padding: "10px 12px", borderRadius: 12, border: "1px solid rgba(0,0,0,0.15)" }}
             >
               {surfaces.map((s) => (
                 <option key={s} value={s}>
@@ -511,11 +454,7 @@ export default function Tracks() {
             <select
               value={sortBy}
               onChange={(e) => setSortBy(e.target.value)}
-              style={{
-                padding: "10px 12px",
-                borderRadius: 12,
-                border: "1px solid rgba(0,0,0,0.15)",
-              }}
+              style={{ padding: "10px 12px", borderRadius: 12, border: "1px solid rgba(0,0,0,0.15)" }}
             >
               <option value="rating">Rating (desc)</option>
               <option value="difficulty">Difficoltà (desc)</option>
@@ -529,61 +468,69 @@ export default function Tracks() {
       {loading ? (
         <SkeletonLoading />
       ) : err ? (
-        <div
-          style={{
-            marginTop: 14,
-            padding: 12,
-            borderRadius: 16,
-            background: "rgba(255,0,0,0.08)",
-          }}
-        >
-          {err}
-        </div>
+        <div style={{ marginTop: 14, padding: 12, borderRadius: 16, background: "rgba(255,0,0,0.08)" }}>{err}</div>
       ) : (
         <>
           {/* MOBILE: dettaglio single-screen */}
           {showDetailMobile ? (
             <div style={{ marginTop: 14 }}>
+              {/* Sticky mini header */}
               <div
                 style={{
                   position: "sticky",
                   top: 0,
-                  zIndex: 5,
+                  zIndex: 20,
                   background: "rgba(255,255,255,0.96)",
-                  backdropFilter: "blur(8px)",
+                  backdropFilter: "blur(10px)",
                   borderBottom: "1px solid rgba(0,0,0,0.10)",
-                  padding: 12,
+                  padding: miniHeader ? "8px 10px" : 12,
                   borderRadius: 16,
+                  display: "flex",
+                  alignItems: "center",
+                  gap: 10,
                 }}
               >
                 <button
                   type="button"
-                  onClick={() => setMobileView("list")}
+                  onClick={() => {
+                    setMobileView("list");
+                    window.scrollTo({ top: 0, behavior: "auto" });
+                  }}
                   style={{
-                    padding: "10px 12px",
+                    padding: miniHeader ? "8px 10px" : "10px 12px",
                     borderRadius: 12,
                     border: "1px solid rgba(0,0,0,0.15)",
                     background: "white",
                     cursor: "pointer",
+                    flex: "0 0 auto",
                   }}
                 >
                   ← Indietro
                 </button>
-                <div style={{ marginTop: 10, fontWeight: 900 }}>
-                  {countryFlag(selected.country)} {selected.name}
+
+                <div style={{ minWidth: 0, flex: "1 1 auto" }}>
+                  <div style={{ fontWeight: 950, fontSize: miniHeader ? 14 : 16, lineHeight: 1.15, whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>
+                    {countryFlag(selected.country)} {selected.name}
+                  </div>
+                  {miniHeader ? (
+                    <div style={{ marginTop: 2, fontSize: 12, opacity: 0.75, display: "flex", gap: 10, alignItems: "center", flexWrap: "wrap" }}>
+                      <span>⭐ {Number(selected.rating || 0).toFixed(1)}</span>
+                      <span>{typeLabel(selected.type)}</span>
+                      <span>{surfaceLabel(selected.surface)}</span>
+                    </div>
+                  ) : null}
                 </div>
               </div>
 
-              <div
-                style={{
-                  marginTop: 12,
-                  borderRadius: 22,
-                  overflow: "hidden",
-                  border: "1px solid rgba(0,0,0,0.12)",
-                  background: "white",
-                }}
-              >
-                <TrackDetail track={selected} />
+              <div style={{ marginTop: 12, borderRadius: 22, overflow: "hidden", border: "1px solid rgba(0,0,0,0.12)", background: "white" }}>
+                <TrackDetail
+                  track={selected}
+                  // swipe down -> close (se sei in cima)
+                  onClose={() => {
+                    setMobileView("list");
+                    window.scrollTo({ top: 0, behavior: "auto" });
+                  }}
+                />
               </div>
             </div>
           ) : (
@@ -599,45 +546,19 @@ export default function Tracks() {
                   {filtered.map((t) => {
                     const key = getTrackKey(t);
                     const isActive = key === activeKey;
-                    return (
-                      <TrackCard
-                        key={key}
-                        track={t}
-                        active={isActive}
-                        onSelect={() => selectTrack(t)}
-                      />
-                    );
+                    return <TrackCard key={key} track={t} active={isActive} onSelect={() => selectTrack(t)} />;
                   })}
 
                   {filtered.length === 0 && (
-                    <div
-                      style={{
-                        padding: 12,
-                        borderRadius: 16,
-                        background: "rgba(0,0,0,0.04)",
-                      }}
-                    >
-                      Nessuna pista trovata.
-                    </div>
+                    <div style={{ padding: 12, borderRadius: 16, background: "rgba(0,0,0,0.04)" }}>Nessuna pista trovata.</div>
                   )}
                 </div>
               </div>
 
               {/* DETAIL (solo desktop/tablet) */}
               <div className="tracks-detail">
-                <div
-                  style={{
-                    borderRadius: 22,
-                    overflow: "hidden",
-                    border: "1px solid rgba(0,0,0,0.12)",
-                    background: "white",
-                  }}
-                >
-                  {!active ? (
-                    <div style={{ padding: 14 }}>Seleziona una pista.</div>
-                  ) : (
-                    <TrackDetail track={active} />
-                  )}
+                <div style={{ borderRadius: 22, overflow: "hidden", border: "1px solid rgba(0,0,0,0.12)", background: "white" }}>
+                  {!active ? <div style={{ padding: 14 }}>Seleziona una pista.</div> : <TrackDetail track={active} />}
                 </div>
               </div>
             </div>
@@ -661,9 +582,7 @@ export default function Tracks() {
             overflow: auto;
             padding-right: 6px;
           }
-          .tracks-detail{
-            height: fit-content;
-          }
+          .tracks-detail{ height: fit-content; }
         }
 
         @media (max-width: 1023px){
@@ -672,20 +591,20 @@ export default function Tracks() {
             grid-template-columns: 1fr;
             gap: 14px;
           }
-          /* su mobile/tablet, nascondiamo il dettaglio split */
-          .tracks-detail{
-            display: none;
-          }
+          .tracks-detail{ display: none; }
         }
 
         @media (max-width: 767px){
           .tracks-root{ padding: 10px !important; }
           .tracks-root h1{ font-size: 30px !important; line-height: 1.05 !important; }
-          /* Hero mobile più compatto */
-          .track-hero{ height: 210px !important; }
-          .track-hero-title{ font-size: 22px !important; line-height: 1.08 !important; }
-          .track-hero-sub{ font-size: 12px !important; }
-          .hero-pills span{ font-size: 11px !important; padding: 5px 9px !important; }
+
+          /* Hero mobile: base compatta (poi si riduce ancora con JS) */
+          .track-hero{ height: 180px !important; }
+          .track-hero-title{ font-size: 20px !important; line-height: 1.05 !important; }
+          .track-hero-sub{ font-size: 11px !important; }
+
+          /* Pill più compatti su mobile */
+          .hero-pills span{ font-size: 10px !important; padding: 4px 8px !important; }
         }
       `}</style>
     </div>
@@ -724,117 +643,45 @@ function TrackCard({ track, active, onSelect }) {
       }}
     >
       {/* MOBILE ROW */}
-      <div
-        className="track-card-mobile"
-        style={{ display: "none", padding: 10, gap: 10, alignItems: "center" }}
-      >
-        <div
-          style={{
-            width: 88,
-            height: 64,
-            borderRadius: 14,
-            overflow: "hidden",
-            background: "rgba(0,0,0,0.05)",
-            flex: "0 0 auto",
-          }}
-        >
-          <img
-            src={photo}
-            alt=""
-            style={{ width: "100%", height: "100%", objectFit: "cover" }}
-            loading="lazy"
-          />
+      <div className="track-card-mobile" style={{ display: "none", padding: 10, gap: 10, alignItems: "center" }}>
+        <div style={{ width: 88, height: 64, borderRadius: 14, overflow: "hidden", background: "rgba(0,0,0,0.05)", flex: "0 0 auto" }}>
+          <img src={photo} alt="" style={{ width: "100%", height: "100%", objectFit: "cover" }} loading="lazy" />
         </div>
 
         <div style={{ minWidth: 0, flex: "1 1 auto" }}>
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "space-between",
-              gap: 8,
-              alignItems: "start",
-            }}
-          >
-            <div
-              style={{
-                fontWeight: 950,
-                lineHeight: 1.15,
-                overflow: "hidden",
-                textOverflow: "ellipsis",
-                whiteSpace: "nowrap",
-              }}
-            >
+          <div style={{ display: "flex", justifyContent: "space-between", gap: 8, alignItems: "start" }}>
+            <div style={{ fontWeight: 950, lineHeight: 1.15, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
               {countryFlag(track.country)} {track.name}
             </div>
-            <div style={{ fontSize: 12, opacity: 0.75, whiteSpace: "nowrap" }}>
-              {typeLabel(track.type)}
-            </div>
+            <div style={{ fontSize: 12, opacity: 0.75, whiteSpace: "nowrap" }}>{typeLabel(track.type)}</div>
           </div>
 
-          <div
-            style={{
-              marginTop: 4,
-              fontSize: 12,
-              opacity: 0.75,
-              overflow: "hidden",
-              textOverflow: "ellipsis",
-              whiteSpace: "nowrap",
-            }}
-          >
-            {track.region || "—"} · {surfaceLabel(track.surface)} ·{" "}
-            {track.bestSeason || "—"}
+          <div style={{ marginTop: 4, fontSize: 12, opacity: 0.75, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
+            {track.region || "—"} · {surfaceLabel(track.surface)} · {track.bestSeason || "—"}
           </div>
 
-          <div
-            style={{
-              marginTop: 8,
-              display: "flex",
-              gap: 8,
-              alignItems: "center",
-              flexWrap: "wrap",
-            }}
-          >
+          <div style={{ marginTop: 8, display: "flex", gap: 8, alignItems: "center", flexWrap: "wrap" }}>
             <span style={pillStyle(p.level)}>
               ⭐ {Number.isFinite(rating) ? rating.toFixed(1) : "0.0"} · {p.label}
             </span>
-            <span
-              style={{
-                marginLeft: "auto",
-                fontSize: 12,
-                opacity: 0.6,
-                whiteSpace: "nowrap",
-                pointerEvents: "none",
-              }}
-            >
-              Tocca →
-            </span>
+            <span style={{ marginLeft: "auto", fontSize: 12, opacity: 0.6, whiteSpace: "nowrap", pointerEvents: "none" }}>Tocca →</span>
           </div>
         </div>
       </div>
 
       {/* DESKTOP “vetrina” */}
       <div className="track-card-desktop" style={{ display: "block" }}>
-        <div
-          style={{
-            height: 130,
-            backgroundImage: `url(${photo})`,
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-          }}
-        />
+        <div style={{ height: 130, backgroundImage: `url(${photo})`, backgroundSize: "cover", backgroundPosition: "center" }} />
         <div style={{ padding: 12 }}>
           <div style={{ display: "flex", justifyContent: "space-between", gap: 10 }}>
             <div style={{ fontWeight: 900, lineHeight: 1.15 }}>
               {countryFlag(track.country)} {track.name}
             </div>
-            <div style={{ fontSize: 12, opacity: 0.75, whiteSpace: "nowrap" }}>
-              {typeLabel(track.type)}
-            </div>
+            <div style={{ fontSize: 12, opacity: 0.75, whiteSpace: "nowrap" }}>{typeLabel(track.type)}</div>
           </div>
 
           <div style={{ marginTop: 4, fontSize: 12, opacity: 0.75 }}>
-            {track.region} · fondo: {surfaceLabel(track.surface)} · stagione:{" "}
-            {track.bestSeason || "—"}
+            {track.region} · fondo: {surfaceLabel(track.surface)} · stagione: {track.bestSeason || "—"}
           </div>
 
           <div style={{ marginTop: 10, display: "flex", gap: 8, flexWrap: "wrap" }}>
@@ -859,15 +706,61 @@ function TrackCard({ track, active, onSelect }) {
   );
 }
 
-function TrackDetail({ track }) {
+function TrackDetail({ track, onClose }) {
   const photo = track.photo || FALLBACK_PHOTO;
   const lat = track?.coords?.lat;
   const lng = track?.coords?.lng;
 
-  const googleHref =
-    lat != null && lng != null
-      ? `https://www.google.com/maps?q=${lat},${lng}`
-      : "https://www.google.com/maps";
+  const googleHref = lat != null && lng != null ? `https://www.google.com/maps?q=${lat},${lng}` : "https://www.google.com/maps";
+
+  const isMobile = isMobileNow();
+
+  // scroll -> hero shrink (mobile)
+  const [scrollY, setScrollY] = useState(0);
+
+  useEffect(() => {
+    if (!isMobile) return;
+    const onScroll = () => setScrollY(window.scrollY || 0);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    onScroll();
+    return () => window.removeEventListener("scroll", onScroll);
+  }, [isMobile]);
+
+  // swipe down -> close (solo se sei in cima)
+  const touchRef = useRef({ startY: 0, startT: 0, active: false, fired: false });
+
+  const onTouchStart = (e) => {
+    if (!isMobile || !onClose) return;
+    const y = e?.touches?.[0]?.clientY ?? 0;
+    touchRef.current = { startY: y, startT: Date.now(), active: true, fired: false };
+  };
+
+  const onTouchMove = (e) => {
+    if (!isMobile || !onClose) return;
+    const st = touchRef.current;
+    if (!st.active || st.fired) return;
+    // solo se siamo in cima (evitiamo chiusure mentre scrolli)
+    if ((window.scrollY || 0) > 6) return;
+
+    const y = e?.touches?.[0]?.clientY ?? 0;
+    const dy = y - st.startY;
+    const dt = Date.now() - st.startT;
+
+    // swipe down "deciso"
+    if (dy > 90 && dt < 650) {
+      st.fired = true;
+      onClose();
+    }
+  };
+
+  const onTouchEnd = () => {
+    touchRef.current.active = false;
+  };
+
+  // HERO HEIGHT (mobile collapse effect)
+  const heroMax = isMobile ? 180 : 280;
+  const heroMin = isMobile ? 96 : 280;
+  const heroH = isMobile ? Math.max(heroMin, heroMax - Math.min(scrollY, heroMax - heroMin)) : heroMax;
 
   const [wx, setWx] = useState(null);
   const [wxBusy, setWxBusy] = useState(false);
@@ -904,33 +797,8 @@ function TrackDetail({ track }) {
   }, [getTrackKey(track)]);
 
   const wxBox = (() => {
-    if (wxBusy)
-      return (
-        <div
-          style={{
-            marginTop: 10,
-            padding: 12,
-            borderRadius: 16,
-            background: "rgba(0,0,0,0.04)",
-          }}
-        >
-          Carico meteo…
-        </div>
-      );
-
-    if (!wx || !wx.ok)
-      return (
-        <div
-          style={{
-            marginTop: 10,
-            padding: 12,
-            borderRadius: 16,
-            background: "rgba(0,0,0,0.04)",
-          }}
-        >
-          {wx?.note || "Meteo non disponibile."}
-        </div>
-      );
+    if (wxBusy) return <div style={{ marginTop: 10, padding: 12, borderRadius: 16, background: "rgba(0,0,0,0.04)" }}>Carico meteo…</div>;
+    if (!wx || !wx.ok) return <div style={{ marginTop: 10, padding: 12, borderRadius: 16, background: "rgba(0,0,0,0.04)" }}>{wx?.note || "Meteo non disponibile."}</div>;
 
     return (
       <div style={{ marginTop: 10, display: "grid", gap: 10 }}>
@@ -938,20 +806,10 @@ function TrackDetail({ track }) {
           <span style={pillStyle(weatherLevel(wx.worst))}>
             Condizione: <strong>{wx.worst}</strong>
           </span>
-          {wx.temp != null ? (
-            <span style={pillStyle("ok")}>
-              🌡 {wx.temp}° (min {wx.tempMin}° / max {wx.tempMax}°)
-            </span>
-          ) : null}
-          {wx.windKmh != null ? (
-            <span style={pillStyle(wx.windKmh >= 50 ? "warn" : "ok")}>
-              💨 vento {wx.windKmh} km/h
-            </span>
-          ) : null}
+          {wx.temp != null ? <span style={pillStyle("ok")}>🌡 {wx.temp}° (min {wx.tempMin}° / max {wx.tempMax}°)</span> : null}
+          {wx.windKmh != null ? <span style={pillStyle(wx.windKmh >= 50 ? "warn" : "ok")}>💨 vento {wx.windKmh} km/h</span> : null}
         </div>
-        <div style={{ fontSize: 12, opacity: 0.7 }}>
-          Aggiornato: {String(wx.updatedAt || "").slice(0, 16).replace("T", " ")}
-        </div>
+        <div style={{ fontSize: 12, opacity: 0.7 }}>Aggiornato: {String(wx.updatedAt || "").slice(0, 16).replace("T", " ")}</div>
       </div>
     );
   })();
@@ -961,55 +819,32 @@ function TrackDetail({ track }) {
   const hasWeather =
     !!wx &&
     wx.ok &&
-    (wx.temp != null ||
-      wx.tempMin != null ||
-      wx.tempMax != null ||
-      wx.windKmh != null ||
-      !!wx.worst);
+    (wx.temp != null || wx.tempMin != null || wx.tempMax != null || wx.windKmh != null || !!wx.worst);
 
   return (
-    <>
-      {/* Hero */}
+    <div onTouchStart={onTouchStart} onTouchMove={onTouchMove} onTouchEnd={onTouchEnd}>
+      {/* Hero (collapsing on mobile) */}
       <div
         className="track-hero"
         style={{
           position: "relative",
-          height: 280,
+          height: heroH,
           backgroundImage: `url(${photo})`,
           backgroundSize: "cover",
           backgroundPosition: "center",
+          transition: isMobile ? "height 120ms linear" : "none",
         }}
       >
-        <div
-          style={{
-            position: "absolute",
-            inset: 0,
-            background:
-              "linear-gradient(180deg, rgba(0,0,0,0.12), rgba(0,0,0,0.72))",
-          }}
-        />
-        <div
-          style={{
-            position: "absolute",
-            left: 16,
-            right: 16,
-            bottom: 14,
-            color: "white",
-          }}
-        >
+        <div style={{ position: "absolute", inset: 0, background: "linear-gradient(180deg, rgba(0,0,0,0.10), rgba(0,0,0,0.74))" }} />
+        <div style={{ position: "absolute", left: 12, right: 12, bottom: 10, color: "white" }}>
           <div className="track-hero-sub" style={{ fontSize: 13, opacity: 0.92 }}>
-            {countryFlag(track.country)} {track.country} · {track.region} ·{" "}
-            {typeLabel(track.type)}
+            {countryFlag(track.country)} {track.country} · {track.region} · {typeLabel(track.type)}
           </div>
 
-          <div
-            className="track-hero-title"
-            style={{ fontSize: 30, fontWeight: 950, letterSpacing: 0.2 }}
-          >
+          <div className="track-hero-title" style={{ fontSize: 30, fontWeight: 950, letterSpacing: 0.2, lineHeight: 1.05 }}>
             {track.name}
           </div>
 
-          {/* PILL HERO (dark glass) */}
           <div className="hero-pills" style={{ marginTop: 10, display: "flex", gap: 8, flexWrap: "wrap" }}>
             <span style={pillStyleHero("ok")}>⭐ {Number(track.rating || 0).toFixed(1)}</span>
             <span style={pillStyleHero("ok")}>🧠 diff {Number(track.difficulty || 0)}/10</span>
@@ -1023,13 +858,7 @@ function TrackDetail({ track }) {
 
       {/* Body */}
       <div style={{ padding: 14 }}>
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(160px, 1fr))",
-            gap: 10,
-          }}
-        >
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(160px, 1fr))", gap: 10 }}>
           <Stat label="Tipo" value={typeLabel(track.type)} />
           <Stat label="Fondo" value={surfaceLabel(track.surface)} />
           <Stat label="Rating" value={`${Number(track.rating || 0).toFixed(1)} / 10`} />
@@ -1056,9 +885,7 @@ function TrackDetail({ track }) {
 
         <div style={{ marginTop: 14, borderTop: "1px solid rgba(0,0,0,0.08)", paddingTop: 14 }}>
           <strong>📌 Descrizione</strong>
-          <div style={{ marginTop: 8, fontSize: 14, opacity: 0.9, lineHeight: 1.4 }}>
-            {track.description || "—"}
-          </div>
+          <div style={{ marginTop: 8, fontSize: 14, opacity: 0.9, lineHeight: 1.4 }}>{track.description || "—"}</div>
         </div>
 
         <div style={{ marginTop: 14, borderTop: "1px solid rgba(0,0,0,0.08)", paddingTop: 14 }}>
@@ -1078,13 +905,12 @@ function TrackDetail({ track }) {
             </div>
           ) : !hasWeather ? (
             <div style={{ marginTop: 8, fontSize: 12, opacity: 0.75 }}>
-              ⚠️ Manca <strong>VITE_OWM_KEY</strong> (OpenWeather): aggiungila in{" "}
-              <code>client/.env</code> e riavvia Vite.
+              ⚠️ Manca <strong>VITE_OWM_KEY</strong> (OpenWeather): aggiungila in <code>client/.env</code> e riavvia Vite.
             </div>
           ) : null}
         </div>
       </div>
-    </>
+    </div>
   );
 }
 
