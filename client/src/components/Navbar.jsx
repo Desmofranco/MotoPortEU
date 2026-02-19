@@ -38,9 +38,12 @@ export default function Navbar() {
       }}
     >
       <strong style={{ marginRight: 8 }}>MotoPortEU</strong>
-
+      
       <NavLink to="/routes" style={linkStyle}>Itinerari</NavLink>
       <NavLink to="/tracks" style={linkStyle}>🏁 Circuiti</NavLink>
+      <NavLink to="/map" style={linkStyle}>
+  🏁 Rotte
+</NavLink>
       <NavLink to="/garage" style={linkStyle}>Garage</NavLink>
       <NavLink to="/suppliers" style={linkStyle}>Fornitori</NavLink>
 
