@@ -1,10 +1,11 @@
 // =======================================================
 // src/pages/Map.jsx
-// MotoPortEU — Rotta Libera 🏁 WOW
+// MotoPortEU — Rotta Libera 🏁 WOW + TIMER (solo GPS ON)
 // ✅ UI carina senza Tailwind (inline styles)
 // ✅ Autocomplete luoghi (Nominatim OSM)
 // ✅ Snap su strada (OSRM public router)
 // ✅ Navigatore base (GPS follow + next waypoint + Google Maps nav)
+// ✅ Timer corsa: Start/Stop salva sessioni e tempo totale (solo con GPS ON)
 // ✅ Export GPX (Premium gate via localStorage)
 // =======================================================
 
@@ -51,15 +52,24 @@ function computeDistanceKm(points) {
   return sum;
 }
 
+const fmtTime = (sec) => {
+  const s = Math.max(0, Math.floor(sec || 0));
+  const hh = String(Math.floor(s / 3600)).padStart(2, "0");
+  const mm = String(Math.floor((s % 3600) / 60)).padStart(2, "0");
+  const ss = String(s % 60).padStart(2, "0");
+  return `${hh}:${mm}:${ss}`;
+};
+
 // --- GPX ---
 function toGpx(name, points) {
-  const esc = (s) => String(s || "").replace(/[<>&'"]/g, (c) => ({
-    "<": "&lt;",
-    ">": "&gt;",
-    "&": "&amp;",
-    "'": "&apos;",
-    '"': "&quot;",
-  }[c]));
+  const esc = (s) =>
+    String(s || "").replace(/[<>&'"]/g, (c) => ({
+      "<": "&lt;",
+      ">": "&gt;",
+      "&": "&amp;",
+      "'": "&apos;",
+      '"': "&quot;",
+    }[c]));
   const now = new Date().toISOString();
   const seg = points
     .map(([lat, lon]) => `<trkpt lat="${lat}" lon="${lon}"></trkpt>`)
@@ -94,9 +104,7 @@ function downloadTextFile(filename, content, mime = "application/octet-stream") 
 // --- Autocomplete Nominatim ---
 async function nominatimSearch(q) {
   const url = `https://nominatim.openstreetmap.org/search?format=json&limit=6&q=${encodeURIComponent(q)}`;
-  const res = await fetch(url, {
-    headers: { "Accept": "application/json" },
-  });
+  const res = await fetch(url, { headers: { Accept: "application/json" } });
   if (!res.ok) throw new Error("Nominatim error");
   const data = await res.json();
   return (data || []).map((x) => ({
@@ -107,15 +115,15 @@ async function nominatimSearch(q) {
 }
 
 // --- Snap OSRM route ---
-// points: [ [lat,lng], ... ] -> returns snapped polyline array [ [lat,lng], ... ]
 async function osrmSnap(points) {
-  // OSRM wants lon,lat and needs at least 2 points
   if (!points || points.length < 2) return null;
 
-  // Keep it safe: OSRM public can choke with too many points.
-  // If user puts tons of points, you can decimate later; for now cap at 25.
+  // cap points for public OSRM stability
   const maxPts = 25;
-  const pts = points.length > maxPts ? points.filter((_, i) => i % Math.ceil(points.length / maxPts) === 0) : points;
+  const pts =
+    points.length > maxPts
+      ? points.filter((_, i) => i % Math.ceil(points.length / maxPts) === 0)
+      : points;
 
   const coords = pts.map(([lat, lng]) => `${lng},${lat}`).join(";");
   const url = `https://router.project-osrm.org/route/v1/driving/${coords}?overview=full&geometries=geojson`;
@@ -133,19 +141,20 @@ async function osrmSnap(points) {
 function nearestNextWaypointIndex(gps, points, currentIdx) {
   if (!gps || !points?.length) return 0;
   const start = Math.max(0, currentIdx || 0);
+
   let bestIdx = start;
   let best = Infinity;
+
   for (let i = start; i < points.length; i++) {
     const d = haversineKm(gps, points[i]);
     if (d < best) {
       best = d;
       bestIdx = i;
     }
-    // early break: once distances start growing after a near point, you could stop,
-    // but keep simple.
   }
-  // If we're very close to this waypoint, move to next
-  if (best < 0.12 && bestIdx < points.length - 1) return bestIdx + 1; // 120m
+
+  // if very close -> advance
+  if (best < 0.12 && bestIdx < points.length - 1) return bestIdx + 1; // ~120m
   return bestIdx;
 }
 
@@ -155,8 +164,12 @@ function buildGoogleMapsNavUrl(gps, points) {
   const origin = gps ? `${gps[0]},${gps[1]}` : `${points[0][0]},${points[0][1]}`;
   const destination = `${points[points.length - 1][0]},${points[points.length - 1][1]}`;
 
-  // Google waypoints limit (practically): keep few
-  const mid = points.slice(1, -1).slice(0, 8).map((p) => `${p[0]},${p[1]}`).join("|");
+  // keep waypoints few (Google limit)
+  const mid = points
+    .slice(1, -1)
+    .slice(0, 8)
+    .map((p) => `${p[0]},${p[1]}`)
+    .join("|");
 
   const url =
     `https://www.google.com/maps/dir/?api=1` +
@@ -172,7 +185,13 @@ function buildGoogleMapsNavUrl(gps, points) {
 const S = {
   page: { width: "100%", padding: "16px 12px" },
   container: { maxWidth: 1180, margin: "0 auto" },
-  headerRow: { display: "flex", gap: 12, alignItems: "flex-start", justifyContent: "space-between", flexWrap: "wrap" },
+  headerRow: {
+    display: "flex",
+    gap: 12,
+    alignItems: "flex-start",
+    justifyContent: "space-between",
+    flexWrap: "wrap",
+  },
   title: { fontSize: 34, fontWeight: 900, letterSpacing: "-0.02em", margin: 0 },
   subtitle: { margin: "6px 0 0", opacity: 0.78, fontSize: 14, lineHeight: 1.35 },
   grid: { display: "grid", gridTemplateColumns: "1fr", gap: 12, marginTop: 14 },
@@ -191,16 +210,16 @@ const S = {
     border: "1px solid rgba(0,0,0,0.12)",
     background: "white",
     cursor: "pointer",
-    fontWeight: 700,
+    fontWeight: 800,
     boxShadow: "0 8px 20px rgba(0,0,0,0.08)",
   },
   btnGhost: {
     padding: "10px 12px",
     borderRadius: 14,
     border: "1px solid rgba(0,0,0,0.10)",
-    background: "rgba(255,255,255,0.6)",
+    background: "rgba(255,255,255,0.60)",
     cursor: "pointer",
-    fontWeight: 700,
+    fontWeight: 800,
   },
   btnDanger: {
     padding: "10px 12px",
@@ -208,7 +227,7 @@ const S = {
     border: "1px solid rgba(220,38,38,0.30)",
     background: "rgba(220,38,38,0.08)",
     cursor: "pointer",
-    fontWeight: 800,
+    fontWeight: 900,
   },
   input: {
     width: "100%",
@@ -236,7 +255,7 @@ const S = {
     borderRadius: 999,
     border: "1px solid rgba(0,0,0,0.10)",
     background: "rgba(255,255,255,0.65)",
-    fontWeight: 700,
+    fontWeight: 800,
     fontSize: 13,
   },
   dropdown: {
@@ -278,12 +297,18 @@ export default function Map() {
   const [snapping, setSnapping] = useState(false);
   const [snapEnabled, setSnapEnabled] = useState(true);
 
-  // Navigator
+  // GPS + Navigator
   const [gps, setGps] = useState(null);
   const [gpsOn, setGpsOn] = useState(false);
   const [followGps, setFollowGps] = useState(true);
   const [navOn, setNavOn] = useState(false);
   const [nextIdx, setNextIdx] = useState(0);
+
+  // ⏱️ Timer / tracking (ONLY GPS ON)
+  const [runOn, setRunOn] = useState(false);
+  const [runStartMs, setRunStartMs] = useState(null);
+  const [runElapsedSec, setRunElapsedSec] = useState(0);
+  const tickRef = useRef(null);
 
   // Premium gate (temp)
   const isPremium = useMemo(() => localStorage.getItem(PASS_KEY) === "true", []);
@@ -291,9 +316,9 @@ export default function Map() {
   const activeRoute = useMemo(() => routes.find((r) => r.id === activeId) || null, [routes, activeId]);
 
   const distanceKm = useMemo(() => {
-    const base = snappedLine && snappedLine.length >= 2 ? snappedLine : points;
+    const base = snapEnabled && snappedLine?.length >= 2 ? snappedLine : points;
     return computeDistanceKm(base);
-  }, [points, snappedLine]);
+  }, [points, snappedLine, snapEnabled]);
 
   useEffect(() => saveRoutes(routes), [routes]);
 
@@ -304,6 +329,14 @@ export default function Map() {
     setSnappedLine(activeRoute.snappedLine || null);
     setName(activeRoute.name || "");
     setNote(activeRoute.note || "");
+    setSnapEnabled(activeRoute.snapEnabled ?? true);
+
+    // reset nav + timer when switching route
+    setNavOn(false);
+    setNextIdx(0);
+    setRunOn(false);
+    setRunElapsedSec(0);
+    setRunStartMs(null);
   }, [activeId]); // eslint-disable-line
 
   // Autocomplete debounce
@@ -326,10 +359,17 @@ export default function Map() {
 
   // GPS watch
   useEffect(() => {
-    if (!gpsOn) return;
+    if (!gpsOn) {
+      setGps(null);
+      // if GPS goes OFF -> stop nav + stop timer
+      setNavOn(false);
+      setRunOn(false);
+      return;
+    }
 
     if (!("geolocation" in navigator)) {
       alert("GPS non disponibile su questo dispositivo/browser.");
+      setGpsOn(false);
       return;
     }
 
@@ -358,9 +398,30 @@ export default function Map() {
     setNextIdx(idx);
   }, [navOn, gps, points]); // eslint-disable-line
 
+  // Timer tick
+  useEffect(() => {
+    if (!runOn) {
+      if (tickRef.current) clearInterval(tickRef.current);
+      tickRef.current = null;
+      return;
+    }
+
+    const start = Date.now();
+    setRunStartMs(start);
+    setRunElapsedSec(0);
+
+    tickRef.current = setInterval(() => {
+      setRunElapsedSec(Math.floor((Date.now() - start) / 1000));
+    }, 1000);
+
+    return () => {
+      if (tickRef.current) clearInterval(tickRef.current);
+      tickRef.current = null;
+    };
+  }, [runOn]);
+
   const onAddPoint = (p) => {
     setPoints((prev) => [...prev, p]);
-    // If user edits points -> invalidate old snap until re-snap
     setSnappedLine(null);
   };
 
@@ -374,6 +435,9 @@ export default function Map() {
     setSnappedLine(null);
     setNavOn(false);
     setNextIdx(0);
+    setRunOn(false);
+    setRunElapsedSec(0);
+    setRunStartMs(null);
   };
 
   const newRoute = () => {
@@ -384,6 +448,9 @@ export default function Map() {
     setSnappedLine(null);
     setNavOn(false);
     setNextIdx(0);
+    setRunOn(false);
+    setRunElapsedSec(0);
+    setRunStartMs(null);
   };
 
   const saveCurrent = () => {
@@ -391,8 +458,11 @@ export default function Map() {
     if (!cleanName) return alert("Dai un nome all’itinerario.");
     if (!points || points.length < 2) return alert("Aggiungi almeno 2 punti.");
 
+    const id = activeId || uid();
+    const existing = routes.find((r) => r.id === id);
+
     const payload = {
-      id: activeId || uid(),
+      id,
       name: cleanName,
       note: String(note || "").trim(),
       points,
@@ -400,6 +470,10 @@ export default function Map() {
       updatedAt: new Date().toISOString(),
       distanceKm: Math.round(distanceKm * 10) / 10,
       snapEnabled,
+      // keep time data if exists
+      totalTimeSec: existing?.totalTimeSec || 0,
+      sessions: existing?.sessions || [],
+      lastRunAt: existing?.lastRunAt || null,
     };
 
     setRoutes((prev) => {
@@ -408,7 +482,61 @@ export default function Map() {
       return next;
     });
 
-    setActiveId(payload.id);
+    setActiveId(id);
+  };
+
+  const stopAndSaveRun = () => {
+    if (!runOn) return;
+
+    const cleanName = String(name || "").trim();
+    if (!cleanName) {
+      alert("Dai un nome all’itinerario prima di salvare il tempo.");
+      setRunOn(false);
+      return;
+    }
+    if (!points || points.length < 2) {
+      alert("Serve un itinerario con almeno 2 punti.");
+      setRunOn(false);
+      return;
+    }
+
+    const endMs = Date.now();
+    const startMs = runStartMs ?? endMs - runElapsedSec * 1000;
+    const durSec = Math.max(1, Math.floor((endMs - startMs) / 1000));
+
+    const id = activeId || uid();
+
+    setRoutes((prev) => {
+      const existing = prev.find((r) => r.id === id);
+      const prevSessions = existing?.sessions || [];
+      const prevTotal = existing?.totalTimeSec || 0;
+
+      const session = {
+        startedAt: new Date(startMs).toISOString(),
+        endedAt: new Date(endMs).toISOString(),
+        durationSec: durSec,
+      };
+
+      const payload = {
+        id,
+        name: cleanName,
+        note: String(note || "").trim(),
+        points,
+        snappedLine: snappedLine && snappedLine.length >= 2 ? snappedLine : null,
+        updatedAt: new Date().toISOString(),
+        distanceKm: Math.round(distanceKm * 10) / 10,
+        snapEnabled,
+        totalTimeSec: prevTotal + durSec,
+        sessions: [session, ...prevSessions].slice(0, 50),
+        lastRunAt: new Date().toISOString(),
+      };
+
+      const exists = prev.some((r) => r.id === id);
+      return exists ? prev.map((r) => (r.id === id ? payload : r)) : [payload, ...prev];
+    });
+
+    setActiveId(id);
+    setRunOn(false);
   };
 
   const deleteRoute = () => {
@@ -432,11 +560,8 @@ export default function Map() {
     setSnapping(true);
     try {
       const line = await osrmSnap(points);
-      if (!line) {
-        alert("Snap non riuscito. Riprova.");
-      } else {
-        setSnappedLine(line);
-      }
+      if (!line) alert("Snap non riuscito. Riprova.");
+      else setSnappedLine(line);
     } catch (e) {
       console.warn(e);
       alert("Snap non disponibile ora (OSRM). Riprova tra poco.");
@@ -450,7 +575,7 @@ export default function Map() {
       alert("Export GPX è Premium (per ora).");
       return;
     }
-    const base = snappedLine && snappedLine.length >= 2 ? snappedLine : points;
+    const base = snapEnabled && snappedLine?.length >= 2 ? snappedLine : points;
     if (!base || base.length < 2) return alert("Nessun percorso da esportare.");
     const gpx = toGpx(name || "MotoPortEU Route", base);
     downloadTextFile(`${(name || "motoport_route").replace(/\s+/g, "_")}.gpx`, gpx, "application/gpx+xml");
@@ -460,6 +585,13 @@ export default function Map() {
     const url = buildGoogleMapsNavUrl(gps, points);
     if (!url) return alert("Serve un itinerario con almeno 2 punti.");
     window.open(url, "_blank", "noopener,noreferrer");
+  };
+
+  const startRun = () => {
+    if (!gpsOn) return alert("Per avviare il timer devi attivare GPS ON.");
+    if (!gps) return alert("Aspetta il fix GPS (posizione non ancora disponibile).");
+    if (points.length < 2) return alert("Crea prima un percorso (min 2 punti).");
+    setRunOn(true);
   };
 
   const nextInfo = useMemo(() => {
@@ -499,7 +631,7 @@ export default function Map() {
           <div>
             <h1 style={S.title}>Rotta Libera 🏁</h1>
             <p style={S.subtitle}>
-              Clicca sulla mappa o usa la ricerca. Snap su strada, navigatore base e GPX Premium.
+              Cerca, snappa su strada, naviga e salva tempo. Timer avviabile solo con GPS ON.
             </p>
           </div>
 
@@ -570,10 +702,6 @@ export default function Map() {
               </div>
 
               <div style={{ marginTop: 10, display: "flex", gap: 8, flexWrap: "wrap" }}>
-                <button style={S.btn} onClick={() => setPoints((p) => [...p])}>
-                  ✍️ Aggiunta via mappa
-                </button>
-
                 <button style={S.btnGhost} onClick={undo} disabled={!points.length}>
                   ↩️ Undo
                 </button>
@@ -585,7 +713,7 @@ export default function Map() {
               <div style={{ marginTop: 10, display: "flex", gap: 8, flexWrap: "wrap" }}>
                 <span style={S.pill}>📍 Punti: {points.length}</span>
                 <span style={S.pill}>📏 Km: {distanceKm.toFixed(1)}</span>
-                {snappedLine?.length ? <span style={S.pill}>🛣️ Snapped</span> : <span style={S.pill}>📌 Manual</span>}
+                {snapEnabled && snappedLine?.length ? <span style={S.pill}>🛣️ Snapped</span> : <span style={S.pill}>📌 Manual</span>}
               </div>
             </div>
 
@@ -598,12 +726,22 @@ export default function Map() {
 
               <div style={{ marginTop: 10 }}>
                 <div style={{ ...S.small, fontWeight: 800 }}>Nome</div>
-                <input style={S.input} value={name} onChange={(e) => setName(e.target.value)} placeholder="Es: Stelvio + Gavia" />
+                <input
+                  style={S.input}
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  placeholder="Es: Stelvio + Gavia"
+                />
               </div>
 
               <div style={{ marginTop: 10 }}>
                 <div style={{ ...S.small, fontWeight: 800 }}>Note</div>
-                <textarea style={S.textarea} value={note} onChange={(e) => setNote(e.target.value)} placeholder="Soste, benzina, orari, velox..." />
+                <textarea
+                  style={S.textarea}
+                  value={note}
+                  onChange={(e) => setNote(e.target.value)}
+                  placeholder="Soste, benzina, orari, velox..."
+                />
               </div>
 
               <div style={{ marginTop: 12, display: "flex", gap: 8, flexWrap: "wrap" }}>
@@ -623,11 +761,41 @@ export default function Map() {
                 </button>
               </div>
 
+              {/* TIMER UI (GPS only) */}
+              <div style={{ marginTop: 12, display: "flex", gap: 8, flexWrap: "wrap", alignItems: "center" }}>
+                <button style={S.btn} onClick={startRun} disabled={runOn}>
+                  ⏱️ Start (GPS)
+                </button>
+                <button style={S.btnGhost} onClick={stopAndSaveRun} disabled={!runOn}>
+                  ✅ Stop & Salva
+                </button>
+                <span style={S.pill}>⏱️ {fmtTime(runElapsedSec)}</span>
+
+                {activeRoute?.totalTimeSec ? (
+                  <span style={S.pill}>Totale: {fmtTime(activeRoute.totalTimeSec)}</span>
+                ) : null}
+              </div>
+
+              {activeRoute?.lastRunAt ? (
+                <div style={{ fontSize: 12, opacity: 0.7, marginTop: 6 }}>
+                  Ultima corsa: {new Date(activeRoute.lastRunAt).toLocaleString()}
+                </div>
+              ) : null}
+
               {navOn && nextInfo && (
-                <div style={{ marginTop: 12, padding: 12, borderRadius: 14, background: "rgba(29,78,216,0.08)", border: "1px solid rgba(29,78,216,0.18)" }}>
+                <div
+                  style={{
+                    marginTop: 12,
+                    padding: 12,
+                    borderRadius: 14,
+                    background: "rgba(29,78,216,0.08)",
+                    border: "1px solid rgba(29,78,216,0.18)",
+                  }}
+                >
                   <div style={{ fontWeight: 900 }}>🧭 Navigatore</div>
                   <div style={{ marginTop: 6, fontSize: 14 }}>
-                    Prossimo waypoint: <b>#{nextInfo.idx + 1}</b> — distanza <b>{(nextInfo.km * 1000).toFixed(0)} m</b>
+                    Prossimo waypoint: <b>#{nextInfo.idx + 1}</b> — distanza{" "}
+                    <b>{(nextInfo.km * 1000).toFixed(0)} m</b>
                   </div>
                   <div style={{ fontSize: 12, opacity: 0.75, marginTop: 4 }}>
                     {nextInfo.wp[0].toFixed(5)}, {nextInfo.wp[1].toFixed(5)}
@@ -668,6 +836,9 @@ export default function Map() {
                       </div>
                       <div style={{ fontSize: 12, opacity: 0.72, marginTop: 4 }}>
                         {(r.points?.length || 0)} punti • {r.updatedAt ? new Date(r.updatedAt).toLocaleDateString() : "-"}
+                        {typeof r.totalTimeSec === "number" && r.totalTimeSec > 0
+                          ? ` • ⏱️ ${fmtTime(r.totalTimeSec)}`
+                          : ""}
                       </div>
                     </button>
                   ))}
@@ -700,7 +871,8 @@ export default function Map() {
             />
 
             <div style={{ ...S.card, padding: 12, fontSize: 13, opacity: 0.82 }}>
-              <b>Tip:</b> fai Snap per rendere il percorso realistico su strada. In “Navigatore ON” vedrai il prossimo waypoint e puoi aprire Google Maps per turn-by-turn.
+              <b>Tip:</b> fai Snap per rendere il percorso realistico su strada. Il timer parte solo con GPS ON.
+              In “Navigatore ON” vedi il prossimo waypoint e puoi aprire Google Maps per turn-by-turn.
             </div>
           </div>
         </div>
