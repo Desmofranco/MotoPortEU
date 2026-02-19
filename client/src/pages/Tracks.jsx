@@ -8,10 +8,9 @@
 // ✅ Dedup key stabile (id o name+coords)
 // ✅ Meteo + Google Maps
 // ✅ Warning VITE_OWM_KEY solo se manca key E non c’è meteo
-// ✅ Mobile: hero più compatto + pill hero "dark glass"
-// ✅ NEW: swipe down per chiudere dettaglio (se sei in cima)
-// ✅ NEW: sticky mini header dopo scroll (compatto)
-// ✅ NEW: hero che si riduce scrollando (tipo Instagram)
+// ✅ Mobile: filtri collassabili inline (opzione 1)
+// ✅ Mobile detail: mini header sticky + swipe down close + hero che si riduce
+// ✅ Mobile: layout veramente compatto (hero/pills/stat/list)
 // =======================================================
 
 import React, { useEffect, useMemo, useRef, useState } from "react";
@@ -53,7 +52,7 @@ function pillStyleHero(level) {
     fontSize: 12,
     border: "1px solid rgba(255,255,255,0.20)",
     background: "rgba(0,0,0,0.38)",
-    backdropFilter: "blur(8px)",
+    backdropFilter: "blur(10px)",
     whiteSpace: "nowrap",
     color: "rgba(255,255,255,0.95)",
     textShadow: "0 1px 2px rgba(0,0,0,0.35)",
@@ -136,8 +135,6 @@ function normalizeIncomingTrack(t) {
   const region = t?.region || "";
   const type = String(t?.type || t?.kind || "").toLowerCase();
   const surface = String(t?.surface || "").toLowerCase();
-
-  // support: coords come oggetto (lat/lng) o start come oggetto
   const lat = t?.coords?.lat ?? t?.start?.lat ?? null;
   const lng = t?.coords?.lng ?? t?.start?.lng ?? null;
 
@@ -207,6 +204,9 @@ export default function Tracks() {
   const [surface, setSurface] = useState("ALL");
   const [sortBy, setSortBy] = useState("rating"); // rating | difficulty | length
 
+  // mobile: filtri collassabili
+  const [showFilters, setShowFilters] = useState(false);
+
   // selezione
   const [activeKey, setActiveKey] = useState(null);
   const [selected, setSelected] = useState(null);
@@ -257,7 +257,6 @@ export default function Tracks() {
         setActiveKey((prev) => prev || firstKey);
         setSelected((prev) => prev || first);
 
-        // su mobile, parti sempre dalla lista
         setMobileView("list");
         setMiniHeader(false);
       } catch (e) {
@@ -304,8 +303,7 @@ export default function Tracks() {
 
     if (country !== "ALL") out = out.filter((t) => String(t.country || "").toUpperCase() === country);
     if (type !== "ALL") out = out.filter((t) => String(t.type || "").toLowerCase() === String(type).toLowerCase());
-    if (surface !== "ALL")
-      out = out.filter((t) => String(t.surface || "").toLowerCase() === String(surface).toLowerCase());
+    if (surface !== "ALL") out = out.filter((t) => String(t.surface || "").toLowerCase() === String(surface).toLowerCase());
 
     const sorter =
       {
@@ -347,6 +345,7 @@ export default function Tracks() {
     if (isMobileNow()) {
       setMobileView("detail");
       setMiniHeader(false);
+      setShowFilters(false);
       window.scrollTo({ top: 0, behavior: "smooth" });
     }
   };
@@ -359,8 +358,7 @@ export default function Tracks() {
     if (!showDetailMobile) return;
 
     const onScroll = () => {
-      // soglia: appena superi la parte alta dell'hero (effetto mini)
-      setMiniHeader(window.scrollY > 110);
+      setMiniHeader((window.scrollY || 0) > 90);
     };
 
     window.addEventListener("scroll", onScroll, { passive: true });
@@ -370,99 +368,123 @@ export default function Tracks() {
 
   return (
     <div className="tracks-root" style={{ padding: 16, maxWidth: 1250, margin: "0 auto" }}>
-      {/* HEADER */}
-      <div style={{ display: "grid", gridTemplateColumns: "1fr", gap: 10, alignItems: "start" }}>
-        <div style={{ display: "flex", justifyContent: "space-between", gap: 12, flexWrap: "wrap", alignItems: "baseline" }}>
-          <div>
-            <h1 style={{ margin: 0, fontSize: 44, letterSpacing: -0.5 }}>Piste 🏁</h1>
-            <div style={{ opacity: 0.75, marginTop: 6 }}>SuperSport, Enduro e Cross: mappa, meteo e link Google.</div>
+      {/* HEADER + FILTRI: li nascondiamo nel dettaglio mobile (così non occupano mezza schermata) */}
+      {!showDetailMobile && (
+        <div style={{ display: "grid", gridTemplateColumns: "1fr", gap: 10, alignItems: "start" }}>
+          <div style={{ display: "flex", justifyContent: "space-between", gap: 12, flexWrap: "wrap", alignItems: "baseline" }}>
+            <div>
+              <h1 style={{ margin: 0, fontSize: 44, letterSpacing: -0.5 }}>Piste 🏁</h1>
+              <div style={{ opacity: 0.75, marginTop: 6 }}>SuperSport, Enduro e Cross: mappa, meteo e link Google.</div>
+            </div>
+
+            <div style={{ display: "flex", gap: 10, alignItems: "center", flexWrap: "wrap", justifyContent: "flex-end" }}>
+              <input
+                value={q}
+                onChange={(e) => setQ(e.target.value)}
+                placeholder="Cerca: Mugello, Misano, enduro, cross…"
+                style={{
+                  width: "min(520px, 100%)",
+                  padding: "10px 12px",
+                  borderRadius: 14,
+                  border: "1px solid rgba(0,0,0,0.15)",
+                  outline: "none",
+                }}
+              />
+
+              {/* Mobile: bottone filtri */}
+              {isMobile && (
+                <button
+                  type="button"
+                  onClick={() => setShowFilters((v) => !v)}
+                  style={{
+                    padding: "10px 12px",
+                    borderRadius: 14,
+                    border: "1px solid rgba(0,0,0,0.15)",
+                    background: "white",
+                    cursor: "pointer",
+                    fontWeight: 800,
+                  }}
+                >
+                  {showFilters ? "Chiudi filtri ✕" : "Filtri ⚙️"}
+                </button>
+              )}
+            </div>
           </div>
 
-          <input
-            value={q}
-            onChange={(e) => setQ(e.target.value)}
-            placeholder="Cerca: Mugello, Misano, enduro, cross…"
-            style={{
-              width: "min(520px, 100%)",
-              padding: "10px 12px",
-              borderRadius: 14,
-              border: "1px solid rgba(0,0,0,0.15)",
-              outline: "none",
-            }}
-          />
+          {/* FILTERS */}
+          {(!isMobile || showFilters) && (
+            <div
+              style={{
+                display: "grid",
+                gridTemplateColumns: "repeat(auto-fit, minmax(160px, 1fr))",
+                gap: 10,
+                padding: 12,
+                borderRadius: 18,
+                border: "1px solid rgba(0,0,0,0.12)",
+                background: "white",
+              }}
+            >
+              <label style={{ display: "grid", gap: 6 }}>
+                <span style={{ fontSize: 12, opacity: 0.75 }}>Paese</span>
+                <select
+                  value={country}
+                  onChange={(e) => setCountry(e.target.value)}
+                  style={{ padding: "10px 12px", borderRadius: 12, border: "1px solid rgba(0,0,0,0.15)" }}
+                >
+                  {countries.map((c) => (
+                    <option key={c} value={c}>
+                      {c === "ALL" ? "Tutti" : `${countryFlag(c)} ${c}`}
+                    </option>
+                  ))}
+                </select>
+              </label>
+
+              <label style={{ display: "grid", gap: 6 }}>
+                <span style={{ fontSize: 12, opacity: 0.75 }}>Tipo</span>
+                <select
+                  value={type}
+                  onChange={(e) => setType(e.target.value)}
+                  style={{ padding: "10px 12px", borderRadius: 12, border: "1px solid rgba(0,0,0,0.15)" }}
+                >
+                  {types.map((t) => (
+                    <option key={t} value={t}>
+                      {t === "ALL" ? "Tutti" : typeLabel(t)}
+                    </option>
+                  ))}
+                </select>
+              </label>
+
+              <label style={{ display: "grid", gap: 6 }}>
+                <span style={{ fontSize: 12, opacity: 0.75 }}>Fondo</span>
+                <select
+                  value={surface}
+                  onChange={(e) => setSurface(e.target.value)}
+                  style={{ padding: "10px 12px", borderRadius: 12, border: "1px solid rgba(0,0,0,0.15)" }}
+                >
+                  {surfaces.map((s) => (
+                    <option key={s} value={s}>
+                      {s === "ALL" ? "Tutti" : surfaceLabel(s)}
+                    </option>
+                  ))}
+                </select>
+              </label>
+
+              <label style={{ display: "grid", gap: 6 }}>
+                <span style={{ fontSize: 12, opacity: 0.75 }}>Ordina</span>
+                <select
+                  value={sortBy}
+                  onChange={(e) => setSortBy(e.target.value)}
+                  style={{ padding: "10px 12px", borderRadius: 12, border: "1px solid rgba(0,0,0,0.15)" }}
+                >
+                  <option value="rating">Rating (desc)</option>
+                  <option value="difficulty">Difficoltà (desc)</option>
+                  <option value="length">Lunghezza (desc)</option>
+                </select>
+              </label>
+            </div>
+          )}
         </div>
-
-        {/* FILTERS */}
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(170px, 1fr))",
-            gap: 10,
-            padding: 12,
-            borderRadius: 18,
-            border: "1px solid rgba(0,0,0,0.12)",
-            background: "white",
-          }}
-        >
-          <label style={{ display: "grid", gap: 6 }}>
-            <span style={{ fontSize: 12, opacity: 0.75 }}>Paese</span>
-            <select
-              value={country}
-              onChange={(e) => setCountry(e.target.value)}
-              style={{ padding: "10px 12px", borderRadius: 12, border: "1px solid rgba(0,0,0,0.15)" }}
-            >
-              {countries.map((c) => (
-                <option key={c} value={c}>
-                  {c === "ALL" ? "Tutti" : `${countryFlag(c)} ${c}`}
-                </option>
-              ))}
-            </select>
-          </label>
-
-          <label style={{ display: "grid", gap: 6 }}>
-            <span style={{ fontSize: 12, opacity: 0.75 }}>Tipo</span>
-            <select
-              value={type}
-              onChange={(e) => setType(e.target.value)}
-              style={{ padding: "10px 12px", borderRadius: 12, border: "1px solid rgba(0,0,0,0.15)" }}
-            >
-              {types.map((t) => (
-                <option key={t} value={t}>
-                  {t === "ALL" ? "Tutti" : typeLabel(t)}
-                </option>
-              ))}
-            </select>
-          </label>
-
-          <label style={{ display: "grid", gap: 6 }}>
-            <span style={{ fontSize: 12, opacity: 0.75 }}>Fondo</span>
-            <select
-              value={surface}
-              onChange={(e) => setSurface(e.target.value)}
-              style={{ padding: "10px 12px", borderRadius: 12, border: "1px solid rgba(0,0,0,0.15)" }}
-            >
-              {surfaces.map((s) => (
-                <option key={s} value={s}>
-                  {s === "ALL" ? "Tutti" : surfaceLabel(s)}
-                </option>
-              ))}
-            </select>
-          </label>
-
-          <label style={{ display: "grid", gap: 6 }}>
-            <span style={{ fontSize: 12, opacity: 0.75 }}>Ordina</span>
-            <select
-              value={sortBy}
-              onChange={(e) => setSortBy(e.target.value)}
-              style={{ padding: "10px 12px", borderRadius: 12, border: "1px solid rgba(0,0,0,0.15)" }}
-            >
-              <option value="rating">Rating (desc)</option>
-              <option value="difficulty">Difficoltà (desc)</option>
-              <option value="length">Lunghezza (desc)</option>
-            </select>
-          </label>
-        </div>
-      </div>
+      )}
 
       {/* CONTENT */}
       {loading ? (
@@ -473,7 +495,7 @@ export default function Tracks() {
         <>
           {/* MOBILE: dettaglio single-screen */}
           {showDetailMobile ? (
-            <div style={{ marginTop: 14 }}>
+            <div style={{ marginTop: 10 }}>
               {/* Sticky mini header */}
               <div
                 style={{
@@ -483,7 +505,7 @@ export default function Tracks() {
                   background: "rgba(255,255,255,0.96)",
                   backdropFilter: "blur(10px)",
                   borderBottom: "1px solid rgba(0,0,0,0.10)",
-                  padding: miniHeader ? "8px 10px" : 12,
+                  padding: miniHeader ? "8px 10px" : "10px 10px",
                   borderRadius: 16,
                   display: "flex",
                   alignItems: "center",
@@ -494,22 +516,33 @@ export default function Tracks() {
                   type="button"
                   onClick={() => {
                     setMobileView("list");
+                    setMiniHeader(false);
                     window.scrollTo({ top: 0, behavior: "auto" });
                   }}
                   style={{
-                    padding: miniHeader ? "8px 10px" : "10px 12px",
+                    padding: miniHeader ? "8px 10px" : "9px 10px",
                     borderRadius: 12,
                     border: "1px solid rgba(0,0,0,0.15)",
                     background: "white",
                     cursor: "pointer",
                     flex: "0 0 auto",
+                    fontWeight: 900,
                   }}
                 >
                   ← Indietro
                 </button>
 
                 <div style={{ minWidth: 0, flex: "1 1 auto" }}>
-                  <div style={{ fontWeight: 950, fontSize: miniHeader ? 14 : 16, lineHeight: 1.15, whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>
+                  <div
+                    style={{
+                      fontWeight: 950,
+                      fontSize: miniHeader ? 14 : 15,
+                      lineHeight: 1.15,
+                      whiteSpace: "nowrap",
+                      overflow: "hidden",
+                      textOverflow: "ellipsis",
+                    }}
+                  >
                     {countryFlag(selected.country)} {selected.name}
                   </div>
                   {miniHeader ? (
@@ -522,12 +555,12 @@ export default function Tracks() {
                 </div>
               </div>
 
-              <div style={{ marginTop: 12, borderRadius: 22, overflow: "hidden", border: "1px solid rgba(0,0,0,0.12)", background: "white" }}>
+              <div style={{ marginTop: 10, borderRadius: 18, overflow: "hidden", border: "1px solid rgba(0,0,0,0.10)", background: "white" }}>
                 <TrackDetail
                   track={selected}
-                  // swipe down -> close (se sei in cima)
                   onClose={() => {
                     setMobileView("list");
+                    setMiniHeader(false);
                     window.scrollTo({ top: 0, behavior: "auto" });
                   }}
                 />
@@ -596,22 +629,14 @@ export default function Tracks() {
 
         @media (max-width: 767px){
           .tracks-root{ padding: 10px !important; }
-          .tracks-root h1{ font-size: 30px !important; line-height: 1.05 !important; }
-
-          /* Hero mobile: base compatta (poi si riduce ancora con JS) */
-          .track-hero{ height: 180px !important; }
-          .track-hero-title{ font-size: 20px !important; line-height: 1.05 !important; }
-          .track-hero-sub{ font-size: 11px !important; }
-
-          /* Pill più compatti su mobile */
-          .hero-pills span{ font-size: 10px !important; padding: 4px 8px !important; }
+          .tracks-root h1{ font-size: 28px !important; line-height: 1.05 !important; }
         }
       `}</style>
     </div>
   );
 }
 
-/** Card: mobile compatta, desktop “vetrina” (ma click sempre affidabile) */
+/** Card: mobile compatta, desktop “vetrina” */
 function TrackCard({ track, active, onSelect }) {
   const photo = track.photo || FALLBACK_PHOTO;
   const rating = Number(track.rating || 0);
@@ -628,43 +653,42 @@ function TrackCard({ track, active, onSelect }) {
       role="button"
       tabIndex={0}
       onClick={click}
-      onTouchStart={click} // ✅ Android friendly
+      onTouchStart={click}
       onKeyDown={(e) => (e.key === "Enter" || e.key === " " ? click(e) : null)}
       style={{
-        borderRadius: 18,
+        borderRadius: 16,
         overflow: "hidden",
         width: "100%",
-        border: active ? "2px solid rgba(0,0,0,0.35)" : "1px solid rgba(0,0,0,0.12)",
+        border: active ? "2px solid rgba(0,0,0,0.35)" : "1px solid rgba(0,0,0,0.10)",
         background: "white",
-        boxShadow: active ? "0 10px 30px rgba(0,0,0,0.12)" : "none",
+        boxShadow: active ? "0 10px 26px rgba(0,0,0,0.10)" : "none",
         cursor: "pointer",
         WebkitTapHighlightColor: "transparent",
         touchAction: "manipulation",
       }}
     >
-      {/* MOBILE ROW */}
-      <div className="track-card-mobile" style={{ display: "none", padding: 10, gap: 10, alignItems: "center" }}>
-        <div style={{ width: 88, height: 64, borderRadius: 14, overflow: "hidden", background: "rgba(0,0,0,0.05)", flex: "0 0 auto" }}>
+      {/* MOBILE ROW (più piccola) */}
+      <div className="track-card-mobile" style={{ display: "none", padding: 8, gap: 10, alignItems: "center" }}>
+        <div style={{ width: 56, height: 56, borderRadius: 14, overflow: "hidden", background: "rgba(0,0,0,0.05)", flex: "0 0 auto" }}>
           <img src={photo} alt="" style={{ width: "100%", height: "100%", objectFit: "cover" }} loading="lazy" />
         </div>
 
         <div style={{ minWidth: 0, flex: "1 1 auto" }}>
           <div style={{ display: "flex", justifyContent: "space-between", gap: 8, alignItems: "start" }}>
-            <div style={{ fontWeight: 950, lineHeight: 1.15, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
+            <div style={{ fontWeight: 950, fontSize: 15, lineHeight: 1.15, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
               {countryFlag(track.country)} {track.name}
             </div>
             <div style={{ fontSize: 12, opacity: 0.75, whiteSpace: "nowrap" }}>{typeLabel(track.type)}</div>
           </div>
 
-          <div style={{ marginTop: 4, fontSize: 12, opacity: 0.75, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
+          <div style={{ marginTop: 3, fontSize: 12, opacity: 0.75, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
             {track.region || "—"} · {surfaceLabel(track.surface)} · {track.bestSeason || "—"}
           </div>
 
-          <div style={{ marginTop: 8, display: "flex", gap: 8, alignItems: "center", flexWrap: "wrap" }}>
-            <span style={pillStyle(p.level)}>
+          <div style={{ marginTop: 6, display: "flex", gap: 8, alignItems: "center", flexWrap: "wrap" }}>
+            <span style={{ ...pillStyle(p.level), fontSize: 11, padding: "5px 8px" }}>
               ⭐ {Number.isFinite(rating) ? rating.toFixed(1) : "0.0"} · {p.label}
             </span>
-            <span style={{ marginLeft: "auto", fontSize: 12, opacity: 0.6, whiteSpace: "nowrap", pointerEvents: "none" }}>Tocca →</span>
           </div>
         </div>
       </div>
@@ -712,7 +736,6 @@ function TrackDetail({ track, onClose }) {
   const lng = track?.coords?.lng;
 
   const googleHref = lat != null && lng != null ? `https://www.google.com/maps?q=${lat},${lng}` : "https://www.google.com/maps";
-
   const isMobile = isMobileNow();
 
   // scroll -> hero shrink (mobile)
@@ -739,14 +762,12 @@ function TrackDetail({ track, onClose }) {
     if (!isMobile || !onClose) return;
     const st = touchRef.current;
     if (!st.active || st.fired) return;
-    // solo se siamo in cima (evitiamo chiusure mentre scrolli)
     if ((window.scrollY || 0) > 6) return;
 
     const y = e?.touches?.[0]?.clientY ?? 0;
     const dy = y - st.startY;
     const dt = Date.now() - st.startT;
 
-    // swipe down "deciso"
     if (dy > 90 && dt < 650) {
       st.fired = true;
       onClose();
@@ -757,9 +778,9 @@ function TrackDetail({ track, onClose }) {
     touchRef.current.active = false;
   };
 
-  // HERO HEIGHT (mobile collapse effect)
-  const heroMax = isMobile ? 180 : 280;
-  const heroMin = isMobile ? 96 : 280;
+  // HERO HEIGHT (mobile collapse effect) — più compatto
+  const heroMax = isMobile ? 140 : 280;
+  const heroMin = isMobile ? 84 : 280;
   const heroH = isMobile ? Math.max(heroMin, heroMax - Math.min(scrollY, heroMax - heroMin)) : heroMax;
 
   const [wx, setWx] = useState(null);
@@ -832,37 +853,69 @@ function TrackDetail({ track, onClose }) {
           backgroundImage: `url(${photo})`,
           backgroundSize: "cover",
           backgroundPosition: "center",
-          transition: isMobile ? "height 120ms linear" : "none",
+          transition: isMobile ? "height 110ms linear" : "none",
         }}
       >
-        <div style={{ position: "absolute", inset: 0, background: "linear-gradient(180deg, rgba(0,0,0,0.10), rgba(0,0,0,0.74))" }} />
-        <div style={{ position: "absolute", left: 12, right: 12, bottom: 10, color: "white" }}>
-          <div className="track-hero-sub" style={{ fontSize: 13, opacity: 0.92 }}>
+        <div style={{ position: "absolute", inset: 0, background: "linear-gradient(180deg, rgba(0,0,0,0.10), rgba(0,0,0,0.76))" }} />
+
+        <div style={{ position: "absolute", left: 12, right: 12, bottom: 8, color: "white" }}>
+          <div style={{ fontSize: isMobile ? 11 : 13, opacity: 0.92 }}>
             {countryFlag(track.country)} {track.country} · {track.region} · {typeLabel(track.type)}
           </div>
 
-          <div className="track-hero-title" style={{ fontSize: 30, fontWeight: 950, letterSpacing: 0.2, lineHeight: 1.05 }}>
+          <div style={{ fontSize: isMobile ? 20 : 30, fontWeight: 950, letterSpacing: 0.2, lineHeight: 1.05 }}>
             {track.name}
           </div>
 
-          <div className="hero-pills" style={{ marginTop: 10, display: "flex", gap: 8, flexWrap: "wrap" }}>
-            <span style={pillStyleHero("ok")}>⭐ {Number(track.rating || 0).toFixed(1)}</span>
-            <span style={pillStyleHero("ok")}>🧠 diff {Number(track.difficulty || 0)}/10</span>
-            <span style={pillStyleHero("ok")}>⚡ speed {Number(track.speed || 0)}/10</span>
-            <span style={pillStyleHero("ok")}>🧩 tech {Number(track.technique || 0)}/10</span>
-            <span style={pillStyleHero("ok")}>🗓 {track.bestSeason || "—"}</span>
-            {track.lengthKm ? <span style={pillStyleHero("ok")}>📏 {track.lengthKm} km</span> : null}
+          {/* PILL HERO: una riga scrollabile (non allunga) */}
+          <div
+            style={{
+              marginTop: 8,
+              display: "flex",
+              gap: 8,
+              flexWrap: "nowrap",
+              overflowX: "auto",
+              WebkitOverflowScrolling: "touch",
+              paddingBottom: 2,
+            }}
+          >
+            <span style={{ ...pillStyleHero("ok"), fontSize: isMobile ? 10 : 12, padding: isMobile ? "4px 8px" : "6px 10px" }}>
+              ⭐ {Number(track.rating || 0).toFixed(1)}
+            </span>
+            <span style={{ ...pillStyleHero("ok"), fontSize: isMobile ? 10 : 12, padding: isMobile ? "4px 8px" : "6px 10px" }}>
+              🧠 diff {Number(track.difficulty || 0)}/10
+            </span>
+            <span style={{ ...pillStyleHero("ok"), fontSize: isMobile ? 10 : 12, padding: isMobile ? "4px 8px" : "6px 10px" }}>
+              ⚡ speed {Number(track.speed || 0)}/10
+            </span>
+            <span style={{ ...pillStyleHero("ok"), fontSize: isMobile ? 10 : 12, padding: isMobile ? "4px 8px" : "6px 10px" }}>
+              🧩 tech {Number(track.technique || 0)}/10
+            </span>
+            <span style={{ ...pillStyleHero("ok"), fontSize: isMobile ? 10 : 12, padding: isMobile ? "4px 8px" : "6px 10px" }}>
+              🗓 {track.bestSeason || "—"}
+            </span>
+            {track.lengthKm ? (
+              <span style={{ ...pillStyleHero("ok"), fontSize: isMobile ? 10 : 12, padding: isMobile ? "4px 8px" : "6px 10px" }}>
+                📏 {track.lengthKm} km
+              </span>
+            ) : null}
           </div>
         </div>
       </div>
 
       {/* Body */}
-      <div style={{ padding: 14 }}>
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(160px, 1fr))", gap: 10 }}>
-          <Stat label="Tipo" value={typeLabel(track.type)} />
-          <Stat label="Fondo" value={surfaceLabel(track.surface)} />
-          <Stat label="Rating" value={`${Number(track.rating || 0).toFixed(1)} / 10`} />
+      <div style={{ padding: isMobile ? 10 : 14 }}>
+        <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr 1fr" : "repeat(auto-fit, minmax(160px, 1fr))", gap: 10 }}>
+          <Stat compact={isMobile} label="Tipo" value={typeLabel(track.type)} />
+          <Stat compact={isMobile} label="Fondo" value={surfaceLabel(track.surface)} />
+          {!isMobile ? <Stat compact={false} label="Rating" value={`${Number(track.rating || 0).toFixed(1)} / 10`} /> : null}
         </div>
+
+        {isMobile ? (
+          <div style={{ marginTop: 10 }}>
+            <Stat compact={true} label="Rating" value={`${Number(track.rating || 0).toFixed(1)} / 10`} />
+          </div>
+        ) : null}
 
         <div style={{ marginTop: 12 }}>
           <a
@@ -883,19 +936,19 @@ function TrackDetail({ track, onClose }) {
           </a>
         </div>
 
-        <div style={{ marginTop: 14, borderTop: "1px solid rgba(0,0,0,0.08)", paddingTop: 14 }}>
+        <div style={{ marginTop: 12, borderTop: "1px solid rgba(0,0,0,0.08)", paddingTop: 12 }}>
           <strong>📌 Descrizione</strong>
           <div style={{ marginTop: 8, fontSize: 14, opacity: 0.9, lineHeight: 1.4 }}>{track.description || "—"}</div>
         </div>
 
-        <div style={{ marginTop: 14, borderTop: "1px solid rgba(0,0,0,0.08)", paddingTop: 14 }}>
+        <div style={{ marginTop: 12, borderTop: "1px solid rgba(0,0,0,0.08)", paddingTop: 12 }}>
           <strong>🗺️ Mappa</strong>
           <div style={{ marginTop: 10 }}>
             <TrackMap track={track} />
           </div>
         </div>
 
-        <div style={{ marginTop: 14, borderTop: "1px solid rgba(0,0,0,0.08)", paddingTop: 14 }}>
+        <div style={{ marginTop: 12, borderTop: "1px solid rgba(0,0,0,0.08)", paddingTop: 12 }}>
           <strong>🌤 Meteo</strong>
           {wxBox}
 
@@ -914,11 +967,18 @@ function TrackDetail({ track, onClose }) {
   );
 }
 
-function Stat({ label, value }) {
+function Stat({ label, value, compact = false }) {
   return (
-    <div style={{ padding: 12, borderRadius: 16, border: "1px solid rgba(0,0,0,0.12)" }}>
-      <div style={{ fontSize: 12, opacity: 0.7 }}>{label}</div>
-      <div style={{ fontWeight: 950, marginTop: 2 }}>{value}</div>
+    <div
+      style={{
+        padding: compact ? 9 : 12,
+        borderRadius: compact ? 14 : 16,
+        border: "1px solid rgba(0,0,0,0.10)",
+        background: "white",
+      }}
+    >
+      <div style={{ fontSize: compact ? 11 : 12, opacity: 0.7 }}>{label}</div>
+      <div style={{ fontWeight: 950, marginTop: 2, fontSize: compact ? 14 : 16 }}>{value}</div>
     </div>
   );
 }
