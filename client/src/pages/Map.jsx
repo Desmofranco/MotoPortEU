@@ -104,7 +104,7 @@ function downloadTextFile(filename, content, mime = "application/octet-stream") 
 }
 
 // --- Autocomplete Nominatim (cache + retry) ---
-const _geoCache = new Map(); // key => results
+const _geoCache = new globalThis.Map();
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
 async function nominatimSearch(q) {
