@@ -7,6 +7,7 @@
 // ✅ Navigatore base (GPS follow + next waypoint + Google Maps nav)
 // ✅ Timer corsa: Start/Stop salva sessioni e tempo totale (solo con GPS ON)
 // ✅ Export GPX (Premium gate via localStorage)
+// ✅ NEW: GPS Live + Scia (trail) in tempo reale
 // =======================================================
 
 import React, { useEffect, useMemo, useRef, useState } from "react";
@@ -279,6 +280,11 @@ const S = {
   },
 };
 
+// --- Trail helpers ---
+const TRAIL_MIN_STEP_M = 12; // aggiungi punto solo se ti sposti almeno 12m
+const TRAIL_MAX_PTS = 2500; // cap memoria
+const kmToM = (km) => km * 1000;
+
 export default function Map() {
   const [routes, setRoutes] = useState(() => loadRoutes());
   const [activeId, setActiveId] = useState(() => routes?.[0]?.id || "");
@@ -304,11 +310,19 @@ export default function Map() {
   const [navOn, setNavOn] = useState(false);
   const [nextIdx, setNextIdx] = useState(0);
 
+  // 🟦 GPS Trail (Scia live)
+  const [gpsTrail, setGpsTrail] = useState([]); // always shown when GPS ON
+  const lastTrailPointRef = useRef(null);
+
   // ⏱️ Timer / tracking (ONLY GPS ON)
   const [runOn, setRunOn] = useState(false);
   const [runStartMs, setRunStartMs] = useState(null);
   const [runElapsedSec, setRunElapsedSec] = useState(0);
   const tickRef = useRef(null);
+
+  // Track points during run (optional)
+  const [runTrack, setRunTrack] = useState([]);
+  const lastRunTrackRef = useRef(null);
 
   // Premium gate (temp)
   const isPremium = useMemo(() => localStorage.getItem(PASS_KEY) === "true", []);
@@ -337,6 +351,8 @@ export default function Map() {
     setRunOn(false);
     setRunElapsedSec(0);
     setRunStartMs(null);
+    setRunTrack([]);
+    lastRunTrackRef.current = null;
   }, [activeId]); // eslint-disable-line
 
   // Autocomplete debounce
@@ -361,9 +377,15 @@ export default function Map() {
   useEffect(() => {
     if (!gpsOn) {
       setGps(null);
-      // if GPS goes OFF -> stop nav + stop timer
       setNavOn(false);
       setRunOn(false);
+
+      // reset scia quando spegni GPS (scelta UX)
+      setGpsTrail([]);
+      lastTrailPointRef.current = null;
+
+      setRunTrack([]);
+      lastRunTrackRef.current = null;
       return;
     }
 
@@ -383,11 +405,49 @@ export default function Map() {
         alert("Impossibile ottenere GPS. Consenti la posizione al browser.");
         setGpsOn(false);
       },
-      { enableHighAccuracy: true, maximumAge: 4000, timeout: 12000 }
+      { enableHighAccuracy: true, maximumAge: 2000, timeout: 12000 }
     );
 
     return () => navigator.geolocation.clearWatch(id);
   }, [gpsOn]);
+
+  // 🟦 Trail update when gps changes
+  useEffect(() => {
+    if (!gpsOn || !gps) return;
+
+    setGpsTrail((prev) => {
+      const last = lastTrailPointRef.current;
+      if (!last) {
+        lastTrailPointRef.current = gps;
+        return [gps];
+      }
+      const movedM = kmToM(haversineKm(last, gps));
+      if (movedM < TRAIL_MIN_STEP_M) return prev;
+
+      const next = [...prev, gps];
+      lastTrailPointRef.current = gps;
+      if (next.length > TRAIL_MAX_PTS) return next.slice(next.length - TRAIL_MAX_PTS);
+      return next;
+    });
+
+    // during run: also track (can be saved in session)
+    if (runOn) {
+      setRunTrack((prev) => {
+        const last = lastRunTrackRef.current;
+        if (!last) {
+          lastRunTrackRef.current = gps;
+          return [gps];
+        }
+        const movedM = kmToM(haversineKm(last, gps));
+        if (movedM < TRAIL_MIN_STEP_M) return prev;
+
+        const next = [...prev, gps];
+        lastRunTrackRef.current = gps;
+        if (next.length > TRAIL_MAX_PTS) return next.slice(next.length - TRAIL_MAX_PTS);
+        return next;
+      });
+    }
+  }, [gps, gpsOn, runOn]);
 
   // Navigator: compute next waypoint
   useEffect(() => {
@@ -410,6 +470,10 @@ export default function Map() {
     setRunStartMs(start);
     setRunElapsedSec(0);
 
+    // reset run track at start
+    setRunTrack(gps ? [gps] : []);
+    lastRunTrackRef.current = gps || null;
+
     tickRef.current = setInterval(() => {
       setRunElapsedSec(Math.floor((Date.now() - start) / 1000));
     }, 1000);
@@ -418,7 +482,7 @@ export default function Map() {
       if (tickRef.current) clearInterval(tickRef.current);
       tickRef.current = null;
     };
-  }, [runOn]);
+  }, [runOn]); // eslint-disable-line
 
   const onAddPoint = (p) => {
     setPoints((prev) => [...prev, p]);
@@ -438,6 +502,13 @@ export default function Map() {
     setRunOn(false);
     setRunElapsedSec(0);
     setRunStartMs(null);
+    setRunTrack([]);
+    lastRunTrackRef.current = null;
+  };
+
+  const resetTrail = () => {
+    setGpsTrail(gps ? [gps] : []);
+    lastTrailPointRef.current = gps || null;
   };
 
   const newRoute = () => {
@@ -451,6 +522,8 @@ export default function Map() {
     setRunOn(false);
     setRunElapsedSec(0);
     setRunStartMs(null);
+    setRunTrack([]);
+    lastRunTrackRef.current = null;
   };
 
   const saveCurrent = () => {
@@ -515,6 +588,8 @@ export default function Map() {
         startedAt: new Date(startMs).toISOString(),
         endedAt: new Date(endMs).toISOString(),
         durationSec: durSec,
+        // 🔥 salva anche la traccia reale del run (opzionale)
+        track: runTrack && runTrack.length >= 2 ? runTrack : null,
       };
 
       const payload = {
@@ -537,6 +612,8 @@ export default function Map() {
 
     setActiveId(id);
     setRunOn(false);
+    setRunTrack([]);
+    lastRunTrackRef.current = null;
   };
 
   const deleteRoute = () => {
@@ -631,7 +708,8 @@ export default function Map() {
           <div>
             <h1 style={S.title}>Rotta Libera 🏁</h1>
             <p style={S.subtitle}>
-              Cerca, snappa su strada, naviga e salva tempo. Timer avviabile solo con GPS ON.
+              Cerca, snappa su strada, naviga e salva tempo. Timer avviabile solo con GPS ON.{" "}
+              <b>NEW:</b> Scia GPS Live.
             </p>
           </div>
 
@@ -715,6 +793,14 @@ export default function Map() {
                 <span style={S.pill}>📏 Km: {distanceKm.toFixed(1)}</span>
                 {snapEnabled && snappedLine?.length ? <span style={S.pill}>🛣️ Snapped</span> : <span style={S.pill}>📌 Manual</span>}
               </div>
+
+              {/* Trail controls */}
+              <div style={{ marginTop: 10, display: "flex", gap: 8, flexWrap: "wrap", alignItems: "center" }}>
+                <span style={S.pill}>🟦 Scia: {gpsTrail.length}</span>
+                <button style={S.btnGhost} onClick={resetTrail} disabled={!gpsOn}>
+                  🧽 Reset scia
+                </button>
+              </div>
             </div>
 
             {/* Route details */}
@@ -774,6 +860,8 @@ export default function Map() {
                 {activeRoute?.totalTimeSec ? (
                   <span style={S.pill}>Totale: {fmtTime(activeRoute.totalTimeSec)}</span>
                 ) : null}
+
+                {runOn ? <span style={S.pill}>🏁 Run pts: {runTrack.length}</span> : null}
               </div>
 
               {activeRoute?.lastRunAt ? (
@@ -839,6 +927,7 @@ export default function Map() {
                         {typeof r.totalTimeSec === "number" && r.totalTimeSec > 0
                           ? ` • ⏱️ ${fmtTime(r.totalTimeSec)}`
                           : ""}
+                        {r.sessions?.[0]?.track?.length ? ` • 🟦 track: ${r.sessions[0].track.length}` : ""}
                       </div>
                     </button>
                   ))}
@@ -861,6 +950,7 @@ export default function Map() {
               points={points}
               snappedLine={snapEnabled ? snappedLine : null}
               gps={gps}
+              gpsTrail={gpsOn ? gpsTrail : null}
               followGps={followGps}
               isAddingEnabled={true}
               onAddPoint={onAddPoint}
@@ -872,7 +962,8 @@ export default function Map() {
 
             <div style={{ ...S.card, padding: 12, fontSize: 13, opacity: 0.82 }}>
               <b>Tip:</b> fai Snap per rendere il percorso realistico su strada. Il timer parte solo con GPS ON.
-              In “Navigatore ON” vedi il prossimo waypoint e puoi aprire Google Maps per turn-by-turn.
+              <br />
+              <b>NEW:</b> attiva GPS ON e vedi la <b>scia live</b> mentre ti muovi.
             </div>
           </div>
         </div>

@@ -1,146 +1,93 @@
 // =======================================================
 // src/components/RouteBuilderMap.jsx
-// MotoPortEU — Route Builder WOW
-// ✅ Click add points + markers
-// ✅ Snapped route polyline (OSRM)
-// ✅ Live GPS marker + follow mode
-// ✅ Fit bounds helper
+// Leaflet map wrapper per Route Builder + GPS + Trail
+// ✅ click per aggiungere punti
+// ✅ disegna snappedLine / points
+// ✅ marker GPS
+// ✅ NEW: gpsTrail polyline (scia live)
 // =======================================================
 
-import React, { useEffect, useMemo, useRef } from "react";
+import React, { useEffect } from "react";
 import { MapContainer, TileLayer, Marker, Polyline, useMap, useMapEvents } from "react-leaflet";
 import L from "leaflet";
-
-// Leaflet CSS + icon fix for Vite
 import "leaflet/dist/leaflet.css";
-import marker2x from "leaflet/dist/images/marker-icon-2x.png";
-import marker1x from "leaflet/dist/images/marker-icon.png";
-import shadow from "leaflet/dist/images/marker-shadow.png";
 
+// Fix icone default (Vite + Leaflet)
 delete L.Icon.Default.prototype._getIconUrl;
 L.Icon.Default.mergeOptions({
-  iconRetinaUrl: marker2x,
-  iconUrl: marker1x,
-  shadowUrl: shadow,
+  iconRetinaUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon-2x.png",
+  iconUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png",
+  shadowUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png",
 });
 
-// Custom small dot icon for GPS
-const gpsIcon = new L.DivIcon({
-  className: "",
-  html: `
-    <div style="
-      width:14px;height:14px;border-radius:999px;
-      background: #1d4ed8;
-      border: 2px solid white;
-      box-shadow: 0 8px 20px rgba(0,0,0,.25);
-    "></div>
-  `,
-  iconSize: [14, 14],
-  iconAnchor: [7, 7],
-});
-
-function FitTo({ points, enabled }) {
+function FitOrFollow({ center, zoom, fitOnChange, followGps, gps }) {
   const map = useMap();
-  useEffect(() => {
-    if (!enabled) return;
-    if (!map) return;
-    if (!points || points.length === 0) return;
 
-    if (points.length === 1) {
-      map.setView(points[0], Math.max(map.getZoom(), 12), { animate: true });
+  useEffect(() => {
+    if (!map) return;
+
+    // follow GPS (soft)
+    if (followGps && gps) {
+      map.setView(gps, Math.max(map.getZoom(), 13), { animate: true });
       return;
     }
-    const bounds = L.latLngBounds(points.map((p) => L.latLng(p[0], p[1])));
-    map.fitBounds(bounds, { padding: [50, 50], animate: true });
-  }, [map, points, enabled]);
+
+    if (fitOnChange && center && zoom) {
+      map.setView(center, zoom, { animate: true });
+    }
+  }, [map, center, zoom, fitOnChange, followGps, gps]);
+
   return null;
 }
 
-function ClickToAdd({ onAddPoint, isEnabled }) {
+function ClickToAdd({ enabled, onAddPoint }) {
   useMapEvents({
     click(e) {
-      if (!isEnabled) return;
+      if (!enabled) return;
       const { lat, lng } = e.latlng;
-      onAddPoint([lat, lng]);
+      onAddPoint?.([lat, lng]);
     },
   });
   return null;
 }
 
-function FollowGps({ gps, follow }) {
-  const map = useMap();
-  const lastRef = useRef(null);
-
-  useEffect(() => {
-    if (!follow) return;
-    if (!map) return;
-    if (!gps) return;
-
-    const key = `${gps[0].toFixed(5)}|${gps[1].toFixed(5)}`;
-    if (lastRef.current === key) return;
-    lastRef.current = key;
-
-    map.setView(gps, Math.max(map.getZoom(), 14), { animate: true });
-  }, [gps, follow, map]);
-
-  return null;
-}
-
 export default function RouteBuilderMap({
-  points,
-  snappedLine, // array of [lat,lng] (optional)
-  gps, // [lat,lng] (optional)
-  followGps = false,
-  onAddPoint,
+  points = [],
+  snappedLine = null,
+  gps = null,
+  gpsTrail = null,
+  followGps = true,
   isAddingEnabled = true,
+  onAddPoint,
   center = [45.4642, 9.19],
   zoom = 6,
   height = 520,
   fitOnChange = true,
 }) {
-  const line = useMemo(() => {
-    if (snappedLine && snappedLine.length >= 2) return snappedLine;
-    return points || [];
-  }, [snappedLine, points]);
+  const line = snappedLine && snappedLine.length >= 2 ? snappedLine : points;
 
   return (
-    <div
-      style={{
-        width: "100%",
-        height,
-        borderRadius: 18,
-        overflow: "hidden",
-        boxShadow: "0 14px 40px rgba(0,0,0,0.22)",
-        border: "1px solid rgba(0,0,0,0.08)",
-        background: "rgba(255,255,255,0.6)",
-      }}
-    >
-      <MapContainer
-        center={center}
-        zoom={zoom}
-        style={{ width: "100%", height: "100%" }}
-      >
+    <div style={{ width: "100%", height, borderRadius: 18, overflow: "hidden", border: "1px solid rgba(0,0,0,0.10)" }}>
+      <MapContainer center={center} zoom={zoom} style={{ width: "100%", height: "100%" }}>
         <TileLayer
+          attribution='&copy; OpenStreetMap contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-          attribution="&copy; OpenStreetMap contributors"
         />
 
-        <ClickToAdd onAddPoint={onAddPoint} isEnabled={isAddingEnabled} />
-        <FitTo points={line.length ? line : points} enabled={fitOnChange} />
+        <FitOrFollow center={center} zoom={zoom} fitOnChange={fitOnChange} followGps={followGps} gps={gps} />
+        <ClickToAdd enabled={isAddingEnabled} onAddPoint={onAddPoint} />
 
-        {/* Waypoints markers */}
-        {points?.map((p, idx) => (
-          <Marker key={`pt-${idx}-${p[0].toFixed(5)}-${p[1].toFixed(5)}`} position={p} />
-        ))}
+        {/* Route line */}
+        {line && line.length >= 2 ? <Polyline positions={line} /> : null}
 
-        {/* Route line (snapped preferred) */}
-        {line.length >= 2 && <Polyline positions={line} />}
+        {/* GPS Trail (scia live) */}
+        {gpsTrail && gpsTrail.length >= 2 ? <Polyline positions={gpsTrail} /> : null}
 
         {/* GPS marker */}
-        {gps && <Marker position={gps} icon={gpsIcon} />}
-
-        <FollowGps gps={gps} follow={followGps} />
+        {gps ? <Marker position={gps} /> : null}
       </MapContainer>
+
+      <div style={{ position: "absolute", left: -9999, top: -9999 }} />
     </div>
   );
 }
