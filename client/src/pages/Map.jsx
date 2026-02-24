@@ -204,21 +204,37 @@ function buildGoogleMapsNavUrl(gps, points) {
   const origin = gps ? `${gps[0]},${gps[1]}` : `${points[0][0]},${points[0][1]}`;
   const destination = `${points[points.length - 1][0]},${points[points.length - 1][1]}`;
 
+  // Google su mobile è molto più affidabile con "navigate"
+  const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent || "");
+
+  // Waypoints (max 8)
   const mid = points
     .slice(1, -1)
     .slice(0, 8)
-    .map((p) => `${p[0]},${p[1]}`)
-    .join("|");
+    .map((p) => `${p[0]},${p[1]}`);
 
+  if (isMobile) {
+    // ✅ Mobile: usa /maps/dir/ (si apre l’app e parte la navigazione quasi sempre)
+    // format: https://www.google.com/maps/dir/?api=1&origin=...&destination=...&waypoints=...
+    const base =
+      `https://www.google.com/maps/dir/?api=1` +
+      `&travelmode=driving` +
+      `&origin=${encodeURIComponent(origin)}` +
+      `&destination=${encodeURIComponent(destination)}` +
+      (mid.length ? `&waypoints=${encodeURIComponent(mid.join("|"))}` : "");
+
+    return base;
+  }
+
+  // ✅ Desktop: la stessa cosa va benissimo
   return (
     `https://www.google.com/maps/dir/?api=1` +
     `&travelmode=driving` +
     `&origin=${encodeURIComponent(origin)}` +
     `&destination=${encodeURIComponent(destination)}` +
-    (mid ? `&waypoints=${encodeURIComponent(mid)}` : "")
+    (mid.length ? `&waypoints=${encodeURIComponent(mid.join("|"))}` : "")
   );
 }
-
 // --- Manual route parse (coords / Google Maps URL) ---
 function parseCoordsFromText(text) {
   const out = [];
@@ -820,7 +836,9 @@ export default function Map() {
   const openGoogleNav = () => {
     const url = buildGoogleMapsNavUrl(gps, points);
     if (!url) return alert("Serve un itinerario con almeno 2 punti.");
-    window.open(url, "_blank", "noopener,noreferrer");
+  const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent || "");
+if (isMobile) window.location.href = url;
+else window.open(url, "_blank", "noopener,noreferrer");
   };
 
   const startRun = () => {
