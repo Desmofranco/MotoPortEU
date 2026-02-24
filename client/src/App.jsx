@@ -10,7 +10,7 @@ import RoutesPage from "./pages/Routes";
 import Tracks from "./pages/Tracks";
 
 import MyTrackDetail from "./pages/MyTrackDetail";
-
+import Map from "./pages/Map";
 import AppShell from "./components/AppShell";
 import RequireAuth from "./components/RequireAuth";
 
@@ -36,7 +36,7 @@ export default function App() {
           <Route path="/supplier/:id" element={<SupplierPage />} />
           <Route path="/routes" element={<RoutesPage />} />
           <Route path="/tracks" element={<Tracks />} />
-
+          <Route path="/map" element={<Map />} />
           <Route path="/my-tracks/:id" element={<MyTrackDetail />} />
         </Route>
       </Routes>
