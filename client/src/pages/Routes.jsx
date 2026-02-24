@@ -528,7 +528,7 @@ function RouteDetail({ route }) {
     🌡 {wx.temp}° {wx.tempMin != null && wx.tempMax != null ? `(min ${wx.tempMin}° / max ${wx.tempMax}°)` : ""}
   </span>
 ) : null}
-                {wx.windKmh != null ? <span style={pill("light")}>💨 {wx.windKmh} km/h</span> : null}
+                {wx.windKmh != null ? <span style={pill("light")}>💨vento {wx.windKmh} km/h</span> : null}
               </div>
               <div style={{ fontSize: 12, opacity: 0.7 }}>Aggiornato: {String(wx.updatedAt || "").slice(0, 16).replace("T", " ")}</div>
             </div>
