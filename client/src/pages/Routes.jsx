@@ -523,7 +523,11 @@ function RouteDetail({ route }) {
             <div style={{ marginTop: 10, display: "grid", gap: 10 }}>
               <div style={{ display: "flex", gap: 10, flexWrap: "wrap", alignItems: "center" }}>
                 <span style={pill("light")}>Condizione: <strong>{wx.worst}</strong></span>
-                {wx.temp != null ? <span style={pill("light")}>🌡 {wx.temp}°</span> : null}
+                {wx.temp != null ? (
+  <span style={pill("light")}>
+    🌡 {wx.temp}° {wx.tempMin != null && wx.tempMax != null ? `(min ${wx.tempMin}° / max ${wx.tempMax}°)` : ""}
+  </span>
+) : null}
                 {wx.windKmh != null ? <span style={pill("light")}>💨 {wx.windKmh} km/h</span> : null}
               </div>
               <div style={{ fontSize: 12, opacity: 0.7 }}>Aggiornato: {String(wx.updatedAt || "").slice(0, 16).replace("T", " ")}</div>
