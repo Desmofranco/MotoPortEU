@@ -1,124 +1,74 @@
 import React from "react";
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
-const TOKEN_KEY = "token";
-
-const linkStyle = (isMobile) => ({ isActive }) => ({
-  padding: isMobile ? "6px 8px" : "8px 12px",
+const linkStyle = ({ isActive }) => ({
+  padding: "8px 14px",
   borderRadius: 999,
   textDecoration: "none",
   color: "inherit",
-  background: isActive ? "rgba(0,0,0,0.08)" : "transparent",
-  border: isActive ? "1px solid rgba(0,0,0,0.10)" : "1px solid transparent",
   fontWeight: 900,
-  fontSize: isMobile ? 13 : 14,
+  fontSize: 14,
   whiteSpace: "nowrap",
+
+  // STILE FIGO tipo "Rotte"
+  background: isActive
+    ? "rgba(0,0,0,0.08)"
+    : "rgba(255,255,255,0.6)",
+
+  border: isActive
+    ? "1px solid rgba(0,0,0,0.15)"
+    : "1px solid rgba(0,0,0,0.08)",
+
+  boxShadow: isActive
+    ? "0 4px 10px rgba(0,0,0,0.08)"
+    : "0 2px 6px rgba(0,0,0,0.05)",
+
+  backdropFilter: "blur(6px)",
+  transition: "all 0.2s ease",
 });
 
 export default function Navbar() {
-  const navigate = useNavigate();
-  const isLogged = Boolean(localStorage.getItem(TOKEN_KEY));
-
-  const logout = () => {
-    localStorage.removeItem(TOKEN_KEY);
-    navigate("/", { replace: true });
-  };
-
-  if (!isLogged) return null;
-
-  const isMobile =
-    typeof window !== "undefined" &&
-    window.matchMedia &&
-    window.matchMedia("(max-width: 640px), (pointer: coarse)").matches;
-
   return (
     <div
       style={{
         position: "sticky",
         top: 0,
         zIndex: 60,
-        background: "rgba(255,255,255,0.92)",
+        background: "rgba(255,255,255,0.9)",
         backdropFilter: "blur(10px)",
-        borderBottom: "1px solid rgba(0,0,0,0.10)",
+        borderBottom: "1px solid rgba(0,0,0,0.08)",
       }}
     >
       <div
         style={{
-          padding: isMobile ? "8px 8px" : "10px 10px",
+          padding: "10px 8px",
           display: "flex",
           alignItems: "center",
           gap: 8,
-          maxWidth: 1250,
-          margin: "0 auto",
-          boxSizing: "border-box",
+          overflowX: "auto",
+          whiteSpace: "nowrap",
+          WebkitOverflowScrolling: "touch",
         }}
       >
-        {/* Brand SOLO desktop (su mobile lo togliamo per spazio) */}
-        {!isMobile && (
-          <div
-            style={{
-              fontWeight: 950,
-              letterSpacing: -0.3,
-              flex: "0 0 auto",
-              maxWidth: 140,
-              overflow: "hidden",
-              textOverflow: "ellipsis",
-              whiteSpace: "nowrap",
-            }}
-            title="MotoPortEU"
-          >
-            MotoPortEU
-          </div>
-        )}
+        <NavLink to="/routes" style={linkStyle}>
+          Itinerari
+        </NavLink>
 
-        {/* Links: sempre scroll orizzontale */}
-        <div
-          style={{
-            flex: "1 1 auto",
-            display: "flex",
-            gap: isMobile ? 6 : 8,
-            alignItems: "center",
-            overflowX: "auto",
-            whiteSpace: "nowrap",
-            WebkitOverflowScrolling: "touch",
-            paddingBottom: 3,
-            minWidth: 0, // IMPORTANTISSIMO per evitare tagli in flex
-          }}
-        >
-          <NavLink to="/routes" style={linkStyle(isMobile)}>
-            Itinerari
-          </NavLink>
-          <NavLink to="/tracks" style={linkStyle(isMobile)}>
-            🏁 Circuiti
-          </NavLink>
-          <NavLink to="/map" style={linkStyle(isMobile)}>
-            🧭 Rotte
-          </NavLink>
-          <NavLink to="/garage" style={linkStyle(isMobile)}>
-            Garage
-          </NavLink>
-          <NavLink to="/suppliers" style={linkStyle(isMobile)}>
-            Fornitori
-          </NavLink>
-        </div>
+        <NavLink to="/tracks" style={linkStyle}>
+          🏁 Circuiti
+        </NavLink>
 
-        {/* Logout compatto su mobile */}
-        <button
-          onClick={logout}
-          title="Logout"
-          style={{
-            flex: "0 0 auto",
-            padding: isMobile ? "7px 9px" : "8px 10px",
-            borderRadius: 12,
-            border: "1px solid rgba(0,0,0,0.15)",
-            background: "white",
-            cursor: "pointer",
-            fontWeight: 950,
-            fontSize: isMobile ? 13 : 14,
-          }}
-        >
-          {isMobile ? "⎋" : "Logout"}
-        </button>
+        <NavLink to="/map" style={linkStyle}>
+          🧭 Rotte
+        </NavLink>
+
+        <NavLink to="/garage" style={linkStyle}>
+          Garage
+        </NavLink>
+
+        <NavLink to="/suppliers" style={linkStyle}>
+          Fornitori
+        </NavLink>
       </div>
     </div>
   );
