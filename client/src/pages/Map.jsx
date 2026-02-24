@@ -10,6 +10,7 @@
 // ✅ Export GPX (Premium gate via localStorage)
 // ✅ GPS Live + Scia (trail) in tempo reale
 // ✅ FIX: input visibili in tema scuro + fitOnChange intelligente
+// ✅ NEW: Inserimento manuale percorso (coordinate / link Google Maps)
 // =======================================================
 
 import React, { useEffect, useMemo, useRef, useState } from "react";
@@ -213,6 +214,47 @@ function buildGoogleMapsNavUrl(gps, points) {
   );
 }
 
+// --- Manual route parse (coords / Google Maps URL) ---
+function parseCoordsFromText(text) {
+  const out = [];
+  const t = String(text || "").trim();
+  if (!t) return out;
+
+  // 1) Google Maps @lat,lng
+  const atMatches = [...t.matchAll(/@(-?\d+(?:\.\d+)?),\s*(-?\d+(?:\.\d+)?)/g)];
+  for (const m of atMatches) {
+    const lat = Number(m[1]);
+    const lon = Number(m[2]);
+    if (Number.isFinite(lat) && Number.isFinite(lon) && Math.abs(lat) <= 90 && Math.abs(lon) <= 180) {
+      out.push([lat, lon]);
+    }
+  }
+
+  // 2) Lines "lat,lng" or "lat lng" or "lat;lng" etc. -> first two numbers found
+  const lines = t.split(/\r?\n/).map((x) => x.trim()).filter(Boolean);
+  for (const line of lines) {
+    const nums = line.match(/-?\d+(?:\.\d+)?/g);
+    if (!nums || nums.length < 2) continue;
+
+    const lat = Number(nums[0]);
+    const lon = Number(nums[1]);
+    if (!Number.isFinite(lat) || !Number.isFinite(lon)) continue;
+    if (Math.abs(lat) > 90 || Math.abs(lon) > 180) continue;
+    out.push([lat, lon]);
+  }
+
+  // dedup
+  const seen = new Set();
+  const dedup = [];
+  for (const [lat, lon] of out) {
+    const k = `${lat.toFixed(6)},${lon.toFixed(6)}`;
+    if (seen.has(k)) continue;
+    seen.add(k);
+    dedup.push([lat, lon]);
+  }
+  return dedup;
+}
+
 // --- Styles (no Tailwind needed) ---
 const S = {
   page: { width: "100%", padding: "16px 12px" },
@@ -327,6 +369,10 @@ export default function Map() {
   const [name, setName] = useState("");
   const [note, setNote] = useState("");
 
+  // Manual insert
+  const [manualText, setManualText] = useState("");
+  const [manualErr, setManualErr] = useState("");
+
   // Autocomplete
   const [q, setQ] = useState("");
   const [suggestions, setSuggestions] = useState([]);
@@ -394,7 +440,7 @@ export default function Map() {
   useEffect(() => {
     if (!q || q.trim().length < 3) {
       setSuggestions([]);
-      setSearchOpen(false); // ✅ micro-fix: dropdown pulita quando cancelli
+      setSearchOpen(false); // dropdown pulita quando cancelli
       return;
     }
     if (searchTimer.current) clearTimeout(searchTimer.current);
@@ -417,7 +463,7 @@ export default function Map() {
     setSearchOpen(false);
   };
 
-  // ✅ aggiungi anche se non clicchi la dropdown (usa prima suggestions)
+  // aggiungi anche se non clicchi la dropdown (usa prima suggestions)
   const addTypedPlace = async () => {
     const query = String(q || "").trim();
     if (query.length < 3) return;
@@ -437,6 +483,32 @@ export default function Map() {
     } catch {
       alert("Ricerca occupata (OSM). Riprova tra 1 secondo.");
     }
+  };
+
+  // Manual insert actions
+  const importManualPoints = () => {
+    setManualErr("");
+    const pts = parseCoordsFromText(manualText);
+    if (!pts.length) {
+      setManualErr(
+        "Nessun punto valido trovato. Usa righe tipo: 45.46, 9.19 (oppure incolla un link Google Maps con @lat,lng)."
+      );
+      return;
+    }
+    setPoints((prev) => [...prev, ...pts]);
+    setSnappedLine(null);
+    setManualText("");
+  };
+
+  const clearManual = () => {
+    setManualText("");
+    setManualErr("");
+  };
+
+  const reversePoints = () => {
+    setPoints((prev) => [...(prev || [])].reverse());
+    setSnappedLine(null);
+    setNextIdx(0);
   };
 
   // GPS watch
@@ -758,7 +830,7 @@ export default function Map() {
           <div>
             <h1 style={S.title}>Rotta Libera 🏁</h1>
             <p style={S.subtitle}>
-              Cerca, snappa su strada, naviga e salva tempo. Timer avviabile solo con GPS ON. <b>NEW:</b> Scia GPS Live.
+              Cerca, snappa su strada, naviga e salva tempo. Timer avviabile solo con GPS ON. <b>NEW:</b> Scia GPS Live + inserimento manuale.
             </p>
           </div>
 
@@ -857,6 +929,49 @@ export default function Map() {
               </div>
             </div>
 
+            {/* NEW: Manual route insert */}
+            <div style={S.card}>
+              <div style={{ fontWeight: 900, fontSize: 16, marginBottom: 8 }}>✍️ Inserimento manuale percorso</div>
+
+              <div style={{ ...S.small, marginBottom: 8 }}>
+                Incolla coordinate (una per riga) tipo <b>45.4642, 9.1900</b> oppure un link Google Maps con <b>@lat,lng</b>.
+              </div>
+
+              <textarea
+                style={S.textarea}
+                value={manualText}
+                onChange={(e) => setManualText(e.target.value)}
+                placeholder={`Esempio:\n45.4642, 9.1900\n46.0678, 11.1210\n\nOppure incolla un link Google Maps...`}
+              />
+
+              {manualErr ? (
+                <div
+                  style={{
+                    marginTop: 8,
+                    padding: 10,
+                    borderRadius: 14,
+                    background: "rgba(220,38,38,0.08)",
+                    border: "1px solid rgba(220,38,38,0.20)",
+                    fontSize: 13,
+                  }}
+                >
+                  ⚠️ {manualErr}
+                </div>
+              ) : null}
+
+              <div style={{ marginTop: 10, display: "flex", gap: 8, flexWrap: "wrap" }}>
+                <button style={S.btn} onClick={importManualPoints} disabled={!manualText.trim()}>
+                  ➕ Importa punti
+                </button>
+                <button style={S.btnGhost} onClick={clearManual} disabled={!manualText.trim()}>
+                  🧹 Svuota
+                </button>
+                <button style={S.btnGhost} onClick={reversePoints} disabled={points.length < 2}>
+                  ⇄ Inverti percorso
+                </button>
+              </div>
+            </div>
+
             <div style={S.card}>
               <div style={{ display: "flex", justifyContent: "space-between", gap: 10, alignItems: "center" }}>
                 <div style={{ fontWeight: 900, fontSize: 16 }}>🧾 Itinerario</div>
@@ -909,7 +1024,15 @@ export default function Map() {
               </div>
 
               {navOn && nextInfo && (
-                <div style={{ marginTop: 12, padding: 12, borderRadius: 14, background: "rgba(29,78,216,0.08)", border: "1px solid rgba(29,78,216,0.18)" }}>
+                <div
+                  style={{
+                    marginTop: 12,
+                    padding: 12,
+                    borderRadius: 14,
+                    background: "rgba(29,78,216,0.08)",
+                    border: "1px solid rgba(29,78,216,0.18)",
+                  }}
+                >
                   <div style={{ fontWeight: 900 }}>🧭 Navigatore</div>
                   <div style={{ marginTop: 6, fontSize: 14 }}>
                     Prossimo waypoint: <b>#{nextInfo.idx + 1}</b> — distanza <b>{(nextInfo.km * 1000).toFixed(0)} m</b>
@@ -985,7 +1108,8 @@ export default function Map() {
             />
 
             <div style={{ ...S.card, padding: 12, fontSize: 13, opacity: 0.82 }}>
-              <b>Tip:</b> scrivi una città e premi <b>Invio</b>. Se la ricerca è “occupata”, riprova subito: ora c’è cache + retry.
+              <b>Tip:</b> scrivi una città e premi <b>Invio</b>. Se la ricerca è “occupata”, riprova subito: ora c’è cache + retry. <br />
+              <b>Manual:</b> incolla coordinate o un link Google Maps con <b>@lat,lng</b> e premi <b>Importa punti</b>.
             </div>
           </div>
         </div>
