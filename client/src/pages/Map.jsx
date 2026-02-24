@@ -3,6 +3,7 @@
 // MotoPortEU — Rotta Libera 🏁 + GPS Live + Scia + Timer
 // ✅ UI inline styles (no Tailwind)
 // ✅ Autocomplete luoghi (Nominatim OSM) + ENTER per aggiungere
+// ✅ FIX: ricerca stabile (cache + retry) + "Aggiungi scritto" usa suggestions
 // ✅ Snap su strada (OSRM public router)
 // ✅ Navigatore base (GPS follow + next waypoint + Google Maps nav)
 // ✅ Timer corsa: Start/Stop salva sessioni e tempo totale (solo con GPS ON)
@@ -101,35 +102,58 @@ function downloadTextFile(filename, content, mime = "application/octet-stream") 
   URL.revokeObjectURL(url);
 }
 
-// --- Autocomplete Nominatim (migliorato) ---
+// --- Autocomplete Nominatim (cache + retry) ---
+const _geoCache = new Map(); // key => results
+const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+
 async function nominatimSearch(q) {
+  const key = String(q || "").trim().toLowerCase();
+  if (key.length < 3) return [];
+
+  if (_geoCache.has(key)) return _geoCache.get(key);
+
   const url =
     `https://nominatim.openstreetmap.org/search?` +
     `format=json&addressdetails=1&limit=10&dedupe=1&accept-language=it` +
     `&q=${encodeURIComponent(q)}`;
 
-  const res = await fetch(url, { headers: { Accept: "application/json" } });
-  if (!res.ok) throw new Error("Nominatim error");
-  const data = await res.json();
+  const attempt = async () => {
+    const res = await fetch(url, { headers: { Accept: "application/json" } });
+    if (res.status === 429 || res.status === 503) throw new Error("RATE_LIMIT");
+    if (!res.ok) throw new Error("NOMINATIM_ERROR");
+    const data = await res.json();
+    return (data || [])
+      .map((x) => ({
+        label: x.display_name,
+        lat: Number(x.lat),
+        lon: Number(x.lon),
+        importance: Number(x.importance || 0),
+      }))
+      .sort((a, b) => (b.importance || 0) - (a.importance || 0))
+      .slice(0, 8);
+  };
 
-  return (data || [])
-    .map((x) => ({
-      label: x.display_name,
-      lat: Number(x.lat),
-      lon: Number(x.lon),
-      importance: Number(x.importance || 0),
-      type: x.type,
-      cls: x.class,
-    }))
-    .sort((a, b) => (b.importance || 0) - (a.importance || 0))
-    .slice(0, 8);
+  let out = [];
+  try {
+    out = await attempt();
+  } catch {
+    await sleep(350);
+    try {
+      out = await attempt();
+    } catch {
+      await sleep(650);
+      out = await attempt().catch(() => []);
+    }
+  }
+
+  _geoCache.set(key, out);
+  return out;
 }
 
 // --- Snap OSRM route ---
 async function osrmSnap(points) {
   if (!points || points.length < 2) return null;
 
-  // cap points for public OSRM stability
   const maxPts = 25;
   const pts =
     points.length > maxPts
@@ -143,7 +167,7 @@ async function osrmSnap(points) {
   if (!res.ok) throw new Error("OSRM error");
   const data = await res.json();
   const geom = data?.routes?.[0]?.geometry;
-  const line = geom?.coordinates; // [ [lon,lat], ... ]
+  const line = geom?.coordinates;
   if (!line || !line.length) return null;
   return line.map(([lon, lat]) => [lat, lon]);
 }
@@ -164,8 +188,7 @@ function nearestNextWaypointIndex(gps, points, currentIdx) {
     }
   }
 
-  // if very close -> advance
-  if (best < 0.12 && bestIdx < points.length - 1) return bestIdx + 1; // ~120m
+  if (best < 0.12 && bestIdx < points.length - 1) return bestIdx + 1;
   return bestIdx;
 }
 
@@ -175,7 +198,6 @@ function buildGoogleMapsNavUrl(gps, points) {
   const origin = gps ? `${gps[0]},${gps[1]}` : `${points[0][0]},${points[0][1]}`;
   const destination = `${points[points.length - 1][0]},${points[points.length - 1][1]}`;
 
-  // keep waypoints few (Google limit)
   const mid = points
     .slice(1, -1)
     .slice(0, 8)
@@ -247,7 +269,7 @@ const S = {
     outline: "none",
     background: "white",
     fontSize: 14,
-    color: "#111", // ✅ visibile su tema scuro
+    color: "#111",
   },
   textarea: {
     width: "100%",
@@ -259,7 +281,7 @@ const S = {
     fontSize: 14,
     minHeight: 96,
     resize: "vertical",
-    color: "#111", // ✅
+    color: "#111",
   },
   small: { fontSize: 13, opacity: 0.78 },
   pill: {
@@ -288,13 +310,13 @@ const S = {
     borderBottom: "1px solid rgba(0,0,0,0.06)",
     fontSize: 13,
     lineHeight: 1.25,
-    color: "#111", // ✅
+    color: "#111",
   },
 };
 
 // --- Trail helpers ---
-const TRAIL_MIN_STEP_M = 12; // aggiungi punto solo se ti sposti almeno 12m
-const TRAIL_MAX_PTS = 2500; // cap memoria
+const TRAIL_MIN_STEP_M = 12;
+const TRAIL_MAX_PTS = 2500;
 const kmToM = (km) => km * 1000;
 
 export default function Map() {
@@ -322,21 +344,20 @@ export default function Map() {
   const [navOn, setNavOn] = useState(false);
   const [nextIdx, setNextIdx] = useState(0);
 
-  // 🟦 GPS Trail (Scia live)
+  // GPS Trail
   const [gpsTrail, setGpsTrail] = useState([]);
   const lastTrailPointRef = useRef(null);
 
-  // ⏱️ Timer / tracking (ONLY GPS ON)
+  // Timer
   const [runOn, setRunOn] = useState(false);
   const [runStartMs, setRunStartMs] = useState(null);
   const [runElapsedSec, setRunElapsedSec] = useState(0);
   const tickRef = useRef(null);
 
-  // Track points during run (optional)
+  // Run track
   const [runTrack, setRunTrack] = useState([]);
   const lastRunTrackRef = useRef(null);
 
-  // Premium gate (temp)
   const isPremium = useMemo(() => localStorage.getItem(PASS_KEY) === "true", []);
 
   const activeRoute = useMemo(
@@ -360,7 +381,6 @@ export default function Map() {
     setNote(activeRoute.note || "");
     setSnapEnabled(activeRoute.snapEnabled ?? true);
 
-    // reset nav + timer when switching route
     setNavOn(false);
     setNextIdx(0);
     setRunOn(false);
@@ -374,6 +394,7 @@ export default function Map() {
   useEffect(() => {
     if (!q || q.trim().length < 3) {
       setSuggestions([]);
+      setSearchOpen(false); // ✅ micro-fix: dropdown pulita quando cancelli
       return;
     }
     if (searchTimer.current) clearTimeout(searchTimer.current);
@@ -396,20 +417,25 @@ export default function Map() {
     setSearchOpen(false);
   };
 
-  // ✅ ENTER / button: aggiungi anche se non clicchi la dropdown
+  // ✅ aggiungi anche se non clicchi la dropdown (usa prima suggestions)
   const addTypedPlace = async () => {
     const query = String(q || "").trim();
     if (query.length < 3) return;
 
+    if (suggestions && suggestions.length) {
+      addFromSearch(suggestions[0]);
+      return;
+    }
+
     try {
       const res = await nominatimSearch(query);
       if (!res.length) {
-        alert("Nessun risultato. Prova: 'Città, Italia' oppure 'Paese'.");
+        alert("Nessun risultato. Prova: 'Città, Italia' (es: 'Como, Italia').");
         return;
       }
       addFromSearch(res[0]);
     } catch {
-      alert("Ricerca non disponibile ora. Riprova tra poco.");
+      alert("Ricerca occupata (OSM). Riprova tra 1 secondo.");
     }
   };
 
@@ -487,7 +513,7 @@ export default function Map() {
     }
   }, [gps, gpsOn, runOn]);
 
-  // Navigator: compute next waypoint
+  // Navigator: next waypoint
   useEffect(() => {
     if (!navOn) return;
     if (!gps) return;
@@ -711,7 +737,6 @@ export default function Map() {
     return 6;
   }, [gps, points]);
 
-  // responsive grid
   const [isLg, setIsLg] = useState(false);
   useEffect(() => {
     const onResize = () => setIsLg(window.innerWidth >= 1024);
@@ -729,7 +754,6 @@ export default function Map() {
           input::placeholder, textarea::placeholder { color: rgba(0,0,0,0.55); }
         `}</style>
 
-        {/* Header */}
         <div style={S.headerRow}>
           <div>
             <h1 style={S.title}>Rotta Libera 🏁</h1>
@@ -767,11 +791,8 @@ export default function Map() {
           </div>
         </div>
 
-        {/* Layout */}
         <div style={isLg ? S.gridLg : S.grid}>
-          {/* Left panel */}
           <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
-            {/* Search */}
             <div style={S.card}>
               <div style={{ fontWeight: 900, fontSize: 16, marginBottom: 8 }}>🔎 Cerca luogo</div>
 
@@ -825,14 +846,9 @@ export default function Map() {
               <div style={{ marginTop: 10, display: "flex", gap: 8, flexWrap: "wrap" }}>
                 <span style={S.pill}>📍 Punti: {points.length}</span>
                 <span style={S.pill}>📏 Km: {distanceKm.toFixed(1)}</span>
-                {snapEnabled && snappedLine?.length ? (
-                  <span style={S.pill}>🛣️ Snapped</span>
-                ) : (
-                  <span style={S.pill}>📌 Manual</span>
-                )}
+                {snapEnabled && snappedLine?.length ? <span style={S.pill}>🛣️ Snapped</span> : <span style={S.pill}>📌 Manual</span>}
               </div>
 
-              {/* Trail controls */}
               <div style={{ marginTop: 10, display: "flex", gap: 8, flexWrap: "wrap", alignItems: "center" }}>
                 <span style={S.pill}>🟦 Scia: {gpsTrail.length}</span>
                 <button style={S.btnGhost} onClick={resetTrail} disabled={!gpsOn}>
@@ -841,7 +857,6 @@ export default function Map() {
               </div>
             </div>
 
-            {/* Route details */}
             <div style={S.card}>
               <div style={{ display: "flex", justifyContent: "space-between", gap: 10, alignItems: "center" }}>
                 <div style={{ fontWeight: 900, fontSize: 16 }}>🧾 Itinerario</div>
@@ -857,19 +872,14 @@ export default function Map() {
 
               <div style={{ marginTop: 10 }}>
                 <div style={{ ...S.small, fontWeight: 800 }}>Note</div>
-                <textarea
-                  style={S.textarea}
-                  value={note}
-                  onChange={(e) => setNote(e.target.value)}
-                  placeholder="Soste, benzina, orari, velox..."
-                />
+                <textarea style={S.textarea} value={note} onChange={(e) => setNote(e.target.value)} placeholder="Soste, benzina, orari, velox..." />
               </div>
 
               <div style={{ marginTop: 12, display: "flex", gap: 8, flexWrap: "wrap" }}>
                 <button style={S.btn} onClick={saveCurrent}>
                   💾 Salva
                 </button>
-                <button style={S.btnDanger} onClick={deleteRoute} disabled={!activeRoute}>
+                <button style={S.btnDanger} onClick={() => (activeRoute ? deleteRoute() : null)} disabled={!activeRoute}>
                   🗑️ Elimina
                 </button>
 
@@ -886,7 +896,6 @@ export default function Map() {
                 </button>
               </div>
 
-              {/* TIMER UI (GPS only) */}
               <div style={{ marginTop: 12, display: "flex", gap: 8, flexWrap: "wrap", alignItems: "center" }}>
                 <button style={S.btn} onClick={startRun} disabled={runOn}>
                   ⏱️ Start (GPS)
@@ -895,27 +904,12 @@ export default function Map() {
                   ✅ Stop & Salva
                 </button>
                 <span style={S.pill}>⏱️ {fmtTime(runElapsedSec)}</span>
-
                 {activeRoute?.totalTimeSec ? <span style={S.pill}>Totale: {fmtTime(activeRoute.totalTimeSec)}</span> : null}
                 {runOn ? <span style={S.pill}>🏁 Run pts: {runTrack.length}</span> : null}
               </div>
 
-              {activeRoute?.lastRunAt ? (
-                <div style={{ fontSize: 12, opacity: 0.7, marginTop: 6 }}>
-                  Ultima corsa: {new Date(activeRoute.lastRunAt).toLocaleString()}
-                </div>
-              ) : null}
-
               {navOn && nextInfo && (
-                <div
-                  style={{
-                    marginTop: 12,
-                    padding: 12,
-                    borderRadius: 14,
-                    background: "rgba(29,78,216,0.08)",
-                    border: "1px solid rgba(29,78,216,0.18)",
-                  }}
-                >
+                <div style={{ marginTop: 12, padding: 12, borderRadius: 14, background: "rgba(29,78,216,0.08)", border: "1px solid rgba(29,78,216,0.18)" }}>
                   <div style={{ fontWeight: 900 }}>🧭 Navigatore</div>
                   <div style={{ marginTop: 6, fontSize: 14 }}>
                     Prossimo waypoint: <b>#{nextInfo.idx + 1}</b> — distanza <b>{(nextInfo.km * 1000).toFixed(0)} m</b>
@@ -927,7 +921,6 @@ export default function Map() {
               )}
             </div>
 
-            {/* Saved list */}
             <div style={S.card}>
               <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
                 <div style={{ fontWeight: 900, fontSize: 16 }}>📦 Salvati</div>
@@ -958,7 +951,6 @@ export default function Map() {
                       <div style={{ fontSize: 12, opacity: 0.72, marginTop: 4 }}>
                         {(r.points?.length || 0)} punti • {r.updatedAt ? new Date(r.updatedAt).toLocaleDateString() : "-"}
                         {typeof r.totalTimeSec === "number" && r.totalTimeSec > 0 ? ` • ⏱️ ${fmtTime(r.totalTimeSec)}` : ""}
-                        {r.sessions?.[0]?.track?.length ? ` • 🟦 track: ${r.sessions[0].track.length}` : ""}
                       </div>
                     </button>
                   ))}
@@ -966,7 +958,6 @@ export default function Map() {
               )}
             </div>
 
-            {/* Premium quick switch (TEMP) */}
             <div style={{ ...S.card, opacity: 0.9 }}>
               <div style={{ fontWeight: 900, marginBottom: 8 }}>🔐 Premium (temporaneo)</div>
               <div style={{ fontSize: 13, opacity: 0.78 }}>
@@ -975,7 +966,6 @@ export default function Map() {
             </div>
           </div>
 
-          {/* Map */}
           <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
             <RouteBuilderMap
               points={points}
@@ -991,14 +981,11 @@ export default function Map() {
               center={mapCenter}
               zoom={mapZoom}
               height={isLg ? 720 : 520}
-              // ✅ se GPS ON ma follow OFF, vogliamo che fitBounds funzioni sui percorsi salvati
               fitOnChange={!gpsOn || !followGps}
             />
 
             <div style={{ ...S.card, padding: 12, fontSize: 13, opacity: 0.82 }}>
-              <b>Tip:</b> fai Snap per rendere il percorso realistico su strada. Il timer parte solo con GPS ON.
-              <br />
-              <b>NEW:</b> scrivi una città e premi <b>Invio</b> per aggiungerla anche se non clicchi la lista.
+              <b>Tip:</b> scrivi una città e premi <b>Invio</b>. Se la ricerca è “occupata”, riprova subito: ora c’è cache + retry.
             </div>
           </div>
         </div>
