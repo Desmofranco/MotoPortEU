@@ -3,14 +3,14 @@
 // MotoPortEU — Rotta Libera 🏁 + GPS Live + Scia + Timer
 // ✅ UI inline styles (no Tailwind)
 // ✅ Autocomplete luoghi (Nominatim OSM) + ENTER per aggiungere
-// ✅ FIX: ricerca stabile (cache + retry) + "Aggiungi scritto" usa suggestions
+// ✅ FIX: ricerca veloce e stabile (abort + debounce + ordered results + cache + retry)
 // ✅ Snap su strada (OSRM public router)
 // ✅ Navigatore base (GPS follow + next waypoint + Google Maps nav)
 // ✅ Timer corsa: Start/Stop salva sessioni e tempo totale (solo con GPS ON)
 // ✅ Export GPX (Premium gate via localStorage)
 // ✅ GPS Live + Scia (trail) in tempo reale
 // ✅ FIX: input visibili in tema scuro + fitOnChange intelligente
-// ✅ NEW: Inserimento manuale percorso (coordinate / link Google Maps)
+// ✅ NEW: Inserimento manuale percorso (coordinate / link Google Maps) + preview + replace
 // =======================================================
 
 import React, { useEffect, useMemo, useRef, useState } from "react";
@@ -103,11 +103,11 @@ function downloadTextFile(filename, content, mime = "application/octet-stream") 
   URL.revokeObjectURL(url);
 }
 
-// --- Autocomplete Nominatim (cache + retry) ---
-const _geoCache = new globalThis.Map();
+// --- Autocomplete Nominatim (cache + retry + abort) ---
+const _geoCache = new globalThis.Map(); // ✅ avoid shadowing with component name
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
-async function nominatimSearch(q) {
+async function nominatimSearch(q, { signal } = {}) {
   const key = String(q || "").trim().toLowerCase();
   if (key.length < 3) return [];
 
@@ -119,7 +119,10 @@ async function nominatimSearch(q) {
     `&q=${encodeURIComponent(q)}`;
 
   const attempt = async () => {
-    const res = await fetch(url, { headers: { Accept: "application/json" } });
+    const res = await fetch(url, {
+      headers: { Accept: "application/json" },
+      signal,
+    });
     if (res.status === 429 || res.status === 503) throw new Error("RATE_LIMIT");
     if (!res.ok) throw new Error("NOMINATIM_ERROR");
     const data = await res.json();
@@ -137,12 +140,14 @@ async function nominatimSearch(q) {
   let out = [];
   try {
     out = await attempt();
-  } catch {
-    await sleep(350);
+  } catch (e) {
+    if (e?.name === "AbortError") return [];
+    await sleep(250);
     try {
       out = await attempt();
-    } catch {
-      await sleep(650);
+    } catch (e2) {
+      if (e2?.name === "AbortError") return [];
+      await sleep(450);
       out = await attempt().catch(() => []);
     }
   }
@@ -230,8 +235,11 @@ function parseCoordsFromText(text) {
     }
   }
 
-  // 2) Lines "lat,lng" or "lat lng" or "lat;lng" etc. -> first two numbers found
-  const lines = t.split(/\r?\n/).map((x) => x.trim()).filter(Boolean);
+  // normalize separators: allow ";" to mean new line
+  const normalized = t.replace(/;/g, "\n");
+
+  // 2) Lines "lat,lng" or "lat lng" -> first two numbers found
+  const lines = normalized.split(/\r?\n/).map((x) => x.trim()).filter(Boolean);
   for (const line of lines) {
     const nums = line.match(/-?\d+(?:\.\d+)?/g);
     if (!nums || nums.length < 2) continue;
@@ -372,12 +380,17 @@ export default function Map() {
   // Manual insert
   const [manualText, setManualText] = useState("");
   const [manualErr, setManualErr] = useState("");
+  const [manualReplace, setManualReplace] = useState(true);
+  const manualPreview = useMemo(() => parseCoordsFromText(manualText), [manualText]);
 
   // Autocomplete
   const [q, setQ] = useState("");
   const [suggestions, setSuggestions] = useState([]);
   const [searchOpen, setSearchOpen] = useState(false);
+  const [searchLoading, setSearchLoading] = useState(false);
   const searchTimer = useRef(null);
+  const lastQueryRef = useRef("");
+  const abortRef = useRef(null);
 
   // Snap
   const [snapping, setSnapping] = useState(false);
@@ -436,23 +449,45 @@ export default function Map() {
     lastRunTrackRef.current = null;
   }, [activeId]); // eslint-disable-line
 
-  // Autocomplete debounce
+  // Autocomplete debounce (abort-safe + ordered results)
   useEffect(() => {
-    if (!q || q.trim().length < 3) {
+    const query = (q || "").trim();
+
+    if (abortRef.current) abortRef.current.abort();
+    if (searchTimer.current) clearTimeout(searchTimer.current);
+
+    if (query.length < 3) {
       setSuggestions([]);
-      setSearchOpen(false); // dropdown pulita quando cancelli
+      setSearchOpen(false);
+      setSearchLoading(false);
+      lastQueryRef.current = "";
       return;
     }
-    if (searchTimer.current) clearTimeout(searchTimer.current);
+
+    setSearchOpen(true);
+    setSearchLoading(true);
+    lastQueryRef.current = query;
+
+    const controller = new AbortController();
+    abortRef.current = controller;
+
     searchTimer.current = setTimeout(async () => {
       try {
-        const res = await nominatimSearch(q.trim());
+        const res = await nominatimSearch(query, { signal: controller.signal });
+        if (lastQueryRef.current !== query) return; // avoid out-of-order
         setSuggestions(res);
       } catch {
+        if (lastQueryRef.current !== query) return;
         setSuggestions([]);
+      } finally {
+        if (lastQueryRef.current === query) setSearchLoading(false);
       }
-    }, 280);
-    return () => searchTimer.current && clearTimeout(searchTimer.current);
+    }, 220);
+
+    return () => {
+      if (searchTimer.current) clearTimeout(searchTimer.current);
+      controller.abort();
+    };
   }, [q]);
 
   const addFromSearch = (s) => {
@@ -461,6 +496,8 @@ export default function Map() {
     setQ("");
     setSuggestions([]);
     setSearchOpen(false);
+    setSearchLoading(false);
+    lastQueryRef.current = "";
   };
 
   // aggiungi anche se non clicchi la dropdown (usa prima suggestions)
@@ -468,13 +505,17 @@ export default function Map() {
     const query = String(q || "").trim();
     if (query.length < 3) return;
 
+    if (searchLoading) return;
+
     if (suggestions && suggestions.length) {
       addFromSearch(suggestions[0]);
       return;
     }
 
+    setSearchLoading(true);
     try {
-      const res = await nominatimSearch(query);
+      const controller = new AbortController();
+      const res = await nominatimSearch(query, { signal: controller.signal });
       if (!res.length) {
         alert("Nessun risultato. Prova: 'Città, Italia' (es: 'Como, Italia').");
         return;
@@ -482,6 +523,8 @@ export default function Map() {
       addFromSearch(res[0]);
     } catch {
       alert("Ricerca occupata (OSM). Riprova tra 1 secondo.");
+    } finally {
+      setSearchLoading(false);
     }
   };
 
@@ -490,12 +533,10 @@ export default function Map() {
     setManualErr("");
     const pts = parseCoordsFromText(manualText);
     if (!pts.length) {
-      setManualErr(
-        "Nessun punto valido trovato. Usa righe tipo: 45.46, 9.19 (oppure incolla un link Google Maps con @lat,lng)."
-      );
+      setManualErr("Nessun punto valido trovato. Esempio: 45.4642, 9.1900 (o link Google Maps con @lat,lng).");
       return;
     }
-    setPoints((prev) => [...prev, ...pts]);
+    setPoints((prev) => (manualReplace ? pts : [...prev, ...pts]));
     setSnappedLine(null);
     setManualText("");
   };
@@ -903,6 +944,12 @@ export default function Map() {
                 )}
               </div>
 
+              {searchOpen && searchLoading && (
+                <div style={{ marginTop: 8, fontSize: 13, opacity: 0.75 }}>
+                  ⏳ Cerco...
+                </div>
+              )}
+
               <div style={{ marginTop: 10, display: "flex", gap: 8, flexWrap: "wrap" }}>
                 <button style={S.btnGhost} onClick={undo} disabled={!points.length}>
                   ↩️ Undo
@@ -910,7 +957,7 @@ export default function Map() {
                 <button style={S.btnGhost} onClick={clear} disabled={!points.length}>
                   🧹 Clear
                 </button>
-                <button style={S.btnGhost} onClick={addTypedPlace} disabled={(q || "").trim().length < 3}>
+                <button style={S.btnGhost} onClick={addTypedPlace} disabled={(q || "").trim().length < 3 || searchLoading}>
                   ➕ Aggiungi scritto
                 </button>
               </div>
@@ -929,12 +976,14 @@ export default function Map() {
               </div>
             </div>
 
-            {/* NEW: Manual route insert */}
+            {/* Manual route insert */}
             <div style={S.card}>
               <div style={{ fontWeight: 900, fontSize: 16, marginBottom: 8 }}>✍️ Inserimento manuale percorso</div>
 
               <div style={{ ...S.small, marginBottom: 8 }}>
                 Incolla coordinate (una per riga) tipo <b>45.4642, 9.1900</b> oppure un link Google Maps con <b>@lat,lng</b>.
+                <br />
+                Supporta anche una riga con <b>;</b> (es: <b>45.46,9.19;46.06,11.12</b>).
               </div>
 
               <textarea
@@ -943,6 +992,26 @@ export default function Map() {
                 onChange={(e) => setManualText(e.target.value)}
                 placeholder={`Esempio:\n45.4642, 9.1900\n46.0678, 11.1210\n\nOppure incolla un link Google Maps...`}
               />
+
+              <div style={{ display: "flex", gap: 8, flexWrap: "wrap", alignItems: "center", marginTop: 8 }}>
+                <span style={S.pill}>✅ Trovati: {manualPreview.length}</span>
+
+                <label style={{ display: "flex", gap: 8, alignItems: "center", fontSize: 13, opacity: 0.85 }}>
+                  <input
+                    type="checkbox"
+                    checked={manualReplace}
+                    onChange={(e) => setManualReplace(e.target.checked)}
+                  />
+                  Sostituisci percorso (consigliato)
+                </label>
+
+                <button
+                  style={S.btnGhost}
+                  onClick={() => setManualText("45.4642, 9.1900\n46.0678, 11.1210")}
+                >
+                  ✨ Esempio
+                </button>
+              </div>
 
               {manualErr ? (
                 <div
@@ -1108,7 +1177,7 @@ export default function Map() {
             />
 
             <div style={{ ...S.card, padding: 12, fontSize: 13, opacity: 0.82 }}>
-              <b>Tip:</b> scrivi una città e premi <b>Invio</b>. Se la ricerca è “occupata”, riprova subito: ora c’è cache + retry. <br />
+              <b>Tip:</b> scrivi una città e premi <b>Invio</b>. <br />
               <b>Manual:</b> incolla coordinate o un link Google Maps con <b>@lat,lng</b> e premi <b>Importa punti</b>.
             </div>
           </div>
