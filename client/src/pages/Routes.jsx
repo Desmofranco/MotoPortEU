@@ -54,23 +54,21 @@ function buildDirUrl({ origin, destination, waypoints = [], travelmode = "drivin
   )}${o}${d}${w}`;
 }
 
-function getBrowserGps() {
-  return new Promise((resolve, reject) => {
-    if (!("geolocation" in navigator)) return reject(new Error("NO_GEO"));
-    navigator.geolocation.getCurrentPosition(
-      (pos) => resolve([pos.coords.latitude, pos.coords.longitude]),
-      (err) => reject(err),
-      { enableHighAccuracy: true, timeout: 12000, maximumAge: 3000 }
-    );
-  });
+// ✅ Android: forza modalità navigazione (mostra "Avvia")
+function buildNavigateUrl(destination, travelmode = "driving") {
+  if (!destination) return null;
+  return (
+    `https://www.google.com/maps/dir/?api=1` +
+    `&destination=${encodeURIComponent(destination)}` +
+    `&travelmode=${encodeURIComponent(travelmode)}` +
+    `&dir_action=navigate`
+  );
 }
 
 function buildRouteKey(r) {
   const id = String(r?.id || "").trim();
   if (id) return `id:${id}`;
-  const name = String(r?.name || "")
-    .trim()
-    .toLowerCase();
+  const name = String(r?.name || "").trim().toLowerCase();
   const s = Array.isArray(r?.start)
     ? `${Number(r.start[0]).toFixed(5)},${Number(r.start[1]).toFixed(5)}`
     : "";
@@ -178,9 +176,7 @@ export default function Routes() {
 
     if (query) {
       out = out.filter((r) => {
-        const blob = [r.name, r.region, r.country, r.description, r.bestSeason, r.pace]
-          .join(" ")
-          .toLowerCase();
+        const blob = [r.name, r.region, r.country, r.description, r.bestSeason, r.pace].join(" ").toLowerCase();
         return blob.includes(query);
       });
     }
@@ -493,7 +489,7 @@ function RouteDetail({ route }) {
   const start = Array.isArray(route?.start) ? route.start : null;
   const end = Array.isArray(route?.end) ? route.end : null;
 
-  // ✅ itinerario completo (start->end)
+  // ✅ Itinerario completo (start -> end)
   const itineraryUrl =
     start && end
       ? buildDirUrl({
@@ -503,32 +499,8 @@ function RouteDetail({ route }) {
         })
       : null;
 
-  const [navBusy, setNavBusy] = useState(false);
-
-  // ✅ da dove sono -> start
-  const openToStartFromMe = async () => {
-    if (!start) return alert("Questo itinerario non ha coordinate di START.");
-    try {
-      setNavBusy(true);
-      const me = await getBrowserGps();
-      const url = buildDirUrl({
-        origin: latLonStr(me),
-        destination: latLonStr(start),
-        travelmode: "driving",
-      });
-      openGoogleMapsSmart(url);
-    } catch {
-      alert("Non riesco a leggere la tua posizione. Consenti il GPS al browser.");
-    } finally {
-      setNavBusy(false);
-    }
-  };
-
-  // ✅ start->end (itinerario)
-  const openFullItinerary = () => {
-    if (!itineraryUrl) return alert("Itinerario non disponibile (manca start/end).");
-    openGoogleMapsSmart(itineraryUrl);
-  };
+  // ✅ Avvio navigazione verso START (Android: "Avvia" garantito)
+  const startNavUrl = start ? buildNavigateUrl(latLonStr(start), "driving") : null;
 
   const [wx, setWx] = useState(null);
   const [wxBusy, setWxBusy] = useState(false);
@@ -577,11 +549,11 @@ function RouteDetail({ route }) {
       </div>
 
       <div style={{ padding: 12 }}>
-        {/* ✅ Bottone 1: da me -> START */}
+        {/* ✅ Bottone 1: NAVIGAZIONE "AVVIA" verso START */}
         <button
           type="button"
-          onClick={openToStartFromMe}
-          disabled={navBusy || !start}
+          onClick={() => openGoogleMapsSmart(startNavUrl)}
+          disabled={!startNavUrl}
           style={{
             display: "inline-block",
             padding: "10px 12px",
@@ -589,12 +561,12 @@ function RouteDetail({ route }) {
             border: "1px solid rgba(0,0,0,0.15)",
             background: "white",
             fontSize: 13,
-            cursor: navBusy ? "wait" : "pointer",
+            cursor: startNavUrl ? "pointer" : "not-allowed",
             fontWeight: 900,
           }}
-          title="Naviga dalla tua posizione all'inizio dell'itinerario"
+          title="Avvia navigazione verso l'inizio (usa la tua posizione automaticamente)"
         >
-          🧭 Vai all’inizio (da dove sono)
+          🧭 Avvia verso START
         </button>
 
         <div style={{ marginTop: 12, borderTop: "1px solid rgba(0,0,0,0.08)", paddingTop: 12 }}>
@@ -605,11 +577,11 @@ function RouteDetail({ route }) {
         <div style={{ marginTop: 12, borderTop: "1px solid rgba(0,0,0,0.08)", paddingTop: 12 }}>
           <strong>🗺️ Mappa</strong>
 
-          {/* ✅ Bottone 2: itinerario completo START->END */}
+          {/* ✅ Bottone 2: ITINERARIO COMPLETO START->END */}
           <div style={{ marginTop: 10, display: "flex", gap: 10, flexWrap: "wrap", alignItems: "center" }}>
             <button
               type="button"
-              onClick={openFullItinerary}
+              onClick={() => openGoogleMapsSmart(itineraryUrl)}
               disabled={!itineraryUrl}
               style={{
                 padding: "10px 12px",
