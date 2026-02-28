@@ -1,9 +1,58 @@
-import React from "react";
+// =======================================================
+// src/pages/Home.jsx
+// MotoPortEU — Home Fix Totale + Menu a tendina (dropdown)
+// ✅ Layout centrato (phone frame)
+// ✅ Dropdown stabile (z-index alto + non tagliato)
+// ✅ Login/Register CTA + voci menu + logout
+// =======================================================
+
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-const TOKEN_KEY = "token"; // se usi un altro nome dimmelo
-const isLogged = Boolean(localStorage.getItem(TOKEN_KEY));
+
+const TOKEN_KEY = "token"; // se usi un altro nome, cambia qui
+
 export default function Home() {
   const navigate = useNavigate();
+
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [isLogged, setIsLogged] = useState(
+    Boolean(localStorage.getItem(TOKEN_KEY))
+  );
+
+  // aggiorna lo stato se il token cambia (anche da altre tab)
+  useEffect(() => {
+    const sync = () => setIsLogged(Boolean(localStorage.getItem(TOKEN_KEY)));
+    window.addEventListener("storage", sync);
+    return () => window.removeEventListener("storage", sync);
+  }, []);
+
+  const MenuItem = ({ icon, label, path }) => (
+    <button
+      type="button"
+      onClick={() => {
+        setMenuOpen(false);
+        navigate(path);
+      }}
+      style={{
+        width: "100%",
+        display: "flex",
+        alignItems: "center",
+        gap: 10,
+        padding: "10px 12px",
+        borderRadius: 14,
+        border: "1px solid rgba(255,255,255,0.14)",
+        background: "rgba(255,255,255,0.06)",
+        color: "rgba(255,255,255,0.95)",
+        cursor: "pointer",
+        fontWeight: 900,
+        textAlign: "left",
+      }}
+    >
+      <span style={{ width: 22, textAlign: "center" }}>{icon}</span>
+      <span style={{ flex: 1 }}>{label}</span>
+      <span style={{ opacity: 0.7 }}>›</span>
+    </button>
+  );
 
   return (
     <>
@@ -67,74 +116,137 @@ export default function Home() {
               position: "absolute",
               inset: 0,
               background:
-                "linear-gradient(180deg, rgba(0,0,0,0.2), rgba(0,0,0,0.7))",
+                "linear-gradient(180deg, rgba(0,0,0,0.2), rgba(0,0,0,0.75))",
             }}
           />
-<MenuItem icon="❓" label="FAQ" path="/faq" />
-<MenuItem icon="📜" label="Condizioni d’uso" path="/terms" />
 
-<button
-  type="button"
-  onClick={() => {
-    setMenuOpen(false);
-    window.location.href = "mailto:motoporteu@gmail.com?subject=MotoPortEU%20-%20Contatto";
-  }}
-  style={{
-    width: "100%",
-    display: "flex",
-    alignItems: "center",
-    gap: 10,
-    padding: "10px 12px",
-    borderRadius: 14,
-    border: "1px solid rgba(255,255,255,0.14)",
-    background: "rgba(255,255,255,0.06)",
-    color: "rgba(255,255,255,0.95)",
-    cursor: "pointer",
-    fontWeight: 900,
-    textAlign: "left",
-  }}
->
-  <span style={{ width: 22, textAlign: "center" }}>✉️</span>
-  <span style={{ flex: 1 }}>Contatti</span>
-  <span style={{ opacity: 0.7 }}>motoporteu@gmail.com</span>
-</button>
+          {/* MENU (top-right) */}
+          <div style={{ position: "absolute", top: 14, right: 14, zIndex: 50 }}>
+            <button
+              type="button"
+              onClick={() => setMenuOpen((v) => !v)}
+              style={{
+                width: 44,
+                height: 44,
+                borderRadius: 14,
+                border: "1px solid rgba(255,255,255,0.18)",
+                background: "rgba(0,0,0,0.35)",
+                color: "white",
+                cursor: "pointer",
+                fontSize: 18,
+                fontWeight: 900,
+                backdropFilter: "blur(10px)",
+              }}
+              aria-label="Menu"
+            >
+              ☰
+            </button>
 
-<div style={{ height: 1, background: "rgba(255,255,255,0.12)", margin: "2px 0" }} />
+            {menuOpen && (
+              <div
+                style={{
+                  marginTop: 10,
+                  width: 320,
+                  maxWidth: "calc(100vw - 28px)",
+                  padding: 12,
+                  borderRadius: 18,
+                  border: "1px solid rgba(255,255,255,0.16)",
+                  background: "rgba(15,18,25,0.82)",
+                  backdropFilter: "blur(14px)",
+                  boxShadow: "0 20px 60px rgba(0,0,0,0.55)",
+                  display: "grid",
+                  gap: 10,
+                }}
+              >
+                <MenuItem icon="❓" label="FAQ" path="/faq" />
+                <MenuItem icon="📜" label="Condizioni d’uso" path="/terms" />
 
-{!isLogged ? (
-  <>
-    <MenuItem icon="🔑" label="Accedi" path="/login" />
-    <MenuItem icon="✨" label="Registrati" path="/register" />
-  </>
-) : (
-  <button
-    type="button"
-    onClick={() => {
-      // logout semplice (adatta se hai altri storage key)
-      localStorage.removeItem(TOKEN_KEY);
-      setMenuOpen(false);
-      navigate("/"); // torna home
-    }}
-    style={{
-      width: "100%",
-      display: "flex",
-      alignItems: "center",
-      gap: 10,
-      padding: "10px 12px",
-      borderRadius: 14,
-      border: "1px solid rgba(255,255,255,0.14)",
-      background: "rgba(255,0,0,0.10)",
-      color: "rgba(255,255,255,0.95)",
-      cursor: "pointer",
-      fontWeight: 950,
-      textAlign: "left",
-    }}
-  >
-    <span style={{ width: 22, textAlign: "center" }}>🚪</span>
-    <span style={{ flex: 1 }}>Logout</span>
-    <span style={{ opacity: 0.7 }}>›</span>
-  </button>
-)}
+                <button
+                  type="button"
+                  onClick={() => {
+                    setMenuOpen(false);
+                    window.location.href =
+                      "mailto:motoporteu@gmail.com?subject=MotoPortEU%20-%20Contatto";
+                  }}
+                  style={{
+                    width: "100%",
+                    display: "flex",
+                    alignItems: "center",
+                    gap: 10,
+                    padding: "10px 12px",
+                    borderRadius: 14,
+                    border: "1px solid rgba(255,255,255,0.14)",
+                    background: "rgba(255,255,255,0.06)",
+                    color: "rgba(255,255,255,0.95)",
+                    cursor: "pointer",
+                    fontWeight: 900,
+                    textAlign: "left",
+                  }}
+                >
+                  <span style={{ width: 22, textAlign: "center" }}>✉️</span>
+                  <span style={{ flex: 1 }}>Contatti</span>
+                  <span style={{ opacity: 0.7 }}>motoporteu@gmail.com</span>
+                </button>
+
+                <div
+                  style={{
+                    height: 1,
+                    background: "rgba(255,255,255,0.12)",
+                    margin: "2px 0",
+                  }}
+                />
+
+                {!isLogged ? (
+                  <>
+                    <MenuItem icon="🔑" label="Accedi" path="/login" />
+                    <MenuItem icon="✨" label="Registrati" path="/register" />
+                  </>
+                ) : (
+                  <button
+                    type="button"
+                    onClick={() => {
+                      localStorage.removeItem(TOKEN_KEY);
+                      setIsLogged(false);
+                      setMenuOpen(false);
+                      navigate("/"); // resta in home
+                    }}
+                    style={{
+                      width: "100%",
+                      display: "flex",
+                      alignItems: "center",
+                      gap: 10,
+                      padding: "10px 12px",
+                      borderRadius: 14,
+                      border: "1px solid rgba(255,255,255,0.14)",
+                      background: "rgba(255,0,0,0.10)",
+                      color: "rgba(255,255,255,0.95)",
+                      cursor: "pointer",
+                      fontWeight: 950,
+                      textAlign: "left",
+                    }}
+                  >
+                    <span style={{ width: 22, textAlign: "center" }}>🚪</span>
+                    <span style={{ flex: 1 }}>Logout</span>
+                    <span style={{ opacity: 0.7 }}>›</span>
+                  </button>
+                )}
+              </div>
+            )}
+          </div>
+
+          {/* CLICK-CATCHER per chiudere menu (senza rompere UI) */}
+          {menuOpen && (
+            <div
+              onClick={() => setMenuOpen(false)}
+              style={{
+                position: "absolute",
+                inset: 0,
+                zIndex: 40, // sotto il menu (50) ma sopra il resto
+                background: "transparent",
+              }}
+            />
+          )}
+
           {/* CONTENT */}
           <div
             style={{
