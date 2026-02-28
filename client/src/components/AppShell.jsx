@@ -1,10 +1,19 @@
 // client/src/components/AppShell.jsx
 import React from "react";
-import { Outlet } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
 import Navbar from "./Navbar";
 import BottomNav from "./BottomNav";
 
 export default function AppShell() {
+  const { pathname } = useLocation();
+
+  // ✅ Mostra la bottom nav SOLO dove serve davvero su mobile.
+  // Cambia liberamente questa lista.
+  const SHOW_BOTTOMNAV_ON = ["/", "/map"]; // Home + Mappa (esempio)
+  const showBottomNav = SHOW_BOTTOMNAV_ON.some((p) =>
+    p === "/" ? pathname === "/" : pathname.startsWith(p)
+  );
+
   return (
     <div className="min-h-screen relative w-full overflow-x-hidden">
       {/* Navbar desktop */}
@@ -12,13 +21,17 @@ export default function AppShell() {
         <Navbar />
       </div>
 
-      {/* Contenuto: padding bottom per non finire sotto la bottom nav su mobile */}
-      <main className="w-full max-w-full overflow-x-hidden pb-20 md:pb-0 px-3 md:px-6">
+      {/* Contenuto: padding bottom SOLO se la bottom nav è visibile */}
+      <main
+        className={`w-full max-w-full overflow-x-hidden px-3 md:px-6 ${
+          showBottomNav ? "pb-20 md:pb-0" : "pb-0"
+        }`}
+      >
         <Outlet />
       </main>
 
       {/* Bottom nav mobile */}
-      <BottomNav />
+      {showBottomNav ? <BottomNav /> : null}
 
       {/* Hard guard: se qualche componente sfora, non deve allargare la pagina */}
       <style>{`
