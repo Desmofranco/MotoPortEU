@@ -1,6 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-
+const TOKEN_KEY = "token"; // se usi un altro nome dimmelo
+const isLogged = Boolean(localStorage.getItem(TOKEN_KEY));
 export default function Home() {
   const navigate = useNavigate();
 
@@ -69,7 +70,71 @@ export default function Home() {
                 "linear-gradient(180deg, rgba(0,0,0,0.2), rgba(0,0,0,0.7))",
             }}
           />
+<MenuItem icon="❓" label="FAQ" path="/faq" />
+<MenuItem icon="📜" label="Condizioni d’uso" path="/terms" />
 
+<button
+  type="button"
+  onClick={() => {
+    setMenuOpen(false);
+    window.location.href = "mailto:motoporteu@gmail.com?subject=MotoPortEU%20-%20Contatto";
+  }}
+  style={{
+    width: "100%",
+    display: "flex",
+    alignItems: "center",
+    gap: 10,
+    padding: "10px 12px",
+    borderRadius: 14,
+    border: "1px solid rgba(255,255,255,0.14)",
+    background: "rgba(255,255,255,0.06)",
+    color: "rgba(255,255,255,0.95)",
+    cursor: "pointer",
+    fontWeight: 900,
+    textAlign: "left",
+  }}
+>
+  <span style={{ width: 22, textAlign: "center" }}>✉️</span>
+  <span style={{ flex: 1 }}>Contatti</span>
+  <span style={{ opacity: 0.7 }}>motoporteu@gmail.com</span>
+</button>
+
+<div style={{ height: 1, background: "rgba(255,255,255,0.12)", margin: "2px 0" }} />
+
+{!isLogged ? (
+  <>
+    <MenuItem icon="🔑" label="Accedi" path="/login" />
+    <MenuItem icon="✨" label="Registrati" path="/register" />
+  </>
+) : (
+  <button
+    type="button"
+    onClick={() => {
+      // logout semplice (adatta se hai altri storage key)
+      localStorage.removeItem(TOKEN_KEY);
+      setMenuOpen(false);
+      navigate("/"); // torna home
+    }}
+    style={{
+      width: "100%",
+      display: "flex",
+      alignItems: "center",
+      gap: 10,
+      padding: "10px 12px",
+      borderRadius: 14,
+      border: "1px solid rgba(255,255,255,0.14)",
+      background: "rgba(255,0,0,0.10)",
+      color: "rgba(255,255,255,0.95)",
+      cursor: "pointer",
+      fontWeight: 950,
+      textAlign: "left",
+    }}
+  >
+    <span style={{ width: 22, textAlign: "center" }}>🚪</span>
+    <span style={{ flex: 1 }}>Logout</span>
+    <span style={{ opacity: 0.7 }}>›</span>
+  </button>
+)}
           {/* CONTENT */}
           <div
             style={{
