@@ -535,12 +535,6 @@ function RouteDetail({ route }) {
           <div style={{ marginTop: 8, fontSize: 14, opacity: 0.9, lineHeight: 1.4 }}>{route.description || "—"}</div>
         </div>
 
-        <div style={{ marginTop: 12, borderTop: "1px solid rgba(0,0,0,0.08)", paddingTop: 12 }}>
-          <strong>🗺️ Mappa</strong>
-          <div style={{ marginTop: 10 }}>
-            <RouteMap route={route} />
-          </div>
-        </div>
 
         <div style={{ marginTop: 12, borderTop: "1px solid rgba(0,0,0,0.08)", paddingTop: 12 }}>
           <strong>🌤 Meteo</strong>
