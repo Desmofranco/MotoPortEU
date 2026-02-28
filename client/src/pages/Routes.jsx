@@ -21,18 +21,76 @@ function isMobileNow() {
   return window.matchMedia("(max-width: 767px), (pointer: coarse)").matches;
 }
 
+// ✅ Smart open: mobile -> location.href (apre app meglio), desktop -> window.open
+function openGoogleMapsSmart(url) {
+  if (!url) return;
+  if (isMobileNow()) window.location.href = url;
+  else window.open(url, "_blank", "noopener,noreferrer");
+}
+
+function latLonStr(p) {
+  if (!p || p.length < 2) return null;
+  const lat = Number(p[0]);
+  const lon = Number(p[1]);
+  if (!Number.isFinite(lat) || !Number.isFinite(lon)) return null;
+  return `${lat},${lon}`;
+}
+
+function buildDirUrl({ origin, destination, waypoints = [], travelmode = "driving" }) {
+  if (!destination) return null;
+
+  const o = origin ? `&origin=${encodeURIComponent(origin)}` : "";
+  const d = `&destination=${encodeURIComponent(destination)}`;
+
+  const mid = (waypoints || [])
+    .filter(Boolean)
+    .slice(0, 8)
+    .join("|");
+
+  const w = mid ? `&waypoints=${encodeURIComponent(mid)}` : "";
+
+  return `https://www.google.com/maps/dir/?api=1&travelmode=${encodeURIComponent(
+    travelmode
+  )}${o}${d}${w}`;
+}
+
+function getBrowserGps() {
+  return new Promise((resolve, reject) => {
+    if (!("geolocation" in navigator)) return reject(new Error("NO_GEO"));
+    navigator.geolocation.getCurrentPosition(
+      (pos) => resolve([pos.coords.latitude, pos.coords.longitude]),
+      (err) => reject(err),
+      { enableHighAccuracy: true, timeout: 12000, maximumAge: 3000 }
+    );
+  });
+}
+
 function buildRouteKey(r) {
   const id = String(r?.id || "").trim();
   if (id) return `id:${id}`;
-  const name = String(r?.name || "").trim().toLowerCase();
-  const s = Array.isArray(r?.start) ? `${Number(r.start[0]).toFixed(5)},${Number(r.start[1]).toFixed(5)}` : "";
-  const e = Array.isArray(r?.end) ? `${Number(r.end[0]).toFixed(5)},${Number(r.end[1]).toFixed(5)}` : "";
+  const name = String(r?.name || "")
+    .trim()
+    .toLowerCase();
+  const s = Array.isArray(r?.start)
+    ? `${Number(r.start[0]).toFixed(5)},${Number(r.start[1]).toFixed(5)}`
+    : "";
+  const e = Array.isArray(r?.end)
+    ? `${Number(r.end[0]).toFixed(5)},${Number(r.end[1]).toFixed(5)}`
+    : "";
   return `n:${name}|${s}|${e}`;
 }
 
 function SkeletonLoading() {
   return (
-    <div style={{ marginTop: 12, padding: 14, borderRadius: 16, border: "1px solid rgba(0,0,0,0.10)", background: "rgba(0,0,0,0.03)" }}>
+    <div
+      style={{
+        marginTop: 12,
+        padding: 14,
+        borderRadius: 16,
+        border: "1px solid rgba(0,0,0,0.10)",
+        background: "rgba(0,0,0,0.03)",
+      }}
+    >
       <div style={{ fontSize: 16, fontWeight: 900 }}>Carico itinerari…</div>
       <div style={{ marginTop: 10, display: "grid", gap: 8 }}>
         <div style={{ height: 12, background: "rgba(0,0,0,0.08)", borderRadius: 8, width: "70%" }} />
@@ -120,7 +178,9 @@ export default function Routes() {
 
     if (query) {
       out = out.filter((r) => {
-        const blob = [r.name, r.region, r.country, r.description, r.bestSeason, r.pace].join(" ").toLowerCase();
+        const blob = [r.name, r.region, r.country, r.description, r.bestSeason, r.pace]
+          .join(" ")
+          .toLowerCase();
         return blob.includes(query);
       });
     }
@@ -387,11 +447,10 @@ function RouteCard({ route, active, onSelect }) {
         <div style={{ minWidth: 0, flex: "1 1 auto" }}>
           <div style={{ display: "flex", justifyContent: "space-between", gap: 8, alignItems: "start" }}>
             <div style={{ fontWeight: 950, fontSize: 14, lineHeight: 1.15, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
-              {route.country ? `${route.country} ` : ""}{route.name}
+              {route.country ? `${route.country} ` : ""}
+              {route.name}
             </div>
-            <div style={{ fontSize: 11, opacity: 0.75, whiteSpace: "nowrap" }}>
-              ⭐ {Number(route.rating || 0).toFixed(1)}
-            </div>
+            <div style={{ fontSize: 11, opacity: 0.75, whiteSpace: "nowrap" }}>⭐ {Number(route.rating || 0).toFixed(1)}</div>
           </div>
 
           <div style={{ marginTop: 2, fontSize: 11, opacity: 0.75, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
@@ -405,7 +464,10 @@ function RouteCard({ route, active, onSelect }) {
         <div style={{ height: 130, backgroundImage: `url(${photo})`, backgroundSize: "cover", backgroundPosition: "center" }} />
         <div style={{ padding: 12 }}>
           <div style={{ display: "flex", justifyContent: "space-between", gap: 10 }}>
-            <div style={{ fontWeight: 900, lineHeight: 1.15 }}>{route.country ? `${route.country} ` : ""}{route.name}</div>
+            <div style={{ fontWeight: 900, lineHeight: 1.15 }}>
+              {route.country ? `${route.country} ` : ""}
+              {route.name}
+            </div>
             <div style={{ fontSize: 12, opacity: 0.75, whiteSpace: "nowrap" }}>⭐ {Number(route.rating || 0).toFixed(1)}</div>
           </div>
 
@@ -431,10 +493,42 @@ function RouteDetail({ route }) {
   const start = Array.isArray(route?.start) ? route.start : null;
   const end = Array.isArray(route?.end) ? route.end : null;
 
-  const googleHref =
+  // ✅ itinerario completo (start->end)
+  const itineraryUrl =
     start && end
-      ? `https://www.google.com/maps/dir/${start[0]},${start[1]}/${end[0]},${end[1]}`
-      : "https://www.google.com/maps";
+      ? buildDirUrl({
+          origin: latLonStr(start),
+          destination: latLonStr(end),
+          travelmode: "driving",
+        })
+      : null;
+
+  const [navBusy, setNavBusy] = useState(false);
+
+  // ✅ da dove sono -> start
+  const openToStartFromMe = async () => {
+    if (!start) return alert("Questo itinerario non ha coordinate di START.");
+    try {
+      setNavBusy(true);
+      const me = await getBrowserGps();
+      const url = buildDirUrl({
+        origin: latLonStr(me),
+        destination: latLonStr(start),
+        travelmode: "driving",
+      });
+      openGoogleMapsSmart(url);
+    } catch {
+      alert("Non riesco a leggere la tua posizione. Consenti il GPS al browser.");
+    } finally {
+      setNavBusy(false);
+    }
+  };
+
+  // ✅ start->end (itinerario)
+  const openFullItinerary = () => {
+    if (!itineraryUrl) return alert("Itinerario non disponibile (manca start/end).");
+    openGoogleMapsSmart(itineraryUrl);
+  };
 
   const [wx, setWx] = useState(null);
   const [wxBusy, setWxBusy] = useState(false);
@@ -483,10 +577,11 @@ function RouteDetail({ route }) {
       </div>
 
       <div style={{ padding: 12 }}>
-        <a
-          href={googleHref}
-          target="_blank"
-          rel="noreferrer"
+        {/* ✅ Bottone 1: da me -> START */}
+        <button
+          type="button"
+          onClick={openToStartFromMe}
+          disabled={navBusy || !start}
           style={{
             display: "inline-block",
             padding: "10px 12px",
@@ -494,11 +589,13 @@ function RouteDetail({ route }) {
             border: "1px solid rgba(0,0,0,0.15)",
             background: "white",
             fontSize: 13,
-            textDecoration: "none",
+            cursor: navBusy ? "wait" : "pointer",
+            fontWeight: 900,
           }}
+          title="Naviga dalla tua posizione all'inizio dell'itinerario"
         >
-          📍 Apri itinerario in Google Maps
-        </a>
+          🧭 Vai all’inizio (da dove sono)
+        </button>
 
         <div style={{ marginTop: 12, borderTop: "1px solid rgba(0,0,0,0.08)", paddingTop: 12 }}>
           <strong>📌 Descrizione</strong>
@@ -507,6 +604,30 @@ function RouteDetail({ route }) {
 
         <div style={{ marginTop: 12, borderTop: "1px solid rgba(0,0,0,0.08)", paddingTop: 12 }}>
           <strong>🗺️ Mappa</strong>
+
+          {/* ✅ Bottone 2: itinerario completo START->END */}
+          <div style={{ marginTop: 10, display: "flex", gap: 10, flexWrap: "wrap", alignItems: "center" }}>
+            <button
+              type="button"
+              onClick={openFullItinerary}
+              disabled={!itineraryUrl}
+              style={{
+                padding: "10px 12px",
+                borderRadius: 12,
+                border: "1px solid rgba(0,0,0,0.15)",
+                background: "white",
+                fontSize: 13,
+                cursor: itineraryUrl ? "pointer" : "not-allowed",
+                fontWeight: 900,
+              }}
+              title="Apri l'itinerario completo (start→end) su Google Maps"
+            >
+              🗺️ Apri itinerario completo (directions)
+            </button>
+
+            {!itineraryUrl ? <span style={{ fontSize: 12, opacity: 0.65 }}>Manca start/end nel JSON.</span> : null}
+          </div>
+
           <div style={{ marginTop: 10 }}>
             <RouteMap route={route} />
           </div>
@@ -522,12 +643,14 @@ function RouteDetail({ route }) {
           ) : (
             <div style={{ marginTop: 10, display: "grid", gap: 10 }}>
               <div style={{ display: "flex", gap: 10, flexWrap: "wrap", alignItems: "center" }}>
-                <span style={pill("light")}>Condizione: <strong>{wx.worst}</strong></span>
+                <span style={pill("light")}>
+                  Condizione: <strong>{wx.worst}</strong>
+                </span>
                 {wx.temp != null ? (
-  <span style={pill("light")}>
-    🌡 {wx.temp}° {wx.tempMin != null && wx.tempMax != null ? `(min ${wx.tempMin}° / max ${wx.tempMax}°)` : ""}
-  </span>
-) : null}
+                  <span style={pill("light")}>
+                    🌡 {wx.temp}° {wx.tempMin != null && wx.tempMax != null ? `(min ${wx.tempMin}° / max ${wx.tempMax}°)` : ""}
+                  </span>
+                ) : null}
                 {wx.windKmh != null ? <span style={pill("light")}>💨vento {wx.windKmh} km/h</span> : null}
               </div>
               <div style={{ fontSize: 12, opacity: 0.7 }}>Aggiornato: {String(wx.updatedAt || "").slice(0, 16).replace("T", " ")}</div>
