@@ -13,7 +13,8 @@ import MyTrackDetail from "./pages/MyTrackDetail";
 import Map from "./pages/Map";
 import AppShell from "./components/AppShell";
 import RequireAuth from "./components/RequireAuth";
-
+import Faq from "./pages/Faq";
+import Terms from "./pages/Terms";
 export default function App() {
   return (
     <BrowserRouter>
@@ -30,6 +31,7 @@ export default function App() {
               <AppShell />
             </RequireAuth>
           }
+          
         >
           <Route path="/garage" element={<Garage />} />
           <Route path="/suppliers" element={<Suppliers />} />
@@ -38,8 +40,11 @@ export default function App() {
           <Route path="/tracks" element={<Tracks />} />
           <Route path="/map" element={<Map />} />
           <Route path="/my-tracks/:id" element={<MyTrackDetail />} />
+          <Route path="/faq" element={<Faq />} />
+          <Route path="/terms" element={<Terms />} />
         </Route>
       </Routes>
+      
     </BrowserRouter>
   );
 }
