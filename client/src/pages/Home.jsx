@@ -6,7 +6,7 @@ export default function Home() {
 
   return (
     <>
-      {/* 🔥 reset body layout che Vite imposta */}
+      {/* 🔥 reset layout Vite */}
       <style>{`
         body, #root {
           margin: 0;
@@ -14,6 +14,14 @@ export default function Home() {
           display: block !important;
           height: 100%;
           width: 100%;
+        }
+
+        .btn {
+          transition: all 0.2s ease;
+        }
+
+        .btn:active {
+          transform: scale(0.96);
         }
       `}</style>
 
@@ -57,50 +65,75 @@ export default function Home() {
             style={{
               position: "absolute",
               inset: 0,
-              background: "rgba(0,0,0,0.45)",
+              background:
+                "linear-gradient(180deg, rgba(0,0,0,0.2), rgba(0,0,0,0.7))",
             }}
           />
 
-          {/* buttons */}
+          {/* CONTENT */}
           <div
             style={{
               position: "relative",
               zIndex: 1,
               height: "100%",
               display: "flex",
-              alignItems: "flex-end",
-              justifyContent: "center",
-              padding: "0 24px 64px",
+              flexDirection: "column",
+              justifyContent: "flex-end",
+              padding: "0 20px",
             }}
           >
-            <div style={{ width: "100%", maxWidth: 360 }}>
-              <div style={{ display: "grid", gap: 10 }}>
+            {/* CTA BOX */}
+            <div
+              style={{
+                width: "100%",
+                maxWidth: 360,
+                margin: "0 auto",
+                marginBottom: "env(safe-area-inset-bottom, 40px)",
+                transform: "translateY(-20px)",
+              }}
+            >
+              <div
+                style={{
+                  display: "grid",
+                  gap: 12,
+                  padding: 14,
+                  borderRadius: 20,
+                  backdropFilter: "blur(12px)",
+                  background: "rgba(255,255,255,0.08)",
+                  border: "1px solid rgba(255,255,255,0.2)",
+                }}
+              >
+                {/* ACCEDI */}
                 <button
+                  className="btn"
                   onClick={() => navigate("/login")}
                   style={{
                     background: "white",
                     color: "black",
-                    fontWeight: 800,
-                    padding: "10px 12px",
+                    fontWeight: 900,
+                    padding: "12px",
                     borderRadius: 14,
                     border: "none",
-                    fontSize: 15,
+                    fontSize: 16,
                     cursor: "pointer",
+                    boxShadow: "0 8px 20px rgba(0,0,0,0.3)",
                   }}
                 >
                   Accedi
                 </button>
 
+                {/* REGISTRATI */}
                 <button
+                  className="btn"
                   onClick={() => navigate("/register")}
                   style={{
-                    background: "rgba(0,0,0,0.15)",
+                    background: "rgba(255,255,255,0.08)",
                     color: "white",
-                    fontWeight: 800,
-                    padding: "10px 12px",
+                    fontWeight: 900,
+                    padding: "12px",
                     borderRadius: 14,
-                    border: "1px solid rgba(255,255,255,0.85)",
-                    fontSize: 15,
+                    border: "1px solid rgba(255,255,255,0.8)",
+                    fontSize: 16,
                     cursor: "pointer",
                   }}
                 >
