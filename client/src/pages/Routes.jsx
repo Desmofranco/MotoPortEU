@@ -1,489 +1,571 @@
 // =======================================================
 // src/pages/Routes.jsx
-// MotoPortEU — Itinerari (Touring)
-// ✅ Responsive: mobile (lista -> dettaglio fullscreen) / desktop (split view)
-// ✅ Filtri: paese, ricerca, pace, ordine
-// ✅ Mappa traccia: RouteMap
-// ✅ Meteo sul tragitto: getRouteWeatherSummary
-// ✅ Google Maps: apertura smart (mobile -> app)
+// Itinerari Touring
+// UI: split-view su desktop (lista + dettaglio)
+// Mobile: lista -> dettaglio (full screen) con back
 // Dati: /public/data/routes.json
+// ✅ Loading skeleton
+// ✅ Dedup key stabile (id o name+start/end)
+// ✅ Meteo + Google Maps
 // =======================================================
 
-import { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import RouteMap from "../components/RouteMap";
 import { getRouteWeatherSummary } from "../utils/routeWeather";
 
 const FALLBACK_PHOTO =
   "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1600&q=80";
 
-const isMobileUA = () => /Android|iPhone|iPad|iPod/i.test(navigator.userAgent || "");
-const openGoogleMapsSmart = (url) => {
-  if (!url) return;
-  if (isMobileUA()) window.location.href = url;
-  else window.open(url, "_blank", "noopener,noreferrer");
-};
-
-const latLonStr = (p) => {
-  if (!p || p.length < 2) return null;
-  const lat = Number(p[0]);
-  const lon = Number(p[1]);
-  if (!Number.isFinite(lat) || !Number.isFinite(lon)) return null;
-  return `${lat},${lon}`;
-};
-
-const buildDirUrl = ({ origin, destination, waypoints = [], travelmode = "driving" }) => {
-  if (!destination) return null;
-  const o = origin ? `&origin=${encodeURIComponent(origin)}` : "";
-  const d = `&destination=${encodeURIComponent(destination)}`;
-  const mid = (waypoints || []).filter(Boolean).slice(0, 8).join("|");
-  const w = mid ? `&waypoints=${encodeURIComponent(mid)}` : "";
-  return `https://www.google.com/maps/dir/?api=1&travelmode=${encodeURIComponent(travelmode)}${o}${d}${w}`;
-};
-
-// prova a costruire un URL navigazione anche se i dati del percorso sono incompleti
-function buildRouteNavUrl(route) {
-  if (!route) return null;
-
-  // 1) start/end (standard)
-  if (Array.isArray(route.start) && Array.isArray(route.end)) {
-    return buildDirUrl({
-      origin: latLonStr(route.start),
-      destination: latLonStr(route.end),
-      travelmode: "driving",
-    });
-  }
-
-  // 2) points/polyline/path (se presenti)
-  const pts =
-    route.points ||
-    route.polylinePoints ||
-    route.path ||
-    route.polyline ||
-    null;
-
-  if (Array.isArray(pts) && pts.length >= 2) {
-    const origin = latLonStr(pts[0]);
-    const destination = latLonStr(pts[pts.length - 1]);
-    const waypoints = pts.slice(1, -1).map(latLonStr).filter(Boolean).slice(0, 8);
-    return buildDirUrl({ origin, destination, waypoints, travelmode: "driving" });
-  }
-
-  return null;
+function isMobileNow() {
+  if (typeof window === "undefined" || !window.matchMedia) return false;
+  return window.matchMedia("(max-width: 767px), (pointer: coarse)").matches;
 }
 
-const paceLabel = (p) => {
-  const s = String(p || "").toLowerCase();
-  if (s.includes("tecn")) return "tecnico";
-  if (s.includes("velo")) return "veloce";
-  if (s.includes("pan")) return "panoramico";
-  if (s.includes("mix")) return "misto";
-  return p || "—";
-};
+function buildRouteKey(r) {
+  const id = String(r?.id || "").trim();
+  if (id) return `id:${id}`;
+  const name = String(r?.name || "").trim().toLowerCase();
+  const s = Array.isArray(r?.start) ? `${Number(r.start[0]).toFixed(5)},${Number(r.start[1]).toFixed(5)}` : "";
+  const e = Array.isArray(r?.end) ? `${Number(r.end[0]).toFixed(5)},${Number(r.end[1]).toFixed(5)}` : "";
+  return `n:${name}|${s}|${e}`;
+}
 
-const score = (n, fallback = 0) => {
-  const x = Number(n);
-  return Number.isFinite(x) ? x : fallback;
-};
-
-const S = {
-  page: { width: "100%", padding: "16px 12px" },
-  container: { maxWidth: 1180, margin: "0 auto" },
-  header: { display: "flex", justifyContent: "space-between", gap: 12, flexWrap: "wrap", alignItems: "flex-end" },
-  title: { margin: 0, fontSize: 34, fontWeight: 900, letterSpacing: "-0.02em" },
-  sub: { margin: "6px 0 0", opacity: 0.78, fontSize: 14, lineHeight: 1.35 },
-  grid: { display: "grid", gridTemplateColumns: "1fr", gap: 12, marginTop: 14 },
-  gridLg: { display: "grid", gridTemplateColumns: "420px 1fr", gap: 14, marginTop: 14 },
-  card: {
-    borderRadius: 18,
-    border: "1px solid rgba(0,0,0,0.08)",
-    background: "rgba(255,255,255,0.72)",
-    boxShadow: "0 10px 30px rgba(0,0,0,0.10)",
-    padding: 14,
-  },
-  row: { display: "flex", gap: 10, flexWrap: "wrap", alignItems: "center" },
-  input: {
-    width: "100%",
-    padding: "10px 12px",
-    borderRadius: 14,
-    border: "1px solid rgba(0,0,0,0.14)",
-    outline: "none",
-    background: "white",
-    fontSize: 14,
-    color: "#111",
-  },
-  select: {
-    width: "100%",
-    padding: "10px 12px",
-    borderRadius: 14,
-    border: "1px solid rgba(0,0,0,0.14)",
-    outline: "none",
-    background: "white",
-    fontSize: 14,
-    color: "#111",
-  },
-  btn: {
-    padding: "10px 12px",
-    borderRadius: 14,
-    border: "1px solid rgba(0,0,0,0.12)",
-    background: "white",
-    cursor: "pointer",
-    fontWeight: 900,
-    boxShadow: "0 8px 20px rgba(0,0,0,0.08)",
-  },
-  btnGhost: {
-    padding: "10px 12px",
-    borderRadius: 14,
-    border: "1px solid rgba(0,0,0,0.10)",
-    background: "rgba(255,255,255,0.60)",
-    cursor: "pointer",
-    fontWeight: 900,
-  },
-  pill: {
-    padding: "7px 10px",
-    borderRadius: 999,
-    border: "1px solid rgba(0,0,0,0.10)",
-    background: "rgba(255,255,255,0.65)",
-    fontWeight: 800,
-    fontSize: 13,
-  },
-  small: { fontSize: 13, opacity: 0.78 },
-  skeleton: {
-    height: 78,
-    borderRadius: 16,
-    border: "1px solid rgba(0,0,0,0.06)",
-    background: "rgba(0,0,0,0.04)",
-  },
-};
+function SkeletonLoading() {
+  return (
+    <div style={{ marginTop: 12, padding: 14, borderRadius: 16, border: "1px solid rgba(0,0,0,0.10)", background: "rgba(0,0,0,0.03)" }}>
+      <div style={{ fontSize: 16, fontWeight: 900 }}>Carico itinerari…</div>
+      <div style={{ marginTop: 10, display: "grid", gap: 8 }}>
+        <div style={{ height: 12, background: "rgba(0,0,0,0.08)", borderRadius: 8, width: "70%" }} />
+        <div style={{ height: 12, background: "rgba(0,0,0,0.08)", borderRadius: 8, width: "55%" }} />
+        <div style={{ height: 12, background: "rgba(0,0,0,0.08)", borderRadius: 8, width: "80%" }} />
+      </div>
+    </div>
+  );
+}
 
 export default function Routes() {
   const [routes, setRoutes] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [err, setErr] = useState("");
 
+  // filtri base
   const [q, setQ] = useState("");
   const [country, setCountry] = useState("ALL");
-  const [pace, setPace] = useState("ALL");
-  const [order, setOrder] = useState("best"); // best | distance | curves
+  const [sortBy, setSortBy] = useState("rating"); // rating | distance | curves
 
-  const [selectedId, setSelectedId] = useState("");
-  const selected = useMemo(
-    () => routes.find((r) => r.id === selectedId) || null,
-    [routes, selectedId]
-  );
+  // selezione
+  const [activeKey, setActiveKey] = useState(null);
+  const [selected, setSelected] = useState(null);
 
-  const [isLg, setIsLg] = useState(false);
-  useEffect(() => {
-    const onResize = () => setIsLg(window.innerWidth >= 1024);
-    onResize();
-    window.addEventListener("resize", onResize);
-    return () => window.removeEventListener("resize", onResize);
-  }, []);
+  // mobile view: "list" | "detail"
+  const [mobileView, setMobileView] = useState("list");
 
-  // mobile: dettaglio fullscreen
-  const [showDetailMobile, setShowDetailMobile] = useState(false);
-  useEffect(() => {
-    if (!isLg && selected) setShowDetailMobile(true);
-  }, [isLg, selected]);
+  const isMobile = isMobileNow();
+  const showDetailMobile = isMobile && mobileView === "detail" && selected;
 
   useEffect(() => {
     let alive = true;
-    (async () => {
+
+    async function run() {
       setLoading(true);
+      setErr("");
       try {
-        const res = await fetch("/data/routes.json");
-        const data = await res.json();
-        if (!alive) return;
+        const data = await fetch("/data/routes.json", { cache: "no-store" })
+          .then((r) => (r.ok ? r.json() : []))
+          .catch(() => []);
+
         const arr = Array.isArray(data) ? data : [];
-        setRoutes(arr);
-        setSelectedId(arr?.[0]?.id || "");
-      } catch {
+
+        // dedup
+        const seen = new Set();
+        const dedup = [];
+        for (const r of arr) {
+          const key = buildRouteKey(r);
+          if (!key || seen.has(key)) continue;
+          seen.add(key);
+          dedup.push(r);
+        }
+
         if (!alive) return;
-        setRoutes([]);
+
+        setRoutes(dedup);
+
+        const first = dedup[0] || null;
+        const firstKey = first ? buildRouteKey(first) : null;
+        setActiveKey((prev) => prev || firstKey);
+        setSelected((prev) => prev || first);
+        setMobileView("list");
+      } catch (e) {
+        if (!alive) return;
+        setErr(e?.message || "Errore caricamento itinerari");
       } finally {
         if (alive) setLoading(false);
       }
-    })();
+    }
+
+    run();
     return () => {
       alive = false;
     };
   }, []);
 
   const countries = useMemo(() => {
-    const s = new Set(routes.map((r) => r.country).filter(Boolean));
-    return ["ALL", ...Array.from(s).sort()];
+    const set = new Set(routes.map((r) => String(r.country || "").toUpperCase()).filter(Boolean));
+    return ["ALL", ...Array.from(set).sort()];
   }, [routes]);
 
   const filtered = useMemo(() => {
-    const needle = String(q || "").trim().toLowerCase();
-    let arr = routes.slice();
+    const query = q.trim().toLowerCase();
+    let out = [...routes];
 
-    if (country !== "ALL") arr = arr.filter((r) => String(r.country || "") === country);
-    if (pace !== "ALL") arr = arr.filter((r) => paceLabel(r.pace) === pace);
-
-    if (needle) {
-      arr = arr.filter((r) => {
-        const blob = `${r.name || ""} ${r.region || ""} ${r.description || ""}`.toLowerCase();
-        return blob.includes(needle);
+    if (query) {
+      out = out.filter((r) => {
+        const blob = [r.name, r.region, r.country, r.description, r.bestSeason, r.pace].join(" ").toLowerCase();
+        return blob.includes(query);
       });
     }
 
-    if (order === "distance") {
-      arr.sort((a, b) => score(a.distanceKm, 0) - score(b.distanceKm, 0));
-    } else if (order === "curves") {
-      arr.sort((a, b) => score(b.curvesScore, 0) - score(a.curvesScore, 0));
-    } else {
-      // "best" = curvesScore + asphaltScore
-      arr.sort(
-        (a, b) =>
-          score(b.curvesScore, 0) + score(b.asphaltScore, 0) - (score(a.curvesScore, 0) + score(a.asphaltScore, 0))
-      );
+    if (country !== "ALL") out = out.filter((r) => String(r.country || "").toUpperCase() === country);
+
+    const sorter =
+      {
+        rating: (a, b) => Number(b.rating || 0) - Number(a.rating || 0),
+        distance: (a, b) => Number(b.distanceKm || 0) - Number(a.distanceKm || 0),
+        curves: (a, b) => Number(b.curvesScore || 0) - Number(a.curvesScore || 0),
+      }[sortBy] || (() => 0);
+
+    out.sort(sorter);
+    return out;
+  }, [routes, q, country, sortBy]);
+
+  // se selezione sparisce coi filtri: ripiega sul primo
+  useEffect(() => {
+    if (!filtered.length) return;
+    const exists = filtered.some((r) => buildRouteKey(r) === activeKey);
+    if (!exists) {
+      const first = filtered[0];
+      setActiveKey(buildRouteKey(first));
+      setSelected(first);
+      if (isMobileNow()) setMobileView("list");
     }
+  }, [filtered, activeKey]);
 
-    return arr;
-  }, [routes, q, country, pace, order]);
-
-  const selectedWeather = useMemo(() => {
-    if (!selected) return null;
-    try {
-      return getRouteWeatherSummary(selected);
-    } catch {
-      return null;
+  const active = useMemo(() => {
+    if (!routes.length) return null;
+    if (activeKey) {
+      const found = routes.find((r) => buildRouteKey(r) === activeKey);
+      if (found) return found;
     }
-  }, [selected]);
+    return routes[0] || null;
+  }, [routes, activeKey]);
 
-  const openNav = () => {
-    const url = buildRouteNavUrl(selected);
-    if (!url) return alert("Navigazione non disponibile: mancano start/end o punti percorso.");
-    openGoogleMapsSmart(url);
+  const selectRoute = (r) => {
+    const key = buildRouteKey(r);
+    setActiveKey(key);
+    setSelected(r);
+
+    if (isMobileNow()) {
+      setMobileView("detail");
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
   };
-
-  const Detail = () => {
-    if (!selected) {
-      return (
-        <div style={S.card}>
-          <div style={{ fontWeight: 900, fontSize: 16 }}>Seleziona un itinerario</div>
-          <div style={{ marginTop: 6, opacity: 0.75 }}>Tocca una card dalla lista.</div>
-        </div>
-      );
-    }
-
-    const photo = selected.photo || FALLBACK_PHOTO;
-
-    return (
-      <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
-        {!isLg && showDetailMobile && (
-          <button
-            style={{ ...S.btnGhost, alignSelf: "flex-start" }}
-            onClick={() => setShowDetailMobile(false)}
-          >
-            ← Indietro
-          </button>
-        )}
-
-        <div
-          style={{
-            ...S.card,
-            padding: 0,
-            overflow: "hidden",
-          }}
-        >
-          <div style={{ position: "relative" }}>
-            <img
-              src={photo}
-              alt={selected.name}
-              style={{ width: "100%", height: 220, objectFit: "cover", display: "block" }}
-              onError={(e) => {
-                e.currentTarget.src = FALLBACK_PHOTO;
-              }}
-            />
-            <div
-              style={{
-                position: "absolute",
-                left: 12,
-                bottom: 12,
-                right: 12,
-                padding: 12,
-                borderRadius: 16,
-                background: "rgba(0,0,0,0.45)",
-                color: "white",
-                backdropFilter: "blur(8px)",
-              }}
-            >
-              <div style={{ fontWeight: 900, fontSize: 18, lineHeight: 1.15 }}>{selected.name}</div>
-              <div style={{ marginTop: 6, fontSize: 13, opacity: 0.95 }}>
-                {selected.region || "—"} • {selected.country || "—"}
-              </div>
-            </div>
-          </div>
-
-          <div style={{ padding: 14 }}>
-            <div style={S.row}>
-              <span style={S.pill}>📏 {score(selected.distanceKm, 0).toFixed(0)} km</span>
-              <span style={S.pill}>🌀 Curve {score(selected.curvesScore, 0)}/10</span>
-              <span style={S.pill}>🛣️ Asfalto {score(selected.asphaltScore, 0)}/10</span>
-              <span style={S.pill}>⚡ Pace {paceLabel(selected.pace)}</span>
-            </div>
-
-            {selectedWeather ? (
-              <div style={{ marginTop: 10, fontSize: 13, opacity: 0.82 }}>
-                🌦️ Meteo (stima): <b>{selectedWeather.summary || "—"}</b>
-              </div>
-            ) : (
-              <div style={{ marginTop: 10, fontSize: 13, opacity: 0.72 }}>
-                🌦️ Meteo: disponibile se config OWM/utility attive.
-              </div>
-            )}
-
-            <div style={{ marginTop: 10, fontSize: 14, lineHeight: 1.35, opacity: 0.9 }}>
-              {selected.description || "—"}
-            </div>
-
-            <div style={{ marginTop: 12, display: "flex", gap: 10, flexWrap: "wrap" }}>
-              <button style={S.btn} onClick={openNav}>
-                🧭 Invio navigazione
-              </button>
-            </div>
-          </div>
-        </div>
-
-        <div style={S.card}>
-          <div style={{ fontWeight: 900, fontSize: 16, marginBottom: 8 }}>🗺️ Mappa</div>
-          <RouteMap route={selected} height={isLg ? 420 : 320} />
-          <div style={{ marginTop: 8, fontSize: 12, opacity: 0.75 }}>
-            Tip: se un itinerario non mostra traccia, controlla che abbia start/end o points/polyline nel JSON.
-          </div>
-        </div>
-      </div>
-    );
-  };
-
-  const List = () => (
-    <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
-      <div style={S.card}>
-        <div style={{ fontWeight: 900, fontSize: 16, marginBottom: 10 }}>Filtri</div>
-
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10 }}>
-          <div>
-            <div style={{ ...S.small, fontWeight: 800 }}>Paese</div>
-            <select style={S.select} value={country} onChange={(e) => setCountry(e.target.value)}>
-              {countries.map((c) => (
-                <option key={c} value={c}>
-                  {c === "ALL" ? "Tutti" : c}
-                </option>
-              ))}
-            </select>
-          </div>
-
-          <div>
-            <div style={{ ...S.small, fontWeight: 800 }}>Pace</div>
-            <select style={S.select} value={pace} onChange={(e) => setPace(e.target.value)}>
-              <option value="ALL">Tutte</option>
-              <option value="tecnico">tecnico</option>
-              <option value="veloce">veloce</option>
-              <option value="panoramico">panoramico</option>
-              <option value="misto">misto</option>
-            </select>
-          </div>
-        </div>
-
-        <div style={{ marginTop: 10 }}>
-          <div style={{ ...S.small, fontWeight: 800 }}>Ricerca</div>
-          <input
-            style={S.input}
-            value={q}
-            onChange={(e) => setQ(e.target.value)}
-            placeholder="Es: Stelvio, Dolomiti, Costa..."
-          />
-        </div>
-
-        <div style={{ marginTop: 10 }}>
-          <div style={{ ...S.small, fontWeight: 800 }}>Ordine</div>
-          <select style={S.select} value={order} onChange={(e) => setOrder(e.target.value)}>
-            <option value="best">Migliori (curve+asfalto)</option>
-            <option value="curves">Più curve</option>
-            <option value="distance">Più corti</option>
-          </select>
-        </div>
-      </div>
-
-      <div style={S.card}>
-        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: 10 }}>
-          <div style={{ fontWeight: 900, fontSize: 16 }}>Itinerari</div>
-          <span style={S.pill}>{filtered.length}</span>
-        </div>
-
-        {loading ? (
-          <div style={{ marginTop: 12, display: "flex", flexDirection: "column", gap: 10 }}>
-            <div style={S.skeleton} />
-            <div style={S.skeleton} />
-            <div style={S.skeleton} />
-          </div>
-        ) : filtered.length === 0 ? (
-          <div style={{ marginTop: 10, opacity: 0.78 }}>Nessun risultato. Prova a cambiare filtri.</div>
-        ) : (
-          <div style={{ marginTop: 12, display: "flex", flexDirection: "column", gap: 10 }}>
-            {filtered.map((r) => {
-              const active = r.id === selectedId;
-              const rating = (score(r.curvesScore, 0) + score(r.asphaltScore, 0)) / 2;
-              return (
-                <button
-                  key={r.id}
-                  onClick={() => {
-                    setSelectedId(r.id);
-                    if (!isLg) setShowDetailMobile(true);
-                  }}
-                  style={{
-                    textAlign: "left",
-                    padding: 12,
-                    borderRadius: 16,
-                    border: "1px solid rgba(0,0,0,0.10)",
-                    background: active ? "rgba(0,0,0,0.06)" : "rgba(255,255,255,0.65)",
-                    cursor: "pointer",
-                  }}
-                >
-                  <div style={{ display: "flex", justifyContent: "space-between", gap: 10, alignItems: "baseline" }}>
-                    <div style={{ fontWeight: 900 }}>{r.name}</div>
-                    <div style={{ fontSize: 12, opacity: 0.75 }}>{score(r.distanceKm, 0).toFixed(0)} km</div>
-                  </div>
-                  <div style={{ marginTop: 6, fontSize: 12, opacity: 0.78 }}>
-                    {r.country || "—"} • {paceLabel(r.pace)} • ⭐ {rating.toFixed(1)}
-                  </div>
-                </button>
-              );
-            })}
-          </div>
-        )}
-      </div>
-    </div>
-  );
-
-  // layout finale
-  const showDetail = isLg ? true : showDetailMobile;
 
   return (
-    <div style={S.page}>
-      <div style={S.container}>
-        <style>{`
-          input::placeholder { color: rgba(0,0,0,0.55); }
-        `}</style>
+    <div className="routes-root" style={{ padding: 12, maxWidth: 1250, margin: "0 auto" }}>
+      {/* Header (nascosto nel dettaglio mobile) */}
+      {!showDetailMobile && (
+        <>
+          <div style={{ display: "flex", justifyContent: "space-between", gap: 12, flexWrap: "wrap", alignItems: "baseline" }}>
+            <div>
+              <h1 style={{ margin: 0, fontSize: 34, letterSpacing: -0.5 }}>Itinerari 📍</h1>
+              <div className="routes-subtitle" style={{ opacity: 0.75, marginTop: 6 }}>
+                Touring emozionale: mappa, meteo e Google Maps.
+              </div>
+            </div>
 
-        <div style={S.header}>
-          <div>
-            <h1 style={S.title}>Itinerari 🏍️</h1>
-            <p style={S.sub}>Seleziona un itinerario e avvia la navigazione su Google Maps (mobile: apre l’app).</p>
+            <input
+              className="routes-search"
+              value={q}
+              onChange={(e) => setQ(e.target.value)}
+              placeholder="Cerca: Stelvio, Dolomiti, curve…"
+              style={{
+                width: "min(520px, 100%)",
+                padding: "10px 12px",
+                borderRadius: 14,
+                border: "1px solid rgba(0,0,0,0.15)",
+                outline: "none",
+              }}
+            />
           </div>
 
-          {!isLg && showDetail && (
-            <button style={S.btnGhost} onClick={() => setShowDetailMobile(false)}>
-              📋 Torna alla lista
-            </button>
-          )}
-        </div>
+          <div
+            style={{
+              marginTop: 10,
+              display: "grid",
+              gridTemplateColumns: "repeat(auto-fit, minmax(160px, 1fr))",
+              gap: 10,
+              padding: 12,
+              borderRadius: 18,
+              border: "1px solid rgba(0,0,0,0.12)",
+              background: "white",
+            }}
+          >
+            <label style={{ display: "grid", gap: 6 }}>
+              <span style={{ fontSize: 12, opacity: 0.75 }}>Paese</span>
+              <select
+                value={country}
+                onChange={(e) => setCountry(e.target.value)}
+                style={{ padding: "10px 12px", borderRadius: 12, border: "1px solid rgba(0,0,0,0.15)" }}
+              >
+                {countries.map((c) => (
+                  <option key={c} value={c}>
+                    {c === "ALL" ? "Tutti" : c}
+                  </option>
+                ))}
+              </select>
+            </label>
 
-        <div style={isLg ? S.gridLg : S.grid}>
-          {!isLg && showDetail ? null : <List />}
-          {showDetail ? <Detail /> : null}
-        </div>
-      </div>
+            <label style={{ display: "grid", gap: 6 }}>
+              <span style={{ fontSize: 12, opacity: 0.75 }}>Ordina</span>
+              <select
+                value={sortBy}
+                onChange={(e) => setSortBy(e.target.value)}
+                style={{ padding: "10px 12px", borderRadius: 12, border: "1px solid rgba(0,0,0,0.15)" }}
+              >
+                <option value="rating">Rating (desc)</option>
+                <option value="distance">Distanza (desc)</option>
+                <option value="curves">Curve (desc)</option>
+              </select>
+            </label>
+          </div>
+        </>
+      )}
+
+      {loading ? (
+        <SkeletonLoading />
+      ) : err ? (
+        <div style={{ marginTop: 12, padding: 12, borderRadius: 16, background: "rgba(255,0,0,0.08)" }}>{err}</div>
+      ) : (
+        <>
+          {/* Mobile detail full screen */}
+          {showDetailMobile ? (
+            <div style={{ marginTop: 10 }}>
+              <div
+                style={{
+                  position: "sticky",
+                  top: 0,
+                  zIndex: 20,
+                  background: "rgba(255,255,255,0.96)",
+                  backdropFilter: "blur(10px)",
+                  borderBottom: "1px solid rgba(0,0,0,0.10)",
+                  padding: 10,
+                  borderRadius: 16,
+                  display: "flex",
+                  alignItems: "center",
+                  gap: 10,
+                }}
+              >
+                <button
+                  type="button"
+                  onClick={() => {
+                    setMobileView("list");
+                    window.scrollTo({ top: 0, behavior: "auto" });
+                  }}
+                  style={{
+                    padding: "9px 10px",
+                    borderRadius: 12,
+                    border: "1px solid rgba(0,0,0,0.15)",
+                    background: "white",
+                    cursor: "pointer",
+                    fontWeight: 900,
+                  }}
+                >
+                  ← Indietro
+                </button>
+
+                <div style={{ fontWeight: 950, fontSize: 15, whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>
+                  {selected.name}
+                </div>
+              </div>
+
+              <div style={{ marginTop: 10, borderRadius: 18, overflow: "hidden", border: "1px solid rgba(0,0,0,0.10)", background: "white" }}>
+                <RouteDetail route={selected} />
+              </div>
+            </div>
+          ) : (
+            /* Desktop split + mobile list */
+            <div style={{ marginTop: 12 }} className="routes-split">
+              <div className="routes-list">
+                <div style={{ fontSize: 12, opacity: 0.7, marginBottom: 8 }}>
+                  Trovati: <strong>{filtered.length}</strong>
+                </div>
+
+                <div style={{ display: "grid", gap: 10 }}>
+                  {filtered.map((r) => {
+                    const key = buildRouteKey(r);
+                    const isActive = key === activeKey;
+                    return <RouteCard key={key} route={r} active={isActive} onSelect={() => selectRoute(r)} />;
+                  })}
+                </div>
+              </div>
+
+              <div className="routes-detail">
+                <div style={{ borderRadius: 22, overflow: "hidden", border: "1px solid rgba(0,0,0,0.12)", background: "white" }}>
+                  {!active ? <div style={{ padding: 14 }}>Seleziona un itinerario.</div> : <RouteDetail route={active} />}
+                </div>
+              </div>
+            </div>
+          )}
+        </>
+      )}
+
+      <style>{`
+        @media (min-width: 1024px){
+          .routes-split{
+            display: grid;
+            grid-template-columns: 420px 1fr;
+            gap: 14px;
+            align-items: start;
+          }
+          .routes-list{
+            position: sticky;
+            top: 10px;
+            height: calc(100dvh - 20px);
+            overflow: auto;
+            padding-right: 6px;
+          }
+        }
+
+        @media (max-width: 1023px){
+          .routes-split{ display: grid; grid-template-columns: 1fr; gap: 12px; }
+          .routes-detail{ display:none; }
+        }
+
+        @media (max-width: 767px){
+          .routes-root h1{ font-size: 22px !important; line-height: 1.05 !important; margin-bottom: 4px !important; }
+          .routes-subtitle{ display:none !important; }
+          .routes-search{ padding: 8px 10px !important; border-radius: 12px !important; }
+        }
+      `}</style>
     </div>
   );
+}
+
+function RouteCard({ route, active, onSelect }) {
+  const photo = route.photo || FALLBACK_PHOTO;
+
+  const click = (e) => {
+    e?.preventDefault?.();
+    e?.stopPropagation?.();
+    onSelect?.();
+  };
+
+  return (
+    <div
+      role="button"
+      tabIndex={0}
+      onClick={click}
+      onTouchStart={click}
+      onKeyDown={(e) => (e.key === "Enter" || e.key === " " ? click(e) : null)}
+      style={{
+        borderRadius: 16,
+        overflow: "hidden",
+        width: "100%",
+        border: active ? "2px solid rgba(0,0,0,0.30)" : "1px solid rgba(0,0,0,0.10)",
+        background: "white",
+        cursor: "pointer",
+        WebkitTapHighlightColor: "transparent",
+        touchAction: "manipulation",
+      }}
+    >
+      {/* MOBILE */}
+      <div className="route-card-mobile" style={{ display: "none", padding: 6, gap: 10, alignItems: "center" }}>
+        <div style={{ width: 46, height: 46, borderRadius: 12, overflow: "hidden", background: "rgba(0,0,0,0.05)", flex: "0 0 auto" }}>
+          <img src={photo} alt="" style={{ width: "100%", height: "100%", objectFit: "cover" }} loading="lazy" />
+        </div>
+
+        <div style={{ minWidth: 0, flex: "1 1 auto" }}>
+          <div style={{ display: "flex", justifyContent: "space-between", gap: 8, alignItems: "start" }}>
+            <div style={{ fontWeight: 950, fontSize: 14, lineHeight: 1.15, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
+              {route.country ? `${route.country} ` : ""}{route.name}
+            </div>
+            <div style={{ fontSize: 11, opacity: 0.75, whiteSpace: "nowrap" }}>
+              ⭐ {Number(route.rating || 0).toFixed(1)}
+            </div>
+          </div>
+
+          <div style={{ marginTop: 2, fontSize: 11, opacity: 0.75, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
+            {route.region || "—"} · {route.bestSeason || "—"} · {route.distanceKm ? `${route.distanceKm} km` : ""}
+          </div>
+        </div>
+      </div>
+
+      {/* DESKTOP */}
+      <div className="route-card-desktop" style={{ display: "block" }}>
+        <div style={{ height: 130, backgroundImage: `url(${photo})`, backgroundSize: "cover", backgroundPosition: "center" }} />
+        <div style={{ padding: 12 }}>
+          <div style={{ display: "flex", justifyContent: "space-between", gap: 10 }}>
+            <div style={{ fontWeight: 900, lineHeight: 1.15 }}>{route.country ? `${route.country} ` : ""}{route.name}</div>
+            <div style={{ fontSize: 12, opacity: 0.75, whiteSpace: "nowrap" }}>⭐ {Number(route.rating || 0).toFixed(1)}</div>
+          </div>
+
+          <div style={{ marginTop: 4, fontSize: 12, opacity: 0.75 }}>
+            {route.region || "—"} · {route.bestSeason || "—"} · {route.distanceKm ? `${route.distanceKm} km` : "—"}
+          </div>
+        </div>
+      </div>
+
+      <style>{`
+        @media (max-width: 1023px){
+          .route-card-mobile{ display:flex !important; }
+          .route-card-desktop{ display:none !important; }
+        }
+      `}</style>
+    </div>
+  );
+}
+
+function RouteDetail({ route }) {
+  const photo = route.photo || FALLBACK_PHOTO;
+
+  const start = Array.isArray(route?.start) ? route.start : null;
+  const end = Array.isArray(route?.end) ? route.end : null;
+
+  const googleHref =
+    start && end
+      ? `https://www.google.com/maps/dir/${start[0]},${start[1]}/${end[0]},${end[1]}`
+      : "https://www.google.com/maps";
+
+  const [wx, setWx] = useState(null);
+  const [wxBusy, setWxBusy] = useState(false);
+
+  useEffect(() => {
+    let alive = true;
+
+    async function run() {
+      try {
+        setWxBusy(true);
+        const res = await getRouteWeatherSummary(route);
+        if (!alive) return;
+        setWx(res);
+      } catch (e) {
+        if (!alive) return;
+        setWx({ ok: false, note: e?.message || "Meteo non disponibile." });
+      } finally {
+        if (alive) setWxBusy(false);
+      }
+    }
+
+    run();
+    return () => {
+      alive = false;
+    };
+  }, [buildRouteKey(route)]);
+
+  return (
+    <>
+      {/* Hero */}
+      <div style={{ position: "relative", height: 240, backgroundImage: `url(${photo})`, backgroundSize: "cover", backgroundPosition: "center" }}>
+        <div style={{ position: "absolute", inset: 0, background: "linear-gradient(180deg, rgba(0,0,0,0.10), rgba(0,0,0,0.76))" }} />
+        <div style={{ position: "absolute", left: 12, right: 12, bottom: 10, color: "white" }}>
+          <div style={{ fontSize: 12, opacity: 0.92 }}>
+            {route.country || "—"} · {route.region || "—"} · {route.bestSeason || "—"}
+          </div>
+          <div style={{ fontSize: 26, fontWeight: 950, lineHeight: 1.05 }}>{route.name}</div>
+
+          <div style={{ marginTop: 8, display: "flex", gap: 8, flexWrap: "wrap" }}>
+            <span style={pill("dark")}>⭐ {Number(route.rating || 0).toFixed(1)}</span>
+            <span style={pill("dark")}>📏 {route.distanceKm ? `${route.distanceKm} km` : "—"}</span>
+            <span style={pill("dark")}>🌀 curve {Number(route.curvesScore || 0)}/10</span>
+            <span style={pill("dark")}>🛣️ asfalto {Number(route.asphaltScore || 0)}/10</span>
+          </div>
+        </div>
+      </div>
+
+      <div style={{ padding: 12 }}>
+        <a
+          href={googleHref}
+          target="_blank"
+          rel="noreferrer"
+          style={{
+            display: "inline-block",
+            padding: "10px 12px",
+            borderRadius: 12,
+            border: "1px solid rgba(0,0,0,0.15)",
+            background: "white",
+            fontSize: 13,
+            textDecoration: "none",
+          }}
+        >
+          📍 Apri itinerario in Google Maps
+        </a>
+
+        <div style={{ marginTop: 12, borderTop: "1px solid rgba(0,0,0,0.08)", paddingTop: 12 }}>
+          <strong>📌 Descrizione</strong>
+          <div style={{ marginTop: 8, fontSize: 14, opacity: 0.9, lineHeight: 1.4 }}>{route.description || "—"}</div>
+        </div>
+
+        <div style={{ marginTop: 12, borderTop: "1px solid rgba(0,0,0,0.08)", paddingTop: 12 }}>
+          <strong>🗺️ Mappa</strong>
+          <div style={{ marginTop: 10 }}>
+            <RouteMap route={route} />
+          </div>
+        </div>
+
+        <div style={{ marginTop: 12, borderTop: "1px solid rgba(0,0,0,0.08)", paddingTop: 12 }}>
+          <strong>🌤 Meteo</strong>
+
+          {wxBusy ? (
+            <div style={{ marginTop: 10, padding: 12, borderRadius: 16, background: "rgba(0,0,0,0.04)" }}>Carico meteo…</div>
+          ) : !wx || !wx.ok ? (
+            <div style={{ marginTop: 10, padding: 12, borderRadius: 16, background: "rgba(0,0,0,0.04)" }}>{wx?.note || "Meteo non disponibile."}</div>
+          ) : (
+            <div style={{ marginTop: 10, display: "grid", gap: 10 }}>
+              <div style={{ display: "flex", gap: 10, flexWrap: "wrap", alignItems: "center" }}>
+                <span style={pill("light")}>Condizione: <strong>{wx.worst}</strong></span>
+                {wx.temp != null ? (
+  <span style={pill("light")}>
+    🌡 {wx.temp}° {wx.tempMin != null && wx.tempMax != null ? `(min ${wx.tempMin}° / max ${wx.tempMax}°)` : ""}
+  </span>
+) : null}
+                {wx.windKmh != null ? <span style={pill("light")}>💨vento {wx.windKmh} km/h</span> : null}
+              </div>
+              <div style={{ fontSize: 12, opacity: 0.7 }}>Aggiornato: {String(wx.updatedAt || "").slice(0, 16).replace("T", " ")}</div>
+            </div>
+          )}
+        </div>
+      </div>
+    </>
+  );
+}
+
+function pill(kind) {
+  const base = {
+    display: "inline-flex",
+    alignItems: "center",
+    gap: 6,
+    padding: "6px 10px",
+    borderRadius: 999,
+    fontSize: 12,
+    whiteSpace: "nowrap",
+  };
+
+  if (kind === "dark") {
+    return {
+      ...base,
+      border: "1px solid rgba(255,255,255,0.20)",
+      background: "rgba(0,0,0,0.38)",
+      color: "rgba(255,255,255,0.95)",
+      backdropFilter: "blur(10px)",
+      textShadow: "0 1px 2px rgba(0,0,0,0.35)",
+    };
+  }
+
+  return {
+    ...base,
+    border: "1px solid rgba(0,0,0,0.14)",
+    background: "rgba(255,255,255,0.86)",
+    color: "rgba(10,10,10,0.92)",
+    backdropFilter: "blur(6px)",
+  };
 }

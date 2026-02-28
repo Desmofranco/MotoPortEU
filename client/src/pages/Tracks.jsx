@@ -1,490 +1,996 @@
 // =======================================================
 // src/pages/Tracks.jsx
-// MotoPortEU — Circuiti (Piste)
-// ✅ Responsive: mobile (lista -> dettaglio fullscreen) / desktop (split view)
-// ✅ Filtri: paese, tipo, fondo, ordine
-// ✅ Mappa: TrackMap
-// ✅ Meteo: getTrackWeatherSummary
-// ✅ Google Maps: apertura smart (mobile -> app)
-// Dati: /public/data/tracks.json + /public/data/tracks.eu.json (se presente)
+// Piste: supersport / enduro / cross
+// UI: split-view su desktop (lista + dettaglio)
+// Mobile: lista -> dettaglio (full screen) con back
+// Dati: /public/data/tracks.json + /public/data/tracks.eu.json
+// ✅ Loading skeleton
+// ✅ Dedup key stabile (id o name+coords)
+// ✅ Meteo + Google Maps
+// ✅ Warning VITE_OWM_KEY solo se manca key E non c’è meteo
+// ✅ Mobile: filtri collassabili inline
+// ✅ Mobile detail: mini header sticky + swipe down close + hero che si riduce
+// ✅ Mobile ULTRA COMPACT: header + lista più piccoli
 // =======================================================
 
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import TrackMap from "../components/TrackMap";
 import { getTrackWeatherSummary } from "../utils/trackWeather";
 
 const FALLBACK_PHOTO =
-  "https://images.unsplash.com/photo-1521412644187-c49fa049e84d?auto=format&fit=crop&w=1600&q=80";
+  "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1600&q=80";
 
-const isMobileUA = () => /Android|iPhone|iPad|iPod/i.test(navigator.userAgent || "");
-const openGoogleMapsSmart = (url) => {
-  if (!url) return;
-  if (isMobileUA()) window.location.href = url;
-  else window.open(url, "_blank", "noopener,noreferrer");
-};
-
-const buildSearchUrl = (lat, lon) => {
-  const a = Number(lat);
-  const b = Number(lon);
-  if (!Number.isFinite(a) || !Number.isFinite(b)) return null;
-  return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${a},${b}`)}`;
-};
-
-function getTrackLatLon(track) {
-  const lat =
-    Number(track?.lat) ??
-    Number(track?.latitude) ??
-    Number(track?.coords?.[0]) ??
-    Number(track?.location?.[0]);
-
-  const lon =
-    Number(track?.lon) ??
-    Number(track?.lng) ??
-    Number(track?.longitude) ??
-    Number(track?.coords?.[1]) ??
-    Number(track?.location?.[1]);
-
-  if (!Number.isFinite(lat) || !Number.isFinite(lon)) return null;
-  return { lat, lon };
+/** Pill "chiaro" (sezioni normali) */
+function pillStyle(level) {
+  const base = {
+    display: "inline-flex",
+    alignItems: "center",
+    gap: 6,
+    padding: "6px 10px",
+    borderRadius: 999,
+    fontSize: 12,
+    border: "1px solid rgba(0,0,0,0.14)",
+    background: "rgba(255,255,255,0.86)",
+    backdropFilter: "blur(6px)",
+    whiteSpace: "nowrap",
+    color: "rgba(10,10,10,0.92)",
+  };
+  if (level === "bad") return { ...base, background: "rgba(255,0,0,0.10)" };
+  if (level === "warn") return { ...base, background: "rgba(255,140,0,0.12)" };
+  if (level === "soon") return { ...base, background: "rgba(255,215,0,0.16)" };
+  return base;
 }
 
-const score = (n, fallback = 0) => {
-  const x = Number(n);
-  return Number.isFinite(x) ? x : fallback;
-};
-
-const S = {
-  page: { width: "100%", padding: "16px 12px" },
-  container: { maxWidth: 1180, margin: "0 auto" },
-  header: { display: "flex", justifyContent: "space-between", gap: 12, flexWrap: "wrap", alignItems: "flex-end" },
-  title: { margin: 0, fontSize: 34, fontWeight: 900, letterSpacing: "-0.02em" },
-  sub: { margin: "6px 0 0", opacity: 0.78, fontSize: 14, lineHeight: 1.35 },
-  grid: { display: "grid", gridTemplateColumns: "1fr", gap: 12, marginTop: 14 },
-  gridLg: { display: "grid", gridTemplateColumns: "420px 1fr", gap: 14, marginTop: 14 },
-  card: {
-    borderRadius: 18,
-    border: "1px solid rgba(0,0,0,0.08)",
-    background: "rgba(255,255,255,0.72)",
-    boxShadow: "0 10px 30px rgba(0,0,0,0.10)",
-    padding: 14,
-  },
-  row: { display: "flex", gap: 10, flexWrap: "wrap", alignItems: "center" },
-  input: {
-    width: "100%",
-    padding: "10px 12px",
-    borderRadius: 14,
-    border: "1px solid rgba(0,0,0,0.14)",
-    outline: "none",
-    background: "white",
-    fontSize: 14,
-    color: "#111",
-  },
-  select: {
-    width: "100%",
-    padding: "10px 12px",
-    borderRadius: 14,
-    border: "1px solid rgba(0,0,0,0.14)",
-    outline: "none",
-    background: "white",
-    fontSize: 14,
-    color: "#111",
-  },
-  btn: {
-    padding: "10px 12px",
-    borderRadius: 14,
-    border: "1px solid rgba(0,0,0,0.12)",
-    background: "white",
-    cursor: "pointer",
-    fontWeight: 900,
-    boxShadow: "0 8px 20px rgba(0,0,0,0.08)",
-  },
-  btnGhost: {
-    padding: "10px 12px",
-    borderRadius: 14,
-    border: "1px solid rgba(0,0,0,0.10)",
-    background: "rgba(255,255,255,0.60)",
-    cursor: "pointer",
-    fontWeight: 900,
-  },
-  pill: {
-    padding: "7px 10px",
+/** Pill "dark glass" SOLO su hero foto */
+function pillStyleHero(level) {
+  const base = {
+    display: "inline-flex",
+    alignItems: "center",
+    gap: 6,
+    padding: "6px 10px",
     borderRadius: 999,
-    border: "1px solid rgba(0,0,0,0.10)",
-    background: "rgba(255,255,255,0.65)",
-    fontWeight: 800,
-    fontSize: 13,
-  },
-  small: { fontSize: 13, opacity: 0.78 },
-  skeleton: {
-    height: 78,
-    borderRadius: 16,
-    border: "1px solid rgba(0,0,0,0.06)",
-    background: "rgba(0,0,0,0.04)",
-  },
-};
+    fontSize: 12,
+    border: "1px solid rgba(255,255,255,0.20)",
+    background: "rgba(0,0,0,0.38)",
+    backdropFilter: "blur(10px)",
+    whiteSpace: "nowrap",
+    color: "rgba(255,255,255,0.95)",
+    textShadow: "0 1px 2px rgba(0,0,0,0.35)",
+  };
+  if (level === "bad") return { ...base, background: "rgba(220,38,38,0.30)" };
+  if (level === "warn") return { ...base, background: "rgba(245,158,11,0.30)" };
+  if (level === "soon") return { ...base, background: "rgba(234,179,8,0.28)" };
+  return base;
+}
+
+function countryFlag(cc) {
+  const c = String(cc || "").toUpperCase();
+  const map = {
+    IT: "🇮🇹",
+    FR: "🇫🇷",
+    DE: "🇩🇪",
+    AT: "🇦🇹",
+    CH: "🇨🇭",
+    ES: "🇪🇸",
+    NO: "🇳🇴",
+    SE: "🇸🇪",
+    FI: "🇫🇮",
+    RO: "🇷🇴",
+    NL: "🇳🇱",
+    BE: "🇧🇪",
+    PT: "🇵🇹",
+    GB: "🇬🇧",
+    IE: "🇮🇪",
+    PL: "🇵🇱",
+    CZ: "🇨🇿",
+    SK: "🇸🇰",
+    HU: "🇭🇺",
+    SI: "🇸🇮",
+    HR: "🇭🇷",
+    GR: "🇬🇷",
+  };
+  return map[c] || "🏁";
+}
+
+function typeLabel(t) {
+  const s = String(t || "").toLowerCase();
+  if (s === "supersport") return "SuperSport";
+  if (s === "enduro") return "Enduro";
+  if (s === "cross") return "Cross";
+  return t ? String(t) : "—";
+}
+
+function surfaceLabel(s) {
+  const v = String(s || "").toLowerCase();
+  if (v === "asphalt") return "Asfalto";
+  if (v === "dirt") return "Terra";
+  if (v === "mixed") return "Misto";
+  return s ? String(s) : "—";
+}
+
+function scorePill(v) {
+  const n = Number(v || 0);
+  if (n >= 9) return { label: "TOP", level: "ok" };
+  if (n >= 7.5) return { label: "OTTIMA", level: "soon" };
+  if (n >= 6) return { label: "BUONA", level: "warn" };
+  return { label: "BASIC", level: "bad" };
+}
+
+function weatherLevel(worst) {
+  const s = String(worst || "").toLowerCase();
+  if (!s) return "ok";
+  if (s.includes("temporale")) return "bad";
+  if (s.includes("neve")) return "warn";
+  if (s.includes("pioggia")) return "warn";
+  if (s.includes("nebbia")) return "warn";
+  if (s.includes("variabile")) return "soon";
+  if (s.includes("nuvoloso")) return "soon";
+  return "ok";
+}
+
+function normalizeIncomingTrack(t) {
+  const id = String(t?.id || "").trim();
+  const name = t?.name || t?.title || "Senza nome";
+  const country = String(t?.country || "").toUpperCase();
+  const region = t?.region || "";
+  const type = String(t?.type || t?.kind || "").toLowerCase();
+  const surface = String(t?.surface || "").toLowerCase();
+  const lat = t?.coords?.lat ?? t?.start?.lat ?? null;
+  const lng = t?.coords?.lng ?? t?.start?.lng ?? null;
+
+  return {
+    ...t,
+    id,
+    name,
+    country,
+    region,
+    type,
+    surface,
+    coords: {
+      lat: lat ?? t?.coords?.lat,
+      lng: lng ?? t?.coords?.lng,
+    },
+  };
+}
+
+function buildDedupeKey(t) {
+  const id = String(t?.id || "").trim();
+  if (id) return `id:${id}`;
+  const name = String(t?.name || "").trim().toLowerCase();
+  const lat = t?.coords?.lat != null ? Number(t.coords.lat).toFixed(6) : "";
+  const lng = t?.coords?.lng != null ? Number(t.coords.lng).toFixed(6) : "";
+  return `n:${name}|${lat}|${lng}`;
+}
+
+function getTrackKey(t) {
+  return buildDedupeKey(t);
+}
+
+function isMobileNow() {
+  if (typeof window === "undefined" || !window.matchMedia) return false;
+  return window.matchMedia("(max-width: 767px), (pointer: coarse)").matches;
+}
+
+function SkeletonLoading() {
+  return (
+    <div
+      style={{
+        marginTop: 12,
+        padding: 14,
+        borderRadius: 16,
+        border: "1px solid rgba(0,0,0,0.10)",
+        background: "rgba(0,0,0,0.03)",
+      }}
+    >
+      <div style={{ fontSize: 16, fontWeight: 800 }}>Carico piste…</div>
+      <div style={{ marginTop: 10, display: "grid", gap: 8 }}>
+        <div style={{ height: 12, background: "rgba(0,0,0,0.08)", borderRadius: 8, width: "70%" }} />
+        <div style={{ height: 12, background: "rgba(0,0,0,0.08)", borderRadius: 8, width: "55%" }} />
+        <div style={{ height: 12, background: "rgba(0,0,0,0.08)", borderRadius: 8, width: "80%" }} />
+      </div>
+    </div>
+  );
+}
 
 export default function Tracks() {
   const [tracks, setTracks] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [err, setErr] = useState("");
 
+  // filtri
   const [q, setQ] = useState("");
   const [country, setCountry] = useState("ALL");
-  const [type, setType] = useState("ALL"); // supersport / enduro / cross / ecc
-  const [surface, setSurface] = useState("ALL"); // asphalt / mixed / dirt ...
-  const [order, setOrder] = useState("best"); // best | rating | name
+  const [type, setType] = useState("ALL");
+  const [surface, setSurface] = useState("ALL");
+  const [sortBy, setSortBy] = useState("rating"); // rating | difficulty | length
 
-  const [selectedKey, setSelectedKey] = useState("");
-  const keyOf = (t) =>
-    t?.id ||
-    `${t?.name || "track"}-${Number(getTrackLatLon(t)?.lat || 0).toFixed(5)}-${Number(getTrackLatLon(t)?.lon || 0).toFixed(5)}`;
+  // mobile: filtri collassabili
+  const [showFilters, setShowFilters] = useState(false);
 
-  const selected = useMemo(
-    () => tracks.find((t) => keyOf(t) === selectedKey) || null,
-    [tracks, selectedKey]
-  );
+  // selezione
+  const [activeKey, setActiveKey] = useState(null);
+  const [selected, setSelected] = useState(null);
 
-  const [isLg, setIsLg] = useState(false);
-  useEffect(() => {
-    const onResize = () => setIsLg(window.innerWidth >= 1024);
-    onResize();
-    window.addEventListener("resize", onResize);
-    return () => window.removeEventListener("resize", onResize);
-  }, []);
+  // mobile view: "list" | "detail"
+  const [mobileView, setMobileView] = useState("list");
 
-  // mobile detail fullscreen
-  const [showDetailMobile, setShowDetailMobile] = useState(false);
-  useEffect(() => {
-    if (!isLg && selected) setShowDetailMobile(true);
-  }, [isLg, selected]);
+  // sticky mini header (mobile detail)
+  const [miniHeader, setMiniHeader] = useState(false);
+
+  const isMobile = isMobileNow();
+  const showDetailMobile = isMobile && mobileView === "detail" && selected;
 
   useEffect(() => {
     let alive = true;
-    (async () => {
+
+    async function run() {
       setLoading(true);
+      setErr("");
+
       try {
-        const [a, b] = await Promise.allSettled([
-          fetch("/data/tracks.json").then((r) => r.json()),
-          fetch("/data/tracks.eu.json").then((r) => r.json()),
+        const [a, b] = await Promise.all([
+          fetch("/data/tracks.json", { cache: "no-store" })
+            .then((r) => (r.ok ? r.json() : []))
+            .catch(() => []),
+          fetch("/data/tracks.eu.json", { cache: "no-store" })
+            .then((r) => (r.ok ? r.json() : []))
+            .catch(() => []),
         ]);
 
-        const arrA = a.status === "fulfilled" && Array.isArray(a.value) ? a.value : [];
-        const arrB = b.status === "fulfilled" && Array.isArray(b.value) ? b.value : [];
-        const merged = [...arrA, ...arrB];
+        const arrA = Array.isArray(a) ? a : [];
+        const arrB = Array.isArray(b) ? b : [];
+        const merged = [...arrA, ...arrB].map(normalizeIncomingTrack);
+
+        const seen = new Set();
+        const dedup = [];
+        for (const t of merged) {
+          const key = buildDedupeKey(t);
+          if (!key || seen.has(key)) continue;
+          seen.add(key);
+          dedup.push(t);
+        }
 
         if (!alive) return;
-        setTracks(merged);
 
-        const first = merged[0];
-        setSelectedKey(first ? keyOf(first) : "");
-      } catch {
+        setTracks(dedup);
+
+        const first = dedup[0] || null;
+        const firstKey = first ? getTrackKey(first) : null;
+
+        setActiveKey((prev) => prev || firstKey);
+        setSelected((prev) => prev || first);
+
+        setMobileView("list");
+        setMiniHeader(false);
+      } catch (e) {
         if (!alive) return;
-        setTracks([]);
+        setErr(e?.message || "Errore caricamento piste");
       } finally {
         if (alive) setLoading(false);
       }
-    })();
+    }
 
+    run();
     return () => {
       alive = false;
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const countries = useMemo(() => {
-    const s = new Set(tracks.map((t) => t.country).filter(Boolean));
-    return ["ALL", ...Array.from(s).sort()];
+    const set = new Set(tracks.map((t) => String(t.country || "").toUpperCase()).filter(Boolean));
+    return ["ALL", ...Array.from(set).sort()];
   }, [tracks]);
 
   const types = useMemo(() => {
-    const s = new Set(tracks.map((t) => t.type).filter(Boolean));
-    return ["ALL", ...Array.from(s).sort()];
+    const set = new Set(tracks.map((t) => String(t.type || "").toLowerCase()).filter(Boolean));
+    return ["ALL", ...Array.from(set).sort()];
   }, [tracks]);
 
   const surfaces = useMemo(() => {
-    const s = new Set(tracks.map((t) => t.surface).filter(Boolean));
-    return ["ALL", ...Array.from(s).sort()];
+    const set = new Set(tracks.map((t) => String(t.surface || "").toLowerCase()).filter(Boolean));
+    return ["ALL", ...Array.from(set).sort()];
   }, [tracks]);
 
   const filtered = useMemo(() => {
-    const needle = String(q || "").trim().toLowerCase();
-    let arr = tracks.slice();
+    const query = q.trim().toLowerCase();
+    let out = [...tracks];
 
-    if (country !== "ALL") arr = arr.filter((t) => String(t.country || "") === country);
-    if (type !== "ALL") arr = arr.filter((t) => String(t.type || "") === type);
-    if (surface !== "ALL") arr = arr.filter((t) => String(t.surface || "") === surface);
-
-    if (needle) {
-      arr = arr.filter((t) => {
-        const blob = `${t.name || ""} ${t.city || ""} ${t.region || ""}`.toLowerCase();
-        return blob.includes(needle);
+    if (query) {
+      out = out.filter((t) => {
+        const blob = [t.name, t.region, t.country, t.type, t.surface, t.description, t.bestSeason]
+          .join(" ")
+          .toLowerCase();
+        return blob.includes(query);
       });
     }
 
-    if (order === "name") {
-      arr.sort((a, b) => String(a.name || "").localeCompare(String(b.name || "")));
-    } else if (order === "rating") {
-      arr.sort((a, b) => score(b.rating, 0) - score(a.rating, 0));
-    } else {
-      // best: rating + lengthKm (se esiste) + surface/asphalt bonus
-      arr.sort((a, b) => {
-        const ab = score(b.rating, 0) + score(b.lengthKm, 0) / 50;
-        const aa = score(a.rating, 0) + score(a.lengthKm, 0) / 50;
-        return ab - aa;
-      });
+    if (country !== "ALL") out = out.filter((t) => String(t.country || "").toUpperCase() === country);
+    if (type !== "ALL") out = out.filter((t) => String(t.type || "").toLowerCase() === String(type).toLowerCase());
+    if (surface !== "ALL") out = out.filter((t) => String(t.surface || "").toLowerCase() === String(surface).toLowerCase());
+
+    const sorter =
+      {
+        rating: (a, b) => Number(b.rating || 0) - Number(a.rating || 0),
+        difficulty: (a, b) => Number(b.difficulty || 0) - Number(a.difficulty || 0),
+        length: (a, b) => Number(b.lengthKm || 0) - Number(a.lengthKm || 0),
+      }[sortBy] || (() => 0);
+
+    out.sort(sorter);
+    return out;
+  }, [tracks, q, country, type, surface, sortBy]);
+
+  // se i filtri cambiano e la selezione non esiste più, ripiega sul primo
+  useEffect(() => {
+    if (!filtered.length) return;
+    const exists = filtered.some((t) => getTrackKey(t) === activeKey);
+    if (!exists) {
+      const first = filtered[0];
+      setActiveKey(getTrackKey(first));
+      setSelected(first);
+      if (isMobileNow()) setMobileView("list");
     }
+  }, [filtered, activeKey]);
 
-    return arr;
-  }, [tracks, q, country, type, surface, order]);
-
-  const weather = useMemo(() => {
-    if (!selected) return null;
-    try {
-      return getTrackWeatherSummary(selected);
-    } catch {
-      return null;
+  const active = useMemo(() => {
+    if (!tracks.length) return null;
+    if (activeKey) {
+      const found = tracks.find((t) => getTrackKey(t) === activeKey);
+      if (found) return found;
     }
-  }, [selected]);
+    return tracks[0] || null;
+  }, [tracks, activeKey]);
 
-  const openMaps = () => {
-    if (!selected) return;
-    const p = getTrackLatLon(selected);
-    const url = p ? buildSearchUrl(p.lat, p.lon) : null;
-    if (!url) return alert("Coordinate circuito non disponibili.");
-    openGoogleMapsSmart(url);
+  const selectTrack = (t) => {
+    const key = getTrackKey(t);
+    setActiveKey(key);
+    setSelected(t);
+
+    if (isMobileNow()) {
+      setMobileView("detail");
+      setMiniHeader(false);
+      setShowFilters(false);
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
   };
 
-  const List = () => (
-    <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
-      <div style={S.card}>
-        <div style={{ fontWeight: 900, fontSize: 16, marginBottom: 10 }}>Filtri</div>
+  // Sticky mini header: quando scrolli abbastanza nel dettaglio mobile
+  useEffect(() => {
+    if (!showDetailMobile) return;
 
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10 }}>
-          <div>
-            <div style={{ ...S.small, fontWeight: 800 }}>Paese</div>
-            <select style={S.select} value={country} onChange={(e) => setCountry(e.target.value)}>
-              {countries.map((c) => (
-                <option key={c} value={c}>
-                  {c === "ALL" ? "Tutti" : c}
-                </option>
-              ))}
-            </select>
+    const onScroll = () => {
+      setMiniHeader((window.scrollY || 0) > 90);
+    };
+
+    window.addEventListener("scroll", onScroll, { passive: true });
+    onScroll();
+    return () => window.removeEventListener("scroll", onScroll);
+  }, [showDetailMobile]);
+
+  return (
+    <div className="tracks-root" style={{ padding: 16, maxWidth: 1250, margin: "0 auto" }}>
+      {/* HEADER + FILTRI: nascosti nel dettaglio mobile */}
+      {!showDetailMobile && (
+        <div style={{ display: "grid", gridTemplateColumns: "1fr", gap: 10, alignItems: "start" }}>
+          <div style={{ display: "flex", justifyContent: "space-between", gap: 12, flexWrap: "wrap", alignItems: "baseline" }}>
+            <div>
+              <h1 style={{ margin: 0, fontSize: 44, letterSpacing: -0.5 }}>Piste 🏁</h1>
+              <div className="tracks-subtitle" style={{ opacity: 0.75, marginTop: 6 }}>
+                SuperSport, Enduro e Cross: mappa, meteo e link Google.
+              </div>
+            </div>
+
+            <div style={{ display: "flex", gap: 10, alignItems: "center", flexWrap: "wrap", justifyContent: "flex-end" }}>
+              <input
+                className="tracks-search"
+                value={q}
+                onChange={(e) => setQ(e.target.value)}
+                placeholder="Cerca: Mugello, Misano, enduro, cross…"
+                style={{
+                  width: "min(520px, 100%)",
+                  padding: "10px 12px",
+                  borderRadius: 14,
+                  border: "1px solid rgba(0,0,0,0.15)",
+                  outline: "none",
+                }}
+              />
+
+              {/* Mobile: bottone filtri */}
+              {isMobile && (
+                <button
+                  className="tracks-filters-btn"
+                  type="button"
+                  onClick={() => setShowFilters((v) => !v)}
+                  style={{
+                    padding: "10px 12px",
+                    borderRadius: 14,
+                    border: "1px solid rgba(0,0,0,0.15)",
+                    background: "white",
+                    cursor: "pointer",
+                    fontWeight: 800,
+                  }}
+                >
+                  {showFilters ? "Chiudi filtri ✕" : "Filtri ⚙️"}
+                </button>
+              )}
+            </div>
           </div>
 
-          <div>
-            <div style={{ ...S.small, fontWeight: 800 }}>Tipo</div>
-            <select style={S.select} value={type} onChange={(e) => setType(e.target.value)}>
-              {types.map((t) => (
-                <option key={t} value={t}>
-                  {t === "ALL" ? "Tutti" : t}
-                </option>
-              ))}
-            </select>
-          </div>
+          {/* FILTERS */}
+          {(!isMobile || showFilters) && (
+            <div
+              style={{
+                display: "grid",
+                gridTemplateColumns: "repeat(auto-fit, minmax(160px, 1fr))",
+                gap: 10,
+                padding: 12,
+                borderRadius: 18,
+                border: "1px solid rgba(0,0,0,0.12)",
+                background: "white",
+              }}
+            >
+              <label style={{ display: "grid", gap: 6 }}>
+                <span style={{ fontSize: 12, opacity: 0.75 }}>Paese</span>
+                <select
+                  value={country}
+                  onChange={(e) => setCountry(e.target.value)}
+                  style={{ padding: "10px 12px", borderRadius: 12, border: "1px solid rgba(0,0,0,0.15)" }}
+                >
+                  {countries.map((c) => (
+                    <option key={c} value={c}>
+                      {c === "ALL" ? "Tutti" : `${countryFlag(c)} ${c}`}
+                    </option>
+                  ))}
+                </select>
+              </label>
+
+              <label style={{ display: "grid", gap: 6 }}>
+                <span style={{ fontSize: 12, opacity: 0.75 }}>Tipo</span>
+                <select
+                  value={type}
+                  onChange={(e) => setType(e.target.value)}
+                  style={{ padding: "10px 12px", borderRadius: 12, border: "1px solid rgba(0,0,0,0.15)" }}
+                >
+                  {types.map((t) => (
+                    <option key={t} value={t}>
+                      {t === "ALL" ? "Tutti" : typeLabel(t)}
+                    </option>
+                  ))}
+                </select>
+              </label>
+
+              <label style={{ display: "grid", gap: 6 }}>
+                <span style={{ fontSize: 12, opacity: 0.75 }}>Fondo</span>
+                <select
+                  value={surface}
+                  onChange={(e) => setSurface(e.target.value)}
+                  style={{ padding: "10px 12px", borderRadius: 12, border: "1px solid rgba(0,0,0,0.15)" }}
+                >
+                  {surfaces.map((s) => (
+                    <option key={s} value={s}>
+                      {s === "ALL" ? "Tutti" : surfaceLabel(s)}
+                    </option>
+                  ))}
+                </select>
+              </label>
+
+              <label style={{ display: "grid", gap: 6 }}>
+                <span style={{ fontSize: 12, opacity: 0.75 }}>Ordina</span>
+                <select
+                  value={sortBy}
+                  onChange={(e) => setSortBy(e.target.value)}
+                  style={{ padding: "10px 12px", borderRadius: 12, border: "1px solid rgba(0,0,0,0.15)" }}
+                >
+                  <option value="rating">Rating (desc)</option>
+                  <option value="difficulty">Difficoltà (desc)</option>
+                  <option value="length">Lunghezza (desc)</option>
+                </select>
+              </label>
+            </div>
+          )}
+        </div>
+      )}
+
+      {/* CONTENT */}
+      {loading ? (
+        <SkeletonLoading />
+      ) : err ? (
+        <div style={{ marginTop: 12, padding: 12, borderRadius: 16, background: "rgba(255,0,0,0.08)" }}>{err}</div>
+      ) : (
+        <>
+          {/* MOBILE: dettaglio single-screen */}
+          {showDetailMobile ? (
+            <div style={{ marginTop: 10 }}>
+              {/* Sticky mini header */}
+              <div
+                style={{
+                  position: "sticky",
+                  top: 0,
+                  zIndex: 20,
+                  background: "rgba(255,255,255,0.96)",
+                  backdropFilter: "blur(10px)",
+                  borderBottom: "1px solid rgba(0,0,0,0.10)",
+                  padding: miniHeader ? "8px 10px" : "10px 10px",
+                  borderRadius: 16,
+                  display: "flex",
+                  alignItems: "center",
+                  gap: 10,
+                }}
+              >
+                <button
+                  type="button"
+                  onClick={() => {
+                    setMobileView("list");
+                    setMiniHeader(false);
+                    window.scrollTo({ top: 0, behavior: "auto" });
+                  }}
+                  style={{
+                    padding: miniHeader ? "8px 10px" : "9px 10px",
+                    borderRadius: 12,
+                    border: "1px solid rgba(0,0,0,0.15)",
+                    background: "white",
+                    cursor: "pointer",
+                    flex: "0 0 auto",
+                    fontWeight: 900,
+                  }}
+                >
+                  ← Indietro
+                </button>
+
+                <div style={{ minWidth: 0, flex: "1 1 auto" }}>
+                  <div
+                    style={{
+                      fontWeight: 950,
+                      fontSize: miniHeader ? 14 : 15,
+                      lineHeight: 1.15,
+                      whiteSpace: "nowrap",
+                      overflow: "hidden",
+                      textOverflow: "ellipsis",
+                    }}
+                  >
+                    {countryFlag(selected.country)} {selected.name}
+                  </div>
+                  {miniHeader ? (
+                    <div style={{ marginTop: 2, fontSize: 12, opacity: 0.75, display: "flex", gap: 10, alignItems: "center", flexWrap: "wrap" }}>
+                      <span>⭐ {Number(selected.rating || 0).toFixed(1)}</span>
+                      <span>{typeLabel(selected.type)}</span>
+                      <span>{surfaceLabel(selected.surface)}</span>
+                    </div>
+                  ) : null}
+                </div>
+              </div>
+
+              <div style={{ marginTop: 10, borderRadius: 18, overflow: "hidden", border: "1px solid rgba(0,0,0,0.10)", background: "white" }}>
+                <TrackDetail
+                  track={selected}
+                  onClose={() => {
+                    setMobileView("list");
+                    setMiniHeader(false);
+                    window.scrollTo({ top: 0, behavior: "auto" });
+                  }}
+                />
+              </div>
+            </div>
+          ) : (
+            /* DESKTOP: split + MOBILE: lista */
+            <div style={{ marginTop: 12 }} className="tracks-split">
+              {/* LIST */}
+              <div className="tracks-list">
+                <div style={{ fontSize: 12, opacity: 0.7, marginBottom: 8 }}>
+                  Trovate: <strong>{filtered.length}</strong> (EU import incluse)
+                </div>
+
+                <div style={{ display: "grid", gap: 10 }}>
+                  {filtered.map((t) => {
+                    const key = getTrackKey(t);
+                    const isActive = key === activeKey;
+                    return <TrackCard key={key} track={t} active={isActive} onSelect={() => selectTrack(t)} />;
+                  })}
+
+                  {filtered.length === 0 && (
+                    <div style={{ padding: 12, borderRadius: 16, background: "rgba(0,0,0,0.04)" }}>Nessuna pista trovata.</div>
+                  )}
+                </div>
+              </div>
+
+              {/* DETAIL (solo desktop/tablet) */}
+              <div className="tracks-detail">
+                <div style={{ borderRadius: 22, overflow: "hidden", border: "1px solid rgba(0,0,0,0.12)", background: "white" }}>
+                  {!active ? <div style={{ padding: 14 }}>Seleziona una pista.</div> : <TrackDetail track={active} />}
+                </div>
+              </div>
+            </div>
+          )}
+        </>
+      )}
+
+      {/* STILI UNICI IN FONDO */}
+      <style>{`
+        @media (min-width: 1024px){
+          .tracks-split{
+            display: grid;
+            grid-template-columns: 420px 1fr;
+            gap: 14px;
+            align-items: start;
+          }
+          .tracks-list{
+            position: sticky;
+            top: 10px;
+            height: calc(100dvh - 20px);
+            overflow: auto;
+            padding-right: 6px;
+          }
+          .tracks-detail{ height: fit-content; }
+        }
+
+        @media (max-width: 1023px){
+          .tracks-split{
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 12px;
+          }
+          .tracks-detail{ display: none; }
+        }
+
+        /* ✅ MOBILE ULTRA COMPACT */
+        @media (max-width: 767px){
+          .tracks-root{ padding: 8px !important; }
+          .tracks-root h1{
+            font-size: 22px !important;
+            line-height: 1.05 !important;
+            margin-bottom: 4px !important;
+          }
+          .tracks-subtitle{ display:none !important; }
+          .tracks-search{ padding: 8px 10px !important; border-radius: 12px !important; }
+          .tracks-filters-btn{ padding: 8px 10px !important; border-radius: 12px !important; }
+        }
+      `}</style>
+    </div>
+  );
+}
+
+/** Card: mobile COMPATTA, desktop “vetrina” */
+function TrackCard({ track, active, onSelect }) {
+  const photo = track.photo || FALLBACK_PHOTO;
+  const rating = Number(track.rating || 0);
+  const p = scorePill(rating);
+
+  const click = (e) => {
+    e?.preventDefault?.();
+    e?.stopPropagation?.();
+    onSelect?.();
+  };
+
+  return (
+    <div
+      role="button"
+      tabIndex={0}
+      onClick={click}
+      onTouchStart={click}
+      onKeyDown={(e) => (e.key === "Enter" || e.key === " " ? click(e) : null)}
+      style={{
+        borderRadius: 16,
+        overflow: "hidden",
+        width: "100%",
+        border: active ? "2px solid rgba(0,0,0,0.30)" : "1px solid rgba(0,0,0,0.10)",
+        background: "white",
+        boxShadow: active ? "0 10px 22px rgba(0,0,0,0.08)" : "none",
+        cursor: "pointer",
+        WebkitTapHighlightColor: "transparent",
+        touchAction: "manipulation",
+      }}
+    >
+      {/* MOBILE ROW (ULTRA COMPATTA) */}
+      <div className="track-card-mobile" style={{ display: "none", padding: 6, gap: 10, alignItems: "center" }}>
+        <div style={{ width: 46, height: 46, borderRadius: 12, overflow: "hidden", background: "rgba(0,0,0,0.05)", flex: "0 0 auto" }}>
+          <img src={photo} alt="" style={{ width: "100%", height: "100%", objectFit: "cover" }} loading="lazy" />
         </div>
 
-        <div style={{ marginTop: 10, display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10 }}>
-          <div>
-            <div style={{ ...S.small, fontWeight: 800 }}>Fondo</div>
-            <select style={S.select} value={surface} onChange={(e) => setSurface(e.target.value)}>
-              {surfaces.map((s) => (
-                <option key={s} value={s}>
-                  {s === "ALL" ? "Tutti" : s}
-                </option>
-              ))}
-            </select>
+        <div style={{ minWidth: 0, flex: "1 1 auto" }}>
+          <div style={{ display: "flex", justifyContent: "space-between", gap: 8, alignItems: "start" }}>
+            <div style={{ fontWeight: 950, fontSize: 14, lineHeight: 1.15, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
+              {countryFlag(track.country)} {track.name}
+            </div>
+            <div style={{ fontSize: 11, opacity: 0.75, whiteSpace: "nowrap" }}>{typeLabel(track.type)}</div>
           </div>
 
-          <div>
-            <div style={{ ...S.small, fontWeight: 800 }}>Ordine</div>
-            <select style={S.select} value={order} onChange={(e) => setOrder(e.target.value)}>
-              <option value="best">Migliori</option>
-              <option value="rating">Rating</option>
-              <option value="name">Nome</option>
-            </select>
+          <div style={{ marginTop: 2, fontSize: 11, opacity: 0.75, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
+            {track.region || "—"} · {surfaceLabel(track.surface)} · {track.bestSeason || "—"}
           </div>
-        </div>
 
-        <div style={{ marginTop: 10 }}>
-          <div style={{ ...S.small, fontWeight: 800 }}>Ricerca</div>
-          <input style={S.input} value={q} onChange={(e) => setQ(e.target.value)} placeholder="Es: Imola, Mugello..." />
+          <div style={{ marginTop: 5, display: "flex", gap: 8, alignItems: "center", flexWrap: "wrap" }}>
+            <span style={{ ...pillStyle(p.level), fontSize: 10, padding: "4px 7px" }}>
+              ⭐ {Number.isFinite(rating) ? rating.toFixed(1) : "0.0"} · {p.label}
+            </span>
+          </div>
         </div>
       </div>
 
-      <div style={S.card}>
-        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: 10 }}>
-          <div style={{ fontWeight: 900, fontSize: 16 }}>Circuiti</div>
-          <span style={S.pill}>{filtered.length}</span>
+      {/* DESKTOP “vetrina” */}
+      <div className="track-card-desktop" style={{ display: "block" }}>
+        <div style={{ height: 130, backgroundImage: `url(${photo})`, backgroundSize: "cover", backgroundPosition: "center" }} />
+        <div style={{ padding: 12 }}>
+          <div style={{ display: "flex", justifyContent: "space-between", gap: 10 }}>
+            <div style={{ fontWeight: 900, lineHeight: 1.15 }}>
+              {countryFlag(track.country)} {track.name}
+            </div>
+            <div style={{ fontSize: 12, opacity: 0.75, whiteSpace: "nowrap" }}>{typeLabel(track.type)}</div>
+          </div>
+
+          <div style={{ marginTop: 4, fontSize: 12, opacity: 0.75 }}>
+            {track.region} · fondo: {surfaceLabel(track.surface)} · stagione: {track.bestSeason || "—"}
+          </div>
+
+          <div style={{ marginTop: 10, display: "flex", gap: 8, flexWrap: "wrap" }}>
+            <span style={pillStyle(p.level)}>
+              ⭐ {Number.isFinite(rating) ? rating.toFixed(1) : "0.0"} · {p.label}
+            </span>
+            <span style={pillStyle("ok")}>🧠 diff {Number(track.difficulty || 0)}/10</span>
+            <span style={pillStyle("ok")}>⚡ speed {Number(track.speed || 0)}/10</span>
+            <span style={pillStyle("ok")}>🧩 tech {Number(track.technique || 0)}/10</span>
+          </div>
+        </div>
+      </div>
+
+      {/* switch mobile/desktop */}
+      <style>{`
+        @media (max-width: 1023px){
+          .track-card-mobile{ display: flex !important; }
+          .track-card-desktop{ display: none !important; }
+        }
+      `}</style>
+    </div>
+  );
+}
+
+function TrackDetail({ track, onClose }) {
+  const photo = track.photo || FALLBACK_PHOTO;
+  const lat = track?.coords?.lat;
+  const lng = track?.coords?.lng;
+
+  const googleHref = lat != null && lng != null ? `https://www.google.com/maps?q=${lat},${lng}` : "https://www.google.com/maps";
+  const isMobile = isMobileNow();
+
+  // scroll -> hero shrink (mobile)
+  const [scrollY, setScrollY] = useState(0);
+
+  useEffect(() => {
+    if (!isMobile) return;
+    const onScroll = () => setScrollY(window.scrollY || 0);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    onScroll();
+    return () => window.removeEventListener("scroll", onScroll);
+  }, [isMobile]);
+
+  // swipe down -> close (solo se sei in cima)
+  const touchRef = useRef({ startY: 0, startT: 0, active: false, fired: false });
+
+  const onTouchStart = (e) => {
+    if (!isMobile || !onClose) return;
+    const y = e?.touches?.[0]?.clientY ?? 0;
+    touchRef.current = { startY: y, startT: Date.now(), active: true, fired: false };
+  };
+
+  const onTouchMove = (e) => {
+    if (!isMobile || !onClose) return;
+    const st = touchRef.current;
+    if (!st.active || st.fired) return;
+    if ((window.scrollY || 0) > 6) return;
+
+    const y = e?.touches?.[0]?.clientY ?? 0;
+    const dy = y - st.startY;
+    const dt = Date.now() - st.startT;
+
+    if (dy > 90 && dt < 650) {
+      st.fired = true;
+      onClose();
+    }
+  };
+
+  const onTouchEnd = () => {
+    touchRef.current.active = false;
+  };
+
+  // HERO HEIGHT — più compatto
+  const heroMax = isMobile ? 140 : 280;
+  const heroMin = isMobile ? 84 : 280;
+  const heroH = isMobile ? Math.max(heroMin, heroMax - Math.min(scrollY, heroMax - heroMin)) : heroMax;
+
+  const [wx, setWx] = useState(null);
+  const [wxBusy, setWxBusy] = useState(false);
+
+  useEffect(() => {
+    let alive = true;
+
+    async function run() {
+      try {
+        setWxBusy(true);
+        const res = await getTrackWeatherSummary(track);
+        if (!alive) return;
+        setWx(res);
+      } catch (e) {
+        if (!alive) return;
+        setWx({ ok: false, note: e?.message || "Meteo non disponibile." });
+      } finally {
+        if (alive) setWxBusy(false);
+      }
+    }
+
+    if (track?.coords?.lat == null || track?.coords?.lng == null) {
+      setWx({ ok: false, note: "Coordinate mancanti." });
+      setWxBusy(false);
+      return () => {
+        alive = false;
+      };
+    }
+
+    run();
+    return () => {
+      alive = false;
+    };
+  }, [getTrackKey(track)]);
+
+  const wxBox = (() => {
+    if (wxBusy) return <div style={{ marginTop: 10, padding: 12, borderRadius: 16, background: "rgba(0,0,0,0.04)" }}>Carico meteo…</div>;
+    if (!wx || !wx.ok) return <div style={{ marginTop: 10, padding: 12, borderRadius: 16, background: "rgba(0,0,0,0.04)" }}>{wx?.note || "Meteo non disponibile."}</div>;
+
+    return (
+      <div style={{ marginTop: 10, display: "grid", gap: 10 }}>
+        <div style={{ display: "flex", gap: 10, flexWrap: "wrap", alignItems: "center" }}>
+          <span style={pillStyle(weatherLevel(wx.worst))}>
+            Condizione: <strong>{wx.worst}</strong>
+          </span>
+          {wx.temp != null ? <span style={pillStyle("ok")}>🌡 {wx.temp}° (min {wx.tempMin}° / max {wx.tempMax}°)</span> : null}
+          {wx.windKmh != null ? <span style={pillStyle(wx.windKmh >= 50 ? "warn" : "ok")}>💨 vento {wx.windKmh} km/h</span> : null}
+        </div>
+        <div style={{ fontSize: 12, opacity: 0.7 }}>Aggiornato: {String(wx.updatedAt || "").slice(0, 16).replace("T", " ")}</div>
+      </div>
+    );
+  })();
+
+  const OWM_KEY = (import.meta?.env?.VITE_OWM_KEY || "").trim();
+  const keyMissing = !OWM_KEY;
+  const hasWeather =
+    !!wx &&
+    wx.ok &&
+    (wx.temp != null || wx.tempMin != null || wx.tempMax != null || wx.windKmh != null || !!wx.worst);
+
+  return (
+    <div onTouchStart={onTouchStart} onTouchMove={onTouchMove} onTouchEnd={onTouchEnd}>
+      {/* Hero (collapsing on mobile) */}
+      <div
+        className="track-hero"
+        style={{
+          position: "relative",
+          height: heroH,
+          backgroundImage: `url(${photo})`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          transition: isMobile ? "height 110ms linear" : "none",
+        }}
+      >
+        <div style={{ position: "absolute", inset: 0, background: "linear-gradient(180deg, rgba(0,0,0,0.10), rgba(0,0,0,0.76))" }} />
+
+        <div style={{ position: "absolute", left: 12, right: 12, bottom: 8, color: "white" }}>
+          <div style={{ fontSize: isMobile ? 11 : 13, opacity: 0.92 }}>
+            {countryFlag(track.country)} {track.country} · {track.region} · {typeLabel(track.type)}
+          </div>
+
+          <div style={{ fontSize: isMobile ? 20 : 30, fontWeight: 950, letterSpacing: 0.2, lineHeight: 1.05 }}>
+            {track.name}
+          </div>
+
+          {/* PILL HERO: una riga scrollabile */}
+          <div
+            style={{
+              marginTop: 8,
+              display: "flex",
+              gap: 8,
+              flexWrap: "nowrap",
+              overflowX: "auto",
+              WebkitOverflowScrolling: "touch",
+              paddingBottom: 2,
+            }}
+          >
+            <span style={{ ...pillStyleHero("ok"), fontSize: isMobile ? 10 : 12, padding: isMobile ? "4px 8px" : "6px 10px" }}>
+              ⭐ {Number(track.rating || 0).toFixed(1)}
+            </span>
+            <span style={{ ...pillStyleHero("ok"), fontSize: isMobile ? 10 : 12, padding: isMobile ? "4px 8px" : "6px 10px" }}>
+              🧠 diff {Number(track.difficulty || 0)}/10
+            </span>
+            <span style={{ ...pillStyleHero("ok"), fontSize: isMobile ? 10 : 12, padding: isMobile ? "4px 8px" : "6px 10px" }}>
+              ⚡ speed {Number(track.speed || 0)}/10
+            </span>
+            <span style={{ ...pillStyleHero("ok"), fontSize: isMobile ? 10 : 12, padding: isMobile ? "4px 8px" : "6px 10px" }}>
+              🧩 tech {Number(track.technique || 0)}/10
+            </span>
+            <span style={{ ...pillStyleHero("ok"), fontSize: isMobile ? 10 : 12, padding: isMobile ? "4px 8px" : "6px 10px" }}>
+              🗓 {track.bestSeason || "—"}
+            </span>
+            {track.lengthKm ? (
+              <span style={{ ...pillStyleHero("ok"), fontSize: isMobile ? 10 : 12, padding: isMobile ? "4px 8px" : "6px 10px" }}>
+                📏 {track.lengthKm} km
+              </span>
+            ) : null}
+          </div>
+        </div>
+      </div>
+
+      {/* Body */}
+      <div style={{ padding: isMobile ? 10 : 14 }}>
+        <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr 1fr" : "repeat(auto-fit, minmax(160px, 1fr))", gap: 10 }}>
+          <Stat compact={isMobile} label="Tipo" value={typeLabel(track.type)} />
+          <Stat compact={isMobile} label="Fondo" value={surfaceLabel(track.surface)} />
+          {!isMobile ? <Stat compact={false} label="Rating" value={`${Number(track.rating || 0).toFixed(1)} / 10`} /> : null}
         </div>
 
-        {loading ? (
-          <div style={{ marginTop: 12, display: "flex", flexDirection: "column", gap: 10 }}>
-            <div style={S.skeleton} />
-            <div style={S.skeleton} />
-            <div style={S.skeleton} />
+        {isMobile ? (
+          <div style={{ marginTop: 10 }}>
+            <Stat compact={true} label="Rating" value={`${Number(track.rating || 0).toFixed(1)} / 10`} />
           </div>
-        ) : filtered.length === 0 ? (
-          <div style={{ marginTop: 10, opacity: 0.78 }}>Nessun risultato. Cambia filtri.</div>
-        ) : (
-          <div style={{ marginTop: 12, display: "flex", flexDirection: "column", gap: 10 }}>
-            {filtered.map((t) => {
-              const k = keyOf(t);
-              const active = k === selectedKey;
-              return (
-                <button
-                  key={k}
-                  onClick={() => {
-                    setSelectedKey(k);
-                    if (!isLg) setShowDetailMobile(true);
-                  }}
-                  style={{
-                    textAlign: "left",
-                    padding: 12,
-                    borderRadius: 16,
-                    border: "1px solid rgba(0,0,0,0.10)",
-                    background: active ? "rgba(0,0,0,0.06)" : "rgba(255,255,255,0.65)",
-                    cursor: "pointer",
-                  }}
-                >
-                  <div style={{ display: "flex", justifyContent: "space-between", gap: 10, alignItems: "baseline" }}>
-                    <div style={{ fontWeight: 900 }}>{t.name || "—"}</div>
-                    <div style={{ fontSize: 12, opacity: 0.75 }}>
-                      ⭐ {score(t.rating, 0).toFixed(1)}
-                    </div>
-                  </div>
-                  <div style={{ marginTop: 6, fontSize: 12, opacity: 0.78 }}>
-                    {t.country || "—"} • {t.type || "—"} • {t.surface || "—"}
-                    {t.lengthKm ? ` • ${score(t.lengthKm, 0).toFixed(1)} km` : ""}
-                  </div>
-                </button>
-              );
-            })}
+        ) : null}
+
+        <div style={{ marginTop: 12 }}>
+          <a
+            href={googleHref}
+            target="_blank"
+            rel="noreferrer"
+            style={{
+              display: "inline-block",
+              padding: "10px 12px",
+              borderRadius: 12,
+              border: "1px solid rgba(0,0,0,0.15)",
+              background: "white",
+              fontSize: 13,
+              textDecoration: "none",
+            }}
+          >
+            📍 Apri in Google Maps
+          </a>
+        </div>
+
+        <div style={{ marginTop: 12, borderTop: "1px solid rgba(0,0,0,0.08)", paddingTop: 12 }}>
+          <strong>📌 Descrizione</strong>
+          <div style={{ marginTop: 8, fontSize: 14, opacity: 0.9, lineHeight: 1.4 }}>{track.description || "—"}</div>
+        </div>
+
+        <div style={{ marginTop: 12, borderTop: "1px solid rgba(0,0,0,0.08)", paddingTop: 12 }}>
+          <strong>🗺️ Mappa</strong>
+          <div style={{ marginTop: 10 }}>
+            <TrackMap track={track} />
           </div>
-        )}
+        </div>
+
+        <div style={{ marginTop: 12, borderTop: "1px solid rgba(0,0,0,0.08)", paddingTop: 12 }}>
+          <strong>🌤 Meteo</strong>
+          {wxBox}
+
+          {!keyMissing ? (
+            <div style={{ marginTop: 8, fontSize: 12, opacity: 0.75 }}>
+              ✅ <strong>VITE_OWM_KEY</strong> (OpenWeather) presente.
+            </div>
+          ) : !hasWeather ? (
+            <div style={{ marginTop: 8, fontSize: 12, opacity: 0.75 }}>
+              ⚠️ Manca <strong>VITE_OWM_KEY</strong> (OpenWeather): aggiungila in <code>client/.env</code> e riavvia Vite.
+            </div>
+          ) : null}
+        </div>
       </div>
     </div>
   );
+}
 
-  const Detail = () => {
-    if (!selected) {
-      return (
-        <div style={S.card}>
-          <div style={{ fontWeight: 900, fontSize: 16 }}>Seleziona un circuito</div>
-          <div style={{ marginTop: 6, opacity: 0.75 }}>Tocca una card dalla lista.</div>
-        </div>
-      );
-    }
-
-    const photo = selected.photo || FALLBACK_PHOTO;
-    const coords = getTrackLatLon(selected);
-
-    return (
-      <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
-        {!isLg && showDetailMobile && (
-          <button style={{ ...S.btnGhost, alignSelf: "flex-start" }} onClick={() => setShowDetailMobile(false)}>
-            ← Indietro
-          </button>
-        )}
-
-        <div style={{ ...S.card, padding: 0, overflow: "hidden" }}>
-          <div style={{ position: "relative" }}>
-            <img
-              src={photo}
-              alt={selected.name}
-              style={{ width: "100%", height: 220, objectFit: "cover", display: "block" }}
-              onError={(e) => {
-                e.currentTarget.src = FALLBACK_PHOTO;
-              }}
-            />
-            <div
-              style={{
-                position: "absolute",
-                left: 12,
-                bottom: 12,
-                right: 12,
-                padding: 12,
-                borderRadius: 16,
-                background: "rgba(0,0,0,0.45)",
-                color: "white",
-                backdropFilter: "blur(8px)",
-              }}
-            >
-              <div style={{ fontWeight: 900, fontSize: 18, lineHeight: 1.15 }}>{selected.name}</div>
-              <div style={{ marginTop: 6, fontSize: 13, opacity: 0.95 }}>
-                {selected.city || selected.region || "—"} • {selected.country || "—"}
-              </div>
-            </div>
-          </div>
-
-          <div style={{ padding: 14 }}>
-            <div style={S.row}>
-              <span style={S.pill}>⭐ {score(selected.rating, 0).toFixed(1)}</span>
-              <span style={S.pill}>🏁 {selected.type || "—"}</span>
-              <span style={S.pill}>🪨 {selected.surface || "—"}</span>
-              {selected.lengthKm ? <span style={S.pill}>📏 {score(selected.lengthKm, 0).toFixed(1)} km</span> : null}
-            </div>
-
-            {weather ? (
-              <div style={{ marginTop: 10, fontSize: 13, opacity: 0.82 }}>
-                🌦️ Meteo: <b>{weather.summary || "—"}</b>
-              </div>
-            ) : (
-              <div style={{ marginTop: 10, fontSize: 13, opacity: 0.72 }}>
-                🌦️ Meteo: disponibile se utility/chiave attive.
-              </div>
-            )}
-
-            <div style={{ marginTop: 10, fontSize: 14, lineHeight: 1.35, opacity: 0.9 }}>
-              {selected.description || "—"}
-            </div>
-
-            <div style={{ marginTop: 12, display: "flex", gap: 10, flexWrap: "wrap" }}>
-              <button style={S.btn} onClick={openMaps}>
-                🧭 Invio navigazione
-              </button>
-              {coords ? (
-                <span style={S.pill}>
-                  📍 {coords.lat.toFixed(5)}, {coords.lon.toFixed(5)}
-                </span>
-              ) : null}
-            </div>
-          </div>
-        </div>
-
-        <div style={S.card}>
-          <div style={{ fontWeight: 900, fontSize: 16, marginBottom: 8 }}>🗺️ Mappa</div>
-          <TrackMap track={selected} height={isLg ? 420 : 320} />
-        </div>
-      </div>
-    );
-  };
-
-  const showDetail = isLg ? true : showDetailMobile;
-
+function Stat({ label, value, compact = false }) {
   return (
-    <div style={S.page}>
-      <div style={S.container}>
-        <style>{`
-          input::placeholder { color: rgba(0,0,0,0.55); }
-        `}</style>
-
-        <div style={S.header}>
-          <div>
-            <h1 style={S.title}>Circuiti 🏁</h1>
-            <p style={S.sub}>Seleziona un circuito, vedi mappa + meteo e apri Google Maps (mobile: apre l’app).</p>
-          </div>
-
-          {!isLg && showDetail && (
-            <button style={S.btnGhost} onClick={() => setShowDetailMobile(false)}>
-              📋 Torna alla lista
-            </button>
-          )}
-        </div>
-
-        <div style={isLg ? S.gridLg : S.grid}>
-          {!isLg && showDetail ? null : <List />}
-          {showDetail ? <Detail /> : null}
-        </div>
-      </div>
+    <div
+      style={{
+        padding: compact ? 9 : 12,
+        borderRadius: compact ? 14 : 16,
+        border: "1px solid rgba(0,0,0,0.10)",
+        background: "white",
+      }}
+    >
+      <div style={{ fontSize: compact ? 11 : 12, opacity: 0.7 }}>{label}</div>
+      <div style={{ fontWeight: 950, marginTop: 2, fontSize: compact ? 14 : 16 }}>{value}</div>
     </div>
   );
 }
