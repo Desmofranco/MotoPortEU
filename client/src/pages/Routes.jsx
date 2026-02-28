@@ -36,24 +36,6 @@ function latLonStr(p) {
   return `${lat},${lon}`;
 }
 
-function buildDirUrl({ origin, destination, waypoints = [], travelmode = "driving" }) {
-  if (!destination) return null;
-
-  const o = origin ? `&origin=${encodeURIComponent(origin)}` : "";
-  const d = `&destination=${encodeURIComponent(destination)}`;
-
-  const mid = (waypoints || [])
-    .filter(Boolean)
-    .slice(0, 8)
-    .join("|");
-
-  const w = mid ? `&waypoints=${encodeURIComponent(mid)}` : "";
-
-  return `https://www.google.com/maps/dir/?api=1&travelmode=${encodeURIComponent(
-    travelmode
-  )}${o}${d}${w}`;
-}
-
 // ✅ Android: forza modalità navigazione (mostra "Avvia")
 function buildNavigateUrl(destination, travelmode = "driving") {
   if (!destination) return null;
@@ -80,15 +62,7 @@ function buildRouteKey(r) {
 
 function SkeletonLoading() {
   return (
-    <div
-      style={{
-        marginTop: 12,
-        padding: 14,
-        borderRadius: 16,
-        border: "1px solid rgba(0,0,0,0.10)",
-        background: "rgba(0,0,0,0.03)",
-      }}
-    >
+    <div style={{ marginTop: 12, padding: 14, borderRadius: 16, border: "1px solid rgba(0,0,0,0.10)", background: "rgba(0,0,0,0.03)" }}>
       <div style={{ fontSize: 16, fontWeight: 900 }}>Carico itinerari…</div>
       <div style={{ marginTop: 10, display: "grid", gap: 8 }}>
         <div style={{ height: 12, background: "rgba(0,0,0,0.08)", borderRadius: 8, width: "70%" }} />
@@ -487,19 +461,6 @@ function RouteDetail({ route }) {
   const photo = route.photo || FALLBACK_PHOTO;
 
   const start = Array.isArray(route?.start) ? route.start : null;
-  const end = Array.isArray(route?.end) ? route.end : null;
-
-  // ✅ Itinerario completo (start -> end)
-  const itineraryUrl =
-    start && end
-      ? buildDirUrl({
-          origin: latLonStr(start),
-          destination: latLonStr(end),
-          travelmode: "driving",
-        })
-      : null;
-
-  // ✅ Avvio navigazione verso START (Android: "Avvia" garantito)
   const startNavUrl = start ? buildNavigateUrl(latLonStr(start), "driving") : null;
 
   const [wx, setWx] = useState(null);
@@ -549,7 +510,7 @@ function RouteDetail({ route }) {
       </div>
 
       <div style={{ padding: 12 }}>
-        {/* ✅ Bottone 1: NAVIGAZIONE "AVVIA" verso START */}
+        {/* ✅ SOLO 1 bottone: Avvia verso START (posizione attuale -> start) */}
         <button
           type="button"
           onClick={() => openGoogleMapsSmart(startNavUrl)}
@@ -576,30 +537,6 @@ function RouteDetail({ route }) {
 
         <div style={{ marginTop: 12, borderTop: "1px solid rgba(0,0,0,0.08)", paddingTop: 12 }}>
           <strong>🗺️ Mappa</strong>
-
-          {/* ✅ Bottone 2: ITINERARIO COMPLETO START->END */}
-          <div style={{ marginTop: 10, display: "flex", gap: 10, flexWrap: "wrap", alignItems: "center" }}>
-            <button
-              type="button"
-              onClick={() => openGoogleMapsSmart(itineraryUrl)}
-              disabled={!itineraryUrl}
-              style={{
-                padding: "10px 12px",
-                borderRadius: 12,
-                border: "1px solid rgba(0,0,0,0.15)",
-                background: "white",
-                fontSize: 13,
-                cursor: itineraryUrl ? "pointer" : "not-allowed",
-                fontWeight: 900,
-              }}
-              title="Apri l'itinerario completo (start→end) su Google Maps"
-            >
-              🗺️ Apri itinerario completo (directions)
-            </button>
-
-            {!itineraryUrl ? <span style={{ fontSize: 12, opacity: 0.65 }}>Manca start/end nel JSON.</span> : null}
-          </div>
-
           <div style={{ marginTop: 10 }}>
             <RouteMap route={route} />
           </div>
