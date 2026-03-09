@@ -964,15 +964,6 @@ function TrackDetail({ track, onClose }) {
           <strong>🌤 Meteo</strong>
           {wxBox}
 
-          {!keyMissing ? (
-            <div style={{ marginTop: 8, fontSize: 12, opacity: 0.75 }}>
-              ✅ <strong>VITE_OWM_KEY</strong> (OpenWeather) presente.
-            </div>
-          ) : !hasWeather ? (
-            <div style={{ marginTop: 8, fontSize: 12, opacity: 0.75 }}>
-              ⚠️ Manca <strong>VITE_OWM_KEY</strong> (OpenWeather): aggiungila in <code>client/.env</code> e riavvia Vite.
-            </div>
-          ) : null}
         </div>
       </div>
     </div>

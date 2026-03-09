@@ -1,9 +1,10 @@
 // =======================================================
 // src/utils/trackWeather.js
-// Meteo per pista: 1 punto (track.coords)
+// Meteo per pista / rotta / itinerario da coordinate
 // Env: VITE_OWM_KEY
 // =======================================================
-const OWM_KEY = import.meta.env.VITE_OWM_KEY;
+
+const OWM_KEY = (import.meta.env.VITE_OWM_KEY || "").trim();
 
 function normalizeMain(m) {
   const s = String(m || "").toLowerCase();
@@ -16,16 +17,38 @@ function normalizeMain(m) {
   return s || "variabile";
 }
 
+function toNum(v) {
+  const n = Number(v);
+  return Number.isFinite(n) ? n : null;
+}
+
 async function fetchOWM(lat, lon, timeoutMs = 9000) {
-  const url = `https://api.openweathermap.org/data/2.5/weather?lat=${encodeURIComponent(
-    lat
-  )}&lon=${encodeURIComponent(lon)}&appid=${encodeURIComponent(OWM_KEY)}&units=metric`;
+  if (!OWM_KEY) return null;
+
+  const url =
+    `https://api.openweathermap.org/data/2.5/weather` +
+    `?lat=${encodeURIComponent(lat)}` +
+    `&lon=${encodeURIComponent(lon)}` +
+    `&appid=${encodeURIComponent(OWM_KEY)}` +
+    `&units=metric` +
+    `&lang=it`;
 
   const ctrl = new AbortController();
   const to = setTimeout(() => ctrl.abort(), timeoutMs);
 
   try {
-    const r = await fetch(url, { signal: ctrl.signal });
+    const r = await fetch(url, {
+      method: "GET",
+      signal: ctrl.signal,
+    });
+
+    if (!r.ok) {
+      return {
+        _httpError: true,
+        status: r.status,
+      };
+    }
+
     const j = await r.json().catch(() => null);
     return j;
   } catch {
@@ -37,37 +60,55 @@ async function fetchOWM(lat, lon, timeoutMs = 9000) {
 
 function okOWM(j) {
   if (!j || typeof j !== "object") return false;
+  if (j._httpError) return false;
+
   const cod = j.cod;
   if (cod === 200 || cod === "200") return true;
-  if (j.main && j.weather && Array.isArray(j.weather)) return true;
-  return false;
+
+  return !!(j.main && Array.isArray(j.weather) && j.weather.length > 0);
 }
 
 export async function getTrackWeatherSummary(track) {
-  if (!OWM_KEY) return { ok: false, note: "Manca VITE_OWM_KEY (OpenWeather)." };
-
-  const lat = Number(track?.coords?.lat ?? track?.coords?.latitude);
-  const lng = Number(track?.coords?.lng ?? track?.coords?.lon ?? track?.coords?.longitude);
+  const lat = toNum(track?.coords?.lat ?? track?.coords?.latitude);
+  const lng = toNum(track?.coords?.lng ?? track?.coords?.lon ?? track?.coords?.longitude);
 
   if (!Number.isFinite(lat) || !Number.isFinite(lng)) {
-    return { ok: false, note: "Mancano coords {lat,lng} per calcolare il meteo." };
+    return {
+      ok: false,
+      note: "Meteo non disponibile.",
+    };
+  }
+
+  if (!OWM_KEY) {
+    return {
+      ok: false,
+      note: "Meteo non disponibile.",
+    };
   }
 
   const j = await fetchOWM(lat, lng);
-  if (!okOWM(j)) return { ok: false, note: "Meteo non disponibile." };
 
-  const temp = Number(j.main?.temp);
-  const tmin = Number(j.main?.temp_min);
-  const tmax = Number(j.main?.temp_max);
-  const wind = Number(j.wind?.speed);
+  if (!okOWM(j)) {
+    return {
+      ok: false,
+      note: "Meteo non disponibile.",
+    };
+  }
+
+  const temp = toNum(j.main?.temp);
+  const tmin = toNum(j.main?.temp_min);
+  const tmax = toNum(j.main?.temp_max);
+  const wind = toNum(j.wind?.speed);
 
   return {
     ok: true,
-    worst: normalizeMain(j.weather?.[0]?.main),
+    worst: normalizeMain(j.weather?.[0]?.main || j.weather?.[0]?.description),
+    description: String(j.weather?.[0]?.description || "").trim() || null,
     temp: Number.isFinite(temp) ? Math.round(temp) : null,
     tempMin: Number.isFinite(tmin) ? Math.round(tmin) : null,
     tempMax: Number.isFinite(tmax) ? Math.round(tmax) : null,
     windKmh: Number.isFinite(wind) ? Math.round(wind * 3.6) : null,
+    humidity: toNum(j.main?.humidity),
     updatedAt: new Date().toISOString(),
   };
 }
