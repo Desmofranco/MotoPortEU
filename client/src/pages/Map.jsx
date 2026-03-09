@@ -1,13 +1,14 @@
 // =======================================================
 // src/pages/Map.jsx
-// MotoPortEU — Navigatore PRO Plus 🏁
+// MotoPortEU — Navigatore Rider Evolution 🏁
 // ✅ UI inline styles (no Tailwind)
 // ✅ Autocomplete luoghi (Nominatim OSM) + ENTER per aggiungere
 // ✅ Ricerca stabile (abort + debounce + ordered results + cache + retry)
-// ✅ Snap su strada (OSRM public router)
+// ✅ Rider Route Engine integrato (hook + scoring + cockpit)
+// ✅ Snap su strada + build route via useRouteEngine
 // ✅ Navigatore base (GPS follow + next waypoint + Google Maps nav)
 // ✅ Timer corsa: Start/Stop salva sessioni e tempo totale (solo con GPS ON)
-// ✅ Export GPX (Premium gate via localStorage)
+// ✅ Export GPX
 // ✅ GPS Live + Scia (trail) in tempo reale
 // ✅ Inserimento manuale percorso (coordinate / link Google Maps) + preview + replace
 // ✅ Rider Travel Panel con distanza, tempo e profilo guida
@@ -21,6 +22,9 @@
 
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import RouteBuilderMap from "../components/RouteBuilderMap";
+import RiderModePanel from "../components/RiderModePanel";
+import useRouteEngine from "../hooks/useRouteEngine";
+import { loadLastRoute } from "../utils/routeStorage";
 
 const STORAGE_KEY = "mp_routes_v4";
 const OWM_KEY = import.meta.env.VITE_OWM_KEY || "";
@@ -102,6 +106,14 @@ function prettyDate(iso) {
 
 function clamp(n, min, max) {
   return Math.max(min, Math.min(max, n));
+}
+
+function toLatLngObjects(points = []) {
+  return (points || []).map((p) => ({ lat: Number(p[0]), lng: Number(p[1]) }));
+}
+
+function toPointPairsFromEngineGeometry(geometry = []) {
+  return (geometry || []).map((p) => [Number(p.lat), Number(p.lng)]);
 }
 
 // --- GPX ---
@@ -195,82 +207,6 @@ async function nominatimSearch(q, { signal } = {}) {
   return out;
 }
 
-// --- OSRM snap + steps ---
-function labelManeuver(type) {
-  const map = {
-    depart: "Parti",
-    turn: "Svolta",
-    continue: "Prosegui",
-    merge: "Immettiti",
-    on_ramp: "Prendi la rampa",
-    off_ramp: "Esci dalla rampa",
-    fork: "Tieni la direzione",
-    end_of_road: "Fine strada",
-    use_lane: "Mantieni corsia",
-    roundabout: "Rotatoria",
-    rotary: "Rotatoria",
-    exit_roundabout: "Esci dalla rotatoria",
-    arrive: "Arrivo",
-  };
-  return map[type] || "Procedi";
-}
-
-function labelModifier(mod) {
-  const map = {
-    left: "a sinistra",
-    right: "a destra",
-    straight: "dritto",
-    slight_left: "leggermente a sinistra",
-    slight_right: "leggermente a destra",
-    sharp_left: "secco a sinistra",
-    sharp_right: "secco a destra",
-    uturn: "inversione",
-  };
-  return map[mod] || "";
-}
-
-async function osrmSnap(points) {
-  if (!points || points.length < 2) return null;
-
-  const maxPts = 25;
-  const pts =
-    points.length > maxPts
-      ? points.filter((_, i) => i % Math.ceil(points.length / maxPts) === 0)
-      : points;
-
-  const coords = pts.map(([lat, lng]) => `${lng},${lat}`).join(";");
-  const url = `https://router.project-osrm.org/route/v1/driving/${coords}?overview=full&geometries=geojson&steps=true`;
-
-  const res = await fetch(url);
-  if (!res.ok) throw new Error("OSRM error");
-  const data = await res.json();
-
-  const route = data?.routes?.[0];
-  const geom = route?.geometry;
-  const line = geom?.coordinates;
-  if (!line || !line.length) return { line: null, distanceKm: 0, durationMin: 0, steps: [] };
-
-  const steps =
-    route?.legs?.flatMap((leg) =>
-      (leg.steps || []).map((s) => ({
-        distanceKm: (s.distance || 0) / 1000,
-        durationMin: (s.duration || 0) / 60,
-        name: s.name || "",
-        instruction:
-          s.maneuver?.modifier
-            ? `${labelManeuver(s.maneuver.type)} ${labelModifier(s.maneuver.modifier)}`
-            : labelManeuver(s.maneuver?.type),
-      }))
-    ) || [];
-
-  return {
-    line: line.map(([lon, lat]) => [lat, lon]),
-    distanceKm: (route?.distance || 0) / 1000,
-    durationMin: (route?.duration || 0) / 60,
-    steps,
-  };
-}
-
 // --- Navigator helper ---
 function nearestNextWaypointIndex(gps, points, currentIdx) {
   if (!gps || !points?.length) return 0;
@@ -321,13 +257,22 @@ function parseCoordsFromText(text) {
   for (const m of atMatches) {
     const lat = Number(m[1]);
     const lon = Number(m[2]);
-    if (Number.isFinite(lat) && Number.isFinite(lon) && Math.abs(lat) <= 90 && Math.abs(lon) <= 180) {
+    if (
+      Number.isFinite(lat) &&
+      Number.isFinite(lon) &&
+      Math.abs(lat) <= 90 &&
+      Math.abs(lon) <= 180
+    ) {
       out.push([lat, lon]);
     }
   }
 
   const normalized = t.replace(/;/g, "\n");
-  const lines = normalized.split(/\r?\n/).map((x) => x.trim()).filter(Boolean);
+  const lines = normalized
+    .split(/\r?\n/)
+    .map((x) => x.trim())
+    .filter(Boolean);
+
   for (const line of lines) {
     const nums = line.match(/-?\d+(?:\.\d+)?/g);
     if (!nums || nums.length < 2) continue;
@@ -422,9 +367,15 @@ function analyzeRiderWeather(wx) {
     points -= 8;
   }
 
-  if (points >= 85) return { score: "A", label: "Ottimo per guidare", color: "#15803d", warnings, severity: 1 };
-  if (points >= 68) return { score: "B", label: "Buono con attenzione", color: "#65a30d", warnings, severity: 2 };
-  if (points >= 48) return { score: "C", label: "Attenzione rider", color: "#ca8a04", warnings, severity: 3 };
+  if (points >= 85) {
+    return { score: "A", label: "Ottimo per guidare", color: "#15803d", warnings, severity: 1 };
+  }
+  if (points >= 68) {
+    return { score: "B", label: "Buono con attenzione", color: "#65a30d", warnings, severity: 2 };
+  }
+  if (points >= 48) {
+    return { score: "C", label: "Attenzione rider", color: "#ca8a04", warnings, severity: 3 };
+  }
   return { score: "D", label: "Condizioni sfavorevoli", color: "#dc2626", warnings, severity: 4 };
 }
 
@@ -491,7 +442,9 @@ function dedupePois(arr) {
     const lat = Number(item?.lat);
     const lon = Number(item?.lon);
     if (!Number.isFinite(lat) || !Number.isFinite(lon)) continue;
-    const key = `${lat.toFixed(5)}-${lon.toFixed(5)}-${String(item?.name || "").trim().toLowerCase()}`;
+    const key = `${lat.toFixed(5)}-${lon.toFixed(5)}-${String(item?.name || "")
+      .trim()
+      .toLowerCase()}`;
     if (seen.has(key)) continue;
     seen.add(key);
     out.push(item);
@@ -505,11 +458,13 @@ async function overpassSearchNearby(point, categoryKey, radius = 3500) {
 
   const [lat, lon] = point;
   const tagParts = cat.tags
-    .map((t) => `
+    .map(
+      (t) => `
       node["${t.key}"="${t.value}"](around:${radius},${lat},${lon});
       way["${t.key}"="${t.value}"](around:${radius},${lat},${lon});
       relation["${t.key}"="${t.value}"](around:${radius},${lat},${lon});
-    `)
+    `
+    )
     .join("\n");
 
   const query = `
@@ -529,26 +484,28 @@ async function overpassSearchNearby(point, categoryKey, radius = 3500) {
     if (!res.ok) return [];
     const data = await res.json();
 
-    return (data?.elements || []).map((el) => {
-      const latVal = Number(el?.lat ?? el?.center?.lat);
-      const lonVal = Number(el?.lon ?? el?.center?.lon);
-      const name = el?.tags?.name || cat.label.replace(/^[^\s]+\s/, "");
-      return {
-        id: `${categoryKey}-${el.type}-${el.id}`,
-        name,
-        lat: latVal,
-        lon: lonVal,
-        categoryKey,
-        categoryLabel: cat.label,
-        distanceKm: haversineKm(point, [latVal, lonVal]),
-        meta:
-          el?.tags?.brand ||
-          el?.tags?.operator ||
-          el?.tags?.cuisine ||
-          el?.tags?.tourism ||
-          "",
-      };
-    }).filter((x) => Number.isFinite(x.lat) && Number.isFinite(x.lon));
+    return (data?.elements || [])
+      .map((el) => {
+        const latVal = Number(el?.lat ?? el?.center?.lat);
+        const lonVal = Number(el?.lon ?? el?.center?.lon);
+        const name = el?.tags?.name || cat.label.replace(/^[^\s]+\s/, "");
+        return {
+          id: `${categoryKey}-${el.type}-${el.id}`,
+          name,
+          lat: latVal,
+          lon: lonVal,
+          categoryKey,
+          categoryLabel: cat.label,
+          distanceKm: haversineKm(point, [latVal, lonVal]),
+          meta:
+            el?.tags?.brand ||
+            el?.tags?.operator ||
+            el?.tags?.cuisine ||
+            el?.tags?.tourism ||
+            "",
+        };
+      })
+      .filter((x) => Number.isFinite(x.lat) && Number.isFinite(x.lon));
   } catch {
     return [];
   }
@@ -702,7 +659,6 @@ export default function Map() {
   const lastQueryRef = useRef("");
   const abortRef = useRef(null);
 
-  const [snapping, setSnapping] = useState(false);
   const [snapEnabled, setSnapEnabled] = useState(true);
 
   const [gps, setGps] = useState(null);
@@ -733,6 +689,18 @@ export default function Map() {
   const [poiLoading, setPoiLoading] = useState(false);
   const [poiResults, setPoiResults] = useState([]);
 
+  const {
+    route: engineRoute,
+    weather: engineWeather,
+    score: engineScore,
+    loading: engineLoading,
+    snapping: engineSnapping,
+    error: engineError,
+    buildRoute: buildRiderRoute,
+    snapPoints,
+    reset: resetEngine,
+  } = useRouteEngine();
+
   const activeRoute = useMemo(
     () => routes.find((r) => r.id === activeId) || null,
     [routes, activeId]
@@ -753,7 +721,8 @@ export default function Map() {
     [distanceKm, rideProfile]
   );
 
-const etaText = formatEta(estimatedHours);
+  const etaText = formatEta(estimatedHours);
+
   const currentStepInstruction = useMemo(() => {
     if (!routeMeta?.steps?.length) return null;
     return routeMeta.steps[0] || null;
@@ -767,15 +736,24 @@ const etaText = formatEta(estimatedHours);
     return { idx, km, wp };
   }, [navOn, gps, points, nextIdx]);
 
-  const weatherAssessments = useMemo(() => ({
-    start: analyzeRiderWeather(routeWeather.start),
-    mid: analyzeRiderWeather(routeWeather.mid),
-    end: analyzeRiderWeather(routeWeather.end),
-  }), [routeWeather]);
+  const weatherAssessments = useMemo(
+    () => ({
+      start: analyzeRiderWeather(routeWeather.start),
+      mid: analyzeRiderWeather(routeWeather.mid),
+      end: analyzeRiderWeather(routeWeather.end),
+    }),
+    [routeWeather]
+  );
 
   const overallWeather = useMemo(() => {
     const labels = [weatherAssessments.start, weatherAssessments.mid, weatherAssessments.end].filter(Boolean);
-    let worst = labels[0] || { score: "—", label: "Meteo non disponibile", color: "#6b7280", warnings: [], severity: 0 };
+    let worst = labels[0] || {
+      score: "—",
+      label: "Meteo non disponibile",
+      color: "#6b7280",
+      warnings: [],
+      severity: 0,
+    };
     for (const item of labels) {
       if ((item.severity || 0) > (worst.severity || 0)) worst = item;
     }
@@ -822,6 +800,35 @@ const etaText = formatEta(estimatedHours);
   useEffect(() => saveRoutes(routes), [routes]);
 
   useEffect(() => {
+    const saved = loadLastRoute();
+    if (!saved?.route || activeId) return;
+
+    const routeObj = saved.route;
+    const restoredLine = Array.isArray(routeObj?.geometry)
+      ? routeObj.geometry.map((p) => [Number(p.lat), Number(p.lng)])
+      : null;
+
+    if (restoredLine?.length >= 2) {
+      setSnappedLine(restoredLine);
+      setRouteMeta({
+        distanceKm: Number(routeObj.distanceKm || 0),
+        durationMin: Number(routeObj.durationMin || 0),
+        steps:
+          routeObj?.legs?.[0]?.steps?.map((s) => ({
+            distanceKm: Number((s.distanceMeters || 0) / 1000),
+            durationMin: Number((s.durationSeconds || 0) / 60),
+            name: s.name || "",
+            instruction:
+              s?.maneuver?.modifier
+                ? `${s.maneuver.type || "Procedi"} ${s.maneuver.modifier || ""}`.trim()
+                : s?.maneuver?.type || "Procedi",
+          })) || [],
+      });
+      setSnapEnabled(true);
+    }
+  }, [activeId]);
+
+  useEffect(() => {
     if (!activeRoute) return;
     setPoints(activeRoute.points || []);
     setSnappedLine(activeRoute.snappedLine || null);
@@ -842,7 +849,8 @@ const etaText = formatEta(estimatedHours);
     setRunStartMs(null);
     setRunTrack([]);
     lastRunTrackRef.current = null;
-  }, [activeId]); // eslint-disable-line
+    resetEngine();
+  }, [activeId, activeRoute, resetEngine]);
 
   useEffect(() => {
     const query = (q || "").trim();
@@ -969,6 +977,7 @@ const etaText = formatEta(estimatedHours);
     setPoints((prev) => [...prev, [s.lat, s.lon]]);
     setSnappedLine(null);
     setRouteMeta({ distanceKm: 0, durationMin: 0, steps: [] });
+    resetEngine();
     setQ("");
     setSuggestions([]);
     setSearchOpen(false);
@@ -1006,12 +1015,15 @@ const etaText = formatEta(estimatedHours);
     setManualErr("");
     const pts = parseCoordsFromText(manualText);
     if (!pts.length) {
-      setManualErr("Nessun punto valido trovato. Esempio: 45.4642, 9.1900 oppure link Google Maps con @lat,lng.");
+      setManualErr(
+        "Nessun punto valido trovato. Esempio: 45.4642, 9.1900 oppure link Google Maps con @lat,lng."
+      );
       return;
     }
     setPoints((prev) => (manualReplace ? pts : [...prev, ...pts]));
     setSnappedLine(null);
     setRouteMeta({ distanceKm: 0, durationMin: 0, steps: [] });
+    resetEngine();
     setManualText("");
   };
 
@@ -1025,6 +1037,7 @@ const etaText = formatEta(estimatedHours);
     setSnappedLine(null);
     setRouteMeta({ distanceKm: 0, durationMin: 0, steps: [] });
     setNextIdx(0);
+    resetEngine();
   };
 
   const removePointAt = (idx) => {
@@ -1032,6 +1045,7 @@ const etaText = formatEta(estimatedHours);
     setSnappedLine(null);
     setRouteMeta({ distanceKm: 0, durationMin: 0, steps: [] });
     setNextIdx(0);
+    resetEngine();
   };
 
   useEffect(() => {
@@ -1107,7 +1121,7 @@ const etaText = formatEta(estimatedHours);
     if (!navOn || !gps || !points?.length) return;
     const idx = nearestNextWaypointIndex(gps, points, nextIdx);
     setNextIdx(idx);
-  }, [navOn, gps, points]); // eslint-disable-line
+  }, [navOn, gps, points, nextIdx]);
 
   useEffect(() => {
     if (!runOn) {
@@ -1131,12 +1145,13 @@ const etaText = formatEta(estimatedHours);
       if (tickRef.current) clearInterval(tickRef.current);
       tickRef.current = null;
     };
-  }, [runOn]); // eslint-disable-line
+  }, [runOn, gps]);
 
   const undo = () => {
     setPoints((prev) => prev.slice(0, -1));
     setSnappedLine(null);
     setRouteMeta({ distanceKm: 0, durationMin: 0, steps: [] });
+    resetEngine();
   };
 
   const clear = () => {
@@ -1152,6 +1167,7 @@ const etaText = formatEta(estimatedHours);
     lastRunTrackRef.current = null;
     setPoiResults([]);
     setRadarPoints([]);
+    resetEngine();
   };
 
   const resetTrail = () => {
@@ -1175,6 +1191,7 @@ const etaText = formatEta(estimatedHours);
     setRunTrack([]);
     lastRunTrackRef.current = null;
     setPoiResults([]);
+    resetEngine();
   };
 
   const saveCurrent = () => {
@@ -1201,6 +1218,9 @@ const etaText = formatEta(estimatedHours);
       osrmDistanceKm: routeMeta?.distanceKm || 0,
       osrmDurationMin: routeMeta?.durationMin || 0,
       osrmSteps: routeMeta?.steps || [],
+      riderScore: engineScore?.riderScore || 0,
+      riderProfile: engineScore?.profile || rideProfile,
+      riderHighlights: engineScore?.highlights || [],
     };
 
     setRoutes((prev) => {
@@ -1260,6 +1280,9 @@ const etaText = formatEta(estimatedHours);
         osrmDistanceKm: routeMeta?.distanceKm || 0,
         osrmDurationMin: routeMeta?.durationMin || 0,
         osrmSteps: routeMeta?.steps || [],
+        riderScore: engineScore?.riderScore || existing?.riderScore || 0,
+        riderProfile: engineScore?.profile || existing?.riderProfile || rideProfile,
+        riderHighlights: engineScore?.highlights || existing?.riderHighlights || [],
       };
 
       const exists = prev.some((r) => r.id === id);
@@ -1293,41 +1316,58 @@ const etaText = formatEta(estimatedHours);
 
   const doSnap = async () => {
     if (!points || points.length < 2) return alert("Aggiungi almeno 2 punti.");
-    setSnapping(true);
+
     try {
-      const res = await osrmSnap(points);
-      if (!res?.line) {
+      const routeInput = toLatLngObjects(points);
+      const snapped = await snapPoints(routeInput);
+      const built = await buildRiderRoute(snapped, {
+        meta: {
+          source: "Map.jsx",
+          rideProfile,
+        },
+      });
+
+      const builtRoute = built?.route;
+      const line = toPointPairsFromEngineGeometry(builtRoute?.geometry || []);
+      const firstLeg = builtRoute?.legs?.[0];
+      const steps =
+        (firstLeg?.steps || []).map((s) => ({
+          distanceKm: Number((s.distanceMeters || 0) / 1000),
+          durationMin: Number((s.durationSeconds || 0) / 60),
+          name: s.name || "",
+          instruction:
+            s?.maneuver?.modifier
+              ? `${s.maneuver.type || "Procedi"} ${s.maneuver.modifier || ""}`.trim()
+              : s?.maneuver?.type || "Procedi",
+        })) || [];
+
+      if (!line?.length) {
         alert("Snap non riuscito. Riprova.");
-      } else {
-        setSnappedLine(res.line);
-        setRouteMeta({
-          distanceKm: res.distanceKm || 0,
-          durationMin: res.durationMin || 0,
-          steps: Array.isArray(res.steps) ? res.steps.slice(0, 8) : [],
-        });
+        return;
       }
-    } catch {
-      alert("Snap non disponibile ora (OSRM). Riprova tra poco.");
-    } finally {
-      setSnapping(false);
+
+      setSnappedLine(line);
+      setRouteMeta({
+        distanceKm: Number(builtRoute?.distanceKm || 0),
+        durationMin: Number(builtRoute?.durationMin || 0),
+        steps: steps.slice(0, 8),
+      });
+    } catch (err) {
+      if (err?.name !== "AbortError") {
+        alert("Snap non disponibile ora. Riprova tra poco.");
+      }
     }
   };
 
   const exportGpx = () => {
-    const exportGpx = () => {
-  const base = snapEnabled && snappedLine?.length >= 2 ? snappedLine : points;
-  if (!base || base.length < 2) return alert("Nessun percorso da esportare.");
-  const gpx = toGpx(name || "MotoPortEU Route", base);
-  downloadTextFile(
-    `${(name || "motoport_route").replace(/\s+/g, "_")}.gpx`,
-    gpx,
-    "application/gpx+xml"
-  );
-};
     const base = snapEnabled && snappedLine?.length >= 2 ? snappedLine : points;
     if (!base || base.length < 2) return alert("Nessun percorso da esportare.");
     const gpx = toGpx(name || "MotoPortEU Route", base);
-    downloadTextFile(`${(name || "motoport_route").replace(/\s+/g, "_")}.gpx`, gpx, "application/gpx+xml");
+    downloadTextFile(
+      `${(name || "motoport_route").replace(/\s+/g, "_")}.gpx`,
+      gpx,
+      "application/gpx+xml"
+    );
   };
 
   const openGoogleNav = () => {
@@ -1375,6 +1415,7 @@ const etaText = formatEta(estimatedHours);
     setPoints((prev) => [...prev, [poi.lat, poi.lon]]);
     setSnappedLine(null);
     setRouteMeta({ distanceKm: 0, durationMin: 0, steps: [] });
+    resetEngine();
     if (!String(name || "").trim()) {
       setName(`Route + ${poi.name}`);
     }
@@ -1451,9 +1492,9 @@ const etaText = formatEta(estimatedHours);
 
         <div style={S.headerRow}>
           <div>
-            <h1 style={S.title}>Navigatore PRO Plus 🏁</h1>
+            <h1 style={S.title}>Navigatore Rider Evolution 🏁</h1>
             <p style={S.subtitle}>
-              Route builder, GPS live, Rider Radar meteo e waypoint automatici lungo la rotta.
+              Rider Route Engine, GPS live, Rider Radar meteo e waypoint automatici lungo la rotta.
             </p>
           </div>
 
@@ -1547,8 +1588,14 @@ const etaText = formatEta(estimatedHours);
               <div style={{ marginTop: 10, display: "flex", gap: 8, flexWrap: "wrap" }}>
                 <span style={S.pill}>📍 Punti: {points.length}</span>
                 <span style={S.pill}>📏 Km: {distanceKm.toFixed(1)}</span>
-                <span style={S.pill}>⏱ Tempo: {etaText}</span>
-                {snapEnabled && snappedLine?.length ? <span style={S.pill}>🛣️ Snapped</span> : <span style={S.pill}>📌 Manual</span>}
+                <span style={S.pill}>
+                  ⏱ Tempo: {routeMeta.durationMin > 0 ? `${Math.round(routeMeta.durationMin)} min` : etaText}
+                </span>
+                {snapEnabled && snappedLine?.length ? (
+                  <span style={S.pill}>🛣️ Snapped</span>
+                ) : (
+                  <span style={S.pill}>📌 Manual</span>
+                )}
               </div>
 
               <div style={{ marginTop: 10, display: "flex", gap: 8, flexWrap: "wrap", alignItems: "center" }}>
@@ -1624,12 +1671,19 @@ const etaText = formatEta(estimatedHours);
             <div style={S.card}>
               <div style={{ display: "flex", justifyContent: "space-between", gap: 10, alignItems: "center" }}>
                 <div style={{ fontWeight: 900, fontSize: 16 }}>🧾 Itinerario</div>
-                <button style={S.btnGhost} onClick={newRoute}>➕ Nuovo</button>
+                <button style={S.btnGhost} onClick={newRoute}>
+                  ➕ Nuovo
+                </button>
               </div>
 
               <div style={{ marginTop: 10 }}>
                 <div style={{ ...S.small, fontWeight: 800 }}>Nome</div>
-                <input style={S.input} value={name} onChange={(e) => setName(e.target.value)} placeholder="Es: Stelvio + Gavia" />
+                <input
+                  style={S.input}
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  placeholder="Es: Stelvio + Gavia"
+                />
               </div>
 
               <div style={{ marginTop: 10 }}>
@@ -1644,32 +1698,75 @@ const etaText = formatEta(estimatedHours);
 
               <div style={{ marginTop: 10 }}>
                 <div style={{ ...S.small, fontWeight: 800 }}>Note</div>
-                <textarea style={S.textarea} value={note} onChange={(e) => setNote(e.target.value)} placeholder="Soste, benzina, orari, velox..." />
+                <textarea
+                  style={S.textarea}
+                  value={note}
+                  onChange={(e) => setNote(e.target.value)}
+                  placeholder="Soste, benzina, orari, velox..."
+                />
               </div>
 
               <div style={{ marginTop: 12, display: "flex", gap: 8, flexWrap: "wrap" }}>
-                <button style={S.btn} onClick={saveCurrent}>💾 Salva</button>
-                <button style={S.btnGhost} onClick={duplicateRoute} disabled={!activeRoute}>📑 Duplica</button>
-                <button style={S.btnDanger} onClick={deleteRoute} disabled={!activeRoute}>🗑️ Elimina</button>
-                <button style={S.btnGhost} onClick={doSnap} disabled={snapping || points.length < 2}>
-                  {snapping ? "🛣️ Snap..." : "🛣️ Snap su strada"}
+                <button style={S.btn} onClick={saveCurrent}>
+                  💾 Salva
+                </button>
+                <button style={S.btnGhost} onClick={duplicateRoute} disabled={!activeRoute}>
+                  📑 Duplica
+                </button>
+                <button style={S.btnDanger} onClick={deleteRoute} disabled={!activeRoute}>
+                  🗑️ Elimina
+                </button>
+                <button style={S.btnGhost} onClick={doSnap} disabled={engineLoading || engineSnapping || points.length < 2}>
+                  {engineLoading || engineSnapping ? "🛣️ Snap..." : "🛣️ Snap Rider Engine"}
                 </button>
                 <button style={S.btnGhost} onClick={openGoogleNav} disabled={points.length < 2}>
                   🧭 Apri navigazione
                 </button>
-<button style={S.btnGhost} onClick={exportGpx} disabled={points.length < 2}>
-  🧾 Export GPX
-</button>
+                <button style={S.btnGhost} onClick={exportGpx} disabled={points.length < 2}>
+                  🧾 Export GPX
+                </button>
               </div>
 
               <div style={{ marginTop: 12, display: "flex", gap: 8, flexWrap: "wrap", alignItems: "center" }}>
-                <button style={S.btnPrimary} onClick={startRun} disabled={runOn}>⏱️ Start (GPS)</button>
-                <button style={S.btnGhost} onClick={stopAndSaveRun} disabled={!runOn}>✅ Stop & Salva</button>
+                <button style={S.btnPrimary} onClick={startRun} disabled={runOn}>
+                  ⏱️ Start (GPS)
+                </button>
+                <button style={S.btnGhost} onClick={stopAndSaveRun} disabled={!runOn}>
+                  ✅ Stop & Salva
+                </button>
                 <span style={S.pill}>⏱️ {fmtTime(runElapsedSec)}</span>
                 {activeRoute?.totalTimeSec ? <span style={S.pill}>Totale: {fmtTime(activeRoute.totalTimeSec)}</span> : null}
                 {runOn ? <span style={S.pill}>🏁 Run pts: {runTrack.length}</span> : null}
               </div>
+
+              {engineError ? (
+                <div
+                  style={{
+                    marginTop: 10,
+                    padding: 10,
+                    borderRadius: 14,
+                    background: "rgba(220,38,38,0.08)",
+                    border: "1px solid rgba(220,38,38,0.20)",
+                    fontSize: 13,
+                  }}
+                >
+                  ⚠️ {engineError}
+                </div>
+              ) : null}
             </div>
+
+            <RiderModePanel
+              route={engineRoute || (snappedLine?.length >= 2 ? { distanceKm, durationMin: routeMeta.durationMin } : null)}
+              weather={engineWeather || { summary: overallWeather.label }}
+              score={
+                engineScore || {
+                  riderScore: activeRoute?.riderScore || 0,
+                  profile: activeRoute?.riderProfile || rideProfile,
+                  highlights: activeRoute?.riderHighlights || [],
+                }
+              }
+              loading={engineLoading || engineSnapping}
+            />
 
             <div style={S.card}>
               <div style={{ fontWeight: 900, fontSize: 16, marginBottom: 10 }}>🧠 Rider Travel Panel</div>
@@ -1677,17 +1774,23 @@ const etaText = formatEta(estimatedHours);
               <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
                 <div style={S.stat}>
                   <div style={{ fontSize: 12, opacity: 0.75 }}>Distanza</div>
-                  <div style={{ marginTop: 4, fontWeight: 900, fontSize: 22 }}>{distanceKm.toFixed(1)} km</div>
+                  <div style={{ marginTop: 4, fontWeight: 900, fontSize: 22 }}>
+                    {distanceKm.toFixed(1)} km
+                  </div>
                 </div>
 
                 <div style={S.stat}>
-<div style={{ fontSize: 12, opacity: 0.75 }}>Tempo stimato</div>
-                  <div style={{ marginTop: 4, fontWeight: 900, fontSize: 22 }}>{etaText}</div>
+                  <div style={{ fontSize: 12, opacity: 0.75 }}>Tempo stimato</div>
+                  <div style={{ marginTop: 4, fontWeight: 900, fontSize: 22 }}>
+                    {routeMeta.durationMin > 0 ? `${Math.round(routeMeta.durationMin)} min` : etaText}
+                  </div>
                 </div>
 
                 <div style={S.stat}>
                   <div style={{ fontSize: 12, opacity: 0.75 }}>Profilo</div>
-                  <div style={{ marginTop: 4, fontWeight: 900, fontSize: 22, textTransform: "capitalize" }}>{rideProfile}</div>
+                  <div style={{ marginTop: 4, fontWeight: 900, fontSize: 22, textTransform: "capitalize" }}>
+                    {engineScore?.profile || rideProfile}
+                  </div>
                 </div>
 
                 <div style={S.stat}>
@@ -1710,7 +1813,8 @@ const etaText = formatEta(estimatedHours);
                 >
                   <div style={{ fontWeight: 900 }}>🧭 Navigatore</div>
                   <div style={{ marginTop: 6, fontSize: 14 }}>
-                    Prossimo waypoint: <b>#{nextInfo.idx + 1}</b> — distanza <b>{(nextInfo.km * 1000).toFixed(0)} m</b>
+                    Prossimo waypoint: <b>#{nextInfo.idx + 1}</b> — distanza{" "}
+                    <b>{(nextInfo.km * 1000).toFixed(0)} m</b>
                   </div>
                   <div style={{ fontSize: 12, opacity: 0.75, marginTop: 4 }}>
                     {nextInfo.wp[0].toFixed(5)}, {nextInfo.wp[1].toFixed(5)}
@@ -1737,7 +1841,9 @@ const etaText = formatEta(estimatedHours);
                   <div style={{ fontWeight: 900 }}>⚠️ Warning rider</div>
                   <div style={{ marginTop: 6, display: "flex", gap: 8, flexWrap: "wrap" }}>
                     {weatherWarningList.map((w) => (
-                      <span key={w} style={S.pill}>{w}</span>
+                      <span key={w} style={S.pill}>
+                        {w}
+                      </span>
                     ))}
                   </div>
                 </div>
@@ -1770,19 +1876,18 @@ const etaText = formatEta(estimatedHours);
                   style={{
                     padding: 12,
                     borderRadius: 14,
-                    border: `1px solid ${radarWorst.analysis?.color || "#999"}33`,
+                    border: `1px solid ${(radarWorst.analysis?.color || "#999")}33`,
                     background: `${radarWorst.analysis?.color || "#999"}11`,
                     marginBottom: 10,
                   }}
                 >
-                  <div style={{ fontWeight: 900 }}>
-                    Tratto più critico: punto #{radarWorst.idx + 1}
-                  </div>
+                  <div style={{ fontWeight: 900 }}>Tratto più critico: punto #{radarWorst.idx + 1}</div>
                   <div style={{ marginTop: 6, fontSize: 13, color: radarWorst.analysis?.color || "#111" }}>
                     {radarWorst.analysis?.score} — {radarWorst.analysis?.label}
                   </div>
                   <div style={{ marginTop: 6, fontSize: 12, opacity: 0.78 }}>
-                    {radarWorst.weather?.desc || "—"} • 🌬 {Math.round(radarWorst.weather?.windKmh || 0)} km/h • 🌧 {radarWorst.weather?.rainMm || 0} mm
+                    {radarWorst.weather?.desc || "—"} • 🌬 {Math.round(radarWorst.weather?.windKmh || 0)} km/h •
+                    🌧 {radarWorst.weather?.rainMm || 0} mm
                   </div>
                 </div>
               ) : null}
@@ -1808,7 +1913,8 @@ const etaText = formatEta(estimatedHours);
                         </div>
                       </div>
                       <div style={{ marginTop: 6, fontSize: 12, opacity: 0.8 }}>
-                        {rp.weather?.desc || "—"} • 🌡 {Math.round(rp.weather?.temp || 0)}° • 🌬 {Math.round(rp.weather?.windKmh || 0)} km/h • 🌧 {rp.weather?.rainMm || 0} mm
+                        {rp.weather?.desc || "—"} • 🌡 {Math.round(rp.weather?.temp || 0)}° • 🌬{" "}
+                        {Math.round(rp.weather?.windKmh || 0)} km/h • 🌧 {rp.weather?.rainMm || 0} mm
                       </div>
                     </div>
                   ))
@@ -1877,9 +1983,7 @@ const etaText = formatEta(estimatedHours);
                     </div>
                   ))
                 ) : (
-                  <div style={{ fontSize: 13, opacity: 0.72 }}>
-                    Nessun waypoint caricato.
-                  </div>
+                  <div style={{ fontSize: 13, opacity: 0.72 }}>Nessun waypoint caricato.</div>
                 )}
               </div>
             </div>
@@ -1908,7 +2012,9 @@ const etaText = formatEta(estimatedHours);
                             {p[0].toFixed(5)}, {p[1].toFixed(5)}
                           </span>
                         </div>
-                        <button style={S.btnDanger} onClick={() => removePointAt(idx)}>✖</button>
+                        <button style={S.btnDanger} onClick={() => removePointAt(idx)}>
+                          ✖
+                        </button>
                       </div>
                     </div>
                   ))}
@@ -1932,9 +2038,7 @@ const etaText = formatEta(estimatedHours);
               </div>
 
               {filteredRoutes.length === 0 ? (
-                <div style={{ marginTop: 8, opacity: 0.78, fontSize: 14 }}>
-                  Nessun itinerario trovato.
-                </div>
+                <div style={{ marginTop: 8, opacity: 0.78, fontSize: 14 }}>Nessun itinerario trovato.</div>
               ) : (
                 <div style={{ marginTop: 10, display: "flex", flexDirection: "column", gap: 8 }}>
                   {filteredRoutes.map((r) => (
@@ -1956,12 +2060,24 @@ const etaText = formatEta(estimatedHours);
                       </div>
 
                       <div style={{ fontSize: 12, opacity: 0.72, marginTop: 4 }}>
-                        {(r.points?.length || 0)} punti • {r.updatedAt ? new Date(r.updatedAt).toLocaleDateString() : "-"}
-                        {typeof r.totalTimeSec === "number" && r.totalTimeSec > 0 ? ` • ⏱️ ${fmtTime(r.totalTimeSec)}` : ""}
+                        {(r.points?.length || 0)} punti •{" "}
+                        {r.updatedAt ? new Date(r.updatedAt).toLocaleDateString() : "-"}
+                        {typeof r.totalTimeSec === "number" && r.totalTimeSec > 0
+                          ? ` • ⏱️ ${fmtTime(r.totalTimeSec)}`
+                          : ""}
                       </div>
 
                       {r.note ? (
-                        <div style={{ fontSize: 12, opacity: 0.72, marginTop: 4, whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>
+                        <div
+                          style={{
+                            fontSize: 12,
+                            opacity: 0.72,
+                            marginTop: 4,
+                            whiteSpace: "nowrap",
+                            overflow: "hidden",
+                            textOverflow: "ellipsis",
+                          }}
+                        >
                           {r.note}
                         </div>
                       ) : null}
@@ -1984,9 +2100,12 @@ const etaText = formatEta(estimatedHours);
             </div>
 
             <div style={{ ...S.card, opacity: 0.9 }}>
-              <div style={{ fontWeight: 900, marginBottom: 8 }}></div>
+              <div style={{ fontWeight: 900, marginBottom: 8 }}>ℹ️ Nota tecnica</div>
               <div style={{ fontSize: 13, opacity: 0.78 }}>
-                Per testare GPX: <code>localStorage["{PASS_KEY}"]="true"</code>
+                Il Rider Route Engine costruisce la rotta reale e calcola il profilo rider. Il meteo avanzato One Call 3.0 sarà il prossimo step.
+              </div>
+              <div style={{ fontSize: 13, opacity: 0.78, marginTop: 8 }}>
+                Per test veloci GPX: <code>localStorage["{PASS_KEY}"]="true"</code>
               </div>
             </div>
           </div>
@@ -2003,6 +2122,7 @@ const etaText = formatEta(estimatedHours);
                 setPoints((prev) => [...prev, p]);
                 setSnappedLine(null);
                 setRouteMeta({ distanceKm: 0, durationMin: 0, steps: [] });
+                resetEngine();
               }}
               center={mapCenter}
               zoom={mapZoom}
@@ -2013,9 +2133,9 @@ const etaText = formatEta(estimatedHours);
             />
 
             <div style={{ ...S.card, padding: 12, fontSize: 13, opacity: 0.84 }}>
-              <b>Tip:</b> scrivi una città e premi <b>Invio</b>. Usa <b>Snap su strada</b> per una rotta più realistica.
+              <b>Tip:</b> scrivi una città e premi <b>Invio</b>. Usa <b>Snap Rider Engine</b> per una rotta più realistica.
               <br />
-              <b>PRO:</b> waypoint automatici + Rider Radar mostrati anche sulla mappa.
+              <b>Rider Evolution:</b> cockpit rider + scoring + waypoint automatici + Rider Radar mostrati anche sulla mappa.
             </div>
           </div>
         </div>
