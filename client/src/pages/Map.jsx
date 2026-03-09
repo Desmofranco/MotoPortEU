@@ -753,8 +753,7 @@ export default function Map() {
     [distanceKm, rideProfile]
   );
 
-  const etaText = useMemo(() => formatEta(estimatedHours), [estimatedHours]);
-
+const etaText = formatEta(estimatedHours);
   const currentStepInstruction = useMemo(() => {
     if (!routeMeta?.steps?.length) return null;
     return routeMeta.steps[0] || null;
@@ -1548,7 +1547,7 @@ export default function Map() {
               <div style={{ marginTop: 10, display: "flex", gap: 8, flexWrap: "wrap" }}>
                 <span style={S.pill}>📍 Punti: {points.length}</span>
                 <span style={S.pill}>📏 Km: {distanceKm.toFixed(1)}</span>
-<span>⏱ Tempo: {eta || "—"}</span>
+                <span style={S.pill}>⏱ Tempo: {etaText}</span>
                 {snapEnabled && snappedLine?.length ? <span style={S.pill}>🛣️ Snapped</span> : <span style={S.pill}>📌 Manual</span>}
               </div>
 
