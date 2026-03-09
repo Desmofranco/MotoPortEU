@@ -1681,7 +1681,7 @@ const etaText = formatEta(estimatedHours);
                 </div>
 
                 <div style={S.stat}>
-                  <div style={{ fontSize: 12, opacity: 0.75 }}>ETA stimata</div>
+<div style={{ fontSize: 12, opacity: 0.75 }}>Tempo stimato</div>
                   <div style={{ marginTop: 4, fontWeight: 900, fontSize: 22 }}>{etaText}</div>
                 </div>
 
