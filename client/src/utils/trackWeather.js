@@ -22,6 +22,56 @@ function toNum(v) {
   return Number.isFinite(n) ? n : null;
 }
 
+function getRideStatus({ worst, windKmh, temp }) {
+  const w = String(worst || "").toLowerCase();
+
+  if (w.includes("temporale") || w.includes("neve")) {
+    return {
+      level: "danger",
+      label: "Condizioni critiche",
+      advice: "Meglio evitare il giro in moto.",
+    };
+  }
+
+  if (w.includes("pioggia")) {
+    return {
+      level: "warn",
+      label: "Fondo potenzialmente bagnato",
+      advice: "Guida prudente, frenata dolce e attenzione alle curve.",
+    };
+  }
+
+  if (w.includes("nebbia")) {
+    return {
+      level: "warn",
+      label: "Visibilità ridotta",
+      advice: "Attenzione nei tratti veloci e nei cambi di luce.",
+    };
+  }
+
+  if (Number.isFinite(windKmh) && windKmh >= 50) {
+    return {
+      level: "warn",
+      label: "Vento forte",
+      advice: "Prudenza su passi, viadotti e uscite di curva.",
+    };
+  }
+
+  if (Number.isFinite(temp) && temp <= 3) {
+    return {
+      level: "warn",
+      label: "Freddo intenso",
+      advice: "Possibile fondo freddo o umido nei tratti in ombra.",
+    };
+  }
+
+  return {
+    level: "ok",
+    label: "Ottimo per la guida",
+    advice: "Condizioni generalmente favorevoli per il giro.",
+  };
+}
+
 async function fetchOWM(lat, lon, timeoutMs = 9000) {
   if (!OWM_KEY) return null;
 
@@ -69,8 +119,21 @@ function okOWM(j) {
 }
 
 export async function getTrackWeatherSummary(track) {
-  const lat = toNum(track?.coords?.lat ?? track?.coords?.latitude);
-  const lng = toNum(track?.coords?.lng ?? track?.coords?.lon ?? track?.coords?.longitude);
+  const lat = toNum(
+    track?.coords?.lat ??
+    track?.coords?.latitude ??
+    track?.lat ??
+    track?.latitude
+  );
+
+  const lng = toNum(
+    track?.coords?.lng ??
+    track?.coords?.lon ??
+    track?.coords?.longitude ??
+    track?.lng ??
+    track?.lon ??
+    track?.longitude
+  );
 
   if (!Number.isFinite(lat) || !Number.isFinite(lng)) {
     return {
@@ -100,9 +163,17 @@ export async function getTrackWeatherSummary(track) {
   const tmax = toNum(j.main?.temp_max);
   const wind = toNum(j.wind?.speed);
 
+  const worst = normalizeMain(j.weather?.[0]?.main || j.weather?.[0]?.description);
+
+  const ride = getRideStatus({
+    worst,
+    windKmh: Number.isFinite(wind) ? Math.round(wind * 3.6) : null,
+    temp: Number.isFinite(temp) ? Math.round(temp) : null,
+  });
+
   return {
     ok: true,
-    worst: normalizeMain(j.weather?.[0]?.main || j.weather?.[0]?.description),
+    worst,
     description: String(j.weather?.[0]?.description || "").trim() || null,
     temp: Number.isFinite(temp) ? Math.round(temp) : null,
     tempMin: Number.isFinite(tmin) ? Math.round(tmin) : null,
@@ -110,5 +181,6 @@ export async function getTrackWeatherSummary(track) {
     windKmh: Number.isFinite(wind) ? Math.round(wind * 3.6) : null,
     humidity: toNum(j.main?.humidity),
     updatedAt: new Date().toISOString(),
+    ride,
   };
 }
