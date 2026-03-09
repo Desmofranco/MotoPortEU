@@ -2,6 +2,8 @@
 // src/utils/trackWeather.js
 // Meteo per pista / rotta / itinerario da coordinate
 // Env: VITE_OWM_KEY
+// Output:
+// { ok, worst, description, temp, tempMin, tempMax, windKmh, humidity, updatedAt, ride, note? }
 // =======================================================
 
 const OWM_KEY = (import.meta.env.VITE_OWM_KEY || "").trim();
@@ -22,7 +24,7 @@ function toNum(v) {
   return Number.isFinite(n) ? n : null;
 }
 
-function getRideStatus({ worst, windKmh, temp }) {
+function buildRideInsight({ worst, windKmh, temp }) {
   const w = String(worst || "").toLowerCase();
 
   if (w.includes("temporale") || w.includes("neve")) {
@@ -121,18 +123,18 @@ function okOWM(j) {
 export async function getTrackWeatherSummary(track) {
   const lat = toNum(
     track?.coords?.lat ??
-    track?.coords?.latitude ??
-    track?.lat ??
-    track?.latitude
+      track?.coords?.latitude ??
+      track?.lat ??
+      track?.latitude
   );
 
   const lng = toNum(
     track?.coords?.lng ??
-    track?.coords?.lon ??
-    track?.coords?.longitude ??
-    track?.lng ??
-    track?.lon ??
-    track?.longitude
+      track?.coords?.lon ??
+      track?.coords?.longitude ??
+      track?.lng ??
+      track?.lon ??
+      track?.longitude
   );
 
   if (!Number.isFinite(lat) || !Number.isFinite(lng)) {
@@ -163,24 +165,24 @@ export async function getTrackWeatherSummary(track) {
   const tmax = toNum(j.main?.temp_max);
   const wind = toNum(j.wind?.speed);
 
+  const tempRounded = Number.isFinite(temp) ? Math.round(temp) : null;
+  const windKmh = Number.isFinite(wind) ? Math.round(wind * 3.6) : null;
   const worst = normalizeMain(j.weather?.[0]?.main || j.weather?.[0]?.description);
-
-  const ride = getRideStatus({
-    worst,
-    windKmh: Number.isFinite(wind) ? Math.round(wind * 3.6) : null,
-    temp: Number.isFinite(temp) ? Math.round(temp) : null,
-  });
 
   return {
     ok: true,
     worst,
     description: String(j.weather?.[0]?.description || "").trim() || null,
-    temp: Number.isFinite(temp) ? Math.round(temp) : null,
+    temp: tempRounded,
     tempMin: Number.isFinite(tmin) ? Math.round(tmin) : null,
     tempMax: Number.isFinite(tmax) ? Math.round(tmax) : null,
-    windKmh: Number.isFinite(wind) ? Math.round(wind * 3.6) : null,
+    windKmh,
     humidity: toNum(j.main?.humidity),
     updatedAt: new Date().toISOString(),
-    ride,
+    ride: buildRideInsight({
+      worst,
+      windKmh,
+      temp: tempRounded,
+    }),
   };
 }

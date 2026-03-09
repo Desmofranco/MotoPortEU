@@ -842,6 +842,33 @@ function TrackDetail({ track, onClose }) {
           {wx.temp != null ? <span style={pillStyle("ok")}>🌡 {wx.temp}° (min {wx.tempMin}° / max {wx.tempMax}°)</span> : null}
           {wx.windKmh != null ? <span style={pillStyle(wx.windKmh >= 50 ? "warn" : "ok")}>💨 vento {wx.windKmh} km/h</span> : null}
         </div>
+        {wx.ride ? (
+  <div
+    style={{
+      padding: 12,
+      borderRadius: 14,
+      background:
+        wx.ride.level === "danger"
+          ? "rgba(255,0,0,0.08)"
+          : wx.ride.level === "warn"
+          ? "rgba(255,180,0,0.12)"
+          : "rgba(0,140,80,0.10)",
+      border:
+        wx.ride.level === "danger"
+          ? "1px solid rgba(255,0,0,0.16)"
+          : wx.ride.level === "warn"
+          ? "1px solid rgba(255,180,0,0.22)"
+          : "1px solid rgba(0,140,80,0.18)",
+    }}
+  >
+    <div style={{ fontWeight: 900, fontSize: 13 }}>
+      🏍 {wx.ride.label}
+    </div>
+    <div style={{ marginTop: 4, fontSize: 13, opacity: 0.85 }}>
+      {wx.ride.advice}
+    </div>
+  </div>
+) : null}
         <div style={{ fontSize: 12, opacity: 0.7 }}>Aggiornato: {String(wx.updatedAt || "").slice(0, 16).replace("T", " ")}</div>
       </div>
     );
