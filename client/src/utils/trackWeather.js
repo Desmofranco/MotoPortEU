@@ -1,148 +1,114 @@
 // =======================================================
 // src/utils/trackWeather.js
-// OpenWeather One Call 3.0
-// Meteo per pista / itinerario / rotta da coordinate
-// Env richiesto: VITE_OWM_KEY
+// Meteo per pista / rotta / itinerario da coordinate
+// Env: VITE_OWM_KEY
 // =======================================================
 
 const OWM_KEY = (import.meta.env.VITE_OWM_KEY || "").trim();
 
-function toNum(v) {
-  const n = Number(v);
-  return Number.isFinite(n) ? n : null;
-}
-
 function normalizeMain(m) {
   const s = String(m || "").toLowerCase();
-
   if (s.includes("thunder")) return "temporale";
   if (s.includes("snow")) return "neve";
   if (s.includes("rain") || s.includes("drizzle")) return "pioggia";
   if (s.includes("fog") || s.includes("mist") || s.includes("haze")) return "nebbia";
   if (s.includes("cloud")) return "nuvoloso";
   if (s.includes("clear")) return "sereno";
-
   return s || "variabile";
 }
 
-function pickCoords(track) {
-  const lat = toNum(track?.coords?.lat ?? track?.coords?.latitude);
-  const lng = toNum(track?.coords?.lng ?? track?.coords?.lon ?? track?.coords?.longitude);
-
-  if (Number.isFinite(lat) && Number.isFinite(lng)) {
-    return { lat, lng };
-  }
-
-  return null;
+function toNum(v) {
+  const n = Number(v);
+  return Number.isFinite(n) ? n : null;
 }
 
-async function fetchOneCall(lat, lon, timeoutMs = 10000) {
-  if (!OWM_KEY) {
-    return { ok: false, reason: "missing_key" };
-  }
+async function fetchOWM(lat, lon, timeoutMs = 9000) {
+  if (!OWM_KEY) return null;
 
   const url =
-    `https://api.openweathermap.org/data/3.0/onecall` +
+    `https://api.openweathermap.org/data/2.5/weather` +
     `?lat=${encodeURIComponent(lat)}` +
     `&lon=${encodeURIComponent(lon)}` +
     `&appid=${encodeURIComponent(OWM_KEY)}` +
     `&units=metric` +
-    `&lang=it` +
-    `&exclude=minutely,alerts`;
+    `&lang=it`;
 
   const ctrl = new AbortController();
   const to = setTimeout(() => ctrl.abort(), timeoutMs);
 
   try {
-    const res = await fetch(url, {
+    const r = await fetch(url, {
       method: "GET",
       signal: ctrl.signal,
     });
 
-    const text = await res.text();
-    let json = null;
-
-    try {
-      json = text ? JSON.parse(text) : null;
-    } catch {
-      json = null;
-    }
-
-    if (!res.ok) {
+    if (!r.ok) {
       return {
-        ok: false,
-        reason: "http_error",
-        status: res.status,
-        body: json || text || null,
+        _httpError: true,
+        status: r.status,
       };
     }
 
-    if (!json || typeof json !== "object") {
-      return { ok: false, reason: "bad_json" };
-    }
-
-    if (!json.current) {
-      return { ok: false, reason: "missing_current", body: json };
-    }
-
-    return { ok: true, data: json };
-  } catch (err) {
-    if (err?.name === "AbortError") {
-      return { ok: false, reason: "timeout" };
-    }
-    return { ok: false, reason: "network_error" };
+    const j = await r.json().catch(() => null);
+    return j;
+  } catch {
+    return null;
   } finally {
     clearTimeout(to);
   }
 }
 
+function okOWM(j) {
+  if (!j || typeof j !== "object") return false;
+  if (j._httpError) return false;
+
+  const cod = j.cod;
+  if (cod === 200 || cod === "200") return true;
+
+  return !!(j.main && Array.isArray(j.weather) && j.weather.length > 0);
+}
+
 export async function getTrackWeatherSummary(track) {
-  const coords = pickCoords(track);
+  const lat = toNum(track?.coords?.lat ?? track?.coords?.latitude);
+  const lng = toNum(track?.coords?.lng ?? track?.coords?.lon ?? track?.coords?.longitude);
 
-  if (!coords) {
+  if (!Number.isFinite(lat) || !Number.isFinite(lng)) {
     return {
       ok: false,
       note: "Meteo non disponibile.",
     };
   }
 
-  const result = await fetchOneCall(coords.lat, coords.lng);
-
-  if (!result.ok) {
+  if (!OWM_KEY) {
     return {
       ok: false,
       note: "Meteo non disponibile.",
-      debugReason: result.reason || null,
-      debugStatus: result.status || null,
-      debugBody: result.body || null,
     };
   }
 
-  const current = result.data.current || {};
-  const daily0 = Array.isArray(result.data.daily) ? result.data.daily[0] : null;
-  const hourly0 = Array.isArray(result.data.hourly) ? result.data.hourly[0] : null;
-  const weather0 = current.weather?.[0] || hourly0?.weather?.[0] || daily0?.weather?.[0] || null;
+  const j = await fetchOWM(lat, lng);
 
-  const temp = toNum(current.temp);
-  const feels = toNum(current.feels_like);
-  const wind = toNum(current.wind_speed);
-  const humidity = toNum(current.humidity);
-  const pop = toNum(hourly0?.pop ?? daily0?.pop);
+  if (!okOWM(j)) {
+    return {
+      ok: false,
+      note: "Meteo non disponibile.",
+    };
+  }
 
-  const tempMin = toNum(daily0?.temp?.min);
-  const tempMax = toNum(daily0?.temp?.max);
+  const temp = toNum(j.main?.temp);
+  const tmin = toNum(j.main?.temp_min);
+  const tmax = toNum(j.main?.temp_max);
+  const wind = toNum(j.wind?.speed);
 
   return {
     ok: true,
-    worst: normalizeMain(weather0?.main || weather0?.description),
-    description: String(weather0?.description || "").trim() || null,
+    worst: normalizeMain(j.weather?.[0]?.main || j.weather?.[0]?.description),
+    description: String(j.weather?.[0]?.description || "").trim() || null,
     temp: Number.isFinite(temp) ? Math.round(temp) : null,
-    feelsLike: Number.isFinite(feels) ? Math.round(feels) : null,
-    tempMin: Number.isFinite(tempMin) ? Math.round(tempMin) : null,
-    tempMax: Number.isFinite(tempMax) ? Math.round(tempMax) : null,
+    tempMin: Number.isFinite(tmin) ? Math.round(tmin) : null,
+    tempMax: Number.isFinite(tmax) ? Math.round(tmax) : null,
     windKmh: Number.isFinite(wind) ? Math.round(wind * 3.6) : null,
-    humidity: Number.isFinite(humidity) ? humidity : null,
-    popPct: Number.isFinite(pop) ? Math.round(pop * 100) : null,
+    humidity: toNum(j.main?.humidity),
     updatedAt: new Date().toISOString(),
   };
 }
