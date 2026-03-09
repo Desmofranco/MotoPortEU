@@ -1,23 +1,30 @@
 // =======================================================
 // src/pages/Map.jsx
-// MotoPortEU — Rotta Libera 🏁 + GPS Live + Scia + Timer
+// MotoPortEU — Navigatore PRO Plus 🏁
 // ✅ UI inline styles (no Tailwind)
 // ✅ Autocomplete luoghi (Nominatim OSM) + ENTER per aggiungere
-// ✅ FIX: ricerca veloce e stabile (abort + debounce + ordered results + cache + retry)
+// ✅ Ricerca stabile (abort + debounce + ordered results + cache + retry)
 // ✅ Snap su strada (OSRM public router)
 // ✅ Navigatore base (GPS follow + next waypoint + Google Maps nav)
 // ✅ Timer corsa: Start/Stop salva sessioni e tempo totale (solo con GPS ON)
 // ✅ Export GPX (Premium gate via localStorage)
 // ✅ GPS Live + Scia (trail) in tempo reale
-// ✅ FIX: input visibili in tema scuro + fitOnChange intelligente
-// ✅ NEW: Inserimento manuale percorso (coordinate / link Google Maps) + preview + replace
+// ✅ Inserimento manuale percorso (coordinate / link Google Maps) + preview + replace
+// ✅ Rider Travel Panel con distanza, ETA e profilo guida
+// ✅ Meteo lungo rotta (start / mid / end)
+// ✅ Rider Radar multi-point con tratto critico
+// ✅ Waypoint automatici lungo il percorso (fuel / food / hotel / workshop / viewpoint)
+// ✅ Aggiunta POI alla rotta con un click
+// ✅ Duplicazione itinerari + ricerca itinerari salvati
+// ✅ Stats sessioni + ultimo utilizzo
 // =======================================================
 
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import RouteBuilderMap from "../components/RouteBuilderMap";
 
-const STORAGE_KEY = "mp_routes_v2";
-const PASS_KEY = "mp_pass_active"; // "true" => premium (per ora)
+const STORAGE_KEY = "mp_routes_v4";
+const PASS_KEY = "mp_pass_active";
+const OWM_KEY = import.meta.env.VITE_OWM_KEY || "";
 
 const uid = () => `rt-${Math.random().toString(16).slice(2)}-${Date.now()}`;
 
@@ -36,6 +43,7 @@ function saveRoutes(routes) {
 }
 
 function haversineKm(a, b) {
+  if (!a || !b) return 0;
   const toRad = (x) => (x * Math.PI) / 180;
   const R = 6371;
   const dLat = toRad(b[0] - a[0]);
@@ -56,6 +64,26 @@ function computeDistanceKm(points) {
   return sum;
 }
 
+function estimateHoursByProfile(km, profile) {
+  const speedMap = {
+    relax: 58,
+    touring: 72,
+    sport: 88,
+    rain: 52,
+  };
+  const avg = speedMap[profile] || 72;
+  return km > 0 ? km / avg : 0;
+}
+
+function formatEta(hours) {
+  if (!hours || hours <= 0) return "—";
+  const totalMin = Math.round(hours * 60);
+  const hh = Math.floor(totalMin / 60);
+  const mm = totalMin % 60;
+  if (hh <= 0) return `${mm} min`;
+  return `${hh}h ${String(mm).padStart(2, "0")}m`;
+}
+
 const fmtTime = (sec) => {
   const s = Math.max(0, Math.floor(sec || 0));
   const hh = String(Math.floor(s / 3600)).padStart(2, "0");
@@ -63,6 +91,19 @@ const fmtTime = (sec) => {
   const ss = String(s % 60).padStart(2, "0");
   return `${hh}:${mm}:${ss}`;
 };
+
+function prettyDate(iso) {
+  if (!iso) return "—";
+  try {
+    return new Date(iso).toLocaleString();
+  } catch {
+    return "—";
+  }
+}
+
+function clamp(n, min, max) {
+  return Math.max(min, Math.min(max, n));
+}
 
 // --- GPX ---
 function toGpx(name, points) {
@@ -103,14 +144,13 @@ function downloadTextFile(filename, content, mime = "application/octet-stream") 
   URL.revokeObjectURL(url);
 }
 
-// --- Autocomplete Nominatim (cache + retry + abort) ---
-const _geoCache = new globalThis.Map(); // ✅ avoid shadowing with component name
+// --- Autocomplete Nominatim ---
+const _geoCache = new globalThis.Map();
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
 async function nominatimSearch(q, { signal } = {}) {
   const key = String(q || "").trim().toLowerCase();
   if (key.length < 3) return [];
-
   if (_geoCache.has(key)) return _geoCache.get(key);
 
   const url =
@@ -156,7 +196,40 @@ async function nominatimSearch(q, { signal } = {}) {
   return out;
 }
 
-// --- Snap OSRM route ---
+// --- OSRM snap + steps ---
+function labelManeuver(type) {
+  const map = {
+    depart: "Parti",
+    turn: "Svolta",
+    continue: "Prosegui",
+    merge: "Immettiti",
+    on_ramp: "Prendi la rampa",
+    off_ramp: "Esci dalla rampa",
+    fork: "Tieni la direzione",
+    end_of_road: "Fine strada",
+    use_lane: "Mantieni corsia",
+    roundabout: "Rotatoria",
+    rotary: "Rotatoria",
+    exit_roundabout: "Esci dalla rotatoria",
+    arrive: "Arrivo",
+  };
+  return map[type] || "Procedi";
+}
+
+function labelModifier(mod) {
+  const map = {
+    left: "a sinistra",
+    right: "a destra",
+    straight: "dritto",
+    slight_left: "leggermente a sinistra",
+    slight_right: "leggermente a destra",
+    sharp_left: "secco a sinistra",
+    sharp_right: "secco a destra",
+    uturn: "inversione",
+  };
+  return map[mod] || "";
+}
+
 async function osrmSnap(points) {
   if (!points || points.length < 2) return null;
 
@@ -167,18 +240,39 @@ async function osrmSnap(points) {
       : points;
 
   const coords = pts.map(([lat, lng]) => `${lng},${lat}`).join(";");
-  const url = `https://router.project-osrm.org/route/v1/driving/${coords}?overview=full&geometries=geojson`;
+  const url = `https://router.project-osrm.org/route/v1/driving/${coords}?overview=full&geometries=geojson&steps=true`;
 
   const res = await fetch(url);
   if (!res.ok) throw new Error("OSRM error");
   const data = await res.json();
-  const geom = data?.routes?.[0]?.geometry;
+
+  const route = data?.routes?.[0];
+  const geom = route?.geometry;
   const line = geom?.coordinates;
-  if (!line || !line.length) return null;
-  return line.map(([lon, lat]) => [lat, lon]);
+  if (!line || !line.length) return { line: null, distanceKm: 0, durationMin: 0, steps: [] };
+
+  const steps =
+    route?.legs?.flatMap((leg) =>
+      (leg.steps || []).map((s) => ({
+        distanceKm: (s.distance || 0) / 1000,
+        durationMin: (s.duration || 0) / 60,
+        name: s.name || "",
+        instruction:
+          s.maneuver?.modifier
+            ? `${labelManeuver(s.maneuver.type)} ${labelModifier(s.maneuver.modifier)}`
+            : labelManeuver(s.maneuver?.type),
+      }))
+    ) || [];
+
+  return {
+    line: line.map(([lon, lat]) => [lat, lon]),
+    distanceKm: (route?.distance || 0) / 1000,
+    durationMin: (route?.duration || 0) / 60,
+    steps,
+  };
 }
 
-// --- Navigator helper: next waypoint ---
+// --- Navigator helper ---
 function nearestNextWaypointIndex(gps, points, currentIdx) {
   if (!gps || !points?.length) return 0;
   const start = Math.max(0, currentIdx || 0);
@@ -204,29 +298,11 @@ function buildGoogleMapsNavUrl(gps, points) {
   const origin = gps ? `${gps[0]},${gps[1]}` : `${points[0][0]},${points[0][1]}`;
   const destination = `${points[points.length - 1][0]},${points[points.length - 1][1]}`;
 
-  // Google su mobile è molto più affidabile con "navigate"
-  const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent || "");
-
-  // Waypoints (max 8)
   const mid = points
     .slice(1, -1)
     .slice(0, 8)
     .map((p) => `${p[0]},${p[1]}`);
 
-  if (isMobile) {
-    // ✅ Mobile: usa /maps/dir/ (si apre l’app e parte la navigazione quasi sempre)
-    // format: https://www.google.com/maps/dir/?api=1&origin=...&destination=...&waypoints=...
-    const base =
-      `https://www.google.com/maps/dir/?api=1` +
-      `&travelmode=driving` +
-      `&origin=${encodeURIComponent(origin)}` +
-      `&destination=${encodeURIComponent(destination)}` +
-      (mid.length ? `&waypoints=${encodeURIComponent(mid.join("|"))}` : "");
-
-    return base;
-  }
-
-  // ✅ Desktop: la stessa cosa va benissimo
   return (
     `https://www.google.com/maps/dir/?api=1` +
     `&travelmode=driving` +
@@ -235,13 +311,13 @@ function buildGoogleMapsNavUrl(gps, points) {
     (mid.length ? `&waypoints=${encodeURIComponent(mid.join("|"))}` : "")
   );
 }
-// --- Manual route parse (coords / Google Maps URL) ---
+
+// --- Manual route parse ---
 function parseCoordsFromText(text) {
   const out = [];
   const t = String(text || "").trim();
   if (!t) return out;
 
-  // 1) Google Maps @lat,lng
   const atMatches = [...t.matchAll(/@(-?\d+(?:\.\d+)?),\s*(-?\d+(?:\.\d+)?)/g)];
   for (const m of atMatches) {
     const lat = Number(m[1]);
@@ -251,10 +327,7 @@ function parseCoordsFromText(text) {
     }
   }
 
-  // normalize separators: allow ";" to mean new line
   const normalized = t.replace(/;/g, "\n");
-
-  // 2) Lines "lat,lng" or "lat lng" -> first two numbers found
   const lines = normalized.split(/\r?\n/).map((x) => x.trim()).filter(Boolean);
   for (const line of lines) {
     const nums = line.match(/-?\d+(?:\.\d+)?/g);
@@ -267,7 +340,6 @@ function parseCoordsFromText(text) {
     out.push([lat, lon]);
   }
 
-  // dedup
   const seen = new Set();
   const dedup = [];
   for (const [lat, lon] of out) {
@@ -279,10 +351,214 @@ function parseCoordsFromText(text) {
   return dedup;
 }
 
-// --- Styles (no Tailwind needed) ---
+// --- Weather helpers ---
+async function fetchPointWeather(point) {
+  if (!OWM_KEY || !point) return null;
+  const [lat, lon] = point;
+  const url =
+    `https://api.openweathermap.org/data/2.5/weather?lat=${encodeURIComponent(lat)}` +
+    `&lon=${encodeURIComponent(lon)}` +
+    `&appid=${encodeURIComponent(OWM_KEY)}` +
+    `&units=metric&lang=it`;
+
+  try {
+    const res = await fetch(url);
+    if (!res.ok) return null;
+    const data = await res.json();
+    return {
+      temp: Number(data?.main?.temp),
+      feelsLike: Number(data?.main?.feels_like),
+      windKmh: Number(data?.wind?.speed || 0) * 3.6,
+      humidity: Number(data?.main?.humidity || 0),
+      rainMm: Number(data?.rain?.["1h"] || data?.rain?.["3h"] || 0),
+      clouds: Number(data?.clouds?.all || 0),
+      desc: data?.weather?.[0]?.description || "",
+      city: data?.name || "",
+    };
+  } catch {
+    return null;
+  }
+}
+
+function analyzeRiderWeather(wx) {
+  if (!wx) {
+    return {
+      score: "—",
+      label: "Meteo non disponibile",
+      color: "#6b7280",
+      warnings: [],
+      severity: 0,
+    };
+  }
+
+  const warnings = [];
+  let points = 100;
+
+  if (wx.rainMm >= 0.2) {
+    warnings.push("Possibile strada bagnata");
+    points -= 24;
+  }
+  if (wx.rainMm >= 1) {
+    warnings.push("Pioggia concreta");
+    points -= 18;
+  }
+  if (wx.windKmh >= 30) {
+    warnings.push("Vento laterale forte");
+    points -= 22;
+  }
+  if (wx.windKmh >= 45) {
+    warnings.push("Vento molto forte");
+    points -= 20;
+  }
+  if (wx.temp <= 4) {
+    warnings.push("Freddo intenso");
+    points -= 16;
+  }
+  if (wx.temp >= 32) {
+    warnings.push("Caldo elevato");
+    points -= 14;
+  }
+  if (wx.clouds >= 90 && wx.rainMm > 0) {
+    warnings.push("Visibilità peggiore");
+    points -= 8;
+  }
+
+  if (points >= 85) return { score: "A", label: "Ottimo per guidare", color: "#15803d", warnings, severity: 1 };
+  if (points >= 68) return { score: "B", label: "Buono con attenzione", color: "#65a30d", warnings, severity: 2 };
+  if (points >= 48) return { score: "C", label: "Attenzione rider", color: "#ca8a04", warnings, severity: 3 };
+  return { score: "D", label: "Condizioni sfavorevoli", color: "#dc2626", warnings, severity: 4 };
+}
+
+function getRouteWeatherSamples(points, snappedLine) {
+  const base = snappedLine?.length >= 3 ? snappedLine : points;
+  if (!base || base.length < 2) return { start: null, mid: null, end: null };
+
+  const start = base[0];
+  const mid = base[Math.floor(base.length / 2)];
+  const end = base[base.length - 1];
+
+  return { start, mid, end };
+}
+
+function sampleLine(line, desiredCount = 7) {
+  if (!Array.isArray(line) || line.length < 2) return [];
+  const count = clamp(desiredCount, 3, 9);
+  if (line.length <= count) return [...line];
+
+  const out = [];
+  for (let i = 0; i < count; i++) {
+    const idx = Math.round((i * (line.length - 1)) / (count - 1));
+    out.push(line[idx]);
+  }
+  return out;
+}
+
+// --- POI helpers ---
+const POI_CATEGORIES = [
+  { key: "fuel", label: "⛽ Carburante", tags: [{ key: "amenity", value: "fuel" }] },
+  {
+    key: "food",
+    label: "☕ Ristoro",
+    tags: [
+      { key: "amenity", value: "cafe" },
+      { key: "amenity", value: "restaurant" },
+      { key: "amenity", value: "fast_food" },
+    ],
+  },
+  { key: "hotel", label: "🏨 Hotel", tags: [{ key: "tourism", value: "hotel" }] },
+  {
+    key: "workshop",
+    label: "🔧 Officina",
+    tags: [
+      { key: "shop", value: "motorcycle" },
+      { key: "shop", value: "car_repair" },
+      { key: "amenity", value: "vehicle_inspection" },
+    ],
+  },
+  {
+    key: "viewpoint",
+    label: "🏔 Panorama",
+    tags: [
+      { key: "tourism", value: "viewpoint" },
+      { key: "natural", value: "peak" },
+    ],
+  },
+];
+
+function dedupePois(arr) {
+  const seen = new Set();
+  const out = [];
+  for (const item of arr || []) {
+    const lat = Number(item?.lat);
+    const lon = Number(item?.lon);
+    if (!Number.isFinite(lat) || !Number.isFinite(lon)) continue;
+    const key = `${lat.toFixed(5)}-${lon.toFixed(5)}-${String(item?.name || "").trim().toLowerCase()}`;
+    if (seen.has(key)) continue;
+    seen.add(key);
+    out.push(item);
+  }
+  return out;
+}
+
+async function overpassSearchNearby(point, categoryKey, radius = 3500) {
+  const cat = POI_CATEGORIES.find((x) => x.key === categoryKey);
+  if (!cat || !point) return [];
+
+  const [lat, lon] = point;
+  const tagParts = cat.tags
+    .map((t) => `
+      node["${t.key}"="${t.value}"](around:${radius},${lat},${lon});
+      way["${t.key}"="${t.value}"](around:${radius},${lat},${lon});
+      relation["${t.key}"="${t.value}"](around:${radius},${lat},${lon});
+    `)
+    .join("\n");
+
+  const query = `
+    [out:json][timeout:18];
+    (
+      ${tagParts}
+    );
+    out center tags 20;
+  `;
+
+  try {
+    const res = await fetch("https://overpass-api.de/api/interpreter", {
+      method: "POST",
+      headers: { "Content-Type": "text/plain;charset=UTF-8" },
+      body: query,
+    });
+    if (!res.ok) return [];
+    const data = await res.json();
+
+    return (data?.elements || []).map((el) => {
+      const latVal = Number(el?.lat ?? el?.center?.lat);
+      const lonVal = Number(el?.lon ?? el?.center?.lon);
+      const name = el?.tags?.name || cat.label.replace(/^[^\s]+\s/, "");
+      return {
+        id: `${categoryKey}-${el.type}-${el.id}`,
+        name,
+        lat: latVal,
+        lon: lonVal,
+        categoryKey,
+        categoryLabel: cat.label,
+        distanceKm: haversineKm(point, [latVal, lonVal]),
+        meta:
+          el?.tags?.brand ||
+          el?.tags?.operator ||
+          el?.tags?.cuisine ||
+          el?.tags?.tourism ||
+          "",
+      };
+    }).filter((x) => Number.isFinite(x.lat) && Number.isFinite(x.lon));
+  } catch {
+    return [];
+  }
+}
+
+// --- Styles ---
 const S = {
   page: { width: "100%", padding: "16px 12px" },
-  container: { maxWidth: 1180, margin: "0 auto" },
+  container: { maxWidth: 1320, margin: "0 auto" },
   headerRow: {
     display: "flex",
     gap: 12,
@@ -293,13 +569,14 @@ const S = {
   title: { fontSize: 34, fontWeight: 900, letterSpacing: "-0.02em", margin: 0 },
   subtitle: { margin: "6px 0 0", opacity: 0.78, fontSize: 14, lineHeight: 1.35 },
   grid: { display: "grid", gridTemplateColumns: "1fr", gap: 12, marginTop: 14 },
-  gridLg: { display: "grid", gridTemplateColumns: "420px 1fr", gap: 14, marginTop: 14 },
+  gridLg: { display: "grid", gridTemplateColumns: "430px 1fr", gap: 14, marginTop: 14 },
   card: {
     borderRadius: 18,
     border: "1px solid rgba(0,0,0,0.08)",
     background: "rgba(255,255,255,0.72)",
     boxShadow: "0 10px 30px rgba(0,0,0,0.10)",
     padding: 14,
+    backdropFilter: "blur(4px)",
   },
   row: { display: "flex", gap: 10, flexWrap: "wrap", alignItems: "center" },
   btn: {
@@ -310,6 +587,15 @@ const S = {
     cursor: "pointer",
     fontWeight: 800,
     boxShadow: "0 8px 20px rgba(0,0,0,0.08)",
+  },
+  btnPrimary: {
+    padding: "10px 12px",
+    borderRadius: 14,
+    border: "1px solid rgba(29,78,216,0.18)",
+    background: "rgba(29,78,216,0.08)",
+    cursor: "pointer",
+    fontWeight: 900,
+    boxShadow: "0 8px 20px rgba(29,78,216,0.08)",
   },
   btnGhost: {
     padding: "10px 12px",
@@ -358,6 +644,14 @@ const S = {
     fontWeight: 800,
     fontSize: 13,
   },
+  stat: {
+    padding: 12,
+    borderRadius: 16,
+    border: "1px solid rgba(0,0,0,0.08)",
+    background: "rgba(255,255,255,0.56)",
+    minWidth: 120,
+    flex: "1 1 120px",
+  },
   dropdown: {
     position: "absolute",
     top: "calc(100% + 6px)",
@@ -380,26 +674,27 @@ const S = {
   },
 };
 
-// --- Trail helpers ---
 const TRAIL_MIN_STEP_M = 12;
 const TRAIL_MAX_PTS = 2500;
 const kmToM = (km) => km * 1000;
 
 export default function Map() {
-  const [routes, setRoutes] = useState(() => loadRoutes());
-  const [activeId, setActiveId] = useState(() => routes?.[0]?.id || "");
+  const initialRoutes = useMemo(() => loadRoutes(), []);
+  const [routes, setRoutes] = useState(initialRoutes);
+  const [activeId, setActiveId] = useState(() => initialRoutes?.[0]?.id || "");
   const [points, setPoints] = useState([]);
   const [snappedLine, setSnappedLine] = useState(null);
+  const [routeMeta, setRouteMeta] = useState({ distanceKm: 0, durationMin: 0, steps: [] });
   const [name, setName] = useState("");
   const [note, setNote] = useState("");
+  const [savedFilter, setSavedFilter] = useState("");
+  const [rideProfile, setRideProfile] = useState("touring");
 
-  // Manual insert
   const [manualText, setManualText] = useState("");
   const [manualErr, setManualErr] = useState("");
   const [manualReplace, setManualReplace] = useState(true);
   const manualPreview = useMemo(() => parseCoordsFromText(manualText), [manualText]);
 
-  // Autocomplete
   const [q, setQ] = useState("");
   const [suggestions, setSuggestions] = useState([]);
   const [searchOpen, setSearchOpen] = useState(false);
@@ -408,53 +703,140 @@ export default function Map() {
   const lastQueryRef = useRef("");
   const abortRef = useRef(null);
 
-  // Snap
   const [snapping, setSnapping] = useState(false);
   const [snapEnabled, setSnapEnabled] = useState(true);
 
-  // GPS + Navigator
   const [gps, setGps] = useState(null);
   const [gpsOn, setGpsOn] = useState(false);
   const [followGps, setFollowGps] = useState(true);
   const [navOn, setNavOn] = useState(false);
   const [nextIdx, setNextIdx] = useState(0);
 
-  // GPS Trail
   const [gpsTrail, setGpsTrail] = useState([]);
   const lastTrailPointRef = useRef(null);
 
-  // Timer
   const [runOn, setRunOn] = useState(false);
   const [runStartMs, setRunStartMs] = useState(null);
   const [runElapsedSec, setRunElapsedSec] = useState(0);
   const tickRef = useRef(null);
 
-  // Run track
   const [runTrack, setRunTrack] = useState([]);
   const lastRunTrackRef = useRef(null);
 
-  const isPremium = useMemo(() => localStorage.getItem(PASS_KEY) === "true", []);
+  const [weatherLoading, setWeatherLoading] = useState(false);
+  const [routeWeather, setRouteWeather] = useState({ start: null, mid: null, end: null });
 
+  const [radarLoading, setRadarLoading] = useState(false);
+  const [radarPoints, setRadarPoints] = useState([]);
+
+  const [poiCategory, setPoiCategory] = useState("fuel");
+  const [poiRadius, setPoiRadius] = useState(3500);
+  const [poiLoading, setPoiLoading] = useState(false);
+  const [poiResults, setPoiResults] = useState([]);
+
+  const isPremium = useMemo(() => localStorage.getItem(PASS_KEY) === "true", []);
   const activeRoute = useMemo(
     () => routes.find((r) => r.id === activeId) || null,
     [routes, activeId]
   );
 
-  const distanceKm = useMemo(() => {
-    const base = snapEnabled && snappedLine?.length >= 2 ? snappedLine : points;
-    return computeDistanceKm(base);
+  const baseLine = useMemo(() => {
+    if (snapEnabled && snappedLine?.length >= 2) return snappedLine;
+    return points;
   }, [points, snappedLine, snapEnabled]);
+
+  const distanceKm = useMemo(() => {
+    if (snapEnabled && routeMeta?.distanceKm > 0 && snappedLine?.length >= 2) return routeMeta.distanceKm;
+    return computeDistanceKm(baseLine);
+  }, [baseLine, routeMeta, snappedLine, snapEnabled]);
+
+  const estimatedHours = useMemo(
+    () => estimateHoursByProfile(distanceKm, rideProfile),
+    [distanceKm, rideProfile]
+  );
+
+  const etaText = useMemo(() => formatEta(estimatedHours), [estimatedHours]);
+
+  const currentStepInstruction = useMemo(() => {
+    if (!routeMeta?.steps?.length) return null;
+    return routeMeta.steps[0] || null;
+  }, [routeMeta]);
+
+  const nextInfo = useMemo(() => {
+    if (!navOn || !gps || !points?.length) return null;
+    const idx = Math.min(nextIdx, points.length - 1);
+    const wp = points[idx];
+    const km = haversineKm(gps, wp);
+    return { idx, km, wp };
+  }, [navOn, gps, points, nextIdx]);
+
+  const weatherAssessments = useMemo(() => ({
+    start: analyzeRiderWeather(routeWeather.start),
+    mid: analyzeRiderWeather(routeWeather.mid),
+    end: analyzeRiderWeather(routeWeather.end),
+  }), [routeWeather]);
+
+  const overallWeather = useMemo(() => {
+    const labels = [weatherAssessments.start, weatherAssessments.mid, weatherAssessments.end].filter(Boolean);
+    let worst = labels[0] || { score: "—", label: "Meteo non disponibile", color: "#6b7280", warnings: [], severity: 0 };
+    for (const item of labels) {
+      if ((item.severity || 0) > (worst.severity || 0)) worst = item;
+    }
+    return worst;
+  }, [weatherAssessments]);
+
+  const weatherWarningList = useMemo(() => {
+    const all = [
+      ...(weatherAssessments.start?.warnings || []),
+      ...(weatherAssessments.mid?.warnings || []),
+      ...(weatherAssessments.end?.warnings || []),
+    ];
+    return [...new Set(all)];
+  }, [weatherAssessments]);
+
+  const samples = useMemo(() => getRouteWeatherSamples(points, snappedLine), [points, snappedLine]);
+
+  const routeStats = useMemo(() => {
+    const total = activeRoute?.totalTimeSec || 0;
+    const sessions = activeRoute?.sessions || [];
+    const avg = sessions.length ? Math.round(total / sessions.length) : 0;
+    return {
+      sessionCount: sessions.length,
+      totalTimeSec: total,
+      avgSessionSec: avg,
+      lastRunAt: activeRoute?.lastRunAt || null,
+    };
+  }, [activeRoute]);
+
+  const filteredRoutes = useMemo(() => {
+    const f = String(savedFilter || "").trim().toLowerCase();
+    if (!f) return routes;
+    return routes.filter((r) => {
+      const txt = `${r.name || ""} ${r.note || ""}`.toLowerCase();
+      return txt.includes(f);
+    });
+  }, [routes, savedFilter]);
+
+  const radarWorst = useMemo(() => {
+    if (!radarPoints.length) return null;
+    return [...radarPoints].sort((a, b) => (b.analysis?.severity || 0) - (a.analysis?.severity || 0))[0];
+  }, [radarPoints]);
 
   useEffect(() => saveRoutes(routes), [routes]);
 
-  // Load selected route
   useEffect(() => {
     if (!activeRoute) return;
     setPoints(activeRoute.points || []);
     setSnappedLine(activeRoute.snappedLine || null);
+    setRouteMeta({
+      distanceKm: Number(activeRoute.osrmDistanceKm || 0),
+      durationMin: Number(activeRoute.osrmDurationMin || 0),
+      steps: Array.isArray(activeRoute.osrmSteps) ? activeRoute.osrmSteps : [],
+    });
     setName(activeRoute.name || "");
     setNote(activeRoute.note || "");
     setSnapEnabled(activeRoute.snapEnabled ?? true);
+    setRideProfile(activeRoute.rideProfile || "touring");
 
     setNavOn(false);
     setNextIdx(0);
@@ -465,7 +847,6 @@ export default function Map() {
     lastRunTrackRef.current = null;
   }, [activeId]); // eslint-disable-line
 
-  // Autocomplete debounce (abort-safe + ordered results)
   useEffect(() => {
     const query = (q || "").trim();
 
@@ -490,7 +871,7 @@ export default function Map() {
     searchTimer.current = setTimeout(async () => {
       try {
         const res = await nominatimSearch(query, { signal: controller.signal });
-        if (lastQueryRef.current !== query) return; // avoid out-of-order
+        if (lastQueryRef.current !== query) return;
         setSuggestions(res);
       } catch {
         if (lastQueryRef.current !== query) return;
@@ -506,9 +887,91 @@ export default function Map() {
     };
   }, [q]);
 
+  useEffect(() => {
+    let cancelled = false;
+
+    const run = async () => {
+      if (!OWM_KEY) {
+        setRouteWeather({ start: null, mid: null, end: null });
+        return;
+      }
+      if (!points || points.length < 2) {
+        setRouteWeather({ start: null, mid: null, end: null });
+        return;
+      }
+
+      setWeatherLoading(true);
+      try {
+        const [startWx, midWx, endWx] = await Promise.all([
+          fetchPointWeather(samples.start),
+          fetchPointWeather(samples.mid),
+          fetchPointWeather(samples.end),
+        ]);
+
+        if (!cancelled) {
+          setRouteWeather({
+            start: startWx,
+            mid: midWx,
+            end: endWx,
+          });
+        }
+      } finally {
+        if (!cancelled) setWeatherLoading(false);
+      }
+    };
+
+    run();
+    return () => {
+      cancelled = true;
+    };
+  }, [samples.start, samples.mid, samples.end, points]);
+
+  useEffect(() => {
+    let cancelled = false;
+
+    const run = async () => {
+      if (!OWM_KEY || !baseLine || baseLine.length < 2) {
+        setRadarPoints([]);
+        return;
+      }
+
+      const desiredCount = distanceKm > 350 ? 9 : distanceKm > 160 ? 7 : 5;
+      const pts = sampleLine(baseLine, desiredCount);
+      if (!pts.length) {
+        setRadarPoints([]);
+        return;
+      }
+
+      setRadarLoading(true);
+      try {
+        const results = await Promise.all(
+          pts.map(async (p, idx) => {
+            const weather = await fetchPointWeather(p);
+            return {
+              idx,
+              point: p,
+              weather,
+              analysis: analyzeRiderWeather(weather),
+            };
+          })
+        );
+
+        if (!cancelled) setRadarPoints(results);
+      } finally {
+        if (!cancelled) setRadarLoading(false);
+      }
+    };
+
+    run();
+    return () => {
+      cancelled = true;
+    };
+  }, [baseLine, distanceKm]);
+
   const addFromSearch = (s) => {
     setPoints((prev) => [...prev, [s.lat, s.lon]]);
     setSnappedLine(null);
+    setRouteMeta({ distanceKm: 0, durationMin: 0, steps: [] });
     setQ("");
     setSuggestions([]);
     setSearchOpen(false);
@@ -516,11 +979,9 @@ export default function Map() {
     lastQueryRef.current = "";
   };
 
-  // aggiungi anche se non clicchi la dropdown (usa prima suggestions)
   const addTypedPlace = async () => {
     const query = String(q || "").trim();
     if (query.length < 3) return;
-
     if (searchLoading) return;
 
     if (suggestions && suggestions.length) {
@@ -544,16 +1005,16 @@ export default function Map() {
     }
   };
 
-  // Manual insert actions
   const importManualPoints = () => {
     setManualErr("");
     const pts = parseCoordsFromText(manualText);
     if (!pts.length) {
-      setManualErr("Nessun punto valido trovato. Esempio: 45.4642, 9.1900 (o link Google Maps con @lat,lng).");
+      setManualErr("Nessun punto valido trovato. Esempio: 45.4642, 9.1900 oppure link Google Maps con @lat,lng.");
       return;
     }
     setPoints((prev) => (manualReplace ? pts : [...prev, ...pts]));
     setSnappedLine(null);
+    setRouteMeta({ distanceKm: 0, durationMin: 0, steps: [] });
     setManualText("");
   };
 
@@ -565,19 +1026,24 @@ export default function Map() {
   const reversePoints = () => {
     setPoints((prev) => [...(prev || [])].reverse());
     setSnappedLine(null);
+    setRouteMeta({ distanceKm: 0, durationMin: 0, steps: [] });
     setNextIdx(0);
   };
 
-  // GPS watch
+  const removePointAt = (idx) => {
+    setPoints((prev) => prev.filter((_, i) => i !== idx));
+    setSnappedLine(null);
+    setRouteMeta({ distanceKm: 0, durationMin: 0, steps: [] });
+    setNextIdx(0);
+  };
+
   useEffect(() => {
     if (!gpsOn) {
       setGps(null);
       setNavOn(false);
       setRunOn(false);
-
       setGpsTrail([]);
       lastTrailPointRef.current = null;
-
       setRunTrack([]);
       lastRunTrackRef.current = null;
       return;
@@ -594,8 +1060,7 @@ export default function Map() {
         const p = [pos.coords.latitude, pos.coords.longitude];
         setGps(p);
       },
-      (err) => {
-        console.warn(err);
+      () => {
         alert("Impossibile ottenere GPS. Consenti la posizione al browser.");
         setGpsOn(false);
       },
@@ -605,7 +1070,6 @@ export default function Map() {
     return () => navigator.geolocation.clearWatch(id);
   }, [gpsOn]);
 
-  // Trail update when gps changes
   useEffect(() => {
     if (!gpsOn || !gps) return;
 
@@ -642,16 +1106,12 @@ export default function Map() {
     }
   }, [gps, gpsOn, runOn]);
 
-  // Navigator: next waypoint
   useEffect(() => {
-    if (!navOn) return;
-    if (!gps) return;
-    if (!points?.length) return;
+    if (!navOn || !gps || !points?.length) return;
     const idx = nearestNextWaypointIndex(gps, points, nextIdx);
     setNextIdx(idx);
   }, [navOn, gps, points]); // eslint-disable-line
 
-  // Timer tick
   useEffect(() => {
     if (!runOn) {
       if (tickRef.current) clearInterval(tickRef.current);
@@ -679,11 +1139,13 @@ export default function Map() {
   const undo = () => {
     setPoints((prev) => prev.slice(0, -1));
     setSnappedLine(null);
+    setRouteMeta({ distanceKm: 0, durationMin: 0, steps: [] });
   };
 
   const clear = () => {
     setPoints([]);
     setSnappedLine(null);
+    setRouteMeta({ distanceKm: 0, durationMin: 0, steps: [] });
     setNavOn(false);
     setNextIdx(0);
     setRunOn(false);
@@ -691,6 +1153,8 @@ export default function Map() {
     setRunStartMs(null);
     setRunTrack([]);
     lastRunTrackRef.current = null;
+    setPoiResults([]);
+    setRadarPoints([]);
   };
 
   const resetTrail = () => {
@@ -702,8 +1166,10 @@ export default function Map() {
     setActiveId("");
     setName("");
     setNote("");
+    setRideProfile("touring");
     setPoints([]);
     setSnappedLine(null);
+    setRouteMeta({ distanceKm: 0, durationMin: 0, steps: [] });
     setNavOn(false);
     setNextIdx(0);
     setRunOn(false);
@@ -711,6 +1177,7 @@ export default function Map() {
     setRunStartMs(null);
     setRunTrack([]);
     lastRunTrackRef.current = null;
+    setPoiResults([]);
   };
 
   const saveCurrent = () => {
@@ -730,9 +1197,13 @@ export default function Map() {
       updatedAt: new Date().toISOString(),
       distanceKm: Math.round(distanceKm * 10) / 10,
       snapEnabled,
+      rideProfile,
       totalTimeSec: existing?.totalTimeSec || 0,
       sessions: existing?.sessions || [],
       lastRunAt: existing?.lastRunAt || null,
+      osrmDistanceKm: routeMeta?.distanceKm || 0,
+      osrmDurationMin: routeMeta?.durationMin || 0,
+      osrmSteps: routeMeta?.steps || [],
     };
 
     setRoutes((prev) => {
@@ -785,9 +1256,13 @@ export default function Map() {
         updatedAt: new Date().toISOString(),
         distanceKm: Math.round(distanceKm * 10) / 10,
         snapEnabled,
+        rideProfile,
         totalTimeSec: prevTotal + durSec,
         sessions: [session, ...prevSessions].slice(0, 50),
         lastRunAt: new Date().toISOString(),
+        osrmDistanceKm: routeMeta?.distanceKm || 0,
+        osrmDurationMin: routeMeta?.durationMin || 0,
+        osrmSteps: routeMeta?.steps || [],
       };
 
       const exists = prev.some((r) => r.id === id);
@@ -807,15 +1282,34 @@ export default function Map() {
     newRoute();
   };
 
+  const duplicateRoute = () => {
+    if (!activeRoute) return;
+    const payload = {
+      ...activeRoute,
+      id: uid(),
+      name: `${activeRoute.name} (copy)`,
+      updatedAt: new Date().toISOString(),
+    };
+    setRoutes((prev) => [payload, ...prev]);
+    setActiveId(payload.id);
+  };
+
   const doSnap = async () => {
     if (!points || points.length < 2) return alert("Aggiungi almeno 2 punti.");
     setSnapping(true);
     try {
-      const line = await osrmSnap(points);
-      if (!line) alert("Snap non riuscito. Riprova.");
-      else setSnappedLine(line);
-    } catch (e) {
-      console.warn(e);
+      const res = await osrmSnap(points);
+      if (!res?.line) {
+        alert("Snap non riuscito. Riprova.");
+      } else {
+        setSnappedLine(res.line);
+        setRouteMeta({
+          distanceKm: res.distanceKm || 0,
+          durationMin: res.durationMin || 0,
+          steps: Array.isArray(res.steps) ? res.steps.slice(0, 8) : [],
+        });
+      }
+    } catch {
       alert("Snap non disponibile ora (OSRM). Riprova tra poco.");
     } finally {
       setSnapping(false);
@@ -836,9 +1330,9 @@ export default function Map() {
   const openGoogleNav = () => {
     const url = buildGoogleMapsNavUrl(gps, points);
     if (!url) return alert("Serve un itinerario con almeno 2 punti.");
-  const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent || "");
-if (isMobile) window.location.href = url;
-else window.open(url, "_blank", "noopener,noreferrer");
+    const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent || "");
+    if (isMobile) window.location.href = url;
+    else window.open(url, "_blank", "noopener,noreferrer");
   };
 
   const startRun = () => {
@@ -848,13 +1342,40 @@ else window.open(url, "_blank", "noopener,noreferrer");
     setRunOn(true);
   };
 
-  const nextInfo = useMemo(() => {
-    if (!navOn || !gps || !points?.length) return null;
-    const idx = Math.min(nextIdx, points.length - 1);
-    const wp = points[idx];
-    const km = haversineKm(gps, wp);
-    return { idx, km, wp };
-  }, [navOn, gps, points, nextIdx]);
+  const loadPois = async () => {
+    if (!baseLine || baseLine.length < 2) {
+      alert("Crea prima un percorso.");
+      return;
+    }
+
+    const poiSampleCount = distanceKm > 220 ? 5 : 3;
+    const samplePoints = sampleLine(baseLine, poiSampleCount);
+
+    setPoiLoading(true);
+    try {
+      const results = await Promise.all(
+        samplePoints.map((p) => overpassSearchNearby(p, poiCategory, poiRadius))
+      );
+
+      const merged = dedupePois(results.flat())
+        .sort((a, b) => (a.distanceKm || 999) - (b.distanceKm || 999))
+        .slice(0, 20);
+
+      setPoiResults(merged);
+    } finally {
+      setPoiLoading(false);
+    }
+  };
+
+  const addPoiToRoute = (poi) => {
+    if (!poi) return;
+    setPoints((prev) => [...prev, [poi.lat, poi.lon]]);
+    setSnappedLine(null);
+    setRouteMeta({ distanceKm: 0, durationMin: 0, steps: [] });
+    if (!String(name || "").trim()) {
+      setName(`Route + ${poi.name}`);
+    }
+  };
 
   const mapCenter = useMemo(() => {
     if (gps) return gps;
@@ -878,27 +1399,67 @@ else window.open(url, "_blank", "noopener,noreferrer");
 
   const loadRoute = (id) => setActiveId(id);
 
+  const PointBadge = ({ idx }) => {
+    if (idx === 0) return <span style={S.pill}>🏁 Start</span>;
+    if (idx === points.length - 1) return <span style={S.pill}>📍 Arrivo</span>;
+    return <span style={S.pill}>🛑 Tappa {idx}</span>;
+  };
+
+  const WeatherCard = ({ title, wx, analysis }) => (
+    <div style={{ ...S.stat, minWidth: 0 }}>
+      <div style={{ fontWeight: 900, fontSize: 13 }}>{title}</div>
+      {!wx ? (
+        <div style={{ marginTop: 6, fontSize: 12, opacity: 0.72 }}>
+          {OWM_KEY ? "Meteo non disponibile" : "Imposta VITE_OWM_KEY"}
+        </div>
+      ) : (
+        <>
+          <div style={{ marginTop: 8, fontSize: 22, fontWeight: 900 }}>
+            {Number.isFinite(wx.temp) ? `${Math.round(wx.temp)}°` : "—"}
+          </div>
+          <div style={{ fontSize: 12, opacity: 0.8 }}>{wx.desc || "—"}</div>
+          <div style={{ fontSize: 12, marginTop: 6 }}>
+            🌬 {Math.round(wx.windKmh || 0)} km/h • 🌧 {wx.rainMm || 0} mm
+          </div>
+          <div style={{ marginTop: 8, fontWeight: 900, color: analysis?.color || "#111" }}>
+            {analysis?.score || "—"} — {analysis?.label || "—"}
+          </div>
+        </>
+      )}
+    </div>
+  );
+
   return (
     <div style={S.page}>
       <div style={S.container}>
         <style>{`
           input::placeholder, textarea::placeholder { color: rgba(0,0,0,0.55); }
+          select {
+            width: 100%;
+            padding: 10px 12px;
+            border-radius: 14px;
+            border: 1px solid rgba(0,0,0,0.14);
+            outline: none;
+            background: white;
+            font-size: 14px;
+            color: #111;
+          }
         `}</style>
 
         <div style={S.headerRow}>
           <div>
-            <h1 style={S.title}>Rotta Libera 🏁</h1>
+            <h1 style={S.title}>Navigatore PRO Plus 🏁</h1>
             <p style={S.subtitle}>
-              Cerca, snappa su strada, naviga e salva tempo. Timer avviabile solo con GPS ON. <b>NEW:</b> Scia GPS Live + inserimento manuale.
+              Route builder, GPS live, Rider Radar meteo e waypoint automatici lungo la rotta.
             </p>
           </div>
 
           <div style={S.row}>
-            <button style={S.btnGhost} onClick={() => setSnapEnabled((v) => !v)} title="Mostra/usa snap">
+            <button style={S.btnGhost} onClick={() => setSnapEnabled((v) => !v)}>
               {snapEnabled ? "🛣️ Snap ON" : "🧩 Snap OFF"}
             </button>
 
-            <button style={S.btnGhost} onClick={() => setGpsOn((v) => !v)} title="GPS live">
+            <button style={S.btnGhost} onClick={() => setGpsOn((v) => !v)}>
               {gpsOn ? "📍 GPS ON" : "📍 GPS OFF"}
             </button>
 
@@ -906,16 +1467,14 @@ else window.open(url, "_blank", "noopener,noreferrer");
               style={S.btnGhost}
               onClick={() => setFollowGps((v) => !v)}
               disabled={!gpsOn}
-              title="Segui la tua posizione"
             >
               {followGps ? "🧭 Follow ON" : "🧭 Follow OFF"}
             </button>
 
             <button
-              style={S.btn}
+              style={S.btnPrimary}
               onClick={() => setNavOn((v) => !v)}
               disabled={!gpsOn || points.length < 2}
-              title="Modalità navigatore (next waypoint)"
             >
               {navOn ? "🧭 Navigatore ON" : "🧭 Navigatore OFF"}
             </button>
@@ -963,9 +1522,7 @@ else window.open(url, "_blank", "noopener,noreferrer");
               </div>
 
               {searchOpen && searchLoading && (
-                <div style={{ marginTop: 8, fontSize: 13, opacity: 0.75 }}>
-                  ⏳ Cerco...
-                </div>
+                <div style={{ marginTop: 8, fontSize: 13, opacity: 0.75 }}>⏳ Cerco...</div>
               )}
 
               <div style={{ marginTop: 10, display: "flex", gap: 8, flexWrap: "wrap" }}>
@@ -975,7 +1532,11 @@ else window.open(url, "_blank", "noopener,noreferrer");
                 <button style={S.btnGhost} onClick={clear} disabled={!points.length}>
                   🧹 Clear
                 </button>
-                <button style={S.btnGhost} onClick={addTypedPlace} disabled={(q || "").trim().length < 3 || searchLoading}>
+                <button
+                  style={S.btnGhost}
+                  onClick={addTypedPlace}
+                  disabled={(q || "").trim().length < 3 || searchLoading}
+                >
                   ➕ Aggiungi scritto
                 </button>
               </div>
@@ -983,6 +1544,7 @@ else window.open(url, "_blank", "noopener,noreferrer");
               <div style={{ marginTop: 10, display: "flex", gap: 8, flexWrap: "wrap" }}>
                 <span style={S.pill}>📍 Punti: {points.length}</span>
                 <span style={S.pill}>📏 Km: {distanceKm.toFixed(1)}</span>
+                <span style={S.pill}>⏱ ETA: {etaText}</span>
                 {snapEnabled && snappedLine?.length ? <span style={S.pill}>🛣️ Snapped</span> : <span style={S.pill}>📌 Manual</span>}
               </div>
 
@@ -994,14 +1556,11 @@ else window.open(url, "_blank", "noopener,noreferrer");
               </div>
             </div>
 
-            {/* Manual route insert */}
             <div style={S.card}>
               <div style={{ fontWeight: 900, fontSize: 16, marginBottom: 8 }}>✍️ Inserimento manuale percorso</div>
 
               <div style={{ ...S.small, marginBottom: 8 }}>
-                Incolla coordinate (una per riga) tipo <b>45.4642, 9.1900</b> oppure un link Google Maps con <b>@lat,lng</b>.
-                <br />
-                Supporta anche una riga con <b>;</b> (es: <b>45.46,9.19;46.06,11.12</b>).
+                Incolla coordinate tipo <b>45.4642, 9.1900</b> oppure un link Google Maps con <b>@lat,lng</b>.
               </div>
 
               <textarea
@@ -1020,7 +1579,7 @@ else window.open(url, "_blank", "noopener,noreferrer");
                     checked={manualReplace}
                     onChange={(e) => setManualReplace(e.target.checked)}
                   />
-                  Sostituisci percorso (consigliato)
+                  Sostituisci percorso
                 </label>
 
                 <button
@@ -1062,9 +1621,7 @@ else window.open(url, "_blank", "noopener,noreferrer");
             <div style={S.card}>
               <div style={{ display: "flex", justifyContent: "space-between", gap: 10, alignItems: "center" }}>
                 <div style={{ fontWeight: 900, fontSize: 16 }}>🧾 Itinerario</div>
-                <button style={S.btnGhost} onClick={newRoute}>
-                  ➕ Nuovo
-                </button>
+                <button style={S.btnGhost} onClick={newRoute}>➕ Nuovo</button>
               </div>
 
               <div style={{ marginTop: 10 }}>
@@ -1073,41 +1630,69 @@ else window.open(url, "_blank", "noopener,noreferrer");
               </div>
 
               <div style={{ marginTop: 10 }}>
+                <div style={{ ...S.small, fontWeight: 800 }}>Profilo guida</div>
+                <select value={rideProfile} onChange={(e) => setRideProfile(e.target.value)}>
+                  <option value="relax">Relax</option>
+                  <option value="touring">Touring</option>
+                  <option value="sport">Sport</option>
+                  <option value="rain">Pioggia / prudenza</option>
+                </select>
+              </div>
+
+              <div style={{ marginTop: 10 }}>
                 <div style={{ ...S.small, fontWeight: 800 }}>Note</div>
                 <textarea style={S.textarea} value={note} onChange={(e) => setNote(e.target.value)} placeholder="Soste, benzina, orari, velox..." />
               </div>
 
               <div style={{ marginTop: 12, display: "flex", gap: 8, flexWrap: "wrap" }}>
-                <button style={S.btn} onClick={saveCurrent}>
-                  💾 Salva
-                </button>
-                <button style={S.btnDanger} onClick={() => (activeRoute ? deleteRoute() : null)} disabled={!activeRoute}>
-                  🗑️ Elimina
-                </button>
-
+                <button style={S.btn} onClick={saveCurrent}>💾 Salva</button>
+                <button style={S.btnGhost} onClick={duplicateRoute} disabled={!activeRoute}>📑 Duplica</button>
+                <button style={S.btnDanger} onClick={deleteRoute} disabled={!activeRoute}>🗑️ Elimina</button>
                 <button style={S.btnGhost} onClick={doSnap} disabled={snapping || points.length < 2}>
                   {snapping ? "🛣️ Snap..." : "🛣️ Snap su strada"}
                 </button>
-
                 <button style={S.btnGhost} onClick={openGoogleNav} disabled={points.length < 2}>
                   🧭 Apri navigazione
                 </button>
-
                 <button style={S.btnGhost} onClick={exportGpx} disabled={points.length < 2}>
                   🧾 Export GPX {isPremium ? "" : "(Premium)"}
                 </button>
               </div>
 
               <div style={{ marginTop: 12, display: "flex", gap: 8, flexWrap: "wrap", alignItems: "center" }}>
-                <button style={S.btn} onClick={startRun} disabled={runOn}>
-                  ⏱️ Start (GPS)
-                </button>
-                <button style={S.btnGhost} onClick={stopAndSaveRun} disabled={!runOn}>
-                  ✅ Stop & Salva
-                </button>
+                <button style={S.btnPrimary} onClick={startRun} disabled={runOn}>⏱️ Start (GPS)</button>
+                <button style={S.btnGhost} onClick={stopAndSaveRun} disabled={!runOn}>✅ Stop & Salva</button>
                 <span style={S.pill}>⏱️ {fmtTime(runElapsedSec)}</span>
                 {activeRoute?.totalTimeSec ? <span style={S.pill}>Totale: {fmtTime(activeRoute.totalTimeSec)}</span> : null}
                 {runOn ? <span style={S.pill}>🏁 Run pts: {runTrack.length}</span> : null}
+              </div>
+            </div>
+
+            <div style={S.card}>
+              <div style={{ fontWeight: 900, fontSize: 16, marginBottom: 10 }}>🧠 Rider Travel Panel</div>
+
+              <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
+                <div style={S.stat}>
+                  <div style={{ fontSize: 12, opacity: 0.75 }}>Distanza</div>
+                  <div style={{ marginTop: 4, fontWeight: 900, fontSize: 22 }}>{distanceKm.toFixed(1)} km</div>
+                </div>
+
+                <div style={S.stat}>
+                  <div style={{ fontSize: 12, opacity: 0.75 }}>ETA stimata</div>
+                  <div style={{ marginTop: 4, fontWeight: 900, fontSize: 22 }}>{etaText}</div>
+                </div>
+
+                <div style={S.stat}>
+                  <div style={{ fontSize: 12, opacity: 0.75 }}>Profilo</div>
+                  <div style={{ marginTop: 4, fontWeight: 900, fontSize: 22, textTransform: "capitalize" }}>{rideProfile}</div>
+                </div>
+
+                <div style={S.stat}>
+                  <div style={{ fontSize: 12, opacity: 0.75 }}>Meteo rotta</div>
+                  <div style={{ marginTop: 4, fontWeight: 900, fontSize: 20, color: overallWeather.color }}>
+                    {overallWeather.score} — {overallWeather.label}
+                  </div>
+                </div>
               </div>
 
               {navOn && nextInfo && (
@@ -1127,21 +1712,229 @@ else window.open(url, "_blank", "noopener,noreferrer");
                   <div style={{ fontSize: 12, opacity: 0.75, marginTop: 4 }}>
                     {nextInfo.wp[0].toFixed(5)}, {nextInfo.wp[1].toFixed(5)}
                   </div>
+                  {currentStepInstruction ? (
+                    <div style={{ marginTop: 8, fontSize: 13 }}>
+                      Prossima manovra: <b>{currentStepInstruction.instruction || "Procedi"}</b>
+                      {currentStepInstruction.name ? ` su ${currentStepInstruction.name}` : ""}
+                    </div>
+                  ) : null}
+                </div>
+              )}
+
+              {weatherWarningList.length > 0 && (
+                <div
+                  style={{
+                    marginTop: 12,
+                    padding: 12,
+                    borderRadius: 14,
+                    background: "rgba(202,138,4,0.08)",
+                    border: "1px solid rgba(202,138,4,0.20)",
+                  }}
+                >
+                  <div style={{ fontWeight: 900 }}>⚠️ Warning rider</div>
+                  <div style={{ marginTop: 6, display: "flex", gap: 8, flexWrap: "wrap" }}>
+                    {weatherWarningList.map((w) => (
+                      <span key={w} style={S.pill}>{w}</span>
+                    ))}
+                  </div>
                 </div>
               )}
             </div>
 
             <div style={S.card}>
-              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+              <div style={{ fontWeight: 900, fontSize: 16, marginBottom: 10 }}>🌤 Meteo lungo rotta</div>
+
+              <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
+                <WeatherCard title="🏁 Start" wx={routeWeather.start} analysis={weatherAssessments.start} />
+                <WeatherCard title="🛣 Mid" wx={routeWeather.mid} analysis={weatherAssessments.mid} />
+                <WeatherCard title="📍 End" wx={routeWeather.end} analysis={weatherAssessments.end} />
+              </div>
+
+              <div style={{ marginTop: 10, fontSize: 12, opacity: 0.72 }}>
+                {weatherLoading
+                  ? "Aggiornamento meteo in corso..."
+                  : OWM_KEY
+                    ? "Valutazione rider calcolata su partenza, metà rotta e arrivo."
+                    : "Per attivare il meteo imposta VITE_OWM_KEY su Render/Vite."}
+              </div>
+            </div>
+
+            <div style={S.card}>
+              <div style={{ fontWeight: 900, fontSize: 16, marginBottom: 10 }}>📡 Rider Radar</div>
+
+              {radarWorst ? (
+                <div
+                  style={{
+                    padding: 12,
+                    borderRadius: 14,
+                    border: `1px solid ${radarWorst.analysis?.color || "#999"}33`,
+                    background: `${radarWorst.analysis?.color || "#999"}11`,
+                    marginBottom: 10,
+                  }}
+                >
+                  <div style={{ fontWeight: 900 }}>
+                    Tratto più critico: punto #{radarWorst.idx + 1}
+                  </div>
+                  <div style={{ marginTop: 6, fontSize: 13, color: radarWorst.analysis?.color || "#111" }}>
+                    {radarWorst.analysis?.score} — {radarWorst.analysis?.label}
+                  </div>
+                  <div style={{ marginTop: 6, fontSize: 12, opacity: 0.78 }}>
+                    {radarWorst.weather?.desc || "—"} • 🌬 {Math.round(radarWorst.weather?.windKmh || 0)} km/h • 🌧 {radarWorst.weather?.rainMm || 0} mm
+                  </div>
+                </div>
+              ) : null}
+
+              <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+                {radarLoading ? (
+                  <div style={{ fontSize: 13, opacity: 0.72 }}>Analisi radar in corso...</div>
+                ) : radarPoints.length ? (
+                  radarPoints.map((rp) => (
+                    <div
+                      key={`radar-${rp.idx}-${rp.point?.[0]}-${rp.point?.[1]}`}
+                      style={{
+                        padding: 10,
+                        borderRadius: 14,
+                        border: "1px solid rgba(0,0,0,0.08)",
+                        background: "rgba(255,255,255,0.56)",
+                      }}
+                    >
+                      <div style={{ display: "flex", justifyContent: "space-between", gap: 8, flexWrap: "wrap" }}>
+                        <div style={{ fontWeight: 900 }}>Punto #{rp.idx + 1}</div>
+                        <div style={{ fontWeight: 900, color: rp.analysis?.color || "#111" }}>
+                          {rp.analysis?.score} — {rp.analysis?.label}
+                        </div>
+                      </div>
+                      <div style={{ marginTop: 6, fontSize: 12, opacity: 0.8 }}>
+                        {rp.weather?.desc || "—"} • 🌡 {Math.round(rp.weather?.temp || 0)}° • 🌬 {Math.round(rp.weather?.windKmh || 0)} km/h • 🌧 {rp.weather?.rainMm || 0} mm
+                      </div>
+                    </div>
+                  ))
+                ) : (
+                  <div style={{ fontSize: 13, opacity: 0.72 }}>
+                    Crea una rotta per vedere il radar meteo multi-point.
+                  </div>
+                )}
+              </div>
+            </div>
+
+            <div style={S.card}>
+              <div style={{ fontWeight: 900, fontSize: 16, marginBottom: 10 }}>⛽ Waypoint automatici</div>
+
+              <div style={{ display: "grid", gap: 8 }}>
+                <div>
+                  <div style={{ ...S.small, fontWeight: 800 }}>Categoria</div>
+                  <select value={poiCategory} onChange={(e) => setPoiCategory(e.target.value)}>
+                    {POI_CATEGORIES.map((cat) => (
+                      <option key={cat.key} value={cat.key}>
+                        {cat.label}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+
+                <div>
+                  <div style={{ ...S.small, fontWeight: 800 }}>Raggio</div>
+                  <select value={String(poiRadius)} onChange={(e) => setPoiRadius(Number(e.target.value))}>
+                    <option value="2000">2 km</option>
+                    <option value="3500">3.5 km</option>
+                    <option value="5000">5 km</option>
+                    <option value="8000">8 km</option>
+                  </select>
+                </div>
+
+                <button style={S.btnPrimary} onClick={loadPois} disabled={poiLoading || points.length < 2}>
+                  {poiLoading ? "Cerco waypoint..." : "🔎 Cerca waypoint lungo rotta"}
+                </button>
+              </div>
+
+              <div style={{ marginTop: 10, display: "flex", flexDirection: "column", gap: 8 }}>
+                {poiResults.length ? (
+                  poiResults.map((poi) => (
+                    <div
+                      key={poi.id}
+                      style={{
+                        padding: 10,
+                        borderRadius: 14,
+                        border: "1px solid rgba(0,0,0,0.08)",
+                        background: "rgba(255,255,255,0.56)",
+                      }}
+                    >
+                      <div style={{ display: "flex", justifyContent: "space-between", gap: 8, flexWrap: "wrap" }}>
+                        <div>
+                          <div style={{ fontWeight: 900 }}>{poi.name}</div>
+                          <div style={{ fontSize: 12, opacity: 0.72 }}>
+                            {poi.categoryLabel} • ~ {poi.distanceKm?.toFixed?.(1) || "—"} km
+                            {poi.meta ? ` • ${poi.meta}` : ""}
+                          </div>
+                        </div>
+                        <button style={S.btnGhost} onClick={() => addPoiToRoute(poi)}>
+                          ➕ Aggiungi alla rotta
+                        </button>
+                      </div>
+                    </div>
+                  ))
+                ) : (
+                  <div style={{ fontSize: 13, opacity: 0.72 }}>
+                    Nessun waypoint caricato.
+                  </div>
+                )}
+              </div>
+            </div>
+
+            <div style={S.card}>
+              <div style={{ fontWeight: 900, fontSize: 16, marginBottom: 10 }}>📍 Punti itinerario</div>
+
+              {points.length === 0 ? (
+                <div style={{ fontSize: 14, opacity: 0.72 }}>Nessun punto inserito.</div>
+              ) : (
+                <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+                  {points.map((p, idx) => (
+                    <div
+                      key={`${p[0]}-${p[1]}-${idx}`}
+                      style={{
+                        padding: 10,
+                        borderRadius: 14,
+                        border: "1px solid rgba(0,0,0,0.08)",
+                        background: "rgba(255,255,255,0.56)",
+                      }}
+                    >
+                      <div style={{ display: "flex", justifyContent: "space-between", gap: 8, alignItems: "center" }}>
+                        <div style={{ display: "flex", gap: 8, alignItems: "center", flexWrap: "wrap" }}>
+                          <PointBadge idx={idx} />
+                          <span style={{ fontSize: 13 }}>
+                            {p[0].toFixed(5)}, {p[1].toFixed(5)}
+                          </span>
+                        </div>
+                        <button style={S.btnDanger} onClick={() => removePointAt(idx)}>✖</button>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+
+            <div style={S.card}>
+              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: 8 }}>
                 <div style={{ fontWeight: 900, fontSize: 16 }}>📦 Salvati</div>
                 <span style={S.pill}>{routes.length}</span>
               </div>
 
-              {routes.length === 0 ? (
-                <div style={{ marginTop: 8, opacity: 0.78, fontSize: 14 }}>Nessun itinerario salvato. Creane uno sulla mappa 👇</div>
+              <div style={{ marginTop: 10 }}>
+                <input
+                  style={S.input}
+                  value={savedFilter}
+                  onChange={(e) => setSavedFilter(e.target.value)}
+                  placeholder="Cerca tra gli itinerari salvati..."
+                />
+              </div>
+
+              {filteredRoutes.length === 0 ? (
+                <div style={{ marginTop: 8, opacity: 0.78, fontSize: 14 }}>
+                  Nessun itinerario trovato.
+                </div>
               ) : (
                 <div style={{ marginTop: 10, display: "flex", flexDirection: "column", gap: 8 }}>
-                  {routes.map((r) => (
+                  {filteredRoutes.map((r) => (
                     <button
                       key={r.id}
                       onClick={() => loadRoute(r.id)}
@@ -1158,20 +1951,39 @@ else window.open(url, "_blank", "noopener,noreferrer");
                         <div style={{ fontWeight: 900 }}>{r.name}</div>
                         <div style={{ fontSize: 12, opacity: 0.75 }}>{(r.distanceKm ?? 0).toFixed(1)} km</div>
                       </div>
+
                       <div style={{ fontSize: 12, opacity: 0.72, marginTop: 4 }}>
                         {(r.points?.length || 0)} punti • {r.updatedAt ? new Date(r.updatedAt).toLocaleDateString() : "-"}
                         {typeof r.totalTimeSec === "number" && r.totalTimeSec > 0 ? ` • ⏱️ ${fmtTime(r.totalTimeSec)}` : ""}
                       </div>
+
+                      {r.note ? (
+                        <div style={{ fontSize: 12, opacity: 0.72, marginTop: 4, whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>
+                          {r.note}
+                        </div>
+                      ) : null}
                     </button>
                   ))}
                 </div>
               )}
             </div>
 
+            <div style={{ ...S.card, opacity: 0.92 }}>
+              <div style={{ fontWeight: 900, marginBottom: 8 }}>📊 Stats percorso attivo</div>
+              <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
+                <span style={S.pill}>Sessioni: {routeStats.sessionCount}</span>
+                <span style={S.pill}>Tempo totale: {fmtTime(routeStats.totalTimeSec)}</span>
+                <span style={S.pill}>Media sessione: {fmtTime(routeStats.avgSessionSec)}</span>
+              </div>
+              <div style={{ marginTop: 8, fontSize: 12, opacity: 0.72 }}>
+                Ultimo utilizzo: {prettyDate(routeStats.lastRunAt)}
+              </div>
+            </div>
+
             <div style={{ ...S.card, opacity: 0.9 }}>
               <div style={{ fontWeight: 900, marginBottom: 8 }}>🔐 Premium (temporaneo)</div>
               <div style={{ fontSize: 13, opacity: 0.78 }}>
-                Per testare GPX ora: imposta <code>localStorage["{PASS_KEY}"]="true"</code>.
+                Per testare GPX: <code>localStorage["{PASS_KEY}"]="true"</code>
               </div>
             </div>
           </div>
@@ -1187,16 +1999,20 @@ else window.open(url, "_blank", "noopener,noreferrer");
               onAddPoint={(p) => {
                 setPoints((prev) => [...prev, p]);
                 setSnappedLine(null);
+                setRouteMeta({ distanceKm: 0, durationMin: 0, steps: [] });
               }}
               center={mapCenter}
               zoom={mapZoom}
-              height={isLg ? 720 : 520}
+              height={isLg ? 780 : 540}
               fitOnChange={!gpsOn || !followGps}
+              poiMarkers={poiResults}
+              radarMarkers={radarPoints}
             />
 
-            <div style={{ ...S.card, padding: 12, fontSize: 13, opacity: 0.82 }}>
-              <b>Tip:</b> scrivi una città e premi <b>Invio</b>. <br />
-              <b>Manual:</b> incolla coordinate o un link Google Maps con <b>@lat,lng</b> e premi <b>Importa punti</b>.
+            <div style={{ ...S.card, padding: 12, fontSize: 13, opacity: 0.84 }}>
+              <b>Tip:</b> scrivi una città e premi <b>Invio</b>. Usa <b>Snap su strada</b> per una rotta più realistica.
+              <br />
+              <b>PRO:</b> waypoint automatici + Rider Radar mostrati anche sulla mappa.
             </div>
           </div>
         </div>

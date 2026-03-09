@@ -1,11 +1,14 @@
 // =======================================================
 // src/components/RouteBuilderMap.jsx
-// Leaflet wrapper: Route Builder + GPS + Trail
+// Leaflet wrapper: Route Builder + GPS + Trail + POI + Radar
 // ✅ click per aggiungere punti
 // ✅ disegna snappedLine / points
 // ✅ marker GPS
 // ✅ gpsTrail polyline (scia live)
-// ✅ FIX: fitBounds su linea + key su polylines per forzare update
+// ✅ fitBounds su linea + key su polylines per forzare update
+// ✅ NEW: marker waypoint numerati (start / tappe / arrivo)
+// ✅ NEW: marker POI automatici
+// ✅ NEW: marker Rider Radar meteo
 // =======================================================
 
 import React, { useEffect, useMemo } from "react";
@@ -14,13 +17,13 @@ import {
   TileLayer,
   Marker,
   Polyline,
+  Popup,
   useMap,
   useMapEvents,
 } from "react-leaflet";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 
-// Fix icone default (Vite + Leaflet)
 delete L.Icon.Default.prototype._getIconUrl;
 L.Icon.Default.mergeOptions({
   iconRetinaUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon-2x.png",
@@ -34,13 +37,11 @@ function FitOrFollow({ center, zoom, fitOnChange, followGps, gps }) {
   useEffect(() => {
     if (!map) return;
 
-    // follow GPS (soft)
     if (followGps && gps) {
       map.setView(gps, Math.max(map.getZoom(), 13), { animate: true });
       return;
     }
 
-    // fallback view
     if (fitOnChange && center && zoom) {
       map.setView(center, zoom, { animate: true });
     }
@@ -87,6 +88,55 @@ function polyKey(prefix, arr) {
   )}-${b?.[0]?.toFixed?.(5)}-${b?.[1]?.toFixed?.(5)}`;
 }
 
+function createDivIcon(html, bg = "#111", color = "#fff") {
+  return L.divIcon({
+    className: "",
+    html: `
+      <div style="
+        width: 28px;
+        height: 28px;
+        border-radius: 999px;
+        background: ${bg};
+        color: ${color};
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        font-weight:900;
+        font-size:12px;
+        border:2px solid white;
+        box-shadow:0 4px 12px rgba(0,0,0,0.22);
+      ">
+        ${html}
+      </div>
+    `,
+    iconSize: [28, 28],
+    iconAnchor: [14, 14],
+    popupAnchor: [0, -12],
+  });
+}
+
+const startIcon = createDivIcon("S", "#15803d");
+const endIcon = createDivIcon("F", "#dc2626");
+const poiIcon = createDivIcon("P", "#1d4ed8");
+const gpsIcon = createDivIcon("📍", "#111827");
+const radarA = createDivIcon("A", "#15803d");
+const radarB = createDivIcon("B", "#65a30d");
+const radarC = createDivIcon("C", "#ca8a04");
+const radarD = createDivIcon("D", "#dc2626");
+
+function getRadarIcon(score) {
+  if (score === "A") return radarA;
+  if (score === "B") return radarB;
+  if (score === "C") return radarC;
+  return radarD;
+}
+
+function getPointIcon(idx, total) {
+  if (idx === 0) return startIcon;
+  if (idx === total - 1) return endIcon;
+  return createDivIcon(String(idx), "#0f172a");
+}
+
 export default function RouteBuilderMap({
   points = [],
   snappedLine = null,
@@ -99,6 +149,8 @@ export default function RouteBuilderMap({
   zoom = 6,
   height = 520,
   fitOnChange = true,
+  poiMarkers = [],
+  radarMarkers = [],
 }) {
   const line = useMemo(
     () => (snappedLine && snappedLine.length >= 2 ? snappedLine : points),
@@ -122,7 +174,6 @@ export default function RouteBuilderMap({
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
 
-        {/* follow GPS or set initial view */}
         <FitOrFollow
           center={center}
           zoom={zoom}
@@ -131,24 +182,80 @@ export default function RouteBuilderMap({
           gps={gps}
         />
 
-        {/* auto-fit when route changes (works also after save/load) */}
         <FitLineBounds line={line} enabled={fitOnChange && !(followGps && gps)} />
-
-        {/* add points by click */}
         <ClickToAdd enabled={isAddingEnabled} onAddPoint={onAddPoint} />
 
-        {/* Route line */}
         {line && line.length >= 2 ? (
           <Polyline key={polyKey("route", line)} positions={line} />
         ) : null}
 
-        {/* GPS Trail (scia live) */}
         {gpsTrail && gpsTrail.length >= 2 ? (
           <Polyline key={polyKey("trail", gpsTrail)} positions={gpsTrail} />
         ) : null}
 
-        {/* GPS marker */}
-        {gps ? <Marker position={gps} /> : null}
+        {points.map((p, idx) => (
+          <Marker
+            key={`wp-${idx}-${p[0]}-${p[1]}`}
+            position={p}
+            icon={getPointIcon(idx, points.length)}
+          >
+            <Popup>
+              <strong>
+                {idx === 0 ? "Start" : idx === points.length - 1 ? "Arrivo" : `Tappa ${idx}`}
+              </strong>
+              <br />
+              {p[0].toFixed(5)}, {p[1].toFixed(5)}
+            </Popup>
+          </Marker>
+        ))}
+
+        {poiMarkers.map((poi) => (
+          <Marker
+            key={poi.id}
+            position={[poi.lat, poi.lon]}
+            icon={poiIcon}
+          >
+            <Popup>
+              <strong>{poi.name}</strong>
+              <br />
+              {poi.categoryLabel}
+              {poi.distanceKm != null ? (
+                <>
+                  <br />~ {poi.distanceKm.toFixed(1)} km
+                </>
+              ) : null}
+              {poi.meta ? (
+                <>
+                  <br />{poi.meta}
+                </>
+              ) : null}
+            </Popup>
+          </Marker>
+        ))}
+
+        {radarMarkers.map((rp) => (
+          <Marker
+            key={`radar-${rp.idx}-${rp.point?.[0]}-${rp.point?.[1]}`}
+            position={rp.point}
+            icon={getRadarIcon(rp.analysis?.score)}
+          >
+            <Popup>
+              <strong>Radar punto #{rp.idx + 1}</strong>
+              <br />
+              {rp.analysis?.score} — {rp.analysis?.label}
+              {rp.weather ? (
+                <>
+                  <br />🌡 {Math.round(rp.weather.temp || 0)}°
+                  <br />🌬 {Math.round(rp.weather.windKmh || 0)} km/h
+                  <br />🌧 {rp.weather.rainMm || 0} mm
+                  <br />{rp.weather.desc || ""}
+                </>
+              ) : null}
+            </Popup>
+          </Marker>
+        ))}
+
+        {gps ? <Marker position={gps} icon={gpsIcon} /> : null}
       </MapContainer>
     </div>
   );
