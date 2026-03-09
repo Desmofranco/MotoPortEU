@@ -10,7 +10,7 @@
 // ✅ Export GPX (Premium gate via localStorage)
 // ✅ GPS Live + Scia (trail) in tempo reale
 // ✅ Inserimento manuale percorso (coordinate / link Google Maps) + preview + replace
-// ✅ Rider Travel Panel con distanza, ETA e profilo guida
+// ✅ Rider Travel Panel con distanza, tempo e profilo guida
 // ✅ Meteo lungo rotta (start / mid / end)
 // ✅ Rider Radar multi-point con tratto critico
 // ✅ Waypoint automatici lungo il percorso (fuel / food / hotel / workshop / viewpoint)
@@ -1548,7 +1548,7 @@ export default function Map() {
               <div style={{ marginTop: 10, display: "flex", gap: 8, flexWrap: "wrap" }}>
                 <span style={S.pill}>📍 Punti: {points.length}</span>
                 <span style={S.pill}>📏 Km: {distanceKm.toFixed(1)}</span>
-                <span style={S.pill}>⏱ ETA: {etaText}</span>
+<span>⏱ Tempo: {eta || "—"}</span>
                 {snapEnabled && snappedLine?.length ? <span style={S.pill}>🛣️ Snapped</span> : <span style={S.pill}>📌 Manual</span>}
               </div>
 
