@@ -24,7 +24,7 @@ import RouteBuilderMap from "../components/RouteBuilderMap";
 
 const STORAGE_KEY = "mp_routes_v4";
 const OWM_KEY = import.meta.env.VITE_OWM_KEY || "";
-
+const PASS_KEY = "mp_pass_active";
 const uid = () => `rt-${Math.random().toString(16).slice(2)}-${Date.now()}`;
 
 function loadRoutes() {
