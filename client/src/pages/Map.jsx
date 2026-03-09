@@ -23,7 +23,6 @@ import React, { useEffect, useMemo, useRef, useState } from "react";
 import RouteBuilderMap from "../components/RouteBuilderMap";
 
 const STORAGE_KEY = "mp_routes_v4";
-const PASS_KEY = "mp_pass_active";
 const OWM_KEY = import.meta.env.VITE_OWM_KEY || "";
 
 const uid = () => `rt-${Math.random().toString(16).slice(2)}-${Date.now()}`;
@@ -734,7 +733,6 @@ export default function Map() {
   const [poiLoading, setPoiLoading] = useState(false);
   const [poiResults, setPoiResults] = useState([]);
 
-  const isPremium = useMemo(() => localStorage.getItem(PASS_KEY) === "true", []);
   const activeRoute = useMemo(
     () => routes.find((r) => r.id === activeId) || null,
     [routes, activeId]
@@ -1317,10 +1315,16 @@ export default function Map() {
   };
 
   const exportGpx = () => {
-    if (!isPremium) {
-      alert("Export GPX è Premium (per ora).");
-      return;
-    }
+    const exportGpx = () => {
+  const base = snapEnabled && snappedLine?.length >= 2 ? snappedLine : points;
+  if (!base || base.length < 2) return alert("Nessun percorso da esportare.");
+  const gpx = toGpx(name || "MotoPortEU Route", base);
+  downloadTextFile(
+    `${(name || "motoport_route").replace(/\s+/g, "_")}.gpx`,
+    gpx,
+    "application/gpx+xml"
+  );
+};
     const base = snapEnabled && snappedLine?.length >= 2 ? snappedLine : points;
     if (!base || base.length < 2) return alert("Nessun percorso da esportare.");
     const gpx = toGpx(name || "MotoPortEU Route", base);
@@ -1654,9 +1658,9 @@ export default function Map() {
                 <button style={S.btnGhost} onClick={openGoogleNav} disabled={points.length < 2}>
                   🧭 Apri navigazione
                 </button>
-                <button style={S.btnGhost} onClick={exportGpx} disabled={points.length < 2}>
-                  🧾 Export GPX {isPremium ? "" : "(Premium)"}
-                </button>
+<button style={S.btnGhost} onClick={exportGpx} disabled={points.length < 2}>
+  🧾 Export GPX
+</button>
               </div>
 
               <div style={{ marginTop: 12, display: "flex", gap: 8, flexWrap: "wrap", alignItems: "center" }}>
@@ -1981,7 +1985,7 @@ export default function Map() {
             </div>
 
             <div style={{ ...S.card, opacity: 0.9 }}>
-              <div style={{ fontWeight: 900, marginBottom: 8 }}>🔐 Premium (temporaneo)</div>
+              <div style={{ fontWeight: 900, marginBottom: 8 }}></div>
               <div style={{ fontSize: 13, opacity: 0.78 }}>
                 Per testare GPX: <code>localStorage["{PASS_KEY}"]="true"</code>
               </div>
