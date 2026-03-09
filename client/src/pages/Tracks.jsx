@@ -11,6 +11,7 @@
 // ✅ Mobile: filtri collassabili inline
 // ✅ Mobile detail: mini header sticky + swipe down close + hero che si riduce
 // ✅ Mobile ULTRA COMPACT: header + lista più piccoli
+// ✅ Descrizione fallback intelligente per circuiti esteri / OSM
 // =======================================================
 
 import React, { useEffect, useMemo, useRef, useState } from "react";
@@ -126,6 +127,80 @@ function weatherLevel(worst) {
   if (s.includes("variabile")) return "soon";
   if (s.includes("nuvoloso")) return "soon";
   return "ok";
+}
+
+function hasRealTrackDescription(track) {
+  const d = String(track?.description || "").trim();
+  if (!d) return false;
+
+  const bad = [
+    "import osm",
+    "da verificare",
+    "to verify",
+    "tbd",
+    "n/a",
+    "no description",
+  ];
+
+  const lower = d.toLowerCase();
+  return !bad.some((x) => lower.includes(x));
+}
+
+function buildTrackDescription(track) {
+  if (hasRealTrackDescription(track)) return String(track.description).trim();
+
+  const name = String(track?.name || "Questo circuito").trim();
+  const country = String(track?.country || "").trim();
+  const region = String(track?.region || "").trim();
+  const type = typeLabel(track?.type);
+  const surface = surfaceLabel(track?.surface);
+  const season = String(track?.bestSeason || "").trim();
+
+  const difficulty = Number(track?.difficulty || 0);
+  const speed = Number(track?.speed || 0);
+  const technique = Number(track?.technique || 0);
+  const lengthKm = Number(track?.lengthKm || 0);
+
+  const parts = [];
+
+  if (region && country) {
+    parts.push(`${name} si trova in ${region}, ${country}`);
+  } else if (country) {
+    parts.push(`${name} si trova in ${country}`);
+  } else if (region) {
+    parts.push(`${name} si trova in ${region}`);
+  } else {
+    parts.push(`${name} è un circuito da esplorare`);
+  }
+
+  if (type && type !== "—") {
+    parts.push(`ed è classificato come ${type}`);
+  }
+
+  if (surface && surface !== "—") {
+    parts.push(`con fondo ${surface.toLowerCase()}`);
+  }
+
+  if (lengthKm > 0) {
+    parts.push(`su circa ${lengthKm} km`);
+  }
+
+  if (season) {
+    parts.push(`e stagione consigliata ${season}`);
+  }
+
+  let ridingNote = "";
+  if (difficulty >= 8 || technique >= 8) {
+    ridingNote = "Tracciato tecnico, adatto a guida più impegnativa e precisa";
+  } else if (speed >= 8) {
+    ridingNote = "Circuito molto scorrevole e divertente, ideale per una guida dinamica";
+  } else if (difficulty >= 5 || technique >= 5) {
+    ridingNote = "Percorso equilibrato, con buon mix tra tecnica e fluidità";
+  } else {
+    ridingNote = "Tracciato accessibile, adatto anche a una guida più rilassata";
+  }
+
+  return `${parts.join(" ")}. ${ridingNote}.`;
 }
 
 function normalizeIncomingTrack(t) {
@@ -749,6 +824,7 @@ function TrackDetail({ track, onClose }) {
 
   const googleHref = lat != null && lng != null ? `https://www.google.com/maps?q=${lat},${lng}` : "https://www.google.com/maps";
   const isMobile = isMobileNow();
+  const displayDescription = buildTrackDescription(track);
 
   // scroll -> hero shrink (mobile)
   const [scrollY, setScrollY] = useState(0);
@@ -842,44 +918,41 @@ function TrackDetail({ track, onClose }) {
           {wx.temp != null ? <span style={pillStyle("ok")}>🌡 {wx.temp}° (min {wx.tempMin}° / max {wx.tempMax}°)</span> : null}
           {wx.windKmh != null ? <span style={pillStyle(wx.windKmh >= 50 ? "warn" : "ok")}>💨 vento {wx.windKmh} km/h</span> : null}
         </div>
+
         {wx.ride ? (
-  <div
-    style={{
-      padding: 12,
-      borderRadius: 14,
-      background:
-        wx.ride.level === "danger"
-          ? "rgba(255,0,0,0.08)"
-          : wx.ride.level === "warn"
-          ? "rgba(255,180,0,0.12)"
-          : "rgba(0,140,80,0.10)",
-      border:
-        wx.ride.level === "danger"
-          ? "1px solid rgba(255,0,0,0.16)"
-          : wx.ride.level === "warn"
-          ? "1px solid rgba(255,180,0,0.22)"
-          : "1px solid rgba(0,140,80,0.18)",
-    }}
-  >
-    <div style={{ fontWeight: 900, fontSize: 13 }}>
-      🏍 {wx.ride.label}
-    </div>
-    <div style={{ marginTop: 4, fontSize: 13, opacity: 0.85 }}>
-      {wx.ride.advice}
-    </div>
-  </div>
-) : null}
-        <div style={{ fontSize: 12, opacity: 0.7 }}>Aggiornato: {String(wx.updatedAt || "").slice(0, 16).replace("T", " ")}</div>
+          <div
+            style={{
+              padding: 12,
+              borderRadius: 14,
+              background:
+                wx.ride.level === "danger"
+                  ? "rgba(255,0,0,0.08)"
+                  : wx.ride.level === "warn"
+                  ? "rgba(255,180,0,0.12)"
+                  : "rgba(0,140,80,0.10)",
+              border:
+                wx.ride.level === "danger"
+                  ? "1px solid rgba(255,0,0,0.16)"
+                  : wx.ride.level === "warn"
+                  ? "1px solid rgba(255,180,0,0.22)"
+                  : "1px solid rgba(0,140,80,0.18)",
+            }}
+          >
+            <div style={{ fontWeight: 900, fontSize: 13 }}>
+              🏍 {wx.ride.label}
+            </div>
+            <div style={{ marginTop: 4, fontSize: 13, opacity: 0.85 }}>
+              {wx.ride.advice}
+            </div>
+          </div>
+        ) : null}
+
+        <div style={{ fontSize: 12, opacity: 0.7 }}>
+          Aggiornato: {String(wx.updatedAt || "").slice(0, 16).replace("T", " ")}
+        </div>
       </div>
     );
   })();
-
-  const OWM_KEY = (import.meta?.env?.VITE_OWM_KEY || "").trim();
-  const keyMissing = !OWM_KEY;
-  const hasWeather =
-    !!wx &&
-    wx.ok &&
-    (wx.temp != null || wx.tempMin != null || wx.tempMax != null || wx.windKmh != null || !!wx.worst);
 
   return (
     <div onTouchStart={onTouchStart} onTouchMove={onTouchMove} onTouchEnd={onTouchEnd}>
@@ -977,7 +1050,9 @@ function TrackDetail({ track, onClose }) {
 
         <div style={{ marginTop: 12, borderTop: "1px solid rgba(0,0,0,0.08)", paddingTop: 12 }}>
           <strong>📌 Descrizione</strong>
-          <div style={{ marginTop: 8, fontSize: 14, opacity: 0.9, lineHeight: 1.4 }}>{track.description || "—"}</div>
+          <div style={{ marginTop: 8, fontSize: 14, opacity: 0.9, lineHeight: 1.4 }}>
+            {displayDescription}
+          </div>
         </div>
 
         <div style={{ marginTop: 12, borderTop: "1px solid rgba(0,0,0,0.08)", paddingTop: 12 }}>
@@ -990,7 +1065,6 @@ function TrackDetail({ track, onClose }) {
         <div style={{ marginTop: 12, borderTop: "1px solid rgba(0,0,0,0.08)", paddingTop: 12 }}>
           <strong>🌤 Meteo</strong>
           {wxBox}
-
         </div>
       </div>
     </div>
