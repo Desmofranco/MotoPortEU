@@ -7,6 +7,7 @@
 // ✅ Loading skeleton
 // ✅ Dedup key stabile (id o name+start/end)
 // ✅ Meteo + Google Maps
+// ✅ Fallback coordinate intelligente per itinerari incompleti / OSM
 // =======================================================
 
 import React, { useEffect, useMemo, useState } from "react";
@@ -26,6 +27,101 @@ function openGoogleMapsSmart(url) {
   if (!url) return;
   if (isMobileNow()) window.location.href = url;
   else window.open(url, "_blank", "noopener,noreferrer");
+}
+
+function toNum(v) {
+  const n = Number(v);
+  return Number.isFinite(n) ? n : null;
+}
+
+function pairFrom(a, b) {
+  const lat = toNum(a);
+  const lon = toNum(b);
+  return Number.isFinite(lat) && Number.isFinite(lon) ? [lat, lon] : null;
+}
+
+function pickRoutePoint(route) {
+  // 1) start / end classici
+  if (Array.isArray(route?.start) && route.start.length >= 2) {
+    const p = pairFrom(route.start[0], route.start[1]);
+    if (p) return p;
+  }
+
+  if (Array.isArray(route?.end) && route.end.length >= 2) {
+    const p = pairFrom(route.end[0], route.end[1]);
+    if (p) return p;
+  }
+
+  // 2) center come array [lat, lon]
+  if (Array.isArray(route?.center) && route.center.length >= 2) {
+    const p = pairFrom(route.center[0], route.center[1]);
+    if (p) return p;
+  }
+
+  // 3) center object
+  {
+    const p = pairFrom(
+      route?.center?.lat ?? route?.center?.latitude,
+      route?.center?.lon ?? route?.center?.lng ?? route?.center?.longitude
+    );
+    if (p) return p;
+  }
+
+  // 4) coords object
+  {
+    const p = pairFrom(
+      route?.coords?.lat ?? route?.coords?.latitude,
+      route?.coords?.lon ?? route?.coords?.lng ?? route?.coords?.longitude
+    );
+    if (p) return p;
+  }
+
+  // 5) lat/lon diretti
+  {
+    const p = pairFrom(
+      route?.lat ?? route?.latitude,
+      route?.lon ?? route?.lng ?? route?.longitude
+    );
+    if (p) return p;
+  }
+
+  // 6) waypoint iniziale
+  if (Array.isArray(route?.waypoints) && route.waypoints.length) {
+    const w0 = route.waypoints[0];
+
+    if (Array.isArray(w0) && w0.length >= 2) {
+      const p = pairFrom(w0[0], w0[1]);
+      if (p) return p;
+    }
+
+    const p = pairFrom(
+      w0?.lat ?? w0?.latitude,
+      w0?.lon ?? w0?.lng ?? w0?.longitude
+    );
+    if (p) return p;
+  }
+
+  // 7) geometry.coordinates GeoJSON [lon, lat]
+  if (
+    Array.isArray(route?.geometry?.coordinates) &&
+    route.geometry.coordinates.length
+  ) {
+    const c0 = route.geometry.coordinates[0];
+
+    // LineString -> [lon, lat]
+    if (Array.isArray(c0) && c0.length >= 2 && !Array.isArray(c0[0])) {
+      const p = pairFrom(c0[1], c0[0]);
+      if (p) return p;
+    }
+
+    // MultiLineString -> [[lon, lat], ...]
+    if (Array.isArray(c0) && Array.isArray(c0[0]) && c0[0].length >= 2) {
+      const p = pairFrom(c0[0][1], c0[0][0]);
+      if (p) return p;
+    }
+  }
+
+  return null;
 }
 
 function latLonStr(p) {
@@ -50,24 +146,57 @@ function buildNavigateUrl(destination, travelmode = "driving") {
 function buildRouteKey(r) {
   const id = String(r?.id || "").trim();
   if (id) return `id:${id}`;
+
   const name = String(r?.name || "").trim().toLowerCase();
+
   const s = Array.isArray(r?.start)
     ? `${Number(r.start[0]).toFixed(5)},${Number(r.start[1]).toFixed(5)}`
     : "";
+
   const e = Array.isArray(r?.end)
     ? `${Number(r.end[0]).toFixed(5)},${Number(r.end[1]).toFixed(5)}`
     : "";
+
   return `n:${name}|${s}|${e}`;
 }
 
 function SkeletonLoading() {
   return (
-    <div style={{ marginTop: 12, padding: 14, borderRadius: 16, border: "1px solid rgba(0,0,0,0.10)", background: "rgba(0,0,0,0.03)" }}>
+    <div
+      style={{
+        marginTop: 12,
+        padding: 14,
+        borderRadius: 16,
+        border: "1px solid rgba(0,0,0,0.10)",
+        background: "rgba(0,0,0,0.03)",
+      }}
+    >
       <div style={{ fontSize: 16, fontWeight: 900 }}>Carico itinerari…</div>
       <div style={{ marginTop: 10, display: "grid", gap: 8 }}>
-        <div style={{ height: 12, background: "rgba(0,0,0,0.08)", borderRadius: 8, width: "70%" }} />
-        <div style={{ height: 12, background: "rgba(0,0,0,0.08)", borderRadius: 8, width: "55%" }} />
-        <div style={{ height: 12, background: "rgba(0,0,0,0.08)", borderRadius: 8, width: "80%" }} />
+        <div
+          style={{
+            height: 12,
+            background: "rgba(0,0,0,0.08)",
+            borderRadius: 8,
+            width: "70%",
+          }}
+        />
+        <div
+          style={{
+            height: 12,
+            background: "rgba(0,0,0,0.08)",
+            borderRadius: 8,
+            width: "55%",
+          }}
+        />
+        <div
+          style={{
+            height: 12,
+            background: "rgba(0,0,0,0.08)",
+            borderRadius: 8,
+            width: "80%",
+          }}
+        />
       </div>
     </div>
   );
@@ -99,6 +228,7 @@ export default function Routes() {
     async function run() {
       setLoading(true);
       setErr("");
+
       try {
         const data = await fetch("/data/routes.json", { cache: "no-store" })
           .then((r) => (r.ok ? r.json() : []))
@@ -109,6 +239,7 @@ export default function Routes() {
         // dedup
         const seen = new Set();
         const dedup = [];
+
         for (const r of arr) {
           const key = buildRouteKey(r);
           if (!key || seen.has(key)) continue;
@@ -122,6 +253,7 @@ export default function Routes() {
 
         const first = dedup[0] || null;
         const firstKey = first ? buildRouteKey(first) : null;
+
         setActiveKey((prev) => prev || firstKey);
         setSelected((prev) => prev || first);
         setMobileView("list");
@@ -134,13 +266,18 @@ export default function Routes() {
     }
 
     run();
+
     return () => {
       alive = false;
     };
   }, []);
 
   const countries = useMemo(() => {
-    const set = new Set(routes.map((r) => String(r.country || "").toUpperCase()).filter(Boolean));
+    const set = new Set(
+      routes
+        .map((r) => String(r.country || "").toUpperCase())
+        .filter(Boolean)
+    );
     return ["ALL", ...Array.from(set).sort()];
   }, [routes]);
 
@@ -150,12 +287,26 @@ export default function Routes() {
 
     if (query) {
       out = out.filter((r) => {
-        const blob = [r.name, r.region, r.country, r.description, r.bestSeason, r.pace].join(" ").toLowerCase();
+        const blob = [
+          r.name,
+          r.region,
+          r.country,
+          r.description,
+          r.bestSeason,
+          r.pace,
+        ]
+          .join(" ")
+          .toLowerCase();
+
         return blob.includes(query);
       });
     }
 
-    if (country !== "ALL") out = out.filter((r) => String(r.country || "").toUpperCase() === country);
+    if (country !== "ALL") {
+      out = out.filter(
+        (r) => String(r.country || "").toUpperCase() === country
+      );
+    }
 
     const sorter =
       {
@@ -171,7 +322,9 @@ export default function Routes() {
   // se selezione sparisce coi filtri: ripiega sul primo
   useEffect(() => {
     if (!filtered.length) return;
+
     const exists = filtered.some((r) => buildRouteKey(r) === activeKey);
+
     if (!exists) {
       const first = filtered[0];
       setActiveKey(buildRouteKey(first));
@@ -182,10 +335,12 @@ export default function Routes() {
 
   const active = useMemo(() => {
     if (!routes.length) return null;
+
     if (activeKey) {
       const found = routes.find((r) => buildRouteKey(r) === activeKey);
       if (found) return found;
     }
+
     return routes[0] || null;
   }, [routes, activeKey]);
 
@@ -201,14 +356,29 @@ export default function Routes() {
   };
 
   return (
-    <div className="routes-root" style={{ padding: 12, maxWidth: 1250, margin: "0 auto" }}>
-      {/* Header (nascosto nel dettaglio mobile) */}
+    <div
+      className="routes-root"
+      style={{ padding: 12, maxWidth: 1250, margin: "0 auto" }}
+    >
       {!showDetailMobile && (
         <>
-          <div style={{ display: "flex", justifyContent: "space-between", gap: 12, flexWrap: "wrap", alignItems: "baseline" }}>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              gap: 12,
+              flexWrap: "wrap",
+              alignItems: "baseline",
+            }}
+          >
             <div>
-              <h1 style={{ margin: 0, fontSize: 34, letterSpacing: -0.5 }}>Itinerari 📍</h1>
-              <div className="routes-subtitle" style={{ opacity: 0.75, marginTop: 6 }}>
+              <h1 style={{ margin: 0, fontSize: 34, letterSpacing: -0.5 }}>
+                Itinerari 📍
+              </h1>
+              <div
+                className="routes-subtitle"
+                style={{ opacity: 0.75, marginTop: 6 }}
+              >
                 Touring emozionale: mappa, meteo e Google Maps.
               </div>
             </div>
@@ -245,7 +415,11 @@ export default function Routes() {
               <select
                 value={country}
                 onChange={(e) => setCountry(e.target.value)}
-                style={{ padding: "10px 12px", borderRadius: 12, border: "1px solid rgba(0,0,0,0.15)" }}
+                style={{
+                  padding: "10px 12px",
+                  borderRadius: 12,
+                  border: "1px solid rgba(0,0,0,0.15)",
+                }}
               >
                 {countries.map((c) => (
                   <option key={c} value={c}>
@@ -260,7 +434,11 @@ export default function Routes() {
               <select
                 value={sortBy}
                 onChange={(e) => setSortBy(e.target.value)}
-                style={{ padding: "10px 12px", borderRadius: 12, border: "1px solid rgba(0,0,0,0.15)" }}
+                style={{
+                  padding: "10px 12px",
+                  borderRadius: 12,
+                  border: "1px solid rgba(0,0,0,0.15)",
+                }}
               >
                 <option value="rating">Rating (desc)</option>
                 <option value="distance">Distanza (desc)</option>
@@ -274,10 +452,18 @@ export default function Routes() {
       {loading ? (
         <SkeletonLoading />
       ) : err ? (
-        <div style={{ marginTop: 12, padding: 12, borderRadius: 16, background: "rgba(255,0,0,0.08)" }}>{err}</div>
+        <div
+          style={{
+            marginTop: 12,
+            padding: 12,
+            borderRadius: 16,
+            background: "rgba(255,0,0,0.08)",
+          }}
+        >
+          {err}
+        </div>
       ) : (
         <>
-          {/* Mobile detail full screen */}
           {showDetailMobile ? (
             <div style={{ marginTop: 10 }}>
               <div
@@ -313,17 +499,32 @@ export default function Routes() {
                   ← Indietro
                 </button>
 
-                <div style={{ fontWeight: 950, fontSize: 15, whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>
+                <div
+                  style={{
+                    fontWeight: 950,
+                    fontSize: 15,
+                    whiteSpace: "nowrap",
+                    overflow: "hidden",
+                    textOverflow: "ellipsis",
+                  }}
+                >
                   {selected.name}
                 </div>
               </div>
 
-              <div style={{ marginTop: 10, borderRadius: 18, overflow: "hidden", border: "1px solid rgba(0,0,0,0.10)", background: "white" }}>
+              <div
+                style={{
+                  marginTop: 10,
+                  borderRadius: 18,
+                  overflow: "hidden",
+                  border: "1px solid rgba(0,0,0,0.10)",
+                  background: "white",
+                }}
+              >
                 <RouteDetail route={selected} />
               </div>
             </div>
           ) : (
-            /* Desktop split + mobile list */
             <div style={{ marginTop: 12 }} className="routes-split">
               <div className="routes-list">
                 <div style={{ fontSize: 12, opacity: 0.7, marginBottom: 8 }}>
@@ -334,14 +535,32 @@ export default function Routes() {
                   {filtered.map((r) => {
                     const key = buildRouteKey(r);
                     const isActive = key === activeKey;
-                    return <RouteCard key={key} route={r} active={isActive} onSelect={() => selectRoute(r)} />;
+                    return (
+                      <RouteCard
+                        key={key}
+                        route={r}
+                        active={isActive}
+                        onSelect={() => selectRoute(r)}
+                      />
+                    );
                   })}
                 </div>
               </div>
 
               <div className="routes-detail">
-                <div style={{ borderRadius: 22, overflow: "hidden", border: "1px solid rgba(0,0,0,0.12)", background: "white" }}>
-                  {!active ? <div style={{ padding: 14 }}>Seleziona un itinerario.</div> : <RouteDetail route={active} />}
+                <div
+                  style={{
+                    borderRadius: 22,
+                    overflow: "hidden",
+                    border: "1px solid rgba(0,0,0,0.12)",
+                    background: "white",
+                  }}
+                >
+                  {!active ? (
+                    <div style={{ padding: 14 }}>Seleziona un itinerario.</div>
+                  ) : (
+                    <RouteDetail route={active} />
+                  )}
                 </div>
               </div>
             </div>
@@ -401,7 +620,9 @@ function RouteCard({ route, active, onSelect }) {
         borderRadius: 16,
         overflow: "hidden",
         width: "100%",
-        border: active ? "2px solid rgba(0,0,0,0.30)" : "1px solid rgba(0,0,0,0.10)",
+        border: active
+          ? "2px solid rgba(0,0,0,0.30)"
+          : "1px solid rgba(0,0,0,0.10)",
         background: "white",
         cursor: "pointer",
         WebkitTapHighlightColor: "transparent",
@@ -409,40 +630,95 @@ function RouteCard({ route, active, onSelect }) {
       }}
     >
       {/* MOBILE */}
-      <div className="route-card-mobile" style={{ display: "none", padding: 6, gap: 10, alignItems: "center" }}>
-        <div style={{ width: 46, height: 46, borderRadius: 12, overflow: "hidden", background: "rgba(0,0,0,0.05)", flex: "0 0 auto" }}>
-          <img src={photo} alt="" style={{ width: "100%", height: "100%", objectFit: "cover" }} loading="lazy" />
+      <div
+        className="route-card-mobile"
+        style={{ display: "none", padding: 6, gap: 10, alignItems: "center" }}
+      >
+        <div
+          style={{
+            width: 46,
+            height: 46,
+            borderRadius: 12,
+            overflow: "hidden",
+            background: "rgba(0,0,0,0.05)",
+            flex: "0 0 auto",
+          }}
+        >
+          <img
+            src={photo}
+            alt=""
+            style={{ width: "100%", height: "100%", objectFit: "cover" }}
+            loading="lazy"
+          />
         </div>
 
         <div style={{ minWidth: 0, flex: "1 1 auto" }}>
-          <div style={{ display: "flex", justifyContent: "space-between", gap: 8, alignItems: "start" }}>
-            <div style={{ fontWeight: 950, fontSize: 14, lineHeight: 1.15, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              gap: 8,
+              alignItems: "start",
+            }}
+          >
+            <div
+              style={{
+                fontWeight: 950,
+                fontSize: 14,
+                lineHeight: 1.15,
+                overflow: "hidden",
+                textOverflow: "ellipsis",
+                whiteSpace: "nowrap",
+              }}
+            >
               {route.country ? `${route.country} ` : ""}
               {route.name}
             </div>
-            <div style={{ fontSize: 11, opacity: 0.75, whiteSpace: "nowrap" }}>⭐ {Number(route.rating || 0).toFixed(1)}</div>
+            <div style={{ fontSize: 11, opacity: 0.75, whiteSpace: "nowrap" }}>
+              ⭐ {Number(route.rating || 0).toFixed(1)}
+            </div>
           </div>
 
-          <div style={{ marginTop: 2, fontSize: 11, opacity: 0.75, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
-            {route.region || "—"} · {route.bestSeason || "—"} · {route.distanceKm ? `${route.distanceKm} km` : ""}
+          <div
+            style={{
+              marginTop: 2,
+              fontSize: 11,
+              opacity: 0.75,
+              overflow: "hidden",
+              textOverflow: "ellipsis",
+              whiteSpace: "nowrap",
+            }}
+          >
+            {route.region || "—"} · {route.bestSeason || "—"} ·{" "}
+            {route.distanceKm ? `${route.distanceKm} km` : ""}
           </div>
         </div>
       </div>
 
       {/* DESKTOP */}
       <div className="route-card-desktop" style={{ display: "block" }}>
-        <div style={{ height: 130, backgroundImage: `url(${photo})`, backgroundSize: "cover", backgroundPosition: "center" }} />
+        <div
+          style={{
+            height: 130,
+            backgroundImage: `url(${photo})`,
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+          }}
+        />
         <div style={{ padding: 12 }}>
           <div style={{ display: "flex", justifyContent: "space-between", gap: 10 }}>
             <div style={{ fontWeight: 900, lineHeight: 1.15 }}>
               {route.country ? `${route.country} ` : ""}
               {route.name}
             </div>
-            <div style={{ fontSize: 12, opacity: 0.75, whiteSpace: "nowrap" }}>⭐ {Number(route.rating || 0).toFixed(1)}</div>
+            <div style={{ fontSize: 12, opacity: 0.75, whiteSpace: "nowrap" }}>
+              ⭐ {Number(route.rating || 0).toFixed(1)}
+            </div>
           </div>
 
           <div style={{ marginTop: 4, fontSize: 12, opacity: 0.75 }}>
-            {route.region || "—"} · {route.bestSeason || "—"} · {route.distanceKm ? `${route.distanceKm} km` : "—"}
+            {route.region || "—"} · {route.bestSeason || "—"} ·{" "}
+            {route.distanceKm ? `${route.distanceKm} km` : "—"}
           </div>
         </div>
       </div>
@@ -460,11 +736,15 @@ function RouteCard({ route, active, onSelect }) {
 function RouteDetail({ route }) {
   const photo = route.photo || FALLBACK_PHOTO;
 
-  const start = Array.isArray(route?.start) ? route.start : null;
-  const startNavUrl = start ? buildNavigateUrl(latLonStr(start), "driving") : null;
+  const navPoint = pickRoutePoint(route);
+  const startNavUrl = navPoint
+    ? buildNavigateUrl(latLonStr(navPoint), "driving")
+    : null;
 
   const [wx, setWx] = useState(null);
   const [wxBusy, setWxBusy] = useState(false);
+
+  const routeKey = buildRouteKey(route);
 
   useEffect(() => {
     let alive = true;
@@ -484,33 +764,67 @@ function RouteDetail({ route }) {
     }
 
     run();
+
     return () => {
       alive = false;
     };
-  }, [buildRouteKey(route)]);
+  }, [routeKey, route]);
 
   return (
     <>
       {/* Hero */}
-      <div style={{ position: "relative", height: 240, backgroundImage: `url(${photo})`, backgroundSize: "cover", backgroundPosition: "center" }}>
-        <div style={{ position: "absolute", inset: 0, background: "linear-gradient(180deg, rgba(0,0,0,0.10), rgba(0,0,0,0.76))" }} />
-        <div style={{ position: "absolute", left: 12, right: 12, bottom: 10, color: "white" }}>
+      <div
+        style={{
+          position: "relative",
+          height: 240,
+          backgroundImage: `url(${photo})`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+        }}
+      >
+        <div
+          style={{
+            position: "absolute",
+            inset: 0,
+            background:
+              "linear-gradient(180deg, rgba(0,0,0,0.10), rgba(0,0,0,0.76))",
+          }}
+        />
+        <div
+          style={{
+            position: "absolute",
+            left: 12,
+            right: 12,
+            bottom: 10,
+            color: "white",
+          }}
+        >
           <div style={{ fontSize: 12, opacity: 0.92 }}>
-            {route.country || "—"} · {route.region || "—"} · {route.bestSeason || "—"}
+            {route.country || "—"} · {route.region || "—"} ·{" "}
+            {route.bestSeason || "—"}
           </div>
-          <div style={{ fontSize: 26, fontWeight: 950, lineHeight: 1.05 }}>{route.name}</div>
+          <div style={{ fontSize: 26, fontWeight: 950, lineHeight: 1.05 }}>
+            {route.name}
+          </div>
 
           <div style={{ marginTop: 8, display: "flex", gap: 8, flexWrap: "wrap" }}>
-            <span style={pill("dark")}>⭐ {Number(route.rating || 0).toFixed(1)}</span>
-            <span style={pill("dark")}>📏 {route.distanceKm ? `${route.distanceKm} km` : "—"}</span>
-            <span style={pill("dark")}>🌀 curve {Number(route.curvesScore || 0)}/10</span>
-            <span style={pill("dark")}>🛣️ asfalto {Number(route.asphaltScore || 0)}/10</span>
+            <span style={pill("dark")}>
+              ⭐ {Number(route.rating || 0).toFixed(1)}
+            </span>
+            <span style={pill("dark")}>
+              📏 {route.distanceKm ? `${route.distanceKm} km` : "—"}
+            </span>
+            <span style={pill("dark")}>
+              🌀 curve {Number(route.curvesScore || 0)}/10
+            </span>
+            <span style={pill("dark")}>
+              🛣️ asfalto {Number(route.asphaltScore || 0)}/10
+            </span>
           </div>
         </div>
       </div>
 
       <div style={{ padding: 12 }}>
-        {/* ✅ SOLO 1 bottone: Avvia verso START (posizione attuale -> start) */}
         <button
           type="button"
           onClick={() => openGoogleMapsSmart(startNavUrl)}
@@ -524,69 +838,135 @@ function RouteDetail({ route }) {
             fontSize: 13,
             cursor: startNavUrl ? "pointer" : "not-allowed",
             fontWeight: 900,
+            opacity: startNavUrl ? 1 : 0.55,
           }}
-          title="Avvia navigazione verso l'inizio (usa la tua posizione automaticamente)"
+          title={
+            startNavUrl
+              ? "Avvia navigazione verso l'inizio (usa la tua posizione automaticamente)"
+              : "Coordinate itinerario non disponibili"
+          }
         >
           🧭 Avvia verso START
         </button>
 
-        <div style={{ marginTop: 12, borderTop: "1px solid rgba(0,0,0,0.08)", paddingTop: 12 }}>
+        <div
+          style={{
+            marginTop: 12,
+            borderTop: "1px solid rgba(0,0,0,0.08)",
+            paddingTop: 12,
+          }}
+        >
           <strong>📌 Descrizione</strong>
-          <div style={{ marginTop: 8, fontSize: 14, opacity: 0.9, lineHeight: 1.4 }}>{route.description || "—"}</div>
+          <div style={{ marginTop: 8, fontSize: 14, opacity: 0.9, lineHeight: 1.4 }}>
+            {route.description || "—"}
+          </div>
         </div>
 
-
-        <div style={{ marginTop: 12, borderTop: "1px solid rgba(0,0,0,0.08)", paddingTop: 12 }}>
+        <div
+          style={{
+            marginTop: 12,
+            borderTop: "1px solid rgba(0,0,0,0.08)",
+            paddingTop: 12,
+          }}
+        >
           <strong>🌤 Meteo</strong>
 
           {wxBusy ? (
-            <div style={{ marginTop: 10, padding: 12, borderRadius: 16, background: "rgba(0,0,0,0.04)" }}>Carico meteo…</div>
+            <div
+              style={{
+                marginTop: 10,
+                padding: 12,
+                borderRadius: 16,
+                background: "rgba(0,0,0,0.04)",
+              }}
+            >
+              Carico meteo…
+            </div>
           ) : !wx || !wx.ok ? (
-            <div style={{ marginTop: 10, padding: 12, borderRadius: 16, background: "rgba(0,0,0,0.04)" }}>{wx?.note || "Meteo non disponibile."}</div>
+            <div
+              style={{
+                marginTop: 10,
+                padding: 12,
+                borderRadius: 16,
+                background: "rgba(0,0,0,0.04)",
+              }}
+            >
+              {wx?.note || "Meteo non disponibile."}
+            </div>
           ) : (
             <div style={{ marginTop: 10, display: "grid", gap: 10 }}>
-              <div style={{ display: "flex", gap: 10, flexWrap: "wrap", alignItems: "center" }}>
+              <div
+                style={{
+                  display: "flex",
+                  gap: 10,
+                  flexWrap: "wrap",
+                  alignItems: "center",
+                }}
+              >
                 <span style={pill("light")}>
                   Condizione: <strong>{wx.worst}</strong>
                 </span>
+
                 {wx.temp != null ? (
                   <span style={pill("light")}>
-                    🌡 {wx.temp}° {wx.tempMin != null && wx.tempMax != null ? `(min ${wx.tempMin}° / max ${wx.tempMax}°)` : ""}
+                    🌡 {wx.temp}°{" "}
+                    {wx.tempMin != null && wx.tempMax != null
+                      ? `(min ${wx.tempMin}° / max ${wx.tempMax}°)`
+                      : ""}
                   </span>
                 ) : null}
-                {wx.windKmh != null ? <span style={pill("light")}>💨vento {wx.windKmh} km/h</span> : null}
+
+                {wx.windKmh != null ? (
+                  <span style={pill("light")}>💨 vento {wx.windKmh} km/h</span>
+                ) : null}
               </div>
+
               {wx.ride ? (
-  <div
-    style={{
-      padding: 12,
-      borderRadius: 14,
-      background:
-        wx.ride.level === "danger"
-          ? "rgba(255,0,0,0.08)"
-          : wx.ride.level === "warn"
-          ? "rgba(255,180,0,0.12)"
-          : "rgba(0,140,80,0.10)",
-      border:
-        wx.ride.level === "danger"
-          ? "1px solid rgba(255,0,0,0.16)"
-          : wx.ride.level === "warn"
-          ? "1px solid rgba(255,180,0,0.22)"
-          : "1px solid rgba(0,140,80,0.18)",
-    }}
-  >
-    <div style={{ fontWeight: 900, fontSize: 13 }}>
-      🏍 {wx.ride.label}
-    </div>
-    <div style={{ marginTop: 4, fontSize: 13, opacity: 0.85 }}>
-      {wx.ride.advice}
-    </div>
-  </div>
-) : null}
-              <div style={{ fontSize: 12, opacity: 0.7 }}>Aggiornato: {String(wx.updatedAt || "").slice(0, 16).replace("T", " ")}</div>
+                <div
+                  style={{
+                    padding: 12,
+                    borderRadius: 14,
+                    background:
+                      wx.ride.level === "danger"
+                        ? "rgba(255,0,0,0.08)"
+                        : wx.ride.level === "warn"
+                        ? "rgba(255,180,0,0.12)"
+                        : "rgba(0,140,80,0.10)",
+                    border:
+                      wx.ride.level === "danger"
+                        ? "1px solid rgba(255,0,0,0.16)"
+                        : wx.ride.level === "warn"
+                        ? "1px solid rgba(255,180,0,0.22)"
+                        : "1px solid rgba(0,140,80,0.18)",
+                  }}
+                >
+                  <div style={{ fontWeight: 900, fontSize: 13 }}>
+                    🏍 {wx.ride.label}
+                  </div>
+                  <div style={{ marginTop: 4, fontSize: 13, opacity: 0.85 }}>
+                    {wx.ride.advice}
+                  </div>
+                </div>
+              ) : null}
+
+              <div style={{ fontSize: 12, opacity: 0.7 }}>
+                Aggiornato: {String(wx.updatedAt || "").slice(0, 16).replace("T", " ")}
+              </div>
             </div>
           )}
         </div>
+
+        {!navPoint ? (
+          <div
+            style={{
+              marginTop: 10,
+              fontSize: 12,
+              opacity: 0.65,
+            }}
+          >
+            Nota: questo itinerario non ha coordinate start/end complete nel dataset.
+          </div>
+        ) : null}
       </div>
     </>
   );
