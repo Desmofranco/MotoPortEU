@@ -15,6 +15,41 @@ import AppShell from "./components/AppShell";
 import RequireAuth from "./components/RequireAuth";
 import Faq from "./pages/Faq";
 import Terms from "./pages/Terms";
+import React, { useEffect, useState } from "react";
+import { clearAuthSession, fetchMe, getStoredUser } from "./utils/auth";
+
+const [authUser, setAuthUser] = useState(getStoredUser());
+const [authReady, setAuthReady] = useState(false);
+
+useEffect(() => {
+  let mounted = true;
+
+  async function bootstrapAuth() {
+    try {
+      const me = await fetchMe();
+
+      if (mounted && me) {
+        localStorage.setItem("mp_user", JSON.stringify(me));
+        setAuthUser(me);
+      }
+    } catch (err) {
+      clearAuthSession();
+      if (mounted) {
+        setAuthUser(null);
+      }
+    } finally {
+      if (mounted) {
+        setAuthReady(true);
+      }
+    }
+  }
+
+  bootstrapAuth();
+
+  return () => {
+    mounted = false;
+  };
+}, []);
 export default function App() {
   return (
     <BrowserRouter>
