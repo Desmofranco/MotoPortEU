@@ -1314,51 +1314,54 @@ export default function Map() {
     setActiveId(payload.id);
   };
 
-  const doSnap = async () => {
-    if (!points || points.length < 2) return alert("Aggiungi almeno 2 punti.");
+const doSnap = async () => {
+  if (!points || points.length < 2) {
+    return alert("Aggiungi almeno 2 punti.");
+  }
 
-    try {
-      const routeInput = toLatLngObjects(points);
-      const snapped = await snapPoints(routeInput);
-      const built = await buildRiderRoute(snapped, {
-        meta: {
-          source: "Map.jsx",
-          rideProfile,
-        },
-      });
+  try {
+    const routeInput = toLatLngObjects(points);
 
-      const builtRoute = built?.route;
-      const line = toPointPairsFromEngineGeometry(builtRoute?.geometry || []);
-      const firstLeg = builtRoute?.legs?.[0];
-      const steps =
-        (firstLeg?.steps || []).map((s) => ({
-          distanceKm: Number((s.distanceMeters || 0) / 1000),
-          durationMin: Number((s.durationSeconds || 0) / 60),
-          name: s.name || "",
-          instruction:
-            s?.maneuver?.modifier
-              ? `${s.maneuver.type || "Procedi"} ${s.maneuver.modifier || ""}`.trim()
-              : s?.maneuver?.type || "Procedi",
-        })) || [];
+    const built = await buildRiderRoute(routeInput, {
+      meta: {
+        source: "Map.jsx",
+        rideProfile,
+      },
+    });
 
-      if (!line?.length) {
-        alert("Snap non riuscito. Riprova.");
-        return;
-      }
+    const builtRoute = built?.route;
+    const line = toPointPairsFromEngineGeometry(builtRoute?.geometry || []);
+    const firstLeg = builtRoute?.legs?.[0];
 
-      setSnappedLine(line);
-      setRouteMeta({
-        distanceKm: Number(builtRoute?.distanceKm || 0),
-        durationMin: Number(builtRoute?.durationMin || 0),
-        steps: steps.slice(0, 8),
-      });
-    } catch (err) {
-      if (err?.name !== "AbortError") {
-        alert("Snap non disponibile ora. Riprova tra poco.");
-      }
+    const steps =
+      (firstLeg?.steps || []).map((s) => ({
+        distanceKm: Number((s.distanceMeters || 0) / 1000),
+        durationMin: Number((s.durationSeconds || 0) / 60),
+        name: s.name || "",
+        instruction:
+          s?.maneuver?.modifier
+            ? `${s.maneuver.type || "Procedi"} ${s.maneuver.modifier || ""}`.trim()
+            : s?.maneuver?.type || "Procedi",
+      })) || [];
+
+    if (!line?.length) {
+      alert("Snap non riuscito. Riprova.");
+      return;
     }
-  };
 
+    setSnappedLine(line);
+    setRouteMeta({
+      distanceKm: Number(builtRoute?.distanceKm || 0),
+      durationMin: Number(builtRoute?.durationMin || 0),
+      steps: steps.slice(0, 8),
+    });
+  } catch (err) {
+    if (err?.name !== "AbortError") {
+      console.error("Snap Rider Engine error:", err);
+      alert(err?.message || "Snap non disponibile ora. Riprova tra poco.");
+    }
+  }
+};
   const exportGpx = () => {
     const base = snapEnabled && snappedLine?.length >= 2 ? snappedLine : points;
     if (!base || base.length < 2) return alert("Nessun percorso da esportare.");
