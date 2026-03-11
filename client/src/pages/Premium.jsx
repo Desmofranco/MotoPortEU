@@ -1,29 +1,122 @@
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useState } from "react";
 
 const API_URL =
   import.meta.env.VITE_API_URL || "https://motoporteu.onrender.com";
 
 export default function Premium() {
   const [loading, setLoading] = useState(false);
+  const [checking, setChecking] = useState(true);
+  const [status, setStatus] = useState("");
 
-  const user = useMemo(() => {
+  const [user, setUser] = useState(() => {
     try {
       return JSON.parse(localStorage.getItem("user") || "null");
     } catch {
       return null;
     }
-  }, []);
+  });
 
-  const isPremium = !!(user?.isPremium || user?.passActive || user?.role === "premium");
+  const token =
+    localStorage.getItem("token") || localStorage.getItem("mp_token");
+
+  const isPremium = !!(
+    user?.isPremium ||
+    user?.passActive ||
+    user?.role === "premium"
+  );
+
+  useEffect(() => {
+    let mounted = true;
+
+    const syncUser = async () => {
+      if (!token) {
+        if (mounted) {
+          setChecking(false);
+          setStatus("");
+        }
+        return;
+      }
+
+      try {
+        // 1) prima tentiamo refresh-token per ottenere JWT aggiornato
+        const refreshRes = await fetch(`${API_URL}/api/auth/refresh-token`, {
+          method: "GET",
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+
+        const refreshData = await refreshRes.json().catch(() => null);
+
+        if (refreshRes.ok && refreshData?.token && refreshData?.user) {
+          if (!mounted) return;
+
+          localStorage.setItem("token", refreshData.token);
+          localStorage.setItem("user", JSON.stringify(refreshData.user));
+          localStorage.setItem("mp_token", refreshData.token);
+          localStorage.setItem("mp_user", JSON.stringify(refreshData.user));
+
+          setUser(refreshData.user);
+          setStatus("");
+          setChecking(false);
+          return;
+        }
+
+        // 2) fallback su /me
+        const meRes = await fetch(`${API_URL}/api/auth/me`, {
+          method: "GET",
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+
+        const meData = await meRes.json().catch(() => null);
+
+        if (meRes.ok && meData?.user) {
+          if (!mounted) return;
+
+          localStorage.setItem("user", JSON.stringify(meData.user));
+          localStorage.setItem("mp_user", JSON.stringify(meData.user));
+          setUser(meData.user);
+          setStatus("");
+        } else {
+          if (!mounted) return;
+          setStatus("Non è stato possibile verificare lo stato del Pass.");
+        }
+      } catch (err) {
+        console.error("Premium sync error:", err);
+        if (mounted) {
+          setStatus("Errore di connessione durante la verifica del profilo.");
+        }
+      } finally {
+        if (mounted) {
+          setChecking(false);
+        }
+      }
+    };
+
+    syncUser();
+
+    return () => {
+      mounted = false;
+    };
+  }, [token]);
 
   const handleCheckout = async () => {
     try {
       setLoading(true);
+      setStatus("");
 
-      const token = localStorage.getItem("token");
       if (!token) {
-        alert("Devi prima registrarti o effettuare il login.");
-        window.location.href = "/register";
+        setStatus("Devi prima registrarti o effettuare il login.");
+        setTimeout(() => {
+          window.location.href = "/register";
+        }, 700);
+        return;
+      }
+
+      if (isPremium) {
+        setStatus("Il tuo Pass è già attivo.");
         return;
       }
 
@@ -34,18 +127,21 @@ export default function Premium() {
         },
       });
 
-      const data = await res.json();
+      const data = await res.json().catch(() => null);
 
       if (!res.ok) {
         throw new Error(data?.error || "Errore nell'avvio del pagamento");
       }
 
-      if (data.url) {
+      if (data?.url) {
         window.location.href = data.url;
+        return;
       }
+
+      throw new Error("URL checkout non ricevuto");
     } catch (err) {
-      console.error(err);
-      alert(err.message || "Errore Stripe");
+      console.error("Stripe checkout error:", err);
+      setStatus(err.message || "Errore Stripe");
     } finally {
       setLoading(false);
     }
@@ -75,7 +171,11 @@ export default function Premium() {
           <li>✅ Supporto diretto allo sviluppo della piattaforma</li>
         </ul>
 
-        {isPremium ? (
+        {checking ? (
+          <div style={styles.infoBox}>
+            Verifica stato Pass in corso...
+          </div>
+        ) : isPremium ? (
           <div style={styles.successBox}>
             ✅ Pass attivo. Puoi entrare nell’app.
             <div style={{ marginTop: 14 }}>
@@ -97,6 +197,8 @@ export default function Premium() {
             {loading ? "Reindirizzamento a Stripe..." : "Attiva Pass"}
           </button>
         )}
+
+        {!!status && <div style={styles.statusBox}>{status}</div>}
       </div>
     </div>
   );
@@ -180,6 +282,15 @@ const styles = {
     background: "linear-gradient(90deg, #f59e0b, #fb7185)",
     color: "#111827",
   },
+  infoBox: {
+    marginTop: 20,
+    padding: 18,
+    borderRadius: 18,
+    background: "rgba(255,255,255,0.10)",
+    border: "1px solid rgba(255,255,255,0.14)",
+    textAlign: "center",
+    fontWeight: 700,
+  },
   successBox: {
     marginTop: 20,
     padding: 18,
@@ -197,5 +308,14 @@ const styles = {
     padding: "12px 18px",
     borderRadius: 14,
     fontWeight: 900,
+  },
+  statusBox: {
+    marginTop: 18,
+    padding: 14,
+    borderRadius: 14,
+    background: "rgba(255,255,255,0.08)",
+    border: "1px solid rgba(255,255,255,0.10)",
+    fontSize: 14,
+    opacity: 0.95,
   },
 };
