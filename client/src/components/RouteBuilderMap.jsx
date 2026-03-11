@@ -31,78 +31,6 @@ function lineKey(arr) {
   ].join("-");
 }
 
-function FitOrFollow({ center, zoom, followGps, gps, userInteractingRef }) {
-  const map = useMap();
-  const lastGpsRef = useRef(null);
-
-  useEffect(() => {
-    if (!map) return;
-
-    if (followGps && gps && !userInteractingRef.current) {
-      const gpsKey = `${gps[0].toFixed(5)}-${gps[1].toFixed(5)}`;
-      if (lastGpsRef.current === gpsKey) return;
-      lastGpsRef.current = gpsKey;
-
-      map.setView(gps, Math.max(map.getZoom(), 13), { animate: true });
-      return;
-    }
-  }, [map, center, zoom, followGps, gps, userInteractingRef]);
-
-  return null;
-}
-
-function FitLineBounds({ line, enabled, userInteractingRef, resetFitSignal }) {
-  const map = useMap();
-  const lastFitKeyRef = useRef("");
-
-  useEffect(() => {
-    if (!enabled) return;
-    if (!map) return;
-    if (!line || line.length < 2) return;
-    if (userInteractingRef.current) return;
-
-    const key = `${resetFitSignal}-${lineKey(line)}`;
-    if (lastFitKeyRef.current === key) return;
-
-    lastFitKeyRef.current = key;
-
-    try {
-      map.fitBounds(line, { padding: [30, 30] });
-    } catch {
-      // ignore
-    }
-  }, [map, enabled, line, userInteractingRef, resetFitSignal]);
-
-  return null;
-}
-
-function UserInteractionWatcher({ userInteractingRef }) {
-  useMapEvents({
-    dragstart() {
-      userInteractingRef.current = true;
-    },
-    zoomstart() {
-      userInteractingRef.current = true;
-    },
-    movestart() {
-      userInteractingRef.current = true;
-    },
-  });
-
-  return null;
-}
-
-function ClickToAdd({ enabled, onAddPoint }) {
-  useMapEvents({
-    click(e) {
-      if (!enabled) return;
-      const { lat, lng } = e.latlng;
-      onAddPoint?.([lat, lng]);
-    },
-  });
-  return null;
-}
-
 function polyKey(prefix, arr) {
   if (!arr || arr.length < 2) return `${prefix}-empty`;
   const a = arr[0];
@@ -161,6 +89,87 @@ function getPointIcon(idx, total) {
   return createDivIcon(String(idx), "#0f172a");
 }
 
+function FitOrFollow({ followGps, gps, userInteractingRef }) {
+  const map = useMap();
+  const lastGpsRef = useRef(null);
+
+  useEffect(() => {
+    if (!map) return;
+    if (!followGps) return;
+    if (!gps || gps.length < 2) return;
+    if (userInteractingRef.current) return;
+
+    const gpsKey = `${gps[0].toFixed(5)}-${gps[1].toFixed(5)}`;
+    if (lastGpsRef.current === gpsKey) return;
+    lastGpsRef.current = gpsKey;
+
+    try {
+      map.setView(gps, Math.max(map.getZoom(), 13), { animate: true });
+    } catch {
+      // ignore
+    }
+  }, [map, followGps, gps, userInteractingRef]);
+
+  return null;
+}
+
+function FitLineBounds({ line, enabled, userInteractingRef, resetFitSignal }) {
+  const map = useMap();
+  const lastFitKeyRef = useRef("");
+
+  useEffect(() => {
+    if (!enabled) return;
+    if (!map) return;
+    if (!line || line.length < 2) return;
+    if (userInteractingRef.current) return;
+
+    const key = `${resetFitSignal}-${lineKey(line)}`;
+    if (lastFitKeyRef.current === key) return;
+
+    lastFitKeyRef.current = key;
+
+    try {
+      map.fitBounds(line, { padding: [30, 30] });
+    } catch {
+      // ignore
+    }
+  }, [map, enabled, line, userInteractingRef, resetFitSignal]);
+
+  return null;
+}
+
+function UserInteractionWatcher({
+  userInteractingRef,
+  followGps,
+  onUserMapInteract,
+}) {
+  useMapEvents({
+    dragstart(e) {
+      if (!e?.originalEvent) return;
+      userInteractingRef.current = true;
+      if (followGps) onUserMapInteract?.();
+    },
+    zoomstart(e) {
+      if (!e?.originalEvent) return;
+      userInteractingRef.current = true;
+      if (followGps) onUserMapInteract?.();
+    },
+  });
+
+  return null;
+}
+
+function ClickToAdd({ enabled, onAddPoint }) {
+  useMapEvents({
+    click(e) {
+      if (!enabled) return;
+      const { lat, lng } = e.latlng;
+      onAddPoint?.([lat, lng]);
+    },
+  });
+  return null;
+}
+
 export default function RouteBuilderMap({
   points = [],
   snappedLine = null,
@@ -169,6 +178,7 @@ export default function RouteBuilderMap({
   followGps = true,
   isAddingEnabled = true,
   onAddPoint,
+  onUserMapInteract,
   center = [45.4642, 9.19],
   zoom = 6,
   height = 520,
@@ -189,7 +199,7 @@ export default function RouteBuilderMap({
 
   useEffect(() => {
     userInteractingRef.current = false;
-  }, [resetFitSignal]);
+  }, [resetFitSignal, followGps]);
 
   return (
     <div
@@ -202,17 +212,23 @@ export default function RouteBuilderMap({
         position: "relative",
       }}
     >
-      <MapContainer center={center} zoom={zoom} style={{ width: "100%", height: "100%" }}>
+      <MapContainer
+        center={center}
+        zoom={zoom}
+        style={{ width: "100%", height: "100%" }}
+      >
         <TileLayer
           attribution="&copy; OpenStreetMap contributors"
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
 
-        <UserInteractionWatcher userInteractingRef={userInteractingRef} />
+        <UserInteractionWatcher
+          userInteractingRef={userInteractingRef}
+          followGps={followGps}
+          onUserMapInteract={onUserMapInteract}
+        />
 
         <FitOrFollow
-          center={center}
-          zoom={zoom}
           followGps={followGps}
           gps={gps}
           userInteractingRef={userInteractingRef}
@@ -243,7 +259,11 @@ export default function RouteBuilderMap({
           >
             <Popup>
               <strong>
-                {idx === 0 ? "Start" : idx === points.length - 1 ? "Arrivo" : `Tappa ${idx}`}
+                {idx === 0
+                  ? "Start"
+                  : idx === points.length - 1
+                  ? "Arrivo"
+                  : `Tappa ${idx}`}
               </strong>
               <br />
               {p[0].toFixed(5)}, {p[1].toFixed(5)}
@@ -252,11 +272,7 @@ export default function RouteBuilderMap({
         ))}
 
         {poiMarkers.map((poi) => (
-          <Marker
-            key={poi.id}
-            position={[poi.lat, poi.lon]}
-            icon={poiIcon}
-          >
+          <Marker key={poi.id} position={[poi.lat, poi.lon]} icon={poiIcon}>
             <Popup>
               <strong>{poi.name}</strong>
               <br />
@@ -268,7 +284,8 @@ export default function RouteBuilderMap({
               ) : null}
               {poi.meta ? (
                 <>
-                  <br />{poi.meta}
+                  <br />
+                  {poi.meta}
                 </>
               ) : null}
             </Popup>
@@ -290,7 +307,8 @@ export default function RouteBuilderMap({
                   <br />🌡 {Math.round(rp.weather.temp || 0)}°
                   <br />🌬 {Math.round(rp.weather.windKmh || 0)} km/h
                   <br />🌧 {rp.weather.rainMm || 0} mm
-                  <br />{rp.weather.desc || ""}
+                  <br />
+                  {rp.weather.desc || ""}
                 </>
               ) : null}
             </Popup>

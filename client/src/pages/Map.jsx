@@ -18,6 +18,7 @@
 // ✅ Aggiunta POI alla rotta con un click
 // ✅ Duplicazione itinerari + ricerca itinerari salvati
 // ✅ Stats sessioni + ultimo utilizzo
+// ✅ FIX: follow GPS separato dall'interazione manuale utente
 // =======================================================
 
 import React, { useEffect, useMemo, useRef, useState } from "react";
@@ -336,44 +337,44 @@ function analyzeRiderWeather(wx) {
   }
 
   const warnings = [];
-  let points = 100;
+  let pointsVal = 100;
 
   if (wx.rainMm >= 0.2) {
     warnings.push("Possibile strada bagnata");
-    points -= 24;
+    pointsVal -= 24;
   }
   if (wx.rainMm >= 1) {
     warnings.push("Pioggia concreta");
-    points -= 18;
+    pointsVal -= 18;
   }
   if (wx.windKmh >= 30) {
     warnings.push("Vento laterale forte");
-    points -= 22;
+    pointsVal -= 22;
   }
   if (wx.windKmh >= 45) {
     warnings.push("Vento molto forte");
-    points -= 20;
+    pointsVal -= 20;
   }
   if (wx.temp <= 4) {
     warnings.push("Freddo intenso");
-    points -= 16;
+    pointsVal -= 16;
   }
   if (wx.temp >= 32) {
     warnings.push("Caldo elevato");
-    points -= 14;
+    pointsVal -= 14;
   }
   if (wx.clouds >= 90 && wx.rainMm > 0) {
     warnings.push("Visibilità peggiore");
-    points -= 8;
+    pointsVal -= 8;
   }
 
-  if (points >= 85) {
+  if (pointsVal >= 85) {
     return { score: "A", label: "Ottimo per guidare", color: "#15803d", warnings, severity: 1 };
   }
-  if (points >= 68) {
+  if (pointsVal >= 68) {
     return { score: "B", label: "Buono con attenzione", color: "#65a30d", warnings, severity: 2 };
   }
-  if (points >= 48) {
+  if (pointsVal >= 48) {
     return { score: "C", label: "Attenzione rider", color: "#ca8a04", warnings, severity: 3 };
   }
   return { score: "D", label: "Condizioni sfavorevoli", color: "#dc2626", warnings, severity: 4 };
@@ -697,7 +698,6 @@ export default function Map() {
     snapping: engineSnapping,
     error: engineError,
     buildRoute: buildRiderRoute,
-    snapPoints,
     reset: resetEngine,
   } = useRouteEngine();
 
@@ -1051,6 +1051,7 @@ export default function Map() {
   useEffect(() => {
     if (!gpsOn) {
       setGps(null);
+      setFollowGps(true);
       setNavOn(false);
       setRunOn(false);
       setGpsTrail([]);
@@ -1059,6 +1060,8 @@ export default function Map() {
       lastRunTrackRef.current = null;
       return;
     }
+
+    setFollowGps(true);
 
     if (!("geolocation" in navigator)) {
       alert("GPS non disponibile su questo dispositivo/browser.");
@@ -1173,6 +1176,12 @@ export default function Map() {
   const resetTrail = () => {
     setGpsTrail(gps ? [gps] : []);
     lastTrailPointRef.current = gps || null;
+  };
+
+  const centerOnMe = () => {
+    if (!gpsOn) return alert("Attiva prima il GPS.");
+    if (!gps) return alert("Aspetta il fix GPS.");
+    setFollowGps(true);
   };
 
   const newRoute = () => {
@@ -1314,54 +1323,55 @@ export default function Map() {
     setActiveId(payload.id);
   };
 
-const doSnap = async () => {
-  if (!points || points.length < 2) {
-    return alert("Aggiungi almeno 2 punti.");
-  }
-
-  try {
-    const routeInput = toLatLngObjects(points);
-
-    const built = await buildRiderRoute(routeInput, {
-      meta: {
-        source: "Map.jsx",
-        rideProfile,
-      },
-    });
-
-    const builtRoute = built?.route;
-    const line = toPointPairsFromEngineGeometry(builtRoute?.geometry || []);
-    const firstLeg = builtRoute?.legs?.[0];
-
-    const steps =
-      (firstLeg?.steps || []).map((s) => ({
-        distanceKm: Number((s.distanceMeters || 0) / 1000),
-        durationMin: Number((s.durationSeconds || 0) / 60),
-        name: s.name || "",
-        instruction:
-          s?.maneuver?.modifier
-            ? `${s.maneuver.type || "Procedi"} ${s.maneuver.modifier || ""}`.trim()
-            : s?.maneuver?.type || "Procedi",
-      })) || [];
-
-    if (!line?.length) {
-      alert("Snap non riuscito. Riprova.");
-      return;
+  const doSnap = async () => {
+    if (!points || points.length < 2) {
+      return alert("Aggiungi almeno 2 punti.");
     }
 
-    setSnappedLine(line);
-    setRouteMeta({
-      distanceKm: Number(builtRoute?.distanceKm || 0),
-      durationMin: Number(builtRoute?.durationMin || 0),
-      steps: steps.slice(0, 8),
-    });
-  } catch (err) {
-    if (err?.name !== "AbortError") {
-      console.error("Snap Rider Engine error:", err);
-      alert(err?.message || "Snap non disponibile ora. Riprova tra poco.");
+    try {
+      const routeInput = toLatLngObjects(points);
+
+      const built = await buildRiderRoute(routeInput, {
+        meta: {
+          source: "Map.jsx",
+          rideProfile,
+        },
+      });
+
+      const builtRoute = built?.route;
+      const line = toPointPairsFromEngineGeometry(builtRoute?.geometry || []);
+      const firstLeg = builtRoute?.legs?.[0];
+
+      const steps =
+        (firstLeg?.steps || []).map((s) => ({
+          distanceKm: Number((s.distanceMeters || 0) / 1000),
+          durationMin: Number((s.durationSeconds || 0) / 60),
+          name: s.name || "",
+          instruction:
+            s?.maneuver?.modifier
+              ? `${s.maneuver.type || "Procedi"} ${s.maneuver.modifier || ""}`.trim()
+              : s?.maneuver?.type || "Procedi",
+        })) || [];
+
+      if (!line?.length) {
+        alert("Snap non riuscito. Riprova.");
+        return;
+      }
+
+      setSnappedLine(line);
+      setRouteMeta({
+        distanceKm: Number(builtRoute?.distanceKm || 0),
+        durationMin: Number(builtRoute?.durationMin || 0),
+        steps: steps.slice(0, 8),
+      });
+    } catch (err) {
+      if (err?.name !== "AbortError") {
+        console.error("Snap Rider Engine error:", err);
+        alert(err?.message || "Snap non disponibile ora. Riprova tra poco.");
+      }
     }
-  }
-};
+  };
+
   const exportGpx = () => {
     const base = snapEnabled && snappedLine?.length >= 2 ? snappedLine : points;
     if (!base || base.length < 2) return alert("Nessun percorso da esportare.");
@@ -1506,7 +1516,12 @@ const doSnap = async () => {
               {snapEnabled ? "🛣️ Snap ON" : "🧩 Snap OFF"}
             </button>
 
-            <button style={S.btnGhost} onClick={() => setGpsOn((v) => !v)}>
+            <button
+              style={S.btnGhost}
+              onClick={() => {
+                setGpsOn((v) => !v);
+              }}
+            >
               {gpsOn ? "📍 GPS ON" : "📍 GPS OFF"}
             </button>
 
@@ -1516,6 +1531,14 @@ const doSnap = async () => {
               disabled={!gpsOn}
             >
               {followGps ? "🧭 Follow ON" : "🧭 Follow OFF"}
+            </button>
+
+            <button
+              style={S.btnPrimary}
+              onClick={centerOnMe}
+              disabled={!gpsOn || !gps}
+            >
+              🎯 Centra su di me
             </button>
 
             <button
@@ -1603,6 +1626,9 @@ const doSnap = async () => {
 
               <div style={{ marginTop: 10, display: "flex", gap: 8, flexWrap: "wrap", alignItems: "center" }}>
                 <span style={S.pill}>🟦 Scia: {gpsTrail.length}</span>
+                <span style={S.pill}>
+                  {gpsOn ? "📍 GPS attivo" : "📍 GPS spento"} • {followGps ? "🧭 Follow attivo" : "🖐️ Mappa libera"}
+                </span>
                 <button style={S.btnGhost} onClick={resetTrail} disabled={!gpsOn}>
                   🧽 Reset scia
                 </button>
@@ -1719,9 +1745,13 @@ const doSnap = async () => {
                 <button style={S.btnDanger} onClick={deleteRoute} disabled={!activeRoute}>
                   🗑️ Elimina
                 </button>
-<button style={S.btnGhost} onClick={doSnap} disabled={engineLoading || engineSnapping || points.length < 2}>
-  {engineLoading || engineSnapping ? "🧠 Analisi rider..." : "🧠 Analizza con Rider Engine"}
-</button>
+                <button
+                  style={S.btnGhost}
+                  onClick={doSnap}
+                  disabled={engineLoading || engineSnapping || points.length < 2}
+                >
+                  {engineLoading || engineSnapping ? "🧠 Analisi rider..." : "🧠 Analizza con Rider Engine"}
+                </button>
                 <button style={S.btnGhost} onClick={openGoogleNav} disabled={points.length < 2}>
                   🧭 Apri navigazione
                 </button>
@@ -1866,8 +1896,8 @@ const doSnap = async () => {
                 {weatherLoading
                   ? "Aggiornamento meteo in corso..."
                   : OWM_KEY
-                    ? "Valutazione rider calcolata su partenza, metà rotta e arrivo."
-                    : "Per attivare il meteo imposta VITE_OWM_KEY su Render/Vite."}
+                  ? "Valutazione rider calcolata su partenza, metà rotta e arrivo."
+                  : "Per attivare il meteo imposta VITE_OWM_KEY su Render/Vite."}
               </div>
             </div>
 
@@ -2108,7 +2138,7 @@ const doSnap = async () => {
                 Il Rider Route Engine costruisce la rotta reale e calcola il profilo rider. Il meteo avanzato One Call 3.0 sarà il prossimo step.
               </div>
               <div style={{ fontSize: 13, opacity: 0.78, marginTop: 8 }}>
-                Per test veloci GPX: <code>localStorage["{PASS_KEY}"]="true"</code>
+                Per test veloci GPX: <code>{`localStorage["${PASS_KEY}"]="true"`}</code>
               </div>
             </div>
           </div>
@@ -2127,6 +2157,9 @@ const doSnap = async () => {
                 setRouteMeta({ distanceKm: 0, durationMin: 0, steps: [] });
                 resetEngine();
               }}
+              onUserMapInteract={() => {
+                if (gpsOn && followGps) setFollowGps(false);
+              }}
               center={mapCenter}
               zoom={mapZoom}
               height={isLg ? 780 : 540}
@@ -2136,9 +2169,11 @@ const doSnap = async () => {
             />
 
             <div style={{ ...S.card, padding: 12, fontSize: 13, opacity: 0.84 }}>
-<b>Tip:</b> scrivi una città e premi <b>Invio</b>. Usa <b>Rider Engine</b> per calcolare rotta reale, score e highlights.
+              <b>Tip:</b> scrivi una città e premi <b>Invio</b>. Usa <b>Rider Engine</b> per calcolare rotta reale, score e highlights.
               <br />
               <b>Rider Evolution:</b> cockpit rider + scoring + waypoint automatici + Rider Radar mostrati anche sulla mappa.
+              <br />
+              <b>Follow GPS:</b> se muovi la mappa a mano, il follow si disattiva. Usa <b>🎯 Centra su di me</b> per riattivarlo.
             </div>
           </div>
         </div>
