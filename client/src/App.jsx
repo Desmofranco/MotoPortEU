@@ -16,6 +16,7 @@ import Terms from "./pages/Terms";
 
 import AppShell from "./components/AppShell";
 import RequireAuth from "./components/RequireAuth";
+import InstallPrompt from "./components/InstallPrompt";
 
 import { clearAuthSession, fetchMe, getStoredUser } from "./utils/auth";
 
@@ -62,32 +63,36 @@ export default function App() {
   }
 
   return (
-    <BrowserRouter>
-      <Routes>
-        {/* Public */}
-        <Route path="/" element={<Home authUser={authUser} />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
+    <>
+      <BrowserRouter>
+        <Routes>
+          {/* Public */}
+          <Route path="/" element={<Home authUser={authUser} />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
 
-        {/* Private */}
-        <Route
-          element={
-            <RequireAuth>
-              <AppShell authUser={authUser} />
-            </RequireAuth>
-          }
-        >
-          <Route path="/garage" element={<Garage />} />
-          <Route path="/suppliers" element={<Suppliers />} />
-          <Route path="/supplier/:id" element={<SupplierPage />} />
-          <Route path="/routes" element={<RoutesPage />} />
-          <Route path="/tracks" element={<Tracks />} />
-          <Route path="/map" element={<Map />} />
-          <Route path="/my-tracks/:id" element={<MyTrackDetail />} />
-          <Route path="/faq" element={<Faq />} />
-          <Route path="/terms" element={<Terms />} />
-        </Route>
-      </Routes>
-    </BrowserRouter>
+          {/* Private */}
+          <Route
+            element={
+              <RequireAuth>
+                <AppShell authUser={authUser} />
+              </RequireAuth>
+            }
+          >
+            <Route path="/garage" element={<Garage />} />
+            <Route path="/suppliers" element={<Suppliers />} />
+            <Route path="/supplier/:id" element={<SupplierPage />} />
+            <Route path="/routes" element={<RoutesPage />} />
+            <Route path="/tracks" element={<Tracks />} />
+            <Route path="/map" element={<Map />} />
+            <Route path="/my-tracks/:id" element={<MyTrackDetail />} />
+            <Route path="/faq" element={<Faq />} />
+            <Route path="/terms" element={<Terms />} />
+          </Route>
+        </Routes>
+      </BrowserRouter>
+
+      <InstallPrompt />
+    </>
   );
 }
