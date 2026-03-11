@@ -5,53 +5,87 @@ export default function AppShell({ children }) {
   const location = useLocation();
 
   const nav = [
-    { path: "/", label: "Home", icon: "🏠" },
-    { path: "/routes", label: "Itinerari", icon: "🗺️" },
-    { path: "/tracks", label: "Circuiti", icon: "🏁" },
-    { path: "/map", label: "Mappa", icon: "🧭" },
-    { path: "/garage", label: "Garage", icon: "🔧" }
+    { path: "/", label: "Home" },
+    { path: "/routes", label: "Itinerari" },
+    { path: "/tracks", label: "Circuiti" },
+    { path: "/map", label: "Mappa" },
+    { path: "/garage", label: "Garage" }
   ];
+
+  const isActive = (path) =>
+    path === "/"
+      ? location.pathname === "/"
+      : location.pathname === path || location.pathname.startsWith(path + "/");
 
   return (
     <div style={{ minHeight: "100vh", background: "#0b1428", color: "white" }}>
-      
-      <main style={{ paddingBottom: 90 }}>
-        {children}
-      </main>
-
-      <nav
+      <header
         style={{
-          position: "fixed",
-          bottom: 0,
-          left: 0,
-          right: 0,
-          height: 70,
-          background: "#091224",
-          display: "flex",
-          justifyContent: "space-around",
-          alignItems: "center",
-          borderTop: "1px solid rgba(255,255,255,0.1)"
+          position: "sticky",
+          top: 0,
+          zIndex: 50,
+          background: "rgba(9,18,36,0.95)",
+          backdropFilter: "blur(10px)",
+          borderBottom: "1px solid rgba(255,255,255,0.08)"
         }}
       >
-        {nav.map((item) => (
+        <div
+          style={{
+            maxWidth: 1400,
+            margin: "0 auto",
+            padding: "14px 18px",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+            gap: 16,
+            flexWrap: "wrap"
+          }}
+        >
           <Link
-            key={item.path}
-            to={item.path}
+            to="/"
             style={{
               textDecoration: "none",
-              color:
-                location.pathname === item.path
-                  ? "#ffd54a"
-                  : "white",
-              fontSize: 12,
-              textAlign: "center"
+              color: "white",
+              fontSize: 28,
+              fontWeight: 900,
+              letterSpacing: "-0.02em"
             }}
           >
-            <div style={{ fontSize: 20 }}>{item.icon}</div>
-            {item.label}
+            🏍️ MotoPortEU
           </Link>
-        ))}
-      </nav>
+
+          <nav
+            style={{
+              display: "flex",
+              gap: 8,
+              flexWrap: "wrap",
+              alignItems: "center"
+            }}
+          >
+            {nav.map((item) => (
+              <Link
+                key={item.path}
+                to={item.path}
+                style={{
+                  textDecoration: "none",
+                  color: isActive(item.path) ? "#ffd54a" : "white",
+                  background: isActive(item.path)
+                    ? "rgba(255,255,255,0.10)"
+                    : "transparent",
+                  padding: "10px 14px",
+                  borderRadius: 12,
+                  fontWeight: 700,
+                  fontSize: 15
+                }}
+              >
+                {item.label}
+              </Link>
+            ))}
+          </nav>
+        </div>
+      </header>
+
+      <main>{children}</main>
     </div>
   );
 }

@@ -3,24 +3,20 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 
 import Home from "./pages/Home";
 import Garage from "./pages/Garage";
-import Suppliers from "./pages/Suppliers";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
-import SupplierPage from "./pages/SupplierPage";
 import RoutesPage from "./pages/Routes";
 import Tracks from "./pages/Tracks";
 import MyTrackDetail from "./pages/MyTrackDetail";
 import Map from "./pages/Map";
 import Faq from "./pages/Faq";
 import Terms from "./pages/Terms";
-import Premium from "./pages/Premium";
-import PremiumSuccess from "./pages/PremiumSuccess";
 
 import AppShell from "./components/AppShell";
 import RequireAuth from "./components/RequireAuth";
 import InstallPrompt from "./components/InstallPrompt";
 
-function AppLayout({ children }) {
+function InnerLayout({ children }) {
   return <AppShell>{children}</AppShell>;
 }
 
@@ -30,32 +26,17 @@ export default function App() {
       <InstallPrompt />
 
       <Routes>
-        <Route
-          path="/"
-          element={
-            <AppLayout>
-              <Home />
-            </AppLayout>
-          }
-        />
-
-        <Route
-          path="/login"
-          element={<Login />}
-        />
-
-        <Route
-          path="/register"
-          element={<Register />}
-        />
+        <Route path="/" element={<Home />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
 
         <Route
           path="/routes"
           element={
             <RequireAuth>
-              <AppLayout>
+              <InnerLayout>
                 <RoutesPage />
-              </AppLayout>
+              </InnerLayout>
             </RequireAuth>
           }
         />
@@ -64,9 +45,9 @@ export default function App() {
           path="/tracks"
           element={
             <RequireAuth>
-              <AppLayout>
+              <InnerLayout>
                 <Tracks />
-              </AppLayout>
+              </InnerLayout>
             </RequireAuth>
           }
         />
@@ -75,9 +56,9 @@ export default function App() {
           path="/tracks/:id"
           element={
             <RequireAuth>
-              <AppLayout>
+              <InnerLayout>
                 <MyTrackDetail />
-              </AppLayout>
+              </InnerLayout>
             </RequireAuth>
           }
         />
@@ -86,9 +67,9 @@ export default function App() {
           path="/map"
           element={
             <RequireAuth>
-              <AppLayout>
+              <InnerLayout>
                 <Map />
-              </AppLayout>
+              </InnerLayout>
             </RequireAuth>
           }
         />
@@ -97,53 +78,9 @@ export default function App() {
           path="/garage"
           element={
             <RequireAuth>
-              <AppLayout>
+              <InnerLayout>
                 <Garage />
-              </AppLayout>
-            </RequireAuth>
-          }
-        />
-
-        <Route
-          path="/suppliers"
-          element={
-            <RequireAuth>
-              <AppLayout>
-                <Suppliers />
-              </AppLayout>
-            </RequireAuth>
-          }
-        />
-
-        <Route
-          path="/supplier/:id"
-          element={
-            <RequireAuth>
-              <AppLayout>
-                <SupplierPage />
-              </AppLayout>
-            </RequireAuth>
-          }
-        />
-
-        <Route
-          path="/premium"
-          element={
-            <RequireAuth>
-              <AppLayout>
-                <Premium />
-              </AppLayout>
-            </RequireAuth>
-          }
-        />
-
-        <Route
-          path="/premium-success"
-          element={
-            <RequireAuth>
-              <AppLayout>
-                <PremiumSuccess />
-              </AppLayout>
+              </InnerLayout>
             </RequireAuth>
           }
         />
@@ -151,18 +88,18 @@ export default function App() {
         <Route
           path="/faq"
           element={
-            <AppLayout>
+            <InnerLayout>
               <Faq />
-            </AppLayout>
+            </InnerLayout>
           }
         />
 
         <Route
           path="/terms"
           element={
-            <AppLayout>
+            <InnerLayout>
               <Terms />
-            </AppLayout>
+            </InnerLayout>
           }
         />
 
