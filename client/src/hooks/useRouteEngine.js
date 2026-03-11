@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { analyzeRouteGeometry } from "../utils/routeAnalysis";
+import { scoreRouteForRider } from "../utils/routeScoring";
 
 function toMessage(err, fallback = "Errore route engine") {
   if (!err) return "";
@@ -12,13 +14,11 @@ function toMessage(err, fallback = "Errore route engine") {
 
 export default function useRouteEngine() {
   const [route, setRoute] = useState(null);
+  const [weather, setWeather] = useState(null);
+  const [score, setScore] = useState(null);
   const [loading, setLoading] = useState(false);
   const [snapping, setSnapping] = useState(false);
   const [error, setError] = useState(null);
-
-  // placeholders compatibili con Map.jsx
-  const [weather] = useState(null);
-  const [score] = useState(null);
 
   async function snapPoints(points) {
     setSnapping(true);
@@ -81,15 +81,32 @@ export default function useRouteEngine() {
 
       const builtRoute = {
         geometry: snapped.geometry,
-        distanceKm: snapped.distanceKm,
-        durationMin: snapped.durationMin,
+        distanceKm: Number(snapped.distanceKm || 0),
+        durationMin: Number(snapped.durationMin || 0),
         legs: snapped.legs || [],
         meta: options?.meta || {},
       };
 
-      setRoute(builtRoute);
+      const analysis = analyzeRouteGeometry(builtRoute.geometry, {
+        durationMin: builtRoute.durationMin,
+      });
 
-      return { route: builtRoute };
+      const riderScore = scoreRouteForRider(
+        analysis,
+        options?.meta?.rideProfile || "touring",
+        null
+      );
+
+      setRoute(builtRoute);
+      setScore(riderScore);
+      setWeather(null);
+
+      return {
+        route: builtRoute,
+        score: riderScore,
+        weather: null,
+        analysis,
+      };
     } catch (e) {
       const msg = toMessage(e, "Errore nella costruzione della rotta.");
       setError(msg);
@@ -101,6 +118,8 @@ export default function useRouteEngine() {
 
   function reset() {
     setRoute(null);
+    setWeather(null);
+    setScore(null);
     setError(null);
   }
 

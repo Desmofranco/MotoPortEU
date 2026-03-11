@@ -1719,9 +1719,9 @@ const doSnap = async () => {
                 <button style={S.btnDanger} onClick={deleteRoute} disabled={!activeRoute}>
                   🗑️ Elimina
                 </button>
-                <button style={S.btnGhost} onClick={doSnap} disabled={engineLoading || engineSnapping || points.length < 2}>
-                  {engineLoading || engineSnapping ? "🛣️ Snap..." : "🛣️ Snap Rider Engine"}
-                </button>
+<button style={S.btnGhost} onClick={doSnap} disabled={engineLoading || engineSnapping || points.length < 2}>
+  {engineLoading || engineSnapping ? "🧠 Analisi rider..." : "🧠 Analizza con Rider Engine"}
+</button>
                 <button style={S.btnGhost} onClick={openGoogleNav} disabled={points.length < 2}>
                   🧭 Apri navigazione
                 </button>
@@ -2136,7 +2136,7 @@ const doSnap = async () => {
             />
 
             <div style={{ ...S.card, padding: 12, fontSize: 13, opacity: 0.84 }}>
-              <b>Tip:</b> scrivi una città e premi <b>Invio</b>. Usa <b>Snap Rider Engine</b> per una rotta più realistica.
+<b>Tip:</b> scrivi una città e premi <b>Invio</b>. Usa <b>Rider Engine</b> per calcolare rotta reale, score e highlights.
               <br />
               <b>Rider Evolution:</b> cockpit rider + scoring + waypoint automatici + Rider Radar mostrati anche sulla mappa.
             </div>
