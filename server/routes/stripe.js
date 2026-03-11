@@ -49,10 +49,17 @@ router.post("/create-checkout-session", authMiddleware, async (req, res) => {
     });
 
     return res.json({ url: session.url });
-  } catch (error) {
-    console.error("❌ Stripe create-checkout-session error:", error);
-    return res.status(500).json({ error: "Errore creazione sessione Stripe" });
-  }
+} catch (error) {
+  console.error("❌ Stripe create-checkout-session error:");
+  console.error("message:", error.message);
+  console.error("type:", error.type);
+  console.error("code:", error.code);
+  console.error("raw:", error.raw?.message || error.raw);
+
+  return res.status(500).json({
+    error: error?.raw?.message || error.message || "Errore creazione sessione Stripe"
+  });
+}
 });
 
 export default router;
