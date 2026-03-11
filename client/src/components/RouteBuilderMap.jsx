@@ -1,17 +1,4 @@
-// =======================================================
-// src/components/RouteBuilderMap.jsx
-// Leaflet wrapper: Route Builder + GPS + Trail + POI + Radar
-// ✅ click per aggiungere punti
-// ✅ disegna snappedLine / points
-// ✅ marker GPS
-// ✅ gpsTrail polyline (scia live)
-// ✅ fitBounds su linea + key su polylines per forzare update
-// ✅ NEW: marker waypoint numerati (start / tappe / arrivo)
-// ✅ NEW: marker POI automatici
-// ✅ NEW: marker Rider Radar meteo
-// =======================================================
-
-import React, { useEffect, useMemo } from "react";
+import React, { useEffect, useMemo, useRef } from "react";
 import {
   MapContainer,
   TileLayer,
@@ -31,39 +18,76 @@ L.Icon.Default.mergeOptions({
   shadowUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png",
 });
 
-function FitOrFollow({ center, zoom, fitOnChange, followGps, gps }) {
+function lineKey(arr) {
+  if (!arr || arr.length < 2) return "empty";
+  const first = arr[0];
+  const last = arr[arr.length - 1];
+  return [
+    arr.length,
+    first?.[0]?.toFixed?.(5),
+    first?.[1]?.toFixed?.(5),
+    last?.[0]?.toFixed?.(5),
+    last?.[1]?.toFixed?.(5),
+  ].join("-");
+}
+
+function FitOrFollow({ center, zoom, followGps, gps, userInteractingRef }) {
   const map = useMap();
+  const lastGpsRef = useRef(null);
 
   useEffect(() => {
     if (!map) return;
 
-    if (followGps && gps) {
+    if (followGps && gps && !userInteractingRef.current) {
+      const gpsKey = `${gps[0].toFixed(5)}-${gps[1].toFixed(5)}`;
+      if (lastGpsRef.current === gpsKey) return;
+      lastGpsRef.current = gpsKey;
+
       map.setView(gps, Math.max(map.getZoom(), 13), { animate: true });
       return;
     }
-
-    if (fitOnChange && center && zoom) {
-      map.setView(center, zoom, { animate: true });
-    }
-  }, [map, center, zoom, fitOnChange, followGps, gps]);
+  }, [map, center, zoom, followGps, gps, userInteractingRef]);
 
   return null;
 }
 
-function FitLineBounds({ line, enabled }) {
+function FitLineBounds({ line, enabled, userInteractingRef, resetFitSignal }) {
   const map = useMap();
+  const lastFitKeyRef = useRef("");
 
   useEffect(() => {
     if (!enabled) return;
     if (!map) return;
     if (!line || line.length < 2) return;
+    if (userInteractingRef.current) return;
+
+    const key = `${resetFitSignal}-${lineKey(line)}`;
+    if (lastFitKeyRef.current === key) return;
+
+    lastFitKeyRef.current = key;
 
     try {
       map.fitBounds(line, { padding: [30, 30] });
     } catch {
       // ignore
     }
-  }, [map, enabled, line]);
+  }, [map, enabled, line, userInteractingRef, resetFitSignal]);
+
+  return null;
+}
+
+function UserInteractionWatcher({ userInteractingRef }) {
+  useMapEvents({
+    dragstart() {
+      userInteractingRef.current = true;
+    },
+    zoomstart() {
+      userInteractingRef.current = true;
+    },
+    movestart() {
+      userInteractingRef.current = true;
+    },
+  });
 
   return null;
 }
@@ -157,6 +181,16 @@ export default function RouteBuilderMap({
     [snappedLine, points]
   );
 
+  const userInteractingRef = useRef(false);
+
+  const resetFitSignal = useMemo(() => {
+    return lineKey(line);
+  }, [line]);
+
+  useEffect(() => {
+    userInteractingRef.current = false;
+  }, [resetFitSignal]);
+
   return (
     <div
       style={{
@@ -174,15 +208,23 @@ export default function RouteBuilderMap({
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
 
+        <UserInteractionWatcher userInteractingRef={userInteractingRef} />
+
         <FitOrFollow
           center={center}
           zoom={zoom}
-          fitOnChange={fitOnChange}
           followGps={followGps}
           gps={gps}
+          userInteractingRef={userInteractingRef}
         />
 
-        <FitLineBounds line={line} enabled={fitOnChange && !(followGps && gps)} />
+        <FitLineBounds
+          line={line}
+          enabled={fitOnChange && !(followGps && gps)}
+          userInteractingRef={userInteractingRef}
+          resetFitSignal={resetFitSignal}
+        />
+
         <ClickToAdd enabled={isAddingEnabled} onAddPoint={onAddPoint} />
 
         {line && line.length >= 2 ? (
