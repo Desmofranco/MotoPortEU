@@ -18,6 +18,11 @@ L.Icon.Default.mergeOptions({
   shadowUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png",
 });
 
+const FOLLOW_MIN_MOVE_METERS = 18;
+const FOLLOW_THROTTLE_MS = 1200;
+const FOLLOW_MIN_ZOOM = 13;
+const FIT_PADDING = [30, 30];
+
 function lineKey(arr) {
   if (!arr || arr.length < 2) return "empty";
   const first = arr[0];
@@ -38,6 +43,21 @@ function polyKey(prefix, arr) {
   return `${prefix}-${arr.length}-${a?.[0]?.toFixed?.(5)}-${a?.[1]?.toFixed?.(
     5
   )}-${b?.[0]?.toFixed?.(5)}-${b?.[1]?.toFixed?.(5)}`;
+}
+
+function haversineMeters(a, b) {
+  if (!a || !b) return 0;
+  const toRad = (x) => (x * Math.PI) / 180;
+  const R = 6371000;
+  const dLat = toRad(b[0] - a[0]);
+  const dLon = toRad(b[1] - a[1]);
+  const lat1 = toRad(a[0]);
+  const lat2 = toRad(b[0]);
+  const s =
+    Math.sin(dLat / 2) ** 2 +
+    Math.cos(lat1) * Math.cos(lat2) * Math.sin(dLon / 2) ** 2;
+  const c = 2 * Math.atan2(Math.sqrt(s), Math.sqrt(1 - s));
+  return R * c;
 }
 
 function createDivIcon(html, bg = "#111", color = "#fff") {
@@ -91,7 +111,8 @@ function getPointIcon(idx, total) {
 
 function FitOrFollow({ followGps, gps, userInteractingRef }) {
   const map = useMap();
-  const lastGpsRef = useRef(null);
+  const lastAppliedGpsRef = useRef(null);
+  const lastFollowAtRef = useRef(0);
 
   useEffect(() => {
     if (!map) return;
@@ -99,16 +120,36 @@ function FitOrFollow({ followGps, gps, userInteractingRef }) {
     if (!gps || gps.length < 2) return;
     if (userInteractingRef.current) return;
 
-    const gpsKey = `${gps[0].toFixed(5)}-${gps[1].toFixed(5)}`;
-    if (lastGpsRef.current === gpsKey) return;
-    lastGpsRef.current = gpsKey;
+    const now = Date.now();
+    const lastPoint = lastAppliedGpsRef.current;
+
+    if (lastPoint) {
+      const movedMeters = haversineMeters(lastPoint, gps);
+      if (movedMeters < FOLLOW_MIN_MOVE_METERS) return;
+
+      const elapsed = now - lastFollowAtRef.current;
+      if (elapsed < FOLLOW_THROTTLE_MS) return;
+    }
+
+    lastAppliedGpsRef.current = gps;
+    lastFollowAtRef.current = now;
 
     try {
-      map.setView(gps, Math.max(map.getZoom(), 13), { animate: true });
+      const targetZoom = Math.max(map.getZoom(), FOLLOW_MIN_ZOOM);
+      map.flyTo(gps, targetZoom, {
+        animate: true,
+        duration: 0.8,
+      });
     } catch {
       // ignore
     }
   }, [map, followGps, gps, userInteractingRef]);
+
+  useEffect(() => {
+    if (followGps) return;
+    lastAppliedGpsRef.current = null;
+    lastFollowAtRef.current = 0;
+  }, [followGps]);
 
   return null;
 }
@@ -129,7 +170,7 @@ function FitLineBounds({ line, enabled, userInteractingRef, resetFitSignal }) {
     lastFitKeyRef.current = key;
 
     try {
-      map.fitBounds(line, { padding: [30, 30] });
+      map.fitBounds(line, { padding: FIT_PADDING });
     } catch {
       // ignore
     }
@@ -143,18 +184,47 @@ function UserInteractionWatcher({
   followGps,
   onUserMapInteract,
 }) {
+  const releaseTimerRef = useRef(null);
+
+  const markUserBusy = () => {
+    userInteractingRef.current = true;
+
+    if (releaseTimerRef.current) {
+      clearTimeout(releaseTimerRef.current);
+    }
+
+    releaseTimerRef.current = setTimeout(() => {
+      userInteractingRef.current = false;
+    }, 1400);
+  };
+
   useMapEvents({
     dragstart(e) {
       if (!e?.originalEvent) return;
-      userInteractingRef.current = true;
+      markUserBusy();
       if (followGps) onUserMapInteract?.();
+    },
+    drag() {
+      markUserBusy();
+    },
+    dragend() {
+      markUserBusy();
     },
     zoomstart(e) {
       if (!e?.originalEvent) return;
-      userInteractingRef.current = true;
+      markUserBusy();
       if (followGps) onUserMapInteract?.();
     },
+    zoomend() {
+      markUserBusy();
+    },
   });
+
+  useEffect(() => {
+    return () => {
+      if (releaseTimerRef.current) clearTimeout(releaseTimerRef.current);
+    };
+  }, []);
 
   return null;
 }
@@ -198,7 +268,15 @@ export default function RouteBuilderMap({
   }, [line]);
 
   useEffect(() => {
-    userInteractingRef.current = false;
+    if (followGps) {
+      userInteractingRef.current = false;
+    }
+  }, [followGps]);
+
+  useEffect(() => {
+    if (!followGps) {
+      userInteractingRef.current = false;
+    }
   }, [resetFitSignal, followGps]);
 
   return (
