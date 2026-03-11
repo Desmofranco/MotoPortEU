@@ -1,8 +1,11 @@
 import jwt from "jsonwebtoken";
 import User from "../models/User.js";
 
+const JWT_SECRET = process.env.JWT_SECRET || "motoport_secret";
+
 const authMiddleware = async (req, res, next) => {
   try {
+
     const authHeader = req.headers.authorization;
 
     if (!authHeader || !authHeader.startsWith("Bearer ")) {
@@ -11,25 +14,28 @@ const authMiddleware = async (req, res, next) => {
 
     const token = authHeader.split(" ")[1];
 
-    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    const decoded = jwt.verify(token, JWT_SECRET);
 
-    const userId = decoded.id || decoded.userId || decoded._id;
-
-    if (!userId) {
-      return res.status(401).json({ error: "Token non valido" });
-    }
-
-    const user = await User.findById(userId).select("-password");
+    const user = await User.findById(decoded.id).select("-password");
 
     if (!user) {
       return res.status(401).json({ error: "Utente non trovato" });
     }
 
-    req.user = user;
+    req.user = {
+      id: user._id,
+      name: user.name,
+      email: user.email,
+      passActive: user.passActive
+    };
+
     next();
+
   } catch (error) {
+
     console.error("❌ Auth middleware error:", error.message);
     return res.status(401).json({ error: "Token non valido" });
+
   }
 };
 
