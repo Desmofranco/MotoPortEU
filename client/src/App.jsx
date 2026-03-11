@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import React from "react";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 
 import Home from "./pages/Home";
 import Garage from "./pages/Garage";
@@ -13,86 +13,161 @@ import MyTrackDetail from "./pages/MyTrackDetail";
 import Map from "./pages/Map";
 import Faq from "./pages/Faq";
 import Terms from "./pages/Terms";
+import Premium from "./pages/Premium";
+import PremiumSuccess from "./pages/PremiumSuccess";
 
 import AppShell from "./components/AppShell";
 import RequireAuth from "./components/RequireAuth";
 import InstallPrompt from "./components/InstallPrompt";
 
-import { clearAuthSession, fetchMe, getStoredUser } from "./utils/auth";
+function AppLayout({ children }) {
+  return <AppShell>{children}</AppShell>;
+}
 
 export default function App() {
-  const [authUser, setAuthUser] = useState(getStoredUser());
-  const [authReady, setAuthReady] = useState(false);
-
-  useEffect(() => {
-    let mounted = true;
-
-    async function bootstrapAuth() {
-      try {
-        const me = await fetchMe();
-
-        if (mounted && me) {
-          localStorage.setItem("mp_user", JSON.stringify(me));
-          setAuthUser(me);
-        }
-      } catch (err) {
-        clearAuthSession();
-        if (mounted) {
-          setAuthUser(null);
-        }
-      } finally {
-        if (mounted) {
-          setAuthReady(true);
-        }
-      }
-    }
-
-    bootstrapAuth();
-
-    return () => {
-      mounted = false;
-    };
-  }, []);
-
-  if (!authReady) {
-    return (
-      <div style={{ padding: 24, textAlign: "center" }}>
-        Caricamento MotoPortEU...
-      </div>
-    );
-  }
-
   return (
-    <>
-      <BrowserRouter>
-        <Routes>
-          {/* Public */}
-          <Route path="/" element={<Home authUser={authUser} />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
-
-          {/* Private */}
-          <Route
-            element={
-              <RequireAuth>
-                <AppShell authUser={authUser} />
-              </RequireAuth>
-            }
-          >
-            <Route path="/garage" element={<Garage />} />
-            <Route path="/suppliers" element={<Suppliers />} />
-            <Route path="/supplier/:id" element={<SupplierPage />} />
-            <Route path="/routes" element={<RoutesPage />} />
-            <Route path="/tracks" element={<Tracks />} />
-            <Route path="/map" element={<Map />} />
-            <Route path="/my-tracks/:id" element={<MyTrackDetail />} />
-            <Route path="/faq" element={<Faq />} />
-            <Route path="/terms" element={<Terms />} />
-          </Route>
-        </Routes>
-      </BrowserRouter>
-
+    <BrowserRouter>
       <InstallPrompt />
-    </>
+
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <AppLayout>
+              <Home />
+            </AppLayout>
+          }
+        />
+
+        <Route
+          path="/login"
+          element={<Login />}
+        />
+
+        <Route
+          path="/register"
+          element={<Register />}
+        />
+
+        <Route
+          path="/routes"
+          element={
+            <RequireAuth>
+              <AppLayout>
+                <RoutesPage />
+              </AppLayout>
+            </RequireAuth>
+          }
+        />
+
+        <Route
+          path="/tracks"
+          element={
+            <RequireAuth>
+              <AppLayout>
+                <Tracks />
+              </AppLayout>
+            </RequireAuth>
+          }
+        />
+
+        <Route
+          path="/tracks/:id"
+          element={
+            <RequireAuth>
+              <AppLayout>
+                <MyTrackDetail />
+              </AppLayout>
+            </RequireAuth>
+          }
+        />
+
+        <Route
+          path="/map"
+          element={
+            <RequireAuth>
+              <AppLayout>
+                <Map />
+              </AppLayout>
+            </RequireAuth>
+          }
+        />
+
+        <Route
+          path="/garage"
+          element={
+            <RequireAuth>
+              <AppLayout>
+                <Garage />
+              </AppLayout>
+            </RequireAuth>
+          }
+        />
+
+        <Route
+          path="/suppliers"
+          element={
+            <RequireAuth>
+              <AppLayout>
+                <Suppliers />
+              </AppLayout>
+            </RequireAuth>
+          }
+        />
+
+        <Route
+          path="/supplier/:id"
+          element={
+            <RequireAuth>
+              <AppLayout>
+                <SupplierPage />
+              </AppLayout>
+            </RequireAuth>
+          }
+        />
+
+        <Route
+          path="/premium"
+          element={
+            <RequireAuth>
+              <AppLayout>
+                <Premium />
+              </AppLayout>
+            </RequireAuth>
+          }
+        />
+
+        <Route
+          path="/premium-success"
+          element={
+            <RequireAuth>
+              <AppLayout>
+                <PremiumSuccess />
+              </AppLayout>
+            </RequireAuth>
+          }
+        />
+
+        <Route
+          path="/faq"
+          element={
+            <AppLayout>
+              <Faq />
+            </AppLayout>
+          }
+        />
+
+        <Route
+          path="/terms"
+          element={
+            <AppLayout>
+              <Terms />
+            </AppLayout>
+          }
+        />
+
+        <Route path="*" element={<Navigate to="/" replace />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
