@@ -12,6 +12,7 @@
 // ✅ Mobile detail: mini header sticky + swipe down close + hero che si riduce
 // ✅ Mobile ULTRA COMPACT: header + lista più piccoli
 // ✅ Descrizione fallback intelligente per circuiti esteri / OSM
+// ✅ FIX mobile: no aperture accidentali durante scroll
 // =======================================================
 
 import React, { useEffect, useMemo, useRef, useState } from "react";
@@ -20,6 +21,8 @@ import { getTrackWeatherSummary } from "../utils/trackWeather";
 
 const FALLBACK_PHOTO =
   "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1600&q=80";
+
+const TAP_MOVE_THRESHOLD = 12;
 
 /** Pill "chiaro" (sezioni normali) */
 function pillStyle(level) {
@@ -729,19 +732,54 @@ function TrackCard({ track, active, onSelect }) {
   const rating = Number(track.rating || 0);
   const p = scorePill(rating);
 
-  const click = (e) => {
+  const touchRef = useRef({
+    startX: 0,
+    startY: 0,
+    moved: false,
+  });
+
+  const handleClick = (e) => {
     e?.preventDefault?.();
     e?.stopPropagation?.();
     onSelect?.();
+  };
+
+  const handleTouchStart = (e) => {
+    const t = e.touches?.[0];
+    if (!t) return;
+    touchRef.current = {
+      startX: t.clientX,
+      startY: t.clientY,
+      moved: false,
+    };
+  };
+
+  const handleTouchMove = (e) => {
+    const t = e.touches?.[0];
+    if (!t) return;
+
+    const dx = Math.abs(t.clientX - touchRef.current.startX);
+    const dy = Math.abs(t.clientY - touchRef.current.startY);
+
+    if (dx > TAP_MOVE_THRESHOLD || dy > TAP_MOVE_THRESHOLD) {
+      touchRef.current.moved = true;
+    }
+  };
+
+  const handleTouchEnd = (e) => {
+    if (touchRef.current.moved) return;
+    handleClick(e);
   };
 
   return (
     <div
       role="button"
       tabIndex={0}
-      onClick={click}
-      onTouchStart={click}
-      onKeyDown={(e) => (e.key === "Enter" || e.key === " " ? click(e) : null)}
+      onClick={handleClick}
+      onTouchStart={handleTouchStart}
+      onTouchMove={handleTouchMove}
+      onTouchEnd={handleTouchEnd}
+      onKeyDown={(e) => (e.key === "Enter" || e.key === " " ? handleClick(e) : null)}
       style={{
         borderRadius: 16,
         overflow: "hidden",
@@ -751,7 +789,8 @@ function TrackCard({ track, active, onSelect }) {
         boxShadow: active ? "0 10px 22px rgba(0,0,0,0.08)" : "none",
         cursor: "pointer",
         WebkitTapHighlightColor: "transparent",
-        touchAction: "manipulation",
+        touchAction: "pan-y",
+        userSelect: "none",
       }}
     >
       {/* MOBILE ROW (ULTRA COMPATTA) */}
@@ -903,7 +942,7 @@ function TrackDetail({ track, onClose }) {
     return () => {
       alive = false;
     };
-  }, [getTrackKey(track)]);
+  }, [track]);
 
   const wxBox = (() => {
     if (wxBusy) return <div style={{ marginTop: 10, padding: 12, borderRadius: 16, background: "rgba(0,0,0,0.04)" }}>Carico meteo…</div>;
