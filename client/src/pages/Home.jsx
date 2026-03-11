@@ -11,7 +11,7 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { clearAuthSession, getStoredUser, getToken } from "../utils/auth";
-
+import { triggerInstall } from "../utils/installPrompt";
 export default function Home({ authUser }) {
   const navigate = useNavigate();
 
@@ -204,7 +204,31 @@ export default function Home({ authUser }) {
 
                 <MenuItem icon="❓" label="FAQ" path="/faq" />
                 <MenuItem icon="📜" label="Condizioni d’uso" path="/terms" />
-
+                <button
+  type="button"
+  onClick={async () => {
+    setMenuOpen(false);
+    await triggerInstall();
+  }}
+  style={{
+    width: "100%",
+    display: "flex",
+    alignItems: "center",
+    gap: 10,
+    padding: "10px 12px",
+    borderRadius: 14,
+    border: "1px solid rgba(255,255,255,0.14)",
+    background: "rgba(255,255,255,0.06)",
+    color: "rgba(255,255,255,0.95)",
+    cursor: "pointer",
+    fontWeight: 900,
+    textAlign: "left",
+  }}
+>
+  <span style={{ width: 22, textAlign: "center" }}>📲</span>
+  <span style={{ flex: 1 }}>Installa MotoPortEU</span>
+  <span style={{ opacity: 0.7 }}>›</span>
+</button>
                 <button
                   type="button"
                   onClick={() => {
