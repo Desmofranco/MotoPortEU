@@ -57,9 +57,9 @@ export default function Register() {
       setAuthSession(data.token, data.user);
       setSuccess("Registrazione completata con successo.");
 
-      setTimeout(() => {
-        navigate("/");
-      }, 500);
+setTimeout(() => {
+  navigate("/routes");
+}, 500);
     } catch (err) {
       setError(err.message || "Errore durante la registrazione.");
     } finally {
