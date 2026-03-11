@@ -13,11 +13,6 @@ app.use(express.json());
 const PORT = process.env.PORT || 10000;
 const MONGO_URI = process.env.MONGODB_URI;
 
-/*
----------------------------------------
-CHECK ENV
----------------------------------------
-*/
 if (!MONGO_URI) {
   console.error("❌ MONGODB_URI non definita nelle variabili ENV");
   process.exit(1);
@@ -25,16 +20,8 @@ if (!MONGO_URI) {
 
 console.log("🔎 Tentativo connessione Mongo...");
 
-/*
----------------------------------------
-MONGODB CONNECTION
----------------------------------------
-*/
 mongoose
-  .connect(MONGO_URI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  })
+  .connect(MONGO_URI)
   .then(() => {
     console.log("✅ MongoDB connected");
   })
@@ -42,11 +29,6 @@ mongoose
     console.error("❌ MongoDB connection error:", err.message);
   });
 
-/*
----------------------------------------
-HEALTH CHECK
----------------------------------------
-*/
 app.get("/health", (req, res) => {
   res.json({
     ok: true,
@@ -55,11 +37,6 @@ app.get("/health", (req, res) => {
   });
 });
 
-/*
----------------------------------------
-SERVER START
----------------------------------------
-*/
 app.listen(PORT, () => {
   console.log(`🏍️ MotoPortEU server running on port ${PORT}`);
 });
