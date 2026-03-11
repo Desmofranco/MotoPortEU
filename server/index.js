@@ -4,7 +4,6 @@ import dotenv from "dotenv";
 import mongoose from "mongoose";
 import authRoutes from "./routes/auth.js";
 
-app.use("/api/auth", authRoutes);
 dotenv.config();
 
 const app = express();
@@ -12,31 +11,18 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-const PORT = process.env.PORT || 10000;
-const MONGO_URI = process.env.MONGODB_URI;
+app.use("/api/auth", authRoutes);
 
-if (!MONGO_URI) {
-  console.error("❌ MONGODB_URI non definita nelle variabili ENV");
-  process.exit(1);
-}
+const PORT = process.env.PORT || 10000;
 
 console.log("🔎 Tentativo connessione Mongo...");
-
 mongoose
-  .connect(MONGO_URI)
-  .then(() => {
-    console.log("✅ MongoDB connected");
-  })
-  .catch((err) => {
-    console.error("❌ MongoDB connection error:", err.message);
-  });
+  .connect(process.env.MONGODB_URI)
+  .then(() => console.log("✅ MongoDB connected"))
+  .catch((err) => console.error("❌ MongoDB connection error:", err));
 
-app.get("/health", (req, res) => {
-  res.json({
-    ok: true,
-    app: "MotoPortEU",
-    mongo: mongoose.connection.readyState === 1 ? "connected" : "not connected",
-  });
+app.get("/", (req, res) => {
+  res.send("MotoPortEU server running");
 });
 
 app.listen(PORT, () => {
