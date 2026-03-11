@@ -7,12 +7,24 @@ const router = express.Router();
 
 const JWT_SECRET = process.env.JWT_SECRET || "motoport_secret";
 
+function getPremiumState(user) {
+  return (
+    user?.role === "premium" ||
+    user?.isPremium === true ||
+    user?.passActive === true
+  );
+}
+
 function signToken(user) {
+  const premiumActive = getPremiumState(user);
+
   return jwt.sign(
     {
       id: user._id,
       email: user.email,
-      passActive: !!user.passActive,
+      role: user.role || "user",
+      isPremium: premiumActive,
+      passActive: premiumActive,
     },
     JWT_SECRET,
     { expiresIn: "7d" }
@@ -20,11 +32,17 @@ function signToken(user) {
 }
 
 function buildUserPayload(user) {
+  const premiumActive = getPremiumState(user);
+
   return {
     id: user._id,
     name: user.name,
     email: user.email,
-    passActive: !!user.passActive,
+    role: user.role || "user",
+    isPremium: premiumActive,
+    passActive: premiumActive,
+    premiumActivatedAt: user.premiumActivatedAt || null,
+    premiumExpiredAt: user.premiumExpiredAt || null,
   };
 }
 
