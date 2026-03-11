@@ -9,14 +9,17 @@
 // ✅ Meteo + Google Maps
 // ✅ Fallback coordinate intelligente per itinerari incompleti / OSM
 // ✅ Descrizione fallback elegante per itinerari senza testo reale
+// ✅ FIX mobile: no aperture accidentali durante scroll
 // =======================================================
 
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import RouteMap from "../components/RouteMap";
 import { getRouteWeatherSummary } from "../utils/routeWeather";
 
 const FALLBACK_PHOTO =
   "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1600&q=80";
+
+const TAP_MOVE_THRESHOLD = 12;
 
 function isMobileNow() {
   if (typeof window === "undefined" || !window.matchMedia) return false;
@@ -592,20 +595,54 @@ export default function Routes() {
 
 function RouteCard({ route, active, onSelect }) {
   const photo = route.photo || FALLBACK_PHOTO;
+  const touchRef = useRef({
+    startX: 0,
+    startY: 0,
+    moved: false,
+  });
 
-  const click = (e) => {
+  const handleClick = (e) => {
     e?.preventDefault?.();
     e?.stopPropagation?.();
     onSelect?.();
+  };
+
+  const handleTouchStart = (e) => {
+    const t = e.touches?.[0];
+    if (!t) return;
+    touchRef.current = {
+      startX: t.clientX,
+      startY: t.clientY,
+      moved: false,
+    };
+  };
+
+  const handleTouchMove = (e) => {
+    const t = e.touches?.[0];
+    if (!t) return;
+
+    const dx = Math.abs(t.clientX - touchRef.current.startX);
+    const dy = Math.abs(t.clientY - touchRef.current.startY);
+
+    if (dx > TAP_MOVE_THRESHOLD || dy > TAP_MOVE_THRESHOLD) {
+      touchRef.current.moved = true;
+    }
+  };
+
+  const handleTouchEnd = (e) => {
+    if (touchRef.current.moved) return;
+    handleClick(e);
   };
 
   return (
     <div
       role="button"
       tabIndex={0}
-      onClick={click}
-      onTouchStart={click}
-      onKeyDown={(e) => (e.key === "Enter" || e.key === " " ? click(e) : null)}
+      onClick={handleClick}
+      onTouchStart={handleTouchStart}
+      onTouchMove={handleTouchMove}
+      onTouchEnd={handleTouchEnd}
+      onKeyDown={(e) => (e.key === "Enter" || e.key === " " ? handleClick(e) : null)}
       style={{
         borderRadius: 16,
         overflow: "hidden",
@@ -614,7 +651,8 @@ function RouteCard({ route, active, onSelect }) {
         background: "white",
         cursor: "pointer",
         WebkitTapHighlightColor: "transparent",
-        touchAction: "manipulation",
+        touchAction: "pan-y",
+        userSelect: "none",
       }}
     >
       <div className="route-card-mobile" style={{ display: "none", padding: 6, gap: 10, alignItems: "center" }}>
@@ -754,6 +792,13 @@ function RouteDetail({ route }) {
           <strong>📌 Descrizione</strong>
           <div style={{ marginTop: 8, fontSize: 14, opacity: 0.9, lineHeight: 1.4 }}>
             {displayDescription}
+          </div>
+        </div>
+
+        <div style={{ marginTop: 12, borderTop: "1px solid rgba(0,0,0,0.08)", paddingTop: 12 }}>
+          <strong>🗺️ Mappa</strong>
+          <div style={{ marginTop: 10 }}>
+            <RouteMap route={route} />
           </div>
         </div>
 
