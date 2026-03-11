@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 
 import Home from "./pages/Home";
@@ -16,17 +16,39 @@ import PremiumSuccess from "./pages/PremiumSuccess";
 
 import AppShell from "./components/AppShell";
 import RequireAuth from "./components/RequireAuth";
-import InstallPrompt from "./components/InstallPrompt";
+
+import {
+  setInstallPrompt,
+  clearInstallPrompt,
+} from "./utils/installPrompt";
 
 function InnerLayout({ children }) {
   return <AppShell>{children}</AppShell>;
 }
 
 export default function App() {
+  useEffect(() => {
+    const handleBeforeInstallPrompt = (e) => {
+      e.preventDefault();
+      setInstallPrompt(e);
+    };
+
+    const handleAppInstalled = () => {
+      clearInstallPrompt();
+      console.log("✅ MotoPortEU installata");
+    };
+
+    window.addEventListener("beforeinstallprompt", handleBeforeInstallPrompt);
+    window.addEventListener("appinstalled", handleAppInstalled);
+
+    return () => {
+      window.removeEventListener("beforeinstallprompt", handleBeforeInstallPrompt);
+      window.removeEventListener("appinstalled", handleAppInstalled);
+    };
+  }, []);
+
   return (
     <BrowserRouter>
-      <InstallPrompt />
-
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
