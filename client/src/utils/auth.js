@@ -30,6 +30,10 @@ export function clearAuthSession() {
   localStorage.removeItem(USER_KEY);
 }
 
+export function isLoggedIn() {
+  return !!getToken();
+}
+
 export async function fetchMe() {
   const token = getToken();
 

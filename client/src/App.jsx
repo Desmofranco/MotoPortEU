@@ -1,3 +1,4 @@
+import React, { useEffect, useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import Home from "./pages/Home";
@@ -8,54 +9,63 @@ import Register from "./pages/Register";
 import SupplierPage from "./pages/SupplierPage";
 import RoutesPage from "./pages/Routes";
 import Tracks from "./pages/Tracks";
-
 import MyTrackDetail from "./pages/MyTrackDetail";
 import Map from "./pages/Map";
-import AppShell from "./components/AppShell";
-import RequireAuth from "./components/RequireAuth";
 import Faq from "./pages/Faq";
 import Terms from "./pages/Terms";
-import React, { useEffect, useState } from "react";
+
+import AppShell from "./components/AppShell";
+import RequireAuth from "./components/RequireAuth";
+
 import { clearAuthSession, fetchMe, getStoredUser } from "./utils/auth";
 
-const [authUser, setAuthUser] = useState(getStoredUser());
-const [authReady, setAuthReady] = useState(false);
+export default function App() {
+  const [authUser, setAuthUser] = useState(getStoredUser());
+  const [authReady, setAuthReady] = useState(false);
 
-useEffect(() => {
-  let mounted = true;
+  useEffect(() => {
+    let mounted = true;
 
-  async function bootstrapAuth() {
-    try {
-      const me = await fetchMe();
+    async function bootstrapAuth() {
+      try {
+        const me = await fetchMe();
 
-      if (mounted && me) {
-        localStorage.setItem("mp_user", JSON.stringify(me));
-        setAuthUser(me);
-      }
-    } catch (err) {
-      clearAuthSession();
-      if (mounted) {
-        setAuthUser(null);
-      }
-    } finally {
-      if (mounted) {
-        setAuthReady(true);
+        if (mounted && me) {
+          localStorage.setItem("mp_user", JSON.stringify(me));
+          setAuthUser(me);
+        }
+      } catch (err) {
+        clearAuthSession();
+        if (mounted) {
+          setAuthUser(null);
+        }
+      } finally {
+        if (mounted) {
+          setAuthReady(true);
+        }
       }
     }
+
+    bootstrapAuth();
+
+    return () => {
+      mounted = false;
+    };
+  }, []);
+
+  if (!authReady) {
+    return (
+      <div style={{ padding: 24, textAlign: "center" }}>
+        Caricamento MotoPortEU...
+      </div>
+    );
   }
 
-  bootstrapAuth();
-
-  return () => {
-    mounted = false;
-  };
-}, []);
-export default function App() {
   return (
     <BrowserRouter>
       <Routes>
         {/* Public */}
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<Home authUser={authUser} />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
 
@@ -63,10 +73,9 @@ export default function App() {
         <Route
           element={
             <RequireAuth>
-              <AppShell />
+              <AppShell authUser={authUser} />
             </RequireAuth>
           }
-          
         >
           <Route path="/garage" element={<Garage />} />
           <Route path="/suppliers" element={<Suppliers />} />
@@ -79,7 +88,6 @@ export default function App() {
           <Route path="/terms" element={<Terms />} />
         </Route>
       </Routes>
-      
     </BrowserRouter>
   );
 }
