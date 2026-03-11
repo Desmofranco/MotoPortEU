@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { loginRequest, setAuthSession } from "../utils/auth";
+
+const API_URL =
+  import.meta.env.VITE_API_URL || "https://motoporteu.onrender.com";
 
 export default function Login() {
   const navigate = useNavigate();
@@ -9,45 +11,57 @@ export default function Login() {
     email: "",
     password: "",
   });
-
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
-  const [success, setSuccess] = useState("");
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
     setForm((prev) => ({
       ...prev,
-      [name]: value,
+      [e.target.name]: e.target.value,
     }));
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError("");
-    setSuccess("");
-
-    const email = form.email.trim().toLowerCase();
-    const password = form.password.trim();
-
-    if (!email || !password) {
-      setError("Compila email e password.");
-      return;
-    }
 
     try {
       setLoading(true);
 
-      const data = await loginRequest(email, password);
+      const res = await fetch(`${API_URL}/api/auth/login`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(form),
+      });
 
-      setAuthSession(data.token, data.user);
-      setSuccess("Accesso effettuato con successo.");
+      const data = await res.json();
 
-setTimeout(() => {
-  navigate("/routes");
-}, 500);
+      if (!res.ok) {
+        throw new Error(data?.message || data?.error || "Login non riuscito");
+      }
+
+      if (data?.token) {
+        localStorage.setItem("token", data.token);
+      }
+
+      if (data?.user) {
+        localStorage.setItem("user", JSON.stringify(data.user));
+      }
+
+      const isPremium = !!(
+        data?.user?.isPremium ||
+        data?.user?.passActive ||
+        data?.user?.role === "premium"
+      );
+
+      if (isPremium) {
+        navigate("/routes");
+      } else {
+        navigate("/premium");
+      }
     } catch (err) {
-      setError(err.message || "Errore durante il login.");
+      console.error(err);
+      alert(err.message || "Errore durante il login");
     } finally {
       setLoading(false);
     }
@@ -56,54 +70,43 @@ setTimeout(() => {
   return (
     <div style={styles.page}>
       <div style={styles.card}>
-        <div style={styles.header}>
-          <h1 style={styles.title}>🏍️ Accedi a MotoPortEU</h1>
-          <p style={styles.subtitle}>
-            Entra nel tuo profilo rider e riprendi i tuoi percorsi.
-          </p>
-        </div>
+        <h1 style={styles.title}>Accedi</h1>
+        <p style={styles.subtitle}>
+          Entra con il tuo account. Se il Pass non è attivo, verrai reindirizzato alla pagina Premium.
+        </p>
 
         <form onSubmit={handleSubmit} style={styles.form}>
-          <label style={styles.label}>
-            Email
-            <input
-              type="email"
-              name="email"
-              value={form.email}
-              onChange={handleChange}
-              placeholder="nome@email.com"
-              autoComplete="email"
-              style={styles.input}
-            />
-          </label>
+          <input
+            name="email"
+            type="email"
+            placeholder="Email"
+            value={form.email}
+            onChange={handleChange}
+            required
+            style={styles.input}
+          />
 
-          <label style={styles.label}>
-            Password
-            <input
-              type="password"
-              name="password"
-              value={form.password}
-              onChange={handleChange}
-              placeholder="Inserisci la password"
-              autoComplete="current-password"
-              style={styles.input}
-            />
-          </label>
-
-          {error ? <div style={styles.error}>{error}</div> : null}
-          {success ? <div style={styles.success}>{success}</div> : null}
+          <input
+            name="password"
+            type="password"
+            placeholder="Password"
+            value={form.password}
+            onChange={handleChange}
+            required
+            style={styles.input}
+          />
 
           <button type="submit" disabled={loading} style={styles.button}>
-            {loading ? "Accesso in corso..." : "Accedi"}
+            {loading ? "Accesso..." : "Accedi"}
           </button>
         </form>
 
-        <div style={styles.footer}>
+        <p style={styles.footer}>
           Non hai un account?{" "}
           <Link to="/register" style={styles.link}>
             Registrati
           </Link>
-        </div>
+        </p>
       </div>
     </div>
   );
@@ -112,91 +115,60 @@ setTimeout(() => {
 const styles = {
   page: {
     minHeight: "100vh",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    padding: "24px",
-    background:
-      "linear-gradient(135deg, #0b1220 0%, #111827 45%, #1f2937 100%)",
+    display: "grid",
+    placeItems: "center",
+    padding: 20,
+    background: "linear-gradient(180deg, #0b1428 0%, #12203d 100%)",
   },
   card: {
     width: "100%",
-    maxWidth: "460px",
-    background: "rgba(255,255,255,0.96)",
-    borderRadius: "24px",
-    padding: "28px",
-    boxShadow: "0 20px 50px rgba(0,0,0,0.25)",
-  },
-  header: {
-    marginBottom: "20px",
+    maxWidth: 520,
+    background: "rgba(255,255,255,0.08)",
+    border: "1px solid rgba(255,255,255,0.12)",
+    borderRadius: 24,
+    padding: 28,
+    color: "#fff",
   },
   title: {
     margin: 0,
-    fontSize: "28px",
-    lineHeight: 1.2,
-    color: "#111827",
+    fontSize: 34,
   },
   subtitle: {
-    margin: "10px 0 0 0",
-    color: "#4b5563",
-    fontSize: "15px",
+    marginTop: 10,
+    opacity: 0.9,
+    lineHeight: 1.6,
   },
   form: {
-    display: "flex",
-    flexDirection: "column",
-    gap: "14px",
-  },
-  label: {
-    display: "flex",
-    flexDirection: "column",
-    gap: "8px",
-    fontSize: "14px",
-    color: "#111827",
-    fontWeight: 600,
+    marginTop: 18,
+    display: "grid",
+    gap: 12,
   },
   input: {
     width: "100%",
-    borderRadius: "14px",
-    border: "1px solid #d1d5db",
-    padding: "13px 14px",
-    fontSize: "15px",
+    padding: "14px 16px",
+    borderRadius: 14,
+    border: "1px solid rgba(255,255,255,0.15)",
+    background: "rgba(255,255,255,0.08)",
+    color: "#fff",
+    fontSize: 16,
     outline: "none",
-    boxSizing: "border-box",
   },
   button: {
-    marginTop: "6px",
+    marginTop: 8,
     border: "none",
-    borderRadius: "14px",
+    borderRadius: 14,
     padding: "14px 16px",
-    fontSize: "15px",
-    fontWeight: 700,
-    cursor: "pointer",
-    background: "#111827",
-    color: "#ffffff",
-  },
-  error: {
-    background: "#fee2e2",
-    color: "#991b1b",
-    borderRadius: "12px",
-    padding: "10px 12px",
-    fontSize: "14px",
-  },
-  success: {
-    background: "#dcfce7",
-    color: "#166534",
-    borderRadius: "12px",
-    padding: "10px 12px",
-    fontSize: "14px",
+    fontSize: 16,
+    fontWeight: 900,
+    background: "linear-gradient(90deg, #f59e0b, #fb7185)",
+    color: "#111827",
   },
   footer: {
-    marginTop: "18px",
-    fontSize: "14px",
-    color: "#4b5563",
-    textAlign: "center",
+    marginTop: 18,
+    opacity: 0.9,
   },
   link: {
-    color: "#111827",
-    fontWeight: 700,
-    textDecoration: "none",
+    color: "#ffd54a",
+    fontWeight: 800,
   },
 };

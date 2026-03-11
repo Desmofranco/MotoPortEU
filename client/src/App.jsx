@@ -11,6 +11,8 @@ import MyTrackDetail from "./pages/MyTrackDetail";
 import Map from "./pages/Map";
 import Faq from "./pages/Faq";
 import Terms from "./pages/Terms";
+import Premium from "./pages/Premium";
+import PremiumSuccess from "./pages/PremiumSuccess";
 
 import AppShell from "./components/AppShell";
 import RequireAuth from "./components/RequireAuth";
@@ -29,6 +31,8 @@ export default function App() {
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/premium" element={<Premium />} />
+        <Route path="/premium-success" element={<PremiumSuccess />} />
 
         <Route
           path="/routes"

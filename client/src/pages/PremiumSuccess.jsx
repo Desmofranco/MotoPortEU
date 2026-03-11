@@ -4,7 +4,7 @@ const API_URL =
   import.meta.env.VITE_API_URL || "https://motoporteu.onrender.com";
 
 export default function PremiumSuccess() {
-  const [status, setStatus] = useState("Verifica attivazione Premium in corso...");
+  const [status, setStatus] = useState("Attivazione Pass in corso...");
 
   useEffect(() => {
     const syncUser = async () => {
@@ -12,7 +12,7 @@ export default function PremiumSuccess() {
         const token = localStorage.getItem("token");
 
         if (!token) {
-          setStatus("Pagamento completato. Effettua il login per aggiornare il profilo.");
+          setStatus("Pagamento completato. Effettua il login per continuare.");
           return;
         }
 
@@ -26,13 +26,27 @@ export default function PremiumSuccess() {
 
         if (res.ok && data?.user) {
           localStorage.setItem("user", JSON.stringify(data.user));
-          setStatus("✅ Premium attivato correttamente!");
+
+          const isPremium = !!(
+            data.user.isPremium ||
+            data.user.passActive ||
+            data.user.role === "premium"
+          );
+
+          if (isPremium) {
+            setStatus("✅ Pass attivato correttamente! Reindirizzamento...");
+            setTimeout(() => {
+              window.location.href = "/routes";
+            }, 1200);
+          } else {
+            setStatus("Pagamento riuscito, ma il profilo non risulta ancora aggiornato.");
+          }
         } else {
-          setStatus("Pagamento riuscito, ma il profilo non è ancora sincronizzato.");
+          setStatus("Pagamento riuscito, ma sincronizzazione profilo da verificare.");
         }
       } catch (err) {
         console.error(err);
-        setStatus("Pagamento riuscito, ma serve una verifica della sincronizzazione.");
+        setStatus("Pagamento riuscito, ma serve una verifica del profilo.");
       }
     };
 
@@ -44,15 +58,6 @@ export default function PremiumSuccess() {
       <div style={styles.card}>
         <h1 style={styles.title}>🏍️ Pagamento completato</h1>
         <p style={styles.text}>{status}</p>
-
-        <div style={styles.actions}>
-          <a href="/premium" style={styles.secondary}>
-            Torna a Premium
-          </a>
-          <a href="/routes" style={styles.primary}>
-            Vai agli Itinerari
-          </a>
-        </div>
       </div>
     </div>
   );
@@ -64,12 +69,11 @@ const styles = {
     display: "grid",
     placeItems: "center",
     padding: 20,
-    background:
-      "linear-gradient(180deg, #0b1220 0%, #101a2f 45%, #0f172a 100%)",
+    background: "linear-gradient(180deg, #0b1428 0%, #12203d 100%)",
   },
   card: {
     width: "100%",
-    maxWidth: 680,
+    maxWidth: 640,
     background: "rgba(255,255,255,0.08)",
     border: "1px solid rgba(255,255,255,0.12)",
     borderRadius: 24,
@@ -78,36 +82,12 @@ const styles = {
     textAlign: "center",
   },
   title: {
-    marginTop: 0,
-    marginBottom: 12,
+    margin: 0,
     fontSize: 34,
   },
   text: {
+    marginTop: 12,
     fontSize: 18,
     opacity: 0.92,
-  },
-  actions: {
-    marginTop: 24,
-    display: "flex",
-    gap: 12,
-    flexWrap: "wrap",
-    justifyContent: "center",
-  },
-  primary: {
-    textDecoration: "none",
-    background: "linear-gradient(90deg, #f59e0b, #fb7185)",
-    color: "#111827",
-    padding: "12px 18px",
-    borderRadius: 14,
-    fontWeight: 800,
-  },
-  secondary: {
-    textDecoration: "none",
-    background: "rgba(255,255,255,0.08)",
-    color: "#fff",
-    padding: "12px 18px",
-    borderRadius: 14,
-    border: "1px solid rgba(255,255,255,0.12)",
-    fontWeight: 700,
   },
 };

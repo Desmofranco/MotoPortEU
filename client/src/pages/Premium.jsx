@@ -14,16 +14,16 @@ export default function Premium() {
     }
   }, []);
 
-  const isPremium = !!(user?.isPremium || user?.role === "premium");
+  const isPremium = !!(user?.isPremium || user?.passActive || user?.role === "premium");
 
-  const handleBuyPremium = async () => {
+  const handleCheckout = async () => {
     try {
       setLoading(true);
 
       const token = localStorage.getItem("token");
       if (!token) {
-        alert("Devi effettuare il login prima di attivare Premium.");
-        window.location.href = "/login";
+        alert("Devi prima registrarti o effettuare il login.");
+        window.location.href = "/register";
         return;
       }
 
@@ -37,7 +37,7 @@ export default function Premium() {
       const data = await res.json();
 
       if (!res.ok) {
-        throw new Error(data?.error || "Errore Stripe");
+        throw new Error(data?.error || "Errore nell'avvio del pagamento");
       }
 
       if (data.url) {
@@ -45,7 +45,7 @@ export default function Premium() {
       }
     } catch (err) {
       console.error(err);
-      alert(err.message || "Errore nell'avvio del checkout Stripe");
+      alert(err.message || "Errore Stripe");
     } finally {
       setLoading(false);
     }
@@ -53,37 +53,40 @@ export default function Premium() {
 
   return (
     <div style={styles.page}>
-      <div style={styles.hero}>
-        <h1 style={styles.title}>🏁 MotoPortEU Premium</h1>
+      <div style={styles.box}>
+        <div style={styles.badge}>ACCESSO APP</div>
+        <h1 style={styles.title}>🏍️ MotoPortEU Pass</h1>
         <p style={styles.subtitle}>
-          Sblocca l’esperienza rider completa e sostieni la crescita del progetto.
+          Per entrare nell’app e usare itinerari, circuiti, navigatore e garage,
+          è necessario attivare il Pass.
         </p>
-      </div>
 
-      <div style={styles.card}>
-        <div style={styles.priceBox}>
-          <div style={styles.badge}>PASS ANNUALE</div>
-          <h2 style={styles.price}>€ 9,99 / anno</h2>
-          <p style={styles.small}>
-            Prezzo lancio. Attivazione immediata dopo il pagamento.
-          </p>
+        <div style={styles.priceCard}>
+          <div style={styles.priceLabel}>PASS ANNUALE</div>
+          <div style={styles.price}>€ 9,99 / anno</div>
+          <div style={styles.note}>Accesso completo a MotoPortEU</div>
         </div>
 
         <ul style={styles.list}>
-          <li>✅ Supporto allo sviluppo MotoPortEU</li>
-          <li>✅ Badge Premium nel profilo</li>
-          <li>✅ Accesso funzioni Premium future</li>
-          <li>✅ Priorità su nuove feature rider</li>
-          <li>✅ Esperienza pro pronta per la crescita</li>
+          <li>✅ Accesso agli itinerari</li>
+          <li>✅ Accesso ai circuiti</li>
+          <li>✅ Accesso al navigatore</li>
+          <li>✅ Accesso al garage</li>
+          <li>✅ Supporto diretto allo sviluppo della piattaforma</li>
         </ul>
 
         {isPremium ? (
-          <div style={styles.premiumActive}>
-            ✅ Sei già un utente Premium
+          <div style={styles.successBox}>
+            ✅ Pass attivo. Puoi entrare nell’app.
+            <div style={{ marginTop: 14 }}>
+              <a href="/routes" style={styles.enterButton}>
+                Entra negli Itinerari
+              </a>
+            </div>
           </div>
         ) : (
           <button
-            onClick={handleBuyPremium}
+            onClick={handleCheckout}
             disabled={loading}
             style={{
               ...styles.button,
@@ -91,7 +94,7 @@ export default function Premium() {
               cursor: loading ? "wait" : "pointer",
             }}
           >
-            {loading ? "Reindirizzamento a Stripe..." : "Attiva Premium"}
+            {loading ? "Reindirizzamento a Stripe..." : "Attiva Pass"}
           </button>
         )}
       </div>
@@ -102,80 +105,97 @@ export default function Premium() {
 const styles = {
   page: {
     minHeight: "100vh",
-    background:
-      "linear-gradient(180deg, #0b1220 0%, #101a2f 45%, #0f172a 100%)",
-    color: "#fff",
-    padding: "24px 16px 90px",
+    background: "linear-gradient(180deg, #0b1428 0%, #12203d 100%)",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    padding: 20,
   },
-  hero: {
-    maxWidth: 900,
-    margin: "0 auto 24px",
-    textAlign: "center",
-  },
-  title: {
-    margin: 0,
-    fontSize: "clamp(30px, 5vw, 46px)",
-    fontWeight: 800,
-  },
-  subtitle: {
-    marginTop: 10,
-    opacity: 0.88,
-    fontSize: 16,
-  },
-  card: {
-    maxWidth: 760,
-    margin: "0 auto",
+  box: {
+    width: "100%",
+    maxWidth: 720,
     background: "rgba(255,255,255,0.08)",
     border: "1px solid rgba(255,255,255,0.12)",
     borderRadius: 24,
-    padding: 24,
+    padding: 28,
+    color: "#fff",
     boxShadow: "0 20px 40px rgba(0,0,0,0.25)",
-    backdropFilter: "blur(8px)",
-  },
-  priceBox: {
-    textAlign: "center",
-    marginBottom: 22,
   },
   badge: {
     display: "inline-block",
     padding: "6px 12px",
     borderRadius: 999,
-    background: "rgba(255,255,255,0.14)",
+    background: "rgba(255,255,255,0.12)",
     fontSize: 12,
-    fontWeight: 700,
+    fontWeight: 800,
     letterSpacing: 0.8,
   },
-  price: {
-    margin: "14px 0 8px",
-    fontSize: 38,
+  title: {
+    fontSize: "clamp(30px, 5vw, 46px)",
+    margin: "14px 0 10px",
   },
-  small: {
+  subtitle: {
     margin: 0,
+    opacity: 0.9,
+    fontSize: 16,
+    lineHeight: 1.6,
+  },
+  priceCard: {
+    marginTop: 22,
+    background: "rgba(255,255,255,0.08)",
+    border: "1px solid rgba(255,255,255,0.10)",
+    borderRadius: 20,
+    padding: 20,
+    textAlign: "center",
+  },
+  priceLabel: {
+    fontSize: 12,
+    fontWeight: 800,
+    letterSpacing: 1,
+    opacity: 0.9,
+  },
+  price: {
+    fontSize: 38,
+    fontWeight: 900,
+    marginTop: 10,
+  },
+  note: {
+    marginTop: 8,
     opacity: 0.8,
   },
   list: {
-    margin: "20px 0 28px",
-    paddingLeft: 18,
+    marginTop: 22,
+    paddingLeft: 22,
     lineHeight: 1.9,
     fontSize: 16,
   },
   button: {
     width: "100%",
+    marginTop: 20,
     border: "none",
-    borderRadius: 16,
+    borderRadius: 18,
     padding: "16px 18px",
     fontSize: 18,
-    fontWeight: 800,
+    fontWeight: 900,
     background: "linear-gradient(90deg, #f59e0b, #fb7185)",
     color: "#111827",
   },
-  premiumActive: {
-    marginTop: 18,
-    textAlign: "center",
-    padding: 16,
-    borderRadius: 16,
-    background: "rgba(34,197,94,0.18)",
+  successBox: {
+    marginTop: 20,
+    padding: 18,
+    borderRadius: 18,
+    background: "rgba(34,197,94,0.16)",
     border: "1px solid rgba(34,197,94,0.35)",
-    fontWeight: 700,
+    fontWeight: 800,
+    textAlign: "center",
+  },
+  enterButton: {
+    display: "inline-block",
+    textDecoration: "none",
+    background: "#ffffff",
+    color: "#111827",
+    padding: "12px 18px",
+    borderRadius: 14,
+    fontWeight: 900,
   },
 };
