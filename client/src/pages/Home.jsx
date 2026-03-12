@@ -192,18 +192,19 @@ export default function Home({ authUser }) {
                   </div>
                 ) : null}
 
-                {isLogged ? (
-                  <>
-                    <MenuItem icon="🗺️" label="Itinerari" path="/routes" accent />
-                    <MenuItem icon="🏁" label="Circuiti" path="/tracks" />
-                    <MenuItem icon="🧭" label="Navigatore" path="/map" />
-                    <MenuItem icon="🛠️" label="Garage" path="/garage" />
-                    <MenuItem icon="🏪" label="Fornitori" path="/suppliers" />
-                  </>
-                ) : null}
-                <MenuItem icon="🔒" label="Privacy" onClick={() => navigate("/privacy")} />
-                <MenuItem icon="❓" label="FAQ" path="/faq" />
-                <MenuItem icon="📜" label="Condizioni d’uso" path="/terms" />
+{isLogged ? (
+  <>
+    <MenuItem icon="🗺️" label="Itinerari" path="/routes" accent />
+    <MenuItem icon="🏁" label="Circuiti" path="/tracks" />
+    <MenuItem icon="🧭" label="Navigatore" path="/map" />
+    <MenuItem icon="🛠️" label="Garage" path="/garage" />
+    <MenuItem icon="🏪" label="Fornitori" path="/suppliers" />
+  </>
+) : null}
+
+<MenuItem icon="🔒" label="Privacy" path="/privacy" />
+<MenuItem icon="❓" label="FAQ" path="/faq" />
+<MenuItem icon="📜" label="Condizioni d’uso" path="/terms" />
                 <button
   type="button"
   onClick={async () => {
