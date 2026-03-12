@@ -3,37 +3,72 @@ import React from "react";
 export default function Faq() {
   return (
     <div style={{ padding: 16, maxWidth: 950, margin: "0 auto" }}>
-      <h1 style={{ margin: "6px 0 0", fontSize: 34, letterSpacing: -0.5 }}>FAQ ❓</h1>
+      <h1 style={{ margin: "6px 0 0", fontSize: 34, letterSpacing: -0.5 }}>
+        FAQ ❓
+      </h1>
+
       <p style={{ opacity: 0.75, marginTop: 6 }}>
-        Risposte rapide su MotoPortEU: itinerari, circuiti, mappa e garage.
+        Tutto quello che devi sapere su MotoPortEU: itinerari, navigatore e
+        strumenti per motociclisti.
       </p>
 
       <div style={{ marginTop: 14, display: "grid", gap: 12 }}>
-        <Card q="MotoPortEU è gratis?" a="Sì. Alcune funzioni avanzate potranno diventare Premium in futuro." />
+
+        <Card
+          q="MotoPortEU è gratuito?"
+          a="Sì. MotoPortEU può essere utilizzato gratuitamente. Alcune funzionalità avanzate potrebbero essere introdotte in futuro come servizi Premium."
+        />
+
+        <Card
+          q="Cosa posso fare con MotoPortEU?"
+          a="MotoPortEU ti permette di creare itinerari motociclistici, scoprire circuiti, pianificare percorsi su mappa, usare il navigatore rider e salvare i tuoi viaggi."
+        />
+
         <Card
           q="Come creo un itinerario?"
-          a="Vai su Mappa, aggiungi punti con la ricerca (Invio) o incolla coordinate, poi salva l’itinerario."
+          a="Apri la sezione Mappa, inserisci i punti del percorso oppure clicca sulla mappa per aggiungere tappe. Quando il percorso è completo puoi salvarlo tra i tuoi itinerari."
         />
+
         <Card
           q="Come avvio la navigazione?"
-          a="Apri un itinerario e usa “Avvia verso START” per partire dalla tua posizione attuale."
+          a="Apri un itinerario salvato e premi 'Apri navigazione'. Il navigatore utilizzerà la tua posizione GPS per guidarti lungo il percorso."
         />
+
         <Card
-          q="Il meteo non si vede."
-          a="Verifica la chiave OpenWeather (VITE_OWM_KEY) e la connessione."
+          q="Posso salvare i miei percorsi?"
+          a="Sì. Puoi salvare i tuoi itinerari e riaprirli quando vuoi, modificarli oppure esportarli in formato GPX."
         />
+
         <Card
-          q="Contatti / supporto"
+          q="Il GPS non parte"
+          a="Assicurati di aver autorizzato l'accesso alla posizione sul tuo dispositivo. Il GPS richiede il consenso del browser o del telefono per funzionare correttamente."
+        />
+
+        <Card
+          q="MotoPortEU funziona su smartphone?"
+          a="Sì. MotoPortEU è una Progressive Web App e può essere installata direttamente sul tuo telefono Android o iPhone per essere usata come una vera applicazione."
+        />
+
+        <Card
+          q="Come installo l'app sul telefono?"
+          a="Apri il menu e seleziona 'Installa MotoPortEU'. Il browser ti proporrà l'installazione dell'app sul tuo dispositivo."
+        />
+
+        <Card
+          q="Come posso contattare il supporto?"
           a={
             <>
-              Scrivici a{" "}
-              <a href="mailto:motoporteu@gmail.com" style={{ fontWeight: 900 }}>
+              Per domande o segnalazioni puoi scriverci a{" "}
+              <a
+                href="mailto:motoporteu@gmail.com"
+                style={{ fontWeight: 900 }}
+              >
                 motoporteu@gmail.com
               </a>
-              .
             </>
           }
         />
+
       </div>
     </div>
   );
