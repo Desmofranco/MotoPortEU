@@ -201,7 +201,7 @@ export default function Home({ authUser }) {
                     <MenuItem icon="🏪" label="Fornitori" path="/suppliers" />
                   </>
                 ) : null}
-
+                <MenuItem icon="🔒" label="Privacy" onClick={() => navigate("/privacy")} />
                 <MenuItem icon="❓" label="FAQ" path="/faq" />
                 <MenuItem icon="📜" label="Condizioni d’uso" path="/terms" />
                 <button
