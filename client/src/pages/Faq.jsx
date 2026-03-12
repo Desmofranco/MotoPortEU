@@ -18,7 +18,10 @@ export default function Faq() {
           q="MotoPortEU è gratuito?"
           a="Sì. MotoPortEU può essere utilizzato gratuitamente. Alcune funzionalità avanzate potrebbero essere introdotte in futuro come servizi Premium."
         />
-
+        <Card
+  q="Perché il pagamento appare come BoatPort?"
+  a="MotoPortEU fa parte dell’ecosistema BoatPort. Per questo motivo alcuni pagamenti possono comparire con il nome BoatPort nel sistema di pagamento."
+/>
         <Card
           q="Cosa posso fare con MotoPortEU?"
           a="MotoPortEU ti permette di creare itinerari motociclistici, scoprire circuiti, pianificare percorsi su mappa, usare il navigatore rider e salvare i tuoi viaggi."

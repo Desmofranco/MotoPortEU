@@ -31,6 +31,13 @@ export default function Terms() {
         </p>
 
         <p>
+MotoPortEU fa parte dell’ecosistema di progetti digitali sviluppati
+nell’ambito della piattaforma BoatPort. Per questo motivo alcuni
+pagamenti o comunicazioni di pagamento possono comparire con il nome
+BoatPort nei sistemi di pagamento o nelle ricevute.
+</p>
+
+        <p>
           Le informazioni presenti nella piattaforma sono fornite a scopo
           informativo e possono includere dati provenienti da fonti pubbliche o
           da contributi degli utenti.
