@@ -1,31 +1,36 @@
 // =======================================================
 // src/pages/Home.jsx
 // MotoPortEU — Home intelligente + menu dropdown + logout reale
-// ✅ Layout centrato (phone frame)
-// ✅ Dropdown stabile (z-index alto + non tagliato)
 // ✅ Home pubblica / Home utente loggato
-// ✅ Logout reale con clearAuthSession()
+// ✅ Menu con Logout quando autenticato
+// ✅ Fix sync stato login tornando in Home
 // ✅ Coerente con mp_token / mp_user
 // =======================================================
 
 import React, { useEffect, useMemo, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { clearAuthSession, getStoredUser, getToken } from "../utils/auth";
 import { triggerInstall } from "../utils/installPrompt";
+
 export default function Home({ authUser }) {
   const navigate = useNavigate();
+  const location = useLocation();
 
   const [menuOpen, setMenuOpen] = useState(false);
-  const [localUser, setLocalUser] = useState(getStoredUser());
-  const [isLogged, setIsLogged] = useState(Boolean(getToken()));
+  const [localUser, setLocalUser] = useState(() => getStoredUser());
+  const [isLogged, setIsLogged] = useState(() => Boolean(getToken()));
 
   const activeUser = useMemo(() => authUser || localUser, [authUser, localUser]);
 
   useEffect(() => {
     const sync = () => {
-      setIsLogged(Boolean(getToken()));
-      setLocalUser(getStoredUser());
+      const token = getToken();
+      const user = getStoredUser();
+      setIsLogged(Boolean(token));
+      setLocalUser(user || null);
     };
+
+    sync();
 
     window.addEventListener("storage", sync);
     window.addEventListener("focus", sync);
@@ -34,7 +39,7 @@ export default function Home({ authUser }) {
       window.removeEventListener("storage", sync);
       window.removeEventListener("focus", sync);
     };
-  }, []);
+  }, [location.pathname, authUser]);
 
   const handleLogout = () => {
     clearAuthSession();
@@ -133,7 +138,7 @@ export default function Home({ authUser }) {
             }}
           />
 
-          <div style={{ position: "absolute", top: 14, right: 14, zIndex: 50 }}>
+          <div style={{ position: "absolute", top: 14, right: 14, zIndex: 60 }}>
             <button
               type="button"
               onClick={() => setMenuOpen((v) => !v)}
@@ -157,6 +162,8 @@ export default function Home({ authUser }) {
             {menuOpen && (
               <div
                 style={{
+                  position: "relative",
+                  zIndex: 61,
                   marginTop: 10,
                   width: 320,
                   maxWidth: "calc(100vw - 28px)",
@@ -192,44 +199,45 @@ export default function Home({ authUser }) {
                   </div>
                 ) : null}
 
-{isLogged ? (
-  <>
-    <MenuItem icon="🗺️" label="Itinerari" path="/routes" accent />
-    <MenuItem icon="🏁" label="Circuiti" path="/tracks" />
-    <MenuItem icon="🧭" label="Navigatore" path="/map" />
-    <MenuItem icon="🛠️" label="Garage" path="/garage" />
-    <MenuItem icon="🏪" label="Fornitori" path="/suppliers" />
-  </>
-) : null}
+                {isLogged ? (
+                  <>
+                    <MenuItem icon="🗺️" label="Itinerari" path="/routes" accent />
+                    <MenuItem icon="🏁" label="Circuiti" path="/tracks" />
+                    <MenuItem icon="🧭" label="Navigatore" path="/map" />
+                    <MenuItem icon="🛠️" label="Garage" path="/garage" />
+                  </>
+                ) : null}
 
-<MenuItem icon="🔒" label="Privacy" path="/privacy" />
-<MenuItem icon="❓" label="FAQ" path="/faq" />
-<MenuItem icon="📜" label="Condizioni d’uso" path="/terms" />
+                <MenuItem icon="🔒" label="Privacy" path="/privacy" />
+                <MenuItem icon="❓" label="FAQ" path="/faq" />
+                <MenuItem icon="📜" label="Condizioni d’uso" path="/terms" />
+
                 <button
-  type="button"
-  onClick={async () => {
-    setMenuOpen(false);
-    await triggerInstall();
-  }}
-  style={{
-    width: "100%",
-    display: "flex",
-    alignItems: "center",
-    gap: 10,
-    padding: "10px 12px",
-    borderRadius: 14,
-    border: "1px solid rgba(255,255,255,0.14)",
-    background: "rgba(255,255,255,0.06)",
-    color: "rgba(255,255,255,0.95)",
-    cursor: "pointer",
-    fontWeight: 900,
-    textAlign: "left",
-  }}
->
-  <span style={{ width: 22, textAlign: "center" }}>📲</span>
-  <span style={{ flex: 1 }}>Installa MotoPortEU</span>
-  <span style={{ opacity: 0.7 }}>›</span>
-</button>
+                  type="button"
+                  onClick={async () => {
+                    setMenuOpen(false);
+                    await triggerInstall();
+                  }}
+                  style={{
+                    width: "100%",
+                    display: "flex",
+                    alignItems: "center",
+                    gap: 10,
+                    padding: "10px 12px",
+                    borderRadius: 14,
+                    border: "1px solid rgba(255,255,255,0.14)",
+                    background: "rgba(255,255,255,0.06)",
+                    color: "rgba(255,255,255,0.95)",
+                    cursor: "pointer",
+                    fontWeight: 900,
+                    textAlign: "left",
+                  }}
+                >
+                  <span style={{ width: 22, textAlign: "center" }}>📲</span>
+                  <span style={{ flex: 1 }}>Installa MotoPortEU</span>
+                  <span style={{ opacity: 0.7 }}>›</span>
+                </button>
+
                 <button
                   type="button"
                   onClick={() => {
@@ -304,7 +312,7 @@ export default function Home({ authUser }) {
               style={{
                 position: "absolute",
                 inset: 0,
-                zIndex: 40,
+                zIndex: 50,
                 background: "transparent",
               }}
             />
