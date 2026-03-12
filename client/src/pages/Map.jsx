@@ -7,7 +7,7 @@
 // ✅ Rider Route Engine integrato (hook + scoring + cockpit)
 // ✅ Snap su strada + build route via useRouteEngine
 // ✅ Navigatore base (GPS follow + next waypoint + Google Maps nav)
-// ✅ Timer corsa: Start/Stop salva sessioni e tempo totale (solo con GPS ON)
+// ✅ Timer corsa FIXATO: Start/Stop salva sessioni e tempo totale (solo con GPS ON)
 // ✅ Export GPX
 // ✅ GPS Live + Scia (trail) in tempo reale
 // ✅ Inserimento manuale percorso (coordinate / link Google Maps) + preview + replace
@@ -675,6 +675,8 @@ export default function Map() {
   const [runStartMs, setRunStartMs] = useState(null);
   const [runElapsedSec, setRunElapsedSec] = useState(0);
   const tickRef = useRef(null);
+  const runStartMsRef = useRef(null);
+  const runElapsedSecRef = useRef(0);
 
   const [runTrack, setRunTrack] = useState([]);
   const lastRunTrackRef = useRef(null);
@@ -844,9 +846,17 @@ export default function Map() {
 
     setNavOn(false);
     setNextIdx(0);
+
+    if (tickRef.current) {
+      clearInterval(tickRef.current);
+      tickRef.current = null;
+    }
     setRunOn(false);
     setRunElapsedSec(0);
     setRunStartMs(null);
+    runStartMsRef.current = null;
+    runElapsedSecRef.current = 0;
+
     setRunTrack([]);
     lastRunTrackRef.current = null;
     resetEngine();
@@ -1050,12 +1060,24 @@ export default function Map() {
 
   useEffect(() => {
     if (!gpsOn) {
+      if (tickRef.current) {
+        clearInterval(tickRef.current);
+        tickRef.current = null;
+      }
+
       setGps(null);
       setFollowGps(true);
       setNavOn(false);
+
       setRunOn(false);
+      setRunElapsedSec(0);
+      setRunStartMs(null);
+      runStartMsRef.current = null;
+      runElapsedSecRef.current = 0;
+
       setGpsTrail([]);
       lastTrailPointRef.current = null;
+
       setRunTrack([]);
       lastRunTrackRef.current = null;
       return;
@@ -1128,27 +1150,41 @@ export default function Map() {
 
   useEffect(() => {
     if (!runOn) {
-      if (tickRef.current) clearInterval(tickRef.current);
-      tickRef.current = null;
+      if (tickRef.current) {
+        clearInterval(tickRef.current);
+        tickRef.current = null;
+      }
       return;
     }
 
-    const start = Date.now();
-    setRunStartMs(start);
-    setRunElapsedSec(0);
+    if (!runStartMsRef.current) {
+      const now = Date.now();
+      runStartMsRef.current = now;
+      setRunStartMs(now);
+    }
 
-    setRunTrack(gps ? [gps] : []);
-    lastRunTrackRef.current = gps || null;
+    if (tickRef.current) {
+      clearInterval(tickRef.current);
+      tickRef.current = null;
+    }
 
-    tickRef.current = setInterval(() => {
-      setRunElapsedSec(Math.floor((Date.now() - start) / 1000));
-    }, 1000);
+    const updateElapsed = () => {
+      const start = runStartMsRef.current || Date.now();
+      const sec = Math.max(0, Math.floor((Date.now() - start) / 1000));
+      runElapsedSecRef.current = sec;
+      setRunElapsedSec(sec);
+    };
+
+    updateElapsed();
+    tickRef.current = setInterval(updateElapsed, 1000);
 
     return () => {
-      if (tickRef.current) clearInterval(tickRef.current);
-      tickRef.current = null;
+      if (tickRef.current) {
+        clearInterval(tickRef.current);
+        tickRef.current = null;
+      }
     };
-  }, [runOn, gps]);
+  }, [runOn]);
 
   const undo = () => {
     setPoints((prev) => prev.slice(0, -1));
@@ -1158,14 +1194,23 @@ export default function Map() {
   };
 
   const clear = () => {
+    if (tickRef.current) {
+      clearInterval(tickRef.current);
+      tickRef.current = null;
+    }
+
     setPoints([]);
     setSnappedLine(null);
     setRouteMeta({ distanceKm: 0, durationMin: 0, steps: [] });
     setNavOn(false);
     setNextIdx(0);
+
     setRunOn(false);
     setRunElapsedSec(0);
     setRunStartMs(null);
+    runStartMsRef.current = null;
+    runElapsedSecRef.current = 0;
+
     setRunTrack([]);
     lastRunTrackRef.current = null;
     setPoiResults([]);
@@ -1185,6 +1230,11 @@ export default function Map() {
   };
 
   const newRoute = () => {
+    if (tickRef.current) {
+      clearInterval(tickRef.current);
+      tickRef.current = null;
+    }
+
     setActiveId("");
     setName("");
     setNote("");
@@ -1194,9 +1244,13 @@ export default function Map() {
     setRouteMeta({ distanceKm: 0, durationMin: 0, steps: [] });
     setNavOn(false);
     setNextIdx(0);
+
     setRunOn(false);
     setRunElapsedSec(0);
     setRunStartMs(null);
+    runStartMsRef.current = null;
+    runElapsedSecRef.current = 0;
+
     setRunTrack([]);
     lastRunTrackRef.current = null;
     setPoiResults([]);
@@ -1243,21 +1297,29 @@ export default function Map() {
   const stopAndSaveRun = () => {
     if (!runOn) return;
 
+    if (tickRef.current) {
+      clearInterval(tickRef.current);
+      tickRef.current = null;
+    }
+
     const cleanName = String(name || "").trim();
     if (!cleanName) {
-      alert("Dai un nome all’itinerario prima di salvare il tempo.");
       setRunOn(false);
+      alert("Dai un nome all’itinerario prima di salvare il tempo.");
       return;
     }
     if (!points || points.length < 2) {
-      alert("Serve un itinerario con almeno 2 punti.");
       setRunOn(false);
+      alert("Serve un itinerario con almeno 2 punti.");
       return;
     }
 
     const endMs = Date.now();
-    const startMs = runStartMs ?? endMs - runElapsedSec * 1000;
-    const durSec = Math.max(1, Math.floor((endMs - startMs) / 1000));
+    const startMs = runStartMsRef.current ?? runStartMs ?? endMs;
+    const durSec =
+      runElapsedSecRef.current > 0
+        ? runElapsedSecRef.current
+        : Math.max(1, Math.floor((endMs - startMs) / 1000));
 
     const id = activeId || uid();
 
@@ -1300,6 +1362,10 @@ export default function Map() {
 
     setActiveId(id);
     setRunOn(false);
+    setRunElapsedSec(durSec);
+    setRunStartMs(null);
+    runStartMsRef.current = null;
+    runElapsedSecRef.current = durSec;
     setRunTrack([]);
     lastRunTrackRef.current = null;
   };
@@ -1392,9 +1458,25 @@ export default function Map() {
   };
 
   const startRun = () => {
+    if (runOn) return;
     if (!gpsOn) return alert("Per avviare il timer devi attivare GPS ON.");
     if (!gps) return alert("Aspetta il fix GPS (posizione non ancora disponibile).");
     if (points.length < 2) return alert("Crea prima un percorso (min 2 punti).");
+
+    if (tickRef.current) {
+      clearInterval(tickRef.current);
+      tickRef.current = null;
+    }
+
+    const now = Date.now();
+    runStartMsRef.current = now;
+    runElapsedSecRef.current = 0;
+
+    setRunStartMs(now);
+    setRunElapsedSec(0);
+    setRunTrack(gps ? [gps] : []);
+    lastRunTrackRef.current = gps || null;
+
     setRunOn(true);
   };
 
