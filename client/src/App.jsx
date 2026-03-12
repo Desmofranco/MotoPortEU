@@ -16,7 +16,7 @@ import PremiumSuccess from "./pages/PremiumSuccess";
 
 import AppShell from "./components/AppShell";
 import RequireAuth from "./components/RequireAuth";
-
+import Privacy from "./pages/Privacy";
 import {
   setInstallPrompt,
   clearInstallPrompt,
@@ -55,7 +55,7 @@ export default function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/premium" element={<Premium />} />
         <Route path="/premium-success" element={<PremiumSuccess />} />
-
+<Route path="/privacy" element={<Privacy />} />
         <Route
           path="/routes"
           element={
