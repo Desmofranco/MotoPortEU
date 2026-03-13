@@ -1,12 +1,34 @@
 import React from "react";
 import { Navigate, useLocation } from "react-router-dom";
-import { getToken, getStoredUser } from "../utils/auth";
+
+function getAnyToken() {
+  return (
+    localStorage.getItem("mp_token") ||
+    localStorage.getItem("token") ||
+    null
+  );
+}
+
+function getAnyUser() {
+  const raw =
+    localStorage.getItem("mp_user") ||
+    localStorage.getItem("user") ||
+    null;
+
+  if (!raw) return null;
+
+  try {
+    return JSON.parse(raw);
+  } catch {
+    return null;
+  }
+}
 
 export default function RequireAuth({ children }) {
   const location = useLocation();
 
-  const token = getToken();
-  const user = getStoredUser();
+  const token = getAnyToken();
+  const user = getAnyUser();
 
   if (!token) {
     return <Navigate to="/login" replace state={{ from: location }} />;
