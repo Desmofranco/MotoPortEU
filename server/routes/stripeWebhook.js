@@ -36,6 +36,9 @@ router.post(
             await User.findByIdAndUpdate(userId, {
               isPremium: true,
               role: "premium",
+              passActive: true,
+              trialActive: false,
+              trialExpires: null,
               stripeCustomerId: session.customer || null,
               stripeSubscriptionId: session.subscription || null,
               premiumActivatedAt: new Date(),
@@ -55,8 +58,13 @@ router.post(
               {
                 isPremium: true,
                 role: "premium",
+                passActive: true,
+                trialActive: false,
+                trialExpires: null,
               }
             );
+
+            console.log("💳 Invoice paid, premium confermato per subscription:", invoice.subscription);
           }
           break;
         }
@@ -69,6 +77,7 @@ router.post(
             {
               isPremium: false,
               role: "user",
+              passActive: false,
               premiumExpiredAt: new Date(),
             }
           );
