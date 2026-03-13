@@ -684,21 +684,27 @@ export default function Garage() {
               <div style={{ marginTop: 16, paddingTop: 14, borderTop: "1px solid rgba(0,0,0,0.10)" }}>
                 <strong>Intervalli (km)</strong>
                 <div style={{ marginTop: 10, display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(180px, 1fr))", gap: 10 }}>
-                  <IntervalInput
-                    label="Olio ogni"
-                    value={String(activeBike.maintenance?.oilEveryKm ?? DEFAULTS.oilEveryKm)}
-                    onChange={(v) => updateIntervals({ oilEveryKm: clampNum(v, 500, 50000) })}
-                  />
-                  <IntervalInput
-                    label="Catena ogni"
-                    value={String(activeBike.maintenance?.chainEveryKm ?? DEFAULTS.chainEveryKm)}
-                    onChange={(v) => updateIntervals({ chainEveryKm: clampNum(v, 100, 10000) })}
-                  />
-                  <IntervalInput
-                    label="Gomme ogni"
-                    value={String(activeBike.maintenance?.tiresEveryKm ?? DEFAULTS.tiresEveryKm)}
-                    onChange={(v) => updateIntervals({ tiresEveryKm: clampNum(v, 1000, 50000) })}
-                  />
+                <IntervalInput
+  label="Olio ogni"
+  value={String(activeBike.maintenance?.oilEveryKm ?? DEFAULTS.oilEveryKm)}
+  min={500}
+  max={50000}
+  onCommit={(v) => updateIntervals({ oilEveryKm: v })}
+/>
+<IntervalInput
+  label="Catena ogni"
+  value={String(activeBike.maintenance?.chainEveryKm ?? DEFAULTS.chainEveryKm)}
+  min={100}
+  max={10000}
+  onCommit={(v) => updateIntervals({ chainEveryKm: v })}
+/>
+<IntervalInput
+  label="Gomme ogni"
+  value={String(activeBike.maintenance?.tiresEveryKm ?? DEFAULTS.tiresEveryKm)}
+  min={1000}
+  max={50000}
+  onCommit={(v) => updateIntervals({ tiresEveryKm: v })}
+/>
                 </div>
                 <div style={{ marginTop: 8, fontSize: 12, opacity: 0.72 }}>
                   Suggerimento: registra un intervento nello storico per avere scadenze davvero precise su olio, catena e gomme.
@@ -902,20 +908,51 @@ function HealthRow({ title, item }) {
   );
 }
 
-function IntervalInput({ label, value, onChange }) {
+function IntervalInput({ label, value, min = 0, max = 9999999, onCommit }) {
+  const [draft, setDraft] = useState(String(value ?? ""));
+
+  useEffect(() => {
+    setDraft(String(value ?? ""));
+  }, [value]);
+
+  const commit = () => {
+    const raw = String(draft ?? "").trim();
+
+    // se l’utente lascia vuoto, ripristina il valore attuale senza salvare schifezze
+    if (!raw) {
+      setDraft(String(value ?? ""));
+      return;
+    }
+
+    const next = clampNum(raw, min, max);
+    setDraft(String(next));
+    onCommit?.(next);
+  };
+
   return (
     <label style={{ display: "grid", gap: 6 }}>
       <span style={{ fontSize: 12, opacity: 0.8 }}>{label}</span>
       <input
-        value={value}
-        onChange={(e) => onChange(e.target.value)}
+        value={draft}
+        onChange={(e) => setDraft(e.target.value)}
+        onBlur={commit}
+        onKeyDown={(e) => {
+          if (e.key === "Enter") {
+            e.preventDefault();
+            commit();
+          }
+        }}
         inputMode="numeric"
-        style={{ padding: "10px 12px", borderRadius: 12, border: "1px solid rgba(0,0,0,0.15)", outline: "none" }}
+        style={{
+          padding: "10px 12px",
+          borderRadius: 12,
+          border: "1px solid rgba(0,0,0,0.15)",
+          outline: "none",
+        }}
       />
     </label>
   );
 }
-
 function DocCard({ doc, onDelete }) {
   const dataUrl = doc.dataUrl || null;
   const isPdf = dataUrl ? String(dataUrl).startsWith("data:application/pdf") : false;
