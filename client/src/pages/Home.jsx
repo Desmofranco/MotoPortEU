@@ -5,6 +5,7 @@
 // ✅ Menu con Logout quando autenticato
 // ✅ Fix sync stato login tornando in Home
 // ✅ Compatibile con mp_token/mp_user e token/user
+// ✅ Badge demo gratuita con giorni rimasti
 // =======================================================
 
 import React, { useEffect, useMemo, useState } from "react";
@@ -27,6 +28,18 @@ function getAnyUser() {
   }
 }
 
+function getTrialDaysLeft(user) {
+  if (!user?.trialActive || !user?.trialExpires) return 0;
+
+  const expiresAt = new Date(user.trialExpires).getTime();
+  if (Number.isNaN(expiresAt)) return 0;
+
+  const diffMs = expiresAt - Date.now();
+  if (diffMs <= 0) return 0;
+
+  return Math.ceil(diffMs / (1000 * 60 * 60 * 24));
+}
+
 export default function Home({ authUser }) {
   const navigate = useNavigate();
   const location = useLocation();
@@ -36,6 +49,20 @@ export default function Home({ authUser }) {
   const [isLogged, setIsLogged] = useState(() => Boolean(getAnyToken()));
 
   const activeUser = useMemo(() => authUser || localUser, [authUser, localUser]);
+
+  const trialDaysLeft = useMemo(() => getTrialDaysLeft(activeUser), [activeUser]);
+
+  const isPaidPremium = !!(
+    activeUser?.isPremium ||
+    activeUser?.passActive ||
+    activeUser?.role === "premium"
+  );
+
+  const hasActiveTrial = !!(
+    activeUser?.trialActive &&
+    trialDaysLeft > 0 &&
+    !isPaidPremium
+  );
 
   useEffect(() => {
     const sync = () => {
@@ -355,6 +382,9 @@ export default function Home({ authUser }) {
                 paddingTop: 42,
                 textAlign: "center",
                 color: "white",
+                display: "grid",
+                gap: 10,
+                justifyItems: "center",
               }}
             >
               {isLogged && activeUser ? (
@@ -371,6 +401,45 @@ export default function Home({ authUser }) {
                   }}
                 >
                   👋 Bentornato, {activeUser.name || "Rider"}
+                </div>
+              ) : null}
+
+              {hasActiveTrial ? (
+                <div
+                  style={{
+                    display: "grid",
+                    gap: 8,
+                    justifyItems: "center",
+                    padding: "10px 14px",
+                    borderRadius: 18,
+                    background: "rgba(255, 193, 7, 0.14)",
+                    border: "1px solid rgba(255, 193, 7, 0.35)",
+                    backdropFilter: "blur(8px)",
+                    maxWidth: 300,
+                  }}
+                >
+                  <div style={{ fontSize: 13, fontWeight: 900 }}>
+                    🎁 Demo gratuita attiva
+                  </div>
+                  <div style={{ fontSize: 13, opacity: 0.95 }}>
+                    Giorni rimasti: <strong>{trialDaysLeft}</strong>
+                  </div>
+                  <button
+                    className="btn"
+                    onClick={() => navigate("/premium")}
+                    style={{
+                      background: "white",
+                      color: "black",
+                      fontWeight: 900,
+                      padding: "8px 14px",
+                      borderRadius: 12,
+                      border: "none",
+                      fontSize: 14,
+                      cursor: "pointer",
+                    }}
+                  >
+                    Attiva Pass
+                  </button>
                 </div>
               ) : null}
             </div>
@@ -485,6 +554,25 @@ export default function Home({ authUser }) {
                     >
                       Apri Navigatore
                     </button>
+
+                    {hasActiveTrial ? (
+                      <button
+                        className="btn"
+                        onClick={() => navigate("/premium")}
+                        style={{
+                          background: "rgba(255, 193, 7, 0.18)",
+                          color: "white",
+                          fontWeight: 900,
+                          padding: "12px",
+                          borderRadius: 14,
+                          border: "1px solid rgba(255, 193, 7, 0.45)",
+                          fontSize: 16,
+                          cursor: "pointer",
+                        }}
+                      >
+                        Demo attiva: {trialDaysLeft} giorni rimasti — Attiva Pass
+                      </button>
+                    ) : null}
                   </>
                 )}
               </div>
