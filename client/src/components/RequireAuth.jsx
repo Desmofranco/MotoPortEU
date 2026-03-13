@@ -24,6 +24,15 @@ function getAnyUser() {
   }
 }
 
+function hasValidTrial(user) {
+  if (!user?.trialActive || !user?.trialExpires) return false;
+
+  const expiresAt = new Date(user.trialExpires).getTime();
+  if (Number.isNaN(expiresAt)) return false;
+
+  return expiresAt > Date.now();
+}
+
 export default function RequireAuth({ children }) {
   const location = useLocation();
 
@@ -40,7 +49,9 @@ export default function RequireAuth({ children }) {
     user?.role === "premium"
   );
 
-  if (!isPremium) {
+  const isTrial = hasValidTrial(user);
+
+  if (!isPremium && !isTrial) {
     return <Navigate to="/premium" replace state={{ from: location }} />;
   }
 
