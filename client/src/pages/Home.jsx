@@ -4,28 +4,43 @@
 // ✅ Home pubblica / Home utente loggato
 // ✅ Menu con Logout quando autenticato
 // ✅ Fix sync stato login tornando in Home
-// ✅ Coerente con mp_token / mp_user
+// ✅ Compatibile con mp_token/mp_user e token/user
 // =======================================================
 
 import React, { useEffect, useMemo, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { clearAuthSession, getStoredUser, getToken } from "../utils/auth";
+import { clearAuthSession } from "../utils/auth";
 import { triggerInstall } from "../utils/installPrompt";
+
+function getAnyToken() {
+  return localStorage.getItem("mp_token") || localStorage.getItem("token") || null;
+}
+
+function getAnyUser() {
+  const raw = localStorage.getItem("mp_user") || localStorage.getItem("user") || null;
+  if (!raw) return null;
+
+  try {
+    return JSON.parse(raw);
+  } catch {
+    return null;
+  }
+}
 
 export default function Home({ authUser }) {
   const navigate = useNavigate();
   const location = useLocation();
 
   const [menuOpen, setMenuOpen] = useState(false);
-  const [localUser, setLocalUser] = useState(() => getStoredUser());
-  const [isLogged, setIsLogged] = useState(() => Boolean(getToken()));
+  const [localUser, setLocalUser] = useState(() => getAnyUser());
+  const [isLogged, setIsLogged] = useState(() => Boolean(getAnyToken()));
 
   const activeUser = useMemo(() => authUser || localUser, [authUser, localUser]);
 
   useEffect(() => {
     const sync = () => {
-      const token = getToken();
-      const user = getStoredUser();
+      const token = getAnyToken();
+      const user = getAnyUser();
       setIsLogged(Boolean(token));
       setLocalUser(user || null);
     };
@@ -43,6 +58,12 @@ export default function Home({ authUser }) {
 
   const handleLogout = () => {
     clearAuthSession();
+
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
+    localStorage.removeItem("mp_token");
+    localStorage.removeItem("mp_user");
+
     setIsLogged(false);
     setLocalUser(null);
     setMenuOpen(false);
