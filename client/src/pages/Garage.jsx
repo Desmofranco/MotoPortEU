@@ -3,6 +3,10 @@
 // ✅ FIX: puoi salvare documenti anche SENZA file (solo tipo+scadenza+note)
 // ✅ NEW: Storico Tagliandi / Interventi (offline) per ogni moto
 // ✅ MOBILE: layout mobile-first (titoli, griglie, bottoni full width)
+// ✅ FIX: logica km manutenzione corretta
+//    - usa ultimo intervento compatibile se presente
+//    - fallback: km attuali + intervallo
+//    - niente multipli incoerenti
 // =======================================================
 import { useEffect, useMemo, useState } from "react";
 import { loadBikes, saveBikes, fileToDataUrl } from "../utils/storage";
@@ -24,19 +28,21 @@ const DOC_TYPES = [
 ];
 
 function clampNum(v, min, max) {
-  const n = Number(String(v).trim());
+  const normalized = String(v ?? "")
+    .replace(/[^\d.,-]/g, "")
+    .replace(",", ".");
+  const n = Number(normalized.trim());
   if (Number.isNaN(n)) return min;
   return Math.max(min, Math.min(max, n));
 }
 
-function nextDueAt(currentKm, intervalKm) {
-  const km = Number(currentKm || 0);
-  const interval = Math.max(1, Number(intervalKm || 1));
-  return Math.ceil(km / interval) * interval + interval;
+function parseKm(v, fallback = 0) {
+  const n = clampNum(v, 0, 9999999);
+  return Number.isFinite(n) ? Math.round(n) : fallback;
 }
 
 function statusFor(nextDueKm, currentKm) {
-  const left = nextDueKm - currentKm;
+  const left = Number(nextDueKm || 0) - Number(currentKm || 0);
   if (left <= 0) return { label: "SCADUTO", level: "bad" };
   if (left <= 150) return { label: "URGENTE", level: "warn" };
   if (left <= 500) return { label: "PRESTO", level: "soon" };
@@ -57,6 +63,88 @@ function expiryStatus(diffDays) {
   if (diffDays <= 15) return { label: "URGENTE", level: "warn" };
   if (diffDays <= 45) return { label: "PRESTO", level: "soon" };
   return { label: "OK", level: "ok" };
+}
+
+function normalizeType(str) {
+  return String(str || "").trim().toLowerCase();
+}
+
+function inferServiceCategory(type) {
+  const t = normalizeType(type);
+
+  if (
+    t.includes("olio") ||
+    t.includes("tagliando") ||
+    t.includes("service")
+  ) {
+    return "oil";
+  }
+
+  if (t.includes("catena") || t.includes("chain")) {
+    return "chain";
+  }
+
+  if (
+    t.includes("gomme") ||
+    t.includes("gomme") ||
+    t.includes("pneumatic") ||
+    t.includes("tire") ||
+    t.includes("tyre")
+  ) {
+    return "tires";
+  }
+
+  return "other";
+}
+
+function getLastServiceKm(serviceLog = [], category) {
+  const arr = Array.isArray(serviceLog) ? serviceLog : [];
+  const matches = arr
+    .filter((x) => inferServiceCategory(x?.type) === category)
+    .map((x) => ({
+      km: parseKm(x?.km, 0),
+      date: String(x?.date || ""),
+      createdAt: String(x?.createdAt || ""),
+      type: String(x?.type || ""),
+    }))
+    .sort((a, b) => {
+      if (a.km !== b.km) return b.km - a.km;
+      if (a.date !== b.date) return b.date.localeCompare(a.date);
+      return b.createdAt.localeCompare(a.createdAt);
+    });
+
+  return matches[0] || null;
+}
+
+function buildMaintenanceItem({
+  currentKm,
+  interval,
+  lastEntry,
+  categoryLabel,
+}) {
+  const safeCurrent = parseKm(currentKm, 0);
+  const safeInterval = Math.max(1, parseKm(interval, 1));
+
+  const lastKm = lastEntry ? parseKm(lastEntry.km, 0) : null;
+
+  // Se c'è uno storico valido, usiamo quello come base.
+  // Altrimenti baseline semplice e chiara: km attuali + intervallo.
+  const nextDueKm =
+    lastKm !== null ? lastKm + safeInterval : safeCurrent + safeInterval;
+
+  const left = nextDueKm - safeCurrent;
+  const status = statusFor(nextDueKm, safeCurrent);
+
+  return {
+    interval: safeInterval,
+    next: nextDueKm,
+    left,
+    lastKm,
+    lastType: lastEntry?.type || "",
+    categoryLabel,
+    calcMode: lastKm !== null ? "from-service-log" : "from-current-km",
+    ...status,
+  };
 }
 
 export default function Garage() {
@@ -82,7 +170,7 @@ export default function Garage() {
   const [docFile, setDocFile] = useState(null);
   const [docBusy, setDocBusy] = useState(false);
 
-  // ✅ Storico tagliandi/interventi
+  // Storico tagliandi/interventi
   const [svcDate, setSvcDate] = useState("");
   const [svcKm, setSvcKm] = useState("");
   const [svcType, setSvcType] = useState("Tagliando");
@@ -106,41 +194,46 @@ export default function Garage() {
   const computed = useMemo(() => {
     if (!activeBike) return null;
 
-    const currentKm = Number(activeBike.km || 0);
-    const oilInterval = Number(
-      activeBike.maintenance?.oilEveryKm ?? DEFAULTS.oilEveryKm
+    const currentKm = parseKm(activeBike.km, 0);
+    const oilInterval = parseKm(
+      activeBike.maintenance?.oilEveryKm ?? DEFAULTS.oilEveryKm,
+      DEFAULTS.oilEveryKm
     );
-    const chainInterval = Number(
-      activeBike.maintenance?.chainEveryKm ?? DEFAULTS.chainEveryKm
+    const chainInterval = parseKm(
+      activeBike.maintenance?.chainEveryKm ?? DEFAULTS.chainEveryKm,
+      DEFAULTS.chainEveryKm
     );
-    const tiresInterval = Number(
-      activeBike.maintenance?.tiresEveryKm ?? DEFAULTS.tiresEveryKm
+    const tiresInterval = parseKm(
+      activeBike.maintenance?.tiresEveryKm ?? DEFAULTS.tiresEveryKm,
+      DEFAULTS.tiresEveryKm
     );
 
-    const oilNext = nextDueAt(currentKm, oilInterval);
-    const chainNext = nextDueAt(currentKm, chainInterval);
-    const tiresNext = nextDueAt(currentKm, tiresInterval);
+    const log = Array.isArray(activeBike.serviceLog) ? activeBike.serviceLog : [];
+
+    const oilLast = getLastServiceKm(log, "oil");
+    const chainLast = getLastServiceKm(log, "chain");
+    const tiresLast = getLastServiceKm(log, "tires");
 
     return {
       currentKm,
-      oil: {
+      oil: buildMaintenanceItem({
+        currentKm,
         interval: oilInterval,
-        next: oilNext,
-        left: oilNext - currentKm,
-        ...statusFor(oilNext, currentKm),
-      },
-      chain: {
+        lastEntry: oilLast,
+        categoryLabel: "Olio / Tagliando",
+      }),
+      chain: buildMaintenanceItem({
+        currentKm,
         interval: chainInterval,
-        next: chainNext,
-        left: chainNext - currentKm,
-        ...statusFor(chainNext, currentKm),
-      },
-      tires: {
+        lastEntry: chainLast,
+        categoryLabel: "Catena",
+      }),
+      tires: buildMaintenanceItem({
+        currentKm,
         interval: tiresInterval,
-        next: tiresNext,
-        left: tiresNext - currentKm,
-        ...statusFor(tiresNext, currentKm),
-      },
+        lastEntry: tiresLast,
+        categoryLabel: "Gomme",
+      }),
     };
   }, [activeBike]);
 
@@ -160,7 +253,7 @@ export default function Garage() {
     const y = year
       ? clampNum(year, 1950, new Date().getFullYear() + 1)
       : "";
-    const k = km ? clampNum(km, 0, 9999999) : 0;
+    const k = km ? parseKm(km, 0) : 0;
 
     const newBike = {
       id: uid(),
@@ -171,7 +264,7 @@ export default function Garage() {
       createdAt: new Date().toISOString(),
       maintenance: { ...DEFAULTS },
       documents: [],
-      serviceLog: [], // ✅ nuovo
+      serviceLog: [],
     };
 
     const next = [newBike, ...bikes];
@@ -196,7 +289,7 @@ export default function Garage() {
     const raw = String(kmUpdate).trim();
     if (!raw) return;
 
-    const newKm = clampNum(raw, 0, 9999999);
+    const newKm = parseKm(raw, 0);
 
     const next = bikes.map((b) =>
       b.id === activeBike.id
@@ -224,7 +317,6 @@ export default function Garage() {
     setBikesAndPersist(next);
   };
 
-  // ✅ puoi salvare anche senza file
   const addDocument = async () => {
     if (!activeBike) return;
 
@@ -308,7 +400,6 @@ export default function Garage() {
     setBikesAndPersist(next);
   };
 
-  // ✅ Storico tagliandi: add/delete
   const addServiceEntry = () => {
     if (!activeBike) return;
 
@@ -324,7 +415,7 @@ export default function Garage() {
       return;
     }
 
-    const kmNum = clampNum(kmRaw, 0, 9999999);
+    const kmNum = parseKm(kmRaw, 0);
     const costRaw = String(svcCost || "").trim();
     const normalizedCost = costRaw.replace(",", ".");
     const costNum =
@@ -393,6 +484,9 @@ export default function Garage() {
     if (!activeBike) return [];
     const arr = Array.isArray(activeBike.serviceLog) ? activeBike.serviceLog : [];
     return [...arr].sort((a, b) => {
+      const ak = parseKm(a.km, 0);
+      const bk = parseKm(b.km, 0);
+      if (ak !== bk) return bk - ak;
       const ad = String(a.date || "");
       const bd = String(b.date || "");
       if (ad !== bd) return bd.localeCompare(ad);
@@ -434,7 +528,6 @@ export default function Garage() {
         .card { margin-top: 12px; border: 1px solid rgba(0,0,0,0.12); border-radius: 16px; padding: 14px; background: #fff; }
         .mutedBox { padding: 10px; border-radius: 12px; background: rgba(0,0,0,0.04); }
 
-        /* ✅ Form "Aggiungi moto": mobile 1 col, tablet 2 col */
         .bike-form { margin-top:10px; display:grid; gap:10px; grid-template-columns: 1fr; }
         @media (min-width: 520px) { .bike-form { grid-template-columns: 1fr 1fr; } }
         .bike-form .full { grid-column: 1 / -1; }
@@ -461,7 +554,6 @@ export default function Garage() {
         </div>
       </div>
 
-      {/* Add bike */}
       <div className="card">
         <strong>Aggiungi moto</strong>
         <div className="bike-form">
@@ -501,7 +593,6 @@ export default function Garage() {
       </div>
 
       <div className="garage-grid">
-        {/* List */}
         <div className="card" style={{ height: "fit-content" }}>
           <strong>Le tue moto</strong>
           <div style={{ marginTop: 10, display: "grid", gap: 10 }}>
@@ -516,7 +607,7 @@ export default function Garage() {
                   <div>
                     <div style={{ fontWeight: 800 }}>{b.brand} {b.model}</div>
                     <div style={{ fontSize: 12, opacity: 0.75 }}>
-                      {b.year ? `${b.year} · ` : ""}{Number(b.km || 0).toLocaleString()} km
+                      {b.year ? `${b.year} · ` : ""}{parseKm(b.km, 0).toLocaleString()} km
                     </div>
                   </div>
                   <button
@@ -533,7 +624,6 @@ export default function Garage() {
           </div>
         </div>
 
-        {/* Detail */}
         <div className="card">
           {!activeBike ? (
             <div className="mutedBox">Seleziona una moto per vedere manutenzione e libretto.</div>
@@ -545,11 +635,10 @@ export default function Garage() {
                 </h2>
                 <span style={{ opacity: 0.75, fontSize: 13 }}>
                   {activeBike.year ? `${activeBike.year} · ` : ""}
-                  {Number(activeBike.km || 0).toLocaleString()} km
+                  {parseKm(activeBike.km, 0).toLocaleString()} km
                 </span>
               </div>
 
-              {/* Scadenze in arrivo */}
               <div style={{ marginTop: 12, padding: 12, borderRadius: 14, border: "1px solid rgba(0,0,0,0.12)", background: "rgba(0,0,0,0.02)" }}>
                 <div style={{ display: "flex", alignItems: "baseline", justifyContent: "space-between", gap: 10, flexWrap: "wrap" }}>
                   <strong>📅 Scadenze in arrivo (45gg)</strong>
@@ -571,7 +660,6 @@ export default function Garage() {
                 )}
               </div>
 
-              {/* Update km */}
               <div className="row" style={{ marginTop: 12 }}>
                 <input
                   value={kmUpdate}
@@ -585,7 +673,6 @@ export default function Garage() {
                 </button>
               </div>
 
-              {/* Health cards */}
               {computed && (
                 <div style={{ marginTop: 14, display: "grid", gap: 10 }}>
                   <HealthRow title="🛢️ Olio" item={computed.oil} />
@@ -594,7 +681,6 @@ export default function Garage() {
                 </div>
               )}
 
-              {/* Intervalli */}
               <div style={{ marginTop: 16, paddingTop: 14, borderTop: "1px solid rgba(0,0,0,0.10)" }}>
                 <strong>Intervalli (km)</strong>
                 <div style={{ marginTop: 10, display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(180px, 1fr))", gap: 10 }}>
@@ -614,9 +700,11 @@ export default function Garage() {
                     onChange={(v) => updateIntervals({ tiresEveryKm: clampNum(v, 1000, 50000) })}
                   />
                 </div>
+                <div style={{ marginTop: 8, fontSize: 12, opacity: 0.72 }}>
+                  Suggerimento: registra un intervento nello storico per avere scadenze davvero precise su olio, catena e gomme.
+                </div>
               </div>
 
-              {/* ✅ Storico Tagliandi / Interventi */}
               <div style={{ marginTop: 16, paddingTop: 14, borderTop: "1px solid rgba(0,0,0,0.10)" }}>
                 <strong>📒 Storico Tagliandi / Interventi</strong>
 
@@ -667,7 +755,7 @@ export default function Garage() {
                         <div style={{ display: "flex", justifyContent: "space-between", gap: 10, flexWrap: "wrap" }}>
                           <div>
                             <div style={{ fontWeight: 800 }}>
-                              {s.type} · {s.date} · {Number(s.km || 0).toLocaleString()} km
+                              {s.type} · {s.date} · {parseKm(s.km, 0).toLocaleString()} km
                             </div>
                             <div style={{ fontSize: 12, opacity: 0.75 }}>
                               {s.cost !== "" ? `Costo: €${Number(s.cost).toLocaleString()} · ` : ""}
@@ -690,7 +778,6 @@ export default function Garage() {
                 </div>
               </div>
 
-              {/* Libretto & Documenti */}
               <div style={{ marginTop: 16, paddingTop: 14, borderTop: "1px solid rgba(0,0,0,0.10)" }}>
                 <strong>Libretto & Documenti (offline)</strong>
 
@@ -778,6 +865,16 @@ function ExpiryRow({ doc }) {
 }
 
 function HealthRow({ title, item }) {
+  const lastText =
+    item.lastKm !== null
+      ? `${item.lastKm.toLocaleString()} km${item.lastType ? ` · ${item.lastType}` : ""}`
+      : "non registrato";
+
+  const modeText =
+    item.calcMode === "from-service-log"
+      ? "Calcolo da ultimo intervento"
+      : "Calcolo da km attuali (nessuno storico trovato)";
+
   return (
     <div style={{ border: "1px solid rgba(0,0,0,0.12)", borderRadius: 14, padding: 12, background: "white" }}>
       <div style={{ display: "flex", alignItems: "baseline", justifyContent: "space-between", gap: 10, flexWrap: "wrap" }}>
@@ -787,9 +884,17 @@ function HealthRow({ title, item }) {
           <strong>{item.left.toLocaleString()} km</strong>
         </span>
       </div>
+
       <div style={{ marginTop: 6, fontSize: 12, opacity: 0.75 }}>
         Intervallo: {item.interval.toLocaleString()} km
       </div>
+      <div style={{ marginTop: 4, fontSize: 12, opacity: 0.75 }}>
+        Ultimo intervento: {lastText}
+      </div>
+      <div style={{ marginTop: 4, fontSize: 12, opacity: 0.65 }}>
+        {modeText}
+      </div>
+
       <div style={{ marginTop: 8 }}>
         <span style={pillStyle(item.level)}>{item.label}</span>
       </div>
