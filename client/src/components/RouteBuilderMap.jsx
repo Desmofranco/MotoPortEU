@@ -18,8 +18,8 @@ L.Icon.Default.mergeOptions({
   shadowUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png",
 });
 
-const FOLLOW_MIN_MOVE_METERS = 18;
-const FOLLOW_THROTTLE_MS = 1200;
+const FOLLOW_MIN_MOVE_METERS = 10;
+const FOLLOW_THROTTLE_MS = 900;
 const FOLLOW_MIN_ZOOM = 13;
 const FIT_PADDING = [30, 30];
 
@@ -60,13 +60,13 @@ function haversineMeters(a, b) {
   return R * c;
 }
 
-function createDivIcon(html, bg = "#111", color = "#fff") {
+function createDivIcon(html, bg = "#111", color = "#fff", size = 28) {
   return L.divIcon({
     className: "",
     html: `
       <div style="
-        width: 28px;
-        height: 28px;
+        width: ${size}px;
+        height: ${size}px;
         border-radius: 999px;
         background: ${bg};
         color: ${color};
@@ -74,11 +74,53 @@ function createDivIcon(html, bg = "#111", color = "#fff") {
         align-items:center;
         justify-content:center;
         font-weight:900;
-        font-size:12px;
+        font-size:${size <= 20 ? 10 : 12}px;
         border:2px solid white;
         box-shadow:0 4px 12px rgba(0,0,0,0.22);
       ">
         ${html}
+      </div>
+    `,
+    iconSize: [size, size],
+    iconAnchor: [size / 2, size / 2],
+    popupAnchor: [0, -12],
+  });
+}
+
+function createGpsPulseIcon() {
+  return L.divIcon({
+    className: "",
+    html: `
+      <div style="
+        position: relative;
+        width: 28px;
+        height: 28px;
+        display:flex;
+        align-items:center;
+        justify-content:center;
+      ">
+        <div style="
+          position:absolute;
+          inset:-8px;
+          border-radius:999px;
+          background: rgba(59,130,246,0.16);
+          border: 2px solid rgba(59,130,246,0.24);
+        "></div>
+        <div style="
+          position:absolute;
+          width: 24px;
+          height: 24px;
+          border-radius:999px;
+          background:#0f172a;
+          border:3px solid white;
+          box-shadow:0 0 0 6px rgba(59,130,246,0.18), 0 6px 16px rgba(0,0,0,0.26);
+          display:flex;
+          align-items:center;
+          justify-content:center;
+          color:white;
+          font-size:11px;
+          font-weight:900;
+        ">📍</div>
       </div>
     `,
     iconSize: [28, 28],
@@ -90,7 +132,7 @@ function createDivIcon(html, bg = "#111", color = "#fff") {
 const startIcon = createDivIcon("S", "#15803d");
 const endIcon = createDivIcon("F", "#dc2626");
 const poiIcon = createDivIcon("P", "#1d4ed8");
-const gpsIcon = createDivIcon("📍", "#111827");
+const gpsIcon = createGpsPulseIcon();
 const radarA = createDivIcon("A", "#15803d");
 const radarB = createDivIcon("B", "#65a30d");
 const radarC = createDivIcon("C", "#ca8a04");
@@ -113,6 +155,7 @@ function FitOrFollow({ followGps, gps, userInteractingRef }) {
   const map = useMap();
   const lastAppliedGpsRef = useRef(null);
   const lastFollowAtRef = useRef(0);
+  const firstLockDoneRef = useRef(false);
 
   useEffect(() => {
     if (!map) return;
@@ -122,6 +165,21 @@ function FitOrFollow({ followGps, gps, userInteractingRef }) {
 
     const now = Date.now();
     const lastPoint = lastAppliedGpsRef.current;
+    const currentZoom = map.getZoom();
+    const targetZoom = Math.max(currentZoom, FOLLOW_MIN_ZOOM);
+
+    if (!firstLockDoneRef.current) {
+      firstLockDoneRef.current = true;
+      lastAppliedGpsRef.current = gps;
+      lastFollowAtRef.current = now;
+
+      try {
+        map.setView(gps, targetZoom, { animate: false });
+      } catch {
+        // ignore
+      }
+      return;
+    }
 
     if (lastPoint) {
       const movedMeters = haversineMeters(lastPoint, gps);
@@ -129,19 +187,22 @@ function FitOrFollow({ followGps, gps, userInteractingRef }) {
 
       const elapsed = now - lastFollowAtRef.current;
       if (elapsed < FOLLOW_THROTTLE_MS) return;
-    }
 
-    lastAppliedGpsRef.current = gps;
-    lastFollowAtRef.current = now;
+      lastAppliedGpsRef.current = gps;
+      lastFollowAtRef.current = now;
 
-    try {
-      const targetZoom = Math.max(map.getZoom(), FOLLOW_MIN_ZOOM);
-      map.flyTo(gps, targetZoom, {
-        animate: true,
-        duration: 0.8,
-      });
-    } catch {
-      // ignore
+      try {
+        if (movedMeters < 80) {
+          map.panTo(gps, { animate: true, duration: 0.7 });
+        } else {
+          map.flyTo(gps, targetZoom, {
+            animate: true,
+            duration: 0.9,
+          });
+        }
+      } catch {
+        // ignore
+      }
     }
   }, [map, followGps, gps, userInteractingRef]);
 
@@ -149,6 +210,7 @@ function FitOrFollow({ followGps, gps, userInteractingRef }) {
     if (followGps) return;
     lastAppliedGpsRef.current = null;
     lastFollowAtRef.current = 0;
+    firstLockDoneRef.current = false;
   }, [followGps]);
 
   return null;
@@ -195,7 +257,7 @@ function UserInteractionWatcher({
 
     releaseTimerRef.current = setTimeout(() => {
       userInteractingRef.current = false;
-    }, 1400);
+    }, 1200);
   };
 
   useMapEvents({
@@ -288,11 +350,13 @@ export default function RouteBuilderMap({
         overflow: "hidden",
         border: "1px solid rgba(0,0,0,0.10)",
         position: "relative",
+        background: "#dbeafe",
       }}
     >
       <MapContainer
         center={center}
         zoom={zoom}
+        preferCanvas={true}
         style={{ width: "100%", height: "100%" }}
       >
         <TileLayer
@@ -322,11 +386,57 @@ export default function RouteBuilderMap({
         <ClickToAdd enabled={isAddingEnabled} onAddPoint={onAddPoint} />
 
         {line && line.length >= 2 ? (
-          <Polyline key={polyKey("route", line)} positions={line} />
+          <>
+            <Polyline
+              key={`${polyKey("route-shadow", line)}`}
+              positions={line}
+              pathOptions={{
+                color: "#0f172a",
+                weight: 10,
+                opacity: 0.18,
+                lineCap: "round",
+                lineJoin: "round",
+              }}
+            />
+            <Polyline
+              key={polyKey("route", line)}
+              positions={line}
+              pathOptions={{
+                color: "#111827",
+                weight: 5,
+                opacity: 0.9,
+                lineCap: "round",
+                lineJoin: "round",
+              }}
+            />
+          </>
         ) : null}
 
         {gpsTrail && gpsTrail.length >= 2 ? (
-          <Polyline key={polyKey("trail", gpsTrail)} positions={gpsTrail} />
+          <>
+            <Polyline
+              key={`${polyKey("trail-shadow", gpsTrail)}`}
+              positions={gpsTrail}
+              pathOptions={{
+                color: "#38bdf8",
+                weight: 12,
+                opacity: 0.16,
+                lineCap: "round",
+                lineJoin: "round",
+              }}
+            />
+            <Polyline
+              key={polyKey("trail", gpsTrail)}
+              positions={gpsTrail}
+              pathOptions={{
+                color: "#0ea5e9",
+                weight: 5,
+                opacity: 0.95,
+                lineCap: "round",
+                lineJoin: "round",
+              }}
+            />
+          </>
         ) : null}
 
         {points.map((p, idx) => (
@@ -393,7 +503,15 @@ export default function RouteBuilderMap({
           </Marker>
         ))}
 
-        {gps ? <Marker position={gps} icon={gpsIcon} /> : null}
+        {gps ? (
+          <Marker position={gps} icon={gpsIcon}>
+            <Popup>
+              <strong>Posizione attuale</strong>
+              <br />
+              {gps[0].toFixed(5)}, {gps[1].toFixed(5)}
+            </Popup>
+          </Marker>
+        ) : null}
       </MapContainer>
     </div>
   );
