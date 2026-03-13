@@ -11,7 +11,16 @@
 // ✅ Export GPX
 // ✅ GPS Live + Scia (trail) in tempo reale
 // ✅ Inserimento manuale percorso (coordinate / link Google Maps) + preview + replace
-// ✅ Rider Travel Panel con distanza, tempo e profilo guida
+// ✅ Rider Travel Panel PRO:
+//    - distanza
+//    - tempo stimato
+//    - velocità media stimata
+//    - velocità media reale
+//    - profilo guida
+//    - meteo rotta
+//    - curve score + analisi curve
+//    - complessità rotta
+//    - soste consigliate
 // ✅ Meteo lungo rotta (start / mid / end)
 // ✅ Rider Radar multi-point con tratto critico
 // ✅ Waypoint automatici lungo il percorso (fuel / food / hotel / workshop / viewpoint)
@@ -88,6 +97,16 @@ function formatEta(hours) {
   return `${hh}h ${String(mm).padStart(2, "0")}m`;
 }
 
+function formatDurationMinutes(totalMinutes) {
+  const mins = Math.max(0, Math.round(Number(totalMinutes || 0)));
+  if (!mins) return "—";
+  const hh = Math.floor(mins / 60);
+  const mm = mins % 60;
+  if (!hh) return `${mm} min`;
+  if (!mm) return `${hh}h`;
+  return `${hh}h ${String(mm).padStart(2, "0")}m`;
+}
+
 const fmtTime = (sec) => {
   const s = Math.max(0, Math.floor(sec || 0));
   const hh = String(Math.floor(s / 3600)).padStart(2, "0");
@@ -115,6 +134,178 @@ function toLatLngObjects(points = []) {
 
 function toPointPairsFromEngineGeometry(geometry = []) {
   return (geometry || []).map((p) => [Number(p.lat), Number(p.lng)]);
+}
+
+function averageSpeedKmh(distanceKm, durationHours) {
+  const d = Number(distanceKm || 0);
+  const h = Number(durationHours || 0);
+  if (!d || !h || h <= 0) return 0;
+  return d / h;
+}
+
+function formatSpeed(kmh) {
+  const v = Number(kmh || 0);
+  if (!v || !Number.isFinite(v)) return "—";
+  return `${Math.round(v)} km/h`;
+}
+
+function getStopAdvice(distanceKm, durationMin) {
+  const km = Number(distanceKm || 0);
+  const min = Number(durationMin || 0);
+
+  const byKm = km >= 550 ? 4 : km >= 380 ? 3 : km >= 220 ? 2 : km >= 120 ? 1 : 0;
+  const byTime = min >= 420 ? 4 : min >= 300 ? 3 : min >= 180 ? 2 : min >= 100 ? 1 : 0;
+  const stops = Math.max(byKm, byTime);
+
+  if (stops <= 0) {
+    return {
+      count: 0,
+      label: "Tirata breve",
+      note: "Nessuna sosta necessaria, solo pausa libera.",
+    };
+  }
+
+  if (stops === 1) {
+    return {
+      count: 1,
+      label: "Una sosta consigliata",
+      note: "Pausa carburante o caffè a metà percorso.",
+    };
+  }
+
+  return {
+    count: stops,
+    label: `${stops} soste consigliate`,
+    note: "Meglio distribuire benzina, recupero e check rapido del meteo.",
+  };
+}
+
+function getLegStats(points = []) {
+  if (!Array.isArray(points) || points.length < 2) {
+    return { count: 0, avgKm: 0, maxKm: 0 };
+  }
+
+  const legs = [];
+  for (let i = 1; i < points.length; i++) {
+    legs.push(haversineKm(points[i - 1], points[i]));
+  }
+
+  const sum = legs.reduce((a, b) => a + b, 0);
+  return {
+    count: legs.length,
+    avgKm: legs.length ? sum / legs.length : 0,
+    maxKm: legs.length ? Math.max(...legs) : 0,
+  };
+}
+
+function analyzeCurves(line = []) {
+  if (!Array.isArray(line) || line.length < 3) {
+    return {
+      totalTurns: 0,
+      softTurns: 0,
+      mediumTurns: 0,
+      hardTurns: 0,
+      score: 0,
+      label: "Tracciato semplice",
+      roadStyle: "Scorrevole",
+      intensity: "Bassa",
+    };
+  }
+
+  let softTurns = 0;
+  let mediumTurns = 0;
+  let hardTurns = 0;
+
+  const normalize = (v) => {
+    const len = Math.hypot(v.x, v.y);
+    if (!len) return null;
+    return { x: v.x / len, y: v.y / len };
+  };
+
+  for (let i = 1; i < line.length - 1; i++) {
+    const a = line[i - 1];
+    const b = line[i];
+    const c = line[i + 1];
+
+    const v1 = normalize({
+      x: Number(b[1]) - Number(a[1]),
+      y: Number(b[0]) - Number(a[0]),
+    });
+
+    const v2 = normalize({
+      x: Number(c[1]) - Number(b[1]),
+      y: Number(c[0]) - Number(b[0]),
+    });
+
+    if (!v1 || !v2) continue;
+
+    const dot = clamp(v1.x * v2.x + v1.y * v2.y, -1, 1);
+    const angleDeg = (Math.acos(dot) * 180) / Math.PI;
+
+    if (angleDeg >= 18 && angleDeg < 35) softTurns += 1;
+    else if (angleDeg >= 35 && angleDeg < 60) mediumTurns += 1;
+    else if (angleDeg >= 60) hardTurns += 1;
+  }
+
+  const totalTurns = softTurns + mediumTurns + hardTurns;
+  const weighted = softTurns * 1 + mediumTurns * 2.2 + hardTurns * 3.4;
+  const rawScore = clamp(Math.round(weighted), 0, 100);
+
+  let label = "Strada molto scorrevole";
+  let roadStyle = "Scorrevole";
+  let intensity = "Bassa";
+
+  if (rawScore >= 75) {
+    label = "Molto guidata";
+    roadStyle = "Tecnica";
+    intensity = "Alta";
+  } else if (rawScore >= 45) {
+    label = "Bella mista";
+    roadStyle = "Mista";
+    intensity = "Media";
+  } else if (rawScore >= 20) {
+    label = "Scorrevole con tratti guidati";
+    roadStyle = "Scorrevole / mista";
+    intensity = "Medio-bassa";
+  }
+
+  return {
+    totalTurns,
+    softTurns,
+    mediumTurns,
+    hardTurns,
+    score: rawScore,
+    label,
+    roadStyle,
+    intensity,
+  };
+}
+
+function getComplexityBadge({ distanceKm, weatherSeverity, curveScore, pointsCount }) {
+  let score = 0;
+
+  if (distanceKm >= 350) score += 3;
+  else if (distanceKm >= 180) score += 2;
+  else if (distanceKm >= 80) score += 1;
+
+  if (curveScore >= 75) score += 3;
+  else if (curveScore >= 45) score += 2;
+  else if (curveScore >= 20) score += 1;
+
+  if ((weatherSeverity || 0) >= 4) score += 3;
+  else if ((weatherSeverity || 0) >= 3) score += 2;
+  else if ((weatherSeverity || 0) >= 2) score += 1;
+
+  if ((pointsCount || 0) >= 8) score += 2;
+  else if ((pointsCount || 0) >= 5) score += 1;
+
+  if (score >= 8) {
+    return { label: "Alta", color: "#dc2626" };
+  }
+  if (score >= 5) {
+    return { label: "Media", color: "#ca8a04" };
+  }
+  return { label: "Bassa", color: "#15803d" };
 }
 
 // --- GPX ---
@@ -725,6 +916,18 @@ export default function Map() {
 
   const etaText = formatEta(estimatedHours);
 
+  const estimatedDurationMin = useMemo(() => {
+    if (routeMeta.durationMin > 0) return Number(routeMeta.durationMin);
+    return Math.round(estimatedHours * 60);
+  }, [routeMeta.durationMin, estimatedHours]);
+
+  const estimatedAvgSpeed = useMemo(() => {
+    if (routeMeta.durationMin > 0) {
+      return averageSpeedKmh(distanceKm, routeMeta.durationMin / 60);
+    }
+    return averageSpeedKmh(distanceKm, estimatedHours);
+  }, [distanceKm, routeMeta.durationMin, estimatedHours]);
+
   const currentStepInstruction = useMemo(() => {
     if (!routeMeta?.steps?.length) return null;
     return routeMeta.steps[0] || null;
@@ -785,6 +988,11 @@ export default function Map() {
     };
   }, [activeRoute]);
 
+  const realAvgSpeed = useMemo(() => {
+    if (!activeRoute?.distanceKm || !routeStats.avgSessionSec) return 0;
+    return averageSpeedKmh(activeRoute.distanceKm, routeStats.avgSessionSec / 3600);
+  }, [activeRoute, routeStats.avgSessionSec]);
+
   const filteredRoutes = useMemo(() => {
     const f = String(savedFilter || "").trim().toLowerCase();
     if (!f) return routes;
@@ -798,6 +1006,26 @@ export default function Map() {
     if (!radarPoints.length) return null;
     return [...radarPoints].sort((a, b) => (b.analysis?.severity || 0) - (a.analysis?.severity || 0))[0];
   }, [radarPoints]);
+
+  const curveAnalysis = useMemo(() => analyzeCurves(baseLine), [baseLine]);
+
+  const stopAdvice = useMemo(
+    () => getStopAdvice(distanceKm, estimatedDurationMin),
+    [distanceKm, estimatedDurationMin]
+  );
+
+  const legStats = useMemo(() => getLegStats(points), [points]);
+
+  const routeComplexity = useMemo(
+    () =>
+      getComplexityBadge({
+        distanceKm,
+        weatherSeverity: overallWeather?.severity || 0,
+        curveScore: curveAnalysis?.score || 0,
+        pointsCount: points?.length || 0,
+      }),
+    [distanceKm, overallWeather, curveAnalysis, points]
+  );
 
   useEffect(() => saveRoutes(routes), [routes]);
 
@@ -1897,7 +2125,24 @@ export default function Map() {
                 <div style={S.stat}>
                   <div style={{ fontSize: 12, opacity: 0.75 }}>Tempo stimato</div>
                   <div style={{ marginTop: 4, fontWeight: 900, fontSize: 22 }}>
-                    {routeMeta.durationMin > 0 ? `${Math.round(routeMeta.durationMin)} min` : etaText}
+                    {formatDurationMinutes(estimatedDurationMin)}
+                  </div>
+                </div>
+
+                <div style={S.stat}>
+                  <div style={{ fontSize: 12, opacity: 0.75 }}>Velocità media stimata</div>
+                  <div style={{ marginTop: 4, fontWeight: 900, fontSize: 22 }}>
+                    {formatSpeed(estimatedAvgSpeed)}
+                  </div>
+                </div>
+
+                <div style={S.stat}>
+                  <div style={{ fontSize: 12, opacity: 0.75 }}>Velocità media reale</div>
+                  <div style={{ marginTop: 4, fontWeight: 900, fontSize: 22 }}>
+                    {routeStats.sessionCount > 0 ? formatSpeed(realAvgSpeed) : "—"}
+                  </div>
+                  <div style={{ fontSize: 12, opacity: 0.72, marginTop: 4 }}>
+                    {routeStats.sessionCount > 0 ? `su ${routeStats.sessionCount} sessioni` : "nessuna sessione salvata"}
                   </div>
                 </div>
 
@@ -1915,6 +2160,109 @@ export default function Map() {
                   </div>
                 </div>
               </div>
+
+              <div style={{ marginTop: 10, display: "flex", gap: 8, flexWrap: "wrap" }}>
+                <div style={S.stat}>
+                  <div style={{ fontSize: 12, opacity: 0.75 }}>Curve score</div>
+                  <div style={{ marginTop: 4, fontWeight: 900, fontSize: 22 }}>
+                    {curveAnalysis.score}/100
+                  </div>
+                  <div style={{ fontSize: 12, opacity: 0.72, marginTop: 4 }}>
+                    {curveAnalysis.label}
+                  </div>
+                </div>
+
+                <div style={S.stat}>
+                  <div style={{ fontSize: 12, opacity: 0.75 }}>Stile strada</div>
+                  <div style={{ marginTop: 4, fontWeight: 900, fontSize: 22 }}>
+                    {curveAnalysis.roadStyle}
+                  </div>
+                  <div style={{ fontSize: 12, opacity: 0.72, marginTop: 4 }}>
+                    Intensità: {curveAnalysis.intensity}
+                  </div>
+                </div>
+
+                <div style={S.stat}>
+                  <div style={{ fontSize: 12, opacity: 0.75 }}>Curve rilevate</div>
+                  <div style={{ marginTop: 4, fontWeight: 900, fontSize: 22 }}>
+                    {curveAnalysis.totalTurns}
+                  </div>
+                  <div style={{ fontSize: 12, opacity: 0.72, marginTop: 4 }}>
+                    Soft {curveAnalysis.softTurns} • Medie {curveAnalysis.mediumTurns} • Hard {curveAnalysis.hardTurns}
+                  </div>
+                </div>
+
+                <div style={S.stat}>
+                  <div style={{ fontSize: 12, opacity: 0.75 }}>Complessità rotta</div>
+                  <div
+                    style={{
+                      marginTop: 4,
+                      fontWeight: 900,
+                      fontSize: 22,
+                      color: routeComplexity.color,
+                    }}
+                  >
+                    {routeComplexity.label}
+                  </div>
+                </div>
+              </div>
+
+              <div style={{ marginTop: 10, display: "flex", gap: 8, flexWrap: "wrap" }}>
+                <div style={S.stat}>
+                  <div style={{ fontSize: 12, opacity: 0.75 }}>Soste consigliate</div>
+                  <div style={{ marginTop: 4, fontWeight: 900, fontSize: 22 }}>
+                    {stopAdvice.count}
+                  </div>
+                  <div style={{ fontSize: 12, opacity: 0.72, marginTop: 4 }}>
+                    {stopAdvice.label}
+                  </div>
+                </div>
+
+                <div style={S.stat}>
+                  <div style={{ fontSize: 12, opacity: 0.75 }}>Tratte</div>
+                  <div style={{ marginTop: 4, fontWeight: 900, fontSize: 22 }}>
+                    {legStats.count}
+                  </div>
+                  <div style={{ fontSize: 12, opacity: 0.72, marginTop: 4 }}>
+                    Media {legStats.avgKm ? `${legStats.avgKm.toFixed(1)} km` : "—"}
+                  </div>
+                </div>
+
+                <div style={S.stat}>
+                  <div style={{ fontSize: 12, opacity: 0.75 }}>Tratta più lunga</div>
+                  <div style={{ marginTop: 4, fontWeight: 900, fontSize: 22 }}>
+                    {legStats.maxKm ? `${legStats.maxKm.toFixed(1)} km` : "—"}
+                  </div>
+                </div>
+
+                <div style={S.stat}>
+                  <div style={{ fontSize: 12, opacity: 0.75 }}>Rider score</div>
+                  <div style={{ marginTop: 4, fontWeight: 900, fontSize: 22 }}>
+                    {engineScore?.riderScore || activeRoute?.riderScore || 0}/100
+                  </div>
+                </div>
+              </div>
+
+              {(engineScore?.highlights?.length || activeRoute?.riderHighlights?.length) ? (
+                <div
+                  style={{
+                    marginTop: 12,
+                    padding: 12,
+                    borderRadius: 14,
+                    background: "rgba(15,23,42,0.04)",
+                    border: "1px solid rgba(15,23,42,0.08)",
+                  }}
+                >
+                  <div style={{ fontWeight: 900 }}>✨ Highlights rider</div>
+                  <div style={{ marginTop: 8, display: "flex", gap: 8, flexWrap: "wrap" }}>
+                    {(engineScore?.highlights || activeRoute?.riderHighlights || []).slice(0, 6).map((h, idx) => (
+                      <span key={`${h}-${idx}`} style={S.pill}>
+                        {h}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              ) : null}
 
               {navOn && nextInfo && (
                 <div
@@ -1942,6 +2290,23 @@ export default function Map() {
                   ) : null}
                 </div>
               )}
+
+              <div
+                style={{
+                  marginTop: 12,
+                  padding: 12,
+                  borderRadius: 14,
+                  background: "rgba(22,163,74,0.06)",
+                  border: "1px solid rgba(22,163,74,0.14)",
+                  fontSize: 13,
+                }}
+              >
+                <div style={{ fontWeight: 900 }}>🛞 Lettura rapida rotta</div>
+                <div style={{ marginTop: 6, opacity: 0.82 }}>
+                  {stopAdvice.note} • Strada: <b>{curveAnalysis.roadStyle}</b> • Complessità:{" "}
+                  <b style={{ color: routeComplexity.color }}>{routeComplexity.label}</b>
+                </div>
+              </div>
 
               {weatherWarningList.length > 0 && (
                 <div
