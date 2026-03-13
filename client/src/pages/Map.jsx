@@ -28,6 +28,7 @@
 // ✅ Duplicazione itinerari + ricerca itinerari salvati
 // ✅ Stats sessioni + ultimo utilizzo
 // ✅ FIX: follow GPS separato dall'interazione manuale utente
+// ✅ FIX: velocità media reale calcolata sulla distanza GPS tracciata
 // =======================================================
 
 import React, { useEffect, useMemo, useRef, useState } from "react";
@@ -74,6 +75,15 @@ function computeDistanceKm(points) {
   if (!points || points.length < 2) return 0;
   let sum = 0;
   for (let i = 1; i < points.length; i++) sum += haversineKm(points[i - 1], points[i]);
+  return sum;
+}
+
+function computeTrackedDistanceKm(track) {
+  if (!Array.isArray(track) || track.length < 2) return 0;
+  let sum = 0;
+  for (let i = 1; i < track.length; i++) {
+    sum += haversineKm(track[i - 1], track[i]);
+  }
   return sum;
 }
 
@@ -989,9 +999,33 @@ export default function Map() {
   }, [activeRoute]);
 
   const realAvgSpeed = useMemo(() => {
-    if (!activeRoute?.distanceKm || !routeStats.avgSessionSec) return 0;
-    return averageSpeedKmh(activeRoute.distanceKm, routeStats.avgSessionSec / 3600);
-  }, [activeRoute, routeStats.avgSessionSec]);
+    const sessions = activeRoute?.sessions || [];
+    if (!sessions.length) return 0;
+
+    const normalizedSessions = sessions
+      .map((s) => {
+        const durationSec = Number(s?.durationSec || 0);
+        const explicitDistance = Number(s?.distanceKm || 0);
+        const trackDistance =
+          !explicitDistance && Array.isArray(s?.track)
+            ? computeTrackedDistanceKm(s.track)
+            : explicitDistance;
+
+        return {
+          durationSec,
+          distanceKm: trackDistance,
+        };
+      })
+      .filter((s) => s.durationSec > 0 && s.distanceKm > 0);
+
+    if (!normalizedSessions.length) return 0;
+
+    const totalDistanceKm = normalizedSessions.reduce((sum, s) => sum + s.distanceKm, 0);
+    const totalDurationHours =
+      normalizedSessions.reduce((sum, s) => sum + s.durationSec, 0) / 3600;
+
+    return averageSpeedKmh(totalDistanceKm, totalDurationHours);
+  }, [activeRoute]);
 
   const filteredRoutes = useMemo(() => {
     const f = String(savedFilter || "").trim().toLowerCase();
@@ -1556,11 +1590,15 @@ export default function Map() {
       const prevSessions = existing?.sessions || [];
       const prevTotal = existing?.totalTimeSec || 0;
 
+      const effectiveRunTrack = runTrack && runTrack.length >= 2 ? runTrack : null;
+      const trackedDistanceKm = computeTrackedDistanceKm(effectiveRunTrack || []);
+
       const session = {
         startedAt: new Date(startMs).toISOString(),
         endedAt: new Date(endMs).toISOString(),
         durationSec: durSec,
-        track: runTrack && runTrack.length >= 2 ? runTrack : null,
+        distanceKm: trackedDistanceKm,
+        track: effectiveRunTrack,
       };
 
       const payload = {
