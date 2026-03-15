@@ -5,6 +5,7 @@
 // { ok, worst, temp, tempMin, tempMax, windKmh, updatedAt, ride, note? }
 // Usa OpenWeather: VITE_OWM_KEY
 // ✅ Fallback coordinate avanzato per itinerari incompleti / OSM / GeoJSON
+// ✅ Ride insight adattivo: touring / sport / enduro / off-road
 // =======================================================
 
 const KEY = (import.meta.env.VITE_OWM_KEY || "").trim();
@@ -122,10 +123,113 @@ const worstLabel = (w) => {
   return x;
 };
 
-function buildRideInsight({ worst, windKmh, temp }) {
-  const w = String(worst || "").toLowerCase();
+function normalizeRouteMode(route) {
+  const raw = String(
+    route?.type || route?.category || route?.style || route?.pace || ""
+  )
+    .trim()
+    .toLowerCase();
 
-  if (w.includes("temporale") || w.includes("neve")) {
+  const blob = [
+    route?.name,
+    route?.region,
+    route?.description,
+    route?.type,
+    route?.category,
+    route?.style,
+    route?.pace,
+  ]
+    .filter(Boolean)
+    .join(" ")
+    .toLowerCase();
+
+  const hasAny = (arr) => arr.some((k) => blob.includes(k));
+
+  if (
+    hasAny([
+      "offroad",
+      "off-road",
+      "cross",
+      "motocross",
+      "mx",
+      "dirt",
+      "trail",
+      "sterrato",
+      "ghiaia",
+    ])
+  ) {
+    return "offroad";
+  }
+
+  if (
+    hasAny([
+      "enduro",
+      "adventure",
+      "adv",
+      "dual sport",
+      "dual-sport",
+      "rally",
+      "maxi-enduro",
+    ])
+  ) {
+    return "enduro";
+  }
+
+  if (
+    hasAny([
+      "sport",
+      "sporty",
+      "twisty",
+      "performance",
+      "tecnico",
+      "dinamica",
+      "guida dinamica",
+    ])
+  ) {
+    return "sport";
+  }
+
+  if (raw.includes("tecnico")) return "sport";
+
+  return "touring";
+}
+
+function buildRideInsight({ route, worst, windKmh, temp }) {
+  const w = String(worst || "").toLowerCase();
+  const mode = normalizeRouteMode(route);
+
+  const isStorm = w.includes("temporale");
+  const isSnow = w.includes("neve");
+  const isRain = w.includes("pioggia") || w.includes("pioviggine");
+  const isFog = w.includes("nebbia");
+
+  const strongWind = Number.isFinite(windKmh) && windKmh >= 50;
+  const veryStrongWind = Number.isFinite(windKmh) && windKmh >= 65;
+  const cold = Number.isFinite(temp) && temp <= 3;
+  const veryCold = Number.isFinite(temp) && temp <= 0;
+
+  // ---------------------------------------------------
+  // PERICOLO ALTO
+  // ---------------------------------------------------
+  if (isStorm || isSnow) {
+    if (mode === "offroad" || mode === "enduro") {
+      return {
+        level: "danger",
+        label: "Off-road sconsigliato",
+        advice:
+          "Con temporale o neve il fondo può diventare molto instabile e la trazione peggiora rapidamente. Meglio evitare il giro.",
+      };
+    }
+
+    if (mode === "sport") {
+      return {
+        level: "danger",
+        label: "Guida dinamica sconsigliata",
+        advice:
+          "Con temporale o neve non ci sono le condizioni per una guida sportiva sicura. Meglio rimandare.",
+      };
+    }
+
     return {
       level: "danger",
       label: "Condizioni critiche",
@@ -133,7 +237,37 @@ function buildRideInsight({ worst, windKmh, temp }) {
     };
   }
 
-  if (w.includes("pioggia") || w.includes("pioviggine")) {
+  // ---------------------------------------------------
+  // ATTENZIONE MEDIA
+  // ---------------------------------------------------
+  if (isRain) {
+    if (mode === "offroad") {
+      return {
+        level: "warn",
+        label: "Sterrato delicato",
+        advice:
+          "Con pioggia o pioviggine il fondo può diventare viscido e scavato. Serve molta attenzione a trazione e appoggi.",
+      };
+    }
+
+    if (mode === "enduro") {
+      return {
+        level: "warn",
+        label: "Enduro con prudenza",
+        advice:
+          "Con fondo umido o bagnato alcuni tratti possono diventare più tecnici del previsto. Meglio guidare con margine.",
+      };
+    }
+
+    if (mode === "sport") {
+      return {
+        level: "warn",
+        label: "Guida dinamica con prudenza",
+        advice:
+          "Con pioggia il ritmo va abbassato: meno aderenza, frenata più delicata e traiettorie da pulire bene.",
+      };
+    }
+
     return {
       level: "warn",
       label: "Fondo potenzialmente bagnato",
@@ -141,7 +275,25 @@ function buildRideInsight({ worst, windKmh, temp }) {
     };
   }
 
-  if (w.includes("nebbia")) {
+  if (isFog) {
+    if (mode === "offroad" || mode === "enduro") {
+      return {
+        level: "warn",
+        label: "Visibilità ridotta sul percorso",
+        advice:
+          "Su sterrato o percorsi adventure la visibilità ridotta può complicare lettura del terreno, ostacoli e cambi di fondo.",
+      };
+    }
+
+    if (mode === "sport") {
+      return {
+        level: "warn",
+        label: "Visibilità ridotta",
+        advice:
+          "Con nebbia o foschia non ci sono le condizioni ideali per una guida brillante. Meglio aumentare il margine.",
+      };
+    }
+
     return {
       level: "warn",
       label: "Visibilità ridotta",
@@ -149,7 +301,25 @@ function buildRideInsight({ worst, windKmh, temp }) {
     };
   }
 
-  if (Number.isFinite(windKmh) && windKmh >= 50) {
+  if (veryStrongWind || strongWind) {
+    if (mode === "offroad" || mode === "enduro") {
+      return {
+        level: "warn",
+        label: "Vento fastidioso sul percorso",
+        advice:
+          "Il vento può rendere più nervosa la moto nei tratti aperti e meno prevedibili alcuni passaggi, soprattutto su maxi-enduro.",
+      };
+    }
+
+    if (mode === "sport") {
+      return {
+        level: "warn",
+        label: "Vento sfavorevole alla guida dinamica",
+        advice:
+          "Con vento forte il feeling in inserimento e percorrenza può peggiorare. Meglio guidare puliti e senza forzare.",
+      };
+    }
+
     return {
       level: "warn",
       label: "Vento forte",
@@ -157,7 +327,25 @@ function buildRideInsight({ worst, windKmh, temp }) {
     };
   }
 
-  if (Number.isFinite(temp) && temp <= 3) {
+  if (veryCold || cold) {
+    if (mode === "offroad" || mode === "enduro") {
+      return {
+        level: "warn",
+        label: "Fondo freddo e delicato",
+        advice:
+          "Con temperature basse il terreno può essere più umido, duro o scivoloso del previsto. Serve una guida più rotonda.",
+      };
+    }
+
+    if (mode === "sport") {
+      return {
+        level: "warn",
+        label: "Asfalto freddo",
+        advice:
+          "Con temperature basse l’aderenza può non essere ideale, soprattutto nei tratti in ombra. Meglio alzare il ritmo con calma.",
+      };
+    }
+
     return {
       level: "warn",
       label: "Freddo intenso",
@@ -165,9 +353,39 @@ function buildRideInsight({ worst, windKmh, temp }) {
     };
   }
 
+  // ---------------------------------------------------
+  // CONDIZIONI BUONE
+  // ---------------------------------------------------
+  if (mode === "offroad") {
+    return {
+      level: "ok",
+      label: "Buono per off-road",
+      advice:
+        "Condizioni generalmente favorevoli per lo sterrato, con buona leggibilità del fondo e gestione più semplice della trazione.",
+    };
+  }
+
+  if (mode === "enduro") {
+    return {
+      level: "ok",
+      label: "Buono per enduro",
+      advice:
+        "Condizioni generalmente favorevoli per adventure ed enduro, con fondo più gestibile e buona continuità di guida.",
+    };
+  }
+
+  if (mode === "sport") {
+    return {
+      level: "ok",
+      label: "Ottimo per guida dinamica",
+      advice:
+        "Condizioni generalmente favorevoli per una guida dinamica, con buon margine per traiettorie, ritmo e continuità.",
+    };
+  }
+
   return {
     level: "ok",
-    label: "Ottimo per la guida",
+    label: "Ottimo per il touring",
     advice: "Condizioni generalmente favorevoli per il touring.",
   };
 }
@@ -225,6 +443,7 @@ export async function getRouteWeatherSummary(route) {
       windKmh,
       updatedAt,
       ride: buildRideInsight({
+        route,
         worst,
         windKmh,
         temp,
