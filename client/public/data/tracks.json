@@ -12,9 +12,12 @@
     "technique": 7,
     "rating": 9.6,
     "bestSeason": "Apr–Oct",
-    "coords": { "lat": 43.9973, "lng": 11.3719 },
+    "coords": {
+      "lat": 43.9973,
+      "lng": 11.3719
+    },
     "photo": "https://images.unsplash.com/photo-1520975958225-0b4f2a0f2c7c?auto=format&fit=crop&w=1600&q=80",
-    "description": "Tempio della velocità italiana. Curvoni, staccate e atmosfera da GP."
+    "description": "Mugello Circuit è orientato a una guida sportiva, precisa e intensa, pensata per chi cerca tecnica, ritmo e controllo. Il layout valorizza ingressi puliti, cambi di direzione, accelerazioni decise e gestione accurata delle traiettorie, con sezioni che mettono alla prova concentrazione e feeling. Il fondo e la configurazione invitano a una lettura più aggressiva del percorso, dove staccate, percorrenza e uscita di curva fanno la differenza. Ideale per rider sportivi che vogliono una descrizione coerente con la guida reale e non un testo generico da catalogo turistico."
   },
   {
     "id": "trk-002",
@@ -29,9 +32,12 @@
     "technique": 7,
     "rating": 9.2,
     "bestSeason": "Mar–Nov",
-    "coords": { "lat": 43.9614, "lng": 12.6840 },
+    "coords": {
+      "lat": 43.9614,
+      "lng": 12.684
+    },
     "photo": "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1600&q=80",
-    "description": "Scorrevole e guidato. Perfetto per giornate track-day e turismo in Riviera."
+    "description": "Misano World Circuit è orientato a una guida sportiva, precisa e intensa, pensata per chi cerca tecnica, ritmo e controllo. Il layout valorizza ingressi puliti, cambi di direzione, accelerazioni decise e gestione accurata delle traiettorie, con sezioni che mettono alla prova concentrazione e feeling. Il fondo e la configurazione invitano a una lettura più aggressiva del percorso, dove staccate, percorrenza e uscita di curva fanno la differenza. Ideale per rider sportivi che vogliono una descrizione coerente con la guida reale e non un testo generico da catalogo turistico."
   },
   {
     "id": "trk-003",
@@ -44,11 +50,14 @@
     "difficulty": 6,
     "speed": 10,
     "technique": 5,
-    "rating": 9.0,
+    "rating": 9,
     "bestSeason": "Apr–Oct",
-    "coords": { "lat": 45.6156, "lng": 9.2811 },
+    "coords": {
+      "lat": 45.6156,
+      "lng": 9.2811
+    },
     "photo": "https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=1600&q=80",
-    "description": "Velocità pura e storia. Attenzione: qui si vola."
+    "description": "Autodromo di Monza è orientato a una guida sportiva, precisa e intensa, pensata per chi cerca tecnica, ritmo e controllo. Il layout valorizza ingressi puliti, cambi di direzione, accelerazioni decise e gestione accurata delle traiettorie, con sezioni che mettono alla prova concentrazione e feeling. Il fondo e la configurazione invitano a una lettura più aggressiva del percorso, dove staccate, percorrenza e uscita di curva fanno la differenza. Ideale per rider sportivi che vogliono una descrizione coerente con la guida reale e non un testo generico da catalogo turistico."
   },
   {
     "id": "trk-004",
@@ -63,9 +72,12 @@
     "technique": 8,
     "rating": 9.3,
     "bestSeason": "Apr–Oct",
-    "coords": { "lat": 44.3439, "lng": 11.7167 },
+    "coords": {
+      "lat": 44.3439,
+      "lng": 11.7167
+    },
     "photo": "https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=1600&q=80",
-    "description": "Tecnica e emozionale. Cordoli, saliscendi e guidato vero."
+    "description": "Imola (Autodromo Enzo e Dino Ferrari) è orientato a una guida sportiva, precisa e intensa, pensata per chi cerca tecnica, ritmo e controllo. Il layout valorizza ingressi puliti, cambi di direzione, accelerazioni decise e gestione accurata delle traiettorie, con sezioni che mettono alla prova concentrazione e feeling. Il fondo e la configurazione invitano a una lettura più aggressiva del percorso, dove staccate, percorrenza e uscita di curva fanno la differenza. Ideale per rider sportivi che vogliono una descrizione coerente con la guida reale e non un testo generico da catalogo turistico."
   },
   {
     "id": "trk-005",
@@ -80,9 +92,12 @@
     "technique": 7,
     "rating": 9.1,
     "bestSeason": "Mar–Nov",
-    "coords": { "lat": 41.5700, "lng": 2.2611 },
+    "coords": {
+      "lat": 41.57,
+      "lng": 2.2611
+    },
     "photo": "https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=1600&q=80",
-    "description": "GP vibes e curve da manuale. Gran touring + track-day."
+    "description": "Circuit de Barcelona-Catalunya è pensato per una guida stradale coinvolgente, con un ritmo da vero rider e non da semplice turista. Il percorso offre una guida fluida e appagante, con curve scorrevoli, ritmo regolare e tratti che valorizzano il piacere motociclistico più della semplice destinazione. Il fondo è prevalentemente asfaltato e generalmente regolare, con possibili variazioni di aderenza o traffico nei periodi più frequentati. Ideale per rider che cercano curve, panorama e continuità di guida in un contesto adatto a uscite medio-lunghe."
   },
   {
     "id": "trk-006",
@@ -97,9 +112,12 @@
     "technique": 8,
     "rating": 8.9,
     "bestSeason": "Mar–Nov",
-    "coords": { "lat": 39.4849, "lng": -0.6286 },
+    "coords": {
+      "lat": 39.4849,
+      "lng": -0.6286
+    },
     "photo": "https://images.unsplash.com/photo-1500534623283-312aade485b7?auto=format&fit=crop&w=1600&q=80",
-    "description": "Stile arena: si vede tutto. Tecnico e divertente."
+    "description": "Circuit Ricardo Tormo (Valencia) è orientato a una guida sportiva, precisa e intensa, pensata per chi cerca tecnica, ritmo e controllo. Il layout valorizza ingressi puliti, cambi di direzione, accelerazioni decise e gestione accurata delle traiettorie, con sezioni che mettono alla prova concentrazione e feeling. Il fondo e la configurazione invitano a una lettura più aggressiva del percorso, dove staccate, percorrenza e uscita di curva fanno la differenza. Ideale per rider sportivi che vogliono una descrizione coerente con la guida reale e non un testo generico da catalogo turistico."
   },
   {
     "id": "trk-007",
@@ -112,11 +130,14 @@
     "difficulty": 8,
     "speed": 7,
     "technique": 9,
-    "rating": 9.0,
+    "rating": 9,
     "bestSeason": "Apr–Oct",
-    "coords": { "lat": 50.7920, "lng": 12.6860 },
+    "coords": {
+      "lat": 50.792,
+      "lng": 12.686
+    },
     "photo": "https://images.unsplash.com/photo-1520975958225-0b4f2a0f2c7c?auto=format&fit=crop&w=1600&q=80",
-    "description": "Compatto, tecnico, ritmo alto. Uno dei più guidati."
+    "description": "Sachsenring è orientato a una guida sportiva, precisa e intensa, pensata per chi cerca tecnica, ritmo e controllo. Il layout valorizza ingressi puliti, cambi di direzione, accelerazioni decise e gestione accurata delle traiettorie, con sezioni che mettono alla prova concentrazione e feeling. Il fondo e la configurazione invitano a una lettura più aggressiva del percorso, dove staccate, percorrenza e uscita di curva fanno la differenza. Ideale per rider sportivi che vogliono una descrizione coerente con la guida reale e non un testo generico da catalogo turistico."
   },
   {
     "id": "trk-101",
@@ -131,9 +152,12 @@
     "technique": 9,
     "rating": 8.7,
     "bestSeason": "Mar–Jun, Sep–Nov",
-    "coords": { "lat": 43.2500, "lng": 12.6500 },
+    "coords": {
+      "lat": 43.25,
+      "lng": 12.65
+    },
     "photo": "https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=1600&q=80",
-    "description": "Enduro vero: sassi, fango, salite. (Voce demo: sostituisci con piste reali)."
+    "description": "Ténéré / Adventure Enduro Park (demo) ha un’impronta chiaramente off-road, con una guida più fisica e tecnica rispetto a un normale percorso touring. Il fondo può alternare terra, ghiaia e sezioni irregolari, con punti che richiedono trazione, controllo della moto e buona sensibilità sullo sterrato. La difficoltà può cambiare rapidamente in base a meteo, polvere, fango o usura del terreno, quindi è un percorso da affrontare con approccio rider e non turistico. Adatto a enduro, dual sport e maxi-enduro con esperienza, soprattutto nei tratti più impegnativi o scivolosi."
   },
   {
     "id": "trk-201",
@@ -148,8 +172,11 @@
     "technique": 7,
     "rating": 8.2,
     "bestSeason": "Mar–Oct",
-    "coords": { "lat": 45.3000, "lng": 9.5000 },
+    "coords": {
+      "lat": 45.3,
+      "lng": 9.5
+    },
     "photo": "https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=1600&q=80",
-    "description": "Salti, whoops e adrenalina. (Voce demo: sostituisci con piste reali)."
+    "description": "MX Track (demo) ha un’impronta chiaramente off-road, con una guida più fisica e tecnica rispetto a un normale percorso touring. Il fondo può alternare terra, ghiaia e sezioni irregolari, con punti che richiedono trazione, controllo della moto e buona sensibilità sullo sterrato. La difficoltà può cambiare rapidamente in base a meteo, polvere, fango o usura del terreno, quindi è un percorso da affrontare con approccio rider e non turistico. Adatto a enduro, dual sport e maxi-enduro con esperienza, soprattutto nei tratti più impegnativi o scivolosi."
   }
 ]
