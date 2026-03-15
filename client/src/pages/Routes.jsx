@@ -170,6 +170,168 @@ function hasRealDescription(route) {
   return !bad.some((x) => lower.includes(x));
 }
 
+function normalizeRouteType(route) {
+  const raw = String(route?.type || route?.category || route?.style || "")
+    .trim()
+    .toLowerCase();
+
+  if (!raw) return "touring";
+
+  if (["enduro", "adventure", "adv", "dual-sport", "dualsport"].includes(raw)) {
+    return "enduro";
+  }
+
+  if (["offroad", "off-road", "cross", "mx", "dirt"].includes(raw)) {
+    return "offroad";
+  }
+
+  if (["sport", "twisty", "sporty", "performance"].includes(raw)) {
+    return "sport";
+  }
+
+  return "touring";
+}
+
+function fallbackSeasonByCountry(route) {
+  const explicit = String(route?.bestSeason || "").trim();
+  if (explicit) return explicit;
+
+  const country = String(route?.country || "").trim().toUpperCase();
+
+  const north = new Set([
+    "NO", "SE", "FI", "IS", "EE", "LV", "LT",
+  ]);
+
+  const central = new Set([
+    "DE", "PL", "CZ", "SK", "AT", "CH", "NL", "BE", "LU",
+    "UK", "IE", "FR", "SI", "HR", "HU", "RO",
+  ]);
+
+  const south = new Set([
+    "IT", "ES", "PT", "GR", "AL", "ME", "BA", "MK", "RS", "BG", "TR",
+  ]);
+
+  if (north.has(country)) return "Mag–Set";
+  if (central.has(country)) return "Apr–Ott";
+  if (south.has(country)) return "Mar–Nov";
+
+  return "Apr–Ott";
+}
+
+function buildRidingNote(route) {
+  const type = normalizeRouteType(route);
+  const curves = Number(route?.curvesScore || 0);
+  const asphalt = Number(route?.asphaltScore || 0);
+
+  let ridingNote = "";
+
+  if (type === "offroad") {
+    ridingNote =
+      "tracciato off-road con fondo variabile, consigliato per moto da fuoristrada o rider con esperienza su sterrato";
+
+    if (asphalt >= 7) {
+      ridingNote += ", con alcuni collegamenti più scorrevoli";
+    } else if (asphalt > 0 && asphalt <= 3) {
+      ridingNote += ", con prevalenza di superfici non asfaltate";
+    }
+
+    return ridingNote;
+  }
+
+  if (type === "enduro") {
+    ridingNote =
+      "percorso adventure/enduro con tratti tecnici, adatto a moto dual sport o maxi-enduro ben gestite";
+
+    if (curves >= 7) {
+      ridingNote += ", con sviluppo guidato e vario";
+    }
+
+    if (asphalt > 0 && asphalt <= 4) {
+      ridingNote += ", dove conviene valutare bene fondo e gomme";
+    }
+
+    return ridingNote;
+  }
+
+  if (type === "sport") {
+    if (curves >= 8) {
+      ridingNote = "tracciato molto guidato, pensato per una guida dinamica e coinvolgente";
+    } else if (curves >= 5) {
+      ridingNote = "percorso brillante con una buona varietà di curve, ideale per guida dinamica";
+    } else {
+      ridingNote = "itinerario scorrevole ma con tratti adatti a una guida più attiva";
+    }
+
+    if (asphalt >= 8) {
+      ridingNote += ", con fondo generalmente favorevole";
+    } else if (asphalt > 0 && asphalt <= 4) {
+      ridingNote += ", con fondo da valutare con maggiore attenzione";
+    }
+
+    return ridingNote;
+  }
+
+  // touring default
+  if (curves >= 8) {
+    ridingNote = "tracciato ricco di curve e molto coinvolgente alla guida";
+  } else if (curves >= 5) {
+    ridingNote = "percorso piacevole con una buona varietà di curve";
+  } else {
+    ridingNote = "itinerario scorrevole, adatto a guida rilassata e panoramica";
+  }
+
+  if (asphalt >= 8) {
+    ridingNote += ", con fondo generalmente favorevole";
+  } else if (asphalt > 0 && asphalt <= 4) {
+    ridingNote += ", con fondo da valutare con maggiore attenzione";
+  }
+
+  return ridingNote;
+}
+
+function buildRouteDescription(route) {
+  if (hasRealDescription(route)) return String(route.description).trim();
+
+  const parts = [];
+
+  const name = String(route?.name || "Questo itinerario").trim();
+  const region = String(route?.region || "").trim();
+  const country = String(route?.country || "").trim();
+  const season = fallbackSeasonByCountry(route);
+  const type = normalizeRouteType(route);
+
+  const km = Number(route?.distanceKm || 0);
+
+  if (region && country) {
+    parts.push(`${name} attraversa ${region}, ${country}`);
+  } else if (region) {
+    parts.push(`${name} attraversa ${region}`);
+  } else if (country) {
+    parts.push(`${name} si sviluppa in ${country}`);
+  } else {
+    parts.push(`${name} è un itinerario motociclistico da esplorare`);
+  }
+
+  if (km > 0) {
+    parts.push(`per circa ${km} km`);
+  }
+
+  if (season) {
+    parts.push(`con periodo ideale ${season}`);
+  }
+
+  if (type === "offroad") {
+    parts.push("in chiave off-road");
+  } else if (type === "enduro") {
+    parts.push("in chiave adventure/enduro");
+  } else if (type === "sport") {
+    parts.push("con vocazione più dinamica");
+  }
+
+  const ridingNote = buildRidingNote(route);
+
+  return `${parts.join(" ")}. ${ridingNote}.`;
+}
 function buildRouteDescription(route) {
   if (hasRealDescription(route)) return String(route.description).trim();
 
