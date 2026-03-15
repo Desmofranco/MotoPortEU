@@ -175,6 +175,61 @@ function normalizeRouteType(route) {
     .trim()
     .toLowerCase();
 
+  const nameBlob = [
+    route?.name,
+    route?.region,
+    route?.description,
+  ]
+    .filter(Boolean)
+    .join(" ")
+    .toLowerCase();
+
+  const hasAny = (arr) => arr.some((k) => nameBlob.includes(k));
+
+  // euristiche forti dal nome/testo
+  if (
+    hasAny([
+      "motocross",
+      "motocrossowy",
+      "mx",
+      "cross",
+      "offroad",
+      "off-road",
+      "4x4",
+      "dirt",
+      "trail park",
+      "enduro park",
+    ])
+  ) {
+    return "offroad";
+  }
+
+  if (
+    hasAny([
+      "enduro",
+      "adventure",
+      "dual sport",
+      "dual-sport",
+      "adv",
+      "rally",
+    ])
+  ) {
+    return "enduro";
+  }
+
+  if (
+    hasAny([
+      "twisty",
+      "sport",
+      "race road",
+      "fast road",
+      "performance",
+    ])
+  ) {
+    return "sport";
+  }
+
+  // poi i campi strutturati
   if (!raw) return "touring";
 
   if (["enduro", "adventure", "adv", "dual-sport", "dualsport"].includes(raw)) {
@@ -191,7 +246,6 @@ function normalizeRouteType(route) {
 
   return "touring";
 }
-
 function fallbackSeasonByCountry(route) {
   const explicit = String(route?.bestSeason || "").trim();
   if (explicit) return explicit;
