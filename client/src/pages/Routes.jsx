@@ -8,7 +8,7 @@
 // ✅ Dedup key stabile (id o name+start/end)
 // ✅ Meteo + Google Maps
 // ✅ Fallback coordinate intelligente per itinerari incompleti / OSM
-// ✅ Descrizione fallback elegante per itinerari senza testo reale
+// ✅ FIX: usa SEMPRE route.description dal JSON
 // ✅ FIX mobile: no aperture accidentali durante scroll
 // =======================================================
 
@@ -153,289 +153,6 @@ function buildRouteKey(r) {
   return `n:${name}|${s}|${e}`;
 }
 
-function hasRealDescription(route) {
-  const d = String(route?.description || "").trim();
-  if (!d) return false;
-
-  const bad = [
-    "import osm",
-    "da verificare",
-    "to verify",
-    "tbd",
-    "n/a",
-    "no description",
-  ];
-
-  const lower = d.toLowerCase();
-  return !bad.some((x) => lower.includes(x));
-}
-
-function normalizeRouteType(route) {
-  const raw = String(route?.type || route?.category || route?.style || "")
-    .trim()
-    .toLowerCase();
-
-  const nameBlob = [
-    route?.name,
-    route?.region,
-    route?.description,
-  ]
-    .filter(Boolean)
-    .join(" ")
-    .toLowerCase();
-
-  const hasAny = (arr) => arr.some((k) => nameBlob.includes(k));
-
-  // euristiche forti dal nome/testo
-  if (
-    hasAny([
-      "motocross",
-      "motocrossowy",
-      "mx",
-      "cross",
-      "offroad",
-      "off-road",
-      "4x4",
-      "dirt",
-      "trail park",
-      "enduro park",
-    ])
-  ) {
-    return "offroad";
-  }
-
-  if (
-    hasAny([
-      "enduro",
-      "adventure",
-      "dual sport",
-      "dual-sport",
-      "adv",
-      "rally",
-    ])
-  ) {
-    return "enduro";
-  }
-
-  if (
-    hasAny([
-      "twisty",
-      "sport",
-      "race road",
-      "fast road",
-      "performance",
-    ])
-  ) {
-    return "sport";
-  }
-
-  // poi i campi strutturati
-  if (!raw) return "touring";
-
-  if (["enduro", "adventure", "adv", "dual-sport", "dualsport"].includes(raw)) {
-    return "enduro";
-  }
-
-  if (["offroad", "off-road", "cross", "mx", "dirt"].includes(raw)) {
-    return "offroad";
-  }
-
-  if (["sport", "twisty", "sporty", "performance"].includes(raw)) {
-    return "sport";
-  }
-
-  return "touring";
-}
-function fallbackSeasonByCountry(route) {
-  const explicit = String(route?.bestSeason || "").trim();
-  if (explicit) return explicit;
-
-  const country = String(route?.country || "").trim().toUpperCase();
-
-  const north = new Set([
-    "NO", "SE", "FI", "IS", "EE", "LV", "LT",
-  ]);
-
-  const central = new Set([
-    "DE", "PL", "CZ", "SK", "AT", "CH", "NL", "BE", "LU",
-    "UK", "IE", "FR", "SI", "HR", "HU", "RO",
-  ]);
-
-  const south = new Set([
-    "IT", "ES", "PT", "GR", "AL", "ME", "BA", "MK", "RS", "BG", "TR",
-  ]);
-
-  if (north.has(country)) return "Mag–Set";
-  if (central.has(country)) return "Apr–Ott";
-  if (south.has(country)) return "Mar–Nov";
-
-  return "Apr–Ott";
-}
-
-function buildRidingNote(route) {
-  const type = normalizeRouteType(route);
-  const curves = Number(route?.curvesScore || 0);
-  const asphalt = Number(route?.asphaltScore || 0);
-
-  let ridingNote = "";
-
-  if (type === "offroad") {
-    ridingNote =
-      "tracciato off-road con fondo variabile, consigliato per moto da fuoristrada o rider con esperienza su sterrato";
-
-    if (asphalt >= 7) {
-      ridingNote += ", con alcuni collegamenti più scorrevoli";
-    } else if (asphalt > 0 && asphalt <= 3) {
-      ridingNote += ", con prevalenza di superfici non asfaltate";
-    }
-
-    return ridingNote;
-  }
-
-  if (type === "enduro") {
-    ridingNote =
-      "percorso adventure/enduro con tratti tecnici, adatto a moto dual sport o maxi-enduro ben gestite";
-
-    if (curves >= 7) {
-      ridingNote += ", con sviluppo guidato e vario";
-    }
-
-    if (asphalt > 0 && asphalt <= 4) {
-      ridingNote += ", dove conviene valutare bene fondo e gomme";
-    }
-
-    return ridingNote;
-  }
-
-  if (type === "sport") {
-    if (curves >= 8) {
-      ridingNote = "tracciato molto guidato, pensato per una guida dinamica e coinvolgente";
-    } else if (curves >= 5) {
-      ridingNote = "percorso brillante con una buona varietà di curve, ideale per guida dinamica";
-    } else {
-      ridingNote = "itinerario scorrevole ma con tratti adatti a una guida più attiva";
-    }
-
-    if (asphalt >= 8) {
-      ridingNote += ", con fondo generalmente favorevole";
-    } else if (asphalt > 0 && asphalt <= 4) {
-      ridingNote += ", con fondo da valutare con maggiore attenzione";
-    }
-
-    return ridingNote;
-  }
-
-  // touring default
-  if (curves >= 8) {
-    ridingNote = "tracciato ricco di curve e molto coinvolgente alla guida";
-  } else if (curves >= 5) {
-    ridingNote = "percorso piacevole con una buona varietà di curve";
-  } else {
-    ridingNote = "itinerario scorrevole, adatto a guida rilassata e panoramica";
-  }
-
-  if (asphalt >= 8) {
-    ridingNote += ", con fondo generalmente favorevole";
-  } else if (asphalt > 0 && asphalt <= 4) {
-    ridingNote += ", con fondo da valutare con maggiore attenzione";
-  }
-
-  return ridingNote;
-}
-
-function buildRouteDescription(route) {
-  if (hasRealDescription(route)) return String(route.description).trim();
-
-  const parts = [];
-
-  const name = String(route?.name || "Questo itinerario").trim();
-  const region = String(route?.region || "").trim();
-  const country = String(route?.country || "").trim();
-  const season = fallbackSeasonByCountry(route);
-  const type = normalizeRouteType(route);
-
-  const km = Number(route?.distanceKm || 0);
-
-  if (region && country) {
-    parts.push(`${name} attraversa ${region}, ${country}`);
-  } else if (region) {
-    parts.push(`${name} attraversa ${region}`);
-  } else if (country) {
-    parts.push(`${name} si sviluppa in ${country}`);
-  } else {
-    parts.push(`${name} è un itinerario motociclistico da esplorare`);
-  }
-
-  if (km > 0) {
-    parts.push(`per circa ${km} km`);
-  }
-
-  if (season) {
-    parts.push(`con periodo ideale ${season}`);
-  }
-
-  if (type === "offroad") {
-    parts.push("in chiave off-road");
-  } else if (type === "enduro") {
-    parts.push("in chiave adventure/enduro");
-  } else if (type === "sport") {
-    parts.push("con vocazione più dinamica");
-  }
-
-  const ridingNote = buildRidingNote(route);
-
-  return `${parts.join(" ")}. ${ridingNote}.`;
-}
-function buildRouteDescription(route) {
-  if (hasRealDescription(route)) return String(route.description).trim();
-
-  const parts = [];
-
-  const name = String(route?.name || "Questo itinerario").trim();
-  const region = String(route?.region || "").trim();
-  const country = String(route?.country || "").trim();
-  const season = String(route?.bestSeason || "").trim();
-
-  const km = Number(route?.distanceKm || 0);
-  const curves = Number(route?.curvesScore || 0);
-  const asphalt = Number(route?.asphaltScore || 0);
-
-  if (region && country) {
-    parts.push(`${name} attraversa ${region}, ${country}`);
-  } else if (region) {
-    parts.push(`${name} attraversa ${region}`);
-  } else if (country) {
-    parts.push(`${name} si sviluppa in ${country}`);
-  } else {
-    parts.push(`${name} è un itinerario touring da esplorare`);
-  }
-
-  if (km > 0) {
-    parts.push(`per circa ${km} km`);
-  }
-
-  if (season) {
-    parts.push(`con periodo ideale ${season}`);
-  }
-
-  let ridingNote = "";
-  if (curves >= 8) {
-    ridingNote = "tracciato ricco di curve e molto coinvolgente alla guida";
-  } else if (curves >= 5) {
-    ridingNote = "percorso piacevole con una buona varietà di curve";
-  } else {
-    ridingNote = "itinerario scorrevole, adatto a guida rilassata e panoramica";
-  }
-
-  if (asphalt >= 8) {
-    ridingNote += ", con fondo generalmente favorevole";
-  } else if (asphalt > 0 && asphalt <= 4) {
-    ridingNote += ", con fondo da valutare con maggiore attenzione";
-  }
-
-  return `${parts.join(" ")}. ${ridingNote}.`;
-}
-
 function SkeletonLoading() {
   return (
     <div
@@ -449,9 +166,30 @@ function SkeletonLoading() {
     >
       <div style={{ fontSize: 16, fontWeight: 900 }}>Carico itinerari…</div>
       <div style={{ marginTop: 10, display: "grid", gap: 8 }}>
-        <div style={{ height: 12, background: "rgba(0,0,0,0.08)", borderRadius: 8, width: "70%" }} />
-        <div style={{ height: 12, background: "rgba(0,0,0,0.08)", borderRadius: 8, width: "55%" }} />
-        <div style={{ height: 12, background: "rgba(0,0,0,0.08)", borderRadius: 8, width: "80%" }} />
+        <div
+          style={{
+            height: 12,
+            background: "rgba(0,0,0,0.08)",
+            borderRadius: 8,
+            width: "70%",
+          }}
+        />
+        <div
+          style={{
+            height: 12,
+            background: "rgba(0,0,0,0.08)",
+            borderRadius: 8,
+            width: "55%",
+          }}
+        />
+        <div
+          style={{
+            height: 12,
+            background: "rgba(0,0,0,0.08)",
+            borderRadius: 8,
+            width: "80%",
+          }}
+        />
       </div>
     </div>
   );
@@ -517,6 +255,7 @@ export default function Routes() {
     }
 
     run();
+
     return () => {
       alive = false;
     };
@@ -535,15 +274,25 @@ export default function Routes() {
 
     if (query) {
       out = out.filter((r) => {
-        const blob = [r.name, r.region, r.country, r.description, r.bestSeason, r.pace]
+        const blob = [
+          r.name,
+          r.region,
+          r.country,
+          r.description,
+          r.bestSeason,
+          r.pace,
+        ]
           .join(" ")
           .toLowerCase();
+
         return blob.includes(query);
       });
     }
 
     if (country !== "ALL") {
-      out = out.filter((r) => String(r.country || "").toUpperCase() === country);
+      out = out.filter(
+        (r) => String(r.country || "").toUpperCase() === country
+      );
     }
 
     const sorter =
@@ -591,7 +340,10 @@ export default function Routes() {
   };
 
   return (
-    <div className="routes-root" style={{ padding: 12, maxWidth: 1250, margin: "0 auto" }}>
+    <div
+      className="routes-root"
+      style={{ padding: 12, maxWidth: 1250, margin: "0 auto" }}
+    >
       {!showDetailMobile && (
         <>
           <div
@@ -604,8 +356,13 @@ export default function Routes() {
             }}
           >
             <div>
-              <h1 style={{ margin: 0, fontSize: 34, letterSpacing: -0.5 }}>Itinerari 📍</h1>
-              <div className="routes-subtitle" style={{ opacity: 0.75, marginTop: 6 }}>
+              <h1 style={{ margin: 0, fontSize: 34, letterSpacing: -0.5 }}>
+                Itinerari 📍
+              </h1>
+              <div
+                className="routes-subtitle"
+                style={{ opacity: 0.75, marginTop: 6 }}
+              >
                 Touring emozionale: mappa, meteo e Google Maps.
               </div>
             </div>
@@ -679,7 +436,14 @@ export default function Routes() {
       {loading ? (
         <SkeletonLoading />
       ) : err ? (
-        <div style={{ marginTop: 12, padding: 12, borderRadius: 16, background: "rgba(255,0,0,0.08)" }}>
+        <div
+          style={{
+            marginTop: 12,
+            padding: 12,
+            borderRadius: 16,
+            background: "rgba(255,0,0,0.08)",
+          }}
+        >
           {err}
         </div>
       ) : (
@@ -755,7 +519,14 @@ export default function Routes() {
                   {filtered.map((r) => {
                     const key = buildRouteKey(r);
                     const isActive = key === activeKey;
-                    return <RouteCard key={key} route={r} active={isActive} onSelect={() => selectRoute(r)} />;
+                    return (
+                      <RouteCard
+                        key={key}
+                        route={r}
+                        active={isActive}
+                        onSelect={() => selectRoute(r)}
+                      />
+                    );
                   })}
                 </div>
               </div>
@@ -769,7 +540,11 @@ export default function Routes() {
                     background: "white",
                   }}
                 >
-                  {!active ? <div style={{ padding: 14 }}>Seleziona un itinerario.</div> : <RouteDetail route={active} />}
+                  {!active ? (
+                    <div style={{ padding: 14 }}>Seleziona un itinerario.</div>
+                  ) : (
+                    <RouteDetail route={active} />
+                  )}
                 </div>
               </div>
             </div>
@@ -811,6 +586,7 @@ export default function Routes() {
 
 function RouteCard({ route, active, onSelect }) {
   const photo = route.photo || FALLBACK_PHOTO;
+
   const touchRef = useRef({
     startX: 0,
     startY: 0,
@@ -858,12 +634,16 @@ function RouteCard({ route, active, onSelect }) {
       onTouchStart={handleTouchStart}
       onTouchMove={handleTouchMove}
       onTouchEnd={handleTouchEnd}
-      onKeyDown={(e) => (e.key === "Enter" || e.key === " " ? handleClick(e) : null)}
+      onKeyDown={(e) =>
+        e.key === "Enter" || e.key === " " ? handleClick(e) : null
+      }
       style={{
         borderRadius: 16,
         overflow: "hidden",
         width: "100%",
-        border: active ? "2px solid rgba(0,0,0,0.30)" : "1px solid rgba(0,0,0,0.10)",
+        border: active
+          ? "2px solid rgba(0,0,0,0.30)"
+          : "1px solid rgba(0,0,0,0.10)",
         background: "white",
         cursor: "pointer",
         WebkitTapHighlightColor: "transparent",
@@ -871,39 +651,94 @@ function RouteCard({ route, active, onSelect }) {
         userSelect: "none",
       }}
     >
-      <div className="route-card-mobile" style={{ display: "none", padding: 6, gap: 10, alignItems: "center" }}>
-        <div style={{ width: 46, height: 46, borderRadius: 12, overflow: "hidden", background: "rgba(0,0,0,0.05)", flex: "0 0 auto" }}>
-          <img src={photo} alt="" style={{ width: "100%", height: "100%", objectFit: "cover" }} loading="lazy" />
+      <div
+        className="route-card-mobile"
+        style={{ display: "none", padding: 6, gap: 10, alignItems: "center" }}
+      >
+        <div
+          style={{
+            width: 46,
+            height: 46,
+            borderRadius: 12,
+            overflow: "hidden",
+            background: "rgba(0,0,0,0.05)",
+            flex: "0 0 auto",
+          }}
+        >
+          <img
+            src={photo}
+            alt=""
+            style={{ width: "100%", height: "100%", objectFit: "cover" }}
+            loading="lazy"
+          />
         </div>
 
         <div style={{ minWidth: 0, flex: "1 1 auto" }}>
-          <div style={{ display: "flex", justifyContent: "space-between", gap: 8, alignItems: "start" }}>
-            <div style={{ fontWeight: 950, fontSize: 14, lineHeight: 1.15, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              gap: 8,
+              alignItems: "start",
+            }}
+          >
+            <div
+              style={{
+                fontWeight: 950,
+                fontSize: 14,
+                lineHeight: 1.15,
+                overflow: "hidden",
+                textOverflow: "ellipsis",
+                whiteSpace: "nowrap",
+              }}
+            >
               {route.country ? `${route.country} ` : ""}
               {route.name}
             </div>
-            <div style={{ fontSize: 11, opacity: 0.75, whiteSpace: "nowrap" }}>⭐ {Number(route.rating || 0).toFixed(1)}</div>
+            <div style={{ fontSize: 11, opacity: 0.75, whiteSpace: "nowrap" }}>
+              ⭐ {Number(route.rating || 0).toFixed(1)}
+            </div>
           </div>
 
-          <div style={{ marginTop: 2, fontSize: 11, opacity: 0.75, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
-            {route.region || "—"} · {route.bestSeason || "—"} · {route.distanceKm ? `${route.distanceKm} km` : ""}
+          <div
+            style={{
+              marginTop: 2,
+              fontSize: 11,
+              opacity: 0.75,
+              overflow: "hidden",
+              textOverflow: "ellipsis",
+              whiteSpace: "nowrap",
+            }}
+          >
+            {route.region || "—"} · {route.bestSeason || "—"} ·{" "}
+            {route.distanceKm ? `${route.distanceKm} km` : ""}
           </div>
         </div>
       </div>
 
       <div className="route-card-desktop" style={{ display: "block" }}>
-        <div style={{ height: 130, backgroundImage: `url(${photo})`, backgroundSize: "cover", backgroundPosition: "center" }} />
+        <div
+          style={{
+            height: 130,
+            backgroundImage: `url(${photo})`,
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+          }}
+        />
         <div style={{ padding: 12 }}>
           <div style={{ display: "flex", justifyContent: "space-between", gap: 10 }}>
             <div style={{ fontWeight: 900, lineHeight: 1.15 }}>
               {route.country ? `${route.country} ` : ""}
               {route.name}
             </div>
-            <div style={{ fontSize: 12, opacity: 0.75, whiteSpace: "nowrap" }}>⭐ {Number(route.rating || 0).toFixed(1)}</div>
+            <div style={{ fontSize: 12, opacity: 0.75, whiteSpace: "nowrap" }}>
+              ⭐ {Number(route.rating || 0).toFixed(1)}
+            </div>
           </div>
 
           <div style={{ marginTop: 4, fontSize: 12, opacity: 0.75 }}>
-            {route.region || "—"} · {route.bestSeason || "—"} · {route.distanceKm ? `${route.distanceKm} km` : "—"}
+            {route.region || "—"} · {route.bestSeason || "—"} ·{" "}
+            {route.distanceKm ? `${route.distanceKm} km` : "—"}
           </div>
         </div>
       </div>
@@ -921,13 +756,16 @@ function RouteCard({ route, active, onSelect }) {
 function RouteDetail({ route }) {
   const photo = route.photo || FALLBACK_PHOTO;
   const navPoint = pickRoutePoint(route);
-  const startNavUrl = navPoint ? buildNavigateUrl(latLonStr(navPoint), "driving") : null;
+  const startNavUrl = navPoint
+    ? buildNavigateUrl(latLonStr(navPoint), "driving")
+    : null;
 
   const [wx, setWx] = useState(null);
   const [wxBusy, setWxBusy] = useState(false);
 
   const routeKey = buildRouteKey(route);
-  const displayDescription = buildRouteDescription(route);
+  const displayDescription =
+    String(route?.description || "").trim() || "Descrizione non disponibile.";
 
   useEffect(() => {
     let alive = true;
@@ -947,6 +785,7 @@ function RouteDetail({ route }) {
     }
 
     run();
+
     return () => {
       alive = false;
     };
@@ -963,18 +802,44 @@ function RouteDetail({ route }) {
           backgroundPosition: "center",
         }}
       >
-        <div style={{ position: "absolute", inset: 0, background: "linear-gradient(180deg, rgba(0,0,0,0.10), rgba(0,0,0,0.76))" }} />
-        <div style={{ position: "absolute", left: 12, right: 12, bottom: 10, color: "white" }}>
+        <div
+          style={{
+            position: "absolute",
+            inset: 0,
+            background:
+              "linear-gradient(180deg, rgba(0,0,0,0.10), rgba(0,0,0,0.76))",
+          }}
+        />
+        <div
+          style={{
+            position: "absolute",
+            left: 12,
+            right: 12,
+            bottom: 10,
+            color: "white",
+          }}
+        >
           <div style={{ fontSize: 12, opacity: 0.92 }}>
-            {route.country || "—"} · {route.region || "—"} · {route.bestSeason || "—"}
+            {route.country || "—"} · {route.region || "—"} ·{" "}
+            {route.bestSeason || "—"}
           </div>
-          <div style={{ fontSize: 26, fontWeight: 950, lineHeight: 1.05 }}>{route.name}</div>
+          <div style={{ fontSize: 26, fontWeight: 950, lineHeight: 1.05 }}>
+            {route.name}
+          </div>
 
           <div style={{ marginTop: 8, display: "flex", gap: 8, flexWrap: "wrap" }}>
-            <span style={pill("dark")}>⭐ {Number(route.rating || 0).toFixed(1)}</span>
-            <span style={pill("dark")}>📏 {route.distanceKm ? `${route.distanceKm} km` : "—"}</span>
-            <span style={pill("dark")}>🌀 curve {Number(route.curvesScore || 0)}/10</span>
-            <span style={pill("dark")}>🛣️ asfalto {Number(route.asphaltScore || 0)}/10</span>
+            <span style={pill("dark")}>
+              ⭐ {Number(route.rating || 0).toFixed(1)}
+            </span>
+            <span style={pill("dark")}>
+              📏 {route.distanceKm ? `${route.distanceKm} km` : "—"}
+            </span>
+            <span style={pill("dark")}>
+              🌀 curve {Number(route.curvesScore || 0)}/10
+            </span>
+            <span style={pill("dark")}>
+              🛣️ asfalto {Number(route.asphaltScore || 0)}/10
+            </span>
           </div>
         </div>
       </div>
@@ -1004,43 +869,98 @@ function RouteDetail({ route }) {
           🧭 Avvia verso START
         </button>
 
-        <div style={{ marginTop: 12, borderTop: "1px solid rgba(0,0,0,0.08)", paddingTop: 12 }}>
+        <div
+          style={{
+            marginTop: 12,
+            borderTop: "1px solid rgba(0,0,0,0.08)",
+            paddingTop: 12,
+          }}
+        >
           <strong>📌 Descrizione</strong>
-          <div style={{ marginTop: 8, fontSize: 14, opacity: 0.9, lineHeight: 1.4 }}>
+          <div
+            style={{
+              marginTop: 8,
+              fontSize: 14,
+              opacity: 0.9,
+              lineHeight: 1.4,
+            }}
+          >
             {displayDescription}
           </div>
         </div>
 
-        <div style={{ marginTop: 12, borderTop: "1px solid rgba(0,0,0,0.08)", paddingTop: 12 }}>
+        <div
+          style={{
+            marginTop: 12,
+            borderTop: "1px solid rgba(0,0,0,0.08)",
+            paddingTop: 12,
+          }}
+        >
           <strong>🗺️ Mappa</strong>
           <div style={{ marginTop: 10 }}>
             <RouteMap route={route} />
           </div>
         </div>
 
-        <div style={{ marginTop: 12, borderTop: "1px solid rgba(0,0,0,0.08)", paddingTop: 12 }}>
+        <div
+          style={{
+            marginTop: 12,
+            borderTop: "1px solid rgba(0,0,0,0.08)",
+            paddingTop: 12,
+          }}
+        >
           <strong>🌤 Meteo</strong>
 
           {wxBusy ? (
-            <div style={{ marginTop: 10, padding: 12, borderRadius: 16, background: "rgba(0,0,0,0.04)" }}>
+            <div
+              style={{
+                marginTop: 10,
+                padding: 12,
+                borderRadius: 16,
+                background: "rgba(0,0,0,0.04)",
+              }}
+            >
               Carico meteo…
             </div>
           ) : !wx || !wx.ok ? (
-            <div style={{ marginTop: 10, padding: 12, borderRadius: 16, background: "rgba(0,0,0,0.04)" }}>
+            <div
+              style={{
+                marginTop: 10,
+                padding: 12,
+                borderRadius: 16,
+                background: "rgba(0,0,0,0.04)",
+              }}
+            >
               {wx?.note || "Meteo non disponibile."}
             </div>
           ) : (
             <div style={{ marginTop: 10, display: "grid", gap: 10 }}>
-              <div style={{ display: "flex", gap: 10, flexWrap: "wrap", alignItems: "center" }}>
+              <div
+                style={{
+                  display: "flex",
+                  gap: 10,
+                  flexWrap: "wrap",
+                  alignItems: "center",
+                }}
+              >
                 <span style={pill("light")}>
                   Condizione: <strong>{wx.worst}</strong>
                 </span>
+
                 {wx.temp != null ? (
                   <span style={pill("light")}>
-                    🌡 {wx.temp}° {wx.tempMin != null && wx.tempMax != null ? `(min ${wx.tempMin}° / max ${wx.tempMax}°)` : ""}
+                    🌡 {wx.temp}°{" "}
+                    {wx.tempMin != null && wx.tempMax != null
+                      ? `(min ${wx.tempMin}° / max ${wx.tempMax}°)`
+                      : ""}
                   </span>
                 ) : null}
-                {wx.windKmh != null ? <span style={pill("light")}>💨 vento {wx.windKmh} km/h</span> : null}
+
+                {wx.windKmh != null ? (
+                  <span style={pill("light")}>
+                    💨 vento {wx.windKmh} km/h
+                  </span>
+                ) : null}
               </div>
 
               {wx.ride ? (
@@ -1062,13 +982,18 @@ function RouteDetail({ route }) {
                         : "1px solid rgba(0,140,80,0.18)",
                   }}
                 >
-                  <div style={{ fontWeight: 900, fontSize: 13 }}>🏍 {wx.ride.label}</div>
-                  <div style={{ marginTop: 4, fontSize: 13, opacity: 0.85 }}>{wx.ride.advice}</div>
+                  <div style={{ fontWeight: 900, fontSize: 13 }}>
+                    🏍 {wx.ride.label}
+                  </div>
+                  <div style={{ marginTop: 4, fontSize: 13, opacity: 0.85 }}>
+                    {wx.ride.advice}
+                  </div>
                 </div>
               ) : null}
 
               <div style={{ fontSize: 12, opacity: 0.7 }}>
-                Aggiornato: {String(wx.updatedAt || "").slice(0, 16).replace("T", " ")}
+                Aggiornato:{" "}
+                {String(wx.updatedAt || "").slice(0, 16).replace("T", " ")}
               </div>
             </div>
           )}
@@ -1076,7 +1001,8 @@ function RouteDetail({ route }) {
 
         {!navPoint ? (
           <div style={{ marginTop: 10, fontSize: 12, opacity: 0.65 }}>
-            Nota: questo itinerario non ha coordinate start/end complete nel dataset.
+            Nota: questo itinerario non ha coordinate start/end complete nel
+            dataset.
           </div>
         ) : null}
       </div>
