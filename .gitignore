@@ -1,3 +1,5 @@
 node_modules
 .env
 dist
+# MotoPortEU backups
+client/public/data/*backup*
