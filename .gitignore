@@ -3,3 +3,12 @@ node_modules
 dist
 # MotoPortEU backups
 client/public/data/*backup*
+
+# MotoPortEU archives and backups
+client/public/data/_archive/
+client/public/data/*backup*
+client/public/data/routes.cleaned.json
+client/public/data/tracks.extracted.json
+client/public/data/routes.review.json
+client/public/data/routes.final.json
+client/public/data/tracks.final.json
