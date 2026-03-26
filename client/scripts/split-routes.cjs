@@ -13,10 +13,10 @@
 //   client/public/data/tracks.extracted.json
 //   client/public/data/routes.review.json
 //
-// OBIETTIVO:
-// - togliere da routes i contenuti chiaramente cross/enduro/track
-// - dare priorità ai campi "forti" (id, name, type, rideType, category, surface, terrain)
-// - pesare meno la description, soprattutto se _generated = true
+// VERSIONE 2.5:
+// - severa sui veri track
+// - prudente sui record poveri di struttura
+// - usa review per gli ambigui invece di buttare tutto in tracks
 // =======================================================
 
 const fs = require("fs");
@@ -193,6 +193,33 @@ function pickId(item, idx) {
   return item.id || item.slug || item.name || item.title || `item-${idx + 1}`;
 }
 
+function toNum(v) {
+  const n = Number(v);
+  return Number.isFinite(n) ? n : 0;
+}
+
+function hasCoordsObject(item) {
+  return Boolean(
+    item &&
+      item.coords &&
+      Number.isFinite(Number(item.coords.lat)) &&
+      Number.isFinite(Number(item.coords.lng ?? item.coords.lon))
+  );
+}
+
+function hasLineGeometry(item) {
+  return (
+    (Array.isArray(item?.points) && item.points.length >= 2) ||
+    (Array.isArray(item?.geometry) && item.geometry.length >= 2) ||
+    (Array.isArray(item?.polyline) && item.polyline.length >= 2) ||
+    (Array.isArray(item?.path) && item.path.length >= 2)
+  );
+}
+
+function looksLikeSpot(item) {
+  return hasCoordsObject(item) && !hasLineGeometry(item);
+}
+
 function buildSearchText(item) {
   const primaryFields = [
     item.id,
@@ -232,13 +259,39 @@ function buildSearchText(item) {
   };
 }
 
+function getStructuralSignals(item) {
+  const distanceKm = toNum(item?.distanceKm);
+  const durationMin = toNum(item?.durationMin);
+
+  const zeroDistance = distanceKm <= 0;
+  const zeroDuration = durationMin <= 0;
+  const spotLike = looksLikeSpot(item);
+  const lineLike = hasLineGeometry(item);
+  const generated = Boolean(item?._generated);
+
+  const likelyNonRoute = zeroDistance && zeroDuration && spotLike;
+  const likelyRealRoute = distanceKm > 5 || durationMin > 8 || lineLike;
+
+  return {
+    distanceKm,
+    durationMin,
+    zeroDistance,
+    zeroDuration,
+    spotLike,
+    lineLike,
+    generated,
+    likelyNonRoute,
+    likelyRealRoute,
+  };
+}
+
 function getSignals(item) {
   const { primaryText, secondaryText, fullText } = buildSearchText(item);
+  const structural = getStructuralSignals(item);
 
-  const generated = Boolean(item._generated);
+  const generated = structural.generated;
 
   const matchedHardTrackPrimary = includesAny(primaryText, HARD_TRACK_KEYWORDS);
-
   const matchedTrackPrimary = includesAny(primaryText, STRONG_TRACK_KEYWORDS);
   const matchedRoutePrimary = includesAny(primaryText, STRONG_ROUTE_KEYWORDS);
   const matchedWeakRoutePrimary = includesAny(primaryText, WEAK_ROUTE_KEYWORDS);
@@ -259,15 +312,12 @@ function getSignals(item) {
   let trackScore = 0;
   let routeScore = 0;
 
-  // PRIORITÀ MASSIMA: segnali hard-track nei campi forti
   trackScore += matchedHardTrackPrimary.length * 14;
 
-  // Campi forti
   trackScore += matchedTrackPrimary.length * 6;
   routeScore += matchedRoutePrimary.length * 4;
   routeScore += matchedWeakRoutePrimary.length * 1;
 
-  // Campi secondari: description pesa meno, specie se generata
   const secondaryTrackWeight = generated ? 1 : 2;
   const secondaryStrongRouteWeight = generated ? 0.75 : 2;
   const secondaryWeakRouteWeight = generated ? 0.25 : 0.75;
@@ -276,7 +326,6 @@ function getSignals(item) {
   routeScore += matchedRouteSecondary.length * secondaryStrongRouteWeight;
   routeScore += matchedWeakRouteSecondary.length * secondaryWeakRouteWeight;
 
-  // Type / rideType / category
   if (TRACK_TYPES.includes(typeNorm)) trackScore += 6;
   if (TRACK_TYPES.includes(rideTypeNorm)) trackScore += 6;
   if (TRACK_TYPES.includes(categoryNorm)) trackScore += 5;
@@ -285,7 +334,6 @@ function getSignals(item) {
   if (ROUTE_TYPES.includes(rideTypeNorm)) routeScore += 3;
   if (ROUTE_TYPES.includes(categoryNorm)) routeScore += 3;
 
-  // Surface
   if (surfaceNorm.includes("dirt")) trackScore += 5;
   if (surfaceNorm.includes("sterr")) trackScore += 5;
   if (surfaceNorm.includes("gravel")) trackScore += 3;
@@ -295,7 +343,6 @@ function getSignals(item) {
   if (surfaceNorm.includes("asfalto")) routeScore += 4;
   if (surfaceNorm.includes("paved")) routeScore += 3;
 
-  // Terrain
   if (terrainNorm.includes("dirt")) trackScore += 5;
   if (terrainNorm.includes("sterr")) trackScore += 5;
   if (terrainNorm.includes("offroad")) trackScore += 5;
@@ -308,26 +355,29 @@ function getSignals(item) {
   if (terrainNorm.includes("scenic")) routeScore += 2;
   if (terrainNorm.includes("panoramic")) routeScore += 2;
 
-  // Pattern forti su id e name
   if (idNorm.startsWith("trk")) trackScore += 2;
 
   if (/\b(circuito|circuit|track|motocross|enduro|cross|mx|pista)\b/.test(nameNorm)) {
     trackScore += 8;
   }
 
-  // Segnali "passes" da trattare con cautela:
-  // se source=passes ma il nome contiene track keywords, track vince
   if (sourceNorm === "passes" && matchedHardTrackPrimary.length > 0) {
     trackScore += 4;
   }
 
-  // Penalizzazione route se description generata e dice "touring/itinerario/strada"
-  // ma i campi forti dicono track
+  // struttura: pesa, ma non decide da sola
+  if (structural.spotLike) trackScore += 2;
+  if (structural.lineLike) routeScore += 3;
+  if (structural.distanceKm > 20) routeScore += 4;
+  else if (structural.distanceKm > 5) routeScore += 2;
+
+  if (structural.durationMin > 30) routeScore += 3;
+  else if (structural.durationMin > 8) routeScore += 1.5;
+
   if (generated && matchedHardTrackPrimary.length > 0) {
     routeScore -= 2;
   }
 
-  // Clamp minimo
   trackScore = Math.max(0, trackScore);
   routeScore = Math.max(0, routeScore);
 
@@ -336,6 +386,7 @@ function getSignals(item) {
     secondaryText,
     fullText,
     generated,
+    structural,
     matchedHardTrackPrimary: uniq(matchedHardTrackPrimary),
     matchedTrackKeywords: uniq([...matchedTrackPrimary, ...matchedTrackSecondary]),
     matchedRouteKeywords: uniq([
@@ -351,14 +402,9 @@ function getSignals(item) {
 
 function classify(item) {
   const signals = getSignals(item);
-  const {
-    trackScore,
-    routeScore,
-    matchedHardTrackPrimary,
-    generated,
-  } = signals;
+  const { trackScore, routeScore, matchedHardTrackPrimary, generated, structural } = signals;
 
-  // Regola killer assoluta
+  // 1. hard-track immediato
   if (matchedHardTrackPrimary.length > 0) {
     return {
       bucket: "tracks",
@@ -367,7 +413,25 @@ function classify(item) {
     };
   }
 
-  // Track forte
+  // 2. struttura povera + segnali track = tracks
+  if (structural.likelyNonRoute && trackScore >= 6) {
+    return {
+      bucket: "tracks",
+      reason: "structural_non_route_with_track_signals",
+      signals,
+    };
+  }
+
+  // 3. route whitelist equilibrata
+  if (routeScore >= 6 && routeScore >= trackScore + 1 && !matchedHardTrackPrimary.length) {
+    return {
+      bucket: "routes",
+      reason: "route_whitelist",
+      signals,
+    };
+  }
+
+  // 4. track forte
   if (trackScore >= 10 && trackScore >= routeScore + 2) {
     return {
       bucket: "tracks",
@@ -376,8 +440,26 @@ function classify(item) {
     };
   }
 
-  // Route forte
-  if (routeScore >= 7 && routeScore >= trackScore + 3) {
+  // 5. generato + spot povero ma non chiarissimo -> review, non tracks
+  if (generated && structural.likelyNonRoute && trackScore < 6) {
+    return {
+      bucket: "review",
+      reason: "generated_structural_ambiguous",
+      signals,
+    };
+  }
+
+  // 6. spot povero e ambiguo -> review
+  if (structural.likelyNonRoute && trackScore > 0 && routeScore > 0) {
+    return {
+      bucket: "review",
+      reason: "structural_mixed_signals",
+      signals,
+    };
+  }
+
+  // 7. route forte ma senza hard-track
+  if (!structural.spotLike && routeScore >= 8 && routeScore >= trackScore + 3) {
     return {
       bucket: "routes",
       reason: "strong_route_signals",
@@ -385,15 +467,7 @@ function classify(item) {
     };
   }
 
-  // Casi misti con record generato: essere più severi verso tracks
-  if (generated && trackScore >= 6 && routeScore >= 1) {
-    return {
-      bucket: "tracks",
-      reason: "generated_track_override",
-      signals,
-    };
-  }
-
+  // 8. misti veri
   if (trackScore > 0 && routeScore > 0) {
     return {
       bucket: "review",
@@ -461,6 +535,7 @@ function main() {
         trackScore: result.signals.trackScore,
         routeScore: result.signals.routeScore,
         generated: result.signals.generated,
+        structural: result.signals.structural,
         matchedHardTrackPrimary: result.signals.matchedHardTrackPrimary,
         matchedTrackKeywords: result.signals.matchedTrackKeywords,
         matchedRouteKeywords: result.signals.matchedRouteKeywords,
@@ -519,7 +594,7 @@ function main() {
     console.log("Primi elementi in review:");
     review.slice(0, 10).forEach((item, i) => {
       console.log(
-        `${i + 1}. ${pickId(item, i)} | trackScore=${item._classification.trackScore} | routeScore=${item._classification.routeScore}`
+        `${i + 1}. ${pickId(item, i)} | trackScore=${item._classification.trackScore} | routeScore=${item._classification.routeScore} | reason=${item._classification.reason}`
       );
     });
   }
