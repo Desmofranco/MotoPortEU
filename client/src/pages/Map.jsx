@@ -1331,7 +1331,7 @@ useEffect(() => {
               spot?.source ||
               "Google Discovery",
             riderScore: Number(spot?.riderScore || 0),
-            distanceKm: normalizeRiderSpotDistance(discoveryCenter, { lat, lng: lon }),
+            distanceKm: 0,
             original: spot,
           };
         })
@@ -1353,7 +1353,7 @@ useEffect(() => {
   return () => {
     cancelled = true;
   };
-}, [discoveryCenter?.[0], discoveryCenter?.[1]]);
+}, []);
 const addFromSearch = (s) => {
     setPoints((prev) => [...prev, [s.lat, s.lon]]);
     setSnappedLine(null);
@@ -1929,7 +1929,7 @@ const refreshRiderSpots = async () => {
             spot?.source ||
             "Google Discovery",
           riderScore: Number(spot?.riderScore || 0),
-          distanceKm: normalizeRiderSpotDistance(discoveryCenter, { lat, lng: lon }),
+          distanceKm: 0,
           original: spot,
         };
       })
