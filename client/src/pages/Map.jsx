@@ -41,8 +41,7 @@ import RouteBuilderMap from "../components/RouteBuilderMap";
 import RiderModePanel from "../components/RiderModePanel";
 import useRouteEngine from "../hooks/useRouteEngine";
 import { loadLastRoute } from "../utils/routeStorage";
-import { getNearbyRiderSpots } from "../utils/riderSpots";
-
+import { loadRiderSpots, findNearbyRiderSpots } from "../utils/riderSpots";
 const STORAGE_KEY = "mp_routes_v4";
 const OWM_KEY = import.meta.env.VITE_OWM_KEY || "";
 const PASS_KEY = "mp_pass_active";
@@ -1293,68 +1292,68 @@ export default function Map() {
   }, [mapCenter]);
 // ✅ FIX: filtra realmente gli spot nel raggio selezionato
 const nearbyRiderSpots = useMemo(() => {
-  if (!Array.isArray(riderSpots) || !discoveryCenter) return [];
+  if (!Array.isArray(riderSpots) || !riderSpots.length || !discoveryCenter) return [];
 
-  return riderSpots.filter((s) => {
-    const d = normalizeRiderSpotDistance(discoveryCenter, s);
-    return d <= riderSpotsRadiusKm;
-  });
+  return findNearbyRiderSpots(
+    riderSpots,
+    Number(discoveryCenter[0]),
+    Number(discoveryCenter[1]),
+    Number(riderSpotsRadiusKm),
+    18
+  );
 }, [riderSpots, discoveryCenter, riderSpotsRadiusKm]);
-  useEffect(() => {
-    let cancelled = false;
+useEffect(() => {
+  let cancelled = false;
 
-    const loadRiderSpots = async () => {
-      try {
-        setRiderSpotsLoading(true);
-        setRiderSpotsError("");
+  const run = async () => {
+    try {
+      setRiderSpotsLoading(true);
+      setRiderSpotsError("");
 
-        const raw = await Promise.resolve(
-          getNearbyRiderSpots(discoveryCenter, riderSpotsRadiusKm)
-        );
+      const raw = await loadRiderSpots();
 
-        const normalized = (Array.isArray(raw) ? raw : [])
-          .map((spot, idx) => {
-            const lat = Number(spot?.lat);
-            const lon = Number(spot?.lng ?? spot?.lon);
-            return {
-              id: spot?.id || `rider-spot-${idx}-${lat}-${lon}`,
-              name: spot?.name || "Passo rider",
-              lat,
-              lon,
-              categoryKey: "rider_spot",
-              categoryLabel: "🏍️ Passo rider",
-              meta:
-                spot?.region ||
-                spot?.country ||
-                spot?.type ||
-                spot?.source ||
-                "Google Discovery",
-              distanceKm: normalizeRiderSpotDistance(discoveryCenter, { lat, lng: lon }),
-              original: spot,
-            };
-          })
-          .filter((x) => Number.isFinite(x.lat) && Number.isFinite(x.lon))
-          .sort((a, b) => (a.distanceKm || 9999) - (b.distanceKm || 9999))
-          .slice(0, 18);
+      const normalized = (Array.isArray(raw) ? raw : [])
+        .map((spot, idx) => {
+          const lat = Number(spot?.lat);
+          const lon = Number(spot?.lng ?? spot?.lon);
 
-        if (!cancelled) setRiderSpots(normalized);
-      } catch (err) {
-        if (!cancelled) {
-          setRiderSpots([]);
-          setRiderSpotsError(err?.message || "Errore caricamento rider spots");
-        }
-      } finally {
-        if (!cancelled) setRiderSpotsLoading(false);
+          return {
+            id: spot?.id || `rider-spot-${idx}-${lat}-${lon}`,
+            name: spot?.name || "Passo rider",
+            lat,
+            lon,
+            categoryKey: "rider_spot",
+            categoryLabel: "🏍️ Passo rider",
+            meta:
+              spot?.region ||
+              spot?.country ||
+              spot?.type ||
+              spot?.source ||
+              "Google Discovery",
+            riderScore: Number(spot?.riderScore || 0),
+            distanceKm: normalizeRiderSpotDistance(discoveryCenter, { lat, lng: lon }),
+            original: spot,
+          };
+        })
+        .filter((x) => Number.isFinite(x.lat) && Number.isFinite(x.lon));
+
+      if (!cancelled) setRiderSpots(normalized);
+    } catch (err) {
+      if (!cancelled) {
+        setRiderSpots([]);
+        setRiderSpotsError(err?.message || "Errore caricamento rider spots");
       }
-    };
+    } finally {
+      if (!cancelled) setRiderSpotsLoading(false);
+    }
+  };
 
-    loadRiderSpots();
+  run();
 
-    return () => {
-      cancelled = true;
-    };
-  }, [discoveryCenter, riderSpotsRadiusKm]);
-
+  return () => {
+    cancelled = true;
+  };
+}, [discoveryCenter]);
   const addFromSearch = (s) => {
     setPoints((prev) => [...prev, [s.lat, s.lon]]);
     setSnappedLine(null);
@@ -1904,45 +1903,46 @@ const nearbyRiderSpots = useMemo(() => {
     }
   };
 
-  const refreshRiderSpots = async () => {
-    try {
-      setRiderSpotsLoading(true);
-      setRiderSpotsError("");
-      const raw = await Promise.resolve(getNearbyRiderSpots(discoveryCenter, riderSpotsRadiusKm));
-      const normalized = (Array.isArray(raw) ? raw : [])
-        .map((spot, idx) => {
-          const lat = Number(spot?.lat);
-          const lon = Number(spot?.lng ?? spot?.lon);
-          return {
-            id: spot?.id || `rider-spot-${idx}-${lat}-${lon}`,
-            name: spot?.name || "Passo rider",
-            lat,
-            lon,
-            categoryKey: "rider_spot",
-            categoryLabel: "🏍️ Passo rider",
-            meta:
-              spot?.region ||
-              spot?.country ||
-              spot?.type ||
-              spot?.source ||
-              "Google Discovery",
-            distanceKm: normalizeRiderSpotDistance(discoveryCenter, { lat, lng: lon }),
-            original: spot,
-          };
-        })
-        .filter((x) => Number.isFinite(x.lat) && Number.isFinite(x.lon))
-        .sort((a, b) => (a.distanceKm || 9999) - (b.distanceKm || 9999))
-        .slice(0, 18);
+const refreshRiderSpots = async () => {
+  try {
+    setRiderSpotsLoading(true);
+    setRiderSpotsError("");
 
-      setRiderSpots(normalized);
-    } catch (err) {
-      setRiderSpots([]);
-      setRiderSpotsError(err?.message || "Errore caricamento rider spots");
-    } finally {
-      setRiderSpotsLoading(false);
-    }
-  };
+    const raw = await loadRiderSpots();
 
+    const normalized = (Array.isArray(raw) ? raw : [])
+      .map((spot, idx) => {
+        const lat = Number(spot?.lat);
+        const lon = Number(spot?.lng ?? spot?.lon);
+
+        return {
+          id: spot?.id || `rider-spot-${idx}-${lat}-${lon}`,
+          name: spot?.name || "Passo rider",
+          lat,
+          lon,
+          categoryKey: "rider_spot",
+          categoryLabel: "🏍️ Passo rider",
+          meta:
+            spot?.region ||
+            spot?.country ||
+            spot?.type ||
+            spot?.source ||
+            "Google Discovery",
+          riderScore: Number(spot?.riderScore || 0),
+          distanceKm: normalizeRiderSpotDistance(discoveryCenter, { lat, lng: lon }),
+          original: spot,
+        };
+      })
+      .filter((x) => Number.isFinite(x.lat) && Number.isFinite(x.lon));
+
+    setRiderSpots(normalized);
+  } catch (err) {
+    setRiderSpots([]);
+    setRiderSpotsError(err?.message || "Errore caricamento rider spots");
+  } finally {
+    setRiderSpotsLoading(false);
+  }
+};
   const mapZoom = useMemo(() => {
     if (gps) return 13;
     if (points?.length) return 9;
