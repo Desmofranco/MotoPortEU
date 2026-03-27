@@ -1,24 +1,41 @@
+// client/src/utils/riderSpots.js
+
 export async function loadRiderSpots() {
   const res = await fetch("/data/rider-spots.cleaned.json");
   if (!res.ok) {
     throw new Error(`Impossibile caricare rider-spots.cleaned.json (${res.status})`);
   }
-  return res.json();
+  const data = await res.json();
+  return Array.isArray(data) ? data : [];
 }
 
 function toRad(v) {
-  return (v * Math.PI) / 180;
+  return (Number(v) * Math.PI) / 180;
 }
 
 export function distanceKm(aLat, aLng, bLat, bLng) {
+  const lat1 = Number(aLat);
+  const lng1 = Number(aLng);
+  const lat2 = Number(bLat);
+  const lng2 = Number(bLng);
+
+  if (
+    !Number.isFinite(lat1) ||
+    !Number.isFinite(lng1) ||
+    !Number.isFinite(lat2) ||
+    !Number.isFinite(lng2)
+  ) {
+    return Infinity;
+  }
+
   const R = 6371;
-  const dLat = toRad(bLat - aLat);
-  const dLng = toRad(bLng - aLng);
+  const dLat = toRad(lat2 - lat1);
+  const dLng = toRad(lng2 - lng1);
 
   const aa =
     Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-    Math.cos(toRad(aLat)) *
-      Math.cos(toRad(bLat)) *
+    Math.cos(toRad(lat1)) *
+      Math.cos(toRad(lat2)) *
       Math.sin(dLng / 2) *
       Math.sin(dLng / 2);
 
@@ -26,22 +43,38 @@ export function distanceKm(aLat, aLng, bLat, bLng) {
   return R * c;
 }
 
-export function findNearbyRiderSpots(spots, lat, lng, radiusKm = 120, limit = 12) {
-  if (!Array.isArray(spots)) return [];
+export function findNearbyRiderSpots(spots, centerLat, centerLng, radiusKm = 120, limit = 8) {
+  const lat = Number(centerLat);
+  const lng = Number(centerLng);
+  const radius = Number(radiusKm);
 
-  return spots
-    .filter((s) => Number.isFinite(Number(s.lat)) && Number.isFinite(Number(s.lng)))
-    .map((s) => ({
-      ...s,
-      distanceKm: distanceKm(lat, lng, Number(s.lat), Number(s.lng)),
-    }))
-    .filter((s) => s.distanceKm <= radiusKm)
+  if (!Array.isArray(spots) || !spots.length) return [];
+  if (!Number.isFinite(lat) || !Number.isFinite(lng)) return [];
+  if (!Number.isFinite(radius) || radius <= 0) return [];
+
+  const results = spots
+    .map((spot) => {
+      const spotLat = Number(spot?.lat);
+      const spotLng = Number(spot?.lng);
+      const dist = distanceKm(lat, lng, spotLat, spotLng);
+
+      return {
+        ...spot,
+        lat: spotLat,
+        lng: spotLng,
+        distanceKm: dist,
+      };
+    })
+    .filter((spot) => Number.isFinite(spot.distanceKm))
+    .filter((spot) => spot.distanceKm <= radius)
     .sort((a, b) => {
-      if ((b.riderScore || 0) !== (a.riderScore || 0)) {
-        return (b.riderScore || 0) - (a.riderScore || 0);
-      }
-      return a.distanceKm - b.distanceKm;
+      if (a.distanceKm !== b.distanceKm) return a.distanceKm - b.distanceKm;
+      return (b.riderScore || 0) - (a.riderScore || 0);
     })
     .slice(0, limit);
+
+  return results;
 }
+
+// alias di compatibilità se Map.jsx usa ancora questo nome
 export const getNearbyRiderSpots = findNearbyRiderSpots;
