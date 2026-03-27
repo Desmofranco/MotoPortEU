@@ -29,6 +29,11 @@
 // ✅ Stats sessioni + ultimo utilizzo
 // ✅ FIX: follow GPS separato dall'interazione manuale utente
 // ✅ FIX: velocità media reale calcolata sulla distanza GPS tracciata
+// ✅ NEW: Google Discovery PRO v2
+//    - rider spots vicini
+//    - pannello "Passi vicini rider"
+//    - aggiunta rider spot alla rotta
+//    - marker rider spot mostrati in mappa
 // =======================================================
 
 import React, { useEffect, useMemo, useRef, useState } from "react";
@@ -36,6 +41,7 @@ import RouteBuilderMap from "../components/RouteBuilderMap";
 import RiderModePanel from "../components/RiderModePanel";
 import useRouteEngine from "../hooks/useRouteEngine";
 import { loadLastRoute } from "../utils/routeStorage";
+import { getNearbyRiderSpots } from "../utils/riderSpots";
 
 const STORAGE_KEY = "mp_routes_v4";
 const OWM_KEY = import.meta.env.VITE_OWM_KEY || "";
@@ -713,10 +719,31 @@ async function overpassSearchNearby(point, categoryKey, radius = 3500) {
   }
 }
 
+// --- Rider Spots helpers ---
+function getLineCenter(points = []) {
+  if (!Array.isArray(points) || !points.length) return null;
+  const sum = points.reduce(
+    (acc, p) => {
+      acc.lat += Number(p[0]) || 0;
+      acc.lng += Number(p[1]) || 0;
+      return acc;
+    },
+    { lat: 0, lng: 0 }
+  );
+  return [sum.lat / points.length, sum.lng / points.length];
+}
+
+function normalizeRiderSpotDistance(center, spot) {
+  const lat = Number(spot?.lat);
+  const lng = Number(spot?.lng);
+  if (!Number.isFinite(lat) || !Number.isFinite(lng) || !center) return 9999;
+  return haversineKm(center, [lat, lng]);
+}
+
 // --- Styles ---
 const S = {
   page: { width: "100%", padding: "16px 12px" },
-  container: { maxWidth: 1320, margin: "0 auto" },
+  container: { maxWidth: 1380, margin: "0 auto" },
   headerRow: {
     display: "flex",
     gap: 12,
@@ -892,6 +919,12 @@ export default function Map() {
   const [poiRadius, setPoiRadius] = useState(3500);
   const [poiLoading, setPoiLoading] = useState(false);
   const [poiResults, setPoiResults] = useState([]);
+
+  // --- Google Discovery PRO v2 ---
+  const [riderSpotsRadiusKm, setRiderSpotsRadiusKm] = useState(80);
+  const [riderSpots, setRiderSpots] = useState([]);
+  const [riderSpotsLoading, setRiderSpotsLoading] = useState(false);
+  const [riderSpotsError, setRiderSpotsError] = useState("");
 
   const {
     route: engineRoute,
@@ -1244,6 +1277,76 @@ export default function Map() {
       cancelled = true;
     };
   }, [baseLine, distanceKm]);
+
+  // --- Google Discovery PRO v2 ---
+  const mapCenter = useMemo(() => {
+    if (gps) return gps;
+    if (baseLine?.length >= 2) {
+      const center = getLineCenter(baseLine);
+      if (center) return center;
+    }
+    if (points?.length) return points[0];
+    return [45.4642, 9.19];
+  }, [gps, baseLine, points]);
+
+  const discoveryCenter = useMemo(() => {
+    return mapCenter;
+  }, [mapCenter]);
+
+  useEffect(() => {
+    let cancelled = false;
+
+    const loadRiderSpots = async () => {
+      try {
+        setRiderSpotsLoading(true);
+        setRiderSpotsError("");
+
+        const raw = await Promise.resolve(
+          getNearbyRiderSpots(discoveryCenter, riderSpotsRadiusKm)
+        );
+
+        const normalized = (Array.isArray(raw) ? raw : [])
+          .map((spot, idx) => {
+            const lat = Number(spot?.lat);
+            const lon = Number(spot?.lng ?? spot?.lon);
+            return {
+              id: spot?.id || `rider-spot-${idx}-${lat}-${lon}`,
+              name: spot?.name || "Passo rider",
+              lat,
+              lon,
+              categoryKey: "rider_spot",
+              categoryLabel: "🏍️ Passo rider",
+              meta:
+                spot?.region ||
+                spot?.country ||
+                spot?.type ||
+                spot?.source ||
+                "Google Discovery",
+              distanceKm: normalizeRiderSpotDistance(discoveryCenter, { lat, lng: lon }),
+              original: spot,
+            };
+          })
+          .filter((x) => Number.isFinite(x.lat) && Number.isFinite(x.lon))
+          .sort((a, b) => (a.distanceKm || 9999) - (b.distanceKm || 9999))
+          .slice(0, 18);
+
+        if (!cancelled) setRiderSpots(normalized);
+      } catch (err) {
+        if (!cancelled) {
+          setRiderSpots([]);
+          setRiderSpotsError(err?.message || "Errore caricamento rider spots");
+        }
+      } finally {
+        if (!cancelled) setRiderSpotsLoading(false);
+      }
+    };
+
+    loadRiderSpots();
+
+    return () => {
+      cancelled = true;
+    };
+  }, [discoveryCenter, riderSpotsRadiusKm]);
 
   const addFromSearch = (s) => {
     setPoints((prev) => [...prev, [s.lat, s.lon]]);
@@ -1782,11 +1885,56 @@ export default function Map() {
     }
   };
 
-  const mapCenter = useMemo(() => {
-    if (gps) return gps;
-    if (points?.length) return points[0];
-    return [45.4642, 9.19];
-  }, [gps, points]);
+  const addRiderSpotToRoute = (spot) => {
+    if (!spot) return;
+    setPoints((prev) => [...prev, [spot.lat, spot.lon]]);
+    setSnappedLine(null);
+    setRouteMeta({ distanceKm: 0, durationMin: 0, steps: [] });
+    resetEngine();
+
+    if (!String(name || "").trim()) {
+      setName(`Giro ${spot.name}`);
+    }
+  };
+
+  const refreshRiderSpots = async () => {
+    try {
+      setRiderSpotsLoading(true);
+      setRiderSpotsError("");
+      const raw = await Promise.resolve(getNearbyRiderSpots(discoveryCenter, riderSpotsRadiusKm));
+      const normalized = (Array.isArray(raw) ? raw : [])
+        .map((spot, idx) => {
+          const lat = Number(spot?.lat);
+          const lon = Number(spot?.lng ?? spot?.lon);
+          return {
+            id: spot?.id || `rider-spot-${idx}-${lat}-${lon}`,
+            name: spot?.name || "Passo rider",
+            lat,
+            lon,
+            categoryKey: "rider_spot",
+            categoryLabel: "🏍️ Passo rider",
+            meta:
+              spot?.region ||
+              spot?.country ||
+              spot?.type ||
+              spot?.source ||
+              "Google Discovery",
+            distanceKm: normalizeRiderSpotDistance(discoveryCenter, { lat, lng: lon }),
+            original: spot,
+          };
+        })
+        .filter((x) => Number.isFinite(x.lat) && Number.isFinite(x.lon))
+        .sort((a, b) => (a.distanceKm || 9999) - (b.distanceKm || 9999))
+        .slice(0, 18);
+
+      setRiderSpots(normalized);
+    } catch (err) {
+      setRiderSpots([]);
+      setRiderSpotsError(err?.message || "Errore caricamento rider spots");
+    } finally {
+      setRiderSpotsLoading(false);
+    }
+  };
 
   const mapZoom = useMemo(() => {
     if (gps) return 13;
@@ -1834,6 +1982,21 @@ export default function Map() {
     </div>
   );
 
+  const combinedMapPois = useMemo(() => {
+    const riderMarkers = (riderSpots || []).map((spot) => ({
+      id: spot.id,
+      name: spot.name,
+      lat: spot.lat,
+      lon: spot.lon,
+      categoryKey: "rider_spot",
+      categoryLabel: "🏍️ Passo rider",
+      distanceKm: spot.distanceKm,
+      meta: spot.meta,
+    }));
+
+    return [...(poiResults || []), ...riderMarkers];
+  }, [poiResults, riderSpots]);
+
   return (
     <div style={S.page}>
       <div style={S.container}>
@@ -1855,7 +2018,7 @@ export default function Map() {
           <div>
             <h1 style={S.title}>Navigatore Rider Evolution 🏁</h1>
             <p style={S.subtitle}>
-              Rider Route Engine, GPS live, Rider Radar meteo e waypoint automatici lungo la rotta.
+              Rider Route Engine, GPS live, Rider Radar meteo, waypoint automatici e Google Discovery rider spots.
             </p>
           </div>
 
@@ -2507,6 +2670,94 @@ export default function Map() {
             </div>
 
             <div style={S.card}>
+              <div style={{ display: "flex", justifyContent: "space-between", gap: 10, alignItems: "center", flexWrap: "wrap" }}>
+                <div style={{ fontWeight: 900, fontSize: 16 }}>🏍️ Passi vicini rider</div>
+                <div style={{ display: "flex", gap: 8, flexWrap: "wrap", alignItems: "center" }}>
+                  <span style={S.pill}>
+                    Centro: {discoveryCenter?.[0]?.toFixed?.(3)}, {discoveryCenter?.[1]?.toFixed?.(3)}
+                  </span>
+                  <button style={S.btnGhost} onClick={refreshRiderSpots} disabled={riderSpotsLoading}>
+                    {riderSpotsLoading ? "Aggiorno..." : "🔄 Aggiorna"}
+                  </button>
+                </div>
+              </div>
+
+              <div style={{ marginTop: 10 }}>
+                <div style={{ ...S.small, fontWeight: 800 }}>Raggio discovery</div>
+                <select
+                  value={String(riderSpotsRadiusKm)}
+                  onChange={(e) => setRiderSpotsRadiusKm(Number(e.target.value))}
+                >
+                  <option value="40">40 km</option>
+                  <option value="80">80 km</option>
+                  <option value="120">120 km</option>
+                  <option value="180">180 km</option>
+                  <option value="250">250 km</option>
+                </select>
+              </div>
+
+              <div style={{ marginTop: 10, fontSize: 12, opacity: 0.75 }}>
+                Spot rider suggeriti vicino al centro attuale della navigazione. Click rapido per aggiungerli alla rotta.
+              </div>
+
+              {riderSpotsError ? (
+                <div
+                  style={{
+                    marginTop: 10,
+                    padding: 10,
+                    borderRadius: 14,
+                    background: "rgba(220,38,38,0.08)",
+                    border: "1px solid rgba(220,38,38,0.20)",
+                    fontSize: 13,
+                  }}
+                >
+                  ⚠️ {riderSpotsError}
+                </div>
+              ) : null}
+
+              <div style={{ marginTop: 10, display: "flex", flexDirection: "column", gap: 8 }}>
+                {riderSpotsLoading ? (
+                  <div style={{ fontSize: 13, opacity: 0.72 }}>Cerco passi rider vicini...</div>
+                ) : riderSpots.length ? (
+                  riderSpots.map((spot) => (
+                    <div
+                      key={spot.id}
+                      style={{
+                        padding: 10,
+                        borderRadius: 14,
+                        border: "1px solid rgba(0,0,0,0.08)",
+                        background: "rgba(255,255,255,0.56)",
+                      }}
+                    >
+                      <div style={{ display: "flex", justifyContent: "space-between", gap: 8, flexWrap: "wrap" }}>
+                        <div>
+                          <div style={{ fontWeight: 900 }}>{spot.name}</div>
+                          <div style={{ fontSize: 12, opacity: 0.72 }}>
+                            {spot.categoryLabel} • ~ {spot.distanceKm?.toFixed?.(1) || "—"} km
+                            {spot.meta ? ` • ${spot.meta}` : ""}
+                          </div>
+                          <div style={{ fontSize: 11, opacity: 0.6, marginTop: 4 }}>
+                            {spot.lat.toFixed(5)}, {spot.lon.toFixed(5)}
+                          </div>
+                        </div>
+
+                        <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
+                          <button style={S.btnGhost} onClick={() => addRiderSpotToRoute(spot)}>
+                            ➕ Aggiungi
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  ))
+                ) : (
+                  <div style={{ fontSize: 13, opacity: 0.72 }}>
+                    Nessun rider spot disponibile in quest’area.
+                  </div>
+                )}
+              </div>
+            </div>
+
+            <div style={S.card}>
               <div style={{ fontWeight: 900, fontSize: 16, marginBottom: 10 }}>📍 Punti itinerario</div>
 
               {points.length === 0 ? (
@@ -2620,7 +2871,7 @@ export default function Map() {
             <div style={{ ...S.card, opacity: 0.9 }}>
               <div style={{ fontWeight: 900, marginBottom: 8 }}>ℹ️ Nota tecnica</div>
               <div style={{ fontSize: 13, opacity: 0.78 }}>
-                Il Rider Route Engine costruisce la rotta reale e calcola il profilo rider. Il meteo avanzato One Call 3.0 sarà il prossimo step.
+                Il Rider Route Engine costruisce la rotta reale e calcola il profilo rider. Google Discovery PRO integra spot rider vicini senza rompere il motore attuale.
               </div>
               <div style={{ fontSize: 13, opacity: 0.78, marginTop: 8 }}>
                 Per test veloci GPX: <code>{`localStorage["${PASS_KEY}"]="true"`}</code>
@@ -2649,7 +2900,7 @@ export default function Map() {
               zoom={mapZoom}
               height={isLg ? 780 : 540}
               fitOnChange={!gpsOn || !followGps}
-              poiMarkers={poiResults}
+              poiMarkers={combinedMapPois}
               radarMarkers={radarPoints}
             />
 
@@ -2657,6 +2908,8 @@ export default function Map() {
               <b>Tip:</b> scrivi una città e premi <b>Invio</b>. Usa <b>Rider Engine</b> per calcolare rotta reale, score e highlights.
               <br />
               <b>Rider Evolution:</b> cockpit rider + scoring + waypoint automatici + Rider Radar mostrati anche sulla mappa.
+              <br />
+              <b>Google Discovery PRO:</b> i rider spots vicini vengono caricati nel pannello dedicato e compaiono anche come marker.
               <br />
               <b>Follow GPS:</b> se muovi la mappa a mano, il follow si disattiva. Usa <b>🎯 Centra su di me</b> per riattivarlo.
             </div>

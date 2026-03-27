@@ -1,0 +1,6497 @@
+[
+  {
+    "id": "spot-passo-giau-it-alpi-est",
+    "sourceId": "ChIJFZmkRPBJeEcR81picR6LfnY",
+    "name": "Passo Giau",
+    "lat": 46.4855379,
+    "lng": 12.049963900000002,
+    "address": "Passo Giau, 32020 Colle Santa Lucia BL, Italy",
+    "country": "IT",
+    "region": "IT-Alpi-Est",
+    "type": "mountain_pass",
+    "source": "google_places",
+    "keyword": "passo alpino",
+    "tags": [
+      "passo",
+      "montagna",
+      "curve",
+      "panorama",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "rating": 4.9,
+    "userRatingCount": 1453,
+    "googleMapsUri": "https://maps.google.com/?cid=8538414906408590067&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+    "rawTypes": [
+      "mountain_peak",
+      "natural_feature",
+      "establishment"
+    ],
+    "riderScore": 95
+  },
+  {
+    "id": "spot-passo-costalunga-at",
+    "sourceId": "ChIJZQ6KPJ5veEcRaItlE-nVPfE",
+    "name": "Passo Costalunga",
+    "lat": 46.4043099,
+    "lng": 11.6089275,
+    "address": "SS241, 39030 Nova Levante BZ, Italy",
+    "country": "IT",
+    "region": "AT",
+    "type": "mountain_pass",
+    "source": "google_places",
+    "keyword": "passo",
+    "tags": [
+      "passo",
+      "montagna",
+      "curve",
+      "panorama",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "rating": 4.7,
+    "userRatingCount": 2299,
+    "googleMapsUri": "https://maps.google.com/?cid=17383285333749500776&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+    "rawTypes": [
+      "scenic_spot",
+      "tourist_attraction",
+      "point_of_interest",
+      "establishment"
+    ],
+    "riderScore": 85
+  },
+  {
+    "id": "spot-passo-dei-salati-it-alpi-ovest",
+    "sourceId": "ChIJ5ZI6WcmziEcRd4qdfd9YL8Q",
+    "name": "Passo dei Salati",
+    "lat": 45.8770748,
+    "lng": 7.867871299999999,
+    "address": "Passo dei Salati, 13021 Alagna Valsesia, Province of Vercelli, Italy",
+    "country": "IT",
+    "region": "IT-Alpi-Ovest",
+    "type": "mountain_pass",
+    "source": "google_places",
+    "keyword": "passo alpino",
+    "tags": [
+      "passo",
+      "montagna",
+      "curve",
+      "panorama",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "rating": 4.8,
+    "userRatingCount": 262,
+    "googleMapsUri": "https://maps.google.com/?cid=14136615472247704183&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "riderScore": 85
+  },
+  {
+    "id": "spot-passo-del-rombo-veduta-panoramica-at",
+    "sourceId": "ChIJA65Ay8bKgkcRJPy7rcbwBxY",
+    "name": "Passo del Rombo - Veduta Panoramica",
+    "lat": 46.892918300000005,
+    "lng": 11.1206572,
+    "address": "Timmelsjochstrasse, 16, 39013 Moso in Passiria BZ, Italy",
+    "country": "IT",
+    "region": "AT",
+    "type": "mountain_pass",
+    "source": "google_places",
+    "keyword": "passo",
+    "tags": [
+      "passo",
+      "montagna",
+      "curve",
+      "panorama",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "rating": 4.8,
+    "userRatingCount": 668,
+    "googleMapsUri": "https://maps.google.com/?cid=1587502129780358180&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+    "rawTypes": [
+      "historical_place",
+      "point_of_interest",
+      "establishment"
+    ],
+    "riderScore": 85
+  },
+  {
+    "id": "spot-passo-della-presolana-it-alpi-ovest",
+    "sourceId": "ChIJFUnNpVjDg0cR8FjAPgN4Bh0",
+    "name": "Passo della Presolana",
+    "lat": 45.9166667,
+    "lng": 10.1,
+    "address": "Passo della Presolana, 25040 Angolo Terme BS, Italy",
+    "country": "IT",
+    "region": "IT-Alpi-Ovest",
+    "type": "mountain_pass",
+    "source": "google_places",
+    "keyword": "passo alpino",
+    "tags": [
+      "passo",
+      "montagna",
+      "curve",
+      "panorama",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "rating": 4.7,
+    "userRatingCount": 295,
+    "googleMapsUri": "https://maps.google.com/?cid=2091491032293202160&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "riderScore": 85
+  },
+  {
+    "id": "spot-passo-di-oclini-it-alpi-centro",
+    "sourceId": "ChIJQ96GCcJ7eEcR1nT425D93Wo",
+    "name": "Passo di Oclini",
+    "lat": 46.3472685,
+    "lng": 11.4515867,
+    "address": "Passo di Oclini, 39040 Aldino BZ, Italy",
+    "country": "IT",
+    "region": "IT-Alpi-Centro",
+    "type": "mountain_pass",
+    "source": "google_places",
+    "keyword": "joch",
+    "tags": [
+      "passo",
+      "montagna",
+      "curve",
+      "panorama",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "rating": 4.7,
+    "userRatingCount": 145,
+    "googleMapsUri": "https://maps.google.com/?cid=7700589736481027286&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "riderScore": 85
+  },
+  {
+    "id": "spot-passo-di-stalle-at",
+    "sourceId": "ChIJJ-b2G9uFd0cRSoGujS7X8e0",
+    "name": "Passo di Stalle",
+    "lat": 46.8833333,
+    "lng": 12.2,
+    "address": "Passo di Stalle, 39030 Rasen-Antholz, Autonomous Province of Bolzano – South Tyrol, Italy",
+    "country": "IT",
+    "region": "AT",
+    "type": "mountain_pass",
+    "source": "google_places",
+    "keyword": "passo alpino",
+    "tags": [
+      "passo",
+      "montagna",
+      "curve",
+      "panorama",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "rating": 4.8,
+    "userRatingCount": 153,
+    "googleMapsUri": "https://maps.google.com/?cid=17145721851321680202&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "riderScore": 85
+  },
+  {
+    "id": "spot-passo-pordoi-2-239-m-at",
+    "sourceId": "ChIJwx0egTRAeEcRrg393JzFDms",
+    "name": "Passo Pordoi 2.239 m",
+    "lat": 46.487339299999995,
+    "lng": 11.8135788,
+    "address": "SS48, 32020 Livinallongo del Col di Lana BL, Italy",
+    "country": "IT",
+    "region": "AT",
+    "type": "mountain_pass",
+    "source": "google_places",
+    "keyword": "passo",
+    "tags": [
+      "passo",
+      "montagna",
+      "curve",
+      "panorama",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "rating": 4.8,
+    "userRatingCount": 6536,
+    "googleMapsUri": "https://maps.google.com/?cid=7714320489245380014&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+    "rawTypes": [
+      "tourist_attraction",
+      "point_of_interest",
+      "establishment"
+    ],
+    "riderScore": 85
+  },
+  {
+    "id": "spot-col-agnel-it-alpi-centro",
+    "sourceId": "ChIJaf54CBrRzBIRoNmMZhGNX1c",
+    "name": "Col Agnel",
+    "lat": 44.6839856,
+    "lng": 6.979526399999999,
+    "address": "Col Agnel, 05350 Molines-en-Queyras, France",
+    "country": "IT",
+    "region": "IT-Alpi-Centro",
+    "type": "mountain_pass",
+    "source": "google_places",
+    "keyword": "col de montagne",
+    "tags": [
+      "passo",
+      "montagna",
+      "curve",
+      "panorama",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "rating": 4.9,
+    "userRatingCount": 1015,
+    "googleMapsUri": "https://maps.google.com/?cid=6295905909961709984&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "riderScore": 75
+  },
+  {
+    "id": "spot-col-de-l-iseran-fr-alps",
+    "sourceId": "ChIJHUKaUVMIiUcRLzXZlQpm3Vg",
+    "name": "Col de l'Iseran",
+    "lat": 45.417125999999996,
+    "lng": 7.030626,
+    "address": "Col de l'Iseran, 73480 Bonneval-sur-Arc, France",
+    "country": "FR",
+    "region": "FR-Alps",
+    "type": "mountain_pass",
+    "source": "google_places",
+    "keyword": "passo alpino",
+    "tags": [
+      "passo",
+      "montagna",
+      "curve",
+      "panorama",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "rating": 4.9,
+    "userRatingCount": 1391,
+    "googleMapsUri": "https://maps.google.com/?cid=6403386440840459567&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "riderScore": 75
+  },
+  {
+    "id": "spot-col-des-aravis-fr-alps",
+    "sourceId": "ChIJfVp_bf7vi0cR8FvJPGZpgOg",
+    "name": "Col des Aravis",
+    "lat": 45.8723406,
+    "lng": 6.464746,
+    "address": "Col des Aravis, 74220 La Clusaz, France",
+    "country": "FR",
+    "region": "FR-Alps",
+    "type": "mountain_pass",
+    "source": "google_places",
+    "keyword": "passo alpino",
+    "tags": [
+      "passo",
+      "montagna",
+      "curve",
+      "panorama",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "rating": 4.8,
+    "userRatingCount": 852,
+    "googleMapsUri": "https://maps.google.com/?cid=16753506501645655024&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "riderScore": 75
+  },
+  {
+    "id": "spot-il-passone-it-alpi-centro",
+    "sourceId": "ChIJn8LUEiND1RIRdg-ERJq-L9s",
+    "name": "Il Passone",
+    "lat": 44.2694568,
+    "lng": 10.4213892,
+    "address": "Il Passone, 42030 Villa Minozzo RE, Italy",
+    "country": "IT",
+    "region": "IT-Alpi-Centro",
+    "type": "mountain_pass",
+    "source": "google_places",
+    "keyword": "pass",
+    "tags": [
+      "passo",
+      "montagna",
+      "curve",
+      "panorama",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "rating": 4.7,
+    "userRatingCount": 38,
+    "googleMapsUri": "https://maps.google.com/?cid=15794051987995365238&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "riderScore": 75
+  },
+  {
+    "id": "spot-jungfraujoch-ch",
+    "sourceId": "ChIJ5bMOBCiej0cR63mRLDgOics",
+    "name": "Jungfraujoch",
+    "lat": 46.5482766,
+    "lng": 7.9806434,
+    "address": "Jungfraujoch, 3801 Lauterbrunnen, Switzerland",
+    "country": "CH",
+    "region": "CH",
+    "type": "mountain_pass",
+    "source": "google_places",
+    "keyword": "joch",
+    "tags": [
+      "passo",
+      "montagna",
+      "curve",
+      "panorama",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "rating": 4.5,
+    "userRatingCount": 2857,
+    "googleMapsUri": "https://maps.google.com/?cid=14666269295937419755&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "riderScore": 75
+  },
+  {
+    "id": "spot-passo-del-san-bernardino-ch",
+    "sourceId": "ChIJgybKxBz5hEcRvqTaF0Jf4jw",
+    "name": "Passo del San Bernardino",
+    "lat": 46.497229,
+    "lng": 9.1707226,
+    "address": "Passo del San Bernardino, 6565 Mesocco, Switzerland",
+    "country": "CH",
+    "region": "CH",
+    "type": "mountain_pass",
+    "source": "google_places",
+    "keyword": "passo alpino",
+    "tags": [
+      "passo",
+      "montagna",
+      "curve",
+      "panorama",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "rating": 4.6,
+    "userRatingCount": 20,
+    "googleMapsUri": "https://maps.google.com/?cid=4387173724484969662&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "riderScore": 75
+  },
+  {
+    "id": "spot-passo-dell-alpino-it-alpi-centro",
+    "sourceId": "ChIJ2-XtMmsM1RIR46mTPxFRc0I",
+    "name": "Passo dell'Alpino",
+    "lat": 44.0350434,
+    "lng": 10.1928663,
+    "address": "Passo dell'Alpino, 54100 Massa MS, Italy",
+    "country": "IT",
+    "region": "IT-Alpi-Centro",
+    "type": "mountain_pass",
+    "source": "google_places",
+    "keyword": "passo alpino",
+    "tags": [
+      "passo",
+      "montagna",
+      "curve",
+      "panorama",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "rating": 4.7,
+    "userRatingCount": 26,
+    "googleMapsUri": "https://maps.google.com/?cid=4788259963347904995&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "riderScore": 75
+  },
+  {
+    "id": "spot-passo-dell-aprica-it-alpi-centro",
+    "sourceId": "ChIJu6JEGiO8g0cRn3_9pV8dogE",
+    "name": "Passo dell'Aprica",
+    "lat": 46.15,
+    "lng": 10.15,
+    "address": "Passo dell'Aprica, 23031 Aprica SO, Italy",
+    "country": "IT",
+    "region": "IT-Alpi-Centro",
+    "type": "mountain_pass",
+    "source": "google_places",
+    "keyword": "passo alpino",
+    "tags": [
+      "passo",
+      "montagna",
+      "curve",
+      "panorama",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "rating": 4.4,
+    "userRatingCount": 136,
+    "googleMapsUri": "https://maps.google.com/?cid=117688836909006751&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "riderScore": 75
+  },
+  {
+    "id": "spot-passo-di-gardena-de-south",
+    "sourceId": "ChIJlcPY8GUVeEcRYE5xLogJBx0",
+    "name": "Passo di Gardena",
+    "lat": 46.55,
+    "lng": 11.799999999999999,
+    "address": "Passo di Gardena, 39048 Sëlva, Autonomous Province of Bolzano – South Tyrol, Italy",
+    "country": "IT",
+    "region": "DE-South",
+    "type": "mountain_pass",
+    "source": "google_places",
+    "keyword": "mountain pass",
+    "tags": [
+      "passo",
+      "montagna",
+      "curve",
+      "panorama",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "rating": 4.8,
+    "userRatingCount": 21,
+    "googleMapsUri": "https://maps.google.com/?cid=2091651032436264544&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "riderScore": 75
+  },
+  {
+    "id": "spot-passo-di-valle-alpisella-it-alpi-centro",
+    "sourceId": "ChIJdddFfDxtg0cR7wM-ZFQX72Q",
+    "name": "Passo di Valle Alpisella",
+    "lat": 46.551963,
+    "lng": 10.20488,
+    "address": "Valle Alpisella, 23038 Valdidentro SO, Italy",
+    "country": "IT",
+    "region": "IT-Alpi-Centro",
+    "type": "mountain_pass",
+    "source": "google_places",
+    "keyword": "passo alpino",
+    "tags": [
+      "passo",
+      "montagna",
+      "curve",
+      "panorama",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "rating": 4.8,
+    "userRatingCount": 176,
+    "googleMapsUri": "https://maps.google.com/?cid=7273057574453117935&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+    "rawTypes": [
+      "tourist_attraction",
+      "point_of_interest",
+      "establishment"
+    ],
+    "riderScore": 75
+  },
+  {
+    "id": "spot-passo-monte-croce-di-comelico-de-south",
+    "sourceId": "ChIJ15gEMAHReUcRxS52H15EsZQ",
+    "name": "Passo Monte Croce di Comelico",
+    "lat": 46.6577778,
+    "lng": 12.4205556,
+    "address": "Passo Monte Croce di Comelico, 39030 Sexten, Autonomous Province of Bolzano – South Tyrol, Italy",
+    "country": "IT",
+    "region": "DE-South",
+    "type": "mountain_pass",
+    "source": "google_places",
+    "keyword": "passo",
+    "tags": [
+      "passo",
+      "montagna",
+      "curve",
+      "panorama",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "rating": 4.5,
+    "userRatingCount": 80,
+    "googleMapsUri": "https://maps.google.com/?cid=10714420159536574149&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "riderScore": 75
+  },
+  {
+    "id": "spot-passo-pura-perkh-it-alpi-est",
+    "sourceId": "ChIJF9WxcB2TeUcRlQkzFfwJ8Ik",
+    "name": "Passo Pura / Perkh",
+    "lat": 46.422987,
+    "lng": 12.743597999999999,
+    "address": "Via S. Valentino, 33021 Ampezzo UD, Italy",
+    "country": "IT",
+    "region": "IT-Alpi-Est",
+    "type": "mountain_pass",
+    "source": "google_places",
+    "keyword": "passo alpino",
+    "tags": [
+      "passo",
+      "montagna",
+      "curve",
+      "panorama",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "rating": 4.6,
+    "userRatingCount": 248,
+    "googleMapsUri": "https://maps.google.com/?cid=9939455355898759573&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+    "rawTypes": [
+      "scenic_spot",
+      "tourist_attraction",
+      "point_of_interest",
+      "establishment"
+    ],
+    "riderScore": 75
+  },
+  {
+    "id": "spot-passo-rest-at",
+    "sourceId": "ChIJL6N8P8GNeUcR9gegY9IkG7s",
+    "name": "passo Rest",
+    "lat": 46.356388900000006,
+    "lng": 12.7836111,
+    "address": "passo Rest, 33020 Socchieve UD, Italy",
+    "country": "IT",
+    "region": "AT",
+    "type": "mountain_pass",
+    "source": "google_places",
+    "keyword": "passo",
+    "tags": [
+      "passo",
+      "montagna",
+      "curve",
+      "panorama",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "rating": 4.5,
+    "userRatingCount": 69,
+    "googleMapsUri": "https://maps.google.com/?cid=13482410395496876022&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "riderScore": 75
+  },
+  {
+    "id": "spot-passo-rest-at",
+    "sourceId": "ChIJXbSnzMWNeUcRmuwJg93v7rk",
+    "name": "Passo Rest",
+    "lat": 46.353855499999995,
+    "lng": 12.7870774,
+    "address": "Passo Rest, 33090 Tramonti di Sopra PN, Italy",
+    "country": "IT",
+    "region": "AT",
+    "type": "mountain_pass",
+    "source": "google_places",
+    "keyword": "passo",
+    "tags": [
+      "passo",
+      "montagna",
+      "curve",
+      "panorama",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "rating": 4.6,
+    "userRatingCount": 72,
+    "googleMapsUri": "https://maps.google.com/?cid=13397909676139080858&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "riderScore": 75
+  },
+  {
+    "id": "spot-timmelsjoch-it-alpi-est",
+    "sourceId": "ChIJKfA9eSjLgkcR5hoEg3yfBnw",
+    "name": "Timmelsjoch",
+    "lat": 46.900000000000006,
+    "lng": 11.1,
+    "address": "Timmelsjoch, 39013 Moos in Passeier, Autonomous Province of Bolzano – South Tyrol, Italy",
+    "country": "IT",
+    "region": "IT-Alpi-Est",
+    "type": "mountain_pass",
+    "source": "google_places",
+    "keyword": "passo alpino",
+    "tags": [
+      "passo",
+      "montagna",
+      "curve",
+      "panorama",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "rating": 4.8,
+    "userRatingCount": 1530,
+    "googleMapsUri": "https://maps.google.com/?cid=8937005867686173414&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "riderScore": 75
+  },
+  {
+    "id": "spot-wurzjoch-it-alpi-ovest",
+    "sourceId": "ChIJ8x6t_HsXeEcRyjztYz8JIU4",
+    "name": "Würzjoch",
+    "lat": 46.675,
+    "lng": 11.814167,
+    "address": "Würzjoch, 39030 San Martin de Tor, Autonomous Province of Bolzano – South Tyrol, Italy",
+    "country": "IT",
+    "region": "IT-Alpi-Ovest",
+    "type": "mountain_pass",
+    "source": "google_places",
+    "keyword": "passo alpino",
+    "tags": [
+      "passo",
+      "montagna",
+      "curve",
+      "panorama",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "rating": 4.8,
+    "userRatingCount": 979,
+    "googleMapsUri": "https://maps.google.com/?cid=5629791177053912266&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "riderScore": 75
+  },
+  {
+    "id": "spot-joch-pass-it-alpi-ovest",
+    "sourceId": "ChIJa-6XsMdhhUcRI9Dokf3LdJs",
+    "name": "Joch Pass",
+    "lat": 46.7786,
+    "lng": 8.38672,
+    "address": "Joch Pass, 6390 Wolfenschiessen, Switzerland",
+    "country": "IT",
+    "region": "IT-Alpi-Ovest",
+    "type": "mountain_pass",
+    "source": "google_places",
+    "keyword": "joch",
+    "tags": [
+      "passo",
+      "montagna",
+      "curve",
+      "panorama",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "rating": 4.8,
+    "userRatingCount": 48,
+    "googleMapsUri": "https://maps.google.com/?cid=11201802463112384547&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "riderScore": 70
+  },
+  {
+    "id": "spot-passo-del-sole-ch",
+    "sourceId": "ChIJE-gJhX4JhUcR4plAGyquIT8",
+    "name": "Passo del Sole",
+    "lat": 46.531999899999995,
+    "lng": 8.77087,
+    "address": "Passo del Sole, 6776 Quinto, Switzerland",
+    "country": "CH",
+    "region": "CH",
+    "type": "mountain_pass",
+    "source": "google_places",
+    "keyword": "passo alpino",
+    "tags": [
+      "passo",
+      "montagna",
+      "curve",
+      "panorama",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "rating": 4.8,
+    "userRatingCount": 17,
+    "googleMapsUri": "https://maps.google.com/?cid=4549108594489989602&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "riderScore": 70
+  },
+  {
+    "id": "spot-passo-dell-oregone-it-alpi-est",
+    "sourceId": "ChIJQUD9SeTmeUcRdHp6dZ8cyqU",
+    "name": "Passo dell'Oregone",
+    "lat": 46.6333333,
+    "lng": 12.7333333,
+    "address": "Passo dell'Oregone, 33020 Forni Avoltri, Province of Udine, Italy",
+    "country": "IT",
+    "region": "IT-Alpi-Est",
+    "type": "mountain_pass",
+    "source": "google_places",
+    "keyword": "passo alpino",
+    "tags": [
+      "passo",
+      "montagna",
+      "curve",
+      "panorama",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "rating": 4.8,
+    "userRatingCount": 9,
+    "googleMapsUri": "https://maps.google.com/?cid=11946392432750000756&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "riderScore": 70
+  },
+  {
+    "id": "spot-passo-della-culmine-it-alpi-centro",
+    "sourceId": "ChIJBVwb8RIEhEcRJKfqI0Y-6_4",
+    "name": "Passo della Culmine",
+    "lat": 45.9018616,
+    "lng": 9.4951069,
+    "address": "Passo della Culmine, 23817 Moggio LC, Italy",
+    "country": "IT",
+    "region": "IT-Alpi-Centro",
+    "type": "mountain_pass",
+    "source": "google_places",
+    "keyword": "passo alpino",
+    "tags": [
+      "passo",
+      "montagna",
+      "curve",
+      "panorama",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "rating": 4.5,
+    "userRatingCount": 11,
+    "googleMapsUri": "https://maps.google.com/?cid=18368843976131913508&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "riderScore": 70
+  },
+  {
+    "id": "spot-passo-della-digola-at",
+    "sourceId": "ChIJV9mBQH3CeUcRAyv_DOULtRM",
+    "name": "Passo della Digola",
+    "lat": 46.5525,
+    "lng": 12.624722199999999,
+    "address": "Passo della Digola, 33012 Sappada, Province of Udine, Italy",
+    "country": "IT",
+    "region": "AT",
+    "type": "mountain_pass",
+    "source": "google_places",
+    "keyword": "col de montagne",
+    "tags": [
+      "passo",
+      "montagna",
+      "curve",
+      "panorama",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "rating": 4.8,
+    "userRatingCount": 6,
+    "googleMapsUri": "https://maps.google.com/?cid=1420054335898725123&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "riderScore": 70
+  },
+  {
+    "id": "spot-passo-della-portula-it-alpi-ovest",
+    "sourceId": "ChIJF0RVZ94OhEcRSQMKu8oXyqs",
+    "name": "Passo della Portula",
+    "lat": 46.006713,
+    "lng": 9.5299774,
+    "address": "Passo della Portula, 24010 Valtorta BG, Italy",
+    "country": "IT",
+    "region": "IT-Alpi-Ovest",
+    "type": "mountain_pass",
+    "source": "google_places",
+    "keyword": "passo alpino",
+    "tags": [
+      "passo",
+      "montagna",
+      "curve",
+      "panorama",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "rating": 5,
+    "userRatingCount": 1,
+    "googleMapsUri": "https://maps.google.com/?cid=12378732685270057801&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "riderScore": 70
+  },
+  {
+    "id": "spot-passo-della-sella-at",
+    "sourceId": "ChIJ73jeSWeJd0cRLF6e4IfNLFg",
+    "name": "Passo della Sella",
+    "lat": 46.868888899999995,
+    "lng": 12.0630556,
+    "address": "Passo della Sella, 39030 Percha, Autonomous Province of Bolzano – South Tyrol, Italy",
+    "country": "IT",
+    "region": "AT",
+    "type": "mountain_pass",
+    "source": "google_places",
+    "keyword": "passo",
+    "tags": [
+      "passo",
+      "montagna",
+      "curve",
+      "panorama",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "rating": 5,
+    "userRatingCount": 3,
+    "googleMapsUri": "https://maps.google.com/?cid=6353679157785681452&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "riderScore": 70
+  },
+  {
+    "id": "spot-passo-delle-ciaresole-at",
+    "sourceId": "ChIJ55B_ZGxseEcR7EcJq0-Ob3k",
+    "name": "Passo delle Ciaresole",
+    "lat": 46.4830416,
+    "lng": 11.6723787,
+    "address": "Passo delle Ciaresole, 38031 Campitello di Fassa TN, Italy",
+    "country": "IT",
+    "region": "AT",
+    "type": "mountain_pass",
+    "source": "google_places",
+    "keyword": "passo alpino",
+    "tags": [
+      "passo",
+      "montagna",
+      "curve",
+      "panorama",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "rating": 4.9,
+    "userRatingCount": 12,
+    "googleMapsUri": "https://maps.google.com/?cid=8750369073827235820&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "riderScore": 70
+  },
+  {
+    "id": "spot-passo-di-bondione-it-alpi-centro",
+    "sourceId": "ChIJxWCFncPBg0cRQMYtmxUr1fs",
+    "name": "Passo di Bondione",
+    "lat": 46.0199898,
+    "lng": 10.0499864,
+    "address": "Passo di Bondione, 24020 Valbondione BG, Italy",
+    "country": "IT",
+    "region": "IT-Alpi-Centro",
+    "type": "mountain_pass",
+    "source": "google_places",
+    "keyword": "passo alpino",
+    "tags": [
+      "passo",
+      "montagna",
+      "curve",
+      "panorama",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "rating": 5,
+    "userRatingCount": 4,
+    "googleMapsUri": "https://maps.google.com/?cid=18146457645357057600&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "riderScore": 70
+  },
+  {
+    "id": "spot-passo-di-cavanna-ch",
+    "sourceId": "ChIJQRmQb713hUcRwOWhOwhzOAo",
+    "name": "Passo di Cavanna",
+    "lat": 46.5362,
+    "lng": 8.507859999999999,
+    "address": "Passo di Cavanna, 6781 Bedretto, Switzerland",
+    "country": "CH",
+    "region": "CH",
+    "type": "mountain_pass",
+    "source": "google_places",
+    "keyword": "passo alpino",
+    "tags": [
+      "passo",
+      "montagna",
+      "curve",
+      "panorama",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "rating": 5,
+    "userRatingCount": 2,
+    "googleMapsUri": "https://maps.google.com/?cid=736465018272474560&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "riderScore": 70
+  },
+  {
+    "id": "spot-passo-di-foscagno-de-south",
+    "sourceId": "ChIJExYFJkhyg0cRjjaG6KAzyKk",
+    "name": "Passo di Foscagno",
+    "lat": 46.5,
+    "lng": 10.133333300000002,
+    "address": "Passo di Foscagno, 23041 Livigno, Province of Sondrio, Italy",
+    "country": "IT",
+    "region": "DE-South",
+    "type": "mountain_pass",
+    "source": "google_places",
+    "keyword": "col de montagne",
+    "tags": [
+      "passo",
+      "montagna",
+      "curve",
+      "panorama",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "rating": 4.7,
+    "userRatingCount": 18,
+    "googleMapsUri": "https://maps.google.com/?cid=12234085153940846222&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "riderScore": 70
+  },
+  {
+    "id": "spot-passo-di-fundres-de-south",
+    "sourceId": "ChIJ3d9MzX7-d0cRZwahEQo427o",
+    "name": "Passo di Fundres",
+    "lat": 46.9333333,
+    "lng": 11.6166667,
+    "address": "Passo di Fundres, 39030 Vintl, Autonomous Province of Bolzano – South Tyrol, Italy",
+    "country": "IT",
+    "region": "DE-South",
+    "type": "mountain_pass",
+    "source": "google_places",
+    "keyword": "col de montagne",
+    "tags": [
+      "passo",
+      "montagna",
+      "curve",
+      "panorama",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "rating": 5,
+    "userRatingCount": 1,
+    "googleMapsUri": "https://maps.google.com/?cid=13464417126850823783&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "riderScore": 70
+  },
+  {
+    "id": "spot-passo-di-ghiacciaione-it-alpi-ovest",
+    "sourceId": "ChIJ00r9Lu2mhUcRuKtXaFuUcgQ",
+    "name": "Passo di Ghiacciaione",
+    "lat": 46.4313,
+    "lng": 8.76946,
+    "address": "Passo di Ghiacciaione, 6774 Dalpe, Switzerland",
+    "country": "IT",
+    "region": "IT-Alpi-Ovest",
+    "type": "mountain_pass",
+    "source": "google_places",
+    "keyword": "passo",
+    "tags": [
+      "passo",
+      "montagna",
+      "curve",
+      "panorama",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "rating": 4.5,
+    "userRatingCount": 2,
+    "googleMapsUri": "https://maps.google.com/?cid=320481643810237368&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "riderScore": 70
+  },
+  {
+    "id": "spot-passo-di-vizze-at",
+    "sourceId": "ChIJjVSbX-P8d0cRD6BbYKezF-s",
+    "name": "Passo di Vizze",
+    "lat": 46.9833333,
+    "lng": 11.65,
+    "address": "Passo di Vizze, 39049 Pfitsch, Autonomous Province of Bolzano – South Tyrol, Italy",
+    "country": "IT",
+    "region": "AT",
+    "type": "mountain_pass",
+    "source": "google_places",
+    "keyword": "passo alpino",
+    "tags": [
+      "passo",
+      "montagna",
+      "curve",
+      "panorama",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "rating": 4.9,
+    "userRatingCount": 16,
+    "googleMapsUri": "https://maps.google.com/?cid=16940206054834937871&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "riderScore": 70
+  },
+  {
+    "id": "spot-passo-limo-it-alpi-est",
+    "sourceId": "ChIJQ92SDUM6eEcR3RNmkCCLMY8",
+    "name": "Passo Limo",
+    "lat": 46.6083333,
+    "lng": 12.0169444,
+    "address": "Passo Limo, 39030 Mareo, Autonomous Province of Bolzano – South Tyrol, Italy",
+    "country": "IT",
+    "region": "IT-Alpi-Est",
+    "type": "mountain_pass",
+    "source": "google_places",
+    "keyword": "pass",
+    "tags": [
+      "passo",
+      "montagna",
+      "curve",
+      "panorama",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "rating": 4.9,
+    "userRatingCount": 7,
+    "googleMapsUri": "https://maps.google.com/?cid=10318181193260340189&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "riderScore": 70
+  },
+  {
+    "id": "spot-passo-valbana-at",
+    "sourceId": "ChIJ0U_rLVqheUcREke7pJd-P-o",
+    "name": "Passo Valbana",
+    "lat": 46.2219444,
+    "lng": 12.402777799999999,
+    "address": "Passo Valbana, 32010 Alpago, Province of Belluno, Italy",
+    "country": "IT",
+    "region": "AT",
+    "type": "mountain_pass",
+    "source": "google_places",
+    "keyword": "col de montagne",
+    "tags": [
+      "passo",
+      "montagna",
+      "curve",
+      "panorama",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "rating": 5,
+    "userRatingCount": 3,
+    "googleMapsUri": "https://maps.google.com/?cid=16879349118176806674&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "riderScore": 70
+  },
+  {
+    "id": "spot-col-d-esischie-it-alpi-ovest",
+    "sourceId": "ChIJCUb9h9odzRIRyTYCAGnurhg",
+    "name": "Col d'Esischie",
+    "lat": 44.3963629,
+    "lng": 7.1245009999999995,
+    "address": "Colle d'Esischie, 12020 Castelmagno CN, Italy",
+    "country": "IT",
+    "region": "IT-Alpi-Ovest",
+    "type": "mountain_pass",
+    "source": "google_places",
+    "keyword": "passo alpino",
+    "tags": [
+      "passo",
+      "montagna",
+      "curve",
+      "panorama",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "rating": 4.7,
+    "userRatingCount": 100,
+    "googleMapsUri": "https://maps.google.com/?cid=1778621037597046473&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "riderScore": 65
+  },
+  {
+    "id": "spot-col-de-l-echelle-fr-alps",
+    "sourceId": "ChIJd949yHbuiUcRtCFqAB7kvFY",
+    "name": "Col de l'Échelle",
+    "lat": 45.026385,
+    "lng": 6.656949,
+    "address": "Col de l'Échelle, 05100 Névache, France",
+    "country": "FR",
+    "region": "FR-Alps",
+    "type": "mountain_pass",
+    "source": "google_places",
+    "keyword": "passo alpino",
+    "tags": [
+      "passo",
+      "montagna",
+      "curve",
+      "panorama",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "rating": 4.7,
+    "userRatingCount": 189,
+    "googleMapsUri": "https://maps.google.com/?cid=6250121200390513076&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "riderScore": 65
+  },
+  {
+    "id": "spot-col-de-la-colombiere-fr-alps",
+    "sourceId": "ChIJKyMqTJ_3i0cRGeaXV8tYv9M",
+    "name": "Col de la Colombière",
+    "lat": 45.992165,
+    "lng": 6.475503,
+    "address": "Col de la Colombière, 74950 Le Reposoir, France",
+    "country": "FR",
+    "region": "FR-Alps",
+    "type": "mountain_pass",
+    "source": "google_places",
+    "keyword": "passo",
+    "tags": [
+      "passo",
+      "montagna",
+      "curve",
+      "panorama",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "rating": 4.7,
+    "userRatingCount": 410,
+    "googleMapsUri": "https://maps.google.com/?cid=15258011692925707801&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "riderScore": 65
+  },
+  {
+    "id": "spot-col-de-la-forclaz-fr-alps",
+    "sourceId": "ChIJtf_9RjG0jkcRKuD9zOfLRWw",
+    "name": "Col de la Forclaz",
+    "lat": 46.057899899999995,
+    "lng": 7.001449999999999,
+    "address": "Col de la Forclaz, 1929 Trient, Switzerland",
+    "country": "CH",
+    "region": "FR-Alps",
+    "type": "mountain_pass",
+    "source": "google_places",
+    "keyword": "passo",
+    "tags": [
+      "passo",
+      "montagna",
+      "curve",
+      "panorama",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "rating": 4.5,
+    "userRatingCount": 147,
+    "googleMapsUri": "https://maps.google.com/?cid=7801866125926326314&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "riderScore": 65
+  },
+  {
+    "id": "spot-col-de-la-lezette-fr-alps",
+    "sourceId": "ChIJC0JNsiPhi0cRPQlqZQowQIc",
+    "name": "Col de la Lézette",
+    "lat": 45.760734,
+    "lng": 6.552658,
+    "address": "Col de la Lézette, 73620 Hauteluce, France",
+    "country": "FR",
+    "region": "FR-Alps",
+    "type": "mountain_pass",
+    "source": "google_places",
+    "keyword": "mountain pass",
+    "tags": [
+      "passo",
+      "montagna",
+      "curve",
+      "panorama",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "rating": 4.7,
+    "userRatingCount": 110,
+    "googleMapsUri": "https://maps.google.com/?cid=9745842414839007549&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "riderScore": 65
+  },
+  {
+    "id": "spot-col-de-la-seigne-fr-alps",
+    "sourceId": "ChIJIUGKtzFDiUcRqAPVe7bW91s",
+    "name": "Col de la Seigne",
+    "lat": 45.7502778,
+    "lng": 6.8063889,
+    "address": "Col de la Seigne, 73700 Bourg-Saint-Maurice, France",
+    "country": "FR",
+    "region": "FR-Alps",
+    "type": "mountain_pass",
+    "source": "google_places",
+    "keyword": "passo montano",
+    "tags": [
+      "passo",
+      "montagna",
+      "curve",
+      "panorama",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "rating": 4.9,
+    "userRatingCount": 101,
+    "googleMapsUri": "https://maps.google.com/?cid=6627001455948923816&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "riderScore": 65
+  },
+  {
+    "id": "spot-col-de-montgenevre-fr-alps",
+    "sourceId": "ChIJxXq_3UfmiUcRwHb7xSCb82I",
+    "name": "Col de Montgenèvre",
+    "lat": 44.931669899999996,
+    "lng": 6.725529,
+    "address": "Col de Montgenèvre, 05100 Montgenèvre, France",
+    "country": "FR",
+    "region": "FR-Alps",
+    "type": "mountain_pass",
+    "source": "google_places",
+    "keyword": "passo alpino",
+    "tags": [
+      "passo",
+      "montagna",
+      "curve",
+      "panorama",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "rating": 4.6,
+    "userRatingCount": 218,
+    "googleMapsUri": "https://maps.google.com/?cid=7130213200120477376&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "riderScore": 65
+  },
+  {
+    "id": "spot-col-des-annes-fr-alps",
+    "sourceId": "ChIJw-Qmn7z5i0cRHw0cMxF85l4",
+    "name": "Col des Annes",
+    "lat": 45.970324,
+    "lng": 6.524037,
+    "address": "Col des Annes, 74450 Le Grand-Bornand, France",
+    "country": "FR",
+    "region": "FR-Alps",
+    "type": "mountain_pass",
+    "source": "google_places",
+    "keyword": "mountain pass",
+    "tags": [
+      "passo",
+      "montagna",
+      "curve",
+      "panorama",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "rating": 4.8,
+    "userRatingCount": 181,
+    "googleMapsUri": "https://maps.google.com/?cid=6838289497522441503&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "riderScore": 65
+  },
+  {
+    "id": "spot-col-des-montets-it-alpi-ovest",
+    "sourceId": "ChIJDY49JDSzjkcRvoHeVNtM4YI",
+    "name": "Col des Montets",
+    "lat": 46.004081899999996,
+    "lng": 6.9234789999999995,
+    "address": "Col des Montets, 74660 Vallorcine, France",
+    "country": "IT",
+    "region": "IT-Alpi-Ovest",
+    "type": "mountain_pass",
+    "source": "google_places",
+    "keyword": "col de montagne",
+    "tags": [
+      "passo",
+      "montagna",
+      "curve",
+      "panorama",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "rating": 4.6,
+    "userRatingCount": 114,
+    "googleMapsUri": "https://maps.google.com/?cid=9430903599595946430&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "riderScore": 65
+  },
+  {
+    "id": "spot-col-des-saisies-fr-alps",
+    "sourceId": "ChIJpSLbM9Tmi0cRta3_ixcb4zM",
+    "name": "Col des Saisies",
+    "lat": 45.758379,
+    "lng": 6.5282279999999995,
+    "address": "Col des Saisies, 73620 Hauteluce, France",
+    "country": "FR",
+    "region": "FR-Alps",
+    "type": "mountain_pass",
+    "source": "google_places",
+    "keyword": "col",
+    "tags": [
+      "passo",
+      "montagna",
+      "curve",
+      "panorama",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "rating": 4.5,
+    "userRatingCount": 101,
+    "googleMapsUri": "https://maps.google.com/?cid=3738861903594630581&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "riderScore": 65
+  },
+  {
+    "id": "spot-col-du-granier-fr-alps",
+    "sourceId": "ChIJpawfxg6ri0cRO76Wwazl4mc",
+    "name": "Col du Granier",
+    "lat": 45.480295,
+    "lng": 5.914775,
+    "address": "Col du Granier, 73190 Apremont, France",
+    "country": "FR",
+    "region": "FR-Alps",
+    "type": "mountain_pass",
+    "source": "google_places",
+    "keyword": "mountain pass",
+    "tags": [
+      "passo",
+      "montagna",
+      "curve",
+      "panorama",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "rating": 4.6,
+    "userRatingCount": 180,
+    "googleMapsUri": "https://maps.google.com/?cid=7485798060788203067&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "riderScore": 65
+  },
+  {
+    "id": "spot-col-du-joly-fr-alps",
+    "sourceId": "ChIJPemVRtVeiUcRqMknwrBAuTU",
+    "name": "Col du Joly",
+    "lat": 45.784580999999996,
+    "lng": 6.6738029999999995,
+    "address": "Col du Joly, 74170 Hauteluce, France",
+    "country": "FR",
+    "region": "FR-Alps",
+    "type": "mountain_pass",
+    "source": "google_places",
+    "keyword": "col",
+    "tags": [
+      "passo",
+      "montagna",
+      "curve",
+      "panorama",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "rating": 4.8,
+    "userRatingCount": 189,
+    "googleMapsUri": "https://maps.google.com/?cid=3871196482617461160&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "riderScore": 65
+  },
+  {
+    "id": "spot-col-du-pre-fr-alps",
+    "sourceId": "ChIJM0s5LIzfi0cRDxC1rJZAqW0",
+    "name": "Col du Pré",
+    "lat": 45.690290999999995,
+    "lng": 6.598095,
+    "address": "Col du Pré, 73270 Beaufort, France",
+    "country": "FR",
+    "region": "FR-Alps",
+    "type": "mountain_pass",
+    "source": "google_places",
+    "keyword": "mountain pass",
+    "tags": [
+      "passo",
+      "montagna",
+      "curve",
+      "panorama",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "rating": 4.8,
+    "userRatingCount": 160,
+    "googleMapsUri": "https://maps.google.com/?cid=7901918037085065231&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "riderScore": 65
+  },
+  {
+    "id": "spot-indira-col-west-ch",
+    "sourceId": "ChIJCRgUGAo9-zgRo-mkjfPLiXA",
+    "name": "Indira Col West",
+    "lat": 35.6644093,
+    "lng": 76.7977756,
+    "address": "Indira Col West, Kashgar Prefecture 194401",
+    "country": "CH",
+    "region": "CH",
+    "type": "mountain_pass",
+    "source": "google_places",
+    "keyword": "col",
+    "tags": [
+      "passo",
+      "montagna",
+      "curve",
+      "panorama",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "rating": 4.5,
+    "userRatingCount": 162,
+    "googleMapsUri": "https://maps.google.com/?cid=8109236850971175331&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "riderScore": 65
+  },
+  {
+    "id": "spot-passo-d-eira-fr-alps",
+    "sourceId": "ChIJ2U8q2-Fxg0cRQeJNKeHW97k",
+    "name": "Passo d’Eira",
+    "lat": 46.533333299999995,
+    "lng": 10.1,
+    "address": "Passo d’Eira, 23041 Livigno, Sondrio, Italy",
+    "country": "IT",
+    "region": "FR-Alps",
+    "type": "mountain_pass",
+    "source": "google_places",
+    "keyword": "passo",
+    "tags": [
+      "passo",
+      "montagna",
+      "curve",
+      "panorama",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "rating": 4.2,
+    "userRatingCount": 53,
+    "googleMapsUri": "https://maps.google.com/?cid=13400415478813155905&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "riderScore": 65
+  },
+  {
+    "id": "spot-passo-dell-invergneux-it-alpi-ovest",
+    "sourceId": "ChIJVS0AUEXmiEcRugJKpeBjiko",
+    "name": "Passo dell'Invergneux",
+    "lat": 45.6130494,
+    "lng": 7.4505595,
+    "address": "Vilage de Cogne, 11012 Cogne AO, Italy",
+    "country": "IT",
+    "region": "IT-Alpi-Ovest",
+    "type": "mountain_pass",
+    "source": "google_places",
+    "keyword": "passo montano",
+    "tags": [
+      "passo",
+      "montagna",
+      "curve",
+      "panorama",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "rating": 4.6,
+    "userRatingCount": 29,
+    "googleMapsUri": "https://maps.google.com/?cid=5371215322089652922&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+    "rawTypes": [
+      "scenic_spot",
+      "tourist_attraction",
+      "point_of_interest",
+      "establishment"
+    ],
+    "riderScore": 65
+  },
+  {
+    "id": "spot-passo-di-campagneda-it-alpi-ovest",
+    "sourceId": "ChIJcxuLUnebg0cRq9VjVOg_3xI",
+    "name": "Passo di Campagneda",
+    "lat": 46.3011585,
+    "lng": 9.9833982,
+    "address": "23020 Lanzada, Province of Sondrio, Italy",
+    "country": "IT",
+    "region": "IT-Alpi-Ovest",
+    "type": "mountain_pass",
+    "source": "google_places",
+    "keyword": "passo montano",
+    "tags": [
+      "passo",
+      "montagna",
+      "curve",
+      "panorama",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "rating": 4.8,
+    "userRatingCount": 76,
+    "googleMapsUri": "https://maps.google.com/?cid=1359875879569970603&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+    "rawTypes": [
+      "scenic_spot",
+      "tourist_attraction",
+      "point_of_interest",
+      "establishment"
+    ],
+    "riderScore": 65
+  },
+  {
+    "id": "spot-passo-di-sant-antonio-it-alpi-est",
+    "sourceId": "ChIJCZ-n1rLFeUcRdytlw8GYamw",
+    "name": "Passo di Sant'Antonio",
+    "lat": 46.5572404,
+    "lng": 12.4837921,
+    "address": "Passo di Sant'Antonio, 32041 Auronzo di Cadore BL, Italy",
+    "country": "IT",
+    "region": "IT-Alpi-Est",
+    "type": "mountain_pass",
+    "source": "google_places",
+    "keyword": "passo alpino",
+    "tags": [
+      "passo",
+      "montagna",
+      "curve",
+      "panorama",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "rating": 4,
+    "userRatingCount": 22,
+    "googleMapsUri": "https://maps.google.com/?cid=7812224461601844087&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "riderScore": 65
+  },
+  {
+    "id": "spot-passo-pinei-at",
+    "sourceId": "ChIJa3nBK3kNeEcR-ThI_tuo6VQ",
+    "name": "Passo Pinei",
+    "lat": 46.5802919,
+    "lng": 11.6230009,
+    "address": "Str. Pinei, 44, 39040 Castelrotto BZ, Italy",
+    "country": "IT",
+    "region": "AT",
+    "type": "mountain_pass",
+    "source": "google_places",
+    "keyword": "passo alpino",
+    "tags": [
+      "passo",
+      "montagna",
+      "curve",
+      "panorama",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "rating": 4.4,
+    "userRatingCount": 270,
+    "googleMapsUri": "https://maps.google.com/?cid=6118607231576979705&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+    "rawTypes": [
+      "hiking_area",
+      "tourist_attraction",
+      "sports_activity_location",
+      "point_of_interest",
+      "establishment"
+    ],
+    "riderScore": 65
+  },
+  {
+    "id": "spot-passo-volaia-at",
+    "sourceId": "ChIJ0RQmGiv7eUcRjO6TMv2A0e0",
+    "name": "Passo Volaia",
+    "lat": 46.6073927,
+    "lng": 12.869282499999999,
+    "address": "33020 Forni Avoltri, Province of Udine, Italy",
+    "country": "IT",
+    "region": "AT",
+    "type": "mountain_pass",
+    "source": "google_places",
+    "keyword": "passo alpino",
+    "tags": [
+      "passo",
+      "montagna",
+      "curve",
+      "panorama",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "rating": 4.8,
+    "userRatingCount": 95,
+    "googleMapsUri": "https://maps.google.com/?cid=17136619882085084812&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+    "rawTypes": [
+      "tourist_attraction",
+      "point_of_interest",
+      "establishment"
+    ],
+    "riderScore": 65
+  },
+  {
+    "id": "spot-passo-zulino-it-alpi-centro",
+    "sourceId": "ChIJF3Vpdbnvg0cRuHgqfV94FvI",
+    "name": "Passo Zulino",
+    "lat": 45.9635934,
+    "lng": 9.851641899999999,
+    "address": "24020 Ardesio, Province of Bergamo, Italy",
+    "country": "IT",
+    "region": "IT-Alpi-Centro",
+    "type": "mountain_pass",
+    "source": "google_places",
+    "keyword": "passo alpino",
+    "tags": [
+      "passo",
+      "montagna",
+      "curve",
+      "panorama",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "rating": 4.7,
+    "userRatingCount": 31,
+    "googleMapsUri": "https://maps.google.com/?cid=17444262558183356600&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+    "rawTypes": [
+      "wildlife_park",
+      "tourist_attraction",
+      "zoo",
+      "park",
+      "point_of_interest",
+      "establishment"
+    ],
+    "riderScore": 65
+  },
+  {
+    "id": "spot-penser-joch-it-alpi-ovest",
+    "sourceId": "ChIJXYVkdZOrgkcRl3h9lbUJrFE",
+    "name": "Penser Joch",
+    "lat": 46.8187194,
+    "lng": 11.440927499999999,
+    "address": "Passo, 39040 Pennes BZ, Italy",
+    "country": "IT",
+    "region": "IT-Alpi-Ovest",
+    "type": "mountain_pass",
+    "source": "google_places",
+    "keyword": "joch",
+    "tags": [
+      "passo",
+      "montagna",
+      "curve",
+      "panorama",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "rating": 4.7,
+    "userRatingCount": 3230,
+    "googleMapsUri": "https://maps.google.com/?cid=5885089488568154263&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+    "rawTypes": [
+      "tourist_attraction",
+      "point_of_interest",
+      "establishment"
+    ],
+    "riderScore": 65
+  },
+  {
+    "id": "spot-penser-joch-at",
+    "sourceId": "ChIJ_x7yc5KrgkcRUE5xLogJBx0",
+    "name": "Penser Joch",
+    "lat": 46.816666700000006,
+    "lng": 11.4333333,
+    "address": "Penser Joch, 39058 Sarntal, Autonomous Province of Bolzano – South Tyrol, Italy",
+    "country": "IT",
+    "region": "AT",
+    "type": "mountain_pass",
+    "source": "google_places",
+    "keyword": "joch",
+    "tags": [
+      "passo",
+      "montagna",
+      "curve",
+      "panorama",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "rating": 4.8,
+    "userRatingCount": 193,
+    "googleMapsUri": "https://maps.google.com/?cid=2091651032436264528&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "riderScore": 65
+  },
+  {
+    "id": "spot-sellajoch-wolkenstein-bz-at",
+    "sourceId": "ChIJoWTDtuBqeEcR0CbpBBA4Sss",
+    "name": "Sellajoch - Wolkenstein (BZ)",
+    "lat": 46.507940399999995,
+    "lng": 11.7683094,
+    "address": "SS242, 1-6, 39048 Selva di Val Gardena BZ, Italy",
+    "country": "IT",
+    "region": "AT",
+    "type": "mountain_pass",
+    "source": "google_places",
+    "keyword": "passo montano",
+    "tags": [
+      "passo",
+      "montagna",
+      "curve",
+      "panorama",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "rating": 4.6,
+    "userRatingCount": 601,
+    "googleMapsUri": "https://maps.google.com/?cid=14648582379428980432&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+    "rawTypes": [
+      "tourist_attraction",
+      "point_of_interest",
+      "establishment"
+    ],
+    "riderScore": 65
+  },
+  {
+    "id": "spot-timmelsjoch-hochalpenstra-e-it-alpi-est",
+    "sourceId": "ChIJr-adISzLgkcRTVc60IwYkvU",
+    "name": "Timmelsjoch Hochalpenstraße",
+    "lat": 46.9094067,
+    "lng": 11.053390199999999,
+    "address": "Timmelsjochstraße 8, 6456 Gurgl, Austria",
+    "country": "IT",
+    "region": "IT-Alpi-Est",
+    "type": "mountain_pass",
+    "source": "google_places",
+    "keyword": "joch",
+    "tags": [
+      "passo",
+      "montagna",
+      "curve",
+      "panorama",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "rating": 4.8,
+    "userRatingCount": 1868,
+    "googleMapsUri": "https://maps.google.com/?cid=17695232878960072525&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+    "rawTypes": [
+      "tourist_attraction",
+      "point_of_interest",
+      "establishment"
+    ],
+    "riderScore": 65
+  },
+  {
+    "id": "spot-bernina-pass-it-alpi-centro",
+    "sourceId": "ChIJ__lOPrN3g0cR-orUIa4kjXs",
+    "name": "Bernina Pass",
+    "lat": 46.4107,
+    "lng": 10.0266,
+    "address": "Bernina Pass, 7710 Poschiavo, Switzerland",
+    "country": "IT",
+    "region": "IT-Alpi-Centro",
+    "type": "mountain_pass",
+    "source": "google_places",
+    "keyword": "passo alpino",
+    "tags": [
+      "passo",
+      "montagna",
+      "curve",
+      "panorama",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "rating": 4.8,
+    "userRatingCount": 734,
+    "googleMapsUri": "https://maps.google.com/?cid=8902812368691825402&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "riderScore": 60
+  },
+  {
+    "id": "spot-falzarego-pass-at",
+    "sourceId": "ChIJ6-Vz9vU3eEcRkv4y95ENIeU",
+    "name": "Falzarego Pass",
+    "lat": 46.5191252,
+    "lng": 12.0089186,
+    "address": "Falzarego Pass, 32043 Cortina d'Ampezzo, Province of Belluno, Italy",
+    "country": "IT",
+    "region": "AT",
+    "type": "mountain_pass",
+    "source": "google_places",
+    "keyword": "passo alpino",
+    "tags": [
+      "passo",
+      "montagna",
+      "curve",
+      "panorama",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "rating": 4.8,
+    "userRatingCount": 1699,
+    "googleMapsUri": "https://maps.google.com/?cid=16510492629485682322&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "riderScore": 60
+  },
+  {
+    "id": "spot-fluela-pass-fr-alps",
+    "sourceId": "ChIJnSALbQNfg0cRpEQWajbe3SE",
+    "name": "Flüela Pass",
+    "lat": 46.750299999999996,
+    "lng": 9.94744,
+    "address": "Flüela Pass, 7542 Zernez, Switzerland",
+    "country": "CH",
+    "region": "FR-Alps",
+    "type": "mountain_pass",
+    "source": "google_places",
+    "keyword": "passo",
+    "tags": [
+      "passo",
+      "montagna",
+      "curve",
+      "panorama",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "rating": 4.7,
+    "userRatingCount": 608,
+    "googleMapsUri": "https://maps.google.com/?cid=2440350898394121380&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "riderScore": 60
+  },
+  {
+    "id": "spot-gardena-pass-at",
+    "sourceId": "ChIJuVOiy2UVeEcRh4UQt5PiOMw",
+    "name": "Gardena Pass",
+    "lat": 46.55,
+    "lng": 11.809444,
+    "address": "Gardena Pass, 39033 Corvara, Autonomous Province of Bolzano – South Tyrol, Italy",
+    "country": "IT",
+    "region": "AT",
+    "type": "mountain_pass",
+    "source": "google_places",
+    "keyword": "joch",
+    "tags": [
+      "passo",
+      "montagna",
+      "curve",
+      "panorama",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "rating": 4.9,
+    "userRatingCount": 1289,
+    "googleMapsUri": "https://maps.google.com/?cid=14715760906492478855&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "riderScore": 60
+  },
+  {
+    "id": "spot-gavia-pass-it-alpi-centro",
+    "sourceId": "ChIJoWNW4IEAg0cRUQxukI7FiUo",
+    "name": "Gavia Pass",
+    "lat": 46.3434911,
+    "lng": 10.4846264,
+    "address": "Gavia Pass, 25056 Ponte di Legno, Province of Brescia, Italy",
+    "country": "IT",
+    "region": "IT-Alpi-Centro",
+    "type": "mountain_pass",
+    "source": "google_places",
+    "keyword": "passo alpino",
+    "tags": [
+      "passo",
+      "montagna",
+      "curve",
+      "panorama",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "rating": 4.7,
+    "userRatingCount": 1452,
+    "googleMapsUri": "https://maps.google.com/?cid=5371041246715186257&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "riderScore": 60
+  },
+  {
+    "id": "spot-giau-pass-de-south",
+    "sourceId": "ChIJb3K03chJeEcRwTNb2IiHM24",
+    "name": "Giau Pass",
+    "lat": 46.4830556,
+    "lng": 12.054166700000001,
+    "address": "Giau Pass, 32046 San Vito di Cadore, Province of Belluno, Italy",
+    "country": "IT",
+    "region": "DE-South",
+    "type": "mountain_pass",
+    "source": "google_places",
+    "keyword": "mountain pass",
+    "tags": [
+      "passo",
+      "montagna",
+      "curve",
+      "panorama",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "rating": 4.9,
+    "userRatingCount": 1908,
+    "googleMapsUri": "https://maps.google.com/?cid=7940839589799474113&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "riderScore": 60
+  },
+  {
+    "id": "spot-gotthard-pass-ch",
+    "sourceId": "ChIJJ_KzSet2hUcRX5igGxBcGhM",
+    "name": "Gotthard Pass",
+    "lat": 46.5588864,
+    "lng": 8.5623231,
+    "address": "Gotthard Pass, Switzerland",
+    "country": "CH",
+    "region": "CH",
+    "type": "mountain_pass",
+    "source": "google_places",
+    "keyword": "col",
+    "tags": [
+      "passo",
+      "montagna",
+      "curve",
+      "panorama",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "rating": 4.7,
+    "userRatingCount": 2628,
+    "googleMapsUri": "https://maps.google.com/?cid=1376513860367849567&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "riderScore": 60
+  },
+  {
+    "id": "spot-great-st-bernard-pass-ch",
+    "sourceId": "ChIJFfAA_DIwiUcRBg407ykUu0A",
+    "name": "Great St Bernard Pass",
+    "lat": 45.8938773,
+    "lng": 7.187543700000001,
+    "address": "Great St Bernard Pass",
+    "country": "CH",
+    "region": "CH",
+    "type": "mountain_pass",
+    "source": "google_places",
+    "keyword": "col de montagne",
+    "tags": [
+      "passo",
+      "montagna",
+      "curve",
+      "panorama",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "rating": 4.8,
+    "userRatingCount": 1478,
+    "googleMapsUri": "https://maps.google.com/?cid=4664344009411661318&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "riderScore": 60
+  },
+  {
+    "id": "spot-grimsel-pass-ch",
+    "sourceId": "ChIJCyinolJ-hUcRIQiP1AQWa4s",
+    "name": "Grimsel Pass",
+    "lat": 46.5614,
+    "lng": 8.337579999999999,
+    "address": "Grimsel Pass, 3999 Obergoms, Switzerland",
+    "country": "CH",
+    "region": "CH",
+    "type": "mountain_pass",
+    "source": "google_places",
+    "keyword": "passo alpino",
+    "tags": [
+      "passo",
+      "montagna",
+      "curve",
+      "panorama",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "rating": 4.8,
+    "userRatingCount": 1627,
+    "googleMapsUri": "https://maps.google.com/?cid=10046147603781847073&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "riderScore": 60
+  },
+  {
+    "id": "spot-katschberg-pass-at",
+    "sourceId": "ChIJTWEqqZrDcEcRxIouChRifwM",
+    "name": "Katschberg Pass",
+    "lat": 47.0591777,
+    "lng": 13.6155855,
+    "address": "Katschberg Pass, 5582, Austria",
+    "country": "AT",
+    "region": "AT",
+    "type": "mountain_pass",
+    "source": "google_places",
+    "keyword": "mountain pass",
+    "tags": [
+      "passo",
+      "montagna",
+      "curve",
+      "panorama",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "rating": 4.7,
+    "userRatingCount": 870,
+    "googleMapsUri": "https://maps.google.com/?cid=252027942365727428&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "riderScore": 60
+  },
+  {
+    "id": "spot-little-saint-bernard-pass-fr-alps",
+    "sourceId": "ChIJMTZecxdqiUcRKpIiL8MaH3U",
+    "name": "Little Saint Bernard Pass",
+    "lat": 45.6802785,
+    "lng": 6.883890000000001,
+    "address": "Little St Bernard Pass, 73700 Séez, France",
+    "country": "FR",
+    "region": "FR-Alps",
+    "type": "mountain_pass",
+    "source": "google_places",
+    "keyword": "passo alpino",
+    "tags": [
+      "passo",
+      "montagna",
+      "curve",
+      "panorama",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "rating": 4.8,
+    "userRatingCount": 1053,
+    "googleMapsUri": "https://maps.google.com/?cid=8439493652327338538&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "riderScore": 60
+  },
+  {
+    "id": "spot-mortirolo-pass-it-alpi-est",
+    "sourceId": "ChIJrYBJy5ylg0cRcCvNeiJpS-s",
+    "name": "Mortirolo Pass",
+    "lat": 46.2479261,
+    "lng": 10.2983079,
+    "address": "Mortirolo Pass, 23030 Mazzo di Valtellina, Province of Sondrio, Italy",
+    "country": "IT",
+    "region": "IT-Alpi-Est",
+    "type": "mountain_pass",
+    "source": "google_places",
+    "keyword": "passo alpino",
+    "tags": [
+      "passo",
+      "montagna",
+      "curve",
+      "panorama",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "rating": 4.7,
+    "userRatingCount": 895,
+    "googleMapsUri": "https://maps.google.com/?cid=16954760818976435056&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "riderScore": 60
+  },
+  {
+    "id": "spot-oberalp-pass-it-alpi-ovest",
+    "sourceId": "ChIJZ9H-untthUcRkDMpB8tuNoI",
+    "name": "Oberalp Pass",
+    "lat": 46.6583992,
+    "lng": 8.671018,
+    "address": "Oberalp Pass, 7189 Tujetsch, Switzerland",
+    "country": "IT",
+    "region": "IT-Alpi-Ovest",
+    "type": "mountain_pass",
+    "source": "google_places",
+    "keyword": "mountain pass",
+    "tags": [
+      "passo",
+      "montagna",
+      "curve",
+      "panorama",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "rating": 4.8,
+    "userRatingCount": 517,
+    "googleMapsUri": "https://maps.google.com/?cid=9382808691950564240&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "riderScore": 60
+  },
+  {
+    "id": "spot-passo-d-entralais-it-alpi-est",
+    "sourceId": "ChIJBXDo0hXveUcR3XfYuxsUotY",
+    "name": "Passo d'Entralais",
+    "lat": 46.5527778,
+    "lng": 12.7680556,
+    "address": "Passo d'Entralais, 33020 Forni Avoltri, Province of Udine, Italy",
+    "country": "IT",
+    "region": "IT-Alpi-Est",
+    "type": "mountain_pass",
+    "source": "google_places",
+    "keyword": "passo",
+    "tags": [
+      "passo",
+      "montagna",
+      "curve",
+      "panorama",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "rating": null,
+    "userRatingCount": null,
+    "googleMapsUri": "https://maps.google.com/?cid=15465946179691902941&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "riderScore": 60
+  },
+  {
+    "id": "spot-passo-del-busin-ch",
+    "sourceId": "ChIJW3jIL59Zj0cRu6orFTD4mF4",
+    "name": "Passo del Büsin",
+    "lat": 46.109699899999995,
+    "lng": 8.09855,
+    "address": "Passo del Büsin, 3907 Zwischbergen, Switzerland",
+    "country": "CH",
+    "region": "CH",
+    "type": "mountain_pass",
+    "source": "google_places",
+    "keyword": "passo alpino",
+    "tags": [
+      "passo",
+      "montagna",
+      "curve",
+      "panorama",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "rating": 4,
+    "userRatingCount": 1,
+    "googleMapsUri": "https://maps.google.com/?cid=6816470921422547643&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "riderScore": 60
+  },
+  {
+    "id": "spot-passo-del-laghetto-ch",
+    "sourceId": "ChIJpwnILD4AhUcRFGt-gTA3rQE",
+    "name": "Passo del Laghetto",
+    "lat": 46.489199899999996,
+    "lng": 9.01963,
+    "address": "Passo del Laghetto, 6719 Blenio, Switzerland",
+    "country": "CH",
+    "region": "CH",
+    "type": "mountain_pass",
+    "source": "google_places",
+    "keyword": "passo alpino",
+    "tags": [
+      "passo",
+      "montagna",
+      "curve",
+      "panorama",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "rating": 4,
+    "userRatingCount": 2,
+    "googleMapsUri": "https://maps.google.com/?cid=120813446479375124&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "riderScore": 60
+  },
+  {
+    "id": "spot-passo-del-santicolo-de-south",
+    "sourceId": "ChIJhUe3J45RnUcRlsvEgBAXw3Q",
+    "name": "Passo del Santicolo",
+    "lat": 46.9666275,
+    "lng": 11.416151099999999,
+    "address": "Passo del Santicolo, Brenner, Autonomous Province of Bolzano – South Tyrol, Italy",
+    "country": "IT",
+    "region": "DE-South",
+    "type": "mountain_pass",
+    "source": "google_places",
+    "keyword": "col de montagne",
+    "tags": [
+      "passo",
+      "montagna",
+      "curve",
+      "panorama",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "rating": null,
+    "userRatingCount": null,
+    "googleMapsUri": "https://maps.google.com/?cid=8413593888505514902&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "riderScore": 60
+  },
+  {
+    "id": "spot-passo-dell-arco-at",
+    "sourceId": "ChIJ9Xp10qnpeUcRQtvQw7Gq_Fs",
+    "name": "Passo dell'Arco",
+    "lat": 46.540265999999995,
+    "lng": 12.681282999999999,
+    "address": "46°32'25.0\"N 12°40'52., Corso Italia, 6, 32046 San Vito di Cadore UD, Italy",
+    "country": "IT",
+    "region": "AT",
+    "type": "mountain_pass",
+    "source": "google_places",
+    "keyword": "passo alpino",
+    "tags": [
+      "passo",
+      "montagna",
+      "curve",
+      "panorama",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "rating": 4.8,
+    "userRatingCount": 18,
+    "googleMapsUri": "https://maps.google.com/?cid=6628360432053705538&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+    "rawTypes": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "riderScore": 60
+  },
+  {
+    "id": "spot-passo-di-cristallina-ch",
+    "sourceId": "ChIJEwcOurOdhUcRO-RzMHANdeY",
+    "name": "Passo di Cristallina",
+    "lat": 46.4719,
+    "lng": 8.52708,
+    "address": "Passo di Cristallina, 6781 Bedretto, Switzerland",
+    "country": "CH",
+    "region": "CH",
+    "type": "mountain_pass",
+    "source": "google_places",
+    "keyword": "passo alpino",
+    "tags": [
+      "passo",
+      "montagna",
+      "curve",
+      "panorama",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "rating": null,
+    "userRatingCount": null,
+    "googleMapsUri": "https://maps.google.com/?cid=16606193976498971707&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "riderScore": 60
+  },
+  {
+    "id": "spot-passo-di-san-lugano-at",
+    "sourceId": "ChIJZxCt8ZR-eEcRBFNaiOaN0S4",
+    "name": "Passo di San Lugano",
+    "lat": 46.3106321,
+    "lng": 11.396747699999999,
+    "address": "Passo di San Lugano, 39040 Trodena nel Parco naturale BZ, Italy",
+    "country": "IT",
+    "region": "AT",
+    "type": "mountain_pass",
+    "source": "google_places",
+    "keyword": "passo alpino",
+    "tags": [
+      "passo",
+      "montagna",
+      "curve",
+      "panorama",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "rating": 3.8,
+    "userRatingCount": 16,
+    "googleMapsUri": "https://maps.google.com/?cid=3373633617146827524&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "riderScore": 60
+  },
+  {
+    "id": "spot-passo-predelp-ch",
+    "sourceId": "ChIJC8zCkqYJhUcRnd072DXWVUs",
+    "name": "Passo Predèlp",
+    "lat": 46.522,
+    "lng": 8.79613,
+    "address": "Passo Predèlp, 6718 Blenio, Switzerland",
+    "country": "CH",
+    "region": "CH",
+    "type": "mountain_pass",
+    "source": "google_places",
+    "keyword": "passo alpino",
+    "tags": [
+      "passo",
+      "montagna",
+      "curve",
+      "panorama",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "rating": null,
+    "userRatingCount": null,
+    "googleMapsUri": "https://maps.google.com/?cid=5428480452614413725&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "riderScore": 60
+  },
+  {
+    "id": "spot-passo-san-simone-it-alpi-ovest",
+    "sourceId": "ChIJF-fxQED1g0cR2w88buE_sJQ",
+    "name": "Passo San Simone",
+    "lat": 46.0392802,
+    "lng": 9.6891202,
+    "address": "24010 Valleve, Province of Bergamo, Italy",
+    "country": "IT",
+    "region": "IT-Alpi-Ovest",
+    "type": "mountain_pass",
+    "source": "google_places",
+    "keyword": "passo",
+    "tags": [
+      "passo",
+      "montagna",
+      "curve",
+      "panorama",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "rating": 4.5,
+    "userRatingCount": 2,
+    "googleMapsUri": "https://maps.google.com/?cid=10714133750964031451&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+    "rawTypes": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "riderScore": 60
+  },
+  {
+    "id": "spot-passo-vanit-ch",
+    "sourceId": "ChIJN59EbsCghUcRmbZ0d6k_MRA",
+    "name": "Passo Vanit",
+    "lat": 46.4721378,
+    "lng": 8.7270541,
+    "address": "6772 Prato, Switzerland",
+    "country": "CH",
+    "region": "CH",
+    "type": "mountain_pass",
+    "source": "google_places",
+    "keyword": "passo alpino",
+    "tags": [
+      "passo",
+      "montagna",
+      "curve",
+      "panorama",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "rating": 4.8,
+    "userRatingCount": 12,
+    "googleMapsUri": "https://maps.google.com/?cid=1166783775551829657&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+    "rawTypes": [
+      "hiking_area",
+      "tourist_attraction",
+      "sports_activity_location",
+      "point_of_interest",
+      "establishment"
+    ],
+    "riderScore": 60
+  },
+  {
+    "id": "spot-reschen-pass-de-south",
+    "sourceId": "ChIJ5y2YvkAwg0cR2tIbvgqStaY",
+    "name": "Reschen Pass",
+    "lat": 46.8333333,
+    "lng": 10.5,
+    "address": "Reschen Pass, 39027 Graun im Vinschgau, Autonomous Province of Bolzano – South Tyrol, Italy",
+    "country": "IT",
+    "region": "DE-South",
+    "type": "mountain_pass",
+    "source": "google_places",
+    "keyword": "passo alpino",
+    "tags": [
+      "passo",
+      "montagna",
+      "curve",
+      "panorama",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "rating": 4.6,
+    "userRatingCount": 1234,
+    "googleMapsUri": "https://maps.google.com/?cid=12012668155917488858&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "riderScore": 60
+  },
+  {
+    "id": "spot-san-bernardino-pass-it-alpi-est",
+    "sourceId": "ChIJS7rneeL4hEcRFxsSdwIwabA",
+    "name": "San Bernardino Pass",
+    "lat": 46.4959,
+    "lng": 9.17079,
+    "address": "San Bernardino Pass, 6565 Mesocco, Switzerland",
+    "country": "IT",
+    "region": "IT-Alpi-Est",
+    "type": "mountain_pass",
+    "source": "google_places",
+    "keyword": "passo alpino",
+    "tags": [
+      "passo",
+      "montagna",
+      "curve",
+      "panorama",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "rating": 4.8,
+    "userRatingCount": 1156,
+    "googleMapsUri": "https://maps.google.com/?cid=12711744210375678743&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "riderScore": 60
+  },
+  {
+    "id": "spot-sella-pass-de-south",
+    "sourceId": "ChIJRQw4NOhqeEcRkOuDLogJBx0",
+    "name": "Sella Pass",
+    "lat": 46.509175,
+    "lng": 11.758276799999999,
+    "address": "Sella Pass, 39048 Sëlva, Autonomous Province of Bolzano – South Tyrol, Italy",
+    "country": "IT",
+    "region": "DE-South",
+    "type": "mountain_pass",
+    "source": "google_places",
+    "keyword": "mountain pass",
+    "tags": [
+      "passo",
+      "montagna",
+      "curve",
+      "panorama",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "rating": 4.9,
+    "userRatingCount": 2249,
+    "googleMapsUri": "https://maps.google.com/?cid=2091651032437484432&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "riderScore": 60
+  },
+  {
+    "id": "spot-simplon-pass-ch",
+    "sourceId": "ChIJnS756eNnj0cRl-f2e8aa-CA",
+    "name": "Simplon Pass",
+    "lat": 46.2505944,
+    "lng": 8.032207399999999,
+    "address": "Simplon Pass, 3907 Simplon, Switzerland",
+    "country": "CH",
+    "region": "CH",
+    "type": "mountain_pass",
+    "source": "google_places",
+    "keyword": "passo alpino",
+    "tags": [
+      "passo",
+      "montagna",
+      "curve",
+      "panorama",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "rating": 4.7,
+    "userRatingCount": 1136,
+    "googleMapsUri": "https://maps.google.com/?cid=2375818980711917463&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "riderScore": 60
+  },
+  {
+    "id": "spot-splugen-pass-it-alpi-centro",
+    "sourceId": "ChIJl6NKBaH2hEcR_1llVu16-x8",
+    "name": "Splügen Pass",
+    "lat": 46.5056,
+    "lng": 9.33028,
+    "address": "Splügen Pass, 23024 Rheinwald, Switzerland",
+    "country": "IT",
+    "region": "IT-Alpi-Centro",
+    "type": "mountain_pass",
+    "source": "google_places",
+    "keyword": "mountain pass",
+    "tags": [
+      "passo",
+      "montagna",
+      "curve",
+      "panorama",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "rating": 4.8,
+    "userRatingCount": 1071,
+    "googleMapsUri": "https://maps.google.com/?cid=2304570794105461247&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "riderScore": 60
+  },
+  {
+    "id": "spot-stelvio-pass-it-alpi-centro",
+    "sourceId": "ChIJHRwYVeQag0cRYOuDLogJBx0",
+    "name": "Stelvio Pass",
+    "lat": 46.529360200000006,
+    "lng": 10.453206999999999,
+    "address": "Stelvio Pass, 39029 Stilfs, Autonomous Province of Bolzano – South Tyrol, Italy",
+    "country": "IT",
+    "region": "IT-Alpi-Centro",
+    "type": "mountain_pass",
+    "source": "google_places",
+    "keyword": "passo alpino",
+    "tags": [
+      "passo",
+      "montagna",
+      "curve",
+      "panorama",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "rating": 4.8,
+    "userRatingCount": 7523,
+    "googleMapsUri": "https://maps.google.com/?cid=2091651032437484384&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "riderScore": 60
+  },
+  {
+    "id": "spot-susten-pass-ch",
+    "sourceId": "ChIJYZooigpkhUcRaw42pqpkWmE",
+    "name": "Susten Pass",
+    "lat": 46.7293696,
+    "lng": 8.447023399999999,
+    "address": "Susten Pass, 3863 Innertkirchen, Switzerland",
+    "country": "CH",
+    "region": "CH",
+    "type": "mountain_pass",
+    "source": "google_places",
+    "keyword": "passo alpino",
+    "tags": [
+      "passo",
+      "montagna",
+      "curve",
+      "panorama",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "rating": 4.8,
+    "userRatingCount": 1056,
+    "googleMapsUri": "https://maps.google.com/?cid=7015030053678747243&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "riderScore": 60
+  },
+  {
+    "id": "spot-tonale-pass-it-alpi-centro",
+    "sourceId": "ChIJFxPBR3VUgkcR72cxQn_iweg",
+    "name": "Tonale Pass",
+    "lat": 46.2564381,
+    "lng": 10.5808235,
+    "address": "Tonale Pass, 25056 Ponte di Legno, Province of Brescia, Italy",
+    "country": "IT",
+    "region": "IT-Alpi-Centro",
+    "type": "mountain_pass",
+    "source": "google_places",
+    "keyword": "passo alpino",
+    "tags": [
+      "passo",
+      "montagna",
+      "curve",
+      "panorama",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "rating": 4.6,
+    "userRatingCount": 2622,
+    "googleMapsUri": "https://maps.google.com/?cid=16771935523503695855&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "riderScore": 60
+  },
+  {
+    "id": "spot-col-alto-it-alpi-est",
+    "sourceId": "ChIJmY4mO4B2eUcR_9DxQKQ8LoI",
+    "name": "Col Alto",
+    "lat": 46.0947222,
+    "lng": 12.5344444,
+    "address": "Col Alto, 33081 Aviano, Province of Pordenone, Italy",
+    "country": "IT",
+    "region": "IT-Alpi-Est",
+    "type": "mountain_pass",
+    "source": "google_places",
+    "keyword": "col de montagne",
+    "tags": [
+      "passo",
+      "montagna",
+      "curve",
+      "panorama",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "rating": 4.8,
+    "userRatingCount": 24,
+    "googleMapsUri": "https://maps.google.com/?cid=9380501750021214463&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+    "rawTypes": [
+      "mountain_peak",
+      "natural_feature",
+      "establishment"
+    ],
+    "riderScore": 55
+  },
+  {
+    "id": "spot-col-de-balme-fr-alps",
+    "sourceId": "ChIJeUasN460jkcRCP0LFwzJuyg",
+    "name": "Col de Balme",
+    "lat": 46.026599999999995,
+    "lng": 6.97007,
+    "address": "Col de Balme, 1929 Trient, Switzerland",
+    "country": "CH",
+    "region": "FR-Alps",
+    "type": "mountain_pass",
+    "source": "google_places",
+    "keyword": "passo",
+    "tags": [
+      "passo",
+      "montagna",
+      "curve",
+      "panorama",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "rating": 4.7,
+    "userRatingCount": 44,
+    "googleMapsUri": "https://maps.google.com/?cid=2935160635925462280&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "riderScore": 55
+  },
+  {
+    "id": "spot-col-de-cou-fr-alps",
+    "sourceId": "ChIJt7om0g4UjEcRN5BaluuFs3g",
+    "name": "Col de Cou",
+    "lat": 46.262471,
+    "lng": 6.453863,
+    "address": "Col de Cou, 74550 Cervens, France",
+    "country": "FR",
+    "region": "FR-Alps",
+    "type": "mountain_pass",
+    "source": "google_places",
+    "keyword": "col",
+    "tags": [
+      "passo",
+      "montagna",
+      "curve",
+      "panorama",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "rating": 4.6,
+    "userRatingCount": 60,
+    "googleMapsUri": "https://maps.google.com/?cid=8697442552268886071&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "riderScore": 55
+  },
+  {
+    "id": "spot-col-de-feu-fr-alps",
+    "sourceId": "ChIJJXqSJVgWjEcRFXK4XTzUPGE",
+    "name": "Col de Feu",
+    "lat": 46.294475299999995,
+    "lng": 6.509270700000001,
+    "address": "Col de Feu, 74470 Lullin, France",
+    "country": "FR",
+    "region": "FR-Alps",
+    "type": "mountain_pass",
+    "source": "google_places",
+    "keyword": "col",
+    "tags": [
+      "passo",
+      "montagna",
+      "curve",
+      "panorama",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "rating": 4.5,
+    "userRatingCount": 33,
+    "googleMapsUri": "https://maps.google.com/?cid=7006708476017144341&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "riderScore": 55
+  },
+  {
+    "id": "spot-col-de-jaillet-fr-alps",
+    "sourceId": "ChIJ051rvqT8i0cR_pOewUEoO08",
+    "name": "Col de Jaillet",
+    "lat": 45.880977,
+    "lng": 6.570893,
+    "address": "Col de Jaillet, 73590 Sallanches, France",
+    "country": "FR",
+    "region": "FR-Alps",
+    "type": "mountain_pass",
+    "source": "google_places",
+    "keyword": "mountain pass",
+    "tags": [
+      "passo",
+      "montagna",
+      "curve",
+      "panorama",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "rating": 4.8,
+    "userRatingCount": 53,
+    "googleMapsUri": "https://maps.google.com/?cid=5709201215508616190&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "riderScore": 55
+  },
+  {
+    "id": "spot-col-de-l-arpettaz-fr-alps",
+    "sourceId": "ChIJuzYF97Toi0cR204gnEbwKOg",
+    "name": "Col de l'Arpettaz",
+    "lat": 45.796966999999995,
+    "lng": 6.4340459999999995,
+    "address": "Col de l'Arpettaz, 73400 Ugine, France",
+    "country": "FR",
+    "region": "FR-Alps",
+    "type": "mountain_pass",
+    "source": "google_places",
+    "keyword": "mountain pass",
+    "tags": [
+      "passo",
+      "montagna",
+      "curve",
+      "panorama",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "rating": 4.6,
+    "userRatingCount": 65,
+    "googleMapsUri": "https://maps.google.com/?cid=16728885001925447387&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "riderScore": 55
+  },
+  {
+    "id": "spot-col-de-l-aulp-fr-alps",
+    "sourceId": "ChIJeeB3Cz-Ti0cRCVLYxglZguM",
+    "name": "Col de l'Aulp",
+    "lat": 45.829063,
+    "lng": 6.263044,
+    "address": "Col de l'Aulp, 74290 Talloires-Montmin, France",
+    "country": "FR",
+    "region": "FR-Alps",
+    "type": "mountain_pass",
+    "source": "google_places",
+    "keyword": "col",
+    "tags": [
+      "passo",
+      "montagna",
+      "curve",
+      "panorama",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "rating": 4.5,
+    "userRatingCount": 41,
+    "googleMapsUri": "https://maps.google.com/?cid=16393763492107670025&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "riderScore": 55
+  },
+  {
+    "id": "spot-col-de-l-epine-fr-alps",
+    "sourceId": "ChIJC4i9ykgGi0cRWGOf1EGoQeI",
+    "name": "Col de l'Épine",
+    "lat": 45.58027,
+    "lng": 5.823999,
+    "address": "Col de l'Épine, 73290 La Motte-Servolex, France",
+    "country": "FR",
+    "region": "FR-Alps",
+    "type": "mountain_pass",
+    "source": "google_places",
+    "keyword": "mountain pass",
+    "tags": [
+      "passo",
+      "montagna",
+      "curve",
+      "panorama",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "rating": 4.6,
+    "userRatingCount": 73,
+    "googleMapsUri": "https://maps.google.com/?cid=16303497126751462232&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "riderScore": 55
+  },
+  {
+    "id": "spot-col-de-la-vallee-etroite-it-alpi-ovest",
+    "sourceId": "ChIJIcmvjyeNiUcRtjgx9_y_Iaw",
+    "name": "Col de la Vallée Étroite",
+    "lat": 45.119541999999996,
+    "lng": 6.6067659999999995,
+    "address": "Col de la Vallée Étroite, 05100 Névache, France",
+    "country": "IT",
+    "region": "IT-Alpi-Ovest",
+    "type": "mountain_pass",
+    "source": "google_places",
+    "keyword": "col de montagne",
+    "tags": [
+      "passo",
+      "montagna",
+      "curve",
+      "panorama",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "rating": 4.8,
+    "userRatingCount": 43,
+    "googleMapsUri": "https://maps.google.com/?cid=12403405941954918582&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "riderScore": 55
+  },
+  {
+    "id": "spot-col-de-meraillet-fr-alps",
+    "sourceId": "ChIJb6SmS2pgiUcR35SU5mubq7E",
+    "name": "Col de Méraillet",
+    "lat": 45.694818,
+    "lng": 6.63339,
+    "address": "Col de Méraillet, 73270 Beaufort, France",
+    "country": "FR",
+    "region": "FR-Alps",
+    "type": "mountain_pass",
+    "source": "google_places",
+    "keyword": "passo alpino",
+    "tags": [
+      "passo",
+      "montagna",
+      "curve",
+      "panorama",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "rating": 4.6,
+    "userRatingCount": 76,
+    "googleMapsUri": "https://maps.google.com/?cid=12802497253463069919&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "riderScore": 55
+  },
+  {
+    "id": "spot-col-de-moi-it-alpi-est",
+    "sourceId": "ChIJM8UaoBcbeUcRYFh-rLTwp04",
+    "name": "Col de Moi",
+    "lat": 46.003055599999996,
+    "lng": 12.1266667,
+    "address": "Col de Moi, 32026 Borgo Valbelluna, Province of Belluno, Italy",
+    "country": "IT",
+    "region": "IT-Alpi-Est",
+    "type": "mountain_pass",
+    "source": "google_places",
+    "keyword": "col de montagne",
+    "tags": [
+      "passo",
+      "montagna",
+      "curve",
+      "panorama",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "rating": 4.8,
+    "userRatingCount": 34,
+    "googleMapsUri": "https://maps.google.com/?cid=5667763314847799392&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+    "rawTypes": [
+      "mountain_peak",
+      "natural_feature",
+      "establishment"
+    ],
+    "riderScore": 55
+  },
+  {
+    "id": "spot-col-de-steige-de-south",
+    "sourceId": "ChIJ5_C1tuT8k0cRaXXBIc69urk",
+    "name": "Col de Steige",
+    "lat": 48.363191,
+    "lng": 7.201309999999999,
+    "address": "Col de Steige, 67420 Steige, France",
+    "country": "FR",
+    "region": "DE-South",
+    "type": "mountain_pass",
+    "source": "google_places",
+    "keyword": "col",
+    "tags": [
+      "passo",
+      "montagna",
+      "curve",
+      "panorama",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "rating": 4.6,
+    "userRatingCount": 34,
+    "googleMapsUri": "https://maps.google.com/?cid=13383217935712089449&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "riderScore": 55
+  },
+  {
+    "id": "spot-col-de-tricot-fr-alps",
+    "sourceId": "ChIJPfx7xXtaiUcRcMurjeBJ1v0",
+    "name": "Col de Tricot",
+    "lat": 45.850482899999996,
+    "lng": 6.770073999999999,
+    "address": "Col de Tricot, 74170 Saint-Gervais-les-Bains, France",
+    "country": "FR",
+    "region": "FR-Alps",
+    "type": "mountain_pass",
+    "source": "google_places",
+    "keyword": "col",
+    "tags": [
+      "passo",
+      "montagna",
+      "curve",
+      "panorama",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "rating": 4.7,
+    "userRatingCount": 81,
+    "googleMapsUri": "https://maps.google.com/?cid=18290888165410196336&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "riderScore": 55
+  },
+  {
+    "id": "spot-col-des-glieres-fr-alps",
+    "sourceId": "ChIJQTbywaL0i0cRC5kGcWOK5vo",
+    "name": "Col des Glières",
+    "lat": 45.965862,
+    "lng": 6.332944899999999,
+    "address": "Col des Glières, 74570 Glières-Val-de-Borne, France",
+    "country": "FR",
+    "region": "FR-Alps",
+    "type": "mountain_pass",
+    "source": "google_places",
+    "keyword": "col",
+    "tags": [
+      "passo",
+      "montagna",
+      "curve",
+      "panorama",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "rating": 4.9,
+    "userRatingCount": 41,
+    "googleMapsUri": "https://maps.google.com/?cid=18079289913828088075&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "riderScore": 55
+  },
+  {
+    "id": "spot-col-des-planches-ch",
+    "sourceId": "ChIJSYy1jRvJjkcReJf7cjjJSFU",
+    "name": "Col des Planches",
+    "lat": 46.097,
+    "lng": 7.124289999999999,
+    "address": "Col des Planches, 1927 Val de Bagnes, Switzerland",
+    "country": "CH",
+    "region": "CH",
+    "type": "mountain_pass",
+    "source": "google_places",
+    "keyword": "col",
+    "tags": [
+      "passo",
+      "montagna",
+      "curve",
+      "panorama",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "rating": 4.6,
+    "userRatingCount": 50,
+    "googleMapsUri": "https://maps.google.com/?cid=6145382935831484280&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "riderScore": 55
+  },
+  {
+    "id": "spot-col-des-pres-fr-alps",
+    "sourceId": "ChIJPZHf4Ku6i0cRkjOEnCBcGTU",
+    "name": "Col des Prés",
+    "lat": 45.595282999999995,
+    "lng": 6.060426,
+    "address": "Col des Prés, 73230 Thoiry, France",
+    "country": "FR",
+    "region": "FR-Alps",
+    "type": "mountain_pass",
+    "source": "google_places",
+    "keyword": "mountain pass",
+    "tags": [
+      "passo",
+      "montagna",
+      "curve",
+      "panorama",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "rating": 4.5,
+    "userRatingCount": 32,
+    "googleMapsUri": "https://maps.google.com/?cid=3826190653562565522&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "riderScore": 55
+  },
+  {
+    "id": "spot-col-du-corbier-fr-alps",
+    "sourceId": "ChIJRcZyPygZjEcRyuXZk_mAJ5c",
+    "name": "Col du Corbier",
+    "lat": 46.28378,
+    "lng": 6.644702,
+    "address": "Col du Corbier, 74430 Biot, France",
+    "country": "FR",
+    "region": "FR-Alps",
+    "type": "mountain_pass",
+    "source": "google_places",
+    "keyword": "col",
+    "tags": [
+      "passo",
+      "montagna",
+      "curve",
+      "panorama",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "rating": 4.4,
+    "userRatingCount": 132,
+    "googleMapsUri": "https://maps.google.com/?cid=10891816033234576842&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "riderScore": 55
+  },
+  {
+    "id": "spot-col-ferret-fr-alps",
+    "sourceId": "ChIJ_3zls402iUcRe4p_uzTX3aI",
+    "name": "Col Ferret",
+    "lat": 45.898399999999995,
+    "lng": 7.0683,
+    "address": "Col Ferret, 11013 Courmayeur, Aosta Valley, Italy",
+    "country": "IT",
+    "region": "FR-Alps",
+    "type": "mountain_pass",
+    "source": "google_places",
+    "keyword": "passo",
+    "tags": [
+      "passo",
+      "montagna",
+      "curve",
+      "panorama",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "rating": 4.7,
+    "userRatingCount": 27,
+    "googleMapsUri": "https://maps.google.com/?cid=11735772825481349755&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "riderScore": 55
+  },
+  {
+    "id": "spot-col-nudo-it-alpi-ovest",
+    "sourceId": "ChIJM2nOWv2jeUcRdDWx00Xvec0",
+    "name": "Col Nudo",
+    "lat": 46.2280556,
+    "lng": 12.4016667,
+    "address": "Col Nudo, 32010 Alpago, Province of Belluno, Italy",
+    "country": "IT",
+    "region": "IT-Alpi-Ovest",
+    "type": "mountain_pass",
+    "source": "google_places",
+    "keyword": "col",
+    "tags": [
+      "passo",
+      "montagna",
+      "curve",
+      "panorama",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "rating": 4.7,
+    "userRatingCount": 29,
+    "googleMapsUri": "https://maps.google.com/?cid=14806128333140604276&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+    "rawTypes": [
+      "mountain_peak",
+      "natural_feature",
+      "establishment"
+    ],
+    "riderScore": 55
+  },
+  {
+    "id": "spot-col-quaterna-it-alpi-est",
+    "sourceId": "ChIJH8lQi5jQeUcRWF-GWQpawSU",
+    "name": "Col Quaternà",
+    "lat": 46.6673741,
+    "lng": 12.4725723,
+    "address": "Col Quaternà, 32040 Comelico Superiore BL, Italy",
+    "country": "IT",
+    "region": "IT-Alpi-Est",
+    "type": "mountain_pass",
+    "source": "google_places",
+    "keyword": "col de montagne",
+    "tags": [
+      "passo",
+      "montagna",
+      "curve",
+      "panorama",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "rating": 4.7,
+    "userRatingCount": 44,
+    "googleMapsUri": "https://maps.google.com/?cid=2720554650406641496&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+    "rawTypes": [
+      "mountain_peak",
+      "natural_feature",
+      "establishment"
+    ],
+    "riderScore": 55
+  },
+  {
+    "id": "spot-jochstock-ch",
+    "sourceId": "ChIJX1gBpb1hhUcRAeVWRniJCNE",
+    "name": "Jochstock",
+    "lat": 46.7715202,
+    "lng": 8.3952665,
+    "address": "Jochstock, 6390 Engelberg, Switzerland",
+    "country": "CH",
+    "region": "CH",
+    "type": "mountain_pass",
+    "source": "google_places",
+    "keyword": "joch",
+    "tags": [
+      "passo",
+      "montagna",
+      "curve",
+      "panorama",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "rating": 4.5,
+    "userRatingCount": 22,
+    "googleMapsUri": "https://maps.google.com/?cid=15062440103409804545&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+    "rawTypes": [
+      "mountain_peak",
+      "natural_feature",
+      "establishment"
+    ],
+    "riderScore": 55
+  },
+  {
+    "id": "spot-jungfraujoch-ch",
+    "sourceId": "ChIJISNLgyeej0cRkSxye45YaJw",
+    "name": "Jungfraujoch",
+    "lat": 46.547467999999995,
+    "lng": 7.982085,
+    "address": "3801 Fieschertal, Switzerland",
+    "country": "CH",
+    "region": "CH",
+    "type": "mountain_pass",
+    "source": "google_places",
+    "keyword": "joch",
+    "tags": [
+      "passo",
+      "montagna",
+      "curve",
+      "panorama",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "rating": 4.5,
+    "userRatingCount": 330,
+    "googleMapsUri": "https://maps.google.com/?cid=11270355436474346641&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+    "rawTypes": [
+      "train_station",
+      "transit_station",
+      "transportation_service",
+      "point_of_interest",
+      "establishment"
+    ],
+    "riderScore": 55
+  },
+  {
+    "id": "spot-albula-pass-it-alpi-est",
+    "sourceId": "ChIJW8TeN5tig0cRVBOJOCavPno",
+    "name": "Albula Pass",
+    "lat": 46.5843,
+    "lng": 9.85289,
+    "address": "Albula Pass, 7522 La Punt Chamues-ch, Switzerland",
+    "country": "IT",
+    "region": "IT-Alpi-Est",
+    "type": "mountain_pass",
+    "source": "google_places",
+    "keyword": "mountain pass",
+    "tags": [
+      "passo",
+      "montagna",
+      "curve",
+      "panorama",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "rating": 4.8,
+    "userRatingCount": 318,
+    "googleMapsUri": "https://maps.google.com/?cid=8808670499875394388&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "riderScore": 50
+  },
+  {
+    "id": "spot-balmberg-pass-ch",
+    "sourceId": "ChIJDUlhwOXZkUcRHEw83bClEys",
+    "name": "Balmberg Pass",
+    "lat": 47.266099999999994,
+    "lng": 7.539460000000001,
+    "address": "Balmberg Pass, 4524 Balm bei Günsberg, Switzerland",
+    "country": "CH",
+    "region": "CH",
+    "type": "mountain_pass",
+    "source": "google_places",
+    "keyword": "mountain pass",
+    "tags": [
+      "passo",
+      "montagna",
+      "curve",
+      "panorama",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "rating": 4.5,
+    "userRatingCount": 123,
+    "googleMapsUri": "https://maps.google.com/?cid=3104006747232947228&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "riderScore": 50
+  },
+  {
+    "id": "spot-brenner-pass-de-south",
+    "sourceId": "ChIJkcVm_TJXnUcR2DRkieoxHy8",
+    "name": "Brenner Pass",
+    "lat": 47.0017816,
+    "lng": 11.5060678,
+    "address": "Brenner Pass, 39041 Brenner, Autonomous Province of Bolzano – South Tyrol, Italy",
+    "country": "IT",
+    "region": "DE-South",
+    "type": "mountain_pass",
+    "source": "google_places",
+    "keyword": "mountain pass",
+    "tags": [
+      "passo",
+      "montagna",
+      "curve",
+      "panorama",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "rating": 4.3,
+    "userRatingCount": 1985,
+    "googleMapsUri": "https://maps.google.com/?cid=3395487527457797336&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "riderScore": 50
+  },
+  {
+    "id": "spot-brunig-pass-ch",
+    "sourceId": "ChIJ0yp7D5GRj0cRkq996nC0Chc",
+    "name": "Brünig Pass",
+    "lat": 46.756499999999996,
+    "lng": 8.13679,
+    "address": "Brünig Pass, 3860 Meiringen, Switzerland",
+    "country": "CH",
+    "region": "CH",
+    "type": "mountain_pass",
+    "source": "google_places",
+    "keyword": "mountain pass",
+    "tags": [
+      "passo",
+      "montagna",
+      "curve",
+      "panorama",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "rating": 4.5,
+    "userRatingCount": 278,
+    "googleMapsUri": "https://maps.google.com/?cid=1660337809702891410&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "riderScore": 50
+  },
+  {
+    "id": "spot-campolongo-pass-de-south",
+    "sourceId": "ChIJmRtvFplAeEcRcE5xLogJBx0",
+    "name": "Campolongo Pass",
+    "lat": 46.519605,
+    "lng": 11.8737906,
+    "address": "Campolongo Pass, 32020 Livinallongo del Col di Lana, Province of Belluno, Italy",
+    "country": "IT",
+    "region": "DE-South",
+    "type": "mountain_pass",
+    "source": "google_places",
+    "keyword": "passo alpino",
+    "tags": [
+      "passo",
+      "montagna",
+      "curve",
+      "panorama",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "rating": 4.6,
+    "userRatingCount": 266,
+    "googleMapsUri": "https://maps.google.com/?cid=2091651032436264560&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "riderScore": 50
+  },
+  {
+    "id": "spot-coe-pass-at",
+    "sourceId": "ChIJkXGu6semeEcR9sByBkPIEIU",
+    "name": "Coe Pass",
+    "lat": 45.8766223,
+    "lng": 11.2154612,
+    "address": "SP143, 38064 Folgaria TN, Italy",
+    "country": "IT",
+    "region": "AT",
+    "type": "mountain_pass",
+    "source": "google_places",
+    "keyword": "passo montano",
+    "tags": [
+      "passo",
+      "montagna",
+      "curve",
+      "panorama",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "rating": 4.5,
+    "userRatingCount": 3335,
+    "googleMapsUri": "https://maps.google.com/?cid=9588383796868333814&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+    "rawTypes": [
+      "hiking_area",
+      "sports_activity_location",
+      "point_of_interest",
+      "establishment"
+    ],
+    "riderScore": 50
+  },
+  {
+    "id": "spot-col-bastia-it-alpi-est",
+    "sourceId": "ChIJXQYbALLbeEcRcWJzbo9CfW4",
+    "name": "Col Bastia",
+    "lat": 45.7974551,
+    "lng": 11.7674769,
+    "address": "Col Bastia, 36060 Romano d'Ezzelino VI, Italy",
+    "country": "IT",
+    "region": "IT-Alpi-Est",
+    "type": "mountain_pass",
+    "source": "google_places",
+    "keyword": "col de montagne",
+    "tags": [
+      "passo",
+      "montagna",
+      "curve",
+      "panorama",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "rating": 4.8,
+    "userRatingCount": 11,
+    "googleMapsUri": "https://maps.google.com/?cid=7961592900061717105&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+    "rawTypes": [
+      "mountain_peak",
+      "natural_feature",
+      "establishment"
+    ],
+    "riderScore": 50
+  },
+  {
+    "id": "spot-col-collon-it-alpi-ovest",
+    "sourceId": "ChIJsYN3cDPTiEcRCyPbc3UFOj4",
+    "name": "Col Collon",
+    "lat": 45.9604,
+    "lng": 7.51346,
+    "address": "Col Collon, 11010 Evolène, Switzerland",
+    "country": "IT",
+    "region": "IT-Alpi-Ovest",
+    "type": "mountain_pass",
+    "source": "google_places",
+    "keyword": "col de montagne",
+    "tags": [
+      "passo",
+      "montagna",
+      "curve",
+      "panorama",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "rating": 4.8,
+    "userRatingCount": 6,
+    "googleMapsUri": "https://maps.google.com/?cid=4483902381013803787&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "riderScore": 50
+  },
+  {
+    "id": "spot-col-de-cou-it-alpi-ovest",
+    "sourceId": "ChIJXUVO5tAgj0cRQCgf65zxYsw",
+    "name": "Col de Cou",
+    "lat": 46.201499999999996,
+    "lng": 7.49441,
+    "address": "Col de Cou, 1968 Mont-Noble, Switzerland",
+    "country": "IT",
+    "region": "IT-Alpi-Ovest",
+    "type": "mountain_pass",
+    "source": "google_places",
+    "keyword": "col de montagne",
+    "tags": [
+      "passo",
+      "montagna",
+      "curve",
+      "panorama",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "rating": 4.8,
+    "userRatingCount": 4,
+    "googleMapsUri": "https://maps.google.com/?cid=14727599387716823104&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "riderScore": 50
+  },
+  {
+    "id": "spot-col-de-cou-fr-alps",
+    "sourceId": "ChIJURuHCrCojkcRCy6UCsqlNcs",
+    "name": "Col de Cou",
+    "lat": 46.1502,
+    "lng": 6.79282,
+    "address": "Col de Cou, Samoëns, France",
+    "country": "FR",
+    "region": "FR-Alps",
+    "type": "mountain_pass",
+    "source": "google_places",
+    "keyword": "col",
+    "tags": [
+      "passo",
+      "montagna",
+      "curve",
+      "panorama",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "rating": 5,
+    "userRatingCount": 19,
+    "googleMapsUri": "https://maps.google.com/?cid=14642792050644495883&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "riderScore": 50
+  },
+  {
+    "id": "spot-col-de-la-chaux-it-alpi-ovest",
+    "sourceId": "ChIJIeq_kRXRjkcR83dcjJnOUCE",
+    "name": "Col de la Chaux",
+    "lat": 46.0747,
+    "lng": 7.30758,
+    "address": "Col de la Chaux, 1948 Val de Bagnes, Switzerland",
+    "country": "IT",
+    "region": "IT-Alpi-Ovest",
+    "type": "mountain_pass",
+    "source": "google_places",
+    "keyword": "col de montagne",
+    "tags": [
+      "passo",
+      "montagna",
+      "curve",
+      "panorama",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "rating": 5,
+    "userRatingCount": 4,
+    "googleMapsUri": "https://maps.google.com/?cid=2400645760268662771&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "riderScore": 50
+  },
+  {
+    "id": "spot-col-de-la-cicle-it-alpi-centro",
+    "sourceId": "ChIJ9WUE4oxeiUcRUiTgEyLPP-Y",
+    "name": "Col de la Cicle",
+    "lat": 45.753507899999995,
+    "lng": 6.689502,
+    "address": "Col de la Cicle, 73270 Les Contamines-Montjoie, France",
+    "country": "IT",
+    "region": "IT-Alpi-Centro",
+    "type": "mountain_pass",
+    "source": "google_places",
+    "keyword": "col de montagne",
+    "tags": [
+      "passo",
+      "montagna",
+      "curve",
+      "panorama",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "rating": 4.7,
+    "userRatingCount": 9,
+    "googleMapsUri": "https://maps.google.com/?cid=16591207297525490770&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "riderScore": 50
+  },
+  {
+    "id": "spot-col-de-la-colombiere-it-alpi-centro",
+    "sourceId": "ChIJfTumuADxzBIRjuVTYp3Na1o",
+    "name": "Col de la Colombière",
+    "lat": 44.304744899999996,
+    "lng": 6.87359,
+    "address": "Col de la Colombière, 06660 Saint-Dalmas-le-Selvage, France",
+    "country": "IT",
+    "region": "IT-Alpi-Centro",
+    "type": "mountain_pass",
+    "source": "google_places",
+    "keyword": "col de montagne",
+    "tags": [
+      "passo",
+      "montagna",
+      "curve",
+      "panorama",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "rating": 4.9,
+    "userRatingCount": 7,
+    "googleMapsUri": "https://maps.google.com/?cid=6515527361764779406&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "riderScore": 50
+  },
+  {
+    "id": "spot-col-des-mines-it-alpi-ovest",
+    "sourceId": "ChIJ3w1fmSPQjkcRwOlzgUutjDM",
+    "name": "Col des Mines",
+    "lat": 46.1092,
+    "lng": 7.25685,
+    "address": "Col des Mines, 1918 Riddes, Switzerland",
+    "country": "IT",
+    "region": "IT-Alpi-Ovest",
+    "type": "mountain_pass",
+    "source": "google_places",
+    "keyword": "col de montagne",
+    "tags": [
+      "passo",
+      "montagna",
+      "curve",
+      "panorama",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "rating": 5,
+    "userRatingCount": 6,
+    "googleMapsUri": "https://maps.google.com/?cid=3714534332479826368&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "riderScore": 50
+  },
+  {
+    "id": "spot-col-di-pera-it-alpi-est",
+    "sourceId": "ChIJ-T9olxoFeUcRXkYdbpny_3c",
+    "name": "Col di Pera",
+    "lat": 46.0475,
+    "lng": 12.1716667,
+    "address": "Col di Pera, 32028 Borgo Valbelluna, Province of Belluno, Italy",
+    "country": "IT",
+    "region": "IT-Alpi-Est",
+    "type": "mountain_pass",
+    "source": "google_places",
+    "keyword": "col de montagne",
+    "tags": [
+      "passo",
+      "montagna",
+      "curve",
+      "panorama",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "rating": 4.9,
+    "userRatingCount": 8,
+    "googleMapsUri": "https://maps.google.com/?cid=8646896550365972062&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+    "rawTypes": [
+      "mountain_peak",
+      "natural_feature",
+      "establishment"
+    ],
+    "riderScore": 50
+  },
+  {
+    "id": "spot-col-du-geant-it-alpi-ovest",
+    "sourceId": "ChIJFzfOi59IiUcRqS3wRXOFS28",
+    "name": "Col du Géant",
+    "lat": 45.847552,
+    "lng": 6.934507,
+    "address": "Col du Géant, 74400 Chamonix, France",
+    "country": "IT",
+    "region": "IT-Alpi-Ovest",
+    "type": "mountain_pass",
+    "source": "google_places",
+    "keyword": "mountain pass",
+    "tags": [
+      "passo",
+      "montagna",
+      "curve",
+      "panorama",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "rating": 4.7,
+    "userRatingCount": 3,
+    "googleMapsUri": "https://maps.google.com/?cid=8019650291604401577&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "riderScore": 50
+  },
+  {
+    "id": "spot-col-du-jorat-it-alpi-ovest",
+    "sourceId": "ChIJM42uHwC6jkcRJ5rrk6wTkWw",
+    "name": "Col du Jorat",
+    "lat": 46.1503,
+    "lng": 6.9855,
+    "address": "Col du Jorat, 1902 Evionnaz, Switzerland",
+    "country": "IT",
+    "region": "IT-Alpi-Ovest",
+    "type": "mountain_pass",
+    "source": "google_places",
+    "keyword": "col de montagne",
+    "tags": [
+      "passo",
+      "montagna",
+      "curve",
+      "panorama",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "rating": 4.7,
+    "userRatingCount": 14,
+    "googleMapsUri": "https://maps.google.com/?cid=7823055659656256039&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "riderScore": 50
+  },
+  {
+    "id": "spot-col-du-mont-lachat-fr-alps",
+    "sourceId": "ChIJl03b125QiUcRXQxsLiB9vqw",
+    "name": "Col du Mont Lachat",
+    "lat": 45.868244,
+    "lng": 6.796056,
+    "address": "Col du Mont Lachat, 74170 Saint-Gervais-les-Bains, France",
+    "country": "FR",
+    "region": "FR-Alps",
+    "type": "mountain_pass",
+    "source": "google_places",
+    "keyword": "col",
+    "tags": [
+      "passo",
+      "montagna",
+      "curve",
+      "panorama",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "rating": 4.9,
+    "userRatingCount": 18,
+    "googleMapsUri": "https://maps.google.com/?cid=12447523997269888093&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "riderScore": 50
+  },
+  {
+    "id": "spot-col-du-mont-noir-at",
+    "sourceId": "ChIJ91K9so2VikcRJn1Y3P29jA4",
+    "name": "Col du Mont-Noir",
+    "lat": 45.116361,
+    "lng": 5.448208999999999,
+    "address": "Col du Mont-Noir, 38680 Rencurel, France",
+    "country": "AT",
+    "region": "AT",
+    "type": "mountain_pass",
+    "source": "google_places",
+    "keyword": "col de montagne",
+    "tags": [
+      "passo",
+      "montagna",
+      "curve",
+      "panorama",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "rating": 4.5,
+    "userRatingCount": 12,
+    "googleMapsUri": "https://maps.google.com/?cid=1048421711291645222&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "riderScore": 50
+  },
+  {
+    "id": "spot-col-moscher-it-alpi-est",
+    "sourceId": "ChIJC2ChS6MdeUcRDQYlMPZuiZo",
+    "name": "Col Moscher",
+    "lat": 45.98861110000001,
+    "lng": 12.014444399999999,
+    "address": "Col Moscher, 32020 Borgo Valbelluna, Province of Belluno, Italy",
+    "country": "IT",
+    "region": "IT-Alpi-Est",
+    "type": "mountain_pass",
+    "source": "google_places",
+    "keyword": "col de montagne",
+    "tags": [
+      "passo",
+      "montagna",
+      "curve",
+      "panorama",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "rating": 5,
+    "userRatingCount": 5,
+    "googleMapsUri": "https://maps.google.com/?cid=11135553557299004941&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+    "rawTypes": [
+      "mountain_peak",
+      "natural_feature",
+      "establishment"
+    ],
+    "riderScore": 50
+  },
+  {
+    "id": "spot-col-vidal-it-alpi-est",
+    "sourceId": "ChIJSwky_BbGeUcRTg350uSVkQw",
+    "name": "Col Vidal",
+    "lat": 46.5191667,
+    "lng": 12.4325,
+    "address": "Col Vidal, 32040 Lozzo di Cadore, Province of Belluno, Italy",
+    "country": "IT",
+    "region": "IT-Alpi-Est",
+    "type": "mountain_pass",
+    "source": "google_places",
+    "keyword": "col de montagne",
+    "tags": [
+      "passo",
+      "montagna",
+      "curve",
+      "panorama",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "rating": 4.8,
+    "userRatingCount": 4,
+    "googleMapsUri": "https://maps.google.com/?cid=905669810102799694&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+    "rawTypes": [
+      "mountain_peak",
+      "natural_feature",
+      "establishment"
+    ],
+    "riderScore": 50
+  },
+  {
+    "id": "spot-foscagno-pass-it-alpi-centro",
+    "sourceId": "ChIJDah3ii0Ng0cRYFnAPgN4Bh0",
+    "name": "Foscagno Pass",
+    "lat": 46.495,
+    "lng": 10.209,
+    "address": "Foscagno Pass, 23041 Livigno, Province of Sondrio, Italy",
+    "country": "IT",
+    "region": "IT-Alpi-Centro",
+    "type": "mountain_pass",
+    "source": "google_places",
+    "keyword": "passo alpino",
+    "tags": [
+      "passo",
+      "montagna",
+      "curve",
+      "panorama",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "rating": 4.6,
+    "userRatingCount": 197,
+    "googleMapsUri": "https://maps.google.com/?cid=2091491032293202272&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "riderScore": 50
+  },
+  {
+    "id": "spot-fuorn-pass-fr-alps",
+    "sourceId": "ChIJqapkPBsVg0cRVW8dHb61YEk",
+    "name": "Fuorn Pass",
+    "lat": 46.64,
+    "lng": 10.2927778,
+    "address": "Fuorn Pass, 7532 Val Müstair, Switzerland",
+    "country": "CH",
+    "region": "FR-Alps",
+    "type": "mountain_pass",
+    "source": "google_places",
+    "keyword": "passo",
+    "tags": [
+      "passo",
+      "montagna",
+      "curve",
+      "panorama",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "rating": 4.7,
+    "userRatingCount": 327,
+    "googleMapsUri": "https://maps.google.com/?cid=5287425790669844309&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "riderScore": 50
+  },
+  {
+    "id": "spot-gampen-pass-it-alpi-est",
+    "sourceId": "ChIJeT116qaWgkcR_1s9yOHdc58",
+    "name": "Gampen Pass",
+    "lat": 46.530556,
+    "lng": 11.112222,
+    "address": "Gampen Pass, 39010 Unsere Liebe Frau im Walde-St. Felix, Autonomous Province of Bolzano – South Tyrol, Italy",
+    "country": "IT",
+    "region": "IT-Alpi-Est",
+    "type": "mountain_pass",
+    "source": "google_places",
+    "keyword": "mountain pass",
+    "tags": [
+      "passo",
+      "montagna",
+      "curve",
+      "panorama",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "rating": 4.5,
+    "userRatingCount": 300,
+    "googleMapsUri": "https://maps.google.com/?cid=11489771036149111807&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "riderScore": 50
+  },
+  {
+    "id": "spot-gerstinger-joch-at",
+    "sourceId": "ChIJ9wl5Rhu0d0cRjVh5vafYsYE",
+    "name": "Gerstinger Joch",
+    "lat": 47.349999999999994,
+    "lng": 12.25,
+    "address": "Gerstinger Joch, 6363, Austria",
+    "country": "AT",
+    "region": "AT",
+    "type": "mountain_pass",
+    "source": "google_places",
+    "keyword": "joch",
+    "tags": [
+      "passo",
+      "montagna",
+      "curve",
+      "panorama",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "rating": 4.7,
+    "userRatingCount": 3,
+    "googleMapsUri": "https://maps.google.com/?cid=9345488916720474253&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+    "rawTypes": [
+      "mountain_peak",
+      "natural_feature",
+      "establishment"
+    ],
+    "riderScore": 50
+  },
+  {
+    "id": "spot-jaufen-pass-at",
+    "sourceId": "ChIJ5UcQDnKygkcRbR4ej98k7aI",
+    "name": "Jaufen Pass",
+    "lat": 46.8333333,
+    "lng": 11.316666699999999,
+    "address": "Jaufen Pass, 39015 St. Leonhard in Passeier, Autonomous Province of Bolzano – South Tyrol, Italy",
+    "country": "IT",
+    "region": "AT",
+    "type": "mountain_pass",
+    "source": "google_places",
+    "keyword": "passo montano",
+    "tags": [
+      "passo",
+      "montagna",
+      "curve",
+      "panorama",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "rating": 4.7,
+    "userRatingCount": 372,
+    "googleMapsUri": "https://maps.google.com/?cid=11740080346222173805&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "riderScore": 50
+  },
+  {
+    "id": "spot-jaun-pass-ch",
+    "sourceId": "ChIJP4JvpHdYjkcRQuQyzikt5AA",
+    "name": "Jaun Pass",
+    "lat": 46.592002199999996,
+    "lng": 7.3397882,
+    "address": "Jaun Pass, 3766 Boltigen, Switzerland",
+    "country": "CH",
+    "region": "CH",
+    "type": "mountain_pass",
+    "source": "google_places",
+    "keyword": "mountain pass",
+    "tags": [
+      "passo",
+      "montagna",
+      "curve",
+      "panorama",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "rating": 4.7,
+    "userRatingCount": 327,
+    "googleMapsUri": "https://maps.google.com/?cid=64225952266380354&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "riderScore": 50
+  },
+  {
+    "id": "spot-joch-it-alpi-ovest",
+    "sourceId": "ChIJlZIoni-_hEcR5D0jn48oyRM",
+    "name": "Joch",
+    "lat": 46.805,
+    "lng": 9.570179999999999,
+    "address": "Joch, 7076 Churwalden, Switzerland",
+    "country": "IT",
+    "region": "IT-Alpi-Ovest",
+    "type": "mountain_pass",
+    "source": "google_places",
+    "keyword": "joch",
+    "tags": [
+      "passo",
+      "montagna",
+      "curve",
+      "panorama",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "rating": 4.9,
+    "userRatingCount": 14,
+    "googleMapsUri": "https://maps.google.com/?cid=1425715354354793956&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "riderScore": 50
+  },
+  {
+    "id": "spot-julier-pass-it-alpi-est",
+    "sourceId": "ChIJL9tM1UmBhEcRFshmEScPank",
+    "name": "Julier Pass",
+    "lat": 46.470163899999996,
+    "lng": 9.7177092,
+    "address": "Julier Pass, 7457 Surses, Switzerland",
+    "country": "IT",
+    "region": "IT-Alpi-Est",
+    "type": "mountain_pass",
+    "source": "google_places",
+    "keyword": "passo alpino",
+    "tags": [
+      "passo",
+      "montagna",
+      "curve",
+      "panorama",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "rating": 4.8,
+    "userRatingCount": 499,
+    "googleMapsUri": "https://maps.google.com/?cid=8748821886590699542&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "riderScore": 50
+  },
+  {
+    "id": "spot-klausen-pass-ch",
+    "sourceId": "ChIJjwiDlbM-hUcR8SqHD9cCZMk",
+    "name": "Klausen Pass",
+    "lat": 46.8681722,
+    "lng": 8.855581299999999,
+    "address": "Klausen Pass, 8751 Spiringen, Switzerland",
+    "country": "CH",
+    "region": "CH",
+    "type": "mountain_pass",
+    "source": "google_places",
+    "keyword": "pass",
+    "tags": [
+      "passo",
+      "montagna",
+      "curve",
+      "panorama",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "rating": 4.8,
+    "userRatingCount": 470,
+    "googleMapsUri": "https://maps.google.com/?cid=14511727021996321521&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "riderScore": 50
+  },
+  {
+    "id": "spot-livigno-pass-it-alpi-centro",
+    "sourceId": "ChIJW6MOL8J2g0cRr45KgA2g2sc",
+    "name": "Livigno Pass",
+    "lat": 46.4425,
+    "lng": 10.057,
+    "address": "Livigno Pass, 23041 Livigno, Province of Sondrio, Italy",
+    "country": "IT",
+    "region": "IT-Alpi-Centro",
+    "type": "mountain_pass",
+    "source": "google_places",
+    "keyword": "passo alpino",
+    "tags": [
+      "passo",
+      "montagna",
+      "curve",
+      "panorama",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "rating": 4.6,
+    "userRatingCount": 206,
+    "googleMapsUri": "https://maps.google.com/?cid=14400998738317971119&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "riderScore": 50
+  },
+  {
+    "id": "spot-lukmanier-pass-it-alpi-est",
+    "sourceId": "ChIJK7vS_bQRhUcR2f24j_qPQUE",
+    "name": "Lukmanier Pass",
+    "lat": 46.5622633,
+    "lng": 8.8014082,
+    "address": "Lukmanier Pass, Switzerland",
+    "country": "IT",
+    "region": "IT-Alpi-Est",
+    "type": "mountain_pass",
+    "source": "google_places",
+    "keyword": "passo alpino",
+    "tags": [
+      "passo",
+      "montagna",
+      "curve",
+      "panorama",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "rating": 4.8,
+    "userRatingCount": 461,
+    "googleMapsUri": "https://maps.google.com/?cid=4702197792267369945&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "riderScore": 50
+  },
+  {
+    "id": "spot-nufenen-pass-it-alpi-ovest",
+    "sourceId": "ChIJsbfrcMyDhUcR-xrHIWE1dHs",
+    "name": "Nufenen Pass",
+    "lat": 46.4758333,
+    "lng": 8.3880556,
+    "address": "Nufenen Pass, 6781 Bedretto, Switzerland",
+    "country": "IT",
+    "region": "IT-Alpi-Ovest",
+    "type": "mountain_pass",
+    "source": "google_places",
+    "keyword": "passo alpino",
+    "tags": [
+      "passo",
+      "montagna",
+      "curve",
+      "panorama",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "rating": 4.8,
+    "userRatingCount": 364,
+    "googleMapsUri": "https://maps.google.com/?cid=8895793855258368763&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "riderScore": 50
+  },
+  {
+    "id": "spot-passo-del-tonale-it-alpi-centro",
+    "sourceId": "ChIJyZ7HCQtUgkcRflN6ZjQZKzw",
+    "name": "Passo del Tonale",
+    "lat": 46.260815099999995,
+    "lng": 10.587877599999999,
+    "address": "38029 Passo del Tonale TN, Italy",
+    "country": "IT",
+    "region": "IT-Alpi-Centro",
+    "type": "mountain_pass",
+    "source": "google_places",
+    "keyword": "passo alpino",
+    "tags": [
+      "passo",
+      "montagna",
+      "curve",
+      "panorama",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "rating": null,
+    "userRatingCount": null,
+    "googleMapsUri": "https://maps.google.com/?cid=4335586779122520958&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+    "rawTypes": [
+      "locality",
+      "political"
+    ],
+    "riderScore": 50
+  },
+  {
+    "id": "spot-passo-polentin-at",
+    "sourceId": "ChIJc_nvOAAdekcRSvwCElZ2Ods",
+    "name": "Passo polentin",
+    "lat": 46.5793172,
+    "lng": 13.144665,
+    "address": "Strada dei Malgari, 33027 Paularo UD, Italy",
+    "country": "IT",
+    "region": "AT",
+    "type": "mountain_pass",
+    "source": "google_places",
+    "keyword": "passo",
+    "tags": [
+      "passo",
+      "montagna",
+      "curve",
+      "panorama",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "rating": 4.4,
+    "userRatingCount": 17,
+    "googleMapsUri": "https://maps.google.com/?cid=15796787280020175946&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+    "rawTypes": [
+      "tourist_attraction",
+      "point_of_interest",
+      "establishment"
+    ],
+    "riderScore": 50
+  },
+  {
+    "id": "spot-passo-s-antonio-1489-m-s-l-m-at",
+    "sourceId": "ChIJZVX3RwDFeUcRYPqYdtP6n44",
+    "name": "Passo S. Antonio 1489 m s.l.m.",
+    "lat": 46.5719047,
+    "lng": 12.4824784,
+    "address": "Passo di Sant'Antonio, 32041 Auronzo di Cadore BL, Italy",
+    "country": "IT",
+    "region": "AT",
+    "type": "mountain_pass",
+    "source": "google_places",
+    "keyword": "passo",
+    "tags": [
+      "passo",
+      "montagna",
+      "curve",
+      "panorama",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "rating": 4,
+    "userRatingCount": 1,
+    "googleMapsUri": "https://maps.google.com/?cid=10277208660817541728&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+    "rawTypes": [
+      "historical_landmark",
+      "historical_place",
+      "point_of_interest",
+      "establishment"
+    ],
+    "riderScore": 50
+  },
+  {
+    "id": "spot-passwang-pass-ch",
+    "sourceId": "ChIJN5ihGBvOkUcRAAn_smNLWNM",
+    "name": "Passwang Pass",
+    "lat": 47.3576,
+    "lng": 7.65615,
+    "address": "Passwang Pass, 4719 Mümliswil-Ramiswil, Switzerland",
+    "country": "CH",
+    "region": "CH",
+    "type": "mountain_pass",
+    "source": "google_places",
+    "keyword": "mountain pass",
+    "tags": [
+      "passo",
+      "montagna",
+      "curve",
+      "panorama",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "rating": 4.6,
+    "userRatingCount": 140,
+    "googleMapsUri": "https://maps.google.com/?cid=15229005031530236160&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "riderScore": 50
+  },
+  {
+    "id": "spot-plocken-pass-it-alpi-est",
+    "sourceId": "ChIJaddkJdb7eUcRqBa10bZuQ28",
+    "name": "Plöcken Pass",
+    "lat": 46.6,
+    "lng": 12.9666667,
+    "address": "Plöcken Pass, 33026 Paluzza, Province of Udine, Italy",
+    "country": "IT",
+    "region": "IT-Alpi-Est",
+    "type": "mountain_pass",
+    "source": "google_places",
+    "keyword": "pass",
+    "tags": [
+      "passo",
+      "montagna",
+      "curve",
+      "panorama",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "rating": 4.6,
+    "userRatingCount": 268,
+    "googleMapsUri": "https://maps.google.com/?cid=8017373493131024040&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "riderScore": 50
+  },
+  {
+    "id": "spot-schallenberg-pass-ch",
+    "sourceId": "ChIJU95zuXC3j0cRuWMWyjXh_Qw",
+    "name": "Schallenberg Pass",
+    "lat": 46.826142499999996,
+    "lng": 7.7967846,
+    "address": "Schallenberg Pass, 3537 Röthenbach im Emmental, Switzerland",
+    "country": "CH",
+    "region": "CH",
+    "type": "mountain_pass",
+    "source": "google_places",
+    "keyword": "mountain pass",
+    "tags": [
+      "passo",
+      "montagna",
+      "curve",
+      "panorama",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "rating": 4.7,
+    "userRatingCount": 194,
+    "googleMapsUri": "https://maps.google.com/?cid=936151918702912441&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "riderScore": 50
+  },
+  {
+    "id": "spot-sinsgauer-jochli-ch",
+    "sourceId": "ChIJT1dzMLZehUcRE2bMZ4NYwLI",
+    "name": "Sinsgäuer Jochli",
+    "lat": 46.894,
+    "lng": 8.47191,
+    "address": "Sinsgäuer Jochli, 6461 Isenthal, Switzerland",
+    "country": "CH",
+    "region": "CH",
+    "type": "mountain_pass",
+    "source": "google_places",
+    "keyword": "joch",
+    "tags": [
+      "passo",
+      "montagna",
+      "curve",
+      "panorama",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "rating": 5,
+    "userRatingCount": 1,
+    "googleMapsUri": "https://maps.google.com/?cid=12880392255685027347&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "riderScore": 50
+  },
+  {
+    "id": "spot-solk-pass-at",
+    "sourceId": "ChIJDao153QDcUcRvpp6yf0Kr08",
+    "name": "Sölk Pass",
+    "lat": 47.271389,
+    "lng": 14.079444,
+    "address": "Sölk Pass, 8844, Austria",
+    "country": "AT",
+    "region": "AT",
+    "type": "mountain_pass",
+    "source": "google_places",
+    "keyword": "pass",
+    "tags": [
+      "passo",
+      "montagna",
+      "curve",
+      "panorama",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "rating": 4.8,
+    "userRatingCount": 377,
+    "googleMapsUri": "https://maps.google.com/?cid=5741820135043930814&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "riderScore": 50
+  },
+  {
+    "id": "spot-stanser-joch-at",
+    "sourceId": "ChIJ94U80id8nUcRr1DManIfpBU",
+    "name": "Stanser Joch",
+    "lat": 47.4,
+    "lng": 11.7,
+    "address": "Stanser Joch, 6200, Austria",
+    "country": "AT",
+    "region": "AT",
+    "type": "mountain_pass",
+    "source": "google_places",
+    "keyword": "joch",
+    "tags": [
+      "passo",
+      "montagna",
+      "curve",
+      "panorama",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "rating": 5,
+    "userRatingCount": 1,
+    "googleMapsUri": "https://maps.google.com/?cid=1559405947255541935&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "riderScore": 50
+  },
+  {
+    "id": "spot-sunser-joch-de-south",
+    "sourceId": "ChIJW9stcapDm0cR8AHPxGXEutQ",
+    "name": "Sünser Joch",
+    "lat": 47.2975335,
+    "lng": 9.8466035,
+    "address": "Sünser Joch, 6884 Damüls, Austria",
+    "country": "AT",
+    "region": "DE-South",
+    "type": "mountain_pass",
+    "source": "google_places",
+    "keyword": "joch",
+    "tags": [
+      "passo",
+      "montagna",
+      "curve",
+      "panorama",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "rating": 4.6,
+    "userRatingCount": 8,
+    "googleMapsUri": "https://maps.google.com/?cid=15328780223081546224&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "riderScore": 50
+  },
+  {
+    "id": "spot-sustenjoch-ch",
+    "sourceId": "ChIJr8DXAGhkhUcRSd8dRi-7fmc",
+    "name": "Sustenjoch",
+    "lat": 46.7161,
+    "lng": 8.46543,
+    "address": "Sustenjoch, 6487 Göschenen, Switzerland",
+    "country": "CH",
+    "region": "CH",
+    "type": "mountain_pass",
+    "source": "google_places",
+    "keyword": "pass",
+    "tags": [
+      "passo",
+      "montagna",
+      "curve",
+      "panorama",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "rating": 5,
+    "userRatingCount": 1,
+    "googleMapsUri": "https://maps.google.com/?cid=7457603844686339913&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "riderScore": 50
+  },
+  {
+    "id": "spot-timmels-joch-at",
+    "sourceId": "ChIJKfA9eSjLgkcRupo5-AeT-zY",
+    "name": "Timmels Joch",
+    "lat": 46.900000000000006,
+    "lng": 11.1,
+    "address": "Timmels Joch, 39013 Moos in Passeier, Autonomous Province of Bolzano – South Tyrol, Italy",
+    "country": "IT",
+    "region": "AT",
+    "type": "mountain_pass",
+    "source": "google_places",
+    "keyword": "joch",
+    "tags": [
+      "passo",
+      "montagna",
+      "curve",
+      "panorama",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "rating": 4.8,
+    "userRatingCount": 4,
+    "googleMapsUri": "https://maps.google.com/?cid=3961921959641062074&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "riderScore": 50
+  },
+  {
+    "id": "spot-tuxer-joch-at",
+    "sourceId": "ChIJuR4b6_7hd0cRMKoa7ARwdo8",
+    "name": "Tuxer Joch",
+    "lat": 47.094944,
+    "lng": 11.643196099999999,
+    "address": "Tuxer Joch, 6294, Austria",
+    "country": "AT",
+    "region": "AT",
+    "type": "mountain_pass",
+    "source": "google_places",
+    "keyword": "joch",
+    "tags": [
+      "passo",
+      "montagna",
+      "curve",
+      "panorama",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "rating": 4.7,
+    "userRatingCount": 17,
+    "googleMapsUri": "https://maps.google.com/?cid=10337573161118902832&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "riderScore": 50
+  },
+  {
+    "id": "spot-valparola-pass-de-south",
+    "sourceId": "ChIJ_Xv9fkY4eEcRrMGsjgd2aFc",
+    "name": "Valparola Pass",
+    "lat": 46.5333,
+    "lng": 11.9833,
+    "address": "Valparola Pass, 32020 Livinallongo del Col di Lana, Province of Belluno, Italy",
+    "country": "IT",
+    "region": "DE-South",
+    "type": "mountain_pass",
+    "source": "google_places",
+    "keyword": "passo alpino",
+    "tags": [
+      "passo",
+      "montagna",
+      "curve",
+      "panorama",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "rating": 4.8,
+    "userRatingCount": 297,
+    "googleMapsUri": "https://maps.google.com/?cid=6298413853708173740&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "riderScore": 50
+  },
+  {
+    "id": "spot-vivione-pass-it-alpi-ovest",
+    "sourceId": "ChIJbSc_N7zHg0cRJwD9aTwmTEY",
+    "name": "Vivione Pass",
+    "lat": 46.0379,
+    "lng": 10.2029,
+    "address": "Vivione Pass, 24020 Schilpario, Province of Bergamo, Italy",
+    "country": "IT",
+    "region": "IT-Alpi-Ovest",
+    "type": "mountain_pass",
+    "source": "google_places",
+    "keyword": "passo alpino",
+    "tags": [
+      "passo",
+      "montagna",
+      "curve",
+      "panorama",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "rating": 4.7,
+    "userRatingCount": 336,
+    "googleMapsUri": "https://maps.google.com/?cid=5065465721803046951&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "riderScore": 50
+  },
+  {
+    "id": "spot-col-de-la-puina-it-alpi-centro",
+    "sourceId": "ChIJ8SWN3w1LeEcRmOKZBtDjP20",
+    "name": "Col de la Puina",
+    "lat": 46.443748899999996,
+    "lng": 12.1306044,
+    "address": "32040 Borca di Cadore, Province of Belluno, Italy",
+    "country": "IT",
+    "region": "IT-Alpi-Centro",
+    "type": "mountain_pass",
+    "source": "google_places",
+    "keyword": "col",
+    "tags": [
+      "passo",
+      "montagna",
+      "curve",
+      "panorama",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "rating": 4.7,
+    "userRatingCount": 42,
+    "googleMapsUri": "https://maps.google.com/?cid=7872261156270367384&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+    "rawTypes": [
+      "hiking_area",
+      "sports_activity_location",
+      "point_of_interest",
+      "establishment"
+    ],
+    "riderScore": 45
+  },
+  {
+    "id": "spot-col-des-gets-fr-alps",
+    "sourceId": "ChIJ4ZqnPiADjEcRbCz-EQZsCMU",
+    "name": "Col des Gets",
+    "lat": 46.15,
+    "lng": 6.6666666999999995,
+    "address": "Col des Gets, 74260 Les Gets, France",
+    "country": "FR",
+    "region": "FR-Alps",
+    "type": "mountain_pass",
+    "source": "google_places",
+    "keyword": "col",
+    "tags": [
+      "passo",
+      "montagna",
+      "curve",
+      "panorama",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "rating": 4,
+    "userRatingCount": 27,
+    "googleMapsUri": "https://maps.google.com/?cid=14197716598612962412&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "riderScore": 45
+  },
+  {
+    "id": "spot-dr-astrid-joch-at",
+    "sourceId": "ChIJU9SMKEPecUcR1M_ShuSLZKE",
+    "name": "Dr. Astrid Joch",
+    "lat": 47.3700942,
+    "lng": 15.091864000000001,
+    "address": "Pichlmayergasse 15, 8700 Leoben, Austria",
+    "country": "AT",
+    "region": "AT",
+    "type": "mountain_pass",
+    "source": "google_places",
+    "keyword": "joch",
+    "tags": [
+      "passo",
+      "montagna",
+      "curve",
+      "panorama",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "rating": 4.6,
+    "userRatingCount": 44,
+    "googleMapsUri": "https://maps.google.com/?cid=11629573951408230356&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+    "rawTypes": [
+      "dentist",
+      "health",
+      "point_of_interest",
+      "establishment"
+    ],
+    "riderScore": 45
+  },
+  {
+    "id": "spot-goma-joch-at",
+    "sourceId": "ChIJG4nJBikXeEcRfNzvFmItFYU",
+    "name": "Göma Joch",
+    "lat": 46.6611505,
+    "lng": 11.8506219,
+    "address": "39030 San Martin de Tor, Autonomous Province of Bolzano – South Tyrol, Italy",
+    "country": "IT",
+    "region": "AT",
+    "type": "mountain_pass",
+    "source": "google_places",
+    "keyword": "joch",
+    "tags": [
+      "passo",
+      "montagna",
+      "curve",
+      "panorama",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "rating": 4.6,
+    "userRatingCount": 28,
+    "googleMapsUri": "https://maps.google.com/?cid=9589620880870202492&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+    "rawTypes": [
+      "observation_deck",
+      "point_of_interest",
+      "establishment"
+    ],
+    "riderScore": 45
+  },
+  {
+    "id": "spot-kappelijoch-ch",
+    "sourceId": "ChIJi1X4rq-5kUcRjZzS6rTtqS0",
+    "name": "Käppelijoch",
+    "lat": 47.560093699999996,
+    "lng": 7.589833399999999,
+    "address": "Mittlere Brücke, 4058 Basel, Switzerland",
+    "country": "CH",
+    "region": "CH",
+    "type": "mountain_pass",
+    "source": "google_places",
+    "keyword": "joch",
+    "tags": [
+      "passo",
+      "montagna",
+      "curve",
+      "panorama",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "rating": 4.7,
+    "userRatingCount": 39,
+    "googleMapsUri": "https://maps.google.com/?cid=3290422364060425357&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+    "rawTypes": [
+      "historical_landmark",
+      "historical_place",
+      "point_of_interest",
+      "establishment"
+    ],
+    "riderScore": 45
+  },
+  {
+    "id": "spot-abeni-flue-joch-it-alpi-ovest",
+    "sourceId": "ChIJ68Xjb-h0j0cRE10RH83Cuk4",
+    "name": "Äbeni Flue Joch",
+    "lat": 46.5012,
+    "lng": 7.93345,
+    "address": "Äbeni Flue Joch, 3824 Lauterbrunnen, Switzerland",
+    "country": "IT",
+    "region": "IT-Alpi-Ovest",
+    "type": "mountain_pass",
+    "source": "google_places",
+    "keyword": "joch",
+    "tags": [
+      "passo",
+      "montagna",
+      "curve",
+      "panorama",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "rating": null,
+    "userRatingCount": null,
+    "googleMapsUri": "https://maps.google.com/?cid=5673060866871876883&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "riderScore": 40
+  },
+  {
+    "id": "spot-acherli-pass-ch",
+    "sourceId": "ChIJI9GqviP0j0cRCGSz2Sh6AXE",
+    "name": "Ächerli Pass",
+    "lat": 46.904444,
+    "lng": 8.334722,
+    "address": "Ächerli Pass, 6064 Kerns, Switzerland",
+    "country": "CH",
+    "region": "CH",
+    "type": "mountain_pass",
+    "source": "google_places",
+    "keyword": "col",
+    "tags": [
+      "passo",
+      "montagna",
+      "curve",
+      "panorama",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "rating": 4.7,
+    "userRatingCount": 36,
+    "googleMapsUri": "https://maps.google.com/?cid=8142923917132260360&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "riderScore": 40
+  },
+  {
+    "id": "spot-albis-pass-it-alpi-ovest",
+    "sourceId": "ChIJYUNxvhuomkcRJUzBclVWK0E",
+    "name": "Albis Pass",
+    "lat": 47.2761,
+    "lng": 8.52087,
+    "address": "Albis Pass, 8135 Langnau am Albis, Switzerland",
+    "country": "IT",
+    "region": "IT-Alpi-Ovest",
+    "type": "mountain_pass",
+    "source": "google_places",
+    "keyword": "mountain pass",
+    "tags": [
+      "passo",
+      "montagna",
+      "curve",
+      "panorama",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "rating": 4.7,
+    "userRatingCount": 91,
+    "googleMapsUri": "https://maps.google.com/?cid=4695941961461353509&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "riderScore": 40
+  },
+  {
+    "id": "spot-col-de-by-it-alpi-ovest",
+    "sourceId": "ChIJBe_3B8QriUcRIRf6-eTT1oM",
+    "name": "Col de By",
+    "lat": 45.912299999999995,
+    "lng": 7.31793,
+    "address": "Col de By, 1948 Val de Bagnes, Switzerland",
+    "country": "IT",
+    "region": "IT-Alpi-Ovest",
+    "type": "mountain_pass",
+    "source": "google_places",
+    "keyword": "col de montagne",
+    "tags": [
+      "passo",
+      "montagna",
+      "curve",
+      "panorama",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "rating": null,
+    "userRatingCount": null,
+    "googleMapsUri": "https://maps.google.com/?cid=9500013444384560929&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "riderScore": 40
+  },
+  {
+    "id": "spot-col-de-cheilon-ch",
+    "sourceId": "ChIJ0d3tO2LVjkcRKwaXN0QAVQA",
+    "name": "Col de Cheilon",
+    "lat": 45.994499999999995,
+    "lng": 7.39996,
+    "address": "Col de Cheilon, 1948 Val de Bagnes, Switzerland",
+    "country": "CH",
+    "region": "CH",
+    "type": "mountain_pass",
+    "source": "google_places",
+    "keyword": "col",
+    "tags": [
+      "passo",
+      "montagna",
+      "curve",
+      "panorama",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "rating": null,
+    "userRatingCount": null,
+    "googleMapsUri": "https://maps.google.com/?cid=23925666010826283&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "riderScore": 40
+  },
+  {
+    "id": "spot-col-de-l-epine-fr-alps",
+    "sourceId": "ChIJIYqlTtvri0cR9DGMYiW4Yuw",
+    "name": "Col de l'Épine",
+    "lat": 45.779258999999996,
+    "lng": 6.3491289,
+    "address": "Col de l'Épine, 74210 Le Bouchet-Mont-Charvin, France",
+    "country": "FR",
+    "region": "FR-Alps",
+    "type": "mountain_pass",
+    "source": "google_places",
+    "keyword": "mountain pass",
+    "tags": [
+      "passo",
+      "montagna",
+      "curve",
+      "panorama",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "rating": 4.2,
+    "userRatingCount": 18,
+    "googleMapsUri": "https://maps.google.com/?cid=17033379211375292916&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "riderScore": 40
+  },
+  {
+    "id": "spot-col-de-la-balme-it-alpi-ovest",
+    "sourceId": "ChIJ4Ud32gYqiUcRHnSzFaMQ270",
+    "name": "Col de la Balme",
+    "lat": 45.9003,
+    "lng": 7.37402,
+    "address": "Col de la Balme, 11010 Val de Bagnes, Switzerland",
+    "country": "IT",
+    "region": "IT-Alpi-Ovest",
+    "type": "mountain_pass",
+    "source": "google_places",
+    "keyword": "col de montagne",
+    "tags": [
+      "passo",
+      "montagna",
+      "curve",
+      "panorama",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "rating": null,
+    "userRatingCount": null,
+    "googleMapsUri": "https://maps.google.com/?cid=13680546585697809438&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "riderScore": 40
+  },
+  {
+    "id": "spot-col-de-la-luette-it-alpi-ovest",
+    "sourceId": "ChIJQZycI6DVjkcR8ncHBehT03A",
+    "name": "Col de la Luette",
+    "lat": 46.010599899999995,
+    "lng": 7.3826399999999985,
+    "address": "Col de la Luette, 1948 Val de Bagnes, Switzerland",
+    "country": "IT",
+    "region": "IT-Alpi-Ovest",
+    "type": "mountain_pass",
+    "source": "google_places",
+    "keyword": "col de montagne",
+    "tags": [
+      "passo",
+      "montagna",
+      "curve",
+      "panorama",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "rating": null,
+    "userRatingCount": null,
+    "googleMapsUri": "https://maps.google.com/?cid=8129934008315770866&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "riderScore": 40
+  },
+  {
+    "id": "spot-col-de-la-montagne-at",
+    "sourceId": "ChIJf0Kw1IcbyxIRBDVqdbyly9w",
+    "name": "Col de la Montagne",
+    "lat": 44.449129,
+    "lng": 5.816889,
+    "address": "Col de la Montagne, 05400 Le Saix, France",
+    "country": "AT",
+    "region": "AT",
+    "type": "mountain_pass",
+    "source": "google_places",
+    "keyword": "col de montagne",
+    "tags": [
+      "passo",
+      "montagna",
+      "curve",
+      "panorama",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "rating": null,
+    "userRatingCount": null,
+    "googleMapsUri": "https://maps.google.com/?cid=15909992337458738436&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "riderScore": 40
+  },
+  {
+    "id": "spot-col-de-miage-fr-alps",
+    "sourceId": "ChIJQ8zkAdJaiUcRUq_yho1tJzY",
+    "name": "Col de Miage",
+    "lat": 45.82468,
+    "lng": 6.810885,
+    "address": "Col de Miage, 74170 Saint-Gervais-les-Bains, France",
+    "country": "FR",
+    "region": "FR-Alps",
+    "type": "mountain_pass",
+    "source": "google_places",
+    "keyword": "passo alpino",
+    "tags": [
+      "passo",
+      "montagna",
+      "curve",
+      "panorama",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "rating": null,
+    "userRatingCount": null,
+    "googleMapsUri": "https://maps.google.com/?cid=3902208056761691986&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "riderScore": 40
+  },
+  {
+    "id": "spot-col-de-tracuit-it-alpi-ovest",
+    "sourceId": "ChIJ3TARKVs6j0cRcIviPmheShg",
+    "name": "Col de Tracuit",
+    "lat": 46.130899899999996,
+    "lng": 7.67822,
+    "address": "Col de Tracuit, 3946 Oberems, Switzerland",
+    "country": "IT",
+    "region": "IT-Alpi-Ovest",
+    "type": "mountain_pass",
+    "source": "google_places",
+    "keyword": "col de montagne",
+    "tags": [
+      "passo",
+      "montagna",
+      "curve",
+      "panorama",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "rating": 4,
+    "userRatingCount": 1,
+    "googleMapsUri": "https://maps.google.com/?cid=1750315207011502960&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "riderScore": 40
+  },
+  {
+    "id": "spot-col-du-cret-it-alpi-ovest",
+    "sourceId": "ChIJHfFUAybUjkcRx_-bAugnzoc",
+    "name": "Col du Crêt",
+    "lat": 46.0449,
+    "lng": 7.35745,
+    "address": "Col du Crêt, 1948 Val de Bagnes, Switzerland",
+    "country": "IT",
+    "region": "IT-Alpi-Ovest",
+    "type": "mountain_pass",
+    "source": "google_places",
+    "keyword": "col de montagne",
+    "tags": [
+      "passo",
+      "montagna",
+      "curve",
+      "panorama",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "rating": null,
+    "userRatingCount": null,
+    "googleMapsUri": "https://maps.google.com/?cid=9785802917752340423&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "riderScore": 40
+  },
+  {
+    "id": "spot-col-du-moine-it-alpi-ovest",
+    "sourceId": "ChIJ2dtqefEsiUcRGBl6Y0pIJoQ",
+    "name": "Col du Moine",
+    "lat": 45.946799999999996,
+    "lng": 7.269500000000001,
+    "address": "Col du Moine, 1948 Val de Bagnes, Switzerland",
+    "country": "IT",
+    "region": "IT-Alpi-Ovest",
+    "type": "mountain_pass",
+    "source": "google_places",
+    "keyword": "col de montagne",
+    "tags": [
+      "passo",
+      "montagna",
+      "curve",
+      "panorama",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "rating": null,
+    "userRatingCount": null,
+    "googleMapsUri": "https://maps.google.com/?cid=9522377946455218456&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "riderScore": 40
+  },
+  {
+    "id": "spot-col-du-mont-avril-it-alpi-ovest",
+    "sourceId": "ChIJWwhvujQqiUcRHAjPqMjvKWA",
+    "name": "Col du Mont Avril",
+    "lat": 45.9125,
+    "lng": 7.335789999999999,
+    "address": "Col du Mont Avril, 11010 Val de Bagnes, Switzerland",
+    "country": "IT",
+    "region": "IT-Alpi-Ovest",
+    "type": "mountain_pass",
+    "source": "google_places",
+    "keyword": "col de montagne",
+    "tags": [
+      "passo",
+      "montagna",
+      "curve",
+      "panorama",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "rating": null,
+    "userRatingCount": null,
+    "googleMapsUri": "https://maps.google.com/?cid=6929333146790856732&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "riderScore": 40
+  },
+  {
+    "id": "spot-col-du-mont-crosin-it-alpi-ovest",
+    "sourceId": "ChIJxUFmwFQCjkcRbln2P1koSV8",
+    "name": "Col du Mont Crosin",
+    "lat": 47.191111,
+    "lng": 7.100277999999999,
+    "address": "Col du Mont Crosin, 2607 Cortébert, Switzerland",
+    "country": "IT",
+    "region": "IT-Alpi-Ovest",
+    "type": "mountain_pass",
+    "source": "google_places",
+    "keyword": "col de montagne",
+    "tags": [
+      "passo",
+      "montagna",
+      "curve",
+      "panorama",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "rating": 4.4,
+    "userRatingCount": 12,
+    "googleMapsUri": "https://maps.google.com/?cid=6866063470693341550&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "riderScore": 40
+  },
+  {
+    "id": "spot-col-perre-it-alpi-est",
+    "sourceId": "ChIJx44FPFzueEcR1VbZcxHm7Z8",
+    "name": "Col Perre",
+    "lat": 46.033333299999995,
+    "lng": 11.7333333,
+    "address": "Col Perre, 32033 Lamon, Province of Belluno, Italy",
+    "country": "IT",
+    "region": "IT-Alpi-Est",
+    "type": "mountain_pass",
+    "source": "google_places",
+    "keyword": "col de montagne",
+    "tags": [
+      "passo",
+      "montagna",
+      "curve",
+      "panorama",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "rating": null,
+    "userRatingCount": null,
+    "googleMapsUri": "https://maps.google.com/?cid=11524119984143423189&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+    "rawTypes": [
+      "mountain_peak",
+      "natural_feature",
+      "establishment"
+    ],
+    "riderScore": 40
+  },
+  {
+    "id": "spot-eigerjoch-it-alpi-ovest",
+    "sourceId": "ChIJWbCNBm-ej0cRUEuCWbTYTFs",
+    "name": "Eigerjoch",
+    "lat": 46.572222,
+    "lng": 8.006667,
+    "address": "Eigerjoch, 3823 Lauterbrunnen, Switzerland",
+    "country": "IT",
+    "region": "IT-Alpi-Ovest",
+    "type": "mountain_pass",
+    "source": "google_places",
+    "keyword": "joch",
+    "tags": [
+      "passo",
+      "montagna",
+      "curve",
+      "panorama",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "rating": 3,
+    "userRatingCount": 2,
+    "googleMapsUri": "https://maps.google.com/?cid=6578871424788876112&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "riderScore": 40
+  },
+  {
+    "id": "spot-flexen-pass-at",
+    "sourceId": "ChIJ8fQSovalnEcRAN0GI1iXAB0",
+    "name": "Flexen Pass",
+    "lat": 47.15,
+    "lng": 10.1666667,
+    "address": "Flexen Pass, 6763 Lech, Austria",
+    "country": "AT",
+    "region": "AT",
+    "type": "mountain_pass",
+    "source": "google_places",
+    "keyword": "alp pass",
+    "tags": [
+      "passo",
+      "montagna",
+      "curve",
+      "panorama",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "rating": 4.9,
+    "userRatingCount": 57,
+    "googleMapsUri": "https://maps.google.com/?cid=2089836631900478720&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "riderScore": 40
+  },
+  {
+    "id": "spot-glaubenbielen-pass-ch",
+    "sourceId": "ChIJ7wLKJH2Tj0cRGdHqWrdBzmQ",
+    "name": "Glaubenbielen Pass",
+    "lat": 46.82,
+    "lng": 8.094166999999999,
+    "address": "Glaubenbielen Pass, 6074 Giswil, Switzerland",
+    "country": "CH",
+    "region": "CH",
+    "type": "mountain_pass",
+    "source": "google_places",
+    "keyword": "mountain pass",
+    "tags": [
+      "passo",
+      "montagna",
+      "curve",
+      "panorama",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "rating": 4.5,
+    "userRatingCount": 21,
+    "googleMapsUri": "https://maps.google.com/?cid=7263815504755347737&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "riderScore": 40
+  },
+  {
+    "id": "spot-gries-pass-ch",
+    "sourceId": "ChIJxaqa5vyDhUcRlJEomUmI3fo",
+    "name": "Gries Pass",
+    "lat": 46.449999999999996,
+    "lng": 8.3666667,
+    "address": "Gries Pass, 28863 Formazza, Province of Verbano-Cusio-Ossola, Italy",
+    "country": "IT",
+    "region": "CH",
+    "type": "mountain_pass",
+    "source": "google_places",
+    "keyword": "passo alpino",
+    "tags": [
+      "passo",
+      "montagna",
+      "curve",
+      "panorama",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "rating": 4.6,
+    "userRatingCount": 23,
+    "googleMapsUri": "https://maps.google.com/?cid=18076754329018601876&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "riderScore": 40
+  },
+  {
+    "id": "spot-grossberg-joch-it-alpi-est",
+    "sourceId": "ChIJF85xhy3HnEcRyK6ozGP8rE0",
+    "name": "Grossberg Joch",
+    "lat": 47.199999999999996,
+    "lng": 10.5,
+    "address": "Grossberg Joch, 6511, Austria",
+    "country": "IT",
+    "region": "IT-Alpi-Est",
+    "type": "mountain_pass",
+    "source": "google_places",
+    "keyword": "joch",
+    "tags": [
+      "passo",
+      "montagna",
+      "curve",
+      "panorama",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "rating": null,
+    "userRatingCount": null,
+    "googleMapsUri": "https://maps.google.com/?cid=5597125942480252616&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "riderScore": 40
+  },
+  {
+    "id": "spot-haus-joch-ch",
+    "sourceId": "ChIJ5TW7HwC_hEcR1DXPP3y_IIo",
+    "name": "Haus Joch",
+    "lat": 46.7839046,
+    "lng": 9.544654900000001,
+    "address": "Jochwäg 55, 7075 Churwalden, Switzerland",
+    "country": "CH",
+    "region": "CH",
+    "type": "mountain_pass",
+    "source": "google_places",
+    "keyword": "joch",
+    "tags": [
+      "passo",
+      "montagna",
+      "curve",
+      "panorama",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "rating": 5,
+    "userRatingCount": 1,
+    "googleMapsUri": "https://maps.google.com/?cid=9953165716856190420&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+    "rawTypes": [
+      "real_estate_agency",
+      "service",
+      "point_of_interest",
+      "establishment"
+    ],
+    "riderScore": 40
+  },
+  {
+    "id": "spot-hochtannberg-pass-at",
+    "sourceId": "ChIJJ30v_e2gnEcR9kHM1IFTNPA",
+    "name": "Hochtannberg Pass",
+    "lat": 47.266667,
+    "lng": 10.116667,
+    "address": "Hochtannberg Pass, 6888, Austria",
+    "country": "AT",
+    "region": "AT",
+    "type": "mountain_pass",
+    "source": "google_places",
+    "keyword": "mountain pass",
+    "tags": [
+      "passo",
+      "montagna",
+      "curve",
+      "panorama",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "rating": 4.7,
+    "userRatingCount": 83,
+    "googleMapsUri": "https://maps.google.com/?cid=17308551084977701366&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "riderScore": 40
+  },
+  {
+    "id": "spot-hundskehl-joch-de-south",
+    "sourceId": "ChIJqaFgnPSUd0cRBtfdOsUOaGc",
+    "name": "Hundskehl Joch",
+    "lat": 47.0666667,
+    "lng": 12.0833333,
+    "address": "Hundskehl Joch, 39030 Prettau, Autonomous Province of Bolzano – South Tyrol, Italy",
+    "country": "IT",
+    "region": "DE-South",
+    "type": "mountain_pass",
+    "source": "google_places",
+    "keyword": "col de montagne",
+    "tags": [
+      "passo",
+      "montagna",
+      "curve",
+      "panorama",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "rating": null,
+    "userRatingCount": null,
+    "googleMapsUri": "https://maps.google.com/?cid=7451221823743448838&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "riderScore": 40
+  },
+  {
+    "id": "spot-jochgletscher-ch",
+    "sourceId": "ChIJd0_aYpRhhUcROEBn5T9P7Xk",
+    "name": "Jochgletscher",
+    "lat": 46.766115,
+    "lng": 8.3884482,
+    "address": "Jochgletscher, 3862 Innertkirchen, Switzerland",
+    "country": "CH",
+    "region": "CH",
+    "type": "mountain_pass",
+    "source": "google_places",
+    "keyword": "joch",
+    "tags": [
+      "passo",
+      "montagna",
+      "curve",
+      "panorama",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "rating": null,
+    "userRatingCount": null,
+    "googleMapsUri": "https://maps.google.com/?cid=8785765583919988792&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "riderScore": 40
+  },
+  {
+    "id": "spot-jochseeli-ch",
+    "sourceId": "ChIJZz86lsdhhUcR_WLnApf7SRU",
+    "name": "Jochseeli",
+    "lat": 46.7785393,
+    "lng": 8.387589799999999,
+    "address": "Jochseeli, Switzerland",
+    "country": "CH",
+    "region": "CH",
+    "type": "mountain_pass",
+    "source": "google_places",
+    "keyword": "joch",
+    "tags": [
+      "passo",
+      "montagna",
+      "curve",
+      "panorama",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "rating": 4.3,
+    "userRatingCount": 10,
+    "googleMapsUri": "https://maps.google.com/?cid=1534033774103716605&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+    "rawTypes": [
+      "lake",
+      "natural_feature",
+      "establishment"
+    ],
+    "riderScore": 40
+  },
+  {
+    "id": "spot-lueg-pass-at",
+    "sourceId": "ChIJLTccEE7BdkcRvnYFcT06gSE",
+    "name": "Lueg Pass",
+    "lat": 47.5666667,
+    "lng": 13.2,
+    "address": "Lueg Pass, 5440 Golling an der Salzach, Austria",
+    "country": "AT",
+    "region": "AT",
+    "type": "mountain_pass",
+    "source": "google_places",
+    "keyword": "mountain pass",
+    "tags": [
+      "passo",
+      "montagna",
+      "curve",
+      "panorama",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "rating": 5,
+    "userRatingCount": 26,
+    "googleMapsUri": "https://maps.google.com/?cid=2414274910810896062&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "riderScore": 40
+  },
+  {
+    "id": "spot-mauria-pass-it-alpi-est",
+    "sourceId": "ChIJ548kO6LAeUcRsjJyf0-3Oe0",
+    "name": "Mauria Pass",
+    "lat": 46.4544,
+    "lng": 12.5133,
+    "address": "Mauria Pass, 32040 Lorenzago di Cadore, Province of Belluno, Italy",
+    "country": "IT",
+    "region": "IT-Alpi-Est",
+    "type": "mountain_pass",
+    "source": "google_places",
+    "keyword": "passo alpino",
+    "tags": [
+      "passo",
+      "montagna",
+      "curve",
+      "panorama",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "rating": 4.4,
+    "userRatingCount": 137,
+    "googleMapsUri": "https://maps.google.com/?cid=17093895412729918130&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "riderScore": 40
+  },
+  {
+    "id": "spot-monte-moro-pass-ch",
+    "sourceId": "ChIJc9vUSCNSj0cR2dMuT16dK50",
+    "name": "Monte Moro Pass",
+    "lat": 45.998,
+    "lng": 7.98129,
+    "address": "Monte Moro Pass, 28876 Saas-Almagell, Switzerland",
+    "country": "CH",
+    "region": "CH",
+    "type": "mountain_pass",
+    "source": "google_places",
+    "keyword": "passo montano",
+    "tags": [
+      "passo",
+      "montagna",
+      "curve",
+      "panorama",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "rating": 4.8,
+    "userRatingCount": 44,
+    "googleMapsUri": "https://maps.google.com/?cid=11325318716334199769&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "riderScore": 40
+  },
+  {
+    "id": "spot-oberaarjoch-it-alpi-ovest",
+    "sourceId": "ChIJC_IVkqJ4j0cRsGOoKhpR_yU",
+    "name": "Oberaarjoch",
+    "lat": 46.5253,
+    "lng": 8.174180000000002,
+    "address": "Oberaarjoch, 3984 Fieschertal, Switzerland",
+    "country": "IT",
+    "region": "IT-Alpi-Ovest",
+    "type": "mountain_pass",
+    "source": "google_places",
+    "keyword": "joch",
+    "tags": [
+      "passo",
+      "montagna",
+      "curve",
+      "panorama",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "rating": null,
+    "userRatingCount": null,
+    "googleMapsUri": "https://maps.google.com/?cid=2737996271291229104&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "riderScore": 40
+  },
+  {
+    "id": "spot-radstadter-tauern-pass-at",
+    "sourceId": "ChIJNV9PNbzXcEcR4CZ9sezIvAM",
+    "name": "Radstädter Tauern Pass",
+    "lat": 47.248056,
+    "lng": 13.559166999999999,
+    "address": "Radstädter Tauern Pass, 5562 Obertauern, Austria",
+    "country": "AT",
+    "region": "AT",
+    "type": "mountain_pass",
+    "source": "google_places",
+    "keyword": "mountain pass",
+    "tags": [
+      "passo",
+      "montagna",
+      "curve",
+      "panorama",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "rating": 4.6,
+    "userRatingCount": 22,
+    "googleMapsUri": "https://maps.google.com/?cid=269310996650993376&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "riderScore": 40
+  },
+  {
+    "id": "spot-red-mountain-pass-de-south",
+    "sourceId": "ChIJd_XMGWHePocRKDqBNsesnuI",
+    "name": "Red Mountain Pass",
+    "lat": 37.898883999999995,
+    "lng": -107.71200569999999,
+    "address": "Red Mountain Pass, Colorado 81432, USA",
+    "country": "DE",
+    "region": "DE-South",
+    "type": "mountain_pass",
+    "source": "google_places",
+    "keyword": "mountain pass",
+    "tags": [
+      "passo",
+      "montagna",
+      "curve",
+      "panorama",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "rating": 4.6,
+    "userRatingCount": 70,
+    "googleMapsUri": "https://maps.google.com/?cid=16329679270504905256&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "riderScore": 40
+  },
+  {
+    "id": "spot-san-giacomo-pass-ch",
+    "sourceId": "ChIJkSaTWDGDhUcREF-_1kFzyHk",
+    "name": "San Giacomo Pass",
+    "lat": 46.460299899999995,
+    "lng": 8.45472,
+    "address": "San Giacomo Pass, 6781 Bedretto, Switzerland",
+    "country": "CH",
+    "region": "CH",
+    "type": "mountain_pass",
+    "source": "google_places",
+    "keyword": "passo alpino",
+    "tags": [
+      "passo",
+      "montagna",
+      "curve",
+      "panorama",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "rating": 4.5,
+    "userRatingCount": 37,
+    "googleMapsUri": "https://maps.google.com/?cid=8775390600544345872&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "riderScore": 40
+  },
+  {
+    "id": "spot-san-lucio-pass-ch",
+    "sourceId": "ChIJ1ags9k83hEcRnz81-YQlZcE",
+    "name": "San Lucio Pass",
+    "lat": 46.087222,
+    "lng": 9.089722,
+    "address": "San Lucio Pass, Cavargna, Province of Como, Italy",
+    "country": "IT",
+    "region": "CH",
+    "type": "mountain_pass",
+    "source": "google_places",
+    "keyword": "passo alpino",
+    "tags": [
+      "passo",
+      "montagna",
+      "curve",
+      "panorama",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "rating": 4.7,
+    "userRatingCount": 21,
+    "googleMapsUri": "https://maps.google.com/?cid=13935585875014795167&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "riderScore": 40
+  },
+  {
+    "id": "spot-schollijoch-it-alpi-ovest",
+    "sourceId": "ChIJ71nOsnY5j0cRJmr-BOgZBO0",
+    "name": "Schöllijoch",
+    "lat": 46.144167,
+    "lng": 7.733332999999999,
+    "address": "Schöllijoch, 3946 Turtmann-Unterems, Switzerland",
+    "country": "IT",
+    "region": "IT-Alpi-Ovest",
+    "type": "mountain_pass",
+    "source": "google_places",
+    "keyword": "joch",
+    "tags": [
+      "passo",
+      "montagna",
+      "curve",
+      "panorama",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "rating": 4.3,
+    "userRatingCount": 3,
+    "googleMapsUri": "https://maps.google.com/?cid=17078804171202652710&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "riderScore": 40
+  },
+  {
+    "id": "spot-schwarzenberger-joch-at",
+    "sourceId": "ChIJk4oO8Es3nUcRN0CbRtZ61hA",
+    "name": "Schwarzenberger Joch",
+    "lat": 47.05,
+    "lng": 11.1166667,
+    "address": "Schwarzenberger Joch, 6444, Austria",
+    "country": "AT",
+    "region": "AT",
+    "type": "mountain_pass",
+    "source": "google_places",
+    "keyword": "joch",
+    "tags": [
+      "passo",
+      "montagna",
+      "curve",
+      "panorama",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "rating": null,
+    "userRatingCount": null,
+    "googleMapsUri": "https://maps.google.com/?cid=1213292210349097015&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "riderScore": 40
+  },
+  {
+    "id": "spot-south-pass-de-south",
+    "sourceId": "ChIJZzmtPlubWYcRDQod2kewlYg",
+    "name": "South Pass",
+    "lat": 42.369955100000006,
+    "lng": -108.91344939999999,
+    "address": "South Pass, Wyoming 82520, USA",
+    "country": "DE",
+    "region": "DE-South",
+    "type": "mountain_pass",
+    "source": "google_places",
+    "keyword": "pass",
+    "tags": [
+      "passo",
+      "montagna",
+      "curve",
+      "panorama",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "rating": 4.6,
+    "userRatingCount": 37,
+    "googleMapsUri": "https://maps.google.com/?cid=9841966383336589837&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "riderScore": 40
+  },
+  {
+    "id": "spot-surenen-pass-ch",
+    "sourceId": "ChIJMxw-MmtdhUcRhbrJqpFTwEY",
+    "name": "Surenen Pass",
+    "lat": 46.8364,
+    "lng": 8.54576,
+    "address": "Surenen Pass, 6390 Attinghausen, Switzerland",
+    "country": "CH",
+    "region": "CH",
+    "type": "mountain_pass",
+    "source": "google_places",
+    "keyword": "col",
+    "tags": [
+      "passo",
+      "montagna",
+      "curve",
+      "panorama",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "rating": 4.9,
+    "userRatingCount": 27,
+    "googleMapsUri": "https://maps.google.com/?cid=5098166663284112005&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "riderScore": 40
+  },
+  {
+    "id": "spot-thurn-pass-at",
+    "sourceId": "ChIJxat0XmOud0cRNm1O1dqxIk0",
+    "name": "Thurn Pass",
+    "lat": 47.3166667,
+    "lng": 12.399999999999999,
+    "address": "Thurn Pass, 6373 Jochberg, Austria",
+    "country": "AT",
+    "region": "AT",
+    "type": "mountain_pass",
+    "source": "google_places",
+    "keyword": "mountain pass",
+    "tags": [
+      "passo",
+      "montagna",
+      "curve",
+      "panorama",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "rating": 4.6,
+    "userRatingCount": 74,
+    "googleMapsUri": "https://maps.google.com/?cid=5558200443568287030&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "riderScore": 40
+  },
+  {
+    "id": "spot-torrener-joch-at",
+    "sourceId": "ChIJ7_eYT4LpdkcRjps6bD1fr8U",
+    "name": "Torrener Joch",
+    "lat": 47.5666667,
+    "lng": 13.049999999999999,
+    "address": "Torrener Joch, 5440 Golling an der Salzach, Austria",
+    "country": "AT",
+    "region": "AT",
+    "type": "mountain_pass",
+    "source": "google_places",
+    "keyword": "joch",
+    "tags": [
+      "passo",
+      "montagna",
+      "curve",
+      "panorama",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "rating": null,
+    "userRatingCount": null,
+    "googleMapsUri": "https://maps.google.com/?cid=14244708863809592206&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "riderScore": 40
+  },
+  {
+    "id": "spot-tschey-joch-at",
+    "sourceId": "ChIJg4-USuAtg0cRT7DTkFPdzjI",
+    "name": "Tschey Joch",
+    "lat": 46.8833333,
+    "lng": 10.566666699999999,
+    "address": "Tschey Joch, 6543, Austria",
+    "country": "AT",
+    "region": "AT",
+    "type": "mountain_pass",
+    "source": "google_places",
+    "keyword": "joch",
+    "tags": [
+      "passo",
+      "montagna",
+      "curve",
+      "panorama",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "rating": null,
+    "userRatingCount": null,
+    "googleMapsUri": "https://maps.google.com/?cid=3661106898080608335&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "riderScore": 40
+  },
+  {
+    "id": "spot-verpeil-joch-at",
+    "sourceId": "ChIJAcgT3QEqnUcRY8ZQdGdskTs",
+    "name": "Verpeil Joch",
+    "lat": 47.016666699999995,
+    "lng": 10.799999999999999,
+    "address": "Verpeil Joch, 6524, Austria",
+    "country": "AT",
+    "region": "AT",
+    "type": "mountain_pass",
+    "source": "google_places",
+    "keyword": "joch",
+    "tags": [
+      "passo",
+      "montagna",
+      "curve",
+      "panorama",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "rating": null,
+    "userRatingCount": null,
+    "googleMapsUri": "https://maps.google.com/?cid=4292331111449675363&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "riderScore": 40
+  },
+  {
+    "id": "spot-chruteren-pass-ch",
+    "sourceId": "ChIJmVRmWMOVj0cRmXWc9Mtexh4",
+    "name": "Chruteren Pass",
+    "lat": 46.787999899999996,
+    "lng": 8.01761,
+    "address": "Chruteren Pass, 6174 Flühli, Switzerland",
+    "country": "CH",
+    "region": "CH",
+    "type": "mountain_pass",
+    "source": "google_places",
+    "keyword": "mountain pass",
+    "tags": [
+      "passo",
+      "montagna",
+      "curve",
+      "panorama",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "rating": 5,
+    "userRatingCount": 1,
+    "googleMapsUri": "https://maps.google.com/?cid=2217564096601814425&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "riderScore": 35
+  },
+  {
+    "id": "spot-foo-pass-at",
+    "sourceId": "ChIJT24YygvXhEcR2iifTo2ysnk",
+    "name": "Foo Pass",
+    "lat": 46.942699999999995,
+    "lng": 9.238339999999999,
+    "address": "Foo Pass, 7326 Mels, Switzerland",
+    "country": "CH",
+    "region": "AT",
+    "type": "mountain_pass",
+    "source": "google_places",
+    "keyword": "alp pass",
+    "tags": [
+      "passo",
+      "montagna",
+      "curve",
+      "panorama",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "rating": 5,
+    "userRatingCount": 9,
+    "googleMapsUri": "https://maps.google.com/?cid=8769267744422963418&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "riderScore": 35
+  },
+  {
+    "id": "spot-pass-d-ur-it-alpi-centro",
+    "sourceId": "ChIJTSmmMoSbg0cR2Uadu--6zjA",
+    "name": "Pass d'Ur",
+    "lat": 46.3045,
+    "lng": 9.999509999999999,
+    "address": "Pass d'Ur, Lanzada, Sondrio, Italy",
+    "country": "IT",
+    "region": "IT-Alpi-Centro",
+    "type": "mountain_pass",
+    "source": "google_places",
+    "keyword": "mountain pass",
+    "tags": [
+      "passo",
+      "montagna",
+      "curve",
+      "panorama",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "rating": 5,
+    "userRatingCount": 7,
+    "googleMapsUri": "https://maps.google.com/?cid=3516953897830532825&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "riderScore": 35
+  },
+  {
+    "id": "spot-pass-di-lai-ner-it-alpi-centro",
+    "sourceId": "ChIJ6VJx_ln0hEcRNi5-7xknRIU",
+    "name": "Pass di Lai Ner",
+    "lat": 46.489599999999996,
+    "lng": 9.371179999999999,
+    "address": "Pass di Lai Ner, 7445 Ferrera, Switzerland",
+    "country": "IT",
+    "region": "IT-Alpi-Centro",
+    "type": "mountain_pass",
+    "source": "google_places",
+    "keyword": "mountain pass",
+    "tags": [
+      "passo",
+      "montagna",
+      "curve",
+      "panorama",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "rating": 5,
+    "userRatingCount": 3,
+    "googleMapsUri": "https://maps.google.com/?cid=9602843297806429750&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "riderScore": 35
+  },
+  {
+    "id": "spot-pass-di-omenit-it-alpi-ovest",
+    "sourceId": "ChIJ2_WhxBxWhEcREgpCGX03JrQ",
+    "name": "Pass di Omenit",
+    "lat": 46.4568,
+    "lng": 9.139,
+    "address": "Pass di Omenit, 6565 Mesocco, Switzerland",
+    "country": "IT",
+    "region": "IT-Alpi-Ovest",
+    "type": "mountain_pass",
+    "source": "google_places",
+    "keyword": "pass",
+    "tags": [
+      "passo",
+      "montagna",
+      "curve",
+      "panorama",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "rating": 5,
+    "userRatingCount": 1,
+    "googleMapsUri": "https://maps.google.com/?cid=12981123986376231442&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "riderScore": 35
+  },
+  {
+    "id": "spot-pass-di-passit-it-alpi-ovest",
+    "sourceId": "ChIJCRY7uDRWhEcRL-Bu0bn9Lrk",
+    "name": "Pass di Passit",
+    "lat": 46.441899899999996,
+    "lng": 9.16823,
+    "address": "Pass di Passit, 6565 Mesocco, Switzerland",
+    "country": "IT",
+    "region": "IT-Alpi-Ovest",
+    "type": "mountain_pass",
+    "source": "google_places",
+    "keyword": "mountain pass",
+    "tags": [
+      "passo",
+      "montagna",
+      "curve",
+      "panorama",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "rating": 4.6,
+    "userRatingCount": 8,
+    "googleMapsUri": "https://maps.google.com/?cid=13343881720469839919&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "riderScore": 35
+  },
+  {
+    "id": "spot-pass-luftenstein-at",
+    "sourceId": "ChIJDxJA4a33dkcR0I_r_9VTj1w",
+    "name": "Pass Luftenstein",
+    "lat": 47.5666667,
+    "lng": 12.7166667,
+    "address": "Pass Luftenstein, 5092 Sankt Martin bei Lofer, Austria",
+    "country": "AT",
+    "region": "AT",
+    "type": "mountain_pass",
+    "source": "google_places",
+    "keyword": "pass",
+    "tags": [
+      "passo",
+      "montagna",
+      "curve",
+      "panorama",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "rating": 5,
+    "userRatingCount": 1,
+    "googleMapsUri": "https://maps.google.com/?cid=6669641751745761232&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "riderScore": 35
+  },
+  {
+    "id": "spot-pass-strub-at",
+    "sourceId": "ChIJ6WjpH49YdkcRbXiAYk0hP1w",
+    "name": "Pass Strub",
+    "lat": 47.5833333,
+    "lng": 12.666666699999999,
+    "address": "Pass Strub, 5090 Lofer, Austria",
+    "country": "AT",
+    "region": "AT",
+    "type": "mountain_pass",
+    "source": "google_places",
+    "keyword": "mountain pass",
+    "tags": [
+      "passo",
+      "montagna",
+      "curve",
+      "panorama",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "rating": 5,
+    "userRatingCount": 5,
+    "googleMapsUri": "https://maps.google.com/?cid=6647068191270926445&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "riderScore": 35
+  },
+  {
+    "id": "spot-simplon-pass-it-alpi-ovest",
+    "sourceId": "ChIJBwoa51hgj0cRa-7yS7XO0R4",
+    "name": "Simplon Pass",
+    "lat": 46.25,
+    "lng": 8.1666667,
+    "address": "Simplon Pass, 28868 Trasquera, Province of Verbano-Cusio-Ossola, Italy",
+    "country": "IT",
+    "region": "IT-Alpi-Ovest",
+    "type": "mountain_pass",
+    "source": "google_places",
+    "keyword": "pass",
+    "tags": [
+      "passo",
+      "montagna",
+      "curve",
+      "panorama",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "rating": 4.6,
+    "userRatingCount": 17,
+    "googleMapsUri": "https://maps.google.com/?cid=2220783369328979563&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA",
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "riderScore": 35
+  }
+]
