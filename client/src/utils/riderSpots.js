@@ -44,3 +44,4 @@ export function findNearbyRiderSpots(spots, lat, lng, radiusKm = 120, limit = 12
     })
     .slice(0, limit);
 }
+export const getNearbyRiderSpots = findNearbyRiderSpots;
