@@ -925,15 +925,6 @@ export default function Map() {
   const [riderSpots, setRiderSpots] = useState([]);
   const [riderSpotsLoading, setRiderSpotsLoading] = useState(false);
   const [riderSpotsError, setRiderSpotsError] = useState("");
-// ✅ FIX: filtra realmente gli spot nel raggio selezionato
-const nearbyRiderSpots = useMemo(() => {
-  if (!Array.isArray(riderSpots) || !discoveryCenter) return [];
-
-  return riderSpots.filter((s) => {
-    const d = normalizeRiderSpotDistance(discoveryCenter, s);
-    return d <= riderSpotsRadiusKm;
-  });
-}, [riderSpots, discoveryCenter, riderSpotsRadiusKm]);
   const {
     route: engineRoute,
     weather: engineWeather,
@@ -1300,7 +1291,15 @@ const nearbyRiderSpots = useMemo(() => {
   const discoveryCenter = useMemo(() => {
     return mapCenter;
   }, [mapCenter]);
+// ✅ FIX: filtra realmente gli spot nel raggio selezionato
+const nearbyRiderSpots = useMemo(() => {
+  if (!Array.isArray(riderSpots) || !discoveryCenter) return [];
 
+  return riderSpots.filter((s) => {
+    const d = normalizeRiderSpotDistance(discoveryCenter, s);
+    return d <= riderSpotsRadiusKm;
+  });
+}, [riderSpots, discoveryCenter, riderSpotsRadiusKm]);
   useEffect(() => {
     let cancelled = false;
 
