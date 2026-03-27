@@ -1353,8 +1353,8 @@ useEffect(() => {
   return () => {
     cancelled = true;
   };
-}, [discoveryCenter]);
-  const addFromSearch = (s) => {
+}, [discoveryCenter?.[0], discoveryCenter?.[1]]);
+const addFromSearch = (s) => {
     setPoints((prev) => [...prev, [s.lat, s.lon]]);
     setSnappedLine(null);
     setRouteMeta({ distanceKm: 0, durationMin: 0, steps: [] });
