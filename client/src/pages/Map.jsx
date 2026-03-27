@@ -925,7 +925,15 @@ export default function Map() {
   const [riderSpots, setRiderSpots] = useState([]);
   const [riderSpotsLoading, setRiderSpotsLoading] = useState(false);
   const [riderSpotsError, setRiderSpotsError] = useState("");
+// ✅ FIX: filtra realmente gli spot nel raggio selezionato
+const nearbyRiderSpots = useMemo(() => {
+  if (!Array.isArray(riderSpots) || !discoveryCenter) return [];
 
+  return riderSpots.filter((s) => {
+    const d = normalizeRiderSpotDistance(discoveryCenter, s);
+    return d <= riderSpotsRadiusKm;
+  });
+}, [riderSpots, discoveryCenter, riderSpotsRadiusKm]);
   const {
     route: engineRoute,
     weather: engineWeather,
@@ -2718,8 +2726,8 @@ export default function Map() {
               <div style={{ marginTop: 10, display: "flex", flexDirection: "column", gap: 8 }}>
                 {riderSpotsLoading ? (
                   <div style={{ fontSize: 13, opacity: 0.72 }}>Cerco passi rider vicini...</div>
-                ) : riderSpots.length ? (
-                  riderSpots.map((spot) => (
+                  ) : nearbyRiderSpots.length ? (
+                      nearbyRiderSpots.map((spot) => (
                     <div
                       key={spot.id}
                       style={{
@@ -2751,7 +2759,7 @@ export default function Map() {
                   ))
                 ) : (
                   <div style={{ fontSize: 13, opacity: 0.72 }}>
-                    Nessun rider spot disponibile in quest’area.
+                    Nessun rider spot entro ${riderSpotsRadiusKm} km.
                   </div>
                 )}
               </div>
