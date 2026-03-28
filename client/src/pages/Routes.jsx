@@ -3,13 +3,15 @@
 // Itinerari Touring
 // UI: split-view su desktop (lista + dettaglio)
 // Mobile: lista -> dettaglio (full screen) con back
-// Dati: /public/data/routes.json
+// Dati: /public/data/routes.cleaned.json
 // ✅ Loading skeleton
 // ✅ Dedup key stabile (id o name+start/end)
 // ✅ Meteo + Google Maps
 // ✅ Fallback coordinate intelligente per itinerari incompleti / OSM
 // ✅ FIX: usa SEMPRE route.description dal JSON
 // ✅ FIX mobile: no aperture accidentali durante scroll
+// ✅ NEW: integra rider-spots.cleaned.json
+// ✅ NEW: mostra passi veri lungo il percorso
 // =======================================================
 
 import React, { useEffect, useMemo, useRef, useState } from "react";
@@ -20,6 +22,9 @@ const FALLBACK_PHOTO =
   "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1600&q=80";
 
 const TAP_MOVE_THRESHOLD = 12;
+const MAX_ROUTE_SPOTS = 8;
+const SPOT_NEAR_ROUTE_KM = 22;
+const SPOT_NEAR_POINT_KM = 16;
 
 function isMobileNow() {
   if (typeof window === "undefined" || !window.matchMedia) return false;
@@ -41,6 +46,74 @@ function pairFrom(a, b) {
   const lat = toNum(a);
   const lon = toNum(b);
   return Number.isFinite(lat) && Number.isFinite(lon) ? [lat, lon] : null;
+}
+
+function latLonStr(p) {
+  if (!p || p.length < 2) return null;
+  const lat = Number(p[0]);
+  const lon = Number(p[1]);
+  if (!Number.isFinite(lat) || !Number.isFinite(lon)) return null;
+  return `${lat},${lon}`;
+}
+
+function buildNavigateUrl(destination, travelmode = "driving") {
+  if (!destination) return null;
+  return (
+    `https://www.google.com/maps/dir/?api=1` +
+    `&destination=${encodeURIComponent(destination)}` +
+    `&travelmode=${encodeURIComponent(travelmode)}` +
+    `&dir_action=navigate`
+  );
+}
+
+function buildRouteKey(r) {
+  const id = String(r?.id || "").trim();
+  if (id) return `id:${id}`;
+
+  const name = String(r?.name || "").trim().toLowerCase();
+
+  const s = Array.isArray(r?.start)
+    ? `${Number(r.start[0]).toFixed(5)},${Number(r.start[1]).toFixed(5)}`
+    : "";
+
+  const e = Array.isArray(r?.end)
+    ? `${Number(r.end[0]).toFixed(5)},${Number(r.end[1]).toFixed(5)}`
+    : "";
+
+  return `n:${name}|${s}|${e}`;
+}
+
+function haversineKm(a, b) {
+  if (!a || !b) return Infinity;
+
+  const lat1 = toNum(a[0]);
+  const lon1 = toNum(a[1]);
+  const lat2 = toNum(b[0]);
+  const lon2 = toNum(b[1]);
+
+  if (
+    !Number.isFinite(lat1) ||
+    !Number.isFinite(lon1) ||
+    !Number.isFinite(lat2) ||
+    !Number.isFinite(lon2)
+  ) {
+    return Infinity;
+  }
+
+  const toRad = (d) => (d * Math.PI) / 180;
+  const R = 6371;
+
+  const dLat = toRad(lat2 - lat1);
+  const dLon = toRad(lon2 - lon1);
+
+  const x =
+    Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+    Math.cos(toRad(lat1)) *
+      Math.cos(toRad(lat2)) *
+      Math.sin(dLon / 2) *
+      Math.sin(dLon / 2);
+
+  return 2 * R * Math.atan2(Math.sqrt(x), Math.sqrt(1 - x));
 }
 
 function pickRoutePoint(route) {
@@ -118,39 +191,222 @@ function pickRoutePoint(route) {
   return null;
 }
 
-function latLonStr(p) {
-  if (!p || p.length < 2) return null;
-  const lat = Number(p[0]);
-  const lon = Number(p[1]);
-  if (!Number.isFinite(lat) || !Number.isFinite(lon)) return null;
-  return `${lat},${lon}`;
+function extractRoutePoints(route) {
+  const points = [];
+  const seen = new Set();
+
+  function addPoint(p) {
+    if (!p || p.length < 2) return;
+    const lat = toNum(p[0]);
+    const lon = toNum(p[1]);
+    if (!Number.isFinite(lat) || !Number.isFinite(lon)) return;
+
+    const key = `${lat.toFixed(5)},${lon.toFixed(5)}`;
+    if (seen.has(key)) return;
+    seen.add(key);
+    points.push([lat, lon]);
+  }
+
+  if (Array.isArray(route?.start) && route.start.length >= 2) {
+    addPoint(pairFrom(route.start[0], route.start[1]));
+  }
+
+  if (Array.isArray(route?.end) && route.end.length >= 2) {
+    addPoint(pairFrom(route.end[0], route.end[1]));
+  }
+
+  if (Array.isArray(route?.center) && route.center.length >= 2) {
+    addPoint(pairFrom(route.center[0], route.center[1]));
+  }
+
+  addPoint(
+    pairFrom(
+      route?.center?.lat ?? route?.center?.latitude,
+      route?.center?.lon ?? route?.center?.lng ?? route?.center?.longitude
+    )
+  );
+
+  addPoint(
+    pairFrom(
+      route?.coords?.lat ?? route?.coords?.latitude,
+      route?.coords?.lon ?? route?.coords?.lng ?? route?.coords?.longitude
+    )
+  );
+
+  addPoint(
+    pairFrom(
+      route?.lat ?? route?.latitude,
+      route?.lon ?? route?.lng ?? route?.longitude
+    )
+  );
+
+  if (Array.isArray(route?.waypoints) && route.waypoints.length) {
+    for (const w of route.waypoints) {
+      if (Array.isArray(w) && w.length >= 2) {
+        addPoint(pairFrom(w[0], w[1]));
+      } else {
+        addPoint(
+          pairFrom(
+            w?.lat ?? w?.latitude,
+            w?.lon ?? w?.lng ?? w?.longitude
+          )
+        );
+      }
+    }
+  }
+
+  const coords = route?.geometry?.coordinates;
+  if (Array.isArray(coords) && coords.length) {
+    if (Array.isArray(coords[0]) && !Array.isArray(coords[0][0])) {
+      const step = Math.max(1, Math.floor(coords.length / 18));
+      for (let i = 0; i < coords.length; i += step) {
+        const c = coords[i];
+        if (Array.isArray(c) && c.length >= 2) {
+          addPoint(pairFrom(c[1], c[0]));
+        }
+      }
+      const last = coords[coords.length - 1];
+      if (Array.isArray(last) && last.length >= 2) {
+        addPoint(pairFrom(last[1], last[0]));
+      }
+    } else if (Array.isArray(coords[0]) && Array.isArray(coords[0][0])) {
+      const flat = coords.flat();
+      const step = Math.max(1, Math.floor(flat.length / 18));
+      for (let i = 0; i < flat.length; i += step) {
+        const c = flat[i];
+        if (Array.isArray(c) && c.length >= 2) {
+          addPoint(pairFrom(c[1], c[0]));
+        }
+      }
+      const last = flat[flat.length - 1];
+      if (Array.isArray(last) && last.length >= 2) {
+        addPoint(pairFrom(last[1], last[0]));
+      }
+    }
+  }
+
+  return points;
 }
 
-function buildNavigateUrl(destination, travelmode = "driving") {
-  if (!destination) return null;
+function getRouteBounds(points = []) {
+  if (!points.length) return null;
+
+  let minLat = Infinity;
+  let maxLat = -Infinity;
+  let minLng = Infinity;
+  let maxLng = -Infinity;
+
+  for (const p of points) {
+    const lat = toNum(p[0]);
+    const lng = toNum(p[1]);
+    if (!Number.isFinite(lat) || !Number.isFinite(lng)) continue;
+
+    if (lat < minLat) minLat = lat;
+    if (lat > maxLat) maxLat = lat;
+    if (lng < minLng) minLng = lng;
+    if (lng > maxLng) maxLng = lng;
+  }
+
+  if (
+    !Number.isFinite(minLat) ||
+    !Number.isFinite(maxLat) ||
+    !Number.isFinite(minLng) ||
+    !Number.isFinite(maxLng)
+  ) {
+    return null;
+  }
+
+  const latPad = 0.22;
+  const lngPad = 0.32;
+
+  return {
+    minLat: minLat - latPad,
+    maxLat: maxLat + latPad,
+    minLng: minLng - lngPad,
+    maxLng: maxLng + lngPad,
+  };
+}
+
+function pointInBounds(point, bounds) {
+  if (!point || !bounds) return false;
+  const lat = toNum(point[0]);
+  const lng = toNum(point[1]);
+  if (!Number.isFinite(lat) || !Number.isFinite(lng)) return false;
+
   return (
-    `https://www.google.com/maps/dir/?api=1` +
-    `&destination=${encodeURIComponent(destination)}` +
-    `&travelmode=${encodeURIComponent(travelmode)}` +
-    `&dir_action=navigate`
+    lat >= bounds.minLat &&
+    lat <= bounds.maxLat &&
+    lng >= bounds.minLng &&
+    lng <= bounds.maxLng
   );
 }
 
-function buildRouteKey(r) {
-  const id = String(r?.id || "").trim();
-  if (id) return `id:${id}`;
+function getSpotPoint(spot) {
+  return pairFrom(spot?.lat, spot?.lng);
+}
 
-  const name = String(r?.name || "").trim().toLowerCase();
+function findSpotsAlongRoute(route, spots = []) {
+  if (!route || !Array.isArray(spots) || !spots.length) return [];
 
-  const s = Array.isArray(r?.start)
-    ? `${Number(r.start[0]).toFixed(5)},${Number(r.start[1]).toFixed(5)}`
-    : "";
+  const routePoints = extractRoutePoints(route);
+  if (!routePoints.length) return [];
 
-  const e = Array.isArray(r?.end)
-    ? `${Number(r.end[0]).toFixed(5)},${Number(r.end[1]).toFixed(5)}`
-    : "";
+  const bounds = getRouteBounds(routePoints);
+  const candidates = [];
 
-  return `n:${name}|${s}|${e}`;
+  for (const spot of spots) {
+    const sp = getSpotPoint(spot);
+    if (!sp) continue;
+    if (bounds && !pointInBounds(sp, bounds)) continue;
+
+    let bestKm = Infinity;
+
+    for (const rp of routePoints) {
+      const km = haversineKm(rp, sp);
+      if (km < bestKm) bestKm = km;
+      if (bestKm <= SPOT_NEAR_POINT_KM) break;
+    }
+
+    if (bestKm <= SPOT_NEAR_ROUTE_KM) {
+      candidates.push({
+        ...spot,
+        _distanceKm: Math.round(bestKm * 10) / 10,
+      });
+    }
+  }
+
+  candidates.sort((a, b) => {
+    const da = Number(a._distanceKm ?? Infinity);
+    const db = Number(b._distanceKm ?? Infinity);
+    if (da !== db) return da - db;
+
+    const sa = Number(a.score || 0);
+    const sb = Number(b.score || 0);
+    if (sb !== sa) return sb - sa;
+
+    const ra = Number(a.rating || 0);
+    const rb = Number(b.rating || 0);
+    return rb - ra;
+  });
+
+  const seen = new Set();
+  const final = [];
+
+  for (const spot of candidates) {
+    const key =
+      String(spot.sourceId || "").trim() ||
+      `${String(spot.name || "").toLowerCase()}_${Number(spot.lat).toFixed(4)}_${Number(
+        spot.lng
+      ).toFixed(4)}`;
+
+    if (seen.has(key)) continue;
+    seen.add(key);
+    final.push(spot);
+
+    if (final.length >= MAX_ROUTE_SPOTS) break;
+  }
+
+  return final;
 }
 
 function SkeletonLoading() {
@@ -220,7 +476,9 @@ export default function Routes() {
       setErr("");
 
       try {
-        const data = await fetch("/data/routes.json", { cache: "no-store" })
+        const data = await fetch("/data/routes.cleaned.json", {
+          cache: "no-store",
+        })
           .then((r) => (r.ok ? r.json() : []))
           .catch(() => []);
 
@@ -298,8 +556,10 @@ export default function Routes() {
     const sorter =
       {
         rating: (a, b) => Number(b.rating || 0) - Number(a.rating || 0),
-        distance: (a, b) => Number(b.distanceKm || 0) - Number(a.distanceKm || 0),
-        curves: (a, b) => Number(b.curvesScore || 0) - Number(a.curvesScore || 0),
+        distance: (a, b) =>
+          Number(b.distanceKm || 0) - Number(a.distanceKm || 0),
+        curves: (a, b) =>
+          Number(b.curvesScore || 0) - Number(a.curvesScore || 0),
       }[sortBy] || (() => 0);
 
     out.sort(sorter);
@@ -363,7 +623,7 @@ export default function Routes() {
                 className="routes-subtitle"
                 style={{ opacity: 0.75, marginTop: 6 }}
               >
-                Touring emozionale: mappa, meteo e Google Maps.
+                Touring emozionale: mappa, meteo e passi reali lungo il percorso.
               </div>
             </div>
 
@@ -726,7 +986,9 @@ function RouteCard({ route, active, onSelect }) {
           }}
         />
         <div style={{ padding: 12 }}>
-          <div style={{ display: "flex", justifyContent: "space-between", gap: 10 }}>
+          <div
+            style={{ display: "flex", justifyContent: "space-between", gap: 10 }}
+          >
             <div style={{ fontWeight: 900, lineHeight: 1.15 }}>
               {route.country ? `${route.country} ` : ""}
               {route.name}
@@ -763,6 +1025,9 @@ function RouteDetail({ route }) {
   const [wx, setWx] = useState(null);
   const [wxBusy, setWxBusy] = useState(false);
 
+  const [spots, setSpots] = useState([]);
+  const [spotsBusy, setSpotsBusy] = useState(false);
+
   const routeKey = buildRouteKey(route);
   const displayDescription =
     String(route?.description || "").trim() || "Descrizione non disponibile.";
@@ -781,6 +1046,39 @@ function RouteDetail({ route }) {
         setWx({ ok: false, note: e?.message || "Meteo non disponibile." });
       } finally {
         if (alive) setWxBusy(false);
+      }
+    }
+
+    run();
+
+    return () => {
+      alive = false;
+    };
+  }, [routeKey, route]);
+
+  useEffect(() => {
+    let alive = true;
+
+    async function run() {
+      try {
+        setSpotsBusy(true);
+
+        const data = await fetch("/data/rider-spots.cleaned.json", {
+          cache: "force-cache",
+        })
+          .then((r) => (r.ok ? r.json() : []))
+          .catch(() => []);
+
+        if (!alive) return;
+
+        const arr = Array.isArray(data) ? data : [];
+        const linked = findSpotsAlongRoute(route, arr);
+        setSpots(linked);
+      } catch {
+        if (!alive) return;
+        setSpots([]);
+      } finally {
+        if (alive) setSpotsBusy(false);
       }
     }
 
@@ -887,6 +1185,121 @@ function RouteDetail({ route }) {
           >
             {displayDescription}
           </div>
+        </div>
+
+        <div
+          style={{
+            marginTop: 12,
+            borderTop: "1px solid rgba(0,0,0,0.08)",
+            paddingTop: 12,
+          }}
+        >
+          <strong>🏔️ Passi lungo il percorso</strong>
+
+          {spotsBusy ? (
+            <div
+              style={{
+                marginTop: 10,
+                padding: 12,
+                borderRadius: 16,
+                background: "rgba(0,0,0,0.04)",
+              }}
+            >
+              Cerco i passi reali lungo la rotta…
+            </div>
+          ) : !spots.length ? (
+            <div
+              style={{
+                marginTop: 10,
+                padding: 12,
+                borderRadius: 16,
+                background: "rgba(0,0,0,0.04)",
+              }}
+            >
+              Nessun passo collegato trovato nel dataset pulito.
+            </div>
+          ) : (
+            <div style={{ marginTop: 10, display: "grid", gap: 10 }}>
+              {spots.map((spot) => (
+                <div
+                  key={
+                    spot.sourceId ||
+                    `${spot.name}-${spot.lat}-${spot.lng}`
+                  }
+                  style={{
+                    padding: 12,
+                    borderRadius: 14,
+                    border: "1px solid rgba(0,0,0,0.10)",
+                    background: "white",
+                    display: "grid",
+                    gap: 6,
+                  }}
+                >
+                  <div
+                    style={{
+                      display: "flex",
+                      justifyContent: "space-between",
+                      gap: 10,
+                      alignItems: "start",
+                      flexWrap: "wrap",
+                    }}
+                  >
+                    <div style={{ fontWeight: 900, lineHeight: 1.2 }}>
+                      {spot.name}
+                    </div>
+
+                    <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
+                      {spot._distanceKm != null ? (
+                        <span style={pill("light")}>
+                          📍 {spot._distanceKm} km
+                        </span>
+                      ) : null}
+
+                      {spot.rating != null ? (
+                        <span style={pill("light")}>
+                          ⭐ {Number(spot.rating).toFixed(1)}
+                        </span>
+                      ) : null}
+                    </div>
+                  </div>
+
+                  <div style={{ fontSize: 13, opacity: 0.82 }}>
+                    {spot.region || spot.country || "—"}
+                    {spot.address ? ` · ${spot.address}` : ""}
+                  </div>
+
+                  <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
+                    {Array.isArray(spot.tags)
+                      ? spot.tags.slice(0, 4).map((tag) => (
+                          <span key={tag} style={pill("light")}>
+                            #{tag}
+                          </span>
+                        ))
+                      : null}
+                  </div>
+
+                  {spot.googleMapsUri ? (
+                    <div>
+                      <button
+                        type="button"
+                        onClick={() => openGoogleMapsSmart(spot.googleMapsUri)}
+                        style={{
+                          padding: "9px 11px",
+                          borderRadius: 12,
+                          border: "1px solid rgba(0,0,0,0.15)",
+                          background: "white",
+                          cursor: "pointer",
+                          fontWeight: 800,
+                        }}
+                      >
+                        📍 Apri in Google Maps
+                      </button>
+                    </div>
+                  ) : null}
+                </div>
+              ))}
+            </div>
+          )}
         </div>
 
         <div
