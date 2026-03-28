@@ -4,10 +4,10 @@
 //
 // Input:
 //   client/public/data/routes.json
-//   client/public/data/routes.generated.json
+//   client/public/data/routes.generated.<SCOPE>.json
 //
 // Output:
-//   client/public/data/routes.merged.json
+//   client/public/data/routes.merged.<SCOPE>.json
 //
 // Scopo:
 // - unire dataset live + generated
@@ -16,16 +16,33 @@
 // - mantenere formato compatibile con Routes.jsx
 //
 // Avvio:
-//   node server/scripts/mergeRoutesIntoLiveDataset.js
+//   node server/scripts/mergeRoutesIntoLiveDataset.js --country=IT --scope=italy-nw
+//   node server/scripts/mergeRoutesIntoLiveDataset.js --country=IT
 // =======================================================
 
 import path from "path";
 import fs from "fs/promises";
 import process from "process";
+import {
+  parseCliArgs,
+  getScopeConfig,
+  getScopeSuffix,
+} from "./lib/routeScopes.js";
+
+const args = parseCliArgs();
+const country = String(args.country || "IT").toUpperCase();
+const scope = args.scope ? String(args.scope) : null;
+
+const scopeCfg = getScopeConfig({ country, scope });
+const scopeSuffix = getScopeSuffix({ country, scope });
 
 const LIVE_FILE = path.resolve("client/public/data/routes.json");
-const GENERATED_FILE = path.resolve("client/public/data/routes.generated.json");
-const OUT_FILE = path.resolve("client/public/data/routes.merged.json");
+const GENERATED_FILE = path.resolve(
+  `client/public/data/routes.generated.${scopeSuffix}.json`
+);
+const OUT_FILE = path.resolve(
+  `client/public/data/routes.merged.${scopeSuffix}.json`
+);
 
 function slugify(input) {
   return String(input || "")
@@ -54,7 +71,10 @@ function normalizeText(s) {
 
 function routeNameKey(route) {
   return normalizeText(route?.name || "")
-    .replace(/\b(giro|itinerario|tour|route|panoramico|costiero|montagna|lago|fiordi|foreste)\b/g, " ")
+    .replace(
+      /\b(giro|itinerario|tour|route|panoramico|costiero|montagna|lago|fiordi|foreste|rider)\b/g,
+      " "
+    )
     .replace(/\s+/g, " ")
     .trim();
 }
@@ -137,6 +157,7 @@ function normalizeSpots(route) {
         lat,
         lng,
         country: s?.country || null,
+        scope: s?.scope || null,
       };
     })
     .filter(Boolean);
@@ -155,7 +176,9 @@ function normalizeRoute(route, sourceLabel = "live") {
     type: route?.type || "touring",
     rideType: route?.rideType || null,
     mode: route?.mode || null,
-    country: route?.country || null,
+    country: route?.country || country || null,
+    scope: route?.scope || scope || "all",
+    scopeName: route?.scopeName || scopeCfg.scopeName,
     region: route?.region || null,
     source: route?.source || sourceLabel,
     distanceKm: toNum(route?.distanceKm),
@@ -199,11 +222,16 @@ function normalizeRoute(route, sourceLabel = "live") {
 }
 
 function routeSignature(route) {
-  const spotNames = (route?.spots || []).map((s) => slugify(s.slug || s.name)).sort();
-  const wpNames = (route?.waypoints || []).map((w) => slugify(w.name)).sort();
+  const spotNames = (route?.spots || [])
+    .map((s) => slugify(s.slug || s.name))
+    .sort();
+  const wpNames = (route?.waypoints || [])
+    .map((w) => slugify(w.name))
+    .sort();
 
   return [
     route?.country || "",
+    route?.scope || "",
     route?.region || "",
     route?.rideType || "",
     routeNameKey(route),
@@ -223,6 +251,7 @@ function softSignature(route) {
 
   return [
     route?.country || "",
+    route?.scope || "",
     route?.region || "",
     route?.rideType || "",
     start,
@@ -248,6 +277,8 @@ function qualityScore(route) {
   if (Array.isArray(route?.coords)) score += Math.min(Math.floor(route.coords.length / 20), 10);
 
   if (route?.source === "generated_from_rider_spots") score += 4;
+  if (route?.country === country) score += 2;
+  if ((route?.scope || "all") === (scope || "all")) score += 2;
 
   return score;
 }
@@ -265,6 +296,8 @@ function mergeTwoRoutes(a, b) {
     rideType: better.rideType || other.rideType || null,
     mode: better.mode || other.mode || null,
     country: better.country || other.country || null,
+    scope: better.scope || other.scope || "all",
+    scopeName: better.scopeName || other.scopeName || scopeCfg.scopeName,
     region: better.region || other.region || null,
     source: better.source || other.source,
     distanceKm: better.distanceKm ?? other.distanceKm ?? null,
@@ -290,6 +323,11 @@ async function main() {
   console.log("====================================");
   console.log("MotoPortEU — Merge Routes Into Live");
   console.log("====================================");
+  console.log(`🌍 Country: ${scopeCfg.countryName} (${country})`);
+  console.log(`🧭 Scope: ${scopeCfg.scopeName}`);
+  console.log(`📥 Live: ${LIVE_FILE}`);
+  console.log(`📥 Generated: ${GENERATED_FILE}`);
+  console.log(`💾 Output: ${OUT_FILE}`);
 
   const liveRaw = JSON.parse(await fs.readFile(LIVE_FILE, "utf8"));
   const generatedRaw = JSON.parse(await fs.readFile(GENERATED_FILE, "utf8"));
@@ -320,7 +358,9 @@ async function main() {
       const idx = bySoft.get(soft);
       merged[idx] = mergeTwoRoutes(merged[idx], route);
       const newHard = routeSignature(merged[idx]);
+      const newSoft = softSignature(merged[idx]);
       byHard.set(newHard, idx);
+      bySoft.set(newSoft, idx);
       return;
     }
 
@@ -338,6 +378,7 @@ async function main() {
     .sort((a, b) => {
       return (
         (a.country || "").localeCompare(b.country || "") ||
+        (a.scope || "").localeCompare(b.scope || "") ||
         (a.region || "").localeCompare(b.region || "") ||
         (a.rideType || "").localeCompare(b.rideType || "") ||
         a.name.localeCompare(b.name)
@@ -345,10 +386,11 @@ async function main() {
     })
     .map((r, i) => ({
       ...r,
-      id: r.id || `route-merged-${String(i + 1).padStart(5, "0")}`,
+      id: r.id || `route-merged-${scopeSuffix.toLowerCase()}-${String(i + 1).padStart(5, "0")}`,
       slug: r.slug || slugify(r.name || `route-merged-${i + 1}`),
     }));
 
+  await fs.mkdir(path.dirname(OUT_FILE), { recursive: true });
   await fs.writeFile(OUT_FILE, JSON.stringify(finalRoutes, null, 2), "utf8");
 
   const byRideType = finalRoutes.reduce((acc, item) => {

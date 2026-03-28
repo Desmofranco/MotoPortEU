@@ -1,0 +1,656 @@
+[
+  {
+    "id": "spot-passo-dei-dammusi-ChIJJ3LQ",
+    "sourceId": "spot-passo-dei-dammusi-ChIJJ3LQ",
+    "googlePlaceId": null,
+    "name": "Passo dei Dammusi",
+    "slug": "passo-dei-dammusi",
+    "type": "mountain_pass",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "sicily",
+    "scopeName": "Sicilia",
+    "lat": 37.8203661,
+    "lng": 15.011501999999998,
+    "region": null,
+    "regionHint": "Etna",
+    "address": "Unnamed Road,, 95012 Castiglione di Sicilia CT, Italy",
+    "rating": 4.9,
+    "userRatingCount": 14,
+    "rawTypes": [
+      "scenic_spot",
+      "tourist_attraction",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "scenic_spot",
+      "tourist_attraction",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "mountain",
+      "twisty",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Passo dei Dammusi"
+    ],
+    "riderScore": 80
+  },
+  {
+    "id": "spot-monte-vetore-ChIJp7PF",
+    "sourceId": "spot-monte-vetore-ChIJp7PF",
+    "googlePlaceId": null,
+    "name": "Monte Vetore",
+    "slug": "monte-vetore",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "sicily",
+    "scopeName": "Sicilia",
+    "lat": 37.690749499999995,
+    "lng": 14.983426699999999,
+    "region": null,
+    "regionHint": "Nebrodi",
+    "address": "Monte Vetore, 95032 Belpasso CT, Italy",
+    "rating": 4.6,
+    "userRatingCount": 71,
+    "rawTypes": [
+      "mountain_peak",
+      "natural_feature",
+      "establishment"
+    ],
+    "types": [
+      "mountain_peak",
+      "natural_feature",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Monte Vetore"
+    ],
+    "riderScore": 78
+  },
+  {
+    "id": "spot-passo-di-zingaro-ChIJNf-_",
+    "sourceId": "spot-passo-di-zingaro-ChIJNf-_",
+    "googlePlaceId": null,
+    "name": "Passo di Zingaro",
+    "slug": "passo-di-zingaro",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "sicily",
+    "scopeName": "Sicilia",
+    "lat": 37.7166667,
+    "lng": 14.833333299999998,
+    "region": null,
+    "regionHint": "Etna",
+    "address": "Passo di Zingaro, 95031 Adrano, Metropolitan city of Catania, Italy",
+    "rating": 4.7,
+    "userRatingCount": 9,
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "types": [
+      "natural_feature",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Passo di Zingaro"
+    ],
+    "riderScore": 78
+  },
+  {
+    "id": "spot-mxsimeto-off-road-park-ChIJ-8fM",
+    "sourceId": "spot-mxsimeto-off-road-park-ChIJ-8fM",
+    "googlePlaceId": null,
+    "name": "MXSIMETO OFF ROAD PARK",
+    "slug": "mxsimeto-off-road-park",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "sicily",
+    "scopeName": "Sicilia",
+    "lat": 37.530428,
+    "lng": 14.904329999999998,
+    "region": null,
+    "regionHint": "Etna",
+    "address": "37°31'49. 14°54'15., Via VI Traversa, 5, 95032 Belpasso CT, Italy",
+    "rating": 4.6,
+    "userRatingCount": 11,
+    "rawTypes": [
+      "gym",
+      "sports_activity_location",
+      "health",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "gym",
+      "sports_activity_location",
+      "health",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "MXSIMETO OFF ROAD PARK"
+    ],
+    "riderScore": 73
+  },
+  {
+    "id": "spot-madonie-a-passo-lento-ChIJcUsG",
+    "sourceId": "spot-madonie-a-passo-lento-ChIJcUsG",
+    "googlePlaceId": null,
+    "name": "Madonie a Passo Lento",
+    "slug": "madonie-a-passo-lento",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "sicily",
+    "scopeName": "Sicilia",
+    "lat": 37.915486699999995,
+    "lng": 14.1918545,
+    "region": null,
+    "regionHint": "Nebrodi",
+    "address": "Via Giuseppe Garibaldi, 4, 90010 San Mauro Castelverde PA, Italy",
+    "rating": 4.9,
+    "userRatingCount": 13,
+    "rawTypes": [
+      "tour_agency",
+      "travel_agency",
+      "point_of_interest",
+      "service",
+      "establishment"
+    ],
+    "types": [
+      "tour_agency",
+      "travel_agency",
+      "point_of_interest",
+      "service",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Madonie a Passo Lento"
+    ],
+    "riderScore": 70
+  },
+  {
+    "id": "spot-passo-passo-trekking-ChIJS1lL",
+    "sourceId": "spot-passo-passo-trekking-ChIJS1lL",
+    "googlePlaceId": null,
+    "name": "Passo Passo Trekking",
+    "slug": "passo-passo-trekking",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "sicily",
+    "scopeName": "Sicilia",
+    "lat": 37.7543201,
+    "lng": 15.144174,
+    "region": null,
+    "regionHint": "Etna",
+    "address": "via Guardiula n.33, Strada Provinciale Nunziata Puntalazzo, di, 95010 Mascali CT, Italy",
+    "rating": 4.3,
+    "userRatingCount": 4,
+    "rawTypes": [
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Passo Passo Trekking"
+    ],
+    "riderScore": 63
+  },
+  {
+    "id": "spot-etna-s-south-eastern-crater-ChIJL376",
+    "sourceId": "spot-etna-s-south-eastern-crater-ChIJL376",
+    "googlePlaceId": null,
+    "name": "Etna's South Eastern Crater",
+    "slug": "etna-s-south-eastern-crater",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "sicily",
+    "scopeName": "Sicilia",
+    "lat": 37.7475337,
+    "lng": 15.000679,
+    "region": null,
+    "regionHint": "Etna",
+    "address": "Parco dell'Etna, 95030 Nicolosi CT, Italy",
+    "rating": 4.9,
+    "userRatingCount": 205,
+    "rawTypes": [
+      "scenic_spot",
+      "wildlife_refuge",
+      "park",
+      "historical_place",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "scenic_spot",
+      "wildlife_refuge",
+      "park",
+      "historical_place",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Etna's South Eastern Crater"
+    ],
+    "riderScore": 50
+  },
+  {
+    "id": "spot-gruppo-guide-alpine-etna-sud-soc-coop-sede-amministrativa-ChIJsZHX",
+    "sourceId": "spot-gruppo-guide-alpine-etna-sud-soc-coop-sede-amministrativa-ChIJsZHX",
+    "googlePlaceId": null,
+    "name": "Gruppo Guide Alpine Etna Sud Soc. Coop (sede amministrativa)",
+    "slug": "gruppo-guide-alpine-etna-sud-soc-coop-sede-amministrativa",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "sicily",
+    "scopeName": "Sicilia",
+    "lat": 37.614480799999995,
+    "lng": 15.026155799999998,
+    "region": null,
+    "regionHint": "Etna",
+    "address": "Piazza Vittorio Emanuele, 43, 95052 Nicolosi CT, Italy",
+    "rating": 4.7,
+    "userRatingCount": 250,
+    "rawTypes": [
+      "tour_agency",
+      "travel_agency",
+      "point_of_interest",
+      "service",
+      "establishment"
+    ],
+    "types": [
+      "tour_agency",
+      "travel_agency",
+      "point_of_interest",
+      "service",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Gruppo Guide Alpine Etna Sud Soc. Coop (sede amministrativa)"
+    ],
+    "riderScore": 50
+  },
+  {
+    "id": "spot-lungomare-di-terrasini-ChIJ0TnU",
+    "sourceId": "spot-lungomare-di-terrasini-ChIJ0TnU",
+    "googlePlaceId": null,
+    "name": "Lungomare di Terrasini",
+    "slug": "lungomare-di-terrasini",
+    "type": "coastal_view",
+    "rideType": "coastal",
+    "country": "IT",
+    "scope": "sicily",
+    "scopeName": "Sicilia",
+    "lat": 38.1541855,
+    "lng": 13.0805326,
+    "region": null,
+    "regionHint": "Palermo / Trapani Coast",
+    "address": "Lungomare Peppino Impastato, 90049 Terrasini PA, Italy",
+    "rating": 4.6,
+    "userRatingCount": 605,
+    "rawTypes": [
+      "hiking_area",
+      "sports_activity_location",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "hiking_area",
+      "sports_activity_location",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "coast",
+      "sea",
+      "scenic",
+      "rider",
+      "panoramic",
+      "rider-spot"
+    ],
+    "aliases": [
+      "Lungomare di Terrasini"
+    ],
+    "riderScore": 43
+  },
+  {
+    "id": "spot-pista-altomontana-etna-cancello-filiciusa-ChIJpxK5",
+    "sourceId": "spot-pista-altomontana-etna-cancello-filiciusa-ChIJpxK5",
+    "googlePlaceId": null,
+    "name": "Pista Altomontana Etna - Cancello Filiciusa",
+    "slug": "pista-altomontana-etna-cancello-filiciusa",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "sicily",
+    "scopeName": "Sicilia",
+    "lat": 37.6916351,
+    "lng": 14.969794400000001,
+    "region": null,
+    "regionHint": "Etna",
+    "address": "strada per salire al Galvarina, 95054 Ragalna CT, Italy",
+    "rating": 4.8,
+    "userRatingCount": 204,
+    "rawTypes": [
+      "hiking_area",
+      "tourist_attraction",
+      "sports_activity_location",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "hiking_area",
+      "tourist_attraction",
+      "sports_activity_location",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "rider-spot"
+    ],
+    "aliases": [
+      "Pista Altomontana Etna - Cancello Filiciusa"
+    ],
+    "riderScore": 42
+  },
+  {
+    "id": "spot-pizzo-manolfo-ChIJV0oS",
+    "sourceId": "spot-pizzo-manolfo-ChIJV0oS",
+    "googlePlaceId": null,
+    "name": "Pizzo Manolfo",
+    "slug": "pizzo-manolfo",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "sicily",
+    "scopeName": "Sicilia",
+    "lat": 38.177006999999996,
+    "lng": 13.271472,
+    "region": null,
+    "regionHint": "Palermo / Trapani Coast",
+    "address": "Unnamed Road, Provincia di, 90147 Palermo PA, Italy",
+    "rating": 4.8,
+    "userRatingCount": 179,
+    "rawTypes": [
+      "scenic_spot",
+      "tourist_attraction",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "scenic_spot",
+      "tourist_attraction",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "rider-spot"
+    ],
+    "aliases": [
+      "Pizzo Manolfo"
+    ],
+    "riderScore": 42
+  },
+  {
+    "id": "spot-panoramic-view-of-the-coast-isola-delle-femmine-ChIJeQTy",
+    "sourceId": "spot-panoramic-view-of-the-coast-isola-delle-femmine-ChIJeQTy",
+    "googlePlaceId": null,
+    "name": "panoramic view of the coast - Isola delle Femmine",
+    "slug": "panoramic-view-of-the-coast-isola-delle-femmine",
+    "type": "coastal_view",
+    "rideType": "coastal",
+    "country": "IT",
+    "scope": "sicily",
+    "scopeName": "Sicilia",
+    "lat": 38.1845619,
+    "lng": 13.258578199999999,
+    "region": null,
+    "regionHint": "Palermo / Trapani Coast",
+    "address": "90040 Torretta, PA, Italy",
+    "rating": 5,
+    "userRatingCount": 4,
+    "rawTypes": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "coast",
+      "sea",
+      "scenic",
+      "rider",
+      "panoramic",
+      "rider-spot"
+    ],
+    "aliases": [
+      "panoramic view of the coast - Isola delle Femmine"
+    ],
+    "riderScore": 41
+  },
+  {
+    "id": "spot-capo-milazzo-ChIJ7Z-R",
+    "sourceId": "spot-capo-milazzo-ChIJ7Z-R",
+    "googlePlaceId": null,
+    "name": "Capo Milazzo",
+    "slug": "capo-milazzo",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "sicily",
+    "scopeName": "Sicilia",
+    "lat": 38.2695247,
+    "lng": 15.227588800000001,
+    "region": null,
+    "regionHint": "Etna",
+    "address": "Unnamed Road, 98057 Milazzo ME, Italy",
+    "rating": 4.8,
+    "userRatingCount": 321,
+    "rawTypes": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "rider-spot"
+    ],
+    "aliases": [
+      "Capo Milazzo"
+    ],
+    "riderScore": 40
+  },
+  {
+    "id": "spot-monte-pellegrino-punto-panoramico-sull-addaura-ChIJLVct",
+    "sourceId": "spot-monte-pellegrino-punto-panoramico-sull-addaura-ChIJLVct",
+    "googlePlaceId": null,
+    "name": "Monte Pellegrino: punto panoramico sull'Addaura",
+    "slug": "monte-pellegrino-punto-panoramico-sull-addaura",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "sicily",
+    "scopeName": "Sicilia",
+    "lat": 38.1841794,
+    "lng": 13.351104399999999,
+    "region": null,
+    "regionHint": "Palermo / Trapani Coast",
+    "address": "90149 Palermo, PA, Italy",
+    "rating": 4.8,
+    "userRatingCount": 187,
+    "rawTypes": [
+      "wildlife_refuge",
+      "park",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "wildlife_refuge",
+      "park",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "rider-spot"
+    ],
+    "aliases": [
+      "Monte Pellegrino: punto panoramico sull'Addaura"
+    ],
+    "riderScore": 40
+  },
+  {
+    "id": "spot-panoramic-view-of-avola-ChIJAUV0",
+    "sourceId": "spot-panoramic-view-of-avola-ChIJAUV0",
+    "googlePlaceId": null,
+    "name": "Panoramic view of Avola",
+    "slug": "panoramic-view-of-avola",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "sicily",
+    "scopeName": "Sicilia",
+    "lat": 36.931389599999996,
+    "lng": 15.1078825,
+    "region": null,
+    "regionHint": "Ragusa / Val di Noto",
+    "address": "96012 Avola, Free municipal consortium of Syracuse, Italy",
+    "rating": 4.7,
+    "userRatingCount": 165,
+    "rawTypes": [
+      "observation_deck",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "observation_deck",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "rider-spot"
+    ],
+    "aliases": [
+      "Panoramic view of Avola"
+    ],
+    "riderScore": 40
+  }
+]

@@ -1,0 +1,2026 @@
+[
+  {
+    "id": "spot-passo-ghenna-silana-ChIJqf3R",
+    "name": "Passo Ghenna Silana",
+    "slug": "passo-ghenna-silana",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "sardinia",
+    "scopeName": "Sardegna",
+    "lat": 40.1589281,
+    "lng": 9.5080296,
+    "regionHint": "Supramonte",
+    "address": "SS 125 Orientale Sarda, 08040 Urzulei Provincia dell'Ogliastra, Italy",
+    "rating": 4.8,
+    "userRatingCount": 2682,
+    "types": [
+      "historical_landmark",
+      "tourist_attraction",
+      "historical_place",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic"
+    ],
+    "aliases": [
+      "Passo Ghenna Silana"
+    ],
+    "score": 64
+  },
+  {
+    "id": "spot-punto-panoramico-ripetitori-ChIJc-8e",
+    "name": "Punto panoramico ripetitori",
+    "slug": "punto-panoramico-ripetitori",
+    "type": "lake_view",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "sardinia",
+    "scopeName": "Sardegna",
+    "lat": 39.4657623,
+    "lng": 8.726849699999999,
+    "regionHint": "Sulcis / Iglesiente",
+    "address": "SC, 09039 Villacidro VS, Italy",
+    "rating": 4.8,
+    "userRatingCount": 66,
+    "types": [
+      "scenic_spot",
+      "tourist_attraction",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "lake"
+    ],
+    "aliases": [
+      "Punto panoramico ripetitori"
+    ],
+    "score": 58
+  },
+  {
+    "id": "spot-passo-littu-ChIJ6W17",
+    "name": "Passo Littu",
+    "slug": "passo-littu",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "sardinia",
+    "scopeName": "Sardegna",
+    "lat": 40.299766,
+    "lng": 9.6327534,
+    "regionHint": "Supramonte",
+    "address": "strada Ispinigoli, 08022 Dorgali NU, Italy",
+    "rating": 4.8,
+    "userRatingCount": 99,
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic"
+    ],
+    "aliases": [
+      "Passo Littu"
+    ],
+    "score": 56
+  },
+  {
+    "id": "spot-passo-di-correboi-ChIJAUex",
+    "name": "Passo di Correboi",
+    "slug": "passo-di-correboi",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "sardinia",
+    "scopeName": "Sardegna",
+    "lat": 40.0748366,
+    "lng": 9.3592655,
+    "regionHint": "Supramonte",
+    "address": "08023 Orgosolo NU, Italy",
+    "rating": 4.8,
+    "userRatingCount": 30,
+    "types": [
+      "tourist_attraction",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic"
+    ],
+    "aliases": [
+      "Passo di Correboi"
+    ],
+    "score": 54
+  },
+  {
+    "id": "spot-passo-genna-arramene-ChIJzQgB",
+    "name": "Passo Genna Arramene",
+    "slug": "passo-genna-arramene",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "sardinia",
+    "scopeName": "Sardegna",
+    "lat": 40.0543137,
+    "lng": 9.6261388,
+    "regionHint": "Supramonte",
+    "address": "SS 125 Orientale Sarda, 08040 Baunei Provincia dell'Ogliastra, Italy",
+    "rating": 4.8,
+    "userRatingCount": 140,
+    "types": [
+      "tourist_attraction",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic"
+    ],
+    "aliases": [
+      "Passo Genna Arramene"
+    ],
+    "score": 54
+  },
+  {
+    "id": "spot-punto-panoramico-di-talana-ChIJP-p5",
+    "name": "Punto Panoramico di Talana",
+    "slug": "punto-panoramico-di-talana",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "sardinia",
+    "scopeName": "Sardegna",
+    "lat": 40.035420699999996,
+    "lng": 9.478408,
+    "regionHint": "Supramonte",
+    "address": "Unnamed Road, 08040, 08040 Talana Provincia dell'Ogliastra, Italy",
+    "rating": 4.8,
+    "userRatingCount": 42,
+    "types": [
+      "tourist_attraction",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider"
+    ],
+    "aliases": [
+      "Punto Panoramico di Talana"
+    ],
+    "score": 50
+  },
+  {
+    "id": "spot-piazzola-panoramica-lago-coghinas-ChIJTYCh",
+    "name": "Piazzola panoramica Lago Coghinas",
+    "slug": "piazzola-panoramica-lago-coghinas",
+    "type": "lake_view",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "sardinia",
+    "scopeName": "Sardegna",
+    "lat": 40.7587019,
+    "lng": 9.0131959,
+    "regionHint": "Costa Smeralda / Gallura",
+    "address": "07010 Lago, Coghinas SS, Italy",
+    "rating": 4.5,
+    "userRatingCount": 52,
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "lake"
+    ],
+    "aliases": [
+      "Piazzola panoramica Lago Coghinas"
+    ],
+    "score": 49
+  },
+  {
+    "id": "spot-punto-panoramico-sul-lago-corsi-ChIJz-nb",
+    "name": "Punto panoramico sul Lago Corsi",
+    "slug": "punto-panoramico-sul-lago-corsi",
+    "type": "lake_view",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "sardinia",
+    "scopeName": "Sardegna",
+    "lat": 39.333376,
+    "lng": 8.528960999999999,
+    "regionHint": "Sulcis / Iglesiente",
+    "address": "8GMH+9H, 09016 Iglesias, Province of Sulcis Iglesiente, Italy",
+    "rating": 4.8,
+    "userRatingCount": 9,
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "lake"
+    ],
+    "aliases": [
+      "Punto panoramico sul Lago Corsi"
+    ],
+    "score": 49
+  },
+  {
+    "id": "spot-terrazza-panoramica-sul-lago-del-flumendosa-ChIJc12z",
+    "name": "Terrazza panoramica sul lago del Flumendosa",
+    "slug": "terrazza-panoramica-sul-lago-del-flumendosa",
+    "type": "lake_view",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "sardinia",
+    "scopeName": "Sardegna",
+    "lat": 39.686380299999996,
+    "lng": 9.2866579,
+    "regionHint": "Supramonte",
+    "address": "08030 Orroli, Metropolitan City of Cagliari, Italy",
+    "rating": 5,
+    "userRatingCount": 17,
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "lake"
+    ],
+    "aliases": [
+      "Terrazza panoramica sul lago del Flumendosa"
+    ],
+    "score": 49
+  },
+  {
+    "id": "spot-passo-di-tascusi-ChIJX-p5",
+    "name": "Passo di Tascusì",
+    "slug": "passo-di-tascusi",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "sardinia",
+    "scopeName": "Sardegna",
+    "lat": 40.032055,
+    "lng": 9.2310721,
+    "regionHint": "Supramonte",
+    "address": "Passo Tascusì, 08032 Desulo NU, Italy",
+    "rating": 4.7,
+    "userRatingCount": 70,
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic"
+    ],
+    "aliases": [
+      "Passo di Tascusì"
+    ],
+    "score": 48
+  },
+  {
+    "id": "spot-belvedere-foradada-ChIJ_4Yd",
+    "name": "Belvedere Foradada",
+    "slug": "belvedere-foradada",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "sardinia",
+    "scopeName": "Sardegna",
+    "lat": 40.5743052,
+    "lng": 8.1588919,
+    "regionHint": "Alghero / Bosa Coast",
+    "address": "Strada Provinciale 55, 07041 Alghero SS, Italy",
+    "rating": 4.9,
+    "userRatingCount": 983,
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider"
+    ],
+    "aliases": [
+      "Belvedere Foradada"
+    ],
+    "score": 47
+  },
+  {
+    "id": "spot-passeggiata-panoramica-di-nebida-ChIJ9_fy",
+    "name": "Passeggiata panoramica di Nebida",
+    "slug": "passeggiata-panoramica-di-nebida",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "sardinia",
+    "scopeName": "Sardegna",
+    "lat": 39.310832999999995,
+    "lng": 8.434320399999999,
+    "regionHint": "Sulcis / Iglesiente",
+    "address": "Frazione Nebida Settore A, 09016 Nebida CI, Italy",
+    "rating": 4.9,
+    "userRatingCount": 858,
+    "types": [
+      "tourist_attraction",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider"
+    ],
+    "aliases": [
+      "Passeggiata panoramica di Nebida"
+    ],
+    "score": 47
+  },
+  {
+    "id": "spot-punto-panoramico-croce-di-seddanus-ChIJXYhj",
+    "name": "Punto panoramico Croce di Seddanus",
+    "slug": "punto-panoramico-croce-di-seddanus",
+    "type": "lake_view",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "sardinia",
+    "scopeName": "Sardegna",
+    "lat": 39.461620499999995,
+    "lng": 8.7323987,
+    "regionHint": "Sulcis / Iglesiente",
+    "address": "Via Sa Spendula, 1, 09039 Villacidro VS, Italy",
+    "rating": 4.6,
+    "userRatingCount": 149,
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "lake"
+    ],
+    "aliases": [
+      "Punto panoramico Croce di Seddanus"
+    ],
+    "score": 47
+  },
+  {
+    "id": "spot-scogliera-panoramica-ChIJUZ92",
+    "name": "Scogliera Panoramica",
+    "slug": "scogliera-panoramica",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "sardinia",
+    "scopeName": "Sardegna",
+    "lat": 40.0516387,
+    "lng": 8.4026731,
+    "regionHint": "Alghero / Bosa Coast",
+    "address": "Ex Strada Provinciale 10, 09070 San Vero Milis OR, Italy",
+    "rating": 4.9,
+    "userRatingCount": 21,
+    "types": [
+      "tourist_attraction",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider"
+    ],
+    "aliases": [
+      "Scogliera Panoramica"
+    ],
+    "score": 45
+  },
+  {
+    "id": "spot-belvedere-a-capo-coda-cavallo-ChIJ1Xln",
+    "name": "Belvedere a Capo Coda Cavallo",
+    "slug": "belvedere-a-capo-coda-cavallo",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "sardinia",
+    "scopeName": "Sardegna",
+    "lat": 40.8403892,
+    "lng": 9.715871800000002,
+    "regionHint": "Costa Smeralda / Gallura",
+    "address": "Località Capo Coda Cavallo, 07052 San Teodoro OT, Italy",
+    "rating": 4.8,
+    "userRatingCount": 1604,
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider"
+    ],
+    "aliases": [
+      "Belvedere a Capo Coda Cavallo"
+    ],
+    "score": 44
+  },
+  {
+    "id": "spot-punto-panoramico-strada-statale-129bis-bosa-ChIJtyE4",
+    "name": "Punto panoramico Strada Statale 129bis - Bosa",
+    "slug": "punto-panoramico-strada-statale-129bis-bosa",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "sardinia",
+    "scopeName": "Sardegna",
+    "lat": 40.28857130000001,
+    "lng": 8.503376099999999,
+    "regionHint": "Alghero / Bosa Coast",
+    "address": "SS 129bis Trasversale Sarda, 3, 08013 Bosa OR, Italy",
+    "rating": 4.7,
+    "userRatingCount": 127,
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider"
+    ],
+    "aliases": [
+      "Punto panoramico Strada Statale 129bis - Bosa"
+    ],
+    "score": 44
+  },
+  {
+    "id": "spot-strada-panoramica-alghero-bosa-ChIJmalm",
+    "name": "Strada panoramica Alghero-Bosa",
+    "slug": "strada-panoramica-alghero-bosa",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "sardinia",
+    "scopeName": "Sardegna",
+    "lat": 40.4778824,
+    "lng": 8.3790111,
+    "regionHint": "Alghero / Bosa Coast",
+    "address": "Strada Provinciale 105 Alghero-Bosa, 07019 Alghero SS, Italy",
+    "rating": 4.8,
+    "userRatingCount": 55,
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider"
+    ],
+    "aliases": [
+      "Strada panoramica Alghero-Bosa"
+    ],
+    "score": 44
+  },
+  {
+    "id": "spot-grotta-delle-brocche-rotte-ChIJey5x",
+    "name": "Grotta delle Brocche Rotte",
+    "slug": "grotta-delle-brocche-rotte",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "sardinia",
+    "scopeName": "Sardegna",
+    "lat": 40.5706206,
+    "lng": 8.1579777,
+    "regionHint": "Alghero / Bosa Coast",
+    "address": "Strada Provinciale 55, 07041 Alghero SS, Italy",
+    "rating": 4.8,
+    "userRatingCount": 401,
+    "types": [
+      "tourist_attraction",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider"
+    ],
+    "aliases": [
+      "Grotta delle Brocche Rotte"
+    ],
+    "score": 43
+  },
+  {
+    "id": "spot-nuraghe-serbissi-ChIJWU01",
+    "name": "Nuraghe Serbissi",
+    "slug": "nuraghe-serbissi",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "sardinia",
+    "scopeName": "Sardegna",
+    "lat": 39.8452778,
+    "lng": 9.4611111,
+    "regionHint": "Supramonte",
+    "address": "Serra Serbissi, Strada Statale 198 di Seui e Lanusei, 08040 Osini Provincia dell'Ogliastra, Italy",
+    "rating": 4.7,
+    "userRatingCount": 399,
+    "types": [
+      "tourist_attraction",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider"
+    ],
+    "aliases": [
+      "Nuraghe Serbissi"
+    ],
+    "score": 43
+  },
+  {
+    "id": "spot-passo-ucc-aidu-ChIJSTy2",
+    "name": "Passo Ucc'Aidu",
+    "slug": "passo-ucc-aidu",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "sardinia",
+    "scopeName": "Sardegna",
+    "lat": 40.431131799999996,
+    "lng": 9.0112237,
+    "regionHint": "Supramonte",
+    "address": "SP6, 07011 Bono SS, Italy",
+    "rating": 4.7,
+    "userRatingCount": 12,
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic"
+    ],
+    "aliases": [
+      "Passo Ucc'Aidu"
+    ],
+    "score": 43
+  },
+  {
+    "id": "spot-vedetta-punta-modighina-ChIJnyyq",
+    "name": "Vedetta Punta Modighina",
+    "slug": "vedetta-punta-modighina",
+    "type": "lake_view",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "sardinia",
+    "scopeName": "Sardegna",
+    "lat": 39.8872284,
+    "lng": 8.973998800000002,
+    "regionHint": "Supramonte",
+    "address": "Unnamed Road, 08034, 09080 Laconi OR, Italy",
+    "rating": 4.8,
+    "userRatingCount": 4,
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "lake"
+    ],
+    "aliases": [
+      "Vedetta Punta Modighina"
+    ],
+    "score": 43
+  },
+  {
+    "id": "spot-belvedere-punta-est-ChIJKd9E",
+    "name": "Belvedere Punta Est",
+    "slug": "belvedere-punta-est",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "sardinia",
+    "scopeName": "Sardegna",
+    "lat": 40.8435401,
+    "lng": 9.7242813,
+    "regionHint": "Costa Smeralda / Gallura",
+    "address": "Unnamed Road, 08020, San Teodoro, Italy",
+    "rating": 4.7,
+    "userRatingCount": 44,
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider"
+    ],
+    "aliases": [
+      "Belvedere Punta Est"
+    ],
+    "score": 42
+  },
+  {
+    "id": "spot-panoramica-villacidro-ChIJzW7m",
+    "name": "Panoramica Villacidro",
+    "slug": "panoramica-villacidro",
+    "type": "lake_view",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "sardinia",
+    "scopeName": "Sardegna",
+    "lat": 39.461938499999995,
+    "lng": 8.7306594,
+    "regionHint": "Sulcis / Iglesiente",
+    "address": "Via Pineta, 230, 09039 Villacidro VS, Italy",
+    "rating": 4.6,
+    "userRatingCount": 12,
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "lake"
+    ],
+    "aliases": [
+      "Panoramica Villacidro"
+    ],
+    "score": 42
+  },
+  {
+    "id": "spot-punto-panoramico-croce-del-carmine-ChIJ73fe",
+    "name": "Punto panoramico Croce del Carmine",
+    "slug": "punto-panoramico-croce-del-carmine",
+    "type": "lake_view",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "sardinia",
+    "scopeName": "Sardegna",
+    "lat": 39.453998600000006,
+    "lng": 8.7314474,
+    "regionHint": "Sulcis / Iglesiente",
+    "address": "Via della Libertà, 53, 09039 Villacidro VS, Italy",
+    "rating": 4.6,
+    "userRatingCount": 26,
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "lake"
+    ],
+    "aliases": [
+      "Punto panoramico Croce del Carmine"
+    ],
+    "score": 42
+  },
+  {
+    "id": "spot-punto-panoramico-di-bruncu-mogumu-ChIJB34h",
+    "name": "Punto panoramico di Bruncu Mogumu",
+    "slug": "punto-panoramico-di-bruncu-mogumu",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "sardinia",
+    "scopeName": "Sardegna",
+    "lat": 39.3217189,
+    "lng": 9.1940785,
+    "regionHint": "Sulcis / Iglesiente",
+    "address": "Via del Lentischio, 09048 Sinnai CA, Italy",
+    "rating": 4.8,
+    "userRatingCount": 185,
+    "types": [
+      "scenic_spot",
+      "tourist_attraction",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider"
+    ],
+    "aliases": [
+      "Punto panoramico di Bruncu Mogumu"
+    ],
+    "score": 42
+  },
+  {
+    "id": "spot-cala-gonone-viewpoint-ChIJsWT7",
+    "name": "Cala Gonone Viewpoint",
+    "slug": "cala-gonone-viewpoint",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "sardinia",
+    "scopeName": "Sardegna",
+    "lat": 40.2906876,
+    "lng": 9.6408416,
+    "regionHint": "Supramonte",
+    "address": "Via Codula e' Gostui, 08022 Dorgali NU, Italy",
+    "rating": 4.8,
+    "userRatingCount": 64,
+    "types": [
+      "tourist_attraction",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider"
+    ],
+    "aliases": [
+      "Cala Gonone Viewpoint"
+    ],
+    "score": 40
+  },
+  {
+    "id": "spot-viewpoint-cala-gonone-dorgali-ChIJz5UP",
+    "name": "Viewpoint cala gonone, dorgali",
+    "slug": "viewpoint-cala-gonone-dorgali",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "sardinia",
+    "scopeName": "Sardegna",
+    "lat": 40.2743809,
+    "lng": 9.5980888,
+    "regionHint": "Supramonte",
+    "address": "Galleria Vecchia per Cala Gonone, 08022 Dorgali NU, Italy",
+    "rating": 4.9,
+    "userRatingCount": 41,
+    "types": [
+      "tourist_attraction",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider"
+    ],
+    "aliases": [
+      "Viewpoint cala gonone, dorgali"
+    ],
+    "score": 40
+  },
+  {
+    "id": "spot-vista-point-coastal-drive-alghero-bosa-ChIJQ-xo",
+    "name": "Vista point coastal drive Alghero - Bosa",
+    "slug": "vista-point-coastal-drive-alghero-bosa",
+    "type": "coastal_view",
+    "rideType": "coastal",
+    "country": "IT",
+    "scope": "sardinia",
+    "scopeName": "Sardegna",
+    "lat": 40.373030299999996,
+    "lng": 8.4032111,
+    "regionHint": "Alghero / Bosa Coast",
+    "address": "08013 Bosa, Province of Oristano, Italy",
+    "rating": null,
+    "userRatingCount": null,
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "coast",
+      "sea",
+      "scenic",
+      "rider",
+      "panoramic"
+    ],
+    "aliases": [
+      "Vista point coastal drive Alghero - Bosa"
+    ],
+    "score": 40
+  },
+  {
+    "id": "spot-galleria-panoramica-capo-d-aquila-ChIJ6fqb",
+    "name": "Galleria Panoramica Capo d 'Aquila",
+    "slug": "galleria-panoramica-capo-d-aquila",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "sardinia",
+    "scopeName": "Sardegna",
+    "lat": 40.441484599999995,
+    "lng": 8.3955275,
+    "regionHint": "Alghero / Bosa Coast",
+    "address": "Strada Provinciale 105 Alghero-Bosa, 07019 Alghero SS, Italy",
+    "rating": 4.7,
+    "userRatingCount": 15,
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider"
+    ],
+    "aliases": [
+      "Galleria Panoramica Capo d 'Aquila"
+    ],
+    "score": 39
+  },
+  {
+    "id": "spot-punto-panoramico-di-santa-lucia-ChIJhaA6",
+    "name": "Punto panoramico di Santa Lucia",
+    "slug": "punto-panoramico-di-santa-lucia",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "sardinia",
+    "scopeName": "Sardegna",
+    "lat": 39.406409599999996,
+    "lng": 9.5768008,
+    "regionHint": "Ogliastra",
+    "address": "Unnamed Road, 09043, 09043 Muravera CA, Italy",
+    "rating": 5,
+    "userRatingCount": 2,
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider"
+    ],
+    "aliases": [
+      "Punto panoramico di Santa Lucia"
+    ],
+    "score": 39
+  },
+  {
+    "id": "spot-santu-miali-ChIJ1eRx",
+    "name": "Santu Miali",
+    "slug": "santu-miali",
+    "type": "lake_view",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "sardinia",
+    "scopeName": "Sardegna",
+    "lat": 39.449833999999996,
+    "lng": 8.685449,
+    "regionHint": "Sulcis / Iglesiente",
+    "address": "Unnamed Road, 09039, 09039 Villacidro VS, Italy",
+    "rating": 4.5,
+    "userRatingCount": 4,
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "lake"
+    ],
+    "aliases": [
+      "Santu Miali"
+    ],
+    "score": 38
+  },
+  {
+    "id": "spot-belvedere-baccu-arrodas-ChIJV14B",
+    "name": "Belvedere Baccu Arrodas",
+    "slug": "belvedere-baccu-arrodas",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "sardinia",
+    "scopeName": "Sardegna",
+    "lat": 39.394838299999996,
+    "lng": 9.5664617,
+    "regionHint": "Ogliastra",
+    "address": "Unnamed Road, 09043, 09043 Muravera CA, Italy",
+    "rating": 4.8,
+    "userRatingCount": 18,
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider"
+    ],
+    "aliases": [
+      "Belvedere Baccu Arrodas"
+    ],
+    "score": 37
+  },
+  {
+    "id": "spot-cala-grotta-ChIJHQaA",
+    "name": "Cala Grotta",
+    "slug": "cala-grotta",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "sardinia",
+    "scopeName": "Sardegna",
+    "lat": 39.012392999999996,
+    "lng": 8.3763433,
+    "regionHint": "Sulcis / Iglesiente",
+    "address": "Unnamed Road, Sant'Antioco CI, 09017 Sant'Antioco, Italy",
+    "rating": 4.8,
+    "userRatingCount": 426,
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider"
+    ],
+    "aliases": [
+      "Cala Grotta"
+    ],
+    "score": 37
+  },
+  {
+    "id": "spot-punto-panoramico-golfo-di-bosa-ChIJVXY4",
+    "name": "Punto Panoramico - Golfo di Bosa",
+    "slug": "punto-panoramico-golfo-di-bosa",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "sardinia",
+    "scopeName": "Sardegna",
+    "lat": 40.2698252,
+    "lng": 8.4824243,
+    "regionHint": "Alghero / Bosa Coast",
+    "address": "09090 Sa Lumenera OR, Italy",
+    "rating": 4.7,
+    "userRatingCount": 7,
+    "types": [
+      "tourist_attraction",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider"
+    ],
+    "aliases": [
+      "Punto Panoramico - Golfo di Bosa"
+    ],
+    "score": 37
+  },
+  {
+    "id": "spot-canyon-gorropu-scenic-overlook-ChIJ9SGR",
+    "name": "Canyon Gorropu Scenic Overlook",
+    "slug": "canyon-gorropu-scenic-overlook",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "sardinia",
+    "scopeName": "Sardegna",
+    "lat": 40.1892207,
+    "lng": 9.535473,
+    "regionHint": "Supramonte",
+    "address": "SS 125 Orientale Sarda, 08040 Urzulei Provincia dell'Ogliastra, Italy",
+    "rating": 4.8,
+    "userRatingCount": 137,
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider"
+    ],
+    "aliases": [
+      "Canyon Gorropu Scenic Overlook"
+    ],
+    "score": 36
+  },
+  {
+    "id": "spot-gorropu-panoramic-hiking-trail-ChIJnfOF",
+    "name": "Gorropu Panoramic Hiking trail",
+    "slug": "gorropu-panoramic-hiking-trail",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "sardinia",
+    "scopeName": "Sardegna",
+    "lat": 40.15921,
+    "lng": 9.5076964,
+    "regionHint": "Supramonte",
+    "address": "SS 125 Orientale Sarda, 08040 Urzulei Provincia dell'Ogliastra, Italy",
+    "rating": 4.8,
+    "userRatingCount": 60,
+    "types": [
+      "hiking_area",
+      "sports_activity_location",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider"
+    ],
+    "aliases": [
+      "Gorropu Panoramic Hiking trail"
+    ],
+    "score": 36
+  },
+  {
+    "id": "spot-panoramic-view-ChIJKdXo",
+    "name": "Panoramic view",
+    "slug": "panoramic-view",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "sardinia",
+    "scopeName": "Sardegna",
+    "lat": 39.2485402,
+    "lng": 8.3993335,
+    "regionHint": "Sulcis / Iglesiente",
+    "address": "SP108, 09010 Portoscuso CI, Italy",
+    "rating": 4.8,
+    "userRatingCount": 48,
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider"
+    ],
+    "aliases": [
+      "Panoramic view"
+    ],
+    "score": 36
+  },
+  {
+    "id": "spot-punto-panoramico-ChIJX-4Z",
+    "name": "Punto panoramico",
+    "slug": "punto-panoramico",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "sardinia",
+    "scopeName": "Sardegna",
+    "lat": 39.7650326,
+    "lng": 9.6700418,
+    "regionHint": "Ogliastra",
+    "address": "08040 Gairo Sant'Elena Provincia dell'Ogliastra, Italy",
+    "rating": 4.9,
+    "userRatingCount": 38,
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider"
+    ],
+    "aliases": [
+      "Punto panoramico"
+    ],
+    "score": 36
+  },
+  {
+    "id": "spot-punto-panoramico-ChIJRYlO",
+    "name": "Punto Panoramico",
+    "slug": "punto-panoramico",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "sardinia",
+    "scopeName": "Sardegna",
+    "lat": 40.3081952,
+    "lng": 9.657509,
+    "regionHint": "Supramonte",
+    "address": "08022 Cala Gonone, Province of Nuoro, Italy",
+    "rating": 4.7,
+    "userRatingCount": 58,
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider"
+    ],
+    "aliases": [
+      "Punto Panoramico"
+    ],
+    "score": 36
+  },
+  {
+    "id": "spot-punto-panoramico-s-archittu-ChIJJeK8",
+    "name": "Punto Panoramico S'Archittu",
+    "slug": "punto-panoramico-s-archittu",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "sardinia",
+    "scopeName": "Sardegna",
+    "lat": 40.093904699999996,
+    "lng": 8.4893169,
+    "regionHint": "Alghero / Bosa Coast",
+    "address": "Via dei Cardi, 6, 09073 S'Archittu OR, Italy",
+    "rating": 4.8,
+    "userRatingCount": 146,
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider"
+    ],
+    "aliases": [
+      "Punto Panoramico S'Archittu"
+    ],
+    "score": 36
+  },
+  {
+    "id": "spot-punto-panoramico-sp71-ChIJwZpS",
+    "name": "Punto panoramico SP71",
+    "slug": "punto-panoramico-sp71",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "sardinia",
+    "scopeName": "Sardegna",
+    "lat": 38.8966028,
+    "lng": 8.7941703,
+    "regionHint": "Sulcis / Iglesiente",
+    "address": "SP71, 09019 Teulada Provincia di Cagliari, Italy",
+    "rating": 4.8,
+    "userRatingCount": 61,
+    "types": [
+      "observation_deck",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider"
+    ],
+    "aliases": [
+      "Punto panoramico SP71"
+    ],
+    "score": 36
+  },
+  {
+    "id": "spot-terrazza-panoramica-ChIJOeG9",
+    "name": "Terrazza Panoramica",
+    "slug": "terrazza-panoramica",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "sardinia",
+    "scopeName": "Sardegna",
+    "lat": 38.8893207,
+    "lng": 8.799800099999999,
+    "regionHint": "Sulcis / Iglesiente",
+    "address": "09019 Cagliari, 09019 Teulada Provincia di Cagliari, Italy",
+    "rating": 4.8,
+    "userRatingCount": 32,
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider"
+    ],
+    "aliases": [
+      "Terrazza Panoramica"
+    ],
+    "score": 36
+  },
+  {
+    "id": "spot-terrazza-panoramica-su-cala-gonone-ChIJ7eCf",
+    "name": "Terrazza panoramica su Cala Gonone",
+    "slug": "terrazza-panoramica-su-cala-gonone",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "sardinia",
+    "scopeName": "Sardegna",
+    "lat": 40.275227799999996,
+    "lng": 9.5975621,
+    "regionHint": "Supramonte",
+    "address": "Galleria Vecchia per Cala Gonone, 08022 Dorgali NU, Italy",
+    "rating": 4.8,
+    "userRatingCount": 84,
+    "types": [
+      "observation_deck",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider"
+    ],
+    "aliases": [
+      "Terrazza panoramica su Cala Gonone"
+    ],
+    "score": 36
+  },
+  {
+    "id": "spot-baia-sant-anna-panoramic-view-sunrise-ChIJzerx",
+    "name": "Baia Sant’Anna Panoramic View (Sunrise)",
+    "slug": "baia-sant-anna-panoramic-view-sunrise",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "sardinia",
+    "scopeName": "Sardegna",
+    "lat": 40.6912143,
+    "lng": 9.7427165,
+    "regionHint": "Costa Smeralda / Gallura",
+    "address": "Unnamed Road, 08020, 08020 Budoni OT, Italy",
+    "rating": 4.6,
+    "userRatingCount": 28,
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider"
+    ],
+    "aliases": [
+      "Baia Sant’Anna Panoramic View (Sunrise)"
+    ],
+    "score": 34
+  },
+  {
+    "id": "spot-belvedere-pedra-longa-ChIJQ35d",
+    "name": "Belvedere Pedra Longa",
+    "slug": "belvedere-pedra-longa",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "sardinia",
+    "scopeName": "Sardegna",
+    "lat": 40.0266252,
+    "lng": 9.7056876,
+    "regionHint": "Supramonte",
+    "address": "Pedra Longa, 08040 Baunei Provincia dell'Ogliastra, Italy",
+    "rating": 4.8,
+    "userRatingCount": 47,
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider"
+    ],
+    "aliases": [
+      "Belvedere Pedra Longa"
+    ],
+    "score": 34
+  },
+  {
+    "id": "spot-punto-panoramico-ex-stazione-wwf-ChIJsYVX",
+    "name": "Punto Panoramico - Ex stazione WWF",
+    "slug": "punto-panoramico-ex-stazione-wwf",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "sardinia",
+    "scopeName": "Sardegna",
+    "lat": 39.1318091,
+    "lng": 8.447157599999999,
+    "regionHint": "Sulcis / Iglesiente",
+    "address": "Unnamed Road,09010, 09010 San Giovanni Suergiu CI, Italy",
+    "rating": 4.5,
+    "userRatingCount": 25,
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider"
+    ],
+    "aliases": [
+      "Punto Panoramico - Ex stazione WWF"
+    ],
+    "score": 34
+  },
+  {
+    "id": "spot-percorso-di-abseiling-dillosauro-su-santu-ChIJYxOg",
+    "name": "Percorso di Abseiling \"Dillosauro Su Santu\"",
+    "slug": "percorso-di-abseiling-dillosauro-su-santu",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "sardinia",
+    "scopeName": "Sardegna",
+    "lat": 39.578799,
+    "lng": 9.6565016,
+    "regionHint": "Ogliastra",
+    "address": "Unnamed Road, 08047, 08040 Tertenia Provincia dell'Ogliastra, Italy",
+    "rating": 4.7,
+    "userRatingCount": 19,
+    "types": [
+      "tourist_attraction",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider"
+    ],
+    "aliases": [
+      "Percorso di Abseiling \"Dillosauro Su Santu\""
+    ],
+    "score": 33
+  },
+  {
+    "id": "spot-strada-del-monte-corrasi-ChIJzQmP",
+    "name": "Strada del Monte Corrasi",
+    "slug": "strada-del-monte-corrasi",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "sardinia",
+    "scopeName": "Sardegna",
+    "lat": 40.253557799999996,
+    "lng": 9.4188023,
+    "regionHint": "Supramonte",
+    "address": "Supramonte, 08025 Oliena NU, Italy",
+    "rating": 4.5,
+    "userRatingCount": 30,
+    "types": [
+      "historical_landmark",
+      "historical_place",
+      "tourist_attraction",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider"
+    ],
+    "aliases": [
+      "Strada del Monte Corrasi"
+    ],
+    "score": 33
+  },
+  {
+    "id": "spot-strada-provinciale-49-bosa-alghero-ChIJfflp",
+    "name": "Strada Provinciale 49 Bosa-Alghero",
+    "slug": "strada-provinciale-49-bosa-alghero",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "sardinia",
+    "scopeName": "Sardegna",
+    "lat": 40.3663357,
+    "lng": 8.4092446,
+    "regionHint": "Alghero / Bosa Coast",
+    "address": "Capo Marrargiu, 08013 Bosa OR, Italy",
+    "rating": 5,
+    "userRatingCount": 2,
+    "types": [
+      "tourist_attraction",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider"
+    ],
+    "aliases": [
+      "Strada Provinciale 49 Bosa-Alghero"
+    ],
+    "score": 33
+  },
+  {
+    "id": "spot-chia-strada-romana-ChIJzRA8",
+    "name": "Chia - Strada Romana",
+    "slug": "chia-strada-romana",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "sardinia",
+    "scopeName": "Sardegna",
+    "lat": 38.8996059,
+    "lng": 8.8918813,
+    "regionHint": "Sulcis / Iglesiente",
+    "address": "09010 Domus De Maria CA, Italy",
+    "rating": 4.8,
+    "userRatingCount": 76,
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider"
+    ],
+    "aliases": [
+      "Chia - Strada Romana"
+    ],
+    "score": 32
+  },
+  {
+    "id": "spot-les-locations-de-l-atelier-moto-sud-ChIJOViy",
+    "name": "Les locations de l'atelier Moto Sud",
+    "slug": "les-locations-de-l-atelier-moto-sud",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "sardinia",
+    "scopeName": "Sardegna",
+    "lat": 41.481799099999996,
+    "lng": 9.114394299999999,
+    "regionHint": "Costa Smeralda / Gallura",
+    "address": "520 strada di i Scopettu, 20114 Figari, France",
+    "rating": 4.9,
+    "userRatingCount": 149,
+    "types": [
+      "car_repair",
+      "service",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider"
+    ],
+    "aliases": [
+      "Les locations de l'atelier Moto Sud"
+    ],
+    "score": 32
+  },
+  {
+    "id": "spot-promontorio-di-capo-figari-ChIJxw3e",
+    "name": "Promontorio di Capo Figari",
+    "slug": "promontorio-di-capo-figari",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "sardinia",
+    "scopeName": "Sardegna",
+    "lat": 40.997808899999995,
+    "lng": 9.652945299999999,
+    "regionHint": "Costa Smeralda / Gallura",
+    "address": "Unnamed Road, 07020, 07020 Golfo Aranci OT, Italy",
+    "rating": 4.8,
+    "userRatingCount": 93,
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider"
+    ],
+    "aliases": [
+      "Promontorio di Capo Figari"
+    ],
+    "score": 32
+  },
+  {
+    "id": "spot-punto-panoramico-ChIJCTBb",
+    "name": "Punto panoramico",
+    "slug": "punto-panoramico",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "sardinia",
+    "scopeName": "Sardegna",
+    "lat": 40.8538977,
+    "lng": 9.141095499999999,
+    "regionHint": "Costa Smeralda / Gallura",
+    "address": "SP51, 07029 Tempio Pausania OT, Italy",
+    "rating": 4.9,
+    "userRatingCount": 22,
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider"
+    ],
+    "aliases": [
+      "Punto panoramico"
+    ],
+    "score": 31
+  },
+  {
+    "id": "spot-punto-panoramico-ChIJJVGW",
+    "name": "Punto Panoramico",
+    "slug": "punto-panoramico",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "sardinia",
+    "scopeName": "Sardegna",
+    "lat": 38.998840099999995,
+    "lng": 8.731688,
+    "regionHint": "Sulcis / Iglesiente",
+    "address": "SP70, 09019 Teulada CI, Italy",
+    "rating": 5,
+    "userRatingCount": 1,
+    "types": [
+      "hiking_area",
+      "sports_activity_location",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider"
+    ],
+    "aliases": [
+      "Punto Panoramico"
+    ],
+    "score": 31
+  },
+  {
+    "id": "spot-punto-panoramico-sa-furca-e-sa-pruna-ChIJZdym",
+    "name": "Punto panoramico \"Sa Furca e sa Pruna\"",
+    "slug": "punto-panoramico-sa-furca-e-sa-pruna",
+    "type": "forest_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "sardinia",
+    "scopeName": "Sardegna",
+    "lat": 39.8786853,
+    "lng": 9.5230369,
+    "regionHint": "Supramonte",
+    "address": "Punto panoramico Bosco Selene, Str. panoramica di Selene, 08045 Lanusei Provincia dell'Ogliastra, Italy",
+    "rating": 5,
+    "userRatingCount": 9,
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "forest"
+    ],
+    "aliases": [
+      "Punto panoramico \"Sa Furca e sa Pruna\""
+    ],
+    "score": 31
+  },
+  {
+    "id": "spot-punto-panoramico-di-la-frana-ChIJs8Eg",
+    "name": "Punto panoramico di La Frana",
+    "slug": "punto-panoramico-di-la-frana",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "sardinia",
+    "scopeName": "Sardegna",
+    "lat": 40.7628797,
+    "lng": 8.1620857,
+    "regionHint": "Alghero / Bosa Coast",
+    "address": "Sentiero Costiero Nurra, 07100 Sassari SS, Italy",
+    "rating": 4.7,
+    "userRatingCount": 18,
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider"
+    ],
+    "aliases": [
+      "Punto panoramico di La Frana"
+    ],
+    "score": 31
+  },
+  {
+    "id": "spot-punto-panoramico-su-la-caletta-ChIJaQr9",
+    "name": "Punto panoramico su La Caletta",
+    "slug": "punto-panoramico-su-la-caletta",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "sardinia",
+    "scopeName": "Sardegna",
+    "lat": 40.6097093,
+    "lng": 9.7387398,
+    "regionHint": "Supramonte",
+    "address": "08029 Siniscola, Province of Nuoro, Italy",
+    "rating": 4.8,
+    "userRatingCount": 26,
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic"
+    ],
+    "aliases": [
+      "Punto panoramico su La Caletta"
+    ],
+    "score": 31
+  },
+  {
+    "id": "spot-terrazza-panoramica-su-baunei-ChIJFabx",
+    "name": "Terrazza panoramica su Baunei",
+    "slug": "terrazza-panoramica-su-baunei",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "sardinia",
+    "scopeName": "Sardegna",
+    "lat": 40.042834899999995,
+    "lng": 9.6552356,
+    "regionHint": "Supramonte",
+    "address": "SS 125 Orientale Sarda, 08040 Baunei Provincia dell'Ogliastra, Italy",
+    "rating": 4.7,
+    "userRatingCount": 16,
+    "types": [
+      "observation_deck",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider"
+    ],
+    "aliases": [
+      "Terrazza panoramica su Baunei"
+    ],
+    "score": 31
+  },
+  {
+    "id": "spot-ufficio-guide-alpine-sardegna-ChIJS7ZM",
+    "name": "Ufficio Guide Alpine Sardegna",
+    "slug": "ufficio-guide-alpine-sardegna",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "sardinia",
+    "scopeName": "Sardegna",
+    "lat": 40.2800544,
+    "lng": 9.6347658,
+    "regionHint": "Barbagia",
+    "address": "Via Lungomare Palmasera, 32, 08020 Cala Gonone NU, Italy",
+    "rating": 5,
+    "userRatingCount": 26,
+    "types": [
+      "adventure_sports_center",
+      "sports_complex",
+      "sports_activity_location",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic"
+    ],
+    "aliases": [
+      "Ufficio Guide Alpine Sardegna"
+    ],
+    "score": 31
+  },
+  {
+    "id": "spot-urzulei-punto-panoramico-gorropu-ChIJVVzg",
+    "name": "Urzulei Punto Panoramico Gorropu",
+    "slug": "urzulei-punto-panoramico-gorropu",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "sardinia",
+    "scopeName": "Sardegna",
+    "lat": 40.1977903,
+    "lng": 9.5350395,
+    "regionHint": "Supramonte",
+    "address": "SS 125 Orientale Sarda, 08040 Urzulei Provincia dell'Ogliastra, Italy",
+    "rating": 5,
+    "userRatingCount": 15,
+    "types": [
+      "observation_deck",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider"
+    ],
+    "aliases": [
+      "Urzulei Punto Panoramico Gorropu"
+    ],
+    "score": 31
+  },
+  {
+    "id": "spot-belvedere-corriga-ChIJN7XG",
+    "name": "Belvedere Corriga",
+    "slug": "belvedere-corriga",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "sardinia",
+    "scopeName": "Sardegna",
+    "lat": 39.702484399999996,
+    "lng": 9.6216259,
+    "regionHint": "Supramonte",
+    "address": "PJ2C+XM, 08047 Tertenia, Province of Ogliastra, Italy",
+    "rating": 5,
+    "userRatingCount": 1,
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider"
+    ],
+    "aliases": [
+      "Belvedere Corriga"
+    ],
+    "score": 29
+  },
+  {
+    "id": "spot-statua-del-cristo-di-monte-tuttavista-ChIJ2Z24",
+    "name": "Statua del Cristo di Monte Tuttavista",
+    "slug": "statua-del-cristo-di-monte-tuttavista",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "sardinia",
+    "scopeName": "Sardegna",
+    "lat": 40.3808827,
+    "lng": 9.6381221,
+    "regionHint": "Supramonte",
+    "address": "08020 Galtellì, Province of Nuoro, Italy",
+    "rating": 4.8,
+    "userRatingCount": 221,
+    "types": [
+      "landmark",
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider"
+    ],
+    "aliases": [
+      "Statua del Cristo di Monte Tuttavista"
+    ],
+    "score": 29
+  },
+  {
+    "id": "spot-tuones-viewpoint-ChIJkzM-",
+    "name": "Tuones Viewpoint",
+    "slug": "tuones-viewpoint",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "sardinia",
+    "scopeName": "Sardegna",
+    "lat": 40.2567861,
+    "lng": 9.420797799999999,
+    "regionHint": "Supramonte",
+    "address": "Oliena, 08025, 08025 Oliena NU, Italy",
+    "rating": 4.9,
+    "userRatingCount": 12,
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider"
+    ],
+    "aliases": [
+      "Tuones Viewpoint"
+    ],
+    "score": 29
+  },
+  {
+    "id": "spot-viewpoint-baunei-ChIJgygM",
+    "name": "Viewpoint Baunei",
+    "slug": "viewpoint-baunei",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "sardinia",
+    "scopeName": "Sardegna",
+    "lat": 40.033068199999995,
+    "lng": 9.6665116,
+    "regionHint": "Supramonte",
+    "address": "ovile Bertarelli, 08040 Baunei Provincia dell'Ogliastra, Italy",
+    "rating": 5,
+    "userRatingCount": 8,
+    "types": [
+      "observation_deck",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider"
+    ],
+    "aliases": [
+      "Viewpoint Baunei"
+    ],
+    "score": 29
+  }
+]

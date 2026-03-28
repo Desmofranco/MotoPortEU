@@ -1,0 +1,3463 @@
+[
+  {
+    "id": "spot-passo-croce-ChIJB2rd",
+    "sourceId": "spot-passo-croce-ChIJB2rd",
+    "googlePlaceId": null,
+    "name": "Passo Croce",
+    "slug": "passo-croce",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "italy-center",
+    "scopeName": "Italia Centro",
+    "lat": 44.0345395,
+    "lng": 10.2725485,
+    "region": null,
+    "regionHint": "Garfagnana / Apuane",
+    "address": "Passo Croce, 55040 Stazzema LU, Italy",
+    "rating": 4.8,
+    "userRatingCount": 162,
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "types": [
+      "natural_feature",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Passo Croce"
+    ],
+    "riderScore": 93
+  },
+  {
+    "id": "spot-passo-del-bracco-ChIJi2NN",
+    "sourceId": "spot-passo-del-bracco-ChIJi2NN",
+    "googlePlaceId": null,
+    "name": "Passo del Bracco",
+    "slug": "passo-del-bracco",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "italy-center",
+    "scopeName": "Italia Centro",
+    "lat": 44.257255699999995,
+    "lng": 9.5732144,
+    "region": null,
+    "regionHint": "Garfagnana / Apuane",
+    "address": "Passo del Bracco, 19012 Carro, SP, Italy",
+    "rating": 4.8,
+    "userRatingCount": 181,
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "types": [
+      "natural_feature",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Passo del Bracco"
+    ],
+    "riderScore": 93
+  },
+  {
+    "id": "spot-passo-della-scalucchia-ChIJd95j",
+    "sourceId": "spot-passo-della-scalucchia-ChIJd95j",
+    "googlePlaceId": null,
+    "name": "Passo della Scalucchia",
+    "slug": "passo-della-scalucchia",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "italy-center",
+    "scopeName": "Italia Centro",
+    "lat": 44.356893,
+    "lng": 10.228630899999999,
+    "region": null,
+    "regionHint": "Garfagnana / Apuane",
+    "address": "Passo della Scalucchia, 42037 Ventasso RE, Italy",
+    "rating": 4.7,
+    "userRatingCount": 116,
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "types": [
+      "natural_feature",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Passo della Scalucchia"
+    ],
+    "riderScore": 93
+  },
+  {
+    "id": "spot-passo-godi-ChIJ18br",
+    "sourceId": "spot-passo-godi-ChIJ18br",
+    "googlePlaceId": null,
+    "name": "Passo Godi",
+    "slug": "passo-godi",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "italy-center",
+    "scopeName": "Italia Centro",
+    "lat": 41.8470429,
+    "lng": 13.9282506,
+    "region": null,
+    "regionHint": "Gran Sasso / Majella",
+    "address": "Passo Godi, 67038 Scanno AQ, Italy",
+    "rating": 4.7,
+    "userRatingCount": 141,
+    "rawTypes": [
+      "mountain_peak",
+      "natural_feature",
+      "establishment"
+    ],
+    "types": [
+      "mountain_peak",
+      "natural_feature",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Passo Godi"
+    ],
+    "riderScore": 93
+  },
+  {
+    "id": "spot-passo-del-cerreto-ChIJ8_ht",
+    "sourceId": "spot-passo-del-cerreto-ChIJ8_ht",
+    "googlePlaceId": null,
+    "name": "Passo del Cerreto",
+    "slug": "passo-del-cerreto",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "italy-center",
+    "scopeName": "Italia Centro",
+    "lat": 44.3,
+    "lng": 10.2166667,
+    "region": null,
+    "regionHint": "Garfagnana / Apuane",
+    "address": "Passo del Cerreto, 54013 Fivizzano, Province of Massa and Carrara, Italy",
+    "rating": 4.5,
+    "userRatingCount": 442,
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "types": [
+      "natural_feature",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Passo del Cerreto"
+    ],
+    "riderScore": 88
+  },
+  {
+    "id": "spot-passo-dell-abetone-ChIJWe_d",
+    "sourceId": "spot-passo-dell-abetone-ChIJWe_d",
+    "googlePlaceId": null,
+    "name": "Passo dell'Abetone",
+    "slug": "passo-dell-abetone",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "italy-center",
+    "scopeName": "Italia Centro",
+    "lat": 44.1456156,
+    "lng": 10.664978,
+    "region": null,
+    "regionHint": "Garfagnana / Apuane",
+    "address": "Passo dell'Abetone, 51021 Abetone, Province of Pistoia, Italy",
+    "rating": 4.5,
+    "userRatingCount": 232,
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "types": [
+      "natural_feature",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Passo dell'Abetone"
+    ],
+    "riderScore": 88
+  },
+  {
+    "id": "spot-passo-di-cirone-ChIJAe1A",
+    "sourceId": "spot-passo-di-cirone-ChIJAe1A",
+    "googlePlaceId": null,
+    "name": "Passo di Cirone",
+    "slug": "passo-di-cirone",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "italy-center",
+    "scopeName": "Italia Centro",
+    "lat": 44.438978999999996,
+    "lng": 10.0030744,
+    "region": null,
+    "regionHint": "Garfagnana / Apuane",
+    "address": "Passo di Cirone, 54027 Pontremoli MS, Italy",
+    "rating": 4.6,
+    "userRatingCount": 148,
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "types": [
+      "natural_feature",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Passo di Cirone"
+    ],
+    "riderScore": 88
+  },
+  {
+    "id": "spot-passo-di-pradarena-ChIJF7OW",
+    "sourceId": "spot-passo-di-pradarena-ChIJF7OW",
+    "googlePlaceId": null,
+    "name": "passo di Pradarena",
+    "slug": "passo-di-pradarena",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "italy-center",
+    "scopeName": "Italia Centro",
+    "lat": 44.2851051,
+    "lng": 10.300970099999999,
+    "region": null,
+    "regionHint": "Garfagnana / Apuane",
+    "address": "passo di Pradarena, 55030 Sillano Giuncugnano, Province of Lucca, Italy",
+    "rating": 4.6,
+    "userRatingCount": 331,
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "types": [
+      "natural_feature",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "passo di Pradarena"
+    ],
+    "riderScore": 88
+  },
+  {
+    "id": "spot-passo-lagastrello-ChIJCZ1O",
+    "sourceId": "spot-passo-lagastrello-ChIJCZ1O",
+    "googlePlaceId": null,
+    "name": "Passo Lagastrello",
+    "slug": "passo-lagastrello",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "italy-center",
+    "scopeName": "Italia Centro",
+    "lat": 44.3333333,
+    "lng": 10.133333300000002,
+    "region": null,
+    "regionHint": "Garfagnana / Apuane",
+    "address": "Passo Lagastrello, 54015 Comano, Province of Massa and Carrara, Italy",
+    "rating": 4.5,
+    "userRatingCount": 323,
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "types": [
+      "natural_feature",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Passo Lagastrello"
+    ],
+    "riderScore": 88
+  },
+  {
+    "id": "spot-passo-di-annibale-ChIJfWEM",
+    "sourceId": "spot-passo-di-annibale-ChIJfWEM",
+    "googlePlaceId": null,
+    "name": "Passo di Annibale",
+    "slug": "passo-di-annibale",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "italy-center",
+    "scopeName": "Italia Centro",
+    "lat": 44.12213800000001,
+    "lng": 10.6231903,
+    "region": null,
+    "regionHint": "Garfagnana / Apuane",
+    "address": "Via Val di Luce, 51021 Abetone PT, Italy",
+    "rating": 4.7,
+    "userRatingCount": 166,
+    "rawTypes": [
+      "historical_landmark",
+      "tourist_attraction",
+      "historical_place",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "historical_landmark",
+      "tourist_attraction",
+      "historical_place",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Passo di Annibale"
+    ],
+    "riderScore": 87
+  },
+  {
+    "id": "spot-passo-cattivo-ChIJbZUz",
+    "sourceId": "spot-passo-cattivo-ChIJbZUz",
+    "googlePlaceId": null,
+    "name": "Passo Cattivo",
+    "slug": "passo-cattivo",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "italy-center",
+    "scopeName": "Italia Centro",
+    "lat": 42.9049656,
+    "lng": 13.204279,
+    "region": null,
+    "regionHint": "Sibillini",
+    "address": "Strada Provinciale 136, 62039 Castelsantangelo sul Nera MC, Italy",
+    "rating": 4.9,
+    "userRatingCount": 68,
+    "rawTypes": [
+      "tourist_attraction",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "tourist_attraction",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Passo Cattivo"
+    ],
+    "riderScore": 85
+  },
+  {
+    "id": "spot-passo-del-vestito-ChIJB8yA",
+    "sourceId": "spot-passo-del-vestito-ChIJB8yA",
+    "googlePlaceId": null,
+    "name": "Passo del Vestito",
+    "slug": "passo-del-vestito",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "italy-center",
+    "scopeName": "Italia Centro",
+    "lat": 44.065664299999995,
+    "lng": 10.2249885,
+    "region": null,
+    "regionHint": "Garfagnana / Apuane",
+    "address": "55047 Seravezza, Province of Lucca, Italy",
+    "rating": 4.8,
+    "userRatingCount": 272,
+    "rawTypes": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Passo del vestito",
+      "Passo del Vestito"
+    ],
+    "riderScore": 85
+  },
+  {
+    "id": "spot-il-passone-ChIJn8LU",
+    "sourceId": "spot-il-passone-ChIJn8LU",
+    "googlePlaceId": null,
+    "name": "Il Passone",
+    "slug": "il-passone",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "italy-center",
+    "scopeName": "Italia Centro",
+    "lat": 44.2694568,
+    "lng": 10.4213892,
+    "region": null,
+    "regionHint": "Garfagnana / Apuane",
+    "address": "Il Passone, 42030 Villa Minozzo RE, Italy",
+    "rating": 4.7,
+    "userRatingCount": 38,
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "types": [
+      "natural_feature",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Il Passone"
+    ],
+    "riderScore": 83
+  },
+  {
+    "id": "spot-passo-del-cornello-ChIJf3Es",
+    "sourceId": "spot-passo-del-cornello-ChIJf3Es",
+    "googlePlaceId": null,
+    "name": "Passo del Cornello",
+    "slug": "passo-del-cornello",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "italy-center",
+    "scopeName": "Italia Centro",
+    "lat": 43.1253525,
+    "lng": 12.8585154,
+    "region": null,
+    "regionHint": "Sibillini",
+    "address": "Passo del Cornello, 62025 Fiuminata MC, Italy",
+    "rating": 4.7,
+    "userRatingCount": 76,
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "types": [
+      "natural_feature",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Passo del Cornello"
+    ],
+    "riderScore": 83
+  },
+  {
+    "id": "spot-passo-del-diavolo-ChIJSyRE",
+    "sourceId": "spot-passo-del-diavolo-ChIJSyRE",
+    "googlePlaceId": null,
+    "name": "Passo del Diavolo",
+    "slug": "passo-del-diavolo",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "italy-center",
+    "scopeName": "Italia Centro",
+    "lat": 41.866666699999996,
+    "lng": 13.75,
+    "region": null,
+    "regionHint": "Gran Sasso / Majella",
+    "address": "Passo del Diavolo, 67055 Gioia dei Marsi, Province of L'Aquila, Italy",
+    "rating": 4.7,
+    "userRatingCount": 31,
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "types": [
+      "natural_feature",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Passo del Diavolo"
+    ],
+    "riderScore": 83
+  },
+  {
+    "id": "spot-passo-del-giogo-ChIJSf5y",
+    "sourceId": "spot-passo-del-giogo-ChIJSf5y",
+    "googlePlaceId": null,
+    "name": "Passo del Giogo",
+    "slug": "passo-del-giogo",
+    "type": "mountain_pass",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "italy-center",
+    "scopeName": "Italia Centro",
+    "lat": 44.0470834,
+    "lng": 11.3883564,
+    "region": null,
+    "regionHint": "Casentino / Foreste",
+    "address": "Strada Statale del Passo del Giogo, 13, 50038 Scarperia FI, Italy",
+    "rating": 4.6,
+    "userRatingCount": 94,
+    "rawTypes": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "mountain",
+      "twisty",
+      "forest",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Passo del Giogo"
+    ],
+    "riderScore": 83
+  },
+  {
+    "id": "spot-passo-dell-alpino-ChIJ2-Xt",
+    "sourceId": "spot-passo-dell-alpino-ChIJ2-Xt",
+    "googlePlaceId": null,
+    "name": "Passo dell'Alpino",
+    "slug": "passo-dell-alpino",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "italy-center",
+    "scopeName": "Italia Centro",
+    "lat": 44.0350434,
+    "lng": 10.1928663,
+    "region": null,
+    "regionHint": "Garfagnana / Apuane",
+    "address": "Passo dell'Alpino, 54100 Massa MS, Italy",
+    "rating": 4.7,
+    "userRatingCount": 26,
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "types": [
+      "natural_feature",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Passo dell'Alpino",
+      "Passo dell' Alpino"
+    ],
+    "riderScore": 83
+  },
+  {
+    "id": "spot-passo-della-tambura-ChIJFaHm",
+    "sourceId": "spot-passo-della-tambura-ChIJFaHm",
+    "googlePlaceId": null,
+    "name": "Passo della Tambura",
+    "slug": "passo-della-tambura",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "italy-center",
+    "scopeName": "Italia Centro",
+    "lat": 44.1012005,
+    "lng": 10.2340114,
+    "region": null,
+    "regionHint": "Garfagnana / Apuane",
+    "address": "Passo della Tambura, 54100 Massa MS, Italy",
+    "rating": 4.9,
+    "userRatingCount": 40,
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "types": [
+      "natural_feature",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Passo della Tambura"
+    ],
+    "riderScore": 83
+  },
+  {
+    "id": "spot-passo-delle-capannelle-ChIJhenB",
+    "sourceId": "spot-passo-delle-capannelle-ChIJhenB",
+    "googlePlaceId": null,
+    "name": "Passo delle Capannelle",
+    "slug": "passo-delle-capannelle",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "italy-center",
+    "scopeName": "Italia Centro",
+    "lat": 42.459681100000005,
+    "lng": 13.352277899999999,
+    "region": null,
+    "regionHint": "Sibillini",
+    "address": "Passo delle Capannelle, 67017 Pizzoli AQ, Italy",
+    "rating": 4.9,
+    "userRatingCount": 89,
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "types": [
+      "natural_feature",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Passo delle Capannelle"
+    ],
+    "riderScore": 83
+  },
+  {
+    "id": "spot-passo-dello-strofinatoio-ChIJPSEJ",
+    "sourceId": "spot-passo-dello-strofinatoio-ChIJPSEJ",
+    "googlePlaceId": null,
+    "name": "passo dello Strofinatoio",
+    "slug": "passo-dello-strofinatoio",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "italy-center",
+    "scopeName": "Italia Centro",
+    "lat": 44.115540599999996,
+    "lng": 10.8285512,
+    "region": null,
+    "regionHint": "Garfagnana / Apuane",
+    "address": "passo dello Strofinatoio, 51028 San Marcello Piteglio PT, Italy",
+    "rating": 4.9,
+    "userRatingCount": 36,
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "types": [
+      "natural_feature",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "passo dello Strofinatoio"
+    ],
+    "riderScore": 83
+  },
+  {
+    "id": "spot-passo-di-fugicchia-ChIJDf0u",
+    "sourceId": "spot-passo-di-fugicchia-ChIJDf0u",
+    "googlePlaceId": null,
+    "name": "Passo di Fugicchia",
+    "slug": "passo-di-fugicchia",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "italy-center",
+    "scopeName": "Italia Centro",
+    "lat": 44.3796219,
+    "lng": 10.0421154,
+    "region": null,
+    "regionHint": "Garfagnana / Apuane",
+    "address": "Passo di Fugicchia, 43021 Corniglio PR, Italy",
+    "rating": 4.7,
+    "userRatingCount": 20,
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "types": [
+      "natural_feature",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Passo di Fugicchia"
+    ],
+    "riderScore": 83
+  },
+  {
+    "id": "spot-passo-di-lama-lite-ChIJjUTM",
+    "sourceId": "spot-passo-di-lama-lite-ChIJjUTM",
+    "googlePlaceId": null,
+    "name": "Passo di Lama Lite",
+    "slug": "passo-di-lama-lite",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "italy-center",
+    "scopeName": "Italia Centro",
+    "lat": 44.2587128,
+    "lng": 10.4139622,
+    "region": null,
+    "regionHint": "Garfagnana / Apuane",
+    "address": "Passo di Lama Lite, 42030 Villa Minozzo RE, Italy",
+    "rating": 4.8,
+    "userRatingCount": 57,
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "types": [
+      "natural_feature",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Passo di Lama Lite"
+    ],
+    "riderScore": 83
+  },
+  {
+    "id": "spot-passo-san-leonardo-ChIJT9UG",
+    "sourceId": "spot-passo-san-leonardo-ChIJT9UG",
+    "googlePlaceId": null,
+    "name": "Passo San Leonardo",
+    "slug": "passo-san-leonardo",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "italy-center",
+    "scopeName": "Italia Centro",
+    "lat": 42.0666667,
+    "lng": 14.033333299999999,
+    "region": null,
+    "regionHint": "Gran Sasso / Majella",
+    "address": "Passo San Leonardo, 67030 Pacentro, Province of L'Aquila, Italy",
+    "rating": 4.7,
+    "userRatingCount": 50,
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "types": [
+      "natural_feature",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Passo San Leonardo"
+    ],
+    "riderScore": 83
+  },
+  {
+    "id": "spot-passo-sella-ChIJb8XC",
+    "sourceId": "spot-passo-sella-ChIJb8XC",
+    "googlePlaceId": null,
+    "name": "Passo Sella",
+    "slug": "passo-sella",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "italy-center",
+    "scopeName": "Italia Centro",
+    "lat": 44.0841662,
+    "lng": 10.246948999999999,
+    "region": null,
+    "regionHint": "Garfagnana / Apuane",
+    "address": "Passo Sella, 55030 Vagli Sotto LU, Italy",
+    "rating": 4.7,
+    "userRatingCount": 21,
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "types": [
+      "natural_feature",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Passo Sella"
+    ],
+    "riderScore": 83
+  },
+  {
+    "id": "spot-passo-della-colla-ChIJ_UQl",
+    "sourceId": "spot-passo-della-colla-ChIJ_UQl",
+    "googlePlaceId": null,
+    "name": "Passo della Colla",
+    "slug": "passo-della-colla",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "italy-center",
+    "scopeName": "Italia Centro",
+    "lat": 44.3892559,
+    "lng": 10.0618284,
+    "region": null,
+    "regionHint": "Garfagnana / Apuane",
+    "address": "Lagoni, 43021 Lagdei PR, Italy",
+    "rating": 4.8,
+    "userRatingCount": 25,
+    "rawTypes": [
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Passo della Colla"
+    ],
+    "riderScore": 81
+  },
+  {
+    "id": "spot-passo-di-dante-ChIJmQNc",
+    "sourceId": "spot-passo-di-dante-ChIJmQNc",
+    "googlePlaceId": null,
+    "name": "Passo di Dante",
+    "slug": "passo-di-dante",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "italy-center",
+    "scopeName": "Italia Centro",
+    "lat": 43.770541900000005,
+    "lng": 10.4507487,
+    "region": null,
+    "regionHint": "Garfagnana / Apuane",
+    "address": "56017 San Giuliano Terme, Province of Pisa, Italy",
+    "rating": 4.6,
+    "userRatingCount": 203,
+    "rawTypes": [
+      "hiking_area",
+      "sports_activity_location",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "hiking_area",
+      "sports_activity_location",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Passo di Dante"
+    ],
+    "riderScore": 80
+  },
+  {
+    "id": "spot-passo-lanciano-majelletta-ChIJP35p",
+    "sourceId": "spot-passo-lanciano-majelletta-ChIJP35p",
+    "googlePlaceId": null,
+    "name": "Passo Lanciano - Majelletta",
+    "slug": "passo-lanciano-majelletta",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "italy-center",
+    "scopeName": "Italia Centro",
+    "lat": 42.1806349,
+    "lng": 14.108242899999999,
+    "region": null,
+    "regionHint": "Gran Sasso / Majella",
+    "address": "SP220, 66010 Pretoro CH, Italy",
+    "rating": 4.6,
+    "userRatingCount": 115,
+    "rawTypes": [
+      "ski_resort",
+      "sports_activity_location",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "ski_resort",
+      "sports_activity_location",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Passo Lanciano - Majelletta"
+    ],
+    "riderScore": 80
+  },
+  {
+    "id": "spot-passo-della-boccaia-ChIJNTlP",
+    "sourceId": "spot-passo-della-boccaia-ChIJNTlP",
+    "googlePlaceId": null,
+    "name": "Passo della Boccaia",
+    "slug": "passo-della-boccaia",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "italy-center",
+    "scopeName": "Italia Centro",
+    "lat": 44.144159599999995,
+    "lng": 10.5808398,
+    "region": null,
+    "regionHint": "Garfagnana / Apuane",
+    "address": "Passo della Boccaia, 41027 Pievepelago MO, Italy",
+    "rating": 4.5,
+    "userRatingCount": 17,
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "types": [
+      "natural_feature",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Passo della Boccaia"
+    ],
+    "riderScore": 79
+  },
+  {
+    "id": "spot-capannelle-pass-ChIJ7dHl",
+    "sourceId": "spot-capannelle-pass-ChIJ7dHl",
+    "googlePlaceId": null,
+    "name": "Passo Capannelle",
+    "slug": "passo-capannelle",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "italy-center",
+    "scopeName": "Italia Centro",
+    "lat": 42.45,
+    "lng": 13.35,
+    "region": null,
+    "regionHint": "Sibillini",
+    "address": "Passo Capannelle, 67017 Pizzoli, Province of L'Aquila, Italy",
+    "rating": 5,
+    "userRatingCount": 1,
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "types": [
+      "natural_feature",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Capannelle Pass",
+      "Passo Capannelle"
+    ],
+    "riderScore": 78
+  },
+  {
+    "id": "spot-passo-carnevale-ChIJ11Ue",
+    "sourceId": "spot-passo-carnevale-ChIJ11Ue",
+    "googlePlaceId": null,
+    "name": "Passo Carnevale",
+    "slug": "passo-carnevale",
+    "type": "mountain_pass",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "italy-center",
+    "scopeName": "Italia Centro",
+    "lat": 44.095149899999996,
+    "lng": 11.5780434,
+    "region": null,
+    "regionHint": "Casentino / Foreste",
+    "address": "Strada Provinciale Casolana-Riolese, 50035 Palazzuolo sul Senio FI, Italy",
+    "rating": 4.6,
+    "userRatingCount": 27,
+    "rawTypes": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "mountain",
+      "twisty",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Passo Carnevale"
+    ],
+    "riderScore": 78
+  },
+  {
+    "id": "spot-passo-carpinelli-ChIJp9ND",
+    "sourceId": "spot-passo-carpinelli-ChIJp9ND",
+    "googlePlaceId": null,
+    "name": "Passo Carpinelli",
+    "slug": "passo-carpinelli",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "italy-center",
+    "scopeName": "Italia Centro",
+    "lat": 44.199989699999996,
+    "lng": 10.231876399999999,
+    "region": null,
+    "regionHint": "Garfagnana / Apuane",
+    "address": "Passo Carpinelli, 55034 Minucciano LU, Italy",
+    "rating": 4.5,
+    "userRatingCount": 62,
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "types": [
+      "natural_feature",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Passo Carpinelli"
+    ],
+    "riderScore": 78
+  },
+  {
+    "id": "spot-passo-degli-scaloni-ChIJFddF",
+    "sourceId": "spot-passo-degli-scaloni-ChIJFddF",
+    "googlePlaceId": null,
+    "name": "Passo degli Scaloni",
+    "slug": "passo-degli-scaloni",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "italy-center",
+    "scopeName": "Italia Centro",
+    "lat": 44.2347205,
+    "lng": 10.415828999999999,
+    "region": null,
+    "regionHint": "Garfagnana / Apuane",
+    "address": "Passo degli Scaloni, 42030 Villa Minozzo RE, Italy",
+    "rating": 4.8,
+    "userRatingCount": 4,
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "types": [
+      "natural_feature",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Passo degli Scaloni"
+    ],
+    "riderScore": 78
+  },
+  {
+    "id": "spot-passo-degli-uncini-ChIJE0cW",
+    "sourceId": "spot-passo-degli-uncini-ChIJE0cW",
+    "googlePlaceId": null,
+    "name": "Passo degli Uncini",
+    "slug": "passo-degli-uncini",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "italy-center",
+    "scopeName": "Italia Centro",
+    "lat": 44.0523038,
+    "lng": 10.225435,
+    "region": null,
+    "regionHint": "Garfagnana / Apuane",
+    "address": "Passo degli Uncini, 55047 Seravezza LU, Italy",
+    "rating": 4.8,
+    "userRatingCount": 15,
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "types": [
+      "natural_feature",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Passo degli Uncini"
+    ],
+    "riderScore": 78
+  },
+  {
+    "id": "spot-passo-degli-uomini-della-neve-ChIJDe-f",
+    "sourceId": "spot-passo-degli-uomini-della-neve-ChIJDe-f",
+    "googlePlaceId": null,
+    "name": "Passo degli Uomini della Neve",
+    "slug": "passo-degli-uomini-della-neve",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "italy-center",
+    "scopeName": "Italia Centro",
+    "lat": 44.033890299999996,
+    "lng": 10.3286558,
+    "region": null,
+    "regionHint": "Garfagnana / Apuane",
+    "address": "Passo degli Uomini della Neve, 55020 Fabbriche di Vergemoli LU, Italy",
+    "rating": 4.8,
+    "userRatingCount": 12,
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "types": [
+      "natural_feature",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Passo degli Uomini della Neve"
+    ],
+    "riderScore": 78
+  },
+  {
+    "id": "spot-passo-del-cannone-ChIJS9zy",
+    "sourceId": "spot-passo-del-cannone-ChIJS9zy",
+    "googlePlaceId": null,
+    "name": "Passo del Cannone",
+    "slug": "passo-del-cannone",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "italy-center",
+    "scopeName": "Italia Centro",
+    "lat": 42.4736015,
+    "lng": 13.563611799999999,
+    "region": null,
+    "regionHint": "Sibillini",
+    "address": "Passo del Cannone, 64047 Pietracamela TE, Italy",
+    "rating": 5,
+    "userRatingCount": 9,
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "types": [
+      "natural_feature",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Passo del Cannone"
+    ],
+    "riderScore": 78
+  },
+  {
+    "id": "spot-passo-del-cerratano-ChIJL4mE",
+    "sourceId": "spot-passo-del-cerratano-ChIJL4mE",
+    "googlePlaceId": null,
+    "name": "Passo del Cerratano",
+    "slug": "passo-del-cerratano",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "italy-center",
+    "scopeName": "Italia Centro",
+    "lat": 44.3308208,
+    "lng": 10.2043234,
+    "region": null,
+    "regionHint": "Garfagnana / Apuane",
+    "address": "Passo del Cerratano, 42030 Ventasso RE, Italy",
+    "rating": 5,
+    "userRatingCount": 1,
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "types": [
+      "natural_feature",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Passo del Cerratano"
+    ],
+    "riderScore": 78
+  },
+  {
+    "id": "spot-passo-del-fargno-ChIJO5w2",
+    "sourceId": "spot-passo-del-fargno-ChIJO5w2",
+    "googlePlaceId": null,
+    "name": "Passo del Fargno",
+    "slug": "passo-del-fargno",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "italy-center",
+    "scopeName": "Italia Centro",
+    "lat": 42.9542101,
+    "lng": 13.2058346,
+    "region": null,
+    "regionHint": "Sibillini",
+    "address": "Passo del Fargno, 62039 Ussita MC, Italy",
+    "rating": 5,
+    "userRatingCount": 4,
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "types": [
+      "natural_feature",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Passo del Fargno"
+    ],
+    "riderScore": 78
+  },
+  {
+    "id": "spot-passo-del-lagastrello-ChIJw7V9",
+    "sourceId": "spot-passo-del-lagastrello-ChIJw7V9",
+    "googlePlaceId": null,
+    "name": "Passo del Lagastrello",
+    "slug": "passo-del-lagastrello",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "italy-center",
+    "scopeName": "Italia Centro",
+    "lat": 44.3512008,
+    "lng": 10.1414698,
+    "region": null,
+    "regionHint": "Garfagnana / Apuane",
+    "address": "Passo del Lagastrello, 54015 Comano MS, Italy",
+    "rating": 4.6,
+    "userRatingCount": 31,
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "types": [
+      "natural_feature",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Passo del Lagastrello"
+    ],
+    "riderScore": 78
+  },
+  {
+    "id": "spot-passo-del-lupo-ChIJQSOf",
+    "sourceId": "spot-passo-del-lupo-ChIJQSOf",
+    "googlePlaceId": null,
+    "name": "Passo del Lupo",
+    "slug": "passo-del-lupo",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "italy-center",
+    "scopeName": "Italia Centro",
+    "lat": 44.291658999999996,
+    "lng": 10.264999,
+    "region": null,
+    "regionHint": "Garfagnana / Apuane",
+    "address": "Passo del Lupo, 42037 Ventasso RE, Italy",
+    "rating": 5,
+    "userRatingCount": 2,
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "types": [
+      "natural_feature",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Passo del Lupo"
+    ],
+    "riderScore": 78
+  },
+  {
+    "id": "spot-passo-del-lupo-ChIJlZED",
+    "sourceId": "spot-passo-del-lupo-ChIJlZED",
+    "googlePlaceId": null,
+    "name": "Passo del Lupo",
+    "slug": "passo-del-lupo",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "italy-center",
+    "scopeName": "Italia Centro",
+    "lat": 44.1377874,
+    "lng": 10.8033358,
+    "region": null,
+    "regionHint": "Garfagnana / Apuane",
+    "address": "Passo del Lupo, 41021 Fanano MO, Italy",
+    "rating": 4.4,
+    "userRatingCount": 119,
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "types": [
+      "natural_feature",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Passo del Lupo"
+    ],
+    "riderScore": 78
+  },
+  {
+    "id": "spot-passo-dell-ospedalaccio-ChIJWypG",
+    "sourceId": "spot-passo-dell-ospedalaccio-ChIJWypG",
+    "googlePlaceId": null,
+    "name": "Passo dell'Ospedalaccio",
+    "slug": "passo-dell-ospedalaccio",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "italy-center",
+    "scopeName": "Italia Centro",
+    "lat": 44.310545999999995,
+    "lng": 10.2025022,
+    "region": null,
+    "regionHint": "Garfagnana / Apuane",
+    "address": "Passo dell'Ospedalaccio, 54015 Comano MS, Italy",
+    "rating": 4.6,
+    "userRatingCount": 20,
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "types": [
+      "natural_feature",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Passo dell'Ospedalaccio"
+    ],
+    "riderScore": 78
+  },
+  {
+    "id": "spot-passo-della-calanca-ChIJNTqV",
+    "sourceId": "spot-passo-della-calanca-ChIJNTqV",
+    "googlePlaceId": null,
+    "name": "Passo della Calanca",
+    "slug": "passo-della-calanca",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "italy-center",
+    "scopeName": "Italia Centro",
+    "lat": 44.1230608,
+    "lng": 10.8002767,
+    "region": null,
+    "regionHint": "Garfagnana / Apuane",
+    "address": "Passo della Calanca, 51028 San Marcello Piteglio PT, Italy",
+    "rating": 4.6,
+    "userRatingCount": 57,
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "types": [
+      "natural_feature",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Passo della Calanca"
+    ],
+    "riderScore": 78
+  },
+  {
+    "id": "spot-passo-della-croce-arcana-ChIJi7ux",
+    "sourceId": "spot-passo-della-croce-arcana-ChIJi7ux",
+    "googlePlaceId": null,
+    "name": "Passo della Croce Arcana",
+    "slug": "passo-della-croce-arcana",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "italy-center",
+    "scopeName": "Italia Centro",
+    "lat": 44.1323065,
+    "lng": 10.777669999999999,
+    "region": null,
+    "regionHint": "Garfagnana / Apuane",
+    "address": "Passo della Croce Arcana, 51024 Abetone Cutigliano PT, Italy",
+    "rating": 4.6,
+    "userRatingCount": 86,
+    "rawTypes": [
+      "mountain_peak",
+      "natural_feature",
+      "establishment"
+    ],
+    "types": [
+      "mountain_peak",
+      "natural_feature",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Passo della Croce Arcana"
+    ],
+    "riderScore": 78
+  },
+  {
+    "id": "spot-passo-della-pedata-del-diavolo-ChIJ5dxa",
+    "sourceId": "spot-passo-della-pedata-del-diavolo-ChIJ5dxa",
+    "googlePlaceId": null,
+    "name": "Passo della Pedata del Diavolo",
+    "slug": "passo-della-pedata-del-diavolo",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "italy-center",
+    "scopeName": "Italia Centro",
+    "lat": 44.0802694,
+    "lng": 10.8619434,
+    "region": null,
+    "regionHint": "Garfagnana / Apuane",
+    "address": "Passo della Pedata del Diavolo, 51028 San Marcello Piteglio PT, Italy",
+    "rating": 4.5,
+    "userRatingCount": 22,
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "types": [
+      "natural_feature",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Passo della Pedata del Diavolo"
+    ],
+    "riderScore": 78
+  },
+  {
+    "id": "spot-passo-della-peschiera-ChIJObwo",
+    "sourceId": "spot-passo-della-peschiera-ChIJObwo",
+    "googlePlaceId": null,
+    "name": "Passo della Peschiera",
+    "slug": "passo-della-peschiera",
+    "type": "mountain_pass",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "italy-center",
+    "scopeName": "Italia Centro",
+    "lat": 44.0172247,
+    "lng": 11.6564743,
+    "region": null,
+    "regionHint": "Casentino / Foreste",
+    "address": "Strada Provinciale 55, 47010 Portico e San Benedetto FC, Italy",
+    "rating": 4.5,
+    "userRatingCount": 68,
+    "rawTypes": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "mountain",
+      "twisty",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Passo della Peschiera"
+    ],
+    "riderScore": 78
+  },
+  {
+    "id": "spot-passo-della-portella-ChIJzSta",
+    "sourceId": "spot-passo-della-portella-ChIJzSta",
+    "googlePlaceId": null,
+    "name": "Passo della Portella",
+    "slug": "passo-della-portella",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "italy-center",
+    "scopeName": "Italia Centro",
+    "lat": 42.45,
+    "lng": 13.533333299999999,
+    "region": null,
+    "regionHint": "Sibillini",
+    "address": "Passo della Portella, 64047 Pietracamela, Province of Teramo, Italy",
+    "rating": 5,
+    "userRatingCount": 9,
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "types": [
+      "natural_feature",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Passo della Portella"
+    ],
+    "riderScore": 78
+  },
+  {
+    "id": "spot-passo-della-torrita-ChIJzWZX",
+    "sourceId": "spot-passo-della-torrita-ChIJzWZX",
+    "googlePlaceId": null,
+    "name": "passo della Torrita",
+    "slug": "passo-della-torrita",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "italy-center",
+    "scopeName": "Italia Centro",
+    "lat": 42.6182381,
+    "lng": 13.225575899999999,
+    "region": null,
+    "regionHint": "Gran Sasso / Majella",
+    "address": "passo della Torrita, 02012 Amatrice RI, Italy",
+    "rating": 4.8,
+    "userRatingCount": 4,
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "types": [
+      "natural_feature",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "passo della Torrita"
+    ],
+    "riderScore": 78
+  },
+  {
+    "id": "spot-passo-delle-forbici-ChIJIfo-",
+    "sourceId": "spot-passo-delle-forbici-ChIJIfo-",
+    "googlePlaceId": null,
+    "name": "passo delle Forbici",
+    "slug": "passo-delle-forbici",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "italy-center",
+    "scopeName": "Italia Centro",
+    "lat": 44.2291798,
+    "lng": 10.452225199999999,
+    "region": null,
+    "regionHint": "Garfagnana / Apuane",
+    "address": "passo delle Forbici, 55033 Castiglione di Garfagnana, Province of Lucca, Italy",
+    "rating": 4.6,
+    "userRatingCount": 42,
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "types": [
+      "natural_feature",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "passo delle Forbici"
+    ],
+    "riderScore": 78
+  },
+  {
+    "id": "spot-passo-delle-radici-ChIJ8aK5",
+    "sourceId": "spot-passo-delle-radici-ChIJ8aK5",
+    "googlePlaceId": null,
+    "name": "Passo delle Radici",
+    "slug": "passo-delle-radici",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "italy-center",
+    "scopeName": "Italia Centro",
+    "lat": 44.2091875,
+    "lng": 10.4887695,
+    "region": null,
+    "regionHint": "Garfagnana / Apuane",
+    "address": "Passo delle Radici, 41044 Frassinoro MO, Italy",
+    "rating": 4.4,
+    "userRatingCount": 420,
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "types": [
+      "natural_feature",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Passo delle Radici"
+    ],
+    "riderScore": 78
+  },
+  {
+    "id": "spot-passo-di-annibale-ChIJw-zD",
+    "sourceId": "spot-passo-di-annibale-ChIJw-zD",
+    "googlePlaceId": null,
+    "name": "Passo di Annibale",
+    "slug": "passo-di-annibale",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "italy-center",
+    "scopeName": "Italia Centro",
+    "lat": 44.071922799999996,
+    "lng": 10.372132899999999,
+    "region": null,
+    "regionHint": "Garfagnana / Apuane",
+    "address": "Passo di Annibale, 55020 Molazzana LU, Italy",
+    "rating": 5,
+    "userRatingCount": 2,
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "types": [
+      "natural_feature",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Passo di Annibale"
+    ],
+    "riderScore": 78
+  },
+  {
+    "id": "spot-passo-di-centocroci-ChIJRWlT",
+    "sourceId": "spot-passo-di-centocroci-ChIJRWlT",
+    "googlePlaceId": null,
+    "name": "Passo di Centocroci",
+    "slug": "passo-di-centocroci",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "italy-center",
+    "scopeName": "Italia Centro",
+    "lat": 44.260548299999996,
+    "lng": 10.6199813,
+    "region": null,
+    "regionHint": "Garfagnana / Apuane",
+    "address": "Passo di Centocroci, 41020 Riolunato MO, Italy",
+    "rating": 4.5,
+    "userRatingCount": 59,
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "types": [
+      "natural_feature",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Passo di Centocroci"
+    ],
+    "riderScore": 78
+  },
+  {
+    "id": "spot-passo-fariola-ChIJVQPL",
+    "sourceId": "spot-passo-fariola-ChIJVQPL",
+    "googlePlaceId": null,
+    "name": "Passo Fariola",
+    "slug": "passo-fariola",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "italy-center",
+    "scopeName": "Italia Centro",
+    "lat": 44.1226315,
+    "lng": 10.6388278,
+    "region": null,
+    "regionHint": "Garfagnana / Apuane",
+    "address": "Passo Fariola, 51021 Abetone Cutigliano PT, Italy",
+    "rating": 4.6,
+    "userRatingCount": 24,
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "types": [
+      "natural_feature",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Passo Fariola"
+    ],
+    "riderScore": 78
+  },
+  {
+    "id": "spot-passo-lanciano-ChIJTSc9",
+    "sourceId": "spot-passo-lanciano-ChIJTSc9",
+    "googlePlaceId": null,
+    "name": "Passo Lanciano",
+    "slug": "passo-lanciano",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "italy-center",
+    "scopeName": "Italia Centro",
+    "lat": 42.188330799999996,
+    "lng": 14.1091584,
+    "region": null,
+    "regionHint": "Gran Sasso / Majella",
+    "address": "Passo Lanciano, 66010 Pretoro CH, Italy",
+    "rating": 4.6,
+    "userRatingCount": 46,
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "types": [
+      "natural_feature",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Passo Lanciano"
+    ],
+    "riderScore": 78
+  },
+  {
+    "id": "spot-passo-serra-sant-antonio-ChIJgVtN",
+    "sourceId": "spot-passo-serra-sant-antonio-ChIJgVtN",
+    "googlePlaceId": null,
+    "name": "Passo Serra Sant'Antonio",
+    "slug": "passo-serra-sant-antonio",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "italy-center",
+    "scopeName": "Italia Centro",
+    "lat": 41.9166667,
+    "lng": 13.3666667,
+    "region": null,
+    "regionHint": "Gran Sasso / Majella",
+    "address": "Passo Serra Sant'Antonio, 03010 Filettino FR, Italy",
+    "rating": 5,
+    "userRatingCount": 13,
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "types": [
+      "natural_feature",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Passo Serra Sant'Antonio"
+    ],
+    "riderScore": 78
+  },
+  {
+    "id": "spot-passo-di-pietra-stretta-ChIJ8_3Y",
+    "sourceId": "spot-passo-di-pietra-stretta-ChIJ8_3Y",
+    "googlePlaceId": null,
+    "name": "Passo di Pietra Stretta",
+    "slug": "passo-di-pietra-stretta",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "italy-center",
+    "scopeName": "Italia Centro",
+    "lat": 42.7136126,
+    "lng": 13.587258900000002,
+    "region": null,
+    "regionHint": "Sibillini",
+    "address": "SP51, 64010 Torricella Sicura TE, Italy",
+    "rating": 4.8,
+    "userRatingCount": 34,
+    "rawTypes": [
+      "nature_preserve",
+      "park",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "nature_preserve",
+      "park",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Passo di Pietra Stretta"
+    ],
+    "riderScore": 75
+  },
+  {
+    "id": "spot-passo-bocca-di-massa-ChIJJdnj",
+    "sourceId": "spot-passo-bocca-di-massa-ChIJJdnj",
+    "googlePlaceId": null,
+    "name": "Passo Bocca di Massa",
+    "slug": "passo-bocca-di-massa",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "italy-center",
+    "scopeName": "Italia Centro",
+    "lat": 44.2283197,
+    "lng": 10.428051799999999,
+    "region": null,
+    "regionHint": "Garfagnana / Apuane",
+    "address": "Passo Bocca di Massa, 55030 Villa Collemandina LU, Italy",
+    "rating": 4.6,
+    "userRatingCount": 17,
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "types": [
+      "natural_feature",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Passo Bocca di Massa"
+    ],
+    "riderScore": 73
+  },
+  {
+    "id": "spot-passo-del-vallone-ChIJ5Sjj",
+    "sourceId": "spot-passo-del-vallone-ChIJ5Sjj",
+    "googlePlaceId": null,
+    "name": "Passo del Vallone",
+    "slug": "passo-del-vallone",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "italy-center",
+    "scopeName": "Italia Centro",
+    "lat": 44.1286048,
+    "lng": 10.8322258,
+    "region": null,
+    "regionHint": "Garfagnana / Apuane",
+    "address": "Passo del Vallone, 40042 Lizzano in Belvedere BO, Italy",
+    "rating": 4.6,
+    "userRatingCount": 5,
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "types": [
+      "natural_feature",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Passo del Vallone"
+    ],
+    "riderScore": 73
+  },
+  {
+    "id": "spot-passo-delle-pecore-ChIJAZdE",
+    "sourceId": "spot-passo-delle-pecore-ChIJAZdE",
+    "googlePlaceId": null,
+    "name": "Passo delle Pecore",
+    "slug": "passo-delle-pecore",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "italy-center",
+    "scopeName": "Italia Centro",
+    "lat": 44.118929699999995,
+    "lng": 10.2028468,
+    "region": null,
+    "regionHint": "Garfagnana / Apuane",
+    "address": "Passo delle Pecore, 55034 Minucciano LU, Italy",
+    "rating": 4.5,
+    "userRatingCount": 6,
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "types": [
+      "natural_feature",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Passo delle Pecore"
+    ],
+    "riderScore": 73
+  },
+  {
+    "id": "spot-passo-delle-pecore-ChIJRxTS",
+    "sourceId": "spot-passo-delle-pecore-ChIJRxTS",
+    "googlePlaceId": null,
+    "name": "Passo delle Pecore",
+    "slug": "passo-delle-pecore",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "italy-center",
+    "scopeName": "Italia Centro",
+    "lat": 44.045275,
+    "lng": 10.2158193,
+    "region": null,
+    "regionHint": "Garfagnana / Apuane",
+    "address": "Passo delle Pecore, 55047 Seravezza LU, Italy",
+    "rating": 4.6,
+    "userRatingCount": 7,
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "types": [
+      "natural_feature",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Passo delle Pecore"
+    ],
+    "riderScore": 73
+  },
+  {
+    "id": "spot-passo-di-vallestrina-ChIJjTjy",
+    "sourceId": "spot-passo-di-vallestrina-ChIJjTjy",
+    "googlePlaceId": null,
+    "name": "Passo di Vallestrina",
+    "slug": "passo-di-vallestrina",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "italy-center",
+    "scopeName": "Italia Centro",
+    "lat": 44.2669801,
+    "lng": 10.4305959,
+    "region": null,
+    "regionHint": "Garfagnana / Apuane",
+    "address": "Passo di Vallestrina, 42030 Villa Minozzo RE, Italy",
+    "rating": 4.5,
+    "userRatingCount": 4,
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "types": [
+      "natural_feature",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Passo di Vallestrina"
+    ],
+    "riderScore": 73
+  },
+  {
+    "id": "spot-panorama-park-passolanciano-ChIJV29-",
+    "sourceId": "spot-panorama-park-passolanciano-ChIJV29-",
+    "googlePlaceId": null,
+    "name": "Panorama Park Passolanciano",
+    "slug": "panorama-park-passolanciano",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "italy-center",
+    "scopeName": "Italia Centro",
+    "lat": 42.188741199999996,
+    "lng": 14.104344300000001,
+    "region": null,
+    "regionHint": "Gran Sasso / Majella",
+    "address": "Via Passolanciano, 66010 Passolanciano-Maielletta CH, Italy",
+    "rating": 4.3,
+    "userRatingCount": 166,
+    "rawTypes": [
+      "ski_resort",
+      "sports_activity_location",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "ski_resort",
+      "sports_activity_location",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Panorama Park Passolanciano"
+    ],
+    "riderScore": 70
+  },
+  {
+    "id": "spot-cisa-pass-ChIJ617_",
+    "sourceId": "spot-cisa-pass-ChIJ617_",
+    "googlePlaceId": null,
+    "name": "Cisa Pass",
+    "slug": "cisa-pass",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "italy-center",
+    "scopeName": "Italia Centro",
+    "lat": 44.47146000000001,
+    "lng": 9.9286795,
+    "region": null,
+    "regionHint": "Garfagnana / Apuane",
+    "address": "Cisa Pass, 54027 Pontremoli, Province of Massa and Carrara, Italy",
+    "rating": 4.7,
+    "userRatingCount": 737,
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "types": [
+      "natural_feature",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Cisa Pass"
+    ],
+    "riderScore": 68
+  },
+  {
+    "id": "spot-passo-del-brattello-ChIJI4Fv",
+    "sourceId": "spot-passo-del-brattello-ChIJI4Fv",
+    "googlePlaceId": null,
+    "name": "passo del Brattello",
+    "slug": "passo-del-brattello",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "italy-center",
+    "scopeName": "Italia Centro",
+    "lat": 44.4566972,
+    "lng": 9.8167992,
+    "region": null,
+    "regionHint": "Garfagnana / Apuane",
+    "address": "passo del Brattello, 43043 Borgo Val di Taro PR, Italy",
+    "rating": 4.1,
+    "userRatingCount": 8,
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "types": [
+      "natural_feature",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "passo del Brattello"
+    ],
+    "riderScore": 63
+  },
+  {
+    "id": "spot-passo-del-termine-ChIJTdUK",
+    "sourceId": "spot-passo-del-termine-ChIJTdUK",
+    "googlePlaceId": null,
+    "name": "Passo del Termine",
+    "slug": "passo-del-termine",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "italy-center",
+    "scopeName": "Italia Centro",
+    "lat": 44.09499410000001,
+    "lng": 10.887221799999999,
+    "region": null,
+    "regionHint": "Garfagnana / Apuane",
+    "address": "Passo del Termine, 40045 Alto Reno Terme BO, Italy",
+    "rating": 3.4,
+    "userRatingCount": 5,
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "types": [
+      "natural_feature",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Passo del Termine"
+    ],
+    "riderScore": 63
+  },
+  {
+    "id": "spot-passo-della-cerventosa-ChIJSe7K",
+    "sourceId": "spot-passo-della-cerventosa-ChIJSe7K",
+    "googlePlaceId": null,
+    "name": "Passo della Cerventosa",
+    "slug": "passo-della-cerventosa",
+    "type": "mountain_pass",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "italy-center",
+    "scopeName": "Italia Centro",
+    "lat": 43.291384799999996,
+    "lng": 12.056707099999999,
+    "region": null,
+    "regionHint": "Umbria centrale",
+    "address": "Strada Provinciale Umbro Cortonese, 52044 Cortona AR, Italy",
+    "rating": 4.2,
+    "userRatingCount": 10,
+    "rawTypes": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "mountain",
+      "twisty",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Passo della Cerventosa"
+    ],
+    "riderScore": 63
+  },
+  {
+    "id": "spot-passo-della-comunelle-ChIJYYMy",
+    "sourceId": "spot-passo-della-comunelle-ChIJYYMy",
+    "googlePlaceId": null,
+    "name": "Passo della Comunelle",
+    "slug": "passo-della-comunelle",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "italy-center",
+    "scopeName": "Italia Centro",
+    "lat": 44.2800223,
+    "lng": 10.312299699999999,
+    "region": null,
+    "regionHint": "Garfagnana / Apuane",
+    "address": "Passo della Comunelle, 55030 Sillano Giuncugnano LU, Italy",
+    "rating": 4.4,
+    "userRatingCount": 15,
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "types": [
+      "natural_feature",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Passo della Comunelle"
+    ],
+    "riderScore": 63
+  },
+  {
+    "id": "spot-passo-della-focolaccia-ChIJB9l2",
+    "sourceId": "spot-passo-della-focolaccia-ChIJB9l2",
+    "googlePlaceId": null,
+    "name": "passo della Focolaccia",
+    "slug": "passo-della-focolaccia",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "italy-center",
+    "scopeName": "Italia Centro",
+    "lat": 44.113226,
+    "lng": 10.2212334,
+    "region": null,
+    "regionHint": "Garfagnana / Apuane",
+    "address": "passo della Focolaccia, 54100 Massa MS, Italy",
+    "rating": 4.1,
+    "userRatingCount": 15,
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "types": [
+      "natural_feature",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "passo della Focolaccia"
+    ],
+    "riderScore": 63
+  },
+  {
+    "id": "spot-passo-della-porretta-ChIJsYaa",
+    "sourceId": "spot-passo-della-porretta-ChIJsYaa",
+    "googlePlaceId": null,
+    "name": "Passo della Porretta",
+    "slug": "passo-della-porretta",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "italy-center",
+    "scopeName": "Italia Centro",
+    "lat": 44.033333299999995,
+    "lng": 10.9333333,
+    "region": null,
+    "regionHint": "Garfagnana / Apuane",
+    "address": "Passo della Porretta, 51100 Pistoia, Province of Pistoia, Italy",
+    "rating": 3.9,
+    "userRatingCount": 18,
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "types": [
+      "natural_feature",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Passo della Porretta"
+    ],
+    "riderScore": 63
+  },
+  {
+    "id": "spot-passo-di-blefiore-ChIJh76m",
+    "sourceId": "spot-passo-di-blefiore-ChIJh76m",
+    "googlePlaceId": null,
+    "name": "Passo di Blefiore",
+    "slug": "passo-di-blefiore",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "italy-center",
+    "scopeName": "Italia Centro",
+    "lat": 44.2694367,
+    "lng": 10.2605559,
+    "region": null,
+    "regionHint": "Garfagnana / Apuane",
+    "address": "Passo di Blefiore, 55030 Sillano Giuncugnano LU, Italy",
+    "rating": 4.2,
+    "userRatingCount": 6,
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "types": [
+      "natural_feature",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Passo di Blefiore"
+    ],
+    "riderScore": 63
+  },
+  {
+    "id": "spot-passo-di-cavorsella-ChIJLXXk",
+    "sourceId": "spot-passo-di-cavorsella-ChIJLXXk",
+    "googlePlaceId": null,
+    "name": "Passo di Cavorsella",
+    "slug": "passo-di-cavorsella",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "italy-center",
+    "scopeName": "Italia Centro",
+    "lat": 44.2810765,
+    "lng": 10.2844369,
+    "region": null,
+    "regionHint": "Garfagnana / Apuane",
+    "address": "Passo di Cavorsella, 42037 Ventasso RE, Italy",
+    "rating": 4.2,
+    "userRatingCount": 10,
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "types": [
+      "natural_feature",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Passo di Cavorsella"
+    ],
+    "riderScore": 63
+  },
+  {
+    "id": "spot-passo-di-lupo-ChIJSQos",
+    "sourceId": "spot-passo-di-lupo-ChIJSQos",
+    "googlePlaceId": null,
+    "name": "Passo di Lupo",
+    "slug": "passo-di-lupo",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "italy-center",
+    "scopeName": "Italia Centro",
+    "lat": 42.45,
+    "lng": 13.549999999999999,
+    "region": null,
+    "regionHint": "Sibillini",
+    "address": "Passo di Lupo, 64047 Pietracamela, Province of Teramo, Italy",
+    "rating": 0,
+    "userRatingCount": 0,
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "types": [
+      "natural_feature",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Passo di Lupo"
+    ],
+    "riderScore": 63
+  },
+  {
+    "id": "spot-passo-la-croce-ChIJhwts",
+    "sourceId": "spot-passo-la-croce-ChIJhwts",
+    "googlePlaceId": null,
+    "name": "Passo la Croce",
+    "slug": "passo-la-croce",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "italy-center",
+    "scopeName": "Italia Centro",
+    "lat": 42.4833333,
+    "lng": 13.799999999999999,
+    "region": null,
+    "regionHint": "Gran Sasso / Majella",
+    "address": "Passo la Croce, 64031 Arsita, Province of Teramo, Italy",
+    "rating": 0,
+    "userRatingCount": 0,
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "types": [
+      "natural_feature",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Passo la Croce"
+    ],
+    "riderScore": 63
+  },
+  {
+    "id": "spot-monte-sibilla-ChIJ1W7p",
+    "sourceId": "spot-monte-sibilla-ChIJ1W7p",
+    "googlePlaceId": null,
+    "name": "Monte Sibilla",
+    "slug": "monte-sibilla",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "italy-center",
+    "scopeName": "Italia Centro",
+    "lat": 42.9,
+    "lng": 13.261944,
+    "region": null,
+    "regionHint": "Sibillini",
+    "address": "Monte Sibilla, 63088 Montemonaco, Province of Ascoli Piceno, Italy",
+    "rating": 4.9,
+    "userRatingCount": 136,
+    "rawTypes": [
+      "mountain_peak",
+      "natural_feature",
+      "establishment"
+    ],
+    "types": [
+      "mountain_peak",
+      "natural_feature",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Monte Sibilla"
+    ],
+    "riderScore": 58
+  },
+  {
+    "id": "spot-monte-vettore-ChIJX1ZA",
+    "sourceId": "spot-monte-vettore-ChIJX1ZA",
+    "googlePlaceId": null,
+    "name": "Monte Vettore",
+    "slug": "monte-vettore",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "italy-center",
+    "scopeName": "Italia Centro",
+    "lat": 42.8248531,
+    "lng": 13.2747245,
+    "region": null,
+    "regionHint": "Sibillini",
+    "address": "Monte Vettore, 63088 Montemonaco, Province of Ascoli Piceno, Italy",
+    "rating": 4.7,
+    "userRatingCount": 285,
+    "rawTypes": [
+      "mountain_peak",
+      "natural_feature",
+      "establishment"
+    ],
+    "types": [
+      "mountain_peak",
+      "natural_feature",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Monte Vettore"
+    ],
+    "riderScore": 58
+  },
+  {
+    "id": "spot-passo-di-fociomboli-ChIJw-pd",
+    "sourceId": "spot-passo-di-fociomboli-ChIJw-pd",
+    "googlePlaceId": null,
+    "name": "Passo di Fociomboli",
+    "slug": "passo-di-fociomboli",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "italy-center",
+    "scopeName": "Italia Centro",
+    "lat": 44.0438659,
+    "lng": 10.2844117,
+    "region": null,
+    "regionHint": "Garfagnana / Apuane",
+    "address": "55040 Stazzema, Province of Lucca, Italy",
+    "rating": 4,
+    "userRatingCount": 3,
+    "rawTypes": [
+      "hiking_area",
+      "sports_activity_location",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "hiking_area",
+      "sports_activity_location",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Passo di Fociomboli"
+    ],
+    "riderScore": 55
+  },
+  {
+    "id": "spot-corno-piccolo-ChIJM7O_",
+    "sourceId": "spot-corno-piccolo-ChIJM7O_",
+    "googlePlaceId": null,
+    "name": "Corno Piccolo",
+    "slug": "corno-piccolo",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "italy-center",
+    "scopeName": "Italia Centro",
+    "lat": 42.4833333,
+    "lng": 13.566666699999999,
+    "region": null,
+    "regionHint": "Terminillo / Lazio nord",
+    "address": "Corno Piccolo, 64047 Pietracamela TE, Italy",
+    "rating": 4.8,
+    "userRatingCount": 66,
+    "rawTypes": [
+      "mountain_peak",
+      "natural_feature",
+      "establishment"
+    ],
+    "types": [
+      "mountain_peak",
+      "natural_feature",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Corno Piccolo"
+    ],
+    "riderScore": 48
+  },
+  {
+    "id": "spot-landscape-from-road-to-saint-francesco-ChIJqWyV",
+    "sourceId": "spot-landscape-from-road-to-saint-francesco-ChIJqWyV",
+    "googlePlaceId": null,
+    "name": "Landscape from Road to Saint Francesco",
+    "slug": "landscape-from-road-to-saint-francesco",
+    "type": "forest_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "italy-center",
+    "scopeName": "Italia Centro",
+    "lat": 43.807276699999996,
+    "lng": 11.289845699999999,
+    "region": null,
+    "regionHint": "Chianti / Crete Senesi",
+    "address": "Via S. Francesco, 1, 50014 Fiesole FI, Italy",
+    "rating": 4.7,
+    "userRatingCount": 204,
+    "rawTypes": [
+      "scenic_spot",
+      "tourist_attraction",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "scenic_spot",
+      "tourist_attraction",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "forest",
+      "rider-spot"
+    ],
+    "aliases": [
+      "Landscape from Road to Saint Francesco"
+    ],
+    "riderScore": 47
+  },
+  {
+    "id": "spot-binocolo-panoramico-di-prezza-ChIJvZ4T",
+    "sourceId": "spot-binocolo-panoramico-di-prezza-ChIJvZ4T",
+    "googlePlaceId": null,
+    "name": "Binocolo panoramico di Prezza",
+    "slug": "binocolo-panoramico-di-prezza",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "italy-center",
+    "scopeName": "Italia Centro",
+    "lat": 42.0579307,
+    "lng": 13.8344109,
+    "region": null,
+    "regionHint": "Gran Sasso / Majella",
+    "address": "Piazza Umberto I, 67030 Prezza AQ, Italy",
+    "rating": 5,
+    "userRatingCount": 1,
+    "rawTypes": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Binocolo panoramico di Prezza"
+    ],
+    "riderScore": 43
+  },
+  {
+    "id": "spot-punto-panoramico-rocca-calascio-con-corno-grande-ChIJ_xm8",
+    "sourceId": "spot-punto-panoramico-rocca-calascio-con-corno-grande-ChIJ_xm8",
+    "googlePlaceId": null,
+    "name": "Punto panoramico Rocca Calascio con Corno Grande",
+    "slug": "punto-panoramico-rocca-calascio-con-corno-grande",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "italy-center",
+    "scopeName": "Italia Centro",
+    "lat": 42.2294175,
+    "lng": 13.776772,
+    "region": null,
+    "regionHint": "Gran Sasso / Majella",
+    "address": "67020 Collepietro AQ, Italy",
+    "rating": 5,
+    "userRatingCount": 4,
+    "rawTypes": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Punto panoramico Rocca Calascio con Corno Grande"
+    ],
+    "riderScore": 43
+  },
+  {
+    "id": "spot-etruscan-road-san-rocco-in-sorano-ChIJCXuH",
+    "sourceId": "spot-etruscan-road-san-rocco-in-sorano-ChIJCXuH",
+    "googlePlaceId": null,
+    "name": "Etruscan Road San Rocco in Sorano",
+    "slug": "etruscan-road-san-rocco-in-sorano",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "italy-center",
+    "scopeName": "Italia Centro",
+    "lat": 42.6851108,
+    "lng": 11.7095422,
+    "region": null,
+    "regionHint": "Val d'Orcia / Amiata",
+    "address": "58010 Sorano, Province of Grosseto, Italy",
+    "rating": 4.7,
+    "userRatingCount": 281,
+    "rawTypes": [
+      "tourist_attraction",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "tourist_attraction",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "rider-spot"
+    ],
+    "aliases": [
+      "Etruscan Road San Rocco in Sorano"
+    ],
+    "riderScore": 42
+  },
+  {
+    "id": "spot-valico-di-santa-maria-maddalena-ChIJE-W_",
+    "sourceId": "spot-valico-di-santa-maria-maddalena-ChIJE-W_",
+    "googlePlaceId": null,
+    "name": "Valico di Santa Maria Maddalena",
+    "slug": "valico-di-santa-maria-maddalena",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "italy-center",
+    "scopeName": "Italia Centro",
+    "lat": 43.010157299999996,
+    "lng": 13.226400799999999,
+    "region": null,
+    "regionHint": "Umbria centrale",
+    "address": "Strada Provinciale 120, 62028 Bolognola MC, Italy",
+    "rating": 4.7,
+    "userRatingCount": 315,
+    "rawTypes": [
+      "scenic_spot",
+      "tourist_attraction",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "scenic_spot",
+      "tourist_attraction",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "rider-spot"
+    ],
+    "aliases": [
+      "Valico di Santa Maria Maddalena"
+    ],
+    "riderScore": 42
+  },
+  {
+    "id": "spot-itinerario-strada-verde-casa-leonardo-ChIJsf7K",
+    "sourceId": "spot-itinerario-strada-verde-casa-leonardo-ChIJsf7K",
+    "googlePlaceId": null,
+    "name": "Itinerario Strada Verde - Casa Leonardo",
+    "slug": "itinerario-strada-verde-casa-leonardo",
+    "type": "forest_road",
+    "rideType": "forest",
+    "country": "IT",
+    "scope": "italy-center",
+    "scopeName": "Italia Centro",
+    "lat": 43.7906233,
+    "lng": 10.929305699999999,
+    "region": null,
+    "regionHint": "Garfagnana / Apuane",
+    "address": "Via Belvedere, 1, 50059 Vinci FI, Italy",
+    "rating": 4.5,
+    "userRatingCount": 137,
+    "rawTypes": [
+      "hiking_area",
+      "sports_activity_location",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "hiking_area",
+      "sports_activity_location",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "forest",
+      "scenic",
+      "rider",
+      "rider-spot"
+    ],
+    "aliases": [
+      "Itinerario Strada Verde - Casa Leonardo"
+    ],
+    "riderScore": 40
+  },
+  {
+    "id": "spot-strada-panoramica-monte-serra-ChIJk65u",
+    "sourceId": "spot-strada-panoramica-monte-serra-ChIJk65u",
+    "googlePlaceId": null,
+    "name": "Strada panoramica monte Serra",
+    "slug": "strada-panoramica-monte-serra",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "italy-center",
+    "scopeName": "Italia Centro",
+    "lat": 43.7574324,
+    "lng": 10.5366438,
+    "region": null,
+    "regionHint": "Garfagnana / Apuane",
+    "address": "56011 Capannori, Province of Lucca, Italy",
+    "rating": 4.7,
+    "userRatingCount": 21,
+    "rawTypes": [
+      "tourist_attraction",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "tourist_attraction",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "rider-spot"
+    ],
+    "aliases": [
+      "Strada panoramica monte Serra"
+    ],
+    "riderScore": 40
+  }
+]

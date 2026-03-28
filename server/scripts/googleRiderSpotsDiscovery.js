@@ -1,35 +1,32 @@
 // =======================================================
 // server/scripts/googleRiderSpotsDiscovery.js
-// MotoPortEU — European Rider Spots Discovery
+// MotoPortEU — Rider Spots Discovery by Country / Scope
 //
 // Scopo:
-// Generare un dataset europeo pulito di rider spots reali
-// usando Google Places API.
+// Generare un dataset pulito di rider spots reali
+// usando Google Places API, filtrato per paese / sotto-area.
 //
-// Output:
-//   client/public/data/rider-spots.cleaned.google.json
-//
-// Tipi supportati:
-// - mountain_pass
-// - coastal_view
-// - lake_view
-// - scenic_road
-// - hill_road
-// - fjord_view
-// - cliff_road
-// - forest_road
+// Output esempio:
+//   client/public/data/rider-spots.cleaned.google.IT.italy-nw.json
 //
 // Requisiti:
 //   GOOGLE_PLACES_KEY=...
 //
 // Avvio:
-//   node server/scripts/googleRiderSpotsDiscovery.js
+//   node server/scripts/googleRiderSpotsDiscovery.js --country=IT --scope=italy-nw
+//   node server/scripts/googleRiderSpotsDiscovery.js --country=IT --scope=sicily
+//   node server/scripts/googleRiderSpotsDiscovery.js --country=IT
 // =======================================================
 
 import dotenv from "dotenv";
 import path from "path";
 import fs from "fs/promises";
 import process from "process";
+import {
+  parseCliArgs,
+  getScopeConfig,
+  getScopeSuffix,
+} from "./lib/routeScopes.js";
 
 dotenv.config({ path: path.resolve("server/.env") });
 
@@ -41,7 +38,21 @@ if (!API_KEY) {
 }
 
 const GOOGLE_TEXT_SEARCH_URL = "https://places.googleapis.com/v1/places:searchText";
-const OUT_FILE = path.resolve("client/public/data/rider-spots.cleaned.google.json");
+
+// -------------------------------------------------------
+// CLI / SCOPE
+// -------------------------------------------------------
+
+const args = parseCliArgs();
+const country = String(args.country || "IT").toUpperCase();
+const scope = args.scope ? String(args.scope) : null;
+
+const scopeCfg = getScopeConfig({ country, scope });
+const scopeSuffix = getScopeSuffix({ country, scope });
+
+const OUT_FILE = path.resolve(
+  `client/public/data/rider-spots.cleaned.google.${scopeSuffix}.json`
+);
 
 // -------------------------------------------------------
 // CONFIG
@@ -148,75 +159,15 @@ const SEARCH_GROUPS = [
   },
 ];
 
-const EUROPE_AREAS = [
-  // Italia
-  { name: "IT-Alpi-Ovest", lat: 45.95, lng: 7.15, radius: 50000, country: "IT", profile: ["mountain"] },
-  { name: "IT-Alpi-Centro", lat: 46.35, lng: 10.30, radius: 50000, country: "IT", profile: ["mountain", "lake"] },
-  { name: "IT-Alpi-Est", lat: 46.55, lng: 12.25, radius: 50000, country: "IT", profile: ["mountain"] },
-  { name: "IT-Lago-Garda", lat: 45.65, lng: 10.62, radius: 50000, country: "IT", profile: ["lake", "scenic"] },
-  { name: "IT-Lago-Como", lat: 46.00, lng: 9.26, radius: 50000, country: "IT", profile: ["lake", "scenic"] },
-  { name: "IT-Liguria", lat: 44.20, lng: 8.40, radius: 50000, country: "IT", profile: ["coastal", "scenic"] },
-  { name: "IT-Costiera-Amalfi", lat: 40.63, lng: 14.60, radius: 50000, country: "IT", profile: ["coastal", "scenic"] },
-  { name: "IT-Appennino-Nord", lat: 44.20, lng: 10.20, radius: 50000, country: "IT", profile: ["mountain", "hill", "forest", "scenic"] },
-  { name: "IT-Appennino-Centro", lat: 42.60, lng: 13.30, radius: 50000, country: "IT", profile: ["mountain", "hill", "forest", "scenic"] },
-
-  // Francia
-  { name: "FR-Alpes-Nord", lat: 45.90, lng: 6.85, radius: 50000, country: "FR", profile: ["mountain"] },
-  { name: "FR-Alpes-Sud", lat: 44.70, lng: 6.40, radius: 50000, country: "FR", profile: ["mountain"] },
-  { name: "FR-Pyrenees-Est", lat: 42.60, lng: 2.10, radius: 50000, country: "FR", profile: ["mountain", "scenic"] },
-  { name: "FR-Pyrenees-Centre", lat: 42.85, lng: 0.25, radius: 50000, country: "FR", profile: ["mountain"] },
-  { name: "FR-Pyrenees-Ouest", lat: 43.00, lng: -0.65, radius: 50000, country: "FR", profile: ["mountain"] },
-  { name: "FR-Cote-Azur", lat: 43.55, lng: 6.98, radius: 50000, country: "FR", profile: ["coastal", "scenic"] },
-  { name: "FR-Corsica", lat: 42.20, lng: 9.10, radius: 50000, country: "FR", profile: ["coastal", "mountain", "scenic"] },
-  { name: "FR-Massif-Central", lat: 45.25, lng: 2.95, radius: 50000, country: "FR", profile: ["mountain", "hill", "forest"] },
-  { name: "FR-Vosges", lat: 48.05, lng: 7.00, radius: 50000, country: "FR", profile: ["forest", "hill", "scenic"] },
-
-  // Svizzera
-  { name: "CH-Centrale", lat: 46.65, lng: 8.35, radius: 50000, country: "CH", profile: ["mountain", "lake"] },
-  { name: "CH-Est", lat: 46.85, lng: 9.80, radius: 50000, country: "CH", profile: ["mountain", "lake"] },
-  { name: "CH-Ovest", lat: 46.20, lng: 7.20, radius: 50000, country: "CH", profile: ["mountain", "lake"] },
-
-  // Austria
-  { name: "AT-Tirolo", lat: 47.15, lng: 11.15, radius: 50000, country: "AT", profile: ["mountain"] },
-  { name: "AT-Salisburgo", lat: 47.30, lng: 13.10, radius: 50000, country: "AT", profile: ["mountain", "lake"] },
-  { name: "AT-Carinzia", lat: 46.90, lng: 13.80, radius: 50000, country: "AT", profile: ["mountain", "lake", "scenic"] },
-
-  // Germania
-  { name: "DE-Baviera-Alpi", lat: 47.60, lng: 11.40, radius: 50000, country: "DE", profile: ["mountain", "lake"] },
-  { name: "DE-Foresta-Nera", lat: 48.20, lng: 8.20, radius: 50000, country: "DE", profile: ["forest", "hill", "scenic"] },
-
-  // Spagna
-  { name: "ES-Pirenei-Est", lat: 42.55, lng: 1.85, radius: 50000, country: "ES", profile: ["mountain"] },
-  { name: "ES-Pirenei-Centro", lat: 42.70, lng: 0.25, radius: 50000, country: "ES", profile: ["mountain"] },
-  { name: "ES-Pirenei-Ovest", lat: 42.95, lng: -0.90, radius: 50000, country: "ES", profile: ["mountain"] },
-  { name: "ES-Picos", lat: 43.18, lng: -4.75, radius: 50000, country: "ES", profile: ["mountain", "scenic"] },
-  { name: "ES-Sierra-Nevada", lat: 37.05, lng: -3.35, radius: 50000, country: "ES", profile: ["mountain"] },
-  { name: "ES-Costa-Brava", lat: 41.90, lng: 3.20, radius: 50000, country: "ES", profile: ["coastal", "scenic"] },
-  { name: "ES-Costa-Vasca", lat: 43.35, lng: -2.80, radius: 50000, country: "ES", profile: ["coastal", "scenic"] },
-
-  // Slovenia / Balcani
-  { name: "SI-Alpi-Giulie", lat: 46.38, lng: 13.80, radius: 50000, country: "SI", profile: ["mountain", "lake"] },
-  { name: "HR-Velebit", lat: 44.75, lng: 15.00, radius: 50000, country: "HR", profile: ["mountain", "coastal", "scenic"] },
-  { name: "HR-Adriatic", lat: 43.50, lng: 16.40, radius: 50000, country: "HR", profile: ["coastal", "scenic"] },
-  { name: "BA-Dinariche", lat: 43.80, lng: 17.90, radius: 50000, country: "BA", profile: ["mountain", "forest"] },
-  { name: "ME-Durmitor", lat: 43.10, lng: 19.05, radius: 50000, country: "ME", profile: ["mountain", "scenic"] },
-  { name: "AL-Alpi-Albanesi", lat: 42.45, lng: 19.80, radius: 50000, country: "AL", profile: ["mountain", "scenic", "coastal"] },
-
-  // Romania / Carpazi
-  { name: "RO-Carpazi-Nord", lat: 47.05, lng: 24.60, radius: 50000, country: "RO", profile: ["mountain", "forest"] },
-  { name: "RO-Carpazi-Centro", lat: 45.55, lng: 25.50, radius: 50000, country: "RO", profile: ["mountain", "forest", "scenic"] },
-  { name: "RO-Transfagarasan", lat: 45.60, lng: 24.60, radius: 50000, country: "RO", profile: ["mountain", "scenic"] },
-
-  // Slovacchia / Cechia / Polonia
-  { name: "SK-Tatra", lat: 49.15, lng: 20.15, radius: 50000, country: "SK", profile: ["mountain", "lake"] },
-  { name: "CZ-Beskydy", lat: 49.50, lng: 18.45, radius: 50000, country: "CZ", profile: ["forest", "hill", "scenic"] },
-  { name: "PL-Tatra", lat: 49.25, lng: 19.95, radius: 50000, country: "PL", profile: ["mountain", "lake"] },
-
-  // Nord Europa
-  { name: "NO-Fjordland", lat: 61.45, lng: 7.75, radius: 50000, country: "NO", profile: ["fjord", "mountain", "scenic"] },
-  { name: "NO-Trollstigen", lat: 62.45, lng: 7.67, radius: 50000, country: "NO", profile: ["fjord", "mountain", "scenic"] },
-  { name: "UK-Highlands", lat: 57.15, lng: -4.85, radius: 50000, country: "GB", profile: ["mountain", "lake", "scenic"] },
-];
+// Aree dinamiche lette dal file routeScopes.js
+const DISCOVERY_AREAS = scopeCfg.areas.map((area) => {
+  const profile = inferProfileFromArea(area);
+  return {
+    ...area,
+    country,
+    profile,
+  };
+});
 
 // -------------------------------------------------------
 // UTILS
@@ -272,6 +223,87 @@ function baseNameKey(name) {
     .trim();
 }
 
+function inferProfileFromArea(area) {
+  const name = normalizeText(area?.name || "");
+
+  const profile = new Set(["scenic"]);
+
+  if (
+    name.includes("alpi") ||
+    name.includes("dolomiti") ||
+    name.includes("gran sasso") ||
+    name.includes("majella") ||
+    name.includes("sibillini") ||
+    name.includes("supramonte") ||
+    name.includes("etna") ||
+    name.includes("nebrodi") ||
+    name.includes("madonie") ||
+    name.includes("pollino") ||
+    name.includes("sila") ||
+    name.includes("aspromonte") ||
+    name.includes("barbagia") ||
+    name.includes("terminillo") ||
+    name.includes("monte bianco") ||
+    name.includes("carnia") ||
+    name.includes("apuane")
+  ) {
+    profile.add("mountain");
+  }
+
+  if (
+    name.includes("lago") ||
+    name.includes("laghi") ||
+    name.includes("garda") ||
+    name.includes("como") ||
+    name.includes("maggiore")
+  ) {
+    profile.add("lake");
+  }
+
+  if (
+    name.includes("costa") ||
+    name.includes("costiera") ||
+    name.includes("coast") ||
+    name.includes("liguria") ||
+    name.includes("amalfitana") ||
+    name.includes("cilento") ||
+    name.includes("gargano") ||
+    name.includes("gallura") ||
+    name.includes("alghero") ||
+    name.includes("bosa") ||
+    name.includes("trapani") ||
+    name.includes("palermo")
+  ) {
+    profile.add("coastal");
+  }
+
+  if (
+    name.includes("appennino") ||
+    name.includes("chianti") ||
+    name.includes("crete") ||
+    name.includes("orcia") ||
+    name.includes("amiata") ||
+    name.includes("irpinia") ||
+    name.includes("sannio") ||
+    name.includes("murge") ||
+    name.includes("itria")
+  ) {
+    profile.add("hill");
+  }
+
+  if (
+    name.includes("foreste") ||
+    name.includes("casentino") ||
+    name.includes("bosco") ||
+    name.includes("forest") ||
+    name.includes("garfagnana")
+  ) {
+    profile.add("forest");
+  }
+
+  return Array.from(profile);
+}
+
 function inferType(name = "", address = "", family = "", types = []) {
   const s = normalizeText(`${name} ${address}`);
   const t = Array.isArray(types) ? types.join(" ").toLowerCase() : "";
@@ -317,11 +349,7 @@ function inferType(name = "", address = "", family = "", types = []) {
     return "forest_road";
   }
 
-  if (
-    s.includes("hill") ||
-    s.includes("collina") ||
-    s.includes("colline")
-  ) {
+  if (s.includes("hill") || s.includes("collina") || s.includes("colline")) {
     return "hill_road";
   }
 
@@ -549,7 +577,9 @@ function mapPlace(place, area, group) {
     slug: slugify(name),
     type: spotType,
     rideType: group.rideType || "scenic",
-    country: area.country || null,
+    country: area.country || country,
+    scope: scope || "all",
+    scopeName: scopeCfg.scopeName,
     lat,
     lng,
     regionHint: area.name,
@@ -593,6 +623,8 @@ function dedupeSpots(items) {
           ex.type = item.type;
           ex.rideType = item.rideType;
           ex.country = item.country || ex.country;
+          ex.scope = item.scope || ex.scope;
+          ex.scopeName = item.scopeName || ex.scopeName;
           ex.regionHint = item.regionHint || ex.regionHint;
           ex.tags = Array.from(new Set([...(ex.tags || []), ...(item.tags || [])]));
         } else {
@@ -667,7 +699,9 @@ async function runArea(area) {
             const dist = haversineKm(area.lat, area.lng, item.lat, item.lng);
             if (dist > area.radius / 1000 + 15) continue;
 
-            if (!looksRelevantSpot(item.name, item.address, group.family, item.types)) continue;
+            if (!looksRelevantSpot(item.name, item.address, group.family, item.types)) {
+              continue;
+            }
 
             item.score = scoreSpot(item);
             found.push(item);
@@ -698,12 +732,16 @@ async function runArea(area) {
 
 async function main() {
   console.log("====================================");
-  console.log("MotoPortEU — European Rider Spots Discovery");
+  console.log("MotoPortEU — Rider Spots Discovery");
   console.log("====================================");
+  console.log(`🌍 Country: ${scopeCfg.countryName} (${country})`);
+  console.log(`🧭 Scope: ${scopeCfg.scopeName}`);
+  console.log(`📍 Aree da processare: ${DISCOVERY_AREAS.length}`);
+  console.log(`💾 Output: ${OUT_FILE}`);
 
   const raw = [];
 
-  for (const area of EUROPE_AREAS) {
+  for (const area of DISCOVERY_AREAS) {
     const areaItems = await runArea(area);
     raw.push(...areaItems);
     await sleep(350);
@@ -719,7 +757,9 @@ async function main() {
     slug: x.slug || slugify(x.name),
     type: x.type || "scenic_road",
     rideType: x.rideType || "scenic",
-    country: x.country || null,
+    country: x.country || country,
+    scope: x.scope || scope || "all",
+    scopeName: x.scopeName || scopeCfg.scopeName,
     lat: Number(x.lat),
     lng: Number(x.lng),
     regionHint: x.regionHint || null,

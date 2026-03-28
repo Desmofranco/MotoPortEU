@@ -1,22 +1,39 @@
 // =======================================================
 // server/scripts/generateEuropeanRoutes.js
-// MotoPortEU — European Routes Generator PRO (LIGHT)
+// MotoPortEU — Routes Generator PRO by Country / Scope
 // =======================================================
 
 import path from "path";
 import fs from "fs/promises";
 import process from "process";
+import {
+  parseCliArgs,
+  getScopeConfig,
+  getScopeSuffix,
+} from "./lib/routeScopes.js";
 
-const SPOTS_FILE = path.resolve("client/public/data/rider-spots.cleaned.google.json");
-const OUT_FILE = path.resolve("client/public/data/routes.generated.json");
+const args = parseCliArgs();
+const country = String(args.country || "IT").toUpperCase();
+const scope = args.scope ? String(args.scope) : null;
+
+const scopeCfg = getScopeConfig({ country, scope });
+const scopeSuffix = getScopeSuffix({ country, scope });
+
+const SPOTS_FILE = path.resolve(
+  `client/public/data/rider-spots.cleaned.${scopeSuffix}.json`
+);
+const OUT_FILE = path.resolve(
+  `client/public/data/routes.generated.${scopeSuffix}.json`
+);
+
 const OSRM_BASE = "https://router.project-osrm.org/route/v1/driving";
 
 const MIN_ROUTE_DISTANCE_KM = 45;
 const MAX_ROUTE_DISTANCE_KM = 520;
-const MAX_NEIGHBOR_KM = 120;
+const MAX_NEIGHBOR_KM = 115;
 
-const MAX_SEEDS_PER_CLUSTER = 10;
-const MAX_CANDIDATES_PER_CLUSTER = 36;
+const MAX_SEEDS_PER_CLUSTER = 8;
+const MAX_CANDIDATES_PER_CLUSTER = 24;
 const MAX_FINAL_ROUTES = 2500;
 
 // -------------------------------------------------------
@@ -58,6 +75,16 @@ function averageLatLng(items) {
   return { lat, lng };
 }
 
+function normalizeText(str = "") {
+  return String(str)
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/[^a-z0-9]+/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
 function normalizeRegionHint(s) {
   return String(s || "")
     .replace(/^[A-Z]{2}-/i, "")
@@ -65,9 +92,174 @@ function normalizeRegionHint(s) {
     .trim();
 }
 
-function guessMacroRegion(spot) {
-  const s = `${spot.regionHint || ""} ${spot.address || ""} ${spot.name || ""}`.toLowerCase();
+// -------------------------------------------------------
+// QUALITY FILTERS
+// -------------------------------------------------------
 
+function isWeakGenericName(name = "") {
+  const text = normalizeText(name);
+
+  const exactWeak = new Set([
+    "punto panoramico",
+    "panoramic view",
+    "view point",
+    "viewpoint",
+    "vista del lago",
+    "vista panoramica",
+    "belvedere",
+    "lookout",
+    "panorama",
+    "lake view",
+    "panorama lake view",
+    "fear lake",
+    "vista del mare",
+    "panoramic spot",
+    "scenic view",
+    "terrazza panoramica",
+  ]);
+
+  if (exactWeak.has(text)) return true;
+
+  const weakPatterns = [
+    /^punto panoramico$/,
+    /^punto panoramico .{0,30}$/,
+    /^panoramic view$/,
+    /^panoramic viewpoint$/,
+    /^view point on .+$/,
+    /^lake .+ viewpoint$/,
+    /^vista del lago$/,
+    /^vista panoramica$/,
+    /^terrazza panoramica$/,
+    /^belvedere$/,
+    /^lookout$/,
+    /^panorama$/,
+    /^scenic view$/,
+    /^panoramic spot$/,
+    /^punto panoramico vista sul lago.+$/,
+  ];
+
+  return weakPatterns.some((rx) => rx.test(text));
+}
+
+function isStrongRiderSpot(spot) {
+  const text = normalizeText(`${spot.name || ""} ${spot.address || ""}`);
+  const tags = Array.isArray(spot.tags) ? spot.tags.map(normalizeText) : [];
+  const rawScore = Number(spot.riderScore || spot.score || 0);
+  const rideType = String(spot.rideType || "");
+
+  const strongSignals = [
+    "passo",
+    "stelvio",
+    "gavia",
+    "spluga",
+    "bernina",
+    "mendola",
+    "tonale",
+    "san marco",
+    "forra",
+    "valvestino",
+    "gardesana",
+    "monte baldo",
+    "strada della forra",
+    "lago di garda",
+    "lago di como",
+    "lago maggiore",
+    "costiera",
+    "twisty",
+    "mountain pass",
+    "joch",
+    "col ",
+  ];
+
+  const hasStrongSignal =
+    strongSignals.some((s) => text.includes(s)) ||
+    tags.includes("mountain") ||
+    tags.includes("twisty") ||
+    rideType === "mountain";
+
+  if (isWeakGenericName(spot.name || "")) return false;
+  if (rawScore >= 70) return true;
+  if (rawScore >= 55 && hasStrongSignal) return true;
+  if (rideType === "mountain" && rawScore >= 48) return true;
+  if ((rideType === "lake" || rideType === "coastal") && rawScore >= 52 && hasStrongSignal) return true;
+
+  return false;
+}
+
+function isAllowedNeighborSpot(spot) {
+  const text = normalizeText(`${spot.name || ""} ${spot.address || ""}`);
+  const rawScore = Number(spot.riderScore || spot.score || 0);
+
+  if (isWeakGenericName(spot.name || "")) return false;
+  if (text.includes("monaco")) return false;
+  if (rawScore < 38) return false;
+
+  return true;
+}
+
+function routeQualityScore(points, rideType, region) {
+  let score = 0;
+  const names = points.map((p) => normalizeText(p.name));
+  const allText = names.join(" | ");
+
+  const iconicSignals = [
+    "stelvio",
+    "gavia",
+    "spluga",
+    "bernina",
+    "mendola",
+    "tonale",
+    "san marco",
+    "forra",
+    "valvestino",
+    "gardesana",
+    "monte baldo",
+    "lago di garda",
+    "lago di como",
+    "lago maggiore",
+  ];
+
+  for (const s of iconicSignals) {
+    if (allText.includes(s)) score += 10;
+  }
+
+  if (rideType === "mountain") score += 12;
+  if (rideType === "lake") score += 8;
+  if (rideType === "coastal") score += 8;
+
+  const uniqueNames = new Set(names);
+  score += uniqueNames.size * 4;
+
+  for (const p of points) {
+    score += Math.min(Number(p.riderScore || p.score || 0), 100) / 8;
+  }
+
+  if (normalizeText(region).includes("lago di como")) {
+    if (allText.includes("stelvio") || allText.includes("gavia") || allText.includes("spluga")) {
+      score -= 20;
+    }
+  }
+
+  return score;
+}
+
+// -------------------------------------------------------
+// REGION GUESS
+// -------------------------------------------------------
+
+function guessMacroRegion(spot) {
+  const s = `${spot.regionHint || ""} ${spot.address || ""} ${spot.name || ""} ${spot.scopeName || ""}`.toLowerCase();
+
+  if (s.includes("stelvio") || s.includes("gavia") || s.includes("spluga") || s.includes("bernina")) {
+    return "Alpi Lombarde";
+  }
+  if (s.includes("garda") || s.includes("valvestino") || s.includes("forra") || s.includes("gardesana")) {
+    return "Lago di Garda";
+  }
+  if (s.includes("como")) return "Lago di Como";
+  if (s.includes("maggiore")) return "Lago Maggiore";
+  if (s.includes("liguria")) return "Liguria";
+  if (s.includes("monte bianco") || s.includes("aosta")) return "Valle d'Aosta";
   if (s.includes("dolom")) return "Dolomiti";
   if (s.includes("alpi") || s.includes("alp")) return "Alpi";
   if (s.includes("appenn")) return "Appennino";
@@ -75,10 +267,7 @@ function guessMacroRegion(spot) {
   if (s.includes("carp")) return "Carpazi";
   if (s.includes("highland")) return "Highlands";
   if (s.includes("fjord") || s.includes("fiordo")) return "Fiordi";
-  if (s.includes("garda")) return "Lago di Garda";
-  if (s.includes("como")) return "Lago di Como";
   if (s.includes("amalfi")) return "Costiera Amalfitana";
-  if (s.includes("liguria")) return "Liguria";
   if (s.includes("cote azur")) return "Costa Azzurra";
   if (s.includes("costa brava")) return "Costa Brava";
   if (s.includes("corsica")) return "Corsica";
@@ -86,8 +275,12 @@ function guessMacroRegion(spot) {
   if (s.includes("velebit")) return "Velebit";
   if (s.includes("foresta nera")) return "Foresta Nera";
   if (s.includes("vosges")) return "Vosgi";
+  if (s.includes("sicilia")) return "Sicilia";
+  if (s.includes("sardegna")) return "Sardegna";
+  if (s.includes("etna")) return "Etna";
+  if (s.includes("supramonte")) return "Supramonte";
 
-  return normalizeRegionHint(spot.regionHint) || spot.country || "Europa";
+  return normalizeRegionHint(spot.regionHint) || spot.scopeName || spot.country || "Europa";
 }
 
 function rideTypePriority(rideType) {
@@ -104,17 +297,18 @@ function rideTypePriority(rideType) {
 
 function byScoreThenName(a, b) {
   return (
-    (b.score || 0) - (a.score || 0) ||
+    (b.score || b.riderScore || 0) - (a.score || a.riderScore || 0) ||
     rideTypePriority(b.rideType) - rideTypePriority(a.rideType) ||
-    a.name.localeCompare(b.name)
+    String(a.name || "").localeCompare(String(b.name || ""))
   );
 }
 
 function buildClusterKey(spot) {
-  const country = spot.country || "XX";
+  const countryCode = spot.country || country || "XX";
+  const scopeKey = spot.scope || scope || "all";
   const region = guessMacroRegion(spot);
   const rideType = spot.rideType || "scenic";
-  return `${country}__${region}__${rideType}`;
+  return `${countryCode}__${scopeKey}__${region}__${rideType}`;
 }
 
 function buildRouteType() {
@@ -137,8 +331,8 @@ function buildDifficulty(distanceKm, rideType, pointsCount) {
   return "easy";
 }
 
-function buildTags(rideType, region, country, mode, spots) {
-  const base = ["rider", "europe", "generated"];
+function buildTags(rideType, region, countryCode, mode, spots, scopeName) {
+  const base = ["rider", "generated"];
   const byType = {
     mountain: ["mountain", "passes", "twisty", "panoramic"],
     coastal: ["coast", "sea", "scenic", "panoramic"],
@@ -151,14 +345,18 @@ function buildTags(rideType, region, country, mode, spots) {
   const spotTypes = Array.from(new Set((spots || []).map((s) => s.type).filter(Boolean)));
 
   return Array.from(
-    new Set([
-      ...base,
-      ...(byType[rideType] || []),
-      mode,
-      String(country || "").toLowerCase(),
-      slugify(region || ""),
-      ...spotTypes.map((x) => slugify(x)),
-    ].filter(Boolean))
+    new Set(
+      [
+        ...base,
+        ...(countryCode === "IT" ? ["italy"] : ["europe"]),
+        ...(byType[rideType] || []),
+        mode,
+        String(countryCode || "").toLowerCase(),
+        slugify(region || ""),
+        slugify(scopeName || ""),
+        ...spotTypes.map((x) => slugify(x)),
+      ].filter(Boolean)
+    )
   );
 }
 
@@ -178,7 +376,7 @@ function buildTitle(points, region, rideType) {
   return `${prefix} ${region}: ${names.slice(0, 4).join(" → ")}`;
 }
 
-function buildDescription(points, region, country, rideType, mode, distanceKm) {
+function buildDescription(points, region, countryCode, rideType, mode, distanceKm, scopeName) {
   const names = points.slice(0, 5).map((p) => p.name).join(", ");
   const labelByType = {
     mountain: "di montagna",
@@ -190,7 +388,7 @@ function buildDescription(points, region, country, rideType, mode, distanceKm) {
   };
   const t = labelByType[rideType] || "rider";
 
-  return `Itinerario ${t} in ${region}${country ? ` (${country})` : ""}, generato da rider spots reali europei. Modalità ${mode}. Percorso da circa ${distanceKm} km con focus su guida motociclistica, panorami e punti rider principali: ${names}.`;
+  return `Itinerario ${t} in ${region}${countryCode ? ` (${countryCode})` : ""}, generato da rider spots reali. Scope ${scopeName || "generale"}. Modalità ${mode}. Percorso da circa ${distanceKm} km con focus su guida motociclistica, panorami e punti rider principali: ${names}.`;
 }
 
 async function getOsrmRoute(points) {
@@ -259,9 +457,10 @@ function dedupePointList(points) {
   return out;
 }
 
-function chooseNeighbors(seed, list, max = 6) {
+function chooseNeighbors(seed, list, max = 5) {
   return list
     .filter((p) => p.id !== seed.id)
+    .filter(isAllowedNeighborSpot)
     .map((p) => ({
       ...p,
       _d: haversineKm(seed.lat, seed.lng, p.lat, p.lng),
@@ -272,43 +471,54 @@ function chooseNeighbors(seed, list, max = 6) {
 }
 
 function buildCandidatesForCluster(cluster, rideType) {
-  const sorted = [...cluster].sort(byScoreThenName);
-  const seeds = sorted.slice(0, MAX_SEEDS_PER_CLUSTER);
+  const usable = [...cluster].filter(isAllowedNeighborSpot).sort(byScoreThenName);
+  const strongSeeds = usable.filter(isStrongRiderSpot);
+  const seeds = (strongSeeds.length ? strongSeeds : usable).slice(0, MAX_SEEDS_PER_CLUSTER);
   const candidates = [];
 
-  if (sorted.length < 2) return candidates;
+  if (usable.length < 2) return candidates;
 
   for (const seed of seeds) {
-    const n = chooseNeighbors(seed, sorted, 6);
+    const n = chooseNeighbors(seed, usable, 5);
 
     for (const a of n.slice(0, 2)) {
-      candidates.push({
-        mode: "point_to_point",
-        rideType,
-        points: dedupePointList([seed, a]),
-      });
+      const pts = dedupePointList([seed, a]);
+      if (pts.length >= 2) {
+        candidates.push({
+          mode: "point_to_point",
+          rideType,
+          points: pts,
+          quality: routeQualityScore(pts, rideType, guessMacroRegion(seed)),
+        });
+      }
     }
 
     if (n.length >= 2) {
+      const pts = dedupePointList([seed, n[0], n[1]]);
       candidates.push({
         mode: "linear",
         rideType,
-        points: dedupePointList([seed, n[0], n[1]]),
+        points: pts,
+        quality: routeQualityScore(pts, rideType, guessMacroRegion(seed)),
       });
     }
 
     if (n.length >= 3) {
+      const pts = dedupePointList([seed, n[0], n[1], n[2]]);
       candidates.push({
         mode: "linear",
         rideType,
-        points: dedupePointList([seed, n[0], n[1], n[2]]),
+        points: pts,
+        quality: routeQualityScore(pts, rideType, guessMacroRegion(seed)),
       });
 
       if (rideType !== "coastal" && rideType !== "lake") {
+        const loopPts = dedupePointList([seed, n[0], n[1], seed]);
         candidates.push({
           mode: "loop",
           rideType,
-          points: dedupePointList([seed, n[0], n[1], seed]),
+          points: loopPts,
+          quality: routeQualityScore(loopPts, rideType, guessMacroRegion(seed)),
         });
       }
     }
@@ -316,6 +526,7 @@ function buildCandidatesForCluster(cluster, rideType) {
 
   return candidates
     .filter((c) => c.points.length >= 2)
+    .sort((a, b) => (b.quality || 0) - (a.quality || 0))
     .slice(0, MAX_CANDIDATES_PER_CLUSTER);
 }
 
@@ -329,6 +540,7 @@ function dedupeRoutes(routes) {
 
     const sigA = [
       r.country || "",
+      r.scope || "",
       r.region || "",
       r.rideType || "",
       sorted.join(">"),
@@ -336,6 +548,7 @@ function dedupeRoutes(routes) {
 
     const sigB = [
       r.country || "",
+      r.scope || "",
       r.region || "",
       r.rideType || "",
       ordered.slice(0, 3).join(">"),
@@ -352,10 +565,18 @@ function dedupeRoutes(routes) {
   return out;
 }
 
+function buildRouteId(routeCounter, countryCode, scopeKey, routeName) {
+  return `route-${String(countryCode || "xx").toLowerCase()}-${String(scopeKey || "all").toLowerCase()}-${String(routeCounter).padStart(5, "0")}-${slugify(routeName).slice(0, 40)}`;
+}
+
 async function main() {
   console.log("====================================");
-  console.log("MotoPortEU — Generate European Routes");
+  console.log("MotoPortEU — Generate Routes PRO");
   console.log("====================================");
+  console.log(`🌍 Country: ${scopeCfg.countryName} (${country})`);
+  console.log(`🧭 Scope: ${scopeCfg.scopeName}`);
+  console.log(`📥 Spots: ${SPOTS_FILE}`);
+  console.log(`💾 Output: ${OUT_FILE}`);
 
   const raw = JSON.parse(await fs.readFile(SPOTS_FILE, "utf8"));
   const spots = Array.isArray(raw)
@@ -367,8 +588,10 @@ async function main() {
     process.exit(1);
   }
 
+  const filteredSpots = spots.filter(isAllowedNeighborSpot);
+
   const clusters = new Map();
-  for (const spot of spots) {
+  for (const spot of filteredSpots) {
     const key = buildClusterKey(spot);
     if (!clusters.has(key)) clusters.set(key, []);
     clusters.get(key).push(spot);
@@ -378,8 +601,10 @@ async function main() {
   let routeCounter = 1;
 
   for (const [key, cluster] of clusters.entries()) {
-    const [country, region, rideType] = key.split("__");
-    console.log(`\n🌍 Cluster ${region} (${country}) [${rideType}] — ${cluster.length} spots`);
+    const [countryCode, scopeKey, region, rideType] = key.split("__");
+    console.log(
+      `\n🌍 Cluster ${region} (${countryCode}/${scopeKey}) [${rideType}] — ${cluster.length} spots`
+    );
 
     const candidates = buildCandidatesForCluster(cluster, rideType);
     let produced = 0;
@@ -395,29 +620,41 @@ async function main() {
         const description = buildDescription(
           cand.points,
           region,
-          country,
+          countryCode,
           rideType,
           cand.mode,
-          osrm.distanceKm
+          osrm.distanceKm,
+          scopeCfg.scopeName
         );
         const shape = buildShapeFields(cand.points, osrm);
         const center = averageLatLng(cand.points);
 
+        const routeId = buildRouteId(routeCounter, countryCode, scopeKey, title);
+
         routes.push({
-          id: `route-eu-${String(routeCounter++).padStart(5, "0")}`,
+          id: routeId,
           name: title,
-          slug: slugify(`${title}-${routeCounter}`),
+          slug: slugify(`${title}-${routeId}`),
           type: buildRouteType(),
           rideType,
           mode: cand.mode,
-          country,
+          country: countryCode,
+          scope: scopeKey,
+          scopeName: scopeCfg.scopeName,
           region,
           source: "generated_from_rider_spots",
           distanceKm: osrm.distanceKm,
           durationMin: osrm.durationMin,
           difficulty: buildDifficulty(osrm.distanceKm, rideType, cand.points.length),
           surface: buildSurface(rideType),
-          tags: buildTags(rideType, region, country, cand.mode, cand.points),
+          tags: buildTags(
+            rideType,
+            region,
+            countryCode,
+            cand.mode,
+            cand.points,
+            scopeCfg.scopeName
+          ),
           description,
           center: {
             lat: roundCoord(center.lat),
@@ -432,10 +669,13 @@ async function main() {
             lat: roundCoord(p.lat),
             lng: roundCoord(p.lng),
             country: p.country || null,
+            scope: p.scope || scopeKey,
+            riderScore: p.riderScore || p.score || 0,
           })),
           ...shape,
         });
 
+        routeCounter += 1;
         produced += 1;
       } catch (err) {
         console.warn(
@@ -451,6 +691,7 @@ async function main() {
     .sort((a, b) => {
       return (
         (a.country || "").localeCompare(b.country || "") ||
+        (a.scope || "").localeCompare(b.scope || "") ||
         (a.region || "").localeCompare(b.region || "") ||
         (a.rideType || "").localeCompare(b.rideType || "") ||
         a.name.localeCompare(b.name)
@@ -467,6 +708,7 @@ async function main() {
   }, {});
 
   console.log("\n------------------------------------");
+  console.log(`Filtered spots:   ${filteredSpots.length}`);
   console.log(`Routes generated: ${routes.length}`);
   console.log(`Routes deduped:   ${cleaned.length}`);
   console.log("Distribuzione rideType:", byRideType);
