@@ -1,9 +1,10 @@
 // =======================================================
-// src/pages/Routes.jsx
+// client/src/pages/Routes.jsx
 // Itinerari Touring
 // UI: split-view su desktop (lista + dettaglio)
 // Mobile: lista -> dettaglio (full screen) con back
-// Dati: /public/data/routes.cleaned.json
+// Dati LIVE: /public/data/routes.json
+// Spot reali: /public/data/rider-spots.cleaned.json
 // ✅ Loading skeleton
 // ✅ Dedup key stabile (id o name+start/end)
 // ✅ Meteo + Google Maps
@@ -476,7 +477,7 @@ export default function Routes() {
       setErr("");
 
       try {
-        const data = await fetch("/data/routes.cleaned.json", {
+        const data = await fetch("/data/routes.json", {
           cache: "no-store",
         })
           .then((r) => (r.ok ? r.json() : []))
