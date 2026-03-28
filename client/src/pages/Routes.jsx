@@ -343,9 +343,8 @@ function pointInBounds(point, bounds) {
 }
 
 function getSpotPoint(spot) {
-  return pairFrom(spot?.lat, spot?.lng);
+  return pairFrom(spot?.lat, spot?.lng ?? spot?.lon);
 }
-
 function findSpotsAlongRoute(route, spots = []) {
   if (!route || !Array.isArray(spots) || !spots.length) return [];
 
@@ -394,12 +393,11 @@ function findSpotsAlongRoute(route, spots = []) {
   const final = [];
 
   for (const spot of candidates) {
-    const key =
-      String(spot.sourceId || "").trim() ||
-      `${String(spot.name || "").toLowerCase()}_${Number(spot.lat).toFixed(4)}_${Number(
-        spot.lng
-      ).toFixed(4)}`;
+const spotLng = Number(spot.lng ?? spot.lon);
 
+const key =
+  String(spot.sourceId || "").trim() ||
+  `${String(spot.name || "").toLowerCase()}_${Number(spot.lat).toFixed(4)}_${spotLng.toFixed(4)}`;
     if (seen.has(key)) continue;
     seen.add(key);
     final.push(spot);
