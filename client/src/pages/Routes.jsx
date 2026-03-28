@@ -13,6 +13,10 @@
 // ✅ FIX mobile: no aperture accidentali durante scroll
 // ✅ NEW: integra rider-spots.cleaned.json
 // ✅ NEW: mostra passi veri lungo il percorso
+// ✅ FIX: supporto completo lon/lng nei rider spots
+// ✅ FIX: cache passi disattivata (no-store)
+// ✅ FIX: label UI chiara -> "Itinerari trovati"
+// ✅ NEW: mostra conteggio dataset passi e passi collegati alla rotta
 // =======================================================
 
 import React, { useEffect, useMemo, useRef, useState } from "react";
@@ -23,9 +27,9 @@ const FALLBACK_PHOTO =
   "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1600&q=80";
 
 const TAP_MOVE_THRESHOLD = 12;
-const MAX_ROUTE_SPOTS = 8;
-const SPOT_NEAR_ROUTE_KM = 22;
-const SPOT_NEAR_POINT_KM = 16;
+const MAX_ROUTE_SPOTS = 12;
+const SPOT_NEAR_ROUTE_KM = 28;
+const SPOT_NEAR_POINT_KM = 12;
 
 function isMobileNow() {
   if (typeof window === "undefined" || !window.matchMedia) return false;
@@ -259,7 +263,7 @@ function extractRoutePoints(route) {
   const coords = route?.geometry?.coordinates;
   if (Array.isArray(coords) && coords.length) {
     if (Array.isArray(coords[0]) && !Array.isArray(coords[0][0])) {
-      const step = Math.max(1, Math.floor(coords.length / 18));
+      const step = Math.max(1, Math.floor(coords.length / 32));
       for (let i = 0; i < coords.length; i += step) {
         const c = coords[i];
         if (Array.isArray(c) && c.length >= 2) {
@@ -272,7 +276,7 @@ function extractRoutePoints(route) {
       }
     } else if (Array.isArray(coords[0]) && Array.isArray(coords[0][0])) {
       const flat = coords.flat();
-      const step = Math.max(1, Math.floor(flat.length / 18));
+      const step = Math.max(1, Math.floor(flat.length / 32));
       for (let i = 0; i < flat.length; i += step) {
         const c = flat[i];
         if (Array.isArray(c) && c.length >= 2) {
@@ -317,8 +321,8 @@ function getRouteBounds(points = []) {
     return null;
   }
 
-  const latPad = 0.22;
-  const lngPad = 0.32;
+  const latPad = 0.28;
+  const lngPad = 0.38;
 
   return {
     minLat: minLat - latPad,
@@ -345,6 +349,28 @@ function pointInBounds(point, bounds) {
 function getSpotPoint(spot) {
   return pairFrom(spot?.lat, spot?.lng ?? spot?.lon);
 }
+
+function buildSpotGoogleMapsUri(spot) {
+  const lat = toNum(spot?.lat);
+  const lng = toNum(spot?.lng ?? spot?.lon);
+  if (!Number.isFinite(lat) || !Number.isFinite(lng)) return null;
+  return `https://www.google.com/maps/search/?api=1&query=${lat},${lng}`;
+}
+
+function normalizeSpot(spot) {
+  const lat = toNum(spot?.lat);
+  const lng = toNum(spot?.lng ?? spot?.lon);
+  if (!Number.isFinite(lat) || !Number.isFinite(lng)) return null;
+
+  return {
+    ...spot,
+    lat,
+    lng,
+    lon: lng,
+    googleMapsUri: spot?.googleMapsUri || buildSpotGoogleMapsUri({ lat, lng }),
+  };
+}
+
 function findSpotsAlongRoute(route, spots = []) {
   if (!route || !Array.isArray(spots) || !spots.length) return [];
 
@@ -354,7 +380,10 @@ function findSpotsAlongRoute(route, spots = []) {
   const bounds = getRouteBounds(routePoints);
   const candidates = [];
 
-  for (const spot of spots) {
+  for (const rawSpot of spots) {
+    const spot = normalizeSpot(rawSpot);
+    if (!spot) continue;
+
     const sp = getSpotPoint(spot);
     if (!sp) continue;
     if (bounds && !pointInBounds(sp, bounds)) continue;
@@ -380,8 +409,8 @@ function findSpotsAlongRoute(route, spots = []) {
     const db = Number(b._distanceKm ?? Infinity);
     if (da !== db) return da - db;
 
-    const sa = Number(a.score || 0);
-    const sb = Number(b.score || 0);
+    const sa = Number(a.score || a.riderScore || 0);
+    const sb = Number(b.score || b.riderScore || 0);
     if (sb !== sa) return sb - sa;
 
     const ra = Number(a.rating || 0);
@@ -393,11 +422,12 @@ function findSpotsAlongRoute(route, spots = []) {
   const final = [];
 
   for (const spot of candidates) {
-const spotLng = Number(spot.lng ?? spot.lon);
+    const spotLng = Number(spot.lng ?? spot.lon);
 
-const key =
-  String(spot.sourceId || "").trim() ||
-  `${String(spot.name || "").toLowerCase()}_${Number(spot.lat).toFixed(4)}_${spotLng.toFixed(4)}`;
+    const key =
+      String(spot.sourceId || "").trim() ||
+      `${String(spot.name || "").toLowerCase()}_${Number(spot.lat).toFixed(4)}_${spotLng.toFixed(4)}`;
+
     if (seen.has(key)) continue;
     seen.add(key);
     final.push(spot);
@@ -771,7 +801,7 @@ export default function Routes() {
             <div style={{ marginTop: 12 }} className="routes-split">
               <div className="routes-list">
                 <div style={{ fontSize: 12, opacity: 0.7, marginBottom: 8 }}>
-                  Trovati: <strong>{filtered.length}</strong>
+                  Itinerari trovati: <strong>{filtered.length}</strong>
                 </div>
 
                 <div style={{ display: "grid", gap: 10 }}>
@@ -1026,6 +1056,7 @@ function RouteDetail({ route }) {
 
   const [spots, setSpots] = useState([]);
   const [spotsBusy, setSpotsBusy] = useState(false);
+  const [spotsDatasetCount, setSpotsDatasetCount] = useState(0);
 
   const routeKey = buildRouteKey(route);
   const displayDescription =
@@ -1063,7 +1094,7 @@ function RouteDetail({ route }) {
         setSpotsBusy(true);
 
         const data = await fetch("/data/rider-spots.cleaned.json", {
-          cache: "force-cache",
+          cache: "no-store",
         })
           .then((r) => (r.ok ? r.json() : []))
           .catch(() => []);
@@ -1071,11 +1102,14 @@ function RouteDetail({ route }) {
         if (!alive) return;
 
         const arr = Array.isArray(data) ? data : [];
+        setSpotsDatasetCount(arr.length);
+
         const linked = findSpotsAlongRoute(route, arr);
         setSpots(linked);
       } catch {
         if (!alive) return;
         setSpots([]);
+        setSpotsDatasetCount(0);
       } finally {
         if (alive) setSpotsBusy(false);
       }
@@ -1193,7 +1227,25 @@ function RouteDetail({ route }) {
             paddingTop: 12,
           }}
         >
-          <strong>🏔️ Passi lungo il percorso</strong>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              gap: 10,
+              alignItems: "center",
+              flexWrap: "wrap",
+            }}
+          >
+            <strong>🏔️ Passi lungo il percorso</strong>
+            <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
+              <span style={pill("light")}>
+                Dataset passi: <strong>{spotsDatasetCount}</strong>
+              </span>
+              <span style={pill("light")}>
+                Collegati a questa rotta: <strong>{spots.length}</strong>
+              </span>
+            </div>
+          </div>
 
           {spotsBusy ? (
             <div
@@ -1221,10 +1273,7 @@ function RouteDetail({ route }) {
             <div style={{ marginTop: 10, display: "grid", gap: 10 }}>
               {spots.map((spot) => (
                 <div
-                  key={
-                    spot.sourceId ||
-                    `${spot.name}-${spot.lat}-${spot.lng}`
-                  }
+                  key={spot.sourceId || `${spot.name}-${spot.lat}-${spot.lng}`}
                   style={{
                     padding: 12,
                     borderRadius: 14,
@@ -1265,6 +1314,7 @@ function RouteDetail({ route }) {
                   <div style={{ fontSize: 13, opacity: 0.82 }}>
                     {spot.region || spot.country || "—"}
                     {spot.address ? ` · ${spot.address}` : ""}
+                    {spot.ele ? ` · ${spot.ele}` : ""}
                   </div>
 
                   <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
