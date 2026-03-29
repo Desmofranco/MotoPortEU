@@ -1,0 +1,775 @@
+[
+  {
+    "id": "rt-037",
+    "name": "Elefant Trail (Passau → Solla)",
+    "country": "DE",
+    "region": "Baviera",
+    "distanceKm": 92,
+    "curvesScore": 7,
+    "asphaltScore": 6,
+    "bestSeason": "Jan–Feb",
+    "pace": "avventura",
+    "photo": "https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=1600&q=80",
+    "start": [
+      48.566,
+      13.432
+    ],
+    "end": [
+      48.883,
+      13.514
+    ],
+    "description": "Elefant Trail (Passau → Solla) ha un’impronta chiaramente off-road, con una guida più fisica e tecnica rispetto a un normale percorso touring. Il fondo può alternare terra, ghiaia e sezioni irregolari, con punti che richiedono trazione, controllo della moto e buona sensibilità sullo sterrato. La difficoltà può cambiare rapidamente in base a meteo, polvere, fango o usura del terreno, quindi è un percorso da affrontare con approccio rider e non turistico. Adatto a enduro, dual sport e maxi-enduro con esperienza, soprattutto nei tratti più impegnativi o scivolosi.",
+    "_classification": {
+      "bucket": "tracks",
+      "reason": "hard_track_primary",
+      "trackScore": 9,
+      "routeSafety": 4,
+      "distanceKm": 92,
+      "durationMin": 0,
+      "hasCoords": false,
+      "hasLine": false,
+      "matchedHardTrackPrimary": [],
+      "matchedHardTrackSecondary": [
+        "enduro",
+        "off-road",
+        "off road"
+      ]
+    }
+  },
+  {
+    "id": "trk-a523d482",
+    "name": "🏔 Domaine SuperMoto",
+    "country": "BE",
+    "region": "",
+    "type": "touring",
+    "distanceKm": 0,
+    "durationMin": 0,
+    "coords": {
+      "lat": 50.630847,
+      "lng": 5.912432
+    },
+    "bestSeason": "Apr–Ott",
+    "description": "🏔 Domaine SuperMoto è pensato per una guida stradale coinvolgente, con un ritmo da vero rider e non da semplice turista. Il percorso offre una guida fluida e appagante, con curve scorrevoli, ritmo regolare e tratti che valorizzano il piacere motociclistico più della semplice destinazione. L’asfalto è in genere valido per il mototurismo e la guida dinamica, pur con possibili variazioni di fondo o traffico a seconda della zona e della stagione. Ideale per rider che cercano curve, panorama e continuità di guida in un contesto adatto a uscite medio-lunghe.",
+    "source": "passes",
+    "createdAt": "2026-02-04T23:15:18.203Z",
+    "_generated": true,
+    "_classification": {
+      "bucket": "tracks",
+      "reason": "hard_track_primary",
+      "trackScore": 22,
+      "routeSafety": 0.5,
+      "distanceKm": 0,
+      "durationMin": 0,
+      "hasCoords": true,
+      "hasLine": false,
+      "matchedHardTrackPrimary": [],
+      "matchedHardTrackSecondary": []
+    }
+  },
+  {
+    "id": "trk-bc7e9a26",
+    "name": "🏔 SuperMoto",
+    "country": "BE",
+    "region": "",
+    "type": "touring",
+    "distanceKm": 0,
+    "durationMin": 0,
+    "coords": {
+      "lat": 50.631886,
+      "lng": 5.913538
+    },
+    "bestSeason": "Apr–Ott",
+    "description": "🏔 SuperMoto è pensato per una guida stradale coinvolgente, con un ritmo da vero rider e non da semplice turista. Il percorso offre una guida fluida e appagante, con curve scorrevoli, ritmo regolare e tratti che valorizzano il piacere motociclistico più della semplice destinazione. L’asfalto è in genere valido per il mototurismo e la guida dinamica, pur con possibili variazioni di fondo o traffico a seconda della zona e della stagione. Ideale per rider che cercano curve, panorama e continuità di guida in un contesto adatto a uscite medio-lunghe.",
+    "source": "passes",
+    "createdAt": "2026-02-04T23:15:18.204Z",
+    "_generated": true,
+    "_classification": {
+      "bucket": "tracks",
+      "reason": "hard_track_primary",
+      "trackScore": 22,
+      "routeSafety": 0.5,
+      "distanceKm": 0,
+      "durationMin": 0,
+      "hasCoords": true,
+      "hasLine": false,
+      "matchedHardTrackPrimary": [],
+      "matchedHardTrackSecondary": []
+    }
+  },
+  {
+    "id": "trk-5204eee2",
+    "name": "🏔 SuperMoto Emstalstadion",
+    "country": "DE",
+    "region": "",
+    "type": "touring",
+    "distanceKm": 0,
+    "durationMin": 0,
+    "coords": {
+      "lat": 51.947192,
+      "lng": 8.220105
+    },
+    "bestSeason": "Apr–Ott",
+    "description": "🏔 SuperMoto Emstalstadion è pensato per una guida stradale coinvolgente, con un ritmo da vero rider e non da semplice turista. Il percorso offre una guida fluida e appagante, con curve scorrevoli, ritmo regolare e tratti che valorizzano il piacere motociclistico più della semplice destinazione. L’asfalto è in genere valido per il mototurismo e la guida dinamica, pur con possibili variazioni di fondo o traffico a seconda della zona e della stagione. Ideale per rider che cercano curve, panorama e continuità di guida in un contesto adatto a uscite medio-lunghe.",
+    "source": "passes",
+    "createdAt": "2026-02-04T23:15:18.209Z",
+    "_generated": true,
+    "_classification": {
+      "bucket": "tracks",
+      "reason": "hard_track_primary",
+      "trackScore": 22,
+      "routeSafety": 0.5,
+      "distanceKm": 0,
+      "durationMin": 0,
+      "hasCoords": true,
+      "hasLine": false,
+      "matchedHardTrackPrimary": [],
+      "matchedHardTrackSecondary": []
+    }
+  },
+  {
+    "id": "trk-acc9cb3f",
+    "name": "🏔 Autodromo A.S.D. Minicar Lucca",
+    "country": "IT",
+    "region": "",
+    "type": "touring",
+    "distanceKm": 0,
+    "durationMin": 0,
+    "coords": {
+      "lat": 43.858541,
+      "lng": 10.51097
+    },
+    "bestSeason": "Apr–Ott",
+    "description": "🏔 Autodromo A.S.D. Minicar Lucca è pensato per una guida stradale coinvolgente, con un ritmo da vero rider e non da semplice turista. Il percorso offre una guida fluida e appagante, con curve scorrevoli, ritmo regolare e tratti che valorizzano il piacere motociclistico più della semplice destinazione. L’asfalto è in genere valido per il mototurismo e la guida dinamica, pur con possibili variazioni di fondo o traffico a seconda della zona e della stagione. Ideale per rider che cercano curve, panorama e continuità di guida in un contesto adatto a uscite medio-lunghe.",
+    "source": "passes",
+    "createdAt": "2026-02-04T23:15:18.230Z",
+    "_generated": true,
+    "_classification": {
+      "bucket": "tracks",
+      "reason": "hard_track_primary",
+      "trackScore": 59,
+      "routeSafety": 0.5,
+      "distanceKm": 0,
+      "durationMin": 0,
+      "hasCoords": true,
+      "hasLine": false,
+      "matchedHardTrackPrimary": [
+        "autodromo"
+      ],
+      "matchedHardTrackSecondary": [
+        "autodromo"
+      ]
+    }
+  },
+  {
+    "id": "trk-c926e723",
+    "name": "🏔 Autodromo Concordia",
+    "country": "IT",
+    "region": "",
+    "type": "touring",
+    "distanceKm": 0,
+    "durationMin": 0,
+    "coords": {
+      "lat": 37.252493,
+      "lng": 13.669175
+    },
+    "bestSeason": "Apr–Ott",
+    "description": "🏔 Autodromo Concordia è pensato per una guida stradale coinvolgente, con un ritmo da vero rider e non da semplice turista. Il percorso offre una guida fluida e appagante, con curve scorrevoli, ritmo regolare e tratti che valorizzano il piacere motociclistico più della semplice destinazione. L’asfalto è in genere valido per il mototurismo e la guida dinamica, pur con possibili variazioni di fondo o traffico a seconda della zona e della stagione. Ideale per rider che cercano curve, panorama e continuità di guida in un contesto adatto a uscite medio-lunghe.",
+    "source": "passes",
+    "createdAt": "2026-02-04T23:15:18.230Z",
+    "_generated": true,
+    "_classification": {
+      "bucket": "tracks",
+      "reason": "hard_track_primary",
+      "trackScore": 59,
+      "routeSafety": 0.5,
+      "distanceKm": 0,
+      "durationMin": 0,
+      "hasCoords": true,
+      "hasLine": false,
+      "matchedHardTrackPrimary": [
+        "autodromo"
+      ],
+      "matchedHardTrackSecondary": [
+        "autodromo"
+      ]
+    }
+  },
+  {
+    "id": "trk-ad70a009",
+    "name": "🏔 Autodromo del Levante",
+    "country": "IT",
+    "region": "",
+    "type": "touring",
+    "distanceKm": 0,
+    "durationMin": 0,
+    "coords": {
+      "lat": 40.994503,
+      "lng": 16.741809
+    },
+    "bestSeason": "Apr–Ott",
+    "description": "🏔 Autodromo del Levante è pensato per una guida stradale coinvolgente, con un ritmo da vero rider e non da semplice turista. Il percorso offre una guida fluida e appagante, con curve scorrevoli, ritmo regolare e tratti che valorizzano il piacere motociclistico più della semplice destinazione. L’asfalto è in genere valido per il mototurismo e la guida dinamica, pur con possibili variazioni di fondo o traffico a seconda della zona e della stagione. Ideale per rider che cercano curve, panorama e continuità di guida in un contesto adatto a uscite medio-lunghe.",
+    "source": "passes",
+    "createdAt": "2026-02-04T23:15:18.230Z",
+    "_generated": true,
+    "_classification": {
+      "bucket": "tracks",
+      "reason": "hard_track_primary",
+      "trackScore": 59,
+      "routeSafety": 0.5,
+      "distanceKm": 0,
+      "durationMin": 0,
+      "hasCoords": true,
+      "hasLine": false,
+      "matchedHardTrackPrimary": [
+        "autodromo"
+      ],
+      "matchedHardTrackSecondary": [
+        "autodromo"
+      ]
+    }
+  },
+  {
+    "id": "trk-fef4c09c",
+    "name": "🏔 Autodromo del Salento",
+    "country": "IT",
+    "region": "",
+    "type": "touring",
+    "distanceKm": 0,
+    "durationMin": 0,
+    "coords": {
+      "lat": 40.474103,
+      "lng": 18.063345
+    },
+    "bestSeason": "Apr–Ott",
+    "description": "🏔 Autodromo del Salento è pensato per una guida stradale coinvolgente, con un ritmo da vero rider e non da semplice turista. Il percorso offre una guida fluida e appagante, con curve scorrevoli, ritmo regolare e tratti che valorizzano il piacere motociclistico più della semplice destinazione. L’asfalto è in genere valido per il mototurismo e la guida dinamica, pur con possibili variazioni di fondo o traffico a seconda della zona e della stagione. Ideale per rider che cercano curve, panorama e continuità di guida in un contesto adatto a uscite medio-lunghe.",
+    "source": "passes",
+    "createdAt": "2026-02-04T23:15:18.230Z",
+    "_generated": true,
+    "_classification": {
+      "bucket": "tracks",
+      "reason": "hard_track_primary",
+      "trackScore": 59,
+      "routeSafety": 0.5,
+      "distanceKm": 0,
+      "durationMin": 0,
+      "hasCoords": true,
+      "hasLine": false,
+      "matchedHardTrackPrimary": [
+        "autodromo"
+      ],
+      "matchedHardTrackSecondary": [
+        "autodromo"
+      ]
+    }
+  },
+  {
+    "id": "trk-f44a3ab4",
+    "name": "🏔 Autodromo di Lombardore",
+    "country": "IT",
+    "region": "",
+    "type": "touring",
+    "distanceKm": 0,
+    "durationMin": 0,
+    "coords": {
+      "lat": 45.236212,
+      "lng": 7.724912
+    },
+    "bestSeason": "Apr–Ott",
+    "description": "🏔 Autodromo di Lombardore è pensato per una guida stradale coinvolgente, con un ritmo da vero rider e non da semplice turista. Il percorso offre una guida fluida e appagante, con curve scorrevoli, ritmo regolare e tratti che valorizzano il piacere motociclistico più della semplice destinazione. L’asfalto è in genere valido per il mototurismo e la guida dinamica, pur con possibili variazioni di fondo o traffico a seconda della zona e della stagione. Ideale per rider che cercano curve, panorama e continuità di guida in un contesto adatto a uscite medio-lunghe.",
+    "source": "passes",
+    "createdAt": "2026-02-04T23:15:18.230Z",
+    "_generated": true,
+    "_classification": {
+      "bucket": "tracks",
+      "reason": "hard_track_primary",
+      "trackScore": 59,
+      "routeSafety": 0.5,
+      "distanceKm": 0,
+      "durationMin": 0,
+      "hasCoords": true,
+      "hasLine": false,
+      "matchedHardTrackPrimary": [
+        "autodromo"
+      ],
+      "matchedHardTrackSecondary": [
+        "autodromo"
+      ]
+    }
+  },
+  {
+    "id": "trk-423aa870",
+    "name": "🏔 Autodromo di Morano sul Po",
+    "country": "IT",
+    "region": "",
+    "type": "touring",
+    "distanceKm": 0,
+    "durationMin": 0,
+    "coords": {
+      "lat": 45.152423,
+      "lng": 8.346942
+    },
+    "bestSeason": "Apr–Ott",
+    "description": "🏔 Autodromo di Morano sul Po è pensato per una guida stradale coinvolgente, con un ritmo da vero rider e non da semplice turista. Il percorso offre una guida fluida e appagante, con curve scorrevoli, ritmo regolare e tratti che valorizzano il piacere motociclistico più della semplice destinazione. L’asfalto è in genere valido per il mototurismo e la guida dinamica, pur con possibili variazioni di fondo o traffico a seconda della zona e della stagione. Ideale per rider che cercano curve, panorama e continuità di guida in un contesto adatto a uscite medio-lunghe.",
+    "source": "passes",
+    "createdAt": "2026-02-04T23:15:18.230Z",
+    "_generated": true,
+    "_classification": {
+      "bucket": "tracks",
+      "reason": "hard_track_primary",
+      "trackScore": 59,
+      "routeSafety": 0.5,
+      "distanceKm": 0,
+      "durationMin": 0,
+      "hasCoords": true,
+      "hasLine": false,
+      "matchedHardTrackPrimary": [
+        "autodromo"
+      ],
+      "matchedHardTrackSecondary": [
+        "autodromo"
+      ]
+    }
+  },
+  {
+    "id": "trk-2d56b837",
+    "name": "🏔 Autodromo Franciacorta",
+    "country": "IT",
+    "region": "",
+    "type": "touring",
+    "distanceKm": 0,
+    "durationMin": 0,
+    "coords": {
+      "lat": 45.512309,
+      "lng": 10.003541
+    },
+    "bestSeason": "Apr–Ott",
+    "description": "🏔 Autodromo Franciacorta è pensato per una guida stradale coinvolgente, con un ritmo da vero rider e non da semplice turista. Il percorso offre una guida fluida e appagante, con curve scorrevoli, ritmo regolare e tratti che valorizzano il piacere motociclistico più della semplice destinazione. L’asfalto è in genere valido per il mototurismo e la guida dinamica, pur con possibili variazioni di fondo o traffico a seconda della zona e della stagione. Ideale per rider che cercano curve, panorama e continuità di guida in un contesto adatto a uscite medio-lunghe.",
+    "source": "passes",
+    "createdAt": "2026-02-04T23:15:18.230Z",
+    "_generated": true,
+    "_classification": {
+      "bucket": "tracks",
+      "reason": "hard_track_primary",
+      "trackScore": 59,
+      "routeSafety": 0.5,
+      "distanceKm": 0,
+      "durationMin": 0,
+      "hasCoords": true,
+      "hasLine": false,
+      "matchedHardTrackPrimary": [
+        "autodromo"
+      ],
+      "matchedHardTrackSecondary": [
+        "autodromo"
+      ]
+    }
+  },
+  {
+    "id": "trk-b59d5968",
+    "name": "🏔 Autodromo Franciacorta Chicane",
+    "country": "IT",
+    "region": "",
+    "type": "touring",
+    "distanceKm": 0,
+    "durationMin": 0,
+    "coords": {
+      "lat": 45.511765,
+      "lng": 10.005299
+    },
+    "bestSeason": "Apr–Ott",
+    "description": "🏔 Autodromo Franciacorta Chicane è pensato per una guida stradale coinvolgente, con un ritmo da vero rider e non da semplice turista. Il percorso offre una guida fluida e appagante, con curve scorrevoli, ritmo regolare e tratti che valorizzano il piacere motociclistico più della semplice destinazione. L’asfalto è in genere valido per il mototurismo e la guida dinamica, pur con possibili variazioni di fondo o traffico a seconda della zona e della stagione. Ideale per rider che cercano curve, panorama e continuità di guida in un contesto adatto a uscite medio-lunghe.",
+    "source": "passes",
+    "createdAt": "2026-02-04T23:15:18.230Z",
+    "_generated": true,
+    "_classification": {
+      "bucket": "tracks",
+      "reason": "hard_track_primary",
+      "trackScore": 59,
+      "routeSafety": 0.5,
+      "distanceKm": 0,
+      "durationMin": 0,
+      "hasCoords": true,
+      "hasLine": false,
+      "matchedHardTrackPrimary": [
+        "autodromo"
+      ],
+      "matchedHardTrackSecondary": [
+        "autodromo"
+      ]
+    }
+  },
+  {
+    "id": "trk-44867888",
+    "name": "🏔 Autodromo Gianni De Luca",
+    "country": "IT",
+    "region": "",
+    "type": "touring",
+    "distanceKm": 0,
+    "durationMin": 0,
+    "coords": {
+      "lat": 41.061689,
+      "lng": 14.592103
+    },
+    "bestSeason": "Apr–Ott",
+    "description": "🏔 Autodromo Gianni De Luca è pensato per una guida stradale coinvolgente, con un ritmo da vero rider e non da semplice turista. Il percorso offre una guida fluida e appagante, con curve scorrevoli, ritmo regolare e tratti che valorizzano il piacere motociclistico più della semplice destinazione. L’asfalto è in genere valido per il mototurismo e la guida dinamica, pur con possibili variazioni di fondo o traffico a seconda della zona e della stagione. Ideale per rider che cercano curve, panorama e continuità di guida in un contesto adatto a uscite medio-lunghe.",
+    "source": "passes",
+    "createdAt": "2026-02-04T23:15:18.230Z",
+    "_generated": true,
+    "_classification": {
+      "bucket": "tracks",
+      "reason": "hard_track_primary",
+      "trackScore": 59,
+      "routeSafety": 0.5,
+      "distanceKm": 0,
+      "durationMin": 0,
+      "hasCoords": true,
+      "hasLine": false,
+      "matchedHardTrackPrimary": [
+        "autodromo"
+      ],
+      "matchedHardTrackSecondary": [
+        "autodromo"
+      ]
+    }
+  },
+  {
+    "id": "trk-769a4a8d",
+    "name": "🏔 Autodromo Internazionale Mugello",
+    "country": "IT",
+    "region": "",
+    "type": "touring",
+    "distanceKm": 0,
+    "durationMin": 0,
+    "coords": {
+      "lat": 43.997406,
+      "lng": 11.371541
+    },
+    "bestSeason": "Apr–Ott",
+    "description": "🏔 Autodromo Internazionale Mugello è pensato per una guida stradale coinvolgente, con un ritmo da vero rider e non da semplice turista. Il percorso offre una guida fluida e appagante, con curve scorrevoli, ritmo regolare e tratti che valorizzano il piacere motociclistico più della semplice destinazione. L’asfalto è in genere valido per il mototurismo e la guida dinamica, pur con possibili variazioni di fondo o traffico a seconda della zona e della stagione. Ideale per rider che cercano curve, panorama e continuità di guida in un contesto adatto a uscite medio-lunghe.",
+    "source": "passes",
+    "createdAt": "2026-02-04T23:15:18.230Z",
+    "_generated": true,
+    "_classification": {
+      "bucket": "tracks",
+      "reason": "hard_track_primary",
+      "trackScore": 59,
+      "routeSafety": 0.5,
+      "distanceKm": 0,
+      "durationMin": 0,
+      "hasCoords": true,
+      "hasLine": false,
+      "matchedHardTrackPrimary": [
+        "autodromo"
+      ],
+      "matchedHardTrackSecondary": [
+        "autodromo"
+      ]
+    }
+  },
+  {
+    "id": "trk-8e09d0d8",
+    "name": "🏔 Autodromo Lombardore",
+    "country": "IT",
+    "region": "",
+    "type": "touring",
+    "distanceKm": 0,
+    "durationMin": 0,
+    "coords": {
+      "lat": 45.236225,
+      "lng": 7.724769
+    },
+    "bestSeason": "Apr–Ott",
+    "description": "🏔 Autodromo Lombardore è pensato per una guida stradale coinvolgente, con un ritmo da vero rider e non da semplice turista. Il percorso offre una guida fluida e appagante, con curve scorrevoli, ritmo regolare e tratti che valorizzano il piacere motociclistico più della semplice destinazione. L’asfalto è in genere valido per il mototurismo e la guida dinamica, pur con possibili variazioni di fondo o traffico a seconda della zona e della stagione. Ideale per rider che cercano curve, panorama e continuità di guida in un contesto adatto a uscite medio-lunghe.",
+    "source": "passes",
+    "createdAt": "2026-02-04T23:15:18.230Z",
+    "_generated": true,
+    "_classification": {
+      "bucket": "tracks",
+      "reason": "hard_track_primary",
+      "trackScore": 59,
+      "routeSafety": 0.5,
+      "distanceKm": 0,
+      "durationMin": 0,
+      "hasCoords": true,
+      "hasLine": false,
+      "matchedHardTrackPrimary": [
+        "autodromo"
+      ],
+      "matchedHardTrackSecondary": [
+        "autodromo"
+      ]
+    }
+  },
+  {
+    "id": "trk-102c719f",
+    "name": "🏔 Autodromo Nazionale di Monza",
+    "country": "IT",
+    "region": "",
+    "type": "touring",
+    "distanceKm": 0,
+    "durationMin": 0,
+    "coords": {
+      "lat": 45.62161,
+      "lng": 9.288773
+    },
+    "bestSeason": "Apr–Ott",
+    "description": "🏔 Autodromo Nazionale di Monza è pensato per una guida stradale coinvolgente, con un ritmo da vero rider e non da semplice turista. Il percorso offre una guida fluida e appagante, con curve scorrevoli, ritmo regolare e tratti che valorizzano il piacere motociclistico più della semplice destinazione. L’asfalto è in genere valido per il mototurismo e la guida dinamica, pur con possibili variazioni di fondo o traffico a seconda della zona e della stagione. Ideale per rider che cercano curve, panorama e continuità di guida in un contesto adatto a uscite medio-lunghe.",
+    "source": "passes",
+    "createdAt": "2026-02-04T23:15:18.230Z",
+    "_generated": true,
+    "_classification": {
+      "bucket": "tracks",
+      "reason": "hard_track_primary",
+      "trackScore": 59,
+      "routeSafety": 0.5,
+      "distanceKm": 0,
+      "durationMin": 0,
+      "hasCoords": true,
+      "hasLine": false,
+      "matchedHardTrackPrimary": [
+        "autodromo"
+      ],
+      "matchedHardTrackSecondary": [
+        "autodromo"
+      ]
+    }
+  },
+  {
+    "id": "trk-a65fda3d",
+    "name": "🏔 Autodromo nazionale di Monza - anello alta velocità",
+    "country": "IT",
+    "region": "",
+    "type": "touring",
+    "distanceKm": 0,
+    "durationMin": 0,
+    "coords": {
+      "lat": 45.624797,
+      "lng": 9.28922
+    },
+    "bestSeason": "Apr–Ott",
+    "description": "🏔 Autodromo nazionale di Monza - anello alta velocità è pensato per una guida stradale coinvolgente, con un ritmo da vero rider e non da semplice turista. Il percorso offre una guida fluida e appagante, con curve scorrevoli, ritmo regolare e tratti che valorizzano il piacere motociclistico più della semplice destinazione. L’asfalto è in genere valido per il mototurismo e la guida dinamica, pur con possibili variazioni di fondo o traffico a seconda della zona e della stagione. Ideale per rider che cercano curve, panorama e continuità di guida in un contesto adatto a uscite medio-lunghe.",
+    "source": "passes",
+    "createdAt": "2026-02-04T23:15:18.230Z",
+    "_generated": true,
+    "_classification": {
+      "bucket": "tracks",
+      "reason": "hard_track_primary",
+      "trackScore": 59,
+      "routeSafety": 0.5,
+      "distanceKm": 0,
+      "durationMin": 0,
+      "hasCoords": true,
+      "hasLine": false,
+      "matchedHardTrackPrimary": [
+        "autodromo"
+      ],
+      "matchedHardTrackSecondary": [
+        "autodromo"
+      ]
+    }
+  },
+  {
+    "id": "trk-be121a12",
+    "name": "🏔 Autodromo Valle dei Templi",
+    "country": "IT",
+    "region": "",
+    "type": "touring",
+    "distanceKm": 0,
+    "durationMin": 0,
+    "coords": {
+      "lat": 37.386528,
+      "lng": 13.753711
+    },
+    "bestSeason": "Apr–Ott",
+    "description": "🏔 Autodromo Valle dei Templi è pensato per una guida stradale coinvolgente, con un ritmo da vero rider e non da semplice turista. Il percorso offre una guida fluida e appagante, con curve scorrevoli, ritmo regolare e tratti che valorizzano il piacere motociclistico più della semplice destinazione. L’asfalto è in genere valido per il mototurismo e la guida dinamica, pur con possibili variazioni di fondo o traffico a seconda della zona e della stagione. Ideale per rider che cercano curve, panorama e continuità di guida in un contesto adatto a uscite medio-lunghe.",
+    "source": "passes",
+    "createdAt": "2026-02-04T23:15:18.230Z",
+    "_generated": true,
+    "_classification": {
+      "bucket": "tracks",
+      "reason": "hard_track_primary",
+      "trackScore": 59,
+      "routeSafety": 0.5,
+      "distanceKm": 0,
+      "durationMin": 0,
+      "hasCoords": true,
+      "hasLine": false,
+      "matchedHardTrackPrimary": [
+        "autodromo"
+      ],
+      "matchedHardTrackSecondary": [
+        "autodromo"
+      ]
+    }
+  },
+  {
+    "id": "trk-0ade18fb",
+    "name": "🏔 Mini Autodromo",
+    "country": "IT",
+    "region": "",
+    "type": "touring",
+    "distanceKm": 0,
+    "durationMin": 0,
+    "coords": {
+      "lat": 38.01159,
+      "lng": 12.981415
+    },
+    "bestSeason": "Apr–Ott",
+    "description": "🏔 Mini Autodromo è pensato per una guida stradale coinvolgente, con un ritmo da vero rider e non da semplice turista. Il percorso offre una guida fluida e appagante, con curve scorrevoli, ritmo regolare e tratti che valorizzano il piacere motociclistico più della semplice destinazione. L’asfalto è in genere valido per il mototurismo e la guida dinamica, pur con possibili variazioni di fondo o traffico a seconda della zona e della stagione. Ideale per rider che cercano curve, panorama e continuità di guida in un contesto adatto a uscite medio-lunghe.",
+    "source": "passes",
+    "createdAt": "2026-02-04T23:15:18.233Z",
+    "_generated": true,
+    "_classification": {
+      "bucket": "tracks",
+      "reason": "hard_track_primary",
+      "trackScore": 59,
+      "routeSafety": 0.5,
+      "distanceKm": 0,
+      "durationMin": 0,
+      "hasCoords": true,
+      "hasLine": false,
+      "matchedHardTrackPrimary": [
+        "autodromo"
+      ],
+      "matchedHardTrackSecondary": [
+        "autodromo"
+      ]
+    }
+  },
+  {
+    "id": "trk-643267a7",
+    "name": "🏔 Miniautodromo Ca de Mandorli",
+    "country": "IT",
+    "region": "",
+    "type": "touring",
+    "distanceKm": 0,
+    "durationMin": 0,
+    "coords": {
+      "lat": 44.44056,
+      "lng": 11.445559
+    },
+    "bestSeason": "Apr–Ott",
+    "description": "🏔 Miniautodromo Ca de Mandorli è pensato per una guida stradale coinvolgente, con un ritmo da vero rider e non da semplice turista. Il percorso offre una guida fluida e appagante, con curve scorrevoli, ritmo regolare e tratti che valorizzano il piacere motociclistico più della semplice destinazione. L’asfalto è in genere valido per il mototurismo e la guida dinamica, pur con possibili variazioni di fondo o traffico a seconda della zona e della stagione. Ideale per rider che cercano curve, panorama e continuità di guida in un contesto adatto a uscite medio-lunghe.",
+    "source": "passes",
+    "createdAt": "2026-02-04T23:15:18.233Z",
+    "_generated": true,
+    "_classification": {
+      "bucket": "tracks",
+      "reason": "hard_track_primary",
+      "trackScore": 29,
+      "routeSafety": 0.5,
+      "distanceKm": 0,
+      "durationMin": 0,
+      "hasCoords": true,
+      "hasLine": false,
+      "matchedHardTrackPrimary": [
+        "autodromo"
+      ],
+      "matchedHardTrackSecondary": [
+        "autodromo"
+      ]
+    }
+  },
+  {
+    "id": "trk-ea10bb0b",
+    "name": "🏔 Miniautodromo Ca' de Mandorli MCS80",
+    "country": "IT",
+    "region": "",
+    "type": "touring",
+    "distanceKm": 0,
+    "durationMin": 0,
+    "coords": {
+      "lat": 44.440583,
+      "lng": 11.445586
+    },
+    "bestSeason": "Apr–Ott",
+    "description": "🏔 Miniautodromo Ca' de Mandorli MCS80 è pensato per una guida stradale coinvolgente, con un ritmo da vero rider e non da semplice turista. Il percorso offre una guida fluida e appagante, con curve scorrevoli, ritmo regolare e tratti che valorizzano il piacere motociclistico più della semplice destinazione. L’asfalto è in genere valido per il mototurismo e la guida dinamica, pur con possibili variazioni di fondo o traffico a seconda della zona e della stagione. Ideale per rider che cercano curve, panorama e continuità di guida in un contesto adatto a uscite medio-lunghe.",
+    "source": "passes",
+    "createdAt": "2026-02-04T23:15:18.233Z",
+    "_generated": true,
+    "_classification": {
+      "bucket": "tracks",
+      "reason": "hard_track_primary",
+      "trackScore": 29,
+      "routeSafety": 0.5,
+      "distanceKm": 0,
+      "durationMin": 0,
+      "hasCoords": true,
+      "hasLine": false,
+      "matchedHardTrackPrimary": [
+        "autodromo"
+      ],
+      "matchedHardTrackSecondary": [
+        "autodromo"
+      ]
+    }
+  },
+  {
+    "id": "trk-3e1405da",
+    "name": "🏔 Miniautodromo Margherita",
+    "country": "IT",
+    "region": "",
+    "type": "touring",
+    "distanceKm": 0,
+    "durationMin": 0,
+    "coords": {
+      "lat": 43.084369,
+      "lng": 12.438936
+    },
+    "bestSeason": "Apr–Ott",
+    "description": "🏔 Miniautodromo Margherita è pensato per una guida stradale coinvolgente, con un ritmo da vero rider e non da semplice turista. Il percorso offre una guida fluida e appagante, con curve scorrevoli, ritmo regolare e tratti che valorizzano il piacere motociclistico più della semplice destinazione. L’asfalto è in genere valido per il mototurismo e la guida dinamica, pur con possibili variazioni di fondo o traffico a seconda della zona e della stagione. Ideale per rider che cercano curve, panorama e continuità di guida in un contesto adatto a uscite medio-lunghe.",
+    "source": "passes",
+    "createdAt": "2026-02-04T23:15:18.233Z",
+    "_generated": true,
+    "_classification": {
+      "bucket": "tracks",
+      "reason": "hard_track_primary",
+      "trackScore": 29,
+      "routeSafety": 0.5,
+      "distanceKm": 0,
+      "durationMin": 0,
+      "hasCoords": true,
+      "hasLine": false,
+      "matchedHardTrackPrimary": [
+        "autodromo"
+      ],
+      "matchedHardTrackSecondary": [
+        "autodromo"
+      ]
+    }
+  },
+  {
+    "id": "trk-853ca174",
+    "name": "🏔 Miniautodromo Salvatore Messina",
+    "country": "IT",
+    "region": "",
+    "type": "touring",
+    "distanceKm": 0,
+    "durationMin": 0,
+    "coords": {
+      "lat": 38.087766,
+      "lng": 13.439442
+    },
+    "bestSeason": "Apr–Ott",
+    "description": "🏔 Miniautodromo Salvatore Messina è pensato per una guida stradale coinvolgente, con un ritmo da vero rider e non da semplice turista. Il percorso offre una guida fluida e appagante, con curve scorrevoli, ritmo regolare e tratti che valorizzano il piacere motociclistico più della semplice destinazione. L’asfalto è in genere valido per il mototurismo e la guida dinamica, pur con possibili variazioni di fondo o traffico a seconda della zona e della stagione. Ideale per rider che cercano curve, panorama e continuità di guida in un contesto adatto a uscite medio-lunghe.",
+    "source": "passes",
+    "createdAt": "2026-02-04T23:15:18.233Z",
+    "_generated": true,
+    "_classification": {
+      "bucket": "tracks",
+      "reason": "hard_track_primary",
+      "trackScore": 29,
+      "routeSafety": 0.5,
+      "distanceKm": 0,
+      "durationMin": 0,
+      "hasCoords": true,
+      "hasLine": false,
+      "matchedHardTrackPrimary": [
+        "autodromo"
+      ],
+      "matchedHardTrackSecondary": [
+        "autodromo"
+      ]
+    }
+  }
+]
