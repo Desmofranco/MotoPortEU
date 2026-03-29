@@ -13,7 +13,6 @@
 //    - aliases
 //    - searchText
 //    - tags
-//    - spots[].name
 //    - waypoints[].name
 // ✅ NEW: priorità hero routes
 // ✅ NEW: supporto completo nuovo dataset routes.json
@@ -27,9 +26,6 @@ const FALLBACK_PHOTO =
   "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1600&q=80";
 
 const TAP_MOVE_THRESHOLD = 12;
-const MAX_ROUTE_SPOTS = 12;
-const SPOT_NEAR_ROUTE_KM = 28;
-const SPOT_NEAR_POINT_KM = 12;
 
 function isMobileNow() {
   if (typeof window === "undefined" || !window.matchMedia) return false;
@@ -103,39 +99,6 @@ function buildRouteKey(r) {
   return `n:${name}|${s}|${e}`;
 }
 
-function haversineKm(a, b) {
-  if (!a || !b) return Infinity;
-
-  const lat1 = toNum(a[0]);
-  const lon1 = toNum(a[1]);
-  const lat2 = toNum(b[0]);
-  const lon2 = toNum(b[1]);
-
-  if (
-    !Number.isFinite(lat1) ||
-    !Number.isFinite(lon1) ||
-    !Number.isFinite(lat2) ||
-    !Number.isFinite(lon2)
-  ) {
-    return Infinity;
-  }
-
-  const toRad = (d) => (d * Math.PI) / 180;
-  const R = 6371;
-
-  const dLat = toRad(lat2 - lat1);
-  const dLon = toRad(lon2 - lon1);
-
-  const x =
-    Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-    Math.cos(toRad(lat1)) *
-      Math.cos(toRad(lat2)) *
-      Math.sin(dLon / 2) *
-      Math.sin(dLon / 2);
-
-  return 2 * R * Math.atan2(Math.sqrt(x), Math.sqrt(1 - x));
-}
-
 function normalizeRoute(route) {
   return {
     ...route,
@@ -168,7 +131,6 @@ function routeSearchBlob(route) {
     route?.searchText,
     ...(route?.aliases || []),
     ...(route?.tags || []),
-    ...(route?.spots || []).map((s) => s?.name),
     ...(route?.waypoints || []).map((w) => w?.name),
     route?.start?.name,
     route?.end?.name,
@@ -228,209 +190,7 @@ function pickRoutePoint(route) {
     }
   }
 
-  if (Array.isArray(route?.spots) && route.spots.length) {
-    for (const s of route.spots) {
-      const p = pointFromObject(s);
-      if (p) return p;
-    }
-  }
-
   return null;
-}
-
-function extractRoutePoints(route) {
-  const points = [];
-  const seen = new Set();
-
-  function addPoint(p) {
-    if (!p || p.length < 2) return;
-    const lat = toNum(p[0]);
-    const lon = toNum(p[1]);
-    if (!Number.isFinite(lat) || !Number.isFinite(lon)) return;
-
-    const key = `${lat.toFixed(5)},${lon.toFixed(5)}`;
-    if (seen.has(key)) return;
-    seen.add(key);
-    points.push([lat, lon]);
-  }
-
-  addPoint(pointFromObject(route?.start));
-  addPoint(pointFromObject(route?.end));
-  addPoint(pointFromObject(route?.center));
-
-  if (Array.isArray(route?.center) && route.center.length >= 2) {
-    addPoint(pairFrom(route.center[0], route.center[1]));
-  }
-
-  if (Array.isArray(route?.waypoints)) {
-    for (const w of route.waypoints) addPoint(pointFromObject(w));
-  }
-
-  if (Array.isArray(route?.spots)) {
-    for (const s of route.spots) addPoint(pointFromObject(s));
-  }
-
-  if (Array.isArray(route?.coords) && route.coords.length) {
-    const step = Math.max(1, Math.floor(route.coords.length / 32));
-    for (let i = 0; i < route.coords.length; i += step) {
-      const c = route.coords[i];
-      if (Array.isArray(c) && c.length >= 2) {
-        addPoint(pairFrom(c[0], c[1]));
-      }
-    }
-
-    const last = route.coords[route.coords.length - 1];
-    if (Array.isArray(last) && last.length >= 2) {
-      addPoint(pairFrom(last[0], last[1]));
-    }
-  }
-
-  return points;
-}
-
-function getRouteBounds(points = []) {
-  if (!points.length) return null;
-
-  let minLat = Infinity;
-  let maxLat = -Infinity;
-  let minLng = Infinity;
-  let maxLng = -Infinity;
-
-  for (const p of points) {
-    const lat = toNum(p[0]);
-    const lng = toNum(p[1]);
-    if (!Number.isFinite(lat) || !Number.isFinite(lng)) continue;
-
-    if (lat < minLat) minLat = lat;
-    if (lat > maxLat) maxLat = lat;
-    if (lng < minLng) minLng = lng;
-    if (lng > maxLng) maxLng = lng;
-  }
-
-  if (
-    !Number.isFinite(minLat) ||
-    !Number.isFinite(maxLat) ||
-    !Number.isFinite(minLng) ||
-    !Number.isFinite(maxLng)
-  ) {
-    return null;
-  }
-
-  const latPad = 0.28;
-  const lngPad = 0.38;
-
-  return {
-    minLat: minLat - latPad,
-    maxLat: maxLat + latPad,
-    minLng: minLng - lngPad,
-    maxLng: maxLng + lngPad,
-  };
-}
-
-function pointInBounds(point, bounds) {
-  if (!point || !bounds) return false;
-  const lat = toNum(point[0]);
-  const lng = toNum(point[1]);
-  if (!Number.isFinite(lat) || !Number.isFinite(lng)) return false;
-
-  return (
-    lat >= bounds.minLat &&
-    lat <= bounds.maxLat &&
-    lng >= bounds.minLng &&
-    lng <= bounds.maxLng
-  );
-}
-
-function getSpotPoint(spot) {
-  return pairFrom(spot?.lat, spot?.lng ?? spot?.lon);
-}
-
-function buildSpotGoogleMapsUri(spot) {
-  const lat = toNum(spot?.lat);
-  const lng = toNum(spot?.lng ?? spot?.lon);
-  if (!Number.isFinite(lat) || !Number.isFinite(lng)) return null;
-  return `https://www.google.com/maps/search/?api=1&query=${lat},${lng}`;
-}
-
-function normalizeSpot(spot) {
-  const lat = toNum(spot?.lat);
-  const lng = toNum(spot?.lng ?? spot?.lon);
-  if (!Number.isFinite(lat) || !Number.isFinite(lng)) return null;
-
-  return {
-    ...spot,
-    lat,
-    lng,
-    lon: lng,
-    googleMapsUri: spot?.googleMapsUri || buildSpotGoogleMapsUri({ lat, lng }),
-  };
-}
-
-function findSpotsAlongRoute(route, spots = []) {
-  if (!route || !Array.isArray(spots) || !spots.length) return [];
-
-  const routePoints = extractRoutePoints(route);
-  if (!routePoints.length) return [];
-
-  const bounds = getRouteBounds(routePoints);
-  const candidates = [];
-
-  for (const rawSpot of spots) {
-    const spot = normalizeSpot(rawSpot);
-    if (!spot) continue;
-
-    const sp = getSpotPoint(spot);
-    if (!sp) continue;
-    if (bounds && !pointInBounds(sp, bounds)) continue;
-
-    let bestKm = Infinity;
-
-    for (const rp of routePoints) {
-      const km = haversineKm(rp, sp);
-      if (km < bestKm) bestKm = km;
-      if (bestKm <= SPOT_NEAR_POINT_KM) break;
-    }
-
-    if (bestKm <= SPOT_NEAR_ROUTE_KM) {
-      candidates.push({
-        ...spot,
-        _distanceKm: Math.round(bestKm * 10) / 10,
-      });
-    }
-  }
-
-  candidates.sort((a, b) => {
-    const da = Number(a._distanceKm ?? Infinity);
-    const db = Number(b._distanceKm ?? Infinity);
-    if (da !== db) return da - db;
-
-    const sa = Number(a.score || a.riderScore || 0);
-    const sb = Number(b.score || b.riderScore || 0);
-    if (sb !== sa) return sb - sa;
-
-    const ra = Number(a.rating || 0);
-    const rb = Number(b.rating || 0);
-    return rb - ra;
-  });
-
-  const seen = new Set();
-  const final = [];
-
-  for (const spot of candidates) {
-    const spotLng = Number(spot.lng ?? spot.lon);
-
-    const key =
-      String(spot.id || spot.sourceId || "").trim() ||
-      `${String(spot.name || "").toLowerCase()}_${Number(spot.lat).toFixed(4)}_${spotLng.toFixed(4)}`;
-
-    if (seen.has(key)) continue;
-    seen.add(key);
-    final.push(spot);
-
-    if (final.length >= MAX_ROUTE_SPOTS) break;
-  }
-
-  return final;
 }
 
 function SkeletonLoading() {
@@ -589,7 +349,7 @@ export default function Routes() {
           const as = Number(a._searchScore || 0);
           const bs = Number(b._searchScore || 0);
           if (bs !== as) return bs - as;
-          return (Number(b.distanceKm || 0) - Number(a.distanceKm || 0));
+          return Number(b.distanceKm || 0) - Number(a.distanceKm || 0);
         },
         rating: (a, b) => {
           const ah = a.hero ? 1 : 0;
@@ -676,7 +436,7 @@ export default function Routes() {
                 className="routes-subtitle"
                 style={{ opacity: 0.75, marginTop: 6 }}
               >
-                Touring emozionale: mappa, meteo e passi reali lungo il percorso.
+                Touring emozionale: mappa e meteo lungo il percorso.
               </div>
             </div>
 
@@ -1081,10 +841,6 @@ function RouteDetail({ route }) {
   const [wx, setWx] = useState(null);
   const [wxBusy, setWxBusy] = useState(false);
 
-  const [spots, setSpots] = useState([]);
-  const [spotsBusy, setSpotsBusy] = useState(false);
-  const [spotsDatasetCount, setSpotsDatasetCount] = useState(0);
-
   const routeKey = buildRouteKey(route);
   const displayDescription =
     String(route?.description || "").trim() || "Descrizione non disponibile.";
@@ -1103,64 +859,6 @@ function RouteDetail({ route }) {
         setWx({ ok: false, note: e?.message || "Meteo non disponibile." });
       } finally {
         if (alive) setWxBusy(false);
-      }
-    }
-
-    run();
-
-    return () => {
-      alive = false;
-    };
-  }, [routeKey, route]);
-
-  useEffect(() => {
-    let alive = true;
-
-    async function run() {
-      try {
-        setSpotsBusy(true);
-
-        if (Array.isArray(route?.spots) && route.spots.length) {
-          if (!alive) return;
-          const linked = route.spots
-            .map(normalizeSpot)
-            .filter(Boolean)
-            .slice(0, MAX_ROUTE_SPOTS);
-
-          setSpotsDatasetCount(route.spots.length);
-          setSpots(linked);
-          return;
-        }
-
-        const tryFiles = [
-          "/data/rider-spots.cleaned.google.json",
-          "/data/rider-spots.cleaned.json",
-        ];
-
-        let arr = [];
-
-        for (const file of tryFiles) {
-          const data = await fetch(file, { cache: "no-store" })
-            .then((r) => (r.ok ? r.json() : []))
-            .catch(() => []);
-
-          if (Array.isArray(data) && data.length) {
-            arr = data;
-            break;
-          }
-        }
-
-        if (!alive) return;
-
-        setSpotsDatasetCount(arr.length);
-        const linked = findSpotsAlongRoute(route, arr);
-        setSpots(linked);
-      } catch {
-        if (!alive) return;
-        setSpots([]);
-        setSpotsDatasetCount(0);
-      } finally {
-        if (alive) setSpotsBusy(false);
       }
     }
 
@@ -1289,136 +987,6 @@ function RouteDetail({ route }) {
             </div>
           </div>
         ) : null}
-
-        <div
-          style={{
-            marginTop: 12,
-            borderTop: "1px solid rgba(0,0,0,0.08)",
-            paddingTop: 12,
-          }}
-        >
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "space-between",
-              gap: 10,
-              alignItems: "center",
-              flexWrap: "wrap",
-            }}
-          >
-            <strong>🏔️ Passi / spot lungo il percorso</strong>
-            <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
-              <span style={pill("light")}>
-                Dataset spot: <strong>{spotsDatasetCount}</strong>
-              </span>
-              <span style={pill("light")}>
-                Collegati a questa rotta: <strong>{spots.length}</strong>
-              </span>
-            </div>
-          </div>
-
-          {spotsBusy ? (
-            <div
-              style={{
-                marginTop: 10,
-                padding: 12,
-                borderRadius: 16,
-                background: "rgba(0,0,0,0.04)",
-              }}
-            >
-              Cerco i passi reali lungo la rotta…
-            </div>
-          ) : !spots.length ? (
-            <div
-              style={{
-                marginTop: 10,
-                padding: 12,
-                borderRadius: 16,
-                background: "rgba(0,0,0,0.04)",
-              }}
-            >
-              Nessun passo collegato trovato nel dataset pulito.
-            </div>
-          ) : (
-            <div style={{ marginTop: 10, display: "grid", gap: 10 }}>
-              {spots.map((spot) => (
-                <div
-                  key={spot.id || spot.sourceId || `${spot.name}-${spot.lat}-${spot.lng}`}
-                  style={{
-                    padding: 12,
-                    borderRadius: 14,
-                    border: "1px solid rgba(0,0,0,0.10)",
-                    background: "white",
-                    display: "grid",
-                    gap: 6,
-                  }}
-                >
-                  <div
-                    style={{
-                      display: "flex",
-                      justifyContent: "space-between",
-                      gap: 10,
-                      alignItems: "start",
-                      flexWrap: "wrap",
-                    }}
-                  >
-                    <div style={{ fontWeight: 900, lineHeight: 1.2 }}>
-                      {spot.name}
-                    </div>
-
-                    <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
-                      {spot._distanceKm != null ? (
-                        <span style={pill("light")}>
-                          📍 {spot._distanceKm} km
-                        </span>
-                      ) : null}
-
-                      {spot.rating != null ? (
-                        <span style={pill("light")}>
-                          ⭐ {Number(spot.rating).toFixed(1)}
-                        </span>
-                      ) : null}
-                    </div>
-                  </div>
-
-                  <div style={{ fontSize: 13, opacity: 0.82 }}>
-                    {spot.region || spot.regionHint || spot.country || "—"}
-                    {spot.address ? ` · ${spot.address}` : ""}
-                  </div>
-
-                  <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
-                    {Array.isArray(spot.tags)
-                      ? spot.tags.slice(0, 4).map((tag) => (
-                          <span key={tag} style={pill("light")}>
-                            #{tag}
-                          </span>
-                        ))
-                      : null}
-                  </div>
-
-                  {spot.googleMapsUri ? (
-                    <div>
-                      <button
-                        type="button"
-                        onClick={() => openGoogleMapsSmart(spot.googleMapsUri)}
-                        style={{
-                          padding: "9px 11px",
-                          borderRadius: 12,
-                          border: "1px solid rgba(0,0,0,0.15)",
-                          background: "white",
-                          cursor: "pointer",
-                          fontWeight: 800,
-                        }}
-                      >
-                        📍 Apri in Google Maps
-                      </button>
-                    </div>
-                  ) : null}
-                </div>
-              ))}
-            </div>
-          )}
-        </div>
 
         <div
           style={{
