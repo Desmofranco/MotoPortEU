@@ -199,15 +199,15 @@
     "userRatingCount": 4264,
     "rawTypes": [
       "tourist_attraction",
-      "scenic_spot",
       "cultural_landmark",
+      "scenic_spot",
       "point_of_interest",
       "establishment"
     ],
     "types": [
       "tourist_attraction",
-      "scenic_spot",
       "cultural_landmark",
+      "scenic_spot",
       "point_of_interest",
       "establishment"
     ],

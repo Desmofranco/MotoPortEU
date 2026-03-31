@@ -1,0 +1,2118 @@
+[
+  {
+    "id": "spot-passo-d-ampola-ChIJU2FE",
+    "name": "Passo d'Ámpola",
+    "slug": "passo-d-ampola",
+    "type": "mountain_pass",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "garda",
+    "scopeName": "Lago di Garda",
+    "lat": 45.864399999999996,
+    "lng": 10.6455,
+    "regionHint": "Riva del Garda",
+    "address": "Strada Provinciale 8, 8, 37020 Ferrara di Monte Baldo VR, Italy",
+    "rating": 4.6,
+    "userRatingCount": 302,
+    "types": [
+      "tourist_attraction",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "mountain",
+      "twisty"
+    ],
+    "aliases": [
+      "Passo d'Ámpola"
+    ],
+    "score": 62
+  },
+  {
+    "id": "spot-passo-campiano-ChIJt-UR",
+    "name": "Passo Campiano",
+    "slug": "passo-campiano",
+    "type": "mountain_pass",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "garda",
+    "scopeName": "Lago di Garda",
+    "lat": 45.7636008,
+    "lng": 10.8233704,
+    "regionHint": "Riva del Garda",
+    "address": "Via Panoramica, 113-107, 37018 Malcesine VR, Italy",
+    "rating": 4.9,
+    "userRatingCount": 11,
+    "types": [
+      "tourist_attraction",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "mountain",
+      "twisty"
+    ],
+    "aliases": [
+      "Passo Campiano"
+    ],
+    "score": 61
+  },
+  {
+    "id": "spot-strada-del-menador-punto-panoramico-ChIJb1QY",
+    "name": "Strada del Menador - Punto Panoramico",
+    "slug": "strada-del-menador-punto-panoramico",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "garda",
+    "scopeName": "Lago di Garda",
+    "lat": 45.976253199999995,
+    "lng": 11.290287099999999,
+    "regionHint": "Riva del Garda",
+    "address": "Kaiserjägerstraße, 38052 Caldonazzo TN, Italy",
+    "rating": 4.7,
+    "userRatingCount": 1288,
+    "types": [
+      "scenic_spot",
+      "tourist_attraction",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider"
+    ],
+    "aliases": [
+      "Strada del Menador - Punto Panoramico"
+    ],
+    "score": 60
+  },
+  {
+    "id": "spot-punto-panoramico-vista-sul-lago-di-garda-ChIJgy5_",
+    "name": "Punto panoramico vista sul Lago di Garda",
+    "slug": "punto-panoramico-vista-sul-lago-di-garda",
+    "type": "lake_view",
+    "rideType": "lake",
+    "country": "IT",
+    "scope": "garda",
+    "scopeName": "Lago di Garda",
+    "lat": 45.770562399999996,
+    "lng": 10.760277600000002,
+    "regionHint": "Limone sul Garda",
+    "address": "Via IV Novembre, 2, 25010 Pieve BS, Italy",
+    "rating": 4.8,
+    "userRatingCount": 32,
+    "types": [
+      "observation_deck",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "lake",
+      "scenic",
+      "rider",
+      "panoramic"
+    ],
+    "aliases": [
+      "Punto panoramico vista sul Lago di Garda"
+    ],
+    "score": 54
+  },
+  {
+    "id": "spot-terrazza-panoramica-ChIJz0Jc",
+    "name": "Terrazza panoramica",
+    "slug": "terrazza-panoramica",
+    "type": "lake_view",
+    "rideType": "lake",
+    "country": "IT",
+    "scope": "garda",
+    "scopeName": "Lago di Garda",
+    "lat": 45.8807409,
+    "lng": 10.8381767,
+    "regionHint": "Riva del Garda",
+    "address": "Lago di, 38066 Garda TN, Italy",
+    "rating": 4.7,
+    "userRatingCount": 40,
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "lake",
+      "scenic",
+      "rider",
+      "panoramic"
+    ],
+    "aliases": [
+      "Terrazza panoramica",
+      "Terrazza Panoramica"
+    ],
+    "score": 54
+  },
+  {
+    "id": "spot-punto-panoramico-monte-baldo-ChIJfVoj",
+    "name": "Punto panoramico Monte Baldo",
+    "slug": "punto-panoramico-monte-baldo",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "garda",
+    "scopeName": "Lago di Garda",
+    "lat": 45.7813077,
+    "lng": 10.862238399999999,
+    "regionHint": "Riva del Garda",
+    "address": "37018 Malcesine, VR, Italy",
+    "rating": 4.8,
+    "userRatingCount": 2323,
+    "types": [
+      "tourist_attraction",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider"
+    ],
+    "aliases": [
+      "Punto panoramico Monte Baldo"
+    ],
+    "score": 52
+  },
+  {
+    "id": "spot-sentiero-panoramico-busatte-tempesta-ChIJ8_xM",
+    "name": "Sentiero panoramico Busatte Tempesta",
+    "slug": "sentiero-panoramico-busatte-tempesta",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "garda",
+    "scopeName": "Lago di Garda",
+    "lat": 45.8549601,
+    "lng": 10.8719171,
+    "regionHint": "Riva del Garda",
+    "address": "Località Tempesta, 38069 Nago-Torbole TN, Italy",
+    "rating": 4.7,
+    "userRatingCount": 1637,
+    "types": [
+      "hiking_area",
+      "tourist_attraction",
+      "sports_activity_location",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider"
+    ],
+    "aliases": [
+      "Sentiero panoramico Busatte Tempesta"
+    ],
+    "score": 52
+  },
+  {
+    "id": "spot-punto-panoramico-del-lago-ChIJ1d-M",
+    "name": "Punto panoramico del Lago",
+    "slug": "punto-panoramico-del-lago",
+    "type": "lake_view",
+    "rideType": "lake",
+    "country": "IT",
+    "scope": "garda",
+    "scopeName": "Lago di Garda",
+    "lat": 45.938873099999995,
+    "lng": 11.2515614,
+    "regionHint": "Riva del Garda",
+    "address": "Via Lago, 3, 38046 Lavarone TN, Italy",
+    "rating": 4.4,
+    "userRatingCount": 7,
+    "types": [
+      "tourist_attraction",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "lake",
+      "scenic",
+      "rider",
+      "panoramic"
+    ],
+    "aliases": [
+      "Punto panoramico del Lago"
+    ],
+    "score": 50
+  },
+  {
+    "id": "spot-punto-panoramico-sul-lago-di-garda-ChIJR0Er",
+    "name": "Punto panoramico sul Lago di Garda",
+    "slug": "punto-panoramico-sul-lago-di-garda",
+    "type": "lake_view",
+    "rideType": "lake",
+    "country": "IT",
+    "scope": "garda",
+    "scopeName": "Lago di Garda",
+    "lat": 45.8780504,
+    "lng": 10.8860957,
+    "regionHint": "Riva del Garda",
+    "address": "Via Europa, 54, 38060 Nago-Torbole TN, Italy",
+    "rating": 4.8,
+    "userRatingCount": 5,
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "lake",
+      "scenic",
+      "rider",
+      "panoramic"
+    ],
+    "aliases": [
+      "Punto panoramico sul Lago di Garda"
+    ],
+    "score": 49
+  },
+  {
+    "id": "spot-terrazza-panoramica-sul-lago-ChIJxzYL",
+    "name": "Terrazza panoramica sul lago",
+    "slug": "terrazza-panoramica-sul-lago",
+    "type": "lake_view",
+    "rideType": "lake",
+    "country": "IT",
+    "scope": "garda",
+    "scopeName": "Lago di Garda",
+    "lat": 45.8571981,
+    "lng": 10.874433699999999,
+    "regionHint": "Riva del Garda",
+    "address": "VV4F+VQ, 38069 Nago-Torbole, Autonomous Province of Trento, Italy",
+    "rating": 5,
+    "userRatingCount": 11,
+    "types": [
+      "observation_deck",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "lake",
+      "scenic",
+      "rider",
+      "panoramic"
+    ],
+    "aliases": [
+      "Terrazza panoramica sul lago"
+    ],
+    "score": 49
+  },
+  {
+    "id": "spot-vista-panoramica-sul-lago-di-ledro-ChIJ7YTk",
+    "name": "Vista Panoramica sul Lago di Ledro",
+    "slug": "vista-panoramica-sul-lago-di-ledro",
+    "type": "lake_view",
+    "rideType": "lake",
+    "country": "IT",
+    "scope": "garda",
+    "scopeName": "Lago di Garda",
+    "lat": 45.8846916,
+    "lng": 10.7435818,
+    "regionHint": "Riva del Garda",
+    "address": "38067 Ledro, Autonomous Province of Trento, Italy",
+    "rating": 4.8,
+    "userRatingCount": 29,
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "lake",
+      "scenic",
+      "rider",
+      "panoramic"
+    ],
+    "aliases": [
+      "Vista Panoramica sul Lago di Ledro"
+    ],
+    "score": 49
+  },
+  {
+    "id": "spot-strada-della-forra-ChIJsRRQ",
+    "name": "Strada della Forra",
+    "slug": "strada-della-forra",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "garda",
+    "scopeName": "Lago di Garda",
+    "lat": 45.7741106,
+    "lng": 10.7659152,
+    "regionHint": "Riva del Garda",
+    "address": "Via Benaco, 25010 Tremosine sul Garda BS, Italy",
+    "rating": 4.8,
+    "userRatingCount": 4264,
+    "types": [
+      "tourist_attraction",
+      "cultural_landmark",
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider"
+    ],
+    "aliases": [
+      "Strada della Forra"
+    ],
+    "score": 48
+  },
+  {
+    "id": "spot-belvedere-panoramic-terrace-of-the-ponale-ChIJb4MM",
+    "name": "Belvédère-Panoramic terrace of the Ponale",
+    "slug": "belvedere-panoramic-terrace-of-the-ponale",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "garda",
+    "scopeName": "Lago di Garda",
+    "lat": 45.8775964,
+    "lng": 10.8391194,
+    "regionHint": "Riva del Garda",
+    "address": "Str. del Ponale, 38066 Riva del Garda TN, Italy",
+    "rating": 4.8,
+    "userRatingCount": 147,
+    "types": [
+      "observation_deck",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider"
+    ],
+    "aliases": [
+      "Belvédère-Panoramic terrace of the Ponale"
+    ],
+    "score": 46
+  },
+  {
+    "id": "spot-lago-di-valvestino-ChIJT1xy",
+    "name": "Lago di Valvestino",
+    "slug": "lago-di-valvestino",
+    "type": "lake_view",
+    "rideType": "lake",
+    "country": "IT",
+    "scope": "garda",
+    "scopeName": "Lago di Garda",
+    "lat": 45.7184351,
+    "lng": 10.6097251,
+    "regionHint": "Riva del Garda",
+    "address": "Lago di Valvestino, Provincia di Brescia, Italy",
+    "rating": 4.6,
+    "userRatingCount": 229,
+    "types": [
+      "lake",
+      "natural_feature",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "lake",
+      "scenic",
+      "rider",
+      "panoramic"
+    ],
+    "aliases": [
+      "Lago di Valvestino"
+    ],
+    "score": 46
+  },
+  {
+    "id": "spot-passo-della-croce-ChIJPfl5",
+    "name": "Passo della Croce",
+    "slug": "passo-della-croce",
+    "type": "mountain_pass",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "garda",
+    "scopeName": "Lago di Garda",
+    "lat": 45.759967200000006,
+    "lng": 10.3945882,
+    "regionHint": "Desenzano / Sirmione",
+    "address": "Unnamed Road, 25078, 25074 Pertica Bassa BS, Italy",
+    "rating": 4.5,
+    "userRatingCount": 2,
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "mountain",
+      "twisty"
+    ],
+    "aliases": [
+      "Passo della Croce"
+    ],
+    "score": 46
+  },
+  {
+    "id": "spot-punto-panoramico-lago-ChIJZ8JA",
+    "name": "Punto Panoramico Lago",
+    "slug": "punto-panoramico-lago",
+    "type": "lake_view",
+    "rideType": "lake",
+    "country": "IT",
+    "scope": "garda",
+    "scopeName": "Lago di Garda",
+    "lat": 45.5911488,
+    "lng": 10.701284699999999,
+    "regionHint": "Riva del Garda",
+    "address": "Via Vacce, 37010 Costermano sul Garda VR, Italy",
+    "rating": 4.5,
+    "userRatingCount": 4,
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "lake",
+      "scenic",
+      "rider",
+      "panoramic"
+    ],
+    "aliases": [
+      "Punto Panoramico Lago"
+    ],
+    "score": 44
+  },
+  {
+    "id": "spot-panorama-lake-view-ChIJT0cV",
+    "name": "Panorama Lake View",
+    "slug": "panorama-lake-view",
+    "type": "lake_view",
+    "rideType": "lake",
+    "country": "IT",
+    "scope": "garda",
+    "scopeName": "Lago di Garda",
+    "lat": 45.7661233,
+    "lng": 10.818841700000002,
+    "regionHint": "Riva del Garda",
+    "address": "Via Paier, 15, 37018 Malcesine VR, Italy",
+    "rating": 4.8,
+    "userRatingCount": 24,
+    "types": [
+      "tourist_attraction",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "lake",
+      "scenic",
+      "rider",
+      "panoramic"
+    ],
+    "aliases": [
+      "Panorama Lake View"
+    ],
+    "score": 43
+  },
+  {
+    "id": "spot-groste-scenic-spot-ChIJWUTA",
+    "name": "Grosté Scenic Spot",
+    "slug": "groste-scenic-spot",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "garda",
+    "scopeName": "Lago di Garda",
+    "lat": 46.2116111,
+    "lng": 10.902849699999999,
+    "regionHint": "Riva del Garda",
+    "address": "6W63+J4, 38070 Tre Ville, Autonomous Province of Trento, Italy",
+    "rating": 4.9,
+    "userRatingCount": 73,
+    "types": [
+      "tourist_attraction",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider"
+    ],
+    "aliases": [
+      "Grosté Scenic Spot"
+    ],
+    "score": 42
+  },
+  {
+    "id": "spot-panoramic-view-ChIJhR4H",
+    "name": "Panoramic view",
+    "slug": "panoramic-view",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "garda",
+    "scopeName": "Lago di Garda",
+    "lat": 45.8018776,
+    "lng": 10.0628291,
+    "regionHint": "Gardone / Toscolano",
+    "address": "SS469, 24, 24063 Castro BG, Italy",
+    "rating": 4.8,
+    "userRatingCount": 164,
+    "types": [
+      "tourist_attraction",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider"
+    ],
+    "aliases": [
+      "Panoramic view"
+    ],
+    "score": 42
+  },
+  {
+    "id": "spot-uscita-tunnel-per-il-lago-di-garda-ChIJSfO0",
+    "name": "Uscita tunnel per il Lago di Garda",
+    "slug": "uscita-tunnel-per-il-lago-di-garda",
+    "type": "lake_view",
+    "rideType": "lake",
+    "country": "IT",
+    "scope": "garda",
+    "scopeName": "Lago di Garda",
+    "lat": 45.838636699999995,
+    "lng": 10.7082421,
+    "regionHint": "Limone sul Garda",
+    "address": "25010 Tremosine TN, Italy",
+    "rating": 4.8,
+    "userRatingCount": 36,
+    "types": [
+      "hiking_area",
+      "sports_activity_location",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "lake",
+      "scenic",
+      "rider",
+      "panoramic"
+    ],
+    "aliases": [
+      "Uscita tunnel per il Lago di Garda"
+    ],
+    "score": 42
+  },
+  {
+    "id": "spot-banchina-panoramica-ciclopedonale-da-limone-sul-garda-a-riva-del-garda-ChIJoVMU",
+    "name": "Banchina panoramica Ciclopedonale da Limone sul Garda a Riva del Garda",
+    "slug": "banchina-panoramica-ciclopedonale-da-limone-sul-garda-a-riva-del-garda",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "garda",
+    "scopeName": "Lago di Garda",
+    "lat": 45.8285152,
+    "lng": 10.8212291,
+    "regionHint": "Riva del Garda",
+    "address": "25010 Limone sul Garda, Province of Brescia, Italy",
+    "rating": 4.7,
+    "userRatingCount": 461,
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider"
+    ],
+    "aliases": [
+      "Banchina panoramica Ciclopedonale da Limone sul Garda a Riva del Garda"
+    ],
+    "score": 41
+  },
+  {
+    "id": "spot-banchina-panoramica-da-riva-del-garda-a-limone-del-garda-ChIJ67zu",
+    "name": "Banchina Panoramica da Riva del Garda a Limone del Garda",
+    "slug": "banchina-panoramica-da-riva-del-garda-a-limone-del-garda",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "garda",
+    "scopeName": "Lago di Garda",
+    "lat": 45.837655299999994,
+    "lng": 10.8256555,
+    "regionHint": "Riva del Garda",
+    "address": "SS45bis, 38066 Riva del Garda TN, Italy",
+    "rating": 4.7,
+    "userRatingCount": 329,
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider"
+    ],
+    "aliases": [
+      "Banchina Panoramica da Riva del Garda a Limone del Garda"
+    ],
+    "score": 41
+  },
+  {
+    "id": "spot-terrazza-panoramica-fil-ChIJ6Zl6",
+    "name": "Terrazza Panoramica Fil",
+    "slug": "terrazza-panoramica-fil",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "garda",
+    "scopeName": "Lago di Garda",
+    "lat": 45.7379865,
+    "lng": 10.729942099999999,
+    "regionHint": "Limone sul Garda",
+    "address": "Via S. Pietro, 14, 25080 Gardola BS, Italy",
+    "rating": 4.8,
+    "userRatingCount": 415,
+    "types": [
+      "observation_deck",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider"
+    ],
+    "aliases": [
+      "Terrazza Panoramica Fil"
+    ],
+    "score": 41
+  },
+  {
+    "id": "spot-diga-lago-pra-da-stua-ChIJL8x2",
+    "name": "Diga Lago Pra da Stua",
+    "slug": "diga-lago-pra-da-stua",
+    "type": "lake_view",
+    "rideType": "lake",
+    "country": "IT",
+    "scope": "garda",
+    "scopeName": "Lago di Garda",
+    "lat": 45.77207550000001,
+    "lng": 10.9031998,
+    "regionHint": "Limone sul Garda",
+    "address": "Strada Provinciale 208, pra da stua 10, 38060 Brentonico TN, Italy",
+    "rating": 4.3,
+    "userRatingCount": 42,
+    "types": [
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "lake",
+      "scenic",
+      "rider",
+      "panoramic"
+    ],
+    "aliases": [
+      "Diga Lago Pra da Stua"
+    ],
+    "score": 40
+  },
+  {
+    "id": "spot-belvedere-di-san-zeno-ChIJq_ke",
+    "name": "Belvedere di San Zeno",
+    "slug": "belvedere-di-san-zeno",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "garda",
+    "scopeName": "Lago di Garda",
+    "lat": 45.629160399999996,
+    "lng": 10.7206989,
+    "regionHint": "Desenzano / Sirmione",
+    "address": "San Zeno, Via Monsignor G. Lenotti, 15, 37010 San Zeno VR, Italy",
+    "rating": 4.7,
+    "userRatingCount": 346,
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider"
+    ],
+    "aliases": [
+      "Belvedere di San Zeno"
+    ],
+    "score": 39
+  },
+  {
+    "id": "spot-strada-panoramica-ChIJmSJ8",
+    "name": "Strada panoramica",
+    "slug": "strada-panoramica",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "garda",
+    "scopeName": "Lago di Garda",
+    "lat": 45.7984103,
+    "lng": 10.0577316,
+    "regionHint": "Gardone / Toscolano",
+    "address": "SS469, 24063 Castro BG, Italy",
+    "rating": 4.9,
+    "userRatingCount": 20,
+    "types": [
+      "hiking_area",
+      "sports_activity_location",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider"
+    ],
+    "aliases": [
+      "Strada panoramica"
+    ],
+    "score": 39
+  },
+  {
+    "id": "spot-strada-panoramica-ChIJfTk0",
+    "name": "Strada Panoramica",
+    "slug": "strada-panoramica",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "garda",
+    "scopeName": "Lago di Garda",
+    "lat": 45.858599399999996,
+    "lng": 10.8325658,
+    "regionHint": "Riva del Garda",
+    "address": "SS45bis, 38066 Riva del Garda TN, Italy",
+    "rating": 4.7,
+    "userRatingCount": 9,
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider"
+    ],
+    "aliases": [
+      "Strada Panoramica"
+    ],
+    "score": 39
+  },
+  {
+    "id": "spot-strada-panoramica-ChIJbza0",
+    "name": "Strada Panoramica",
+    "slug": "strada-panoramica",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "garda",
+    "scopeName": "Lago di Garda",
+    "lat": 45.6892127,
+    "lng": 10.75776,
+    "regionHint": "Riva del Garda",
+    "address": "Località Fasor, 22, 37010 Brenzone sul Garda VR, Italy",
+    "rating": 4.7,
+    "userRatingCount": 29,
+    "types": [
+      "hiking_area",
+      "sports_activity_location",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider"
+    ],
+    "aliases": [
+      "Strada Panoramica"
+    ],
+    "score": 39
+  },
+  {
+    "id": "spot-strada-della-forra-punto-di-partenza-ChIJJ2FQ",
+    "name": "Strada della Forra • punto di partenza",
+    "slug": "strada-della-forra-punto-di-partenza",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "garda",
+    "scopeName": "Lago di Garda",
+    "lat": 45.76858800000001,
+    "lng": 10.7620924,
+    "regionHint": "Limone sul Garda",
+    "address": "Via Benaco, 25010 Tremosine sul Garda BS, Italy",
+    "rating": 4.9,
+    "userRatingCount": 31,
+    "types": [
+      "tourist_attraction",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider"
+    ],
+    "aliases": [
+      "Strada della Forra • punto di partenza"
+    ],
+    "score": 38
+  },
+  {
+    "id": "spot-belvedere-strada-della-forra-ChIJdSGZ",
+    "name": "Belvedere Strada della Forra",
+    "slug": "belvedere-strada-della-forra",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "garda",
+    "scopeName": "Lago di Garda",
+    "lat": 45.7739421,
+    "lng": 10.7664423,
+    "regionHint": "Limone sul Garda",
+    "address": "25010 Tremosine sul Garda, Province of Brescia, Italy",
+    "rating": 4.6,
+    "userRatingCount": 86,
+    "types": [
+      "observation_deck",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider"
+    ],
+    "aliases": [
+      "Belvedere Strada della Forra"
+    ],
+    "score": 37
+  },
+  {
+    "id": "spot-casa-vacanze-e-appartamenti-residence-casa-angelina-ChIJE9LI",
+    "name": "Casa vacanze e appartamenti. Residence Casa Angelina",
+    "slug": "casa-vacanze-e-appartamenti-residence-casa-angelina",
+    "type": "lake_view",
+    "rideType": "lake",
+    "country": "IT",
+    "scope": "garda",
+    "scopeName": "Lago di Garda",
+    "lat": 45.735259299999996,
+    "lng": 10.4678089,
+    "regionHint": "Riva del Garda",
+    "address": "Via Lungo Lago Italia, 15, 25074 Idro BS, Italy",
+    "rating": 5,
+    "userRatingCount": 9,
+    "types": [
+      "lodging",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "lake",
+      "scenic",
+      "rider",
+      "panoramic"
+    ],
+    "aliases": [
+      "Casa vacanze e appartamenti. Residence Casa Angelina"
+    ],
+    "score": 37
+  },
+  {
+    "id": "spot-falesia-regina-del-lago-ChIJUzCX",
+    "name": "Falesia Regina Del Lago",
+    "slug": "falesia-regina-del-lago",
+    "type": "lake_view",
+    "rideType": "lake",
+    "country": "IT",
+    "scope": "garda",
+    "scopeName": "Lago di Garda",
+    "lat": 45.8633562,
+    "lng": 10.826755499999999,
+    "regionHint": "Riva del Garda",
+    "address": "Str. del Ponale, 38067 Ledro TN, Italy",
+    "rating": 4.6,
+    "userRatingCount": 59,
+    "types": [
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "lake",
+      "scenic",
+      "rider",
+      "panoramic"
+    ],
+    "aliases": [
+      "Falesia Regina Del Lago"
+    ],
+    "score": 37
+  },
+  {
+    "id": "spot-lake-and-mountain-apartments-with-breathtaking-view-ChIJsX-w",
+    "name": "Lake and Mountain - Apartments with breathtaking view",
+    "slug": "lake-and-mountain-apartments-with-breathtaking-view",
+    "type": "lake_view",
+    "rideType": "lake",
+    "country": "IT",
+    "scope": "garda",
+    "scopeName": "Lago di Garda",
+    "lat": 45.81686,
+    "lng": 10.97036,
+    "regionHint": "Riva del Garda",
+    "address": "Vicolo Corto, 13, 38060 Cazzano TN, Italy",
+    "rating": 5,
+    "userRatingCount": 5,
+    "types": [
+      "lodging",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "lake",
+      "scenic",
+      "rider",
+      "panoramic"
+    ],
+    "aliases": [
+      "Lake and Mountain - Apartments with breathtaking view"
+    ],
+    "score": 37
+  },
+  {
+    "id": "spot-lungolago-paina-ChIJAfsU",
+    "name": "Lungolago Paina",
+    "slug": "lungolago-paina",
+    "type": "lake_view",
+    "rideType": "lake",
+    "country": "IT",
+    "scope": "garda",
+    "scopeName": "Lago di Garda",
+    "lat": 45.766824799999995,
+    "lng": 10.8097164,
+    "regionHint": "Limone sul Garda",
+    "address": "Via Paina, 37018 Malcesine VR, Italy",
+    "rating": 4.6,
+    "userRatingCount": 42,
+    "types": [
+      "hiking_area",
+      "sports_activity_location",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "lake",
+      "scenic",
+      "rider",
+      "panoramic"
+    ],
+    "aliases": [
+      "Lungolago Paina"
+    ],
+    "score": 37
+  },
+  {
+    "id": "spot-punto-panoramico-ChIJ48EA",
+    "name": "Punto panoramico",
+    "slug": "punto-panoramico",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "garda",
+    "scopeName": "Lago di Garda",
+    "lat": 45.7497299,
+    "lng": 10.109377499999999,
+    "regionHint": "Gardone / Toscolano",
+    "address": "SP32, 25050 Zone BS, Italy",
+    "rating": 4.6,
+    "userRatingCount": 145,
+    "types": [
+      "tourist_attraction",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider"
+    ],
+    "aliases": [
+      "Punto panoramico"
+    ],
+    "score": 37
+  },
+  {
+    "id": "spot-punto-panoramico-ChIJ05EH",
+    "name": "Punto panoramico",
+    "slug": "punto-panoramico",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "garda",
+    "scopeName": "Lago di Garda",
+    "lat": 45.7200497,
+    "lng": 10.4577797,
+    "regionHint": "Valvestino / Tremosine",
+    "address": "25070 Treviso Bresciano, Province of Brescia, Italy",
+    "rating": 4.8,
+    "userRatingCount": 24,
+    "types": [
+      "tourist_attraction",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider"
+    ],
+    "aliases": [
+      "Punto panoramico"
+    ],
+    "score": 37
+  },
+  {
+    "id": "spot-sentiero-ponale-lago-di-ledro-ChIJZ-4p",
+    "name": "Sentiero Ponale-Lago di Ledro",
+    "slug": "sentiero-ponale-lago-di-ledro",
+    "type": "lake_view",
+    "rideType": "lake",
+    "country": "IT",
+    "scope": "garda",
+    "scopeName": "Lago di Garda",
+    "lat": 45.8695056,
+    "lng": 10.7807988,
+    "regionHint": "Riva del Garda",
+    "address": "SS240, 30, 38067 Ledro TN, Italy",
+    "rating": 4.9,
+    "userRatingCount": 18,
+    "types": [
+      "hiking_area",
+      "sports_activity_location",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "lake",
+      "scenic",
+      "rider",
+      "panoramic"
+    ],
+    "aliases": [
+      "Sentiero Ponale-Lago di Ledro"
+    ],
+    "score": 37
+  },
+  {
+    "id": "spot-vista-panoramica-ChIJJ7J4",
+    "name": "Vista Panoramica",
+    "slug": "vista-panoramica",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "garda",
+    "scopeName": "Lago di Garda",
+    "lat": 45.9145483,
+    "lng": 10.8349268,
+    "regionHint": "Riva del Garda",
+    "address": "Via Piccinino, 40, 38060 Tenno TN, Italy",
+    "rating": 4.7,
+    "userRatingCount": 15,
+    "types": [
+      "tourist_attraction",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider"
+    ],
+    "aliases": [
+      "Vista Panoramica"
+    ],
+    "score": 37
+  },
+  {
+    "id": "spot-punto-panoramico-ChIJYyvy",
+    "name": "Punto panoramico",
+    "slug": "punto-panoramico",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "garda",
+    "scopeName": "Lago di Garda",
+    "lat": 46.0653481,
+    "lng": 10.9694049,
+    "regionHint": "Riva del Garda",
+    "address": "SP18, 92, 38096 Vallelaghi TN, Italy",
+    "rating": 4.9,
+    "userRatingCount": 68,
+    "types": [
+      "observation_deck",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider"
+    ],
+    "aliases": [
+      "Punto panoramico",
+      "Punto Panoramico"
+    ],
+    "score": 36
+  },
+  {
+    "id": "spot-punto-panoramico-belvedere-di-bezzecca-ChIJWXFW",
+    "name": "Punto panoramico Belvedere di Bezzecca",
+    "slug": "punto-panoramico-belvedere-di-bezzecca",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "garda",
+    "scopeName": "Lago di Garda",
+    "lat": 45.9001532,
+    "lng": 10.7147129,
+    "regionHint": "Limone sul Garda",
+    "address": "Località Derco, 38067 Bezzecca TN, Italy",
+    "rating": 4.5,
+    "userRatingCount": 21,
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider"
+    ],
+    "aliases": [
+      "Punto panoramico Belvedere di Bezzecca"
+    ],
+    "score": 36
+  },
+  {
+    "id": "spot-punto-panoramico-su-valdadige-ChIJcQSe",
+    "name": "Punto Panoramico Su Valdadige",
+    "slug": "punto-panoramico-su-valdadige",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "garda",
+    "scopeName": "Lago di Garda",
+    "lat": 45.576430699999996,
+    "lng": 10.8190867,
+    "regionHint": "Riva del Garda",
+    "address": "Via Castello, 8, 37010 Rivoli Veronese VR, Italy",
+    "rating": 4.7,
+    "userRatingCount": 30,
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider"
+    ],
+    "aliases": [
+      "Punto Panoramico Su Valdadige"
+    ],
+    "score": 36
+  },
+  {
+    "id": "spot-sosta-panoramica-ChIJ7cOU",
+    "name": "Sosta Panoramica",
+    "slug": "sosta-panoramica",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "garda",
+    "scopeName": "Lago di Garda",
+    "lat": 45.7086812,
+    "lng": 10.693411099999999,
+    "regionHint": "Riva del Garda",
+    "address": "Via Repubblica, 25084 Gargnano BS, Italy",
+    "rating": 4.7,
+    "userRatingCount": 157,
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider"
+    ],
+    "aliases": [
+      "Sosta Panoramica"
+    ],
+    "score": 36
+  },
+  {
+    "id": "spot-belvedere-camposaz-ChIJ5yRQ",
+    "name": "Belvedere camposaz",
+    "slug": "belvedere-camposaz",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "garda",
+    "scopeName": "Lago di Garda",
+    "lat": 46.0021158,
+    "lng": 11.096134099999999,
+    "regionHint": "Riva del Garda",
+    "address": "232W+RF, 38060 Garniga Terme, Autonomous Province of Trento, Italy",
+    "rating": 4.9,
+    "userRatingCount": 11,
+    "types": [
+      "tourist_attraction",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider"
+    ],
+    "aliases": [
+      "Belvedere camposaz"
+    ],
+    "score": 35
+  },
+  {
+    "id": "spot-villa-imelda-panoramic-apartment-in-limone-sul-garda-with-views-of-lake-garda-ChIJSx4K",
+    "name": "\"Villa Imelda\" panoramic apartment in Limone sul Garda with views of Lake Garda",
+    "slug": "villa-imelda-panoramic-apartment-in-limone-sul-garda-with-views-of-lake-garda",
+    "type": "lake_view",
+    "rideType": "lake",
+    "country": "IT",
+    "scope": "garda",
+    "scopeName": "Lago di Garda",
+    "lat": 45.808937,
+    "lng": 10.786844199999999,
+    "regionHint": "Riva del Garda",
+    "address": "25010 Limone Sul Garda, Province of Brescia, Italy",
+    "rating": null,
+    "userRatingCount": null,
+    "types": [
+      "lodging",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "lake",
+      "scenic",
+      "rider",
+      "panoramic"
+    ],
+    "aliases": [
+      "\"Villa Imelda\" panoramic apartment in Limone sul Garda with views of Lake Garda"
+    ],
+    "score": 34
+  },
+  {
+    "id": "spot-villa-imelda-panoramic-apartment-in-limone-sul-garda-with-views-on-lake-garda-ChIJD6VC",
+    "name": "\"Villa Imelda\" panoramic apartment in Limone sul Garda with views on Lake Garda",
+    "slug": "villa-imelda-panoramic-apartment-in-limone-sul-garda-with-views-on-lake-garda",
+    "type": "lake_view",
+    "rideType": "lake",
+    "country": "IT",
+    "scope": "garda",
+    "scopeName": "Lago di Garda",
+    "lat": 45.8090134,
+    "lng": 10.7868061,
+    "regionHint": "Riva del Garda",
+    "address": "25010 Limone Sul Garda, Province of Brescia, Italy",
+    "rating": null,
+    "userRatingCount": null,
+    "types": [
+      "lodging",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "lake",
+      "scenic",
+      "rider",
+      "panoramic"
+    ],
+    "aliases": [
+      "\"Villa Imelda\" panoramic apartment in Limone sul Garda with views on Lake Garda"
+    ],
+    "score": 34
+  },
+  {
+    "id": "spot-belvedere-nago-tn-ChIJWSvU",
+    "name": "Belvedere - Nago (tn)",
+    "slug": "belvedere-nago-tn",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "garda",
+    "scopeName": "Lago di Garda",
+    "lat": 45.8808388,
+    "lng": 10.885783,
+    "regionHint": "Riva del Garda",
+    "address": "SS240 DIr, 38069 Nago-Torbole TN, Italy",
+    "rating": 4.8,
+    "userRatingCount": 164,
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider"
+    ],
+    "aliases": [
+      "Belvedere - Nago (tn)"
+    ],
+    "score": 34
+  },
+  {
+    "id": "spot-punto-panoramico-ChIJd1QU",
+    "name": "Punto panoramico",
+    "slug": "punto-panoramico",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "garda",
+    "scopeName": "Lago di Garda",
+    "lat": 45.557581,
+    "lng": 10.293873999999999,
+    "regionHint": "Desenzano / Sirmione",
+    "address": "Unnamed Road, 25082 Botticino BS, Italy",
+    "rating": 4.5,
+    "userRatingCount": 2,
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider"
+    ],
+    "aliases": [
+      "Punto panoramico"
+    ],
+    "score": 34
+  },
+  {
+    "id": "spot-punto-panoramico-strada-che-non-c-e-ChIJo4v3",
+    "name": "Punto Panoramico Strada che non C'è",
+    "slug": "punto-panoramico-strada-che-non-c-e",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "garda",
+    "scopeName": "Lago di Garda",
+    "lat": 45.4747886,
+    "lng": 11.0493297,
+    "regionHint": "Limone sul Garda",
+    "address": "Via del Torresin, 37141 Verona VR, Italy",
+    "rating": 4.6,
+    "userRatingCount": 22,
+    "types": [
+      "hiking_area",
+      "sports_activity_location",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider"
+    ],
+    "aliases": [
+      "Punto Panoramico Strada che non C'è"
+    ],
+    "score": 34
+  },
+  {
+    "id": "spot-entry-to-strada-della-forra-ChIJxQxZ",
+    "name": "Entry to Strada della Forra",
+    "slug": "entry-to-strada-della-forra",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "garda",
+    "scopeName": "Lago di Garda",
+    "lat": 45.776599999999995,
+    "lng": 10.7605,
+    "regionHint": "Limone sul Garda",
+    "address": "Tremosine rist. la forra, 25010, 25010 Tremosine sul Garda BS, Italy",
+    "rating": 4.6,
+    "userRatingCount": 30,
+    "types": [
+      "tourist_attraction",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider"
+    ],
+    "aliases": [
+      "Entry to Strada della Forra"
+    ],
+    "score": 33
+  },
+  {
+    "id": "spot-sengio-rosso-ChIJAbvK",
+    "name": "Sengio Rosso",
+    "slug": "sengio-rosso",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "garda",
+    "scopeName": "Lago di Garda",
+    "lat": 45.63636100000001,
+    "lng": 11.109279899999999,
+    "regionHint": "Malcesine / Monte Baldo",
+    "address": "Unnamed Road, 37030 Velo Veronese VR, Italy",
+    "rating": 4.6,
+    "userRatingCount": 53,
+    "types": [
+      "scenic_spot",
+      "tourist_attraction",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider"
+    ],
+    "aliases": [
+      "Sengio Rosso"
+    ],
+    "score": 33
+  },
+  {
+    "id": "spot-bocchetta-dei-fondi-ChIJ9dEQ",
+    "name": "Bocchetta Dei Fondi",
+    "slug": "bocchetta-dei-fondi",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "garda",
+    "scopeName": "Lago di Garda",
+    "lat": 45.720302499999995,
+    "lng": 11.1429373,
+    "regionHint": "Riva del Garda",
+    "address": "Unnamed Road, 38060, 38061 Vallarsa TN, Italy",
+    "rating": 4.8,
+    "userRatingCount": 44,
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider"
+    ],
+    "aliases": [
+      "Bocchetta Dei Fondi"
+    ],
+    "score": 32
+  },
+  {
+    "id": "spot-view-point-on-garda-lake-ChIJ4Tq7",
+    "name": "View Point On Garda Lake",
+    "slug": "view-point-on-garda-lake",
+    "type": "lake_view",
+    "rideType": "lake",
+    "country": "IT",
+    "scope": "garda",
+    "scopeName": "Lago di Garda",
+    "lat": 45.552471,
+    "lng": 10.5609056,
+    "regionHint": "Riva del Garda",
+    "address": "25080 Solarolo, Province of Brescia, Italy",
+    "rating": 4.5,
+    "userRatingCount": 4,
+    "types": [
+      "observation_deck",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "lake",
+      "scenic",
+      "rider",
+      "panoramic"
+    ],
+    "aliases": [
+      "View Point On Garda Lake"
+    ],
+    "score": 32
+  },
+  {
+    "id": "spot-vista-del-lago-ChIJ52kW",
+    "name": "Vista del Lago",
+    "slug": "vista-del-lago",
+    "type": "lake_view",
+    "rideType": "lake",
+    "country": "IT",
+    "scope": "garda",
+    "scopeName": "Lago di Garda",
+    "lat": 45.7009641,
+    "lng": 10.7669207,
+    "regionHint": "Riva del Garda",
+    "address": "37010 Brenzone sul Garda, VR, Italy",
+    "rating": 4.6,
+    "userRatingCount": 11,
+    "types": [
+      "observation_deck",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "lake",
+      "scenic",
+      "rider",
+      "panoramic"
+    ],
+    "aliases": [
+      "Vista del Lago"
+    ],
+    "score": 32
+  },
+  {
+    "id": "spot-vista-panoramica-ChIJpx_r",
+    "name": "Vista panoramica",
+    "slug": "vista-panoramica",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "garda",
+    "scopeName": "Lago di Garda",
+    "lat": 45.636541099999995,
+    "lng": 10.730386399999999,
+    "regionHint": "Desenzano / Sirmione",
+    "address": "Via Giusto Arturo, 6A, 37010 San Zeno di Montagna VR, Italy",
+    "rating": 4.5,
+    "userRatingCount": 2,
+    "types": [
+      "tourist_attraction",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider"
+    ],
+    "aliases": [
+      "Vista panoramica"
+    ],
+    "score": 32
+  },
+  {
+    "id": "spot-punto-panoramico-ChIJyZgQ",
+    "name": "Punto panoramico",
+    "slug": "punto-panoramico",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "garda",
+    "scopeName": "Lago di Garda",
+    "lat": 45.6860603,
+    "lng": 10.6412161,
+    "regionHint": "Riva del Garda",
+    "address": "25084 Gargnano, Province of Brescia, Italy",
+    "rating": 4.9,
+    "userRatingCount": 11,
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider"
+    ],
+    "aliases": [
+      "Punto panoramico"
+    ],
+    "score": 31
+  },
+  {
+    "id": "spot-punto-panoramico-ChIJ63ya",
+    "name": "Punto panoramico",
+    "slug": "punto-panoramico",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "garda",
+    "scopeName": "Lago di Garda",
+    "lat": 45.864731,
+    "lng": 10.829407999999999,
+    "regionHint": "Riva del Garda",
+    "address": "VR7H+VQ, 38067 Ledro, Autonomous Province of Trento, Italy",
+    "rating": 4.7,
+    "userRatingCount": 3,
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider"
+    ],
+    "aliases": [
+      "Punto panoramico"
+    ],
+    "score": 31
+  },
+  {
+    "id": "spot-punto-panoramico-ChIJNZgL",
+    "name": "Punto panoramico",
+    "slug": "punto-panoramico",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "garda",
+    "scopeName": "Lago di Garda",
+    "lat": 46.14136990000001,
+    "lng": 11.036578299999999,
+    "regionHint": "Riva del Garda",
+    "address": "42RP+GJ, 38096 Vallelaghi, Autonomous Province of Trento, Italy",
+    "rating": 5,
+    "userRatingCount": 8,
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider"
+    ],
+    "aliases": [
+      "Punto panoramico"
+    ],
+    "score": 31
+  },
+  {
+    "id": "spot-punto-panoramico-ChIJI2TR",
+    "name": "Punto panoramico",
+    "slug": "punto-panoramico",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "garda",
+    "scopeName": "Lago di Garda",
+    "lat": 45.5523515,
+    "lng": 10.5090186,
+    "regionHint": "Desenzano / Sirmione",
+    "address": "Piazza Biolchi, 2, 25080 Polpenazze del Garda BS, Italy",
+    "rating": 4.7,
+    "userRatingCount": 6,
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider"
+    ],
+    "aliases": [
+      "Punto panoramico",
+      "Punto Panoramico"
+    ],
+    "score": 31
+  },
+  {
+    "id": "spot-punto-panoramico-ChIJZ2Ey",
+    "name": "Punto panoramico",
+    "slug": "punto-panoramico",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "garda",
+    "scopeName": "Lago di Garda",
+    "lat": 45.624354499999995,
+    "lng": 10.7013853,
+    "regionHint": "Desenzano / Sirmione",
+    "address": "Località Fornare, 20, 37010 Torri del Benaco VR, Italy",
+    "rating": 4.7,
+    "userRatingCount": 15,
+    "types": [
+      "landmark",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider"
+    ],
+    "aliases": [
+      "Punto panoramico"
+    ],
+    "score": 31
+  },
+  {
+    "id": "spot-punto-panoramico-ChIJ41Vv",
+    "name": "Punto Panoramico",
+    "slug": "punto-panoramico",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "garda",
+    "scopeName": "Lago di Garda",
+    "lat": 45.7162935,
+    "lng": 10.7866886,
+    "regionHint": "Riva del Garda",
+    "address": "Via del Sole, 37010 Brenzone sul Garda VR, Italy",
+    "rating": 4.5,
+    "userRatingCount": 53,
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider"
+    ],
+    "aliases": [
+      "Punto Panoramico"
+    ],
+    "score": 31
+  },
+  {
+    "id": "spot-punto-panoramico-ChIJ7WwA",
+    "name": "Punto Panoramico",
+    "slug": "punto-panoramico",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "garda",
+    "scopeName": "Lago di Garda",
+    "lat": 45.7157516,
+    "lng": 10.278708400000001,
+    "regionHint": "Gardone / Toscolano",
+    "address": "25060 Villa, Province of Brescia, Italy",
+    "rating": 5,
+    "userRatingCount": 1,
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider"
+    ],
+    "aliases": [
+      "Punto Panoramico"
+    ],
+    "score": 31
+  },
+  {
+    "id": "spot-punto-panoramico-via-del-carro-sp9-ChIJLUXP",
+    "name": "Punto panoramico Via del Carro - SP9",
+    "slug": "punto-panoramico-via-del-carro-sp9",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "garda",
+    "scopeName": "Lago di Garda",
+    "lat": 45.642209099999995,
+    "lng": 10.7364448,
+    "regionHint": "Gardone / Toscolano",
+    "address": "Via Monte Baldo, 13, 37010 San Zeno di Montagna VR, Italy",
+    "rating": 4.8,
+    "userRatingCount": 13,
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider"
+    ],
+    "aliases": [
+      "Punto panoramico Via del Carro - SP9"
+    ],
+    "score": 31
+  },
+  {
+    "id": "spot-terrazza-panoramica-ChIJ1SD3",
+    "name": "Terrazza panoramica",
+    "slug": "terrazza-panoramica",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "garda",
+    "scopeName": "Lago di Garda",
+    "lat": 46.034113999999995,
+    "lng": 11.020345899999999,
+    "regionHint": "Riva del Garda",
+    "address": "22MC+J4, 38076 Madruzzo, Autonomous Province of Trento, Italy",
+    "rating": 5,
+    "userRatingCount": 3,
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider"
+    ],
+    "aliases": [
+      "Terrazza panoramica"
+    ],
+    "score": 31
+  },
+  {
+    "id": "spot-terrazza-panoramica-belvedere-ChIJ2-X1",
+    "name": "Terrazza Panoramica Belvedere",
+    "slug": "terrazza-panoramica-belvedere",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "garda",
+    "scopeName": "Lago di Garda",
+    "lat": 45.8007931,
+    "lng": 10.8406647,
+    "regionHint": "Riva del Garda",
+    "address": "Via di Mezzo, 8, 37018 Navene VR, Italy",
+    "rating": 4.1,
+    "userRatingCount": 13,
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider"
+    ],
+    "aliases": [
+      "Terrazza Panoramica Belvedere"
+    ],
+    "score": 31
+  },
+  {
+    "id": "spot-belvedere-ChIJl7bu",
+    "name": "Belvedere",
+    "slug": "belvedere",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "garda",
+    "scopeName": "Lago di Garda",
+    "lat": 45.871431799999996,
+    "lng": 10.836858999999999,
+    "regionHint": "Riva del Garda",
+    "address": "38066 Riva del Garda, Autonomous Province of Trento, Italy",
+    "rating": 4.6,
+    "userRatingCount": 44,
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider"
+    ],
+    "aliases": [
+      "Belvedere"
+    ],
+    "score": 29
+  },
+  {
+    "id": "spot-belvedere-sulla-valdadige-ChIJaSG9",
+    "name": "Belvedere Sulla Valdadige",
+    "slug": "belvedere-sulla-valdadige",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "garda",
+    "scopeName": "Lago di Garda",
+    "lat": 45.56026190000001,
+    "lng": 10.8266455,
+    "regionHint": "Malcesine / Monte Baldo",
+    "address": "37010 Rivoli Veronese, VR, Italy",
+    "rating": 4.7,
+    "userRatingCount": 26,
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider"
+    ],
+    "aliases": [
+      "Belvedere Sulla Valdadige"
+    ],
+    "score": 29
+  },
+  {
+    "id": "spot-terra-dei-forti-viewpoint-ChIJh_ZX",
+    "name": "Terra dei Forti Viewpoint",
+    "slug": "terra-dei-forti-viewpoint",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "garda",
+    "scopeName": "Lago di Garda",
+    "lat": 45.550855899999995,
+    "lng": 10.8421232,
+    "regionHint": "Riva del Garda",
+    "address": "HR2R+8R, 37015 Sant'Ambrogio di Valpolicella, VR, Italy",
+    "rating": 5,
+    "userRatingCount": 2,
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider"
+    ],
+    "aliases": [
+      "Terra dei Forti Viewpoint"
+    ],
+    "score": 29
+  }
+]

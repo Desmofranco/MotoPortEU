@@ -89,7 +89,41 @@ export const COUNTRY_SCOPES = {
           { name: "Lake Trasimeno", lat: 43.13, lng: 12.13, radius: 30000 }
         ]
       },
+garda: {
+  name: "Lago di Garda",
+  regions: ["Lombardia", "Veneto", "Trentino-Alto Adige"],
+  areas: [
+    { name: "Riva del Garda", lat: 45.88, lng: 10.84, radius: 30000 },
+    { name: "Limone sul Garda", lat: 45.81, lng: 10.79, radius: 30000 },
+    { name: "Malcesine / Monte Baldo", lat: 45.76, lng: 10.81, radius: 30000 },
+    { name: "Desenzano / Sirmione", lat: 45.47, lng: 10.55, radius: 30000 },
+    { name: "Gardone / Toscolano", lat: 45.63, lng: 10.58, radius: 30000 },
+    { name: "Valvestino / Tremosine", lat: 45.77, lng: 10.72, radius: 30000 }
+  ]
+},
+como: {
+  name: "Lago di Como",
+  regions: ["Lombardia"],
+  areas: [
+    { name: "Como", lat: 45.81, lng: 9.08, radius: 25000 },
+    { name: "Bellagio", lat: 45.99, lng: 9.26, radius: 25000 },
+    { name: "Menaggio", lat: 46.02, lng: 9.24, radius: 25000 },
+    { name: "Lecco / Valsassina", lat: 45.86, lng: 9.39, radius: 30000 },
+    { name: "Colico / Alto Lario", lat: 46.13, lng: 9.37, radius: 25000 }
+  ]
+},
 
+maggiore: {
+  name: "Lago Maggiore",
+  regions: ["Piemonte", "Lombardia"],
+  areas: [
+    { name: "Stresa / Mottarone", lat: 45.88, lng: 8.54, radius: 30000 },
+    { name: "Verbania", lat: 45.93, lng: 8.55, radius: 25000 },
+    { name: "Cannobio / Alto Verbano", lat: 46.06, lng: 8.7, radius: 25000 },
+    { name: "Luino / East Shore", lat: 46.0, lng: 8.74, radius: 25000 },
+    { name: "Arona / South Maggiore", lat: 45.76, lng: 8.56, radius: 25000 }
+  ]
+},
       sicily: {
         name: "Sicilia",
         regions: ["Sicilia"],

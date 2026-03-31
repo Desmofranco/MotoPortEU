@@ -1,0 +1,214 @@
+[
+  {
+    "id": "spot-passo-pertus-1307m-ChIJLVbB",
+    "sourceId": "spot-passo-pertus-1307m-ChIJLVbB",
+    "googlePlaceId": null,
+    "name": "Passo Pertüs 1307m",
+    "slug": "passo-pertus-1307m",
+    "type": "mountain_pass",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "como",
+    "scopeName": "Lago di Como",
+    "lat": 45.806478,
+    "lng": 9.4928239,
+    "region": null,
+    "regionHint": "Lecco / Valsassina",
+    "address": "Unnamed Road, 24030 Carenno LC, Italy",
+    "rating": 4.5,
+    "userRatingCount": 52,
+    "rawTypes": [
+      "tourist_attraction",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "tourist_attraction",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "mountain",
+      "twisty",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Passo Pertüs 1307m"
+    ],
+    "riderScore": 80
+  },
+  {
+    "id": "spot-dordona-viewpoint-ChIJ4wgQ",
+    "sourceId": "spot-dordona-viewpoint-ChIJ4wgQ",
+    "googlePlaceId": null,
+    "name": "Dordona viewpoint",
+    "slug": "dordona-viewpoint",
+    "type": "mountain_pass",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "como",
+    "scopeName": "Lago di Como",
+    "lat": 46.0566223,
+    "lng": 9.763301499999999,
+    "region": null,
+    "regionHint": "Colico / Alto Lario",
+    "address": "Str. del Passo Dordona, 24010 Fusine SO, Italy",
+    "rating": 0,
+    "userRatingCount": 0,
+    "rawTypes": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "mountain",
+      "twisty",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Dordona viewpoint"
+    ],
+    "riderScore": 55
+  },
+  {
+    "id": "spot-cernobbio-panoramica-sul-lago-ChIJuVJ6",
+    "sourceId": "spot-cernobbio-panoramica-sul-lago-ChIJuVJ6",
+    "googlePlaceId": null,
+    "name": "Cernobbio panoramica sul lago",
+    "slug": "cernobbio-panoramica-sul-lago",
+    "type": "lake_view",
+    "rideType": "lake",
+    "country": "IT",
+    "scope": "como",
+    "scopeName": "Lago di Como",
+    "lat": 45.8387768,
+    "lng": 9.0786687,
+    "region": null,
+    "regionHint": "Como",
+    "address": "22012 Cernobbio, Province of Como, Italy",
+    "rating": 4.9,
+    "userRatingCount": 37,
+    "rawTypes": [
+      "hiking_area",
+      "sports_activity_location",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "hiking_area",
+      "sports_activity_location",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "lake",
+      "scenic",
+      "rider",
+      "panoramic",
+      "rider-spot"
+    ],
+    "aliases": [
+      "Cernobbio panoramica sul lago"
+    ],
+    "riderScore": 42
+  },
+  {
+    "id": "spot-sacrario-di-agueglio-ChIJBW19",
+    "sourceId": "spot-sacrario-di-agueglio-ChIJBW19",
+    "googlePlaceId": null,
+    "name": "Sacrario di Agueglio",
+    "slug": "sacrario-di-agueglio",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "como",
+    "scopeName": "Lago di Como",
+    "lat": 46.0129977,
+    "lng": 9.3143452,
+    "region": null,
+    "regionHint": "Como",
+    "address": "Unnamed Road, 23828 Perledo LC, Italy",
+    "rating": 4.7,
+    "userRatingCount": 107,
+    "rawTypes": [
+      "scenic_spot",
+      "tourist_attraction",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "scenic_spot",
+      "tourist_attraction",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "rider-spot"
+    ],
+    "aliases": [
+      "Sacrario di Agueglio"
+    ],
+    "riderScore": 42
+  },
+  {
+    "id": "spot-lungolago-valmadrera-pare-ChIJE-qO",
+    "sourceId": "spot-lungolago-valmadrera-pare-ChIJE-qO",
+    "googlePlaceId": null,
+    "name": "Lungolago Valmadrera - Paré",
+    "slug": "lungolago-valmadrera-pare",
+    "type": "lake_view",
+    "rideType": "lake",
+    "country": "IT",
+    "scope": "como",
+    "scopeName": "Lago di Como",
+    "lat": 45.8581363,
+    "lng": 9.3666209,
+    "region": null,
+    "regionHint": "Como",
+    "address": "SP583, Viale Giuseppe Parini, 41, 23868 Valmadrera LC, Italy",
+    "rating": 4.5,
+    "userRatingCount": 486,
+    "rawTypes": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "lake",
+      "scenic",
+      "rider",
+      "panoramic",
+      "rider-spot"
+    ],
+    "aliases": [
+      "Lungolago Valmadrera - Paré"
+    ],
+    "riderScore": 39
+  }
+]

@@ -747,6 +747,10 @@ function classify(route) {
 
   const hero = HERO_HINTS.some((w) => blob.includes(normalizeText(w)));
 const routeFamily = classifyRouteFamily(blob, points, route);
+const isLakeFamily = routeFamily === "lake";
+const isCoastalFamily = routeFamily === "coastal";
+const relaxedDistanceFloor = isLakeFamily || isCoastalFamily ? 35 : MIN_REAL_DISTANCE_KM;
+const relaxedPreferredFloor = isLakeFamily || isCoastalFamily ? 55 : PREFERRED_MIN_DISTANCE_KM;
   let status = "keep";
   let reason = "real_route";
 
@@ -762,17 +766,18 @@ const routeFamily = classifyRouteFamily(blob, points, route);
   } else if (offroadSeverity === "soft") {
     status = "review";
     reason = "mixed_surface_review";
-  } else if (!distanceKm || distanceKm < MIN_REAL_DISTANCE_KM) {
-    status = "review";
-    reason = passHints >= 1 ? "single_pass_or_micro_route" : "too_short";
-  } else if (passHints >= 2 && distanceKm < PREFERRED_MIN_DISTANCE_KM) {
-    status = "review";
-    reason = "pass_cluster_but_not_full_itinerary";
-  } else if (points.length < 2) {
-    status = "review";
-    reason = "insufficient_points";
-  }
-
+} else if (!distanceKm || distanceKm < relaxedDistanceFloor) {
+  status = "review";
+  reason =
+    isLakeFamily || isCoastalFamily
+      ? "short_lake_or_coastal_route"
+      : passHints >= 1
+      ? "single_pass_or_micro_route"
+      : "too_short";
+} else if (passHints >= 2 && distanceKm < relaxedPreferredFloor && !isLakeFamily && !isCoastalFamily) {
+  status = "review";
+  reason = "pass_cluster_but_not_full_itinerary";
+}
   let sourceQuality = "medium";
   if (
     points.length >= 5 &&
@@ -834,6 +839,8 @@ function chooseBest(a, b) {
     s += x.meta.pointsCount > 5 ? 10 : 0;
     s += x.meta.italianConfidence === "high" ? 20 : x.meta.italianConfidence === "medium" ? 10 : 0;
     s += x.meta.sourceQuality === "high" ? 20 : x.meta.sourceQuality === "medium" ? 10 : 0;
+    s += x.meta.routeFamily === "lake" ? 18 : 0;
+s += x.meta.routeFamily === "coastal" ? 14 : 0;
     s += (x.original?.rating || 0) * 5;
     s += (x.original?.curvesScore || 0) * 3;
     return s;

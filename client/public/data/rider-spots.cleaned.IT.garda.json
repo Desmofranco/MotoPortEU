@@ -1,0 +1,505 @@
+[
+  {
+    "id": "spot-passo-d-ampola-ChIJU2FE",
+    "sourceId": "spot-passo-d-ampola-ChIJU2FE",
+    "googlePlaceId": null,
+    "name": "Passo d'Ámpola",
+    "slug": "passo-d-ampola",
+    "type": "mountain_pass",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "garda",
+    "scopeName": "Lago di Garda",
+    "lat": 45.864399999999996,
+    "lng": 10.6455,
+    "region": null,
+    "regionHint": "Riva del Garda",
+    "address": "Strada Provinciale 8, 8, 37020 Ferrara di Monte Baldo VR, Italy",
+    "rating": 4.6,
+    "userRatingCount": 302,
+    "rawTypes": [
+      "tourist_attraction",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "tourist_attraction",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "mountain",
+      "twisty",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Passo d'Ámpola"
+    ],
+    "riderScore": 90
+  },
+  {
+    "id": "spot-passo-campiano-ChIJt-UR",
+    "sourceId": "spot-passo-campiano-ChIJt-UR",
+    "googlePlaceId": null,
+    "name": "Passo Campiano",
+    "slug": "passo-campiano",
+    "type": "mountain_pass",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "garda",
+    "scopeName": "Lago di Garda",
+    "lat": 45.7636008,
+    "lng": 10.8233704,
+    "region": null,
+    "regionHint": "Riva del Garda",
+    "address": "Via Panoramica, 113-107, 37018 Malcesine VR, Italy",
+    "rating": 4.9,
+    "userRatingCount": 11,
+    "rawTypes": [
+      "tourist_attraction",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "tourist_attraction",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "mountain",
+      "twisty",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Passo Campiano"
+    ],
+    "riderScore": 80
+  },
+  {
+    "id": "spot-strada-della-forra-ChIJsRRQ",
+    "sourceId": "spot-strada-della-forra-ChIJsRRQ",
+    "googlePlaceId": null,
+    "name": "Strada della Forra",
+    "slug": "strada-della-forra",
+    "type": "coastal_view",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "garda",
+    "scopeName": "Lago di Garda",
+    "lat": 45.7741106,
+    "lng": 10.7659152,
+    "region": null,
+    "regionHint": "Riva del Garda",
+    "address": "Via Benaco, 25010 Tremosine sul Garda BS, Italy",
+    "rating": 4.8,
+    "userRatingCount": 4264,
+    "rawTypes": [
+      "tourist_attraction",
+      "cultural_landmark",
+      "scenic_spot",
+      "point_of_interest",
+      "establishment",
+      "observation_deck"
+    ],
+    "types": [
+      "tourist_attraction",
+      "cultural_landmark",
+      "scenic_spot",
+      "point_of_interest",
+      "establishment",
+      "observation_deck"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "rider-spot"
+    ],
+    "aliases": [
+      "Strada della Forra",
+      "Belvedere Strada della Forra"
+    ],
+    "riderScore": 74
+  },
+  {
+    "id": "spot-passo-della-croce-ChIJPfl5",
+    "sourceId": "spot-passo-della-croce-ChIJPfl5",
+    "googlePlaceId": null,
+    "name": "Passo della Croce",
+    "slug": "passo-della-croce",
+    "type": "mountain_pass",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "garda",
+    "scopeName": "Lago di Garda",
+    "lat": 45.759967200000006,
+    "lng": 10.3945882,
+    "region": null,
+    "regionHint": "Desenzano / Sirmione",
+    "address": "Unnamed Road, 25078, 25074 Pertica Bassa BS, Italy",
+    "rating": 4.5,
+    "userRatingCount": 2,
+    "rawTypes": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "mountain",
+      "twisty",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Passo della Croce"
+    ],
+    "riderScore": 73
+  },
+  {
+    "id": "spot-lago-di-valvestino-ChIJT1xy",
+    "sourceId": "spot-lago-di-valvestino-ChIJT1xy",
+    "googlePlaceId": null,
+    "name": "Lago di Valvestino",
+    "slug": "lago-di-valvestino",
+    "type": "lake_view",
+    "rideType": "lake",
+    "country": "IT",
+    "scope": "garda",
+    "scopeName": "Lago di Garda",
+    "lat": 45.7184351,
+    "lng": 10.6097251,
+    "region": null,
+    "regionHint": "Riva del Garda",
+    "address": "Lago di Valvestino, Provincia di Brescia, Italy",
+    "rating": 4.6,
+    "userRatingCount": 229,
+    "rawTypes": [
+      "lake",
+      "natural_feature",
+      "establishment"
+    ],
+    "types": [
+      "lake",
+      "natural_feature",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "lake",
+      "scenic",
+      "rider",
+      "panoramic",
+      "rider-spot"
+    ],
+    "aliases": [
+      "Lago di Valvestino"
+    ],
+    "riderScore": 67
+  },
+  {
+    "id": "spot-strada-del-menador-punto-panoramico-ChIJb1QY",
+    "sourceId": "spot-strada-del-menador-punto-panoramico-ChIJb1QY",
+    "googlePlaceId": null,
+    "name": "Strada del Menador - Punto Panoramico",
+    "slug": "strada-del-menador-punto-panoramico",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "garda",
+    "scopeName": "Lago di Garda",
+    "lat": 45.976253199999995,
+    "lng": 11.290287099999999,
+    "region": null,
+    "regionHint": "Riva del Garda",
+    "address": "Kaiserjägerstraße, 38052 Caldonazzo TN, Italy",
+    "rating": 4.7,
+    "userRatingCount": 1288,
+    "rawTypes": [
+      "scenic_spot",
+      "tourist_attraction",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "scenic_spot",
+      "tourist_attraction",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "rider-spot"
+    ],
+    "aliases": [
+      "Strada del Menador - Punto Panoramico"
+    ],
+    "riderScore": 60
+  },
+  {
+    "id": "spot-strada-della-forra-punto-di-partenza-ChIJJ2FQ",
+    "sourceId": "spot-strada-della-forra-punto-di-partenza-ChIJJ2FQ",
+    "googlePlaceId": null,
+    "name": "Strada della Forra • punto di partenza",
+    "slug": "strada-della-forra-punto-di-partenza",
+    "type": "coastal_view",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "garda",
+    "scopeName": "Lago di Garda",
+    "lat": 45.76858800000001,
+    "lng": 10.7620924,
+    "region": null,
+    "regionHint": "Limone sul Garda",
+    "address": "Via Benaco, 25010 Tremosine sul Garda BS, Italy",
+    "rating": 4.9,
+    "userRatingCount": 31,
+    "rawTypes": [
+      "tourist_attraction",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "tourist_attraction",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "rider-spot"
+    ],
+    "aliases": [
+      "Strada della Forra • punto di partenza"
+    ],
+    "riderScore": 54
+  },
+  {
+    "id": "spot-entry-to-strada-della-forra-ChIJxQxZ",
+    "sourceId": "spot-entry-to-strada-della-forra-ChIJxQxZ",
+    "googlePlaceId": null,
+    "name": "Entry to Strada della Forra",
+    "slug": "entry-to-strada-della-forra",
+    "type": "coastal_view",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "garda",
+    "scopeName": "Lago di Garda",
+    "lat": 45.776599999999995,
+    "lng": 10.7605,
+    "region": null,
+    "regionHint": "Limone sul Garda",
+    "address": "Tremosine rist. la forra, 25010, 25010 Tremosine sul Garda BS, Italy",
+    "rating": 4.6,
+    "userRatingCount": 30,
+    "rawTypes": [
+      "tourist_attraction",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "tourist_attraction",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "rider-spot"
+    ],
+    "aliases": [
+      "Entry to Strada della Forra"
+    ],
+    "riderScore": 49
+  },
+  {
+    "id": "spot-banchina-panoramica-da-riva-del-garda-a-limone-del-garda-ChIJ67zu",
+    "sourceId": "spot-banchina-panoramica-da-riva-del-garda-a-limone-del-garda-ChIJ67zu",
+    "googlePlaceId": null,
+    "name": "Banchina Panoramica da Riva del Garda a Limone del Garda",
+    "slug": "banchina-panoramica-da-riva-del-garda-a-limone-del-garda",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "garda",
+    "scopeName": "Lago di Garda",
+    "lat": 45.837655299999994,
+    "lng": 10.8256555,
+    "region": null,
+    "regionHint": "Riva del Garda",
+    "address": "SS45bis, 38066 Riva del Garda TN, Italy",
+    "rating": 4.7,
+    "userRatingCount": 329,
+    "rawTypes": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "rider-spot"
+    ],
+    "aliases": [
+      "Banchina Panoramica da Riva del Garda a Limone del Garda"
+    ],
+    "riderScore": 40
+  },
+  {
+    "id": "spot-sosta-panoramica-ChIJ7cOU",
+    "sourceId": "spot-sosta-panoramica-ChIJ7cOU",
+    "googlePlaceId": null,
+    "name": "Sosta Panoramica",
+    "slug": "sosta-panoramica",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "garda",
+    "scopeName": "Lago di Garda",
+    "lat": 45.7086812,
+    "lng": 10.693411099999999,
+    "region": null,
+    "regionHint": "Riva del Garda",
+    "address": "Via Repubblica, 25084 Gargnano BS, Italy",
+    "rating": 4.7,
+    "userRatingCount": 157,
+    "rawTypes": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "rider-spot"
+    ],
+    "aliases": [
+      "Sosta Panoramica"
+    ],
+    "riderScore": 40
+  },
+  {
+    "id": "spot-strada-panoramica-ChIJmSJ8",
+    "sourceId": "spot-strada-panoramica-ChIJmSJ8",
+    "googlePlaceId": null,
+    "name": "Strada panoramica",
+    "slug": "strada-panoramica",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "garda",
+    "scopeName": "Lago di Garda",
+    "lat": 45.7984103,
+    "lng": 10.0577316,
+    "region": null,
+    "regionHint": "Gardone / Toscolano",
+    "address": "SS469, 24063 Castro BG, Italy",
+    "rating": 4.9,
+    "userRatingCount": 20,
+    "rawTypes": [
+      "hiking_area",
+      "sports_activity_location",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "hiking_area",
+      "sports_activity_location",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "rider-spot"
+    ],
+    "aliases": [
+      "Strada panoramica"
+    ],
+    "riderScore": 38
+  },
+  {
+    "id": "spot-strada-panoramica-ChIJbza0",
+    "sourceId": "spot-strada-panoramica-ChIJbza0",
+    "googlePlaceId": null,
+    "name": "Strada Panoramica",
+    "slug": "strada-panoramica",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "garda",
+    "scopeName": "Lago di Garda",
+    "lat": 45.6892127,
+    "lng": 10.75776,
+    "region": null,
+    "regionHint": "Riva del Garda",
+    "address": "Località Fasor, 22, 37010 Brenzone sul Garda VR, Italy",
+    "rating": 4.7,
+    "userRatingCount": 29,
+    "rawTypes": [
+      "hiking_area",
+      "sports_activity_location",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "hiking_area",
+      "sports_activity_location",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "rider-spot"
+    ],
+    "aliases": [
+      "Strada Panoramica"
+    ],
+    "riderScore": 38
+  }
+]

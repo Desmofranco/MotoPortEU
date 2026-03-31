@@ -555,6 +555,38 @@
     "score": 52
   },
   {
+    "id": "spot-1a-lake-panorama-lago-di-como-ChIJP6YR",
+    "name": "1a Lake Panorama @ Lago di Como",
+    "slug": "1a-lake-panorama-lago-di-como",
+    "type": "lake_view",
+    "rideType": "lake",
+    "country": "IT",
+    "scope": "italy-lakes",
+    "scopeName": "Italia Laghi",
+    "lat": 46.0535462,
+    "lng": 9.2600535,
+    "regionHint": "Lake Como",
+    "address": "Cipresso37, Villagio Lago di Como, 22010 San Siro CO, Italy",
+    "rating": 4.5,
+    "userRatingCount": 2,
+    "types": [
+      "lodging",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "lake",
+      "scenic",
+      "rider",
+      "panoramic"
+    ],
+    "aliases": [
+      "1a Lake Panorama @ Lago di Como"
+    ],
+    "score": 50
+  },
+  {
     "id": "spot-area-panoramica-del-lago-di-varese-ChIJB0JC",
     "name": "Area panoramica del Lago di Varese",
     "slug": "area-panoramica-del-lago-di-varese",
@@ -583,6 +615,38 @@
     ],
     "aliases": [
       "Area panoramica del Lago di Varese"
+    ],
+    "score": 49
+  },
+  {
+    "id": "spot-lake-como-panoramic-view-ChIJ9ahH",
+    "name": "Lake Como Panoramic View",
+    "slug": "lake-como-panoramic-view",
+    "type": "lake_view",
+    "rideType": "lake",
+    "country": "IT",
+    "scope": "italy-lakes",
+    "scopeName": "Italia Laghi",
+    "lat": 46.151624,
+    "lng": 9.3201258,
+    "regionHint": "Lake Como",
+    "address": "Via Pozzolo, 37, 22013 Domaso CO, Italy",
+    "rating": 4.8,
+    "userRatingCount": 5,
+    "types": [
+      "lodging",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "lake",
+      "scenic",
+      "rider",
+      "panoramic"
+    ],
+    "aliases": [
+      "Lake Como Panoramic View"
     ],
     "score": 49
   },
@@ -862,8 +926,8 @@
     "userRatingCount": 4264,
     "types": [
       "tourist_attraction",
-      "scenic_spot",
       "cultural_landmark",
+      "scenic_spot",
       "point_of_interest",
       "establishment"
     ],
@@ -895,8 +959,8 @@
     "userRatingCount": 675,
     "types": [
       "car_rental",
-      "point_of_interest",
       "service",
+      "point_of_interest",
       "establishment"
     ],
     "source": "google_places",
@@ -2048,38 +2112,6 @@
     "score": 38
   },
   {
-    "id": "spot-lake-view-point-ChIJz3jk",
-    "name": "Lake view Point",
-    "slug": "lake-view-point",
-    "type": "lake_view",
-    "rideType": "lake",
-    "country": "IT",
-    "scope": "italy-lakes",
-    "scopeName": "Italia Laghi",
-    "lat": 45.980354,
-    "lng": 9.210011999999999,
-    "regionHint": "Lake Como",
-    "address": "Via S. Ambrogio, 2B, 22019 Tremezzo CO, Italy",
-    "rating": 4.5,
-    "userRatingCount": 2,
-    "types": [
-      "tourist_attraction",
-      "point_of_interest",
-      "establishment"
-    ],
-    "source": "google_places",
-    "tags": [
-      "lake",
-      "scenic",
-      "rider",
-      "panoramic"
-    ],
-    "aliases": [
-      "Lake view Point"
-    ],
-    "score": 38
-  },
-  {
     "id": "spot-monte-rovrasc-ChIJJ6w4",
     "name": "Monte Rovrasc",
     "slug": "monte-rovrasc",
@@ -2258,8 +2290,8 @@
       "sporting_goods_store",
       "manufacturer",
       "store",
-      "point_of_interest",
       "service",
+      "point_of_interest",
       "establishment"
     ],
     "source": "google_places",
@@ -2358,14 +2390,14 @@
     "types": [
       "bicycle_store",
       "sportswear_store",
-      "tour_agency",
-      "travel_agency",
-      "sporting_goods_store",
       "clothing_store",
+      "sporting_goods_store",
       "manufacturer",
       "store",
-      "point_of_interest",
+      "tour_agency",
+      "travel_agency",
       "service",
+      "point_of_interest",
       "establishment"
     ],
     "source": "google_places",
@@ -2396,8 +2428,8 @@
     "rating": 5,
     "userRatingCount": 24,
     "types": [
-      "point_of_interest",
       "service",
+      "point_of_interest",
       "establishment"
     ],
     "source": "google_places",
@@ -2423,7 +2455,7 @@
     "scopeName": "Italia Laghi",
     "lat": 46.01047,
     "lng": 8.9741667,
-    "regionHint": "Lake Maggiore",
+    "regionHint": "Lake Como",
     "address": "Via al Roccolo 2, 6962 Viganello, Switzerland",
     "rating": 4.8,
     "userRatingCount": 6,
@@ -3014,6 +3046,37 @@
     "score": 34
   },
   {
+    "id": "spot-belvedere-di-campagnano-ChIJ986a",
+    "name": "Belvedere di Campagnano",
+    "slug": "belvedere-di-campagnano",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "italy-lakes",
+    "scopeName": "Italia Laghi",
+    "lat": 46.0525015,
+    "lng": 8.741668899999999,
+    "regionHint": "Lake Maggiore",
+    "address": "San Rocco (chiesa) - bivio Musignano, 21061, 21061 Campagnano VA, Italy",
+    "rating": 4.8,
+    "userRatingCount": 119,
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider"
+    ],
+    "aliases": [
+      "Belvedere di Campagnano"
+    ],
+    "score": 34
+  },
+  {
     "id": "spot-belvedere-di-parzanica-ChIJ_4ha",
     "name": "Belvedere di Parzanica",
     "slug": "belvedere-di-parzanica",
@@ -3500,15 +3563,15 @@
     "rating": 4.1,
     "userRatingCount": 111,
     "types": [
-      "cocktail_bar",
       "observation_deck",
-      "coffee_shop",
       "sandwich_shop",
+      "coffee_shop",
       "cafe",
+      "cocktail_bar",
       "bar",
-      "restaurant",
       "food_store",
       "store",
+      "restaurant",
       "food",
       "point_of_interest",
       "establishment"
@@ -4150,19 +4213,19 @@
     "score": 31
   },
   {
-    "id": "spot-punto-panoramico-vignoni-alto-ChIJKRDY",
-    "name": "Punto panoramico Vignoni alto",
-    "slug": "punto-panoramico-vignoni-alto",
+    "id": "spot-punto-panoramico-vicania-ChIJK83v",
+    "name": "Punto Panoramico Vicania",
+    "slug": "punto-panoramico-vicania",
     "type": "scenic_road",
     "rideType": "scenic",
     "country": "IT",
     "scope": "italy-lakes",
     "scopeName": "Italia Laghi",
-    "lat": 43.036364,
-    "lng": 11.609399999999999,
-    "regionHint": "Lake Trasimeno",
-    "address": "Vignoni Alto, 96, 53027 San Quirico d'Orcia SI, Italy",
-    "rating": 4.9,
+    "lat": 45.936845,
+    "lng": 8.9213366,
+    "regionHint": "Lake Maggiore",
+    "address": "6921 Vico Morcote, Switzerland",
+    "rating": 4.7,
     "userRatingCount": 19,
     "types": [
       "scenic_spot",
@@ -4176,7 +4239,7 @@
       "rider"
     ],
     "aliases": [
-      "Punto panoramico Vignoni alto"
+      "Punto Panoramico Vicania"
     ],
     "score": 31
   },
@@ -4402,6 +4465,38 @@
     "score": 29
   },
   {
+    "id": "spot-cazziemarc-viewpoint-bergamo-ChIJfbRs",
+    "name": "CazzieMarc Viewpoint bergamo",
+    "slug": "cazziemarc-viewpoint-bergamo",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "italy-lakes",
+    "scopeName": "Italia Laghi",
+    "lat": 45.7081437,
+    "lng": 9.654750199999999,
+    "regionHint": "Lake Iseo",
+    "address": "Vicolo Sottoripa, 3-1, 24129 Bergamo BG, Italy",
+    "rating": 5,
+    "userRatingCount": 1,
+    "types": [
+      "historical_landmark",
+      "historical_place",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider"
+    ],
+    "aliases": [
+      "CazzieMarc Viewpoint bergamo"
+    ],
+    "score": 29
+  },
+  {
     "id": "spot-terra-dei-forti-viewpoint-ChIJh_ZX",
     "name": "Terra dei Forti Viewpoint",
     "slug": "terra-dei-forti-viewpoint",
@@ -4460,6 +4555,38 @@
     ],
     "aliases": [
       "Viewpoint - Clivio Centro"
+    ],
+    "score": 29
+  },
+  {
+    "id": "spot-viewpoint-rotonda-zanica-stezzano-ChIJvWc8",
+    "name": "Viewpoint Rotonda Zanica Stezzano",
+    "slug": "viewpoint-rotonda-zanica-stezzano",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "italy-lakes",
+    "scopeName": "Italia Laghi",
+    "lat": 45.6471616,
+    "lng": 9.663071,
+    "regionHint": "Lake Iseo",
+    "address": "Via Zanica, 12C, 24040 Stezzano BG, Italy",
+    "rating": 5,
+    "userRatingCount": 1,
+    "types": [
+      "hiking_area",
+      "sports_activity_location",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider"
+    ],
+    "aliases": [
+      "Viewpoint Rotonda Zanica Stezzano"
     ],
     "score": 29
   }

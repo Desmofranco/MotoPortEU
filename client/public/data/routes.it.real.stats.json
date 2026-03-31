@@ -1,27 +1,25 @@
 {
-  "inputTotal": 56,
-  "preliminaryKeep": 51,
+  "inputTotal": 62,
+  "preliminaryKeep": 62,
   "discarded": 0,
-  "review": 5,
-  "dedupeRemoved": 12,
-  "finalRoutes": 39,
+  "review": 0,
+  "dedupeRemoved": 24,
+  "finalRoutes": 38,
   "reasonBreakdown": {
-    "real_route": 51,
-    "pass_cluster_but_not_full_itinerary": 2,
-    "single_pass_or_micro_route": 3
+    "real_route": 62
   },
-  "finalHeroRoutes": 14,
-  "finalLongRoutes120Plus": 27,
+  "finalHeroRoutes": 15,
+  "finalLongRoutes120Plus": 25,
   "finalRegions": {
     "Toscana / Emilia-Romagna / Appennino": 2,
     "Dolomiti": 8,
-    "Lago di Garda": 1,
-    "Lombardia / Alpi": 2,
+    "Lago di Garda": 3,
+    "Lombardia / Alpi": 1,
     "Sicilia": 1,
     "Valle d'Aosta / Alpi": 3,
     "Sardegna": 2,
-    "Liguria": 2,
-    "Nord-Ovest": 4,
+    "Liguria": 1,
+    "Nord-Ovest": 3,
     "Centro Italia": 3,
     "Sud Italia": 2,
     "Piemonte / Alpi": 3,
@@ -31,15 +29,15 @@
     "Salento Coast": 1
   },
   "finalByRouteFamily": {
-    "mountain": 26,
-    "lake": 6,
-    "coastal": 7
+    "mountain": 25,
+    "lake": 7,
+    "coastal": 6
   },
   "sourceQualityBreakdown": {
-    "high": 32,
-    "medium": 7
+    "high": 29,
+    "medium": 9
   },
   "italianConfidenceBreakdown": {
-    "high": 39
+    "high": 38
   }
 }
