@@ -1,41 +1,45 @@
 {
-  "inputTotal": 70,
-  "preliminaryKeep": 65,
-  "discarded": 2,
-  "review": 3,
-  "dedupeRemoved": 28,
-  "finalRoutes": 37,
+  "inputTotal": 56,
+  "preliminaryKeep": 51,
+  "discarded": 0,
+  "review": 5,
+  "dedupeRemoved": 12,
+  "finalRoutes": 39,
   "reasonBreakdown": {
-    "track_or_circuit": 2,
-    "real_route": 65,
-    "pass_cluster_but_not_full_itinerary": 3
+    "real_route": 51,
+    "pass_cluster_but_not_full_itinerary": 2,
+    "single_pass_or_micro_route": 3
   },
-  "finalHeroRoutes": 32,
-  "finalLongRoutes120Plus": 26,
+  "finalHeroRoutes": 14,
+  "finalLongRoutes120Plus": 27,
   "finalRegions": {
-    "Valle d'Aosta / Alpi": 3,
-    "Sardegna": 3,
-    "Nord-Ovest": 5,
-    "Centro Italia": 3,
-    "Toscana / Emilia-Romagna / Appennino": 3,
+    "Toscana / Emilia-Romagna / Appennino": 2,
     "Dolomiti": 8,
+    "Lago di Garda": 1,
     "Lombardia / Alpi": 2,
+    "Sicilia": 1,
+    "Valle d'Aosta / Alpi": 3,
+    "Sardegna": 2,
+    "Liguria": 2,
+    "Nord-Ovest": 4,
+    "Centro Italia": 3,
     "Sud Italia": 2,
     "Piemonte / Alpi": 3,
     "Trentino / Veneto / Friuli": 3,
-    "Nord-Est": 1,
-    "Sicilia": 1
+    "Lago Maggiore": 1,
+    "Lake Iseo": 1,
+    "Salento Coast": 1
   },
   "finalByRouteFamily": {
-    "mountain": 33,
-    "scenic": 3,
-    "lake": 1
+    "mountain": 26,
+    "lake": 6,
+    "coastal": 7
   },
   "sourceQualityBreakdown": {
-    "high": 31,
-    "medium": 6
+    "high": 32,
+    "medium": 7
   },
   "italianConfidenceBreakdown": {
-    "high": 37
+    "high": 39
   }
 }

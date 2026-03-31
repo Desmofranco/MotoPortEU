@@ -1,0 +1,469 @@
+[
+  {
+    "id": "spot-passo-del-prale-ChIJ2WNL",
+    "sourceId": "spot-passo-del-prale-ChIJ2WNL",
+    "googlePlaceId": null,
+    "name": "Passo del Prale",
+    "slug": "passo-del-prale",
+    "type": "mountain_pass",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "italy-coastal",
+    "scopeName": "Italia Coste",
+    "lat": 44.1082122,
+    "lng": 7.9215884,
+    "region": null,
+    "regionHint": "Liguria Coast",
+    "address": "Unnamed Road,18026, 18026 Armo IM, Italy",
+    "rating": 4.8,
+    "userRatingCount": 31,
+    "rawTypes": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "mountain",
+      "twisty",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Passo del Prale"
+    ],
+    "riderScore": 83
+  },
+  {
+    "id": "spot-passo-del-ghiffi-ChIJIUeo",
+    "sourceId": "spot-passo-del-ghiffi-ChIJIUeo",
+    "googlePlaceId": null,
+    "name": "Passo del Ghiffi",
+    "slug": "passo-del-ghiffi",
+    "type": "mountain_pass",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "italy-coastal",
+    "scopeName": "Italia Coste",
+    "lat": 44.4380009,
+    "lng": 9.4456183,
+    "region": null,
+    "regionHint": "Cinque Terre / Levante",
+    "address": "Strada Provinciale 49, 43059 Borzonasca GE, Italy",
+    "rating": 4.3,
+    "userRatingCount": 43,
+    "rawTypes": [
+      "tourist_attraction",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "tourist_attraction",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "mountain",
+      "twisty",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Passo del Ghiffi"
+    ],
+    "riderScore": 70
+  },
+  {
+    "id": "spot-amalfi-coast-private-driver-ChIJbyeV",
+    "sourceId": "spot-amalfi-coast-private-driver-ChIJbyeV",
+    "googlePlaceId": null,
+    "name": "Amalfi Coast Private Driver",
+    "slug": "amalfi-coast-private-driver",
+    "type": "mountain_pass",
+    "rideType": "coastal",
+    "country": "IT",
+    "scope": "italy-coastal",
+    "scopeName": "Italia Coste",
+    "lat": 40.6364781,
+    "lng": 14.592389800000001,
+    "region": null,
+    "regionHint": "Amalfi Coast",
+    "address": "Via Giovanni Amendola, 34, 84011 Amalfi SA, Italy",
+    "rating": 4.9,
+    "userRatingCount": 64,
+    "rawTypes": [
+      "transportation_service",
+      "chauffeur_service",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "transportation_service",
+      "chauffeur_service",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "coast",
+      "sea",
+      "scenic",
+      "rider",
+      "panoramic",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Amalfi Coast Private Driver"
+    ],
+    "riderScore": 56
+  },
+  {
+    "id": "spot-visitors-center-of-monaco-antonio-garcea-ChIJpUT4",
+    "sourceId": "spot-visitors-center-of-monaco-antonio-garcea-ChIJpUT4",
+    "googlePlaceId": null,
+    "name": "Visitors Center of Monaco \"Antonio Garcea\"",
+    "slug": "visitors-center-of-monaco-antonio-garcea",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "italy-coastal",
+    "scopeName": "Italia Coste",
+    "lat": 39.0729016,
+    "lng": 16.567467999999998,
+    "region": null,
+    "regionHint": "Calabria Ionian",
+    "address": "Strada Statale 179 Dir, 17, 88055 Taverna CZ, Italy",
+    "rating": 4.7,
+    "userRatingCount": 1127,
+    "rawTypes": [
+      "visitor_center",
+      "national_park",
+      "tourist_attraction",
+      "tourist_information_center",
+      "park",
+      "tour_agency",
+      "travel_agency",
+      "service",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "visitor_center",
+      "national_park",
+      "tourist_attraction",
+      "tourist_information_center",
+      "park",
+      "tour_agency",
+      "travel_agency",
+      "service",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "rider-spot"
+    ],
+    "aliases": [
+      "Visitors Center of Monaco \"Antonio Garcea\""
+    ],
+    "riderScore": 52
+  },
+  {
+    "id": "spot-landscape-on-procida-and-ischia-ChIJ74IU",
+    "sourceId": "spot-landscape-on-procida-and-ischia-ChIJ74IU",
+    "googlePlaceId": null,
+    "name": "Landscape on Procida and Ischia",
+    "slug": "landscape-on-procida-and-ischia",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "italy-coastal",
+    "scopeName": "Italia Coste",
+    "lat": 40.7889293,
+    "lng": 14.0599987,
+    "region": null,
+    "regionHint": "Amalfi Coast",
+    "address": "Via Panoramica, 80070 Monte di Procida NA, Italy",
+    "rating": 4.8,
+    "userRatingCount": 528,
+    "rawTypes": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "rider-spot"
+    ],
+    "aliases": [
+      "Landscape on Procida and Ischia"
+    ],
+    "riderScore": 50
+  },
+  {
+    "id": "spot-amalfi-coast-in-tour-panoramic-golf-cart-experience-ChIJRfxz",
+    "sourceId": "spot-amalfi-coast-in-tour-panoramic-golf-cart-experience-ChIJRfxz",
+    "googlePlaceId": null,
+    "name": "Amalfi Coast in Tour – Panoramic Golf Cart Experience",
+    "slug": "amalfi-coast-in-tour-panoramic-golf-cart-experience",
+    "type": "coastal_view",
+    "rideType": "coastal",
+    "country": "IT",
+    "scope": "italy-coastal",
+    "scopeName": "Italia Coste",
+    "lat": 40.6494765,
+    "lng": 14.625888199999999,
+    "region": null,
+    "regionHint": "Amalfi Coast",
+    "address": "V Alfonso Gatto, 19, 84010 Minori SA, Italy",
+    "rating": 5,
+    "userRatingCount": 27,
+    "rawTypes": [
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "coast",
+      "sea",
+      "scenic",
+      "rider",
+      "panoramic",
+      "rider-spot"
+    ],
+    "aliases": [
+      "Amalfi Coast in Tour – Panoramic Golf Cart Experience"
+    ],
+    "riderScore": 46
+  },
+  {
+    "id": "spot-base-o-ChIJ56TW",
+    "sourceId": "spot-base-o-ChIJ56TW",
+    "googlePlaceId": null,
+    "name": "Base O",
+    "slug": "base-o",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "italy-coastal",
+    "scopeName": "Italia Coste",
+    "lat": 44.310501599999995,
+    "lng": 9.180369599999999,
+    "region": null,
+    "regionHint": "Liguria Coast",
+    "address": "Unnamed Road, 16032 Camogli GE, Italy",
+    "rating": 4.8,
+    "userRatingCount": 106,
+    "rawTypes": [
+      "scenic_spot",
+      "tourist_attraction",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "scenic_spot",
+      "tourist_attraction",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "rider-spot"
+    ],
+    "aliases": [
+      "Base O"
+    ],
+    "riderScore": 42
+  },
+  {
+    "id": "spot-panorama-sulle-due-sorelle-ChIJkzKf",
+    "sourceId": "spot-panorama-sulle-due-sorelle-ChIJkzKf",
+    "googlePlaceId": null,
+    "name": "Panorama sulle Due Sorelle",
+    "slug": "panorama-sulle-due-sorelle",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "italy-coastal",
+    "scopeName": "Italia Coste",
+    "lat": 40.2687684,
+    "lng": 18.436858,
+    "region": null,
+    "regionHint": "Salento Coast",
+    "address": "Unnamed Road, 73026, 73026 Torre dell'Orso LE, Italy",
+    "rating": 4.8,
+    "userRatingCount": 124,
+    "rawTypes": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "rider-spot"
+    ],
+    "aliases": [
+      "Panorama sulle Due Sorelle"
+    ],
+    "riderScore": 40
+  },
+  {
+    "id": "spot-punta-meliso-ChIJXXwd",
+    "sourceId": "spot-punta-meliso-ChIJXXwd",
+    "googlePlaceId": null,
+    "name": "Punta Meliso",
+    "slug": "punta-meliso",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "italy-coastal",
+    "scopeName": "Italia Coste",
+    "lat": 39.7933259,
+    "lng": 18.3669018,
+    "region": null,
+    "regionHint": "Salento Coast",
+    "address": "Unnamed Road, 73040, 73040 Santa Maria di Leuca LE, Italy",
+    "rating": 4.7,
+    "userRatingCount": 213,
+    "rawTypes": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "rider-spot"
+    ],
+    "aliases": [
+      "Punta Meliso"
+    ],
+    "riderScore": 40
+  },
+  {
+    "id": "spot-sella-derbi-ChIJs3WM",
+    "sourceId": "spot-sella-derbi-ChIJs3WM",
+    "googlePlaceId": null,
+    "name": "Sella Derbi",
+    "slug": "sella-derbi",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "italy-coastal",
+    "scopeName": "Italia Coste",
+    "lat": 44.0614451,
+    "lng": 9.8185681,
+    "region": null,
+    "regionHint": "Cinque Terre / Levante",
+    "address": "Unnamed Road,19132, 19025 Porto Venere SP, Italy",
+    "rating": 4.8,
+    "userRatingCount": 109,
+    "rawTypes": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "rider-spot"
+    ],
+    "aliases": [
+      "Sella Derbi"
+    ],
+    "riderScore": 40
+  },
+  {
+    "id": "spot-cima-monte-bignone-punto-panoramico-ChIJuyH3",
+    "sourceId": "spot-cima-monte-bignone-punto-panoramico-ChIJuyH3",
+    "googlePlaceId": null,
+    "name": "Cima Monte Bignone, punto panoramico",
+    "slug": "cima-monte-bignone-punto-panoramico",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "italy-coastal",
+    "scopeName": "Italia Coste",
+    "lat": 43.873522,
+    "lng": 7.733676000000001,
+    "region": null,
+    "regionHint": "Liguria Coast",
+    "address": "Unnamed Road, 18038 Sanremo IM, Italy",
+    "rating": 4.7,
+    "userRatingCount": 31,
+    "rawTypes": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "rider-spot"
+    ],
+    "aliases": [
+      "Cima Monte Bignone, punto panoramico"
+    ],
+    "riderScore": 38
+  }
+]

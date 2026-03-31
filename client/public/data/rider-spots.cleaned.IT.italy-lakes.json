@@ -1,0 +1,849 @@
+[
+  {
+    "id": "spot-passo-di-mezzeno-ChIJN81f",
+    "sourceId": "spot-passo-di-mezzeno-ChIJN81f",
+    "googlePlaceId": null,
+    "name": "Passo di Mezzeno",
+    "slug": "passo-di-mezzeno",
+    "type": "mountain_pass",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "italy-lakes",
+    "scopeName": "Italia Laghi",
+    "lat": 45.9799757,
+    "lng": 9.8025846,
+    "region": null,
+    "regionHint": "Lake Iseo",
+    "address": "Unnamed Road, BG, 24010 Roncobello BG, Italy",
+    "rating": 4.7,
+    "userRatingCount": 281,
+    "rawTypes": [
+      "scenic_spot",
+      "tourist_attraction",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "scenic_spot",
+      "tourist_attraction",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "mountain",
+      "twisty",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Passo di Mezzeno"
+    ],
+    "riderScore": 95
+  },
+  {
+    "id": "spot-passo-d-ampola-ChIJU2FE",
+    "sourceId": "spot-passo-d-ampola-ChIJU2FE",
+    "googlePlaceId": null,
+    "name": "Passo d'Ámpola",
+    "slug": "passo-d-ampola",
+    "type": "mountain_pass",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "italy-lakes",
+    "scopeName": "Italia Laghi",
+    "lat": 45.864399999999996,
+    "lng": 10.6455,
+    "region": null,
+    "regionHint": "Lake Garda",
+    "address": "Strada Provinciale 8, 8, 37020 Ferrara di Monte Baldo VR, Italy",
+    "rating": 4.6,
+    "userRatingCount": 302,
+    "rawTypes": [
+      "tourist_attraction",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "tourist_attraction",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "mountain",
+      "twisty",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Passo d'Ámpola"
+    ],
+    "riderScore": 90
+  },
+  {
+    "id": "spot-passo-campiano-ChIJt-UR",
+    "sourceId": "spot-passo-campiano-ChIJt-UR",
+    "googlePlaceId": null,
+    "name": "Passo Campiano",
+    "slug": "passo-campiano",
+    "type": "mountain_pass",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "italy-lakes",
+    "scopeName": "Italia Laghi",
+    "lat": 45.7636008,
+    "lng": 10.8233704,
+    "region": null,
+    "regionHint": "Lake Garda",
+    "address": "Via Panoramica, 113-107, 37018 Malcesine VR, Italy",
+    "rating": 4.9,
+    "userRatingCount": 11,
+    "rawTypes": [
+      "tourist_attraction",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "tourist_attraction",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "mountain",
+      "twisty",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Passo Campiano"
+    ],
+    "riderScore": 80
+  },
+  {
+    "id": "spot-passo-folungo-ChIJ2Qjf",
+    "sourceId": "spot-passo-folungo-ChIJ2Qjf",
+    "googlePlaceId": null,
+    "name": "Passo Folungo",
+    "slug": "passo-folungo",
+    "type": "mountain_pass",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "italy-lakes",
+    "scopeName": "Italia Laghi",
+    "lat": 46.040771199999995,
+    "lng": 8.5828603,
+    "region": null,
+    "regionHint": "Lake Maggiore",
+    "address": "Strada Militare Cadorna, 28812 Aurano VB, Italy",
+    "rating": 4.5,
+    "userRatingCount": 80,
+    "rawTypes": [
+      "hiking_area",
+      "scenic_spot",
+      "tourist_attraction",
+      "sports_activity_location",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "hiking_area",
+      "scenic_spot",
+      "tourist_attraction",
+      "sports_activity_location",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "mountain",
+      "twisty",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Passo Folungo"
+    ],
+    "riderScore": 80
+  },
+  {
+    "id": "spot-strada-della-forra-ChIJsRRQ",
+    "sourceId": "spot-strada-della-forra-ChIJsRRQ",
+    "googlePlaceId": null,
+    "name": "Strada della Forra",
+    "slug": "strada-della-forra",
+    "type": "coastal_view",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "italy-lakes",
+    "scopeName": "Italia Laghi",
+    "lat": 45.7741106,
+    "lng": 10.7659152,
+    "region": null,
+    "regionHint": "Lake Garda",
+    "address": "Via Benaco, 25010 Tremosine sul Garda BS, Italy",
+    "rating": 4.8,
+    "userRatingCount": 4264,
+    "rawTypes": [
+      "tourist_attraction",
+      "scenic_spot",
+      "cultural_landmark",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "tourist_attraction",
+      "scenic_spot",
+      "cultural_landmark",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "rider-spot"
+    ],
+    "aliases": [
+      "Strada della Forra"
+    ],
+    "riderScore": 74
+  },
+  {
+    "id": "spot-passo-della-croce-ChIJPfl5",
+    "sourceId": "spot-passo-della-croce-ChIJPfl5",
+    "googlePlaceId": null,
+    "name": "Passo della Croce",
+    "slug": "passo-della-croce",
+    "type": "mountain_pass",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "italy-lakes",
+    "scopeName": "Italia Laghi",
+    "lat": 45.759967200000006,
+    "lng": 10.3945882,
+    "region": null,
+    "regionHint": "Lake Garda",
+    "address": "Unnamed Road, 25078, 25074 Pertica Bassa BS, Italy",
+    "rating": 4.5,
+    "userRatingCount": 2,
+    "rawTypes": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "mountain",
+      "twisty",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Passo della Croce"
+    ],
+    "riderScore": 73
+  },
+  {
+    "id": "spot-lago-di-valvestino-ChIJT1xy",
+    "sourceId": "spot-lago-di-valvestino-ChIJT1xy",
+    "googlePlaceId": null,
+    "name": "Lago di Valvestino",
+    "slug": "lago-di-valvestino",
+    "type": "lake_view",
+    "rideType": "lake",
+    "country": "IT",
+    "scope": "italy-lakes",
+    "scopeName": "Italia Laghi",
+    "lat": 45.7184351,
+    "lng": 10.6097251,
+    "region": null,
+    "regionHint": "Lake Garda",
+    "address": "Lago di Valvestino, Provincia di Brescia, Italy",
+    "rating": 4.6,
+    "userRatingCount": 229,
+    "rawTypes": [
+      "lake",
+      "natural_feature",
+      "establishment"
+    ],
+    "types": [
+      "lake",
+      "natural_feature",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "lake",
+      "scenic",
+      "rider",
+      "panoramic",
+      "rider-spot"
+    ],
+    "aliases": [
+      "Lago di Valvestino"
+    ],
+    "riderScore": 67
+  },
+  {
+    "id": "spot-passo-della-cerventosa-ChIJSe7K",
+    "sourceId": "spot-passo-della-cerventosa-ChIJSe7K",
+    "googlePlaceId": null,
+    "name": "Passo della Cerventosa",
+    "slug": "passo-della-cerventosa",
+    "type": "mountain_pass",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "italy-lakes",
+    "scopeName": "Italia Laghi",
+    "lat": 43.291384799999996,
+    "lng": 12.056707099999999,
+    "region": null,
+    "regionHint": "Lake Trasimeno",
+    "address": "Strada Provinciale Umbro Cortonese, 52044 Cortona AR, Italy",
+    "rating": 4.2,
+    "userRatingCount": 10,
+    "rawTypes": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "mountain",
+      "twisty",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Passo della Cerventosa"
+    ],
+    "riderScore": 63
+  },
+  {
+    "id": "spot-la-conca-dei-rododendri-ChIJS7wv",
+    "sourceId": "spot-la-conca-dei-rododendri-ChIJS7wv",
+    "googlePlaceId": null,
+    "name": "La Conca Dei Rododendri",
+    "slug": "la-conca-dei-rododendri",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "italy-lakes",
+    "scopeName": "Italia Laghi",
+    "lat": 45.6746316,
+    "lng": 8.1542953,
+    "region": null,
+    "regionHint": "Lake Maggiore",
+    "address": "Strada Provinciale 232 Panoramica Zegna, 10, 13835 Valdilana BI, Italy",
+    "rating": 4.6,
+    "userRatingCount": 1345,
+    "rawTypes": [
+      "tourist_attraction",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "tourist_attraction",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "rider-spot"
+    ],
+    "aliases": [
+      "La Conca Dei Rododendri"
+    ],
+    "riderScore": 55
+  },
+  {
+    "id": "spot-salo-panorama-lago-ChIJCT1a",
+    "sourceId": "spot-salo-panorama-lago-ChIJCT1a",
+    "googlePlaceId": null,
+    "name": "Salò Panorama Lago",
+    "slug": "salo-panorama-lago",
+    "type": "lake_view",
+    "rideType": "lake",
+    "country": "IT",
+    "scope": "italy-lakes",
+    "scopeName": "Italia Laghi",
+    "lat": 45.60453950000001,
+    "lng": 10.5227105,
+    "region": null,
+    "regionHint": "Lake Garda",
+    "address": "Piazza Decorati al Valor Civile, 1449, 25087 Salò BS, Italy",
+    "rating": 4.7,
+    "userRatingCount": 527,
+    "rawTypes": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "lake",
+      "scenic",
+      "rider",
+      "panoramic",
+      "rider-spot"
+    ],
+    "aliases": [
+      "Salò Panorama Lago"
+    ],
+    "riderScore": 54
+  },
+  {
+    "id": "spot-panoramica-ChIJc0qT",
+    "sourceId": "spot-panoramica-ChIJc0qT",
+    "googlePlaceId": null,
+    "name": "Panoramica",
+    "slug": "panoramica",
+    "type": "lake_view",
+    "rideType": "lake",
+    "country": "IT",
+    "scope": "italy-lakes",
+    "scopeName": "Italia Laghi",
+    "lat": 45.6631344,
+    "lng": 9.9603366,
+    "region": null,
+    "regionHint": "Lake Garda",
+    "address": "Lago d'Iseo, Lungolago Chiatte, 25030 Paratico BS, Italy",
+    "rating": 4.6,
+    "userRatingCount": 139,
+    "rawTypes": [
+      "hiking_area",
+      "sports_activity_location",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "hiking_area",
+      "sports_activity_location",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "lake",
+      "scenic",
+      "rider",
+      "panoramic",
+      "rider-spot"
+    ],
+    "aliases": [
+      "Panoramica"
+    ],
+    "riderScore": 47
+  },
+  {
+    "id": "spot-cernobbio-panoramica-sul-lago-ChIJuVJ6",
+    "sourceId": "spot-cernobbio-panoramica-sul-lago-ChIJuVJ6",
+    "googlePlaceId": null,
+    "name": "Cernobbio panoramica sul lago",
+    "slug": "cernobbio-panoramica-sul-lago",
+    "type": "lake_view",
+    "rideType": "lake",
+    "country": "IT",
+    "scope": "italy-lakes",
+    "scopeName": "Italia Laghi",
+    "lat": 45.8387768,
+    "lng": 9.0786687,
+    "region": null,
+    "regionHint": "Lake Como",
+    "address": "22012 Cernobbio, Province of Como, Italy",
+    "rating": 4.9,
+    "userRatingCount": 37,
+    "rawTypes": [
+      "hiking_area",
+      "sports_activity_location",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "hiking_area",
+      "sports_activity_location",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "lake",
+      "scenic",
+      "rider",
+      "panoramic",
+      "rider-spot"
+    ],
+    "aliases": [
+      "Cernobbio panoramica sul lago"
+    ],
+    "riderScore": 42
+  },
+  {
+    "id": "spot-monte-faie-ChIJUZIx",
+    "sourceId": "spot-monte-faie-ChIJUZIx",
+    "googlePlaceId": null,
+    "name": "Monte Faiè",
+    "slug": "monte-faie",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "italy-lakes",
+    "scopeName": "Italia Laghi",
+    "lat": 45.9871954,
+    "lng": 8.4529099,
+    "region": null,
+    "regionHint": "Lake Maggiore",
+    "address": "Unnamed Road, 28804 San Bernardino Verbano VB, Italy",
+    "rating": 4.8,
+    "userRatingCount": 357,
+    "rawTypes": [
+      "scenic_spot",
+      "tourist_attraction",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "scenic_spot",
+      "tourist_attraction",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "rider-spot"
+    ],
+    "aliases": [
+      "Monte Faiè"
+    ],
+    "riderScore": 42
+  },
+  {
+    "id": "spot-passeggiata-panoramica-ChIJe69O",
+    "sourceId": "spot-passeggiata-panoramica-ChIJe69O",
+    "googlePlaceId": null,
+    "name": "Passeggiata Panoramica",
+    "slug": "passeggiata-panoramica",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "italy-lakes",
+    "scopeName": "Italia Laghi",
+    "lat": 45.77719,
+    "lng": 10.04556,
+    "region": null,
+    "regionHint": "Lake Iseo",
+    "address": "via Fracce, 24060 Riva di Solto BG, Italy",
+    "rating": 4.7,
+    "userRatingCount": 269,
+    "rawTypes": [
+      "tourist_attraction",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "tourist_attraction",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "rider-spot"
+    ],
+    "aliases": [
+      "Passeggiata Panoramica"
+    ],
+    "riderScore": 42
+  },
+  {
+    "id": "spot-sacrario-di-agueglio-ChIJBW19",
+    "sourceId": "spot-sacrario-di-agueglio-ChIJBW19",
+    "googlePlaceId": null,
+    "name": "Sacrario di Agueglio",
+    "slug": "sacrario-di-agueglio",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "italy-lakes",
+    "scopeName": "Italia Laghi",
+    "lat": 46.0129977,
+    "lng": 9.3143452,
+    "region": null,
+    "regionHint": "Lake Como",
+    "address": "Unnamed Road, 23828 Perledo LC, Italy",
+    "rating": 4.7,
+    "userRatingCount": 107,
+    "rawTypes": [
+      "scenic_spot",
+      "tourist_attraction",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "scenic_spot",
+      "tourist_attraction",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "rider-spot"
+    ],
+    "aliases": [
+      "Sacrario di Agueglio"
+    ],
+    "riderScore": 42
+  },
+  {
+    "id": "spot-banchina-panoramica-da-riva-del-garda-a-limone-del-garda-ChIJ67zu",
+    "sourceId": "spot-banchina-panoramica-da-riva-del-garda-a-limone-del-garda-ChIJ67zu",
+    "googlePlaceId": null,
+    "name": "Banchina Panoramica da Riva del Garda a Limone del Garda",
+    "slug": "banchina-panoramica-da-riva-del-garda-a-limone-del-garda",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "italy-lakes",
+    "scopeName": "Italia Laghi",
+    "lat": 45.837655299999994,
+    "lng": 10.8256555,
+    "region": null,
+    "regionHint": "Lake Garda",
+    "address": "SS45bis, 38066 Riva del Garda TN, Italy",
+    "rating": 4.7,
+    "userRatingCount": 329,
+    "rawTypes": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "rider-spot"
+    ],
+    "aliases": [
+      "Banchina Panoramica da Riva del Garda a Limone del Garda"
+    ],
+    "riderScore": 40
+  },
+  {
+    "id": "spot-sosta-panoramica-ChIJ7cOU",
+    "sourceId": "spot-sosta-panoramica-ChIJ7cOU",
+    "googlePlaceId": null,
+    "name": "Sosta Panoramica",
+    "slug": "sosta-panoramica",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "italy-lakes",
+    "scopeName": "Italia Laghi",
+    "lat": 45.7086812,
+    "lng": 10.693411099999999,
+    "region": null,
+    "regionHint": "Lake Garda",
+    "address": "Via Repubblica, 25084 Gargnano BS, Italy",
+    "rating": 4.7,
+    "userRatingCount": 157,
+    "rawTypes": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "rider-spot"
+    ],
+    "aliases": [
+      "Sosta Panoramica"
+    ],
+    "riderScore": 40
+  },
+  {
+    "id": "spot-lakeside-lavena-ponte-tresa-ChIJB-n9",
+    "sourceId": "spot-lakeside-lavena-ponte-tresa-ChIJB-n9",
+    "googlePlaceId": null,
+    "name": "Lakeside Lavena Ponte Tresa",
+    "slug": "lakeside-lavena-ponte-tresa",
+    "type": "lake_view",
+    "rideType": "lake",
+    "country": "IT",
+    "scope": "italy-lakes",
+    "scopeName": "Italia Laghi",
+    "lat": 45.9624461,
+    "lng": 8.8603674,
+    "region": null,
+    "regionHint": "Lake Como",
+    "address": "Via Ungheria, 12/A, 21037 Lavena Ponte Tresa VA, Italy",
+    "rating": 4.5,
+    "userRatingCount": 459,
+    "rawTypes": [
+      "park",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "park",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "lake",
+      "scenic",
+      "rider",
+      "panoramic",
+      "rider-spot"
+    ],
+    "aliases": [
+      "Lakeside Lavena Ponte Tresa"
+    ],
+    "riderScore": 39
+  },
+  {
+    "id": "spot-strada-panoramica-ChIJmSJ8",
+    "sourceId": "spot-strada-panoramica-ChIJmSJ8",
+    "googlePlaceId": null,
+    "name": "Strada panoramica",
+    "slug": "strada-panoramica",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "italy-lakes",
+    "scopeName": "Italia Laghi",
+    "lat": 45.7984103,
+    "lng": 10.0577316,
+    "region": null,
+    "regionHint": "Lake Garda",
+    "address": "SS469, 24063 Castro BG, Italy",
+    "rating": 4.9,
+    "userRatingCount": 20,
+    "rawTypes": [
+      "hiking_area",
+      "sports_activity_location",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "hiking_area",
+      "sports_activity_location",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "rider-spot"
+    ],
+    "aliases": [
+      "Strada panoramica"
+    ],
+    "riderScore": 38
+  },
+  {
+    "id": "spot-strada-panoramica-ChIJbza0",
+    "sourceId": "spot-strada-panoramica-ChIJbza0",
+    "googlePlaceId": null,
+    "name": "Strada Panoramica",
+    "slug": "strada-panoramica",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "italy-lakes",
+    "scopeName": "Italia Laghi",
+    "lat": 45.6892127,
+    "lng": 10.75776,
+    "region": null,
+    "regionHint": "Lake Garda",
+    "address": "Località Fasor, 22, 37010 Brenzone sul Garda VR, Italy",
+    "rating": 4.7,
+    "userRatingCount": 29,
+    "rawTypes": [
+      "hiking_area",
+      "sports_activity_location",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "hiking_area",
+      "sports_activity_location",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "rider-spot"
+    ],
+    "aliases": [
+      "Strada Panoramica"
+    ],
+    "riderScore": 38
+  }
+]

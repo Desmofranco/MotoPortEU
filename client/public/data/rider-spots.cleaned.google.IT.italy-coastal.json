@@ -1,0 +1,2709 @@
+[
+  {
+    "id": "spot-panoramic-flat-amalfi-coast-sea-view-ChIJ7ZyQ",
+    "name": "Panoramic flat Amalfi Coast - Sea View",
+    "slug": "panoramic-flat-amalfi-coast-sea-view",
+    "type": "coastal_view",
+    "rideType": "coastal",
+    "country": "IT",
+    "scope": "italy-coastal",
+    "scopeName": "Italia Coste",
+    "lat": 40.670282,
+    "lng": 14.726997800000001,
+    "regionHint": "Amalfi Coast",
+    "address": "Via Diego Taiani, 118, 84019 Vietri sul Mare SA, Italy",
+    "rating": 4.9,
+    "userRatingCount": 74,
+    "types": [
+      "lodging",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "coast",
+      "sea",
+      "scenic",
+      "rider",
+      "panoramic"
+    ],
+    "aliases": [
+      "Panoramic flat Amalfi Coast - Sea View"
+    ],
+    "score": 78
+  },
+  {
+    "id": "spot-amalfi-coast-viewpoint-ChIJFW3v",
+    "name": "Amalfi Coast Viewpoint",
+    "slug": "amalfi-coast-viewpoint",
+    "type": "coastal_view",
+    "rideType": "coastal",
+    "country": "IT",
+    "scope": "italy-coastal",
+    "scopeName": "Italia Coste",
+    "lat": 40.6220271,
+    "lng": 14.5474514,
+    "regionHint": "Amalfi Coast",
+    "address": "Via Belvedere, 84010 Pianillo NA, Italy",
+    "rating": 4.8,
+    "userRatingCount": 372,
+    "types": [
+      "landmark",
+      "observation_deck",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "coast",
+      "sea",
+      "scenic",
+      "rider",
+      "panoramic"
+    ],
+    "aliases": [
+      "Amalfi Coast Viewpoint",
+      "Amalfi Coast"
+    ],
+    "score": 67
+  },
+  {
+    "id": "spot-manarola-viewpoint-ChIJfyPR",
+    "name": "Manarola viewpoint",
+    "slug": "manarola-viewpoint",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "italy-coastal",
+    "scopeName": "Italia Coste",
+    "lat": 44.1075479,
+    "lng": 9.7254419,
+    "regionHint": "Cinque Terre / Levante",
+    "address": "Via Belvedere, 19, 19017 Manarola SP, Italy",
+    "rating": 4.9,
+    "userRatingCount": 1170,
+    "types": [
+      "scenic_spot",
+      "observation_deck",
+      "tourist_attraction",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider"
+    ],
+    "aliases": [
+      "Manarola viewpoint"
+    ],
+    "score": 60
+  },
+  {
+    "id": "spot-passo-del-prale-ChIJ2WNL",
+    "name": "Passo del Prale",
+    "slug": "passo-del-prale",
+    "type": "mountain_pass",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "italy-coastal",
+    "scopeName": "Italia Coste",
+    "lat": 44.1082122,
+    "lng": 7.9215884,
+    "regionHint": "Liguria Coast",
+    "address": "Unnamed Road,18026, 18026 Armo IM, Italy",
+    "rating": 4.8,
+    "userRatingCount": 31,
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "mountain",
+      "twisty"
+    ],
+    "aliases": [
+      "Passo del Prale"
+    ],
+    "score": 56
+  },
+  {
+    "id": "spot-punto-panoramico-ChIJgzSQ",
+    "name": "Punto Panoramico",
+    "slug": "punto-panoramico",
+    "type": "coastal_view",
+    "rideType": "coastal",
+    "country": "IT",
+    "scope": "italy-coastal",
+    "scopeName": "Italia Coste",
+    "lat": 40.6878433,
+    "lng": 14.451451299999997,
+    "regionHint": "Amalfi Coast",
+    "address": "Strada Statale 145 Sorrentina, 145, 80053 Castellammare di Stabia NA, Italy",
+    "rating": 4.7,
+    "userRatingCount": 156,
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "coast",
+      "sea",
+      "scenic",
+      "rider",
+      "panoramic"
+    ],
+    "aliases": [
+      "Punto Panoramico"
+    ],
+    "score": 56
+  },
+  {
+    "id": "spot-viewpoint-of-the-coastline-ChIJDWoy",
+    "name": "Viewpoint of the Coastline",
+    "slug": "viewpoint-of-the-coastline",
+    "type": "coastal_view",
+    "rideType": "coastal",
+    "country": "IT",
+    "scope": "italy-coastal",
+    "scopeName": "Italia Coste",
+    "lat": 40.844829999999995,
+    "lng": 14.2440467,
+    "regionHint": "Amalfi Coast",
+    "address": "Vittorio Emanuele, Vico Trinitá delle Monache, 80134 Napoli NA, Italy",
+    "rating": 5,
+    "userRatingCount": 1,
+    "types": [
+      "tourist_attraction",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "coast",
+      "sea",
+      "scenic",
+      "rider",
+      "panoramic"
+    ],
+    "aliases": [
+      "Viewpoint of the Coastline"
+    ],
+    "score": 53
+  },
+  {
+    "id": "spot-passo-del-ghiffi-ChIJIUeo",
+    "name": "Passo del Ghiffi",
+    "slug": "passo-del-ghiffi",
+    "type": "mountain_pass",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "italy-coastal",
+    "scopeName": "Italia Coste",
+    "lat": 44.4380009,
+    "lng": 9.4456183,
+    "regionHint": "Cinque Terre / Levante",
+    "address": "Strada Provinciale 49, 43059 Borzonasca GE, Italy",
+    "rating": 4.3,
+    "userRatingCount": 43,
+    "types": [
+      "tourist_attraction",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "mountain",
+      "twisty"
+    ],
+    "aliases": [
+      "Passo del Ghiffi"
+    ],
+    "score": 52
+  },
+  {
+    "id": "spot-molo-punta-licosa-scenic-viewpoint-ChIJSTr1",
+    "name": "Molo Punta Licosa Scenic Viewpoint",
+    "slug": "molo-punta-licosa-scenic-viewpoint",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "italy-coastal",
+    "scopeName": "Italia Coste",
+    "lat": 40.2545245,
+    "lng": 14.905874,
+    "regionHint": "Amalfi Coast",
+    "address": "Punta Licosa, 84048 Castellabate SA, Italy",
+    "rating": 4.7,
+    "userRatingCount": 306,
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider"
+    ],
+    "aliases": [
+      "Molo Punta Licosa Scenic Viewpoint"
+    ],
+    "score": 51
+  },
+  {
+    "id": "spot-sorrento-viewpoint-ChIJsTUl",
+    "name": "Sorrento Viewpoint",
+    "slug": "sorrento-viewpoint",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "italy-coastal",
+    "scopeName": "Italia Coste",
+    "lat": 40.649585099999996,
+    "lng": 14.4106108,
+    "regionHint": "Amalfi Coast",
+    "address": "80062 Meta, Metropolitan City of Naples, Italy",
+    "rating": 4.8,
+    "userRatingCount": 2522,
+    "types": [
+      "scenic_spot",
+      "tourist_attraction",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider"
+    ],
+    "aliases": [
+      "Sorrento Viewpoint"
+    ],
+    "score": 50
+  },
+  {
+    "id": "spot-amalfi-coast-in-tour-panoramic-golf-cart-experience-ChIJRfxz",
+    "name": "Amalfi Coast in Tour – Panoramic Golf Cart Experience",
+    "slug": "amalfi-coast-in-tour-panoramic-golf-cart-experience",
+    "type": "coastal_view",
+    "rideType": "coastal",
+    "country": "IT",
+    "scope": "italy-coastal",
+    "scopeName": "Italia Coste",
+    "lat": 40.6494765,
+    "lng": 14.625888199999999,
+    "regionHint": "Amalfi Coast",
+    "address": "V Alfonso Gatto, 19, 84010 Minori SA, Italy",
+    "rating": 5,
+    "userRatingCount": 27,
+    "types": [
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "coast",
+      "sea",
+      "scenic",
+      "rider",
+      "panoramic"
+    ],
+    "aliases": [
+      "Amalfi Coast in Tour – Panoramic Golf Cart Experience"
+    ],
+    "score": 49
+  },
+  {
+    "id": "spot-don-mimi-ChIJ3QUE",
+    "name": "Don Mimì",
+    "slug": "don-mimi",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "italy-coastal",
+    "scopeName": "Italia Coste",
+    "lat": 40.688995399999996,
+    "lng": 14.472104999999999,
+    "regionHint": "Amalfi Coast",
+    "address": "Str. Panoramica, 64, 80053 Castellammare di Stabia NA, Italy",
+    "rating": 4.3,
+    "userRatingCount": 1288,
+    "types": [
+      "restaurant",
+      "pizza_restaurant",
+      "mediterranean_restaurant",
+      "seafood_restaurant",
+      "italian_restaurant",
+      "food",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider"
+    ],
+    "aliases": [
+      "Don Mimì"
+    ],
+    "score": 48
+  },
+  {
+    "id": "spot-ravello-panorama-amalfi-coast-ChIJY_ir",
+    "name": "Ravello Panorama Amalfi Coast",
+    "slug": "ravello-panorama-amalfi-coast",
+    "type": "coastal_view",
+    "rideType": "coastal",
+    "country": "IT",
+    "scope": "italy-coastal",
+    "scopeName": "Italia Coste",
+    "lat": 40.649249999999995,
+    "lng": 14.6134,
+    "regionHint": "Amalfi Coast",
+    "address": "84010 Ravello, SA, Italy",
+    "rating": 4.9,
+    "userRatingCount": 174,
+    "types": [
+      "tourist_attraction",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "coast",
+      "sea",
+      "scenic",
+      "rider",
+      "panoramic"
+    ],
+    "aliases": [
+      "Ravello Panorama Amalfi Coast"
+    ],
+    "score": 48
+  },
+  {
+    "id": "spot-visitors-center-of-monaco-antonio-garcea-ChIJpUT4",
+    "name": "Visitors Center of Monaco \"Antonio Garcea\"",
+    "slug": "visitors-center-of-monaco-antonio-garcea",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "italy-coastal",
+    "scopeName": "Italia Coste",
+    "lat": 39.0729016,
+    "lng": 16.567467999999998,
+    "regionHint": "Calabria Ionian",
+    "address": "Strada Statale 179 Dir, 17, 88055 Taverna CZ, Italy",
+    "rating": 4.7,
+    "userRatingCount": 1127,
+    "types": [
+      "visitor_center",
+      "national_park",
+      "tourist_attraction",
+      "tourist_information_center",
+      "park",
+      "tour_agency",
+      "travel_agency",
+      "service",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider"
+    ],
+    "aliases": [
+      "Visitors Center of Monaco \"Antonio Garcea\""
+    ],
+    "score": 48
+  },
+  {
+    "id": "spot-wine-tour-amalfi-coast-ChIJDbqx",
+    "name": "wine tour amalfi coast",
+    "slug": "wine-tour-amalfi-coast",
+    "type": "coastal_view",
+    "rideType": "coastal",
+    "country": "IT",
+    "scope": "italy-coastal",
+    "scopeName": "Italia Coste",
+    "lat": 40.6168784,
+    "lng": 14.567306799999999,
+    "regionHint": "Amalfi Coast",
+    "address": "Via I Maggio, n°22, 84010 Conca dei Marini SA, Italy",
+    "rating": 5,
+    "userRatingCount": 37,
+    "types": [
+      "tourist_attraction",
+      "food",
+      "association_or_organization",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "coast",
+      "sea",
+      "scenic",
+      "rider",
+      "panoramic"
+    ],
+    "aliases": [
+      "wine tour amalfi coast"
+    ],
+    "score": 48
+  },
+  {
+    "id": "spot-belvedere-piazza-del-cannone-ChIJ43Y4",
+    "name": "Belvedere \"Piazza del Cannone\"",
+    "slug": "belvedere-piazza-del-cannone",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "italy-coastal",
+    "scopeName": "Italia Coste",
+    "lat": 38.6782442,
+    "lng": 15.895765400000002,
+    "regionHint": "Calabria Tyrrhenian",
+    "address": "Via Indipendenza, 44, 89861 Tropea VV, Italy",
+    "rating": 4.8,
+    "userRatingCount": 579,
+    "types": [
+      "scenic_spot",
+      "tourist_attraction",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider"
+    ],
+    "aliases": [
+      "Belvedere \"Piazza del Cannone\""
+    ],
+    "score": 45
+  },
+  {
+    "id": "spot-viewpoint-8-amalfi-dr-ChIJx-4B",
+    "name": "Viewpoint.8-Amalfi Dr",
+    "slug": "viewpoint-8-amalfi-dr",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "italy-coastal",
+    "scopeName": "Italia Coste",
+    "lat": 40.620318499999996,
+    "lng": 14.466795,
+    "regionHint": "Amalfi Coast",
+    "address": "SS163, 80069 Vico Equense NA, Italy",
+    "rating": 4.8,
+    "userRatingCount": 930,
+    "types": [
+      "tourist_attraction",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider"
+    ],
+    "aliases": [
+      "Viewpoint.8-Amalfi Dr"
+    ],
+    "score": 45
+  },
+  {
+    "id": "spot-cima-monte-bignone-punto-panoramico-ChIJuyH3",
+    "name": "Cima Monte Bignone, punto panoramico",
+    "slug": "cima-monte-bignone-punto-panoramico",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "italy-coastal",
+    "scopeName": "Italia Coste",
+    "lat": 43.873522,
+    "lng": 7.733676000000001,
+    "regionHint": "Liguria Coast",
+    "address": "Unnamed Road, 18038 Sanremo IM, Italy",
+    "rating": 4.7,
+    "userRatingCount": 31,
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider"
+    ],
+    "aliases": [
+      "Cima Monte Bignone, punto panoramico"
+    ],
+    "score": 44
+  },
+  {
+    "id": "spot-casa-panoramica-ChIJbdeN",
+    "name": "Casa Panoramica",
+    "slug": "casa-panoramica",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "italy-coastal",
+    "scopeName": "Italia Coste",
+    "lat": 40.6876153,
+    "lng": 14.4812833,
+    "regionHint": "Amalfi Coast",
+    "address": "Str. Panoramica, 46, 80053 Castellammare di Stabia NA, Italy",
+    "rating": 4.7,
+    "userRatingCount": 3,
+    "types": [
+      "private_guest_room",
+      "lodging",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider"
+    ],
+    "aliases": [
+      "Casa Panoramica"
+    ],
+    "score": 43
+  },
+  {
+    "id": "spot-amalfi-coast-private-driver-ChIJbyeV",
+    "name": "Amalfi Coast Private Driver",
+    "slug": "amalfi-coast-private-driver",
+    "type": "coastal_view",
+    "rideType": "coastal",
+    "country": "IT",
+    "scope": "italy-coastal",
+    "scopeName": "Italia Coste",
+    "lat": 40.6364781,
+    "lng": 14.592389800000001,
+    "regionHint": "Amalfi Coast",
+    "address": "Via Giovanni Amendola, 34, 84011 Amalfi SA, Italy",
+    "rating": 4.9,
+    "userRatingCount": 64,
+    "types": [
+      "transportation_service",
+      "chauffeur_service",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "coast",
+      "sea",
+      "scenic",
+      "rider",
+      "panoramic"
+    ],
+    "aliases": [
+      "Amalfi Coast Private Driver"
+    ],
+    "score": 42
+  },
+  {
+    "id": "spot-casa-gargano-ravello-amalfi-coast-ChIJI8Ox",
+    "name": "Casa Gargano Ravello Amalfi Coast",
+    "slug": "casa-gargano-ravello-amalfi-coast",
+    "type": "coastal_view",
+    "rideType": "coastal",
+    "country": "IT",
+    "scope": "italy-coastal",
+    "scopeName": "Italia Coste",
+    "lat": 40.6371971,
+    "lng": 14.611790500000001,
+    "regionHint": "Amalfi Coast",
+    "address": "via Amalfi 12, 84010 Castiglione di, 84010 Ravello SA, Italy",
+    "rating": 4.9,
+    "userRatingCount": 37,
+    "types": [
+      "extended_stay_hotel",
+      "apartment_building",
+      "hotel",
+      "lodging",
+      "point_of_interest",
+      "service",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "coast",
+      "sea",
+      "scenic",
+      "rider",
+      "panoramic"
+    ],
+    "aliases": [
+      "Casa Gargano Ravello Amalfi Coast"
+    ],
+    "score": 42
+  },
+  {
+    "id": "spot-palazzo-san-giovanni-amalfi-coast-ChIJ2aMG",
+    "name": "Palazzo San Giovanni Amalfi Coast",
+    "slug": "palazzo-san-giovanni-amalfi-coast",
+    "type": "coastal_view",
+    "rideType": "coastal",
+    "country": "IT",
+    "scope": "italy-coastal",
+    "scopeName": "Italia Coste",
+    "lat": 40.643364,
+    "lng": 14.602447399999999,
+    "regionHint": "Amalfi Coast",
+    "address": "Via Noce, 9, 84010 Pontone SA, Italy",
+    "rating": 4.7,
+    "userRatingCount": 139,
+    "types": [
+      "hotel",
+      "lodging",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "coast",
+      "sea",
+      "scenic",
+      "rider",
+      "panoramic"
+    ],
+    "aliases": [
+      "Palazzo San Giovanni Amalfi Coast"
+    ],
+    "score": 42
+  },
+  {
+    "id": "spot-porto-cesareo-esplanade-ChIJlWUb",
+    "name": "Porto Cesareo Esplanade",
+    "slug": "porto-cesareo-esplanade",
+    "type": "coastal_view",
+    "rideType": "coastal",
+    "country": "IT",
+    "scope": "italy-coastal",
+    "scopeName": "Italia Coste",
+    "lat": 40.2578327,
+    "lng": 17.8933991,
+    "regionHint": "Salento Coast",
+    "address": "Lungomare Raffaele Sambati, 73010 Porto Cesareo LE, Italy",
+    "rating": 4.5,
+    "userRatingCount": 584,
+    "types": [
+      "tourist_attraction",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "coast",
+      "sea",
+      "scenic",
+      "rider",
+      "panoramic"
+    ],
+    "aliases": [
+      "Porto Cesareo Esplanade"
+    ],
+    "score": 42
+  },
+  {
+    "id": "spot-punto-panoramico-borgio-verezzi-ChIJCzGK",
+    "name": "Punto Panoramico Borgio Verezzi",
+    "slug": "punto-panoramico-borgio-verezzi",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "italy-coastal",
+    "scopeName": "Italia Coste",
+    "lat": 44.1671493,
+    "lng": 8.3126398,
+    "regionHint": "Liguria Coast",
+    "address": "Via Nazario Sauro, 189, 17022 Borgio SV, Italy",
+    "rating": 4.8,
+    "userRatingCount": 151,
+    "types": [
+      "scenic_spot",
+      "tourist_attraction",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider"
+    ],
+    "aliases": [
+      "Punto Panoramico Borgio Verezzi"
+    ],
+    "score": 42
+  },
+  {
+    "id": "spot-gerace-scenic-viewpoint-ChIJdxfb",
+    "name": "Gerace Scenic Viewpoint",
+    "slug": "gerace-scenic-viewpoint",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "italy-coastal",
+    "scopeName": "Italia Coste",
+    "lat": 38.2737182,
+    "lng": 16.21887,
+    "regionHint": "Calabria Tyrrhenian",
+    "address": "Largo Eduardo de Filippo, 12, 89040 Gerace RC, Italy",
+    "rating": 5,
+    "userRatingCount": 1,
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider"
+    ],
+    "aliases": [
+      "Gerace Scenic Viewpoint"
+    ],
+    "score": 41
+  },
+  {
+    "id": "spot-landscape-on-procida-and-ischia-ChIJ74IU",
+    "name": "Landscape on Procida and Ischia",
+    "slug": "landscape-on-procida-and-ischia",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "italy-coastal",
+    "scopeName": "Italia Coste",
+    "lat": 40.7889293,
+    "lng": 14.0599987,
+    "regionHint": "Amalfi Coast",
+    "address": "Via Panoramica, 80070 Monte di Procida NA, Italy",
+    "rating": 4.8,
+    "userRatingCount": 528,
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider"
+    ],
+    "aliases": [
+      "Landscape on Procida and Ischia"
+    ],
+    "score": 41
+  },
+  {
+    "id": "spot-marina-di-loano-ChIJc_xq",
+    "name": "Marina di Loano",
+    "slug": "marina-di-loano",
+    "type": "coastal_view",
+    "rideType": "coastal",
+    "country": "IT",
+    "scope": "italy-coastal",
+    "scopeName": "Italia Coste",
+    "lat": 44.131616,
+    "lng": 8.2653676,
+    "regionHint": "Liguria Coast",
+    "address": "Lungomare Nazario Sauro, 12/1, 17025 Loano SV, Italy",
+    "rating": 4.5,
+    "userRatingCount": 4129,
+    "types": [
+      "marina",
+      "hotel",
+      "lodging",
+      "service",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "coast",
+      "sea",
+      "scenic",
+      "rider",
+      "panoramic"
+    ],
+    "aliases": [
+      "Marina di Loano"
+    ],
+    "score": 41
+  },
+  {
+    "id": "spot-punto-panoramico-290m-ChIJA9lI",
+    "name": "Punto Panoramico 290m",
+    "slug": "punto-panoramico-290m",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "italy-coastal",
+    "scopeName": "Italia Coste",
+    "lat": 38.805090899999996,
+    "lng": 15.2142137,
+    "regionHint": "Calabria Tyrrhenian",
+    "address": "Salita al Vulcano - Labronzo, 98050 Lipari ME, Italy",
+    "rating": 4.8,
+    "userRatingCount": 209,
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider"
+    ],
+    "aliases": [
+      "Punto Panoramico 290m"
+    ],
+    "score": 41
+  },
+  {
+    "id": "spot-scenic-road-to-sorrento-ChIJbRnQ",
+    "name": "Scenic Road to Sorrento",
+    "slug": "scenic-road-to-sorrento",
+    "type": "coastal_view",
+    "rideType": "coastal",
+    "country": "IT",
+    "scope": "italy-coastal",
+    "scopeName": "Italia Coste",
+    "lat": 40.688806,
+    "lng": 14.472835000000002,
+    "regionHint": "Amalfi Coast",
+    "address": "Salita Quisisana, 62, 80053 Castellammare di Stabia NA, Italy",
+    "rating": 4.2,
+    "userRatingCount": 17,
+    "types": [
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "coast",
+      "sea",
+      "scenic",
+      "rider",
+      "panoramic"
+    ],
+    "aliases": [
+      "Scenic Road to Sorrento"
+    ],
+    "score": 41
+  },
+  {
+    "id": "spot-scenic-viewpoint-ChIJ61gH",
+    "name": "Scenic viewpoint",
+    "slug": "scenic-viewpoint",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "italy-coastal",
+    "scopeName": "Italia Coste",
+    "lat": 38.5954172,
+    "lng": 15.870596200000001,
+    "regionHint": "Calabria Tyrrhenian",
+    "address": "SP23, 89863 Joppolo VV, Italy",
+    "rating": 4.7,
+    "userRatingCount": 9,
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider"
+    ],
+    "aliases": [
+      "Scenic viewpoint"
+    ],
+    "score": 41
+  },
+  {
+    "id": "spot-belvedere-sud-ChIJBydf",
+    "name": "Belvedere Sud",
+    "slug": "belvedere-sud",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "italy-coastal",
+    "scopeName": "Italia Coste",
+    "lat": 43.5438176,
+    "lng": 13.622946899999999,
+    "regionHint": "Conero / Adriatic Coast",
+    "address": "60020 Sirolo, Province of Ancona, Italy",
+    "rating": 4.6,
+    "userRatingCount": 408,
+    "types": [
+      "scenic_spot",
+      "tourist_attraction",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider"
+    ],
+    "aliases": [
+      "Belvedere Sud"
+    ],
+    "score": 40
+  },
+  {
+    "id": "spot-belvedere-di-campocecina-ChIJGXjc",
+    "name": "Belvedere di Campocecina",
+    "slug": "belvedere-di-campocecina",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "italy-coastal",
+    "scopeName": "Italia Coste",
+    "lat": 44.114709700000006,
+    "lng": 10.123056499999999,
+    "regionHint": "Cinque Terre / Levante",
+    "address": "Piazzale dell'Uccelliera, 54033 Carrara MS, Italy",
+    "rating": 4.7,
+    "userRatingCount": 216,
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider"
+    ],
+    "aliases": [
+      "Belvedere di Campocecina"
+    ],
+    "score": 39
+  },
+  {
+    "id": "spot-belvedere-nord-ChIJ9fem",
+    "name": "Belvedere Nord",
+    "slug": "belvedere-nord",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "italy-coastal",
+    "scopeName": "Italia Coste",
+    "lat": 43.5530153,
+    "lng": 13.602511699999999,
+    "regionHint": "Conero / Adriatic Coast",
+    "address": "Pian Grande, 60129 Ancona AN, Italy",
+    "rating": 4.8,
+    "userRatingCount": 353,
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider"
+    ],
+    "aliases": [
+      "Belvedere Nord"
+    ],
+    "score": 39
+  },
+  {
+    "id": "spot-punto-panoramico-di-monte-bignone-ChIJ9x5c",
+    "name": "Punto Panoramico di Monte Bignone",
+    "slug": "punto-panoramico-di-monte-bignone",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "italy-coastal",
+    "scopeName": "Italia Coste",
+    "lat": 43.870773299999996,
+    "lng": 7.73842,
+    "regionHint": "Liguria Coast",
+    "address": "Unnamed Road, 18038 Sanremo IM, Italy",
+    "rating": 4.6,
+    "userRatingCount": 59,
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider"
+    ],
+    "aliases": [
+      "Punto Panoramico di Monte Bignone"
+    ],
+    "score": 39
+  },
+  {
+    "id": "spot-viewpoint-ChIJmUbS",
+    "name": "Viewpoint",
+    "slug": "viewpoint",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "italy-coastal",
+    "scopeName": "Italia Coste",
+    "lat": 40.6167346,
+    "lng": 14.4387764,
+    "regionHint": "Amalfi Coast",
+    "address": "SS163, 80063 Vico Equense NA, Italy",
+    "rating": 4.9,
+    "userRatingCount": 214,
+    "types": [
+      "observation_deck",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider"
+    ],
+    "aliases": [
+      "Viewpoint"
+    ],
+    "score": 39
+  },
+  {
+    "id": "spot-baia-alessia-ChIJW-rw",
+    "name": "Baia Alessia",
+    "slug": "baia-alessia",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "italy-coastal",
+    "scopeName": "Italia Coste",
+    "lat": 40.1750093,
+    "lng": 18.4776541,
+    "regionHint": "Salento Coast",
+    "address": "Unnamed Road, 73028, 73028 Otranto LE, Italy",
+    "rating": 4.7,
+    "userRatingCount": 85,
+    "types": [
+      "tourist_attraction",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider"
+    ],
+    "aliases": [
+      "Baia Alessia"
+    ],
+    "score": 38
+  },
+  {
+    "id": "spot-base-o-ChIJ56TW",
+    "name": "Base O",
+    "slug": "base-o",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "italy-coastal",
+    "scopeName": "Italia Coste",
+    "lat": 44.310501599999995,
+    "lng": 9.180369599999999,
+    "regionHint": "Liguria Coast",
+    "address": "Unnamed Road, 16032 Camogli GE, Italy",
+    "rating": 4.8,
+    "userRatingCount": 106,
+    "types": [
+      "scenic_spot",
+      "tourist_attraction",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider"
+    ],
+    "aliases": [
+      "Base O"
+    ],
+    "score": 38
+  },
+  {
+    "id": "spot-camera-con-vista-mare-top-panoramic-ChIJH9Kw",
+    "name": "Camera con Vista mare - Top Panoramic",
+    "slug": "camera-con-vista-mare-top-panoramic",
+    "type": "coastal_view",
+    "rideType": "coastal",
+    "country": "IT",
+    "scope": "italy-coastal",
+    "scopeName": "Italia Coste",
+    "lat": 43.5237832,
+    "lng": 13.619320499999999,
+    "regionHint": "Conero / Adriatic Coast",
+    "address": "Via S. Michele, 6/8, 60020 Sirolo AN, Italy",
+    "rating": 4.3,
+    "userRatingCount": 38,
+    "types": [
+      "hotel",
+      "scenic_spot",
+      "lodging",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "coast",
+      "sea",
+      "scenic",
+      "rider",
+      "panoramic"
+    ],
+    "aliases": [
+      "Camera con Vista mare - Top Panoramic"
+    ],
+    "score": 38
+  },
+  {
+    "id": "spot-punta-scrugli-ChIJf3hL",
+    "name": "Punta scrugli",
+    "slug": "punta-scrugli",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "italy-coastal",
+    "scopeName": "Italia Coste",
+    "lat": 38.7203965,
+    "lng": 16.0684359,
+    "regionHint": "Calabria Tyrrhenian",
+    "address": "Unnamed Road, 89817, 89817 Briatico VV, Italy",
+    "rating": 4.5,
+    "userRatingCount": 204,
+    "types": [
+      "tourist_attraction",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider"
+    ],
+    "aliases": [
+      "Punta scrugli"
+    ],
+    "score": 38
+  },
+  {
+    "id": "spot-sentiero-di-mezzavalle-ChIJuUx9",
+    "name": "Sentiero di Mezzavalle",
+    "slug": "sentiero-di-mezzavalle",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "italy-coastal",
+    "scopeName": "Italia Coste",
+    "lat": 43.5672119,
+    "lng": 13.572430899999999,
+    "regionHint": "Conero / Adriatic Coast",
+    "address": "Strada Provinciale del Conero, 60129 Ancona AN, Italy",
+    "rating": 4.4,
+    "userRatingCount": 245,
+    "types": [
+      "tourist_attraction",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider"
+    ],
+    "aliases": [
+      "Sentiero di Mezzavalle"
+    ],
+    "score": 38
+  },
+  {
+    "id": "spot-punta-meliso-ChIJXXwd",
+    "name": "Punta Meliso",
+    "slug": "punta-meliso",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "italy-coastal",
+    "scopeName": "Italia Coste",
+    "lat": 39.7933259,
+    "lng": 18.3669018,
+    "regionHint": "Salento Coast",
+    "address": "Unnamed Road, 73040, 73040 Santa Maria di Leuca LE, Italy",
+    "rating": 4.7,
+    "userRatingCount": 213,
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider"
+    ],
+    "aliases": [
+      "Punta Meliso"
+    ],
+    "score": 37
+  },
+  {
+    "id": "spot-punto-panoramico-ChIJIfDX",
+    "name": "Punto panoramico",
+    "slug": "punto-panoramico",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "italy-coastal",
+    "scopeName": "Italia Coste",
+    "lat": 39.0188659,
+    "lng": 16.784504599999998,
+    "regionHint": "Calabria Ionian",
+    "address": "Via Cesare Battisti, 9, 88050 Belcastro CZ, Italy",
+    "rating": 4.7,
+    "userRatingCount": 3,
+    "types": [
+      "tourist_attraction",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider"
+    ],
+    "aliases": [
+      "Punto panoramico"
+    ],
+    "score": 37
+  },
+  {
+    "id": "spot-the-amalfi-coast-wedding-planner-ChIJZ2yf",
+    "name": "The Amalfi Coast Wedding Planner",
+    "slug": "the-amalfi-coast-wedding-planner",
+    "type": "coastal_view",
+    "rideType": "coastal",
+    "country": "IT",
+    "scope": "italy-coastal",
+    "scopeName": "Italia Coste",
+    "lat": 40.635708400000006,
+    "lng": 14.6021725,
+    "regionHint": "Amalfi Coast",
+    "address": "Supportico Rua, 8, 84011 Amalfi SA, Italy",
+    "rating": 5,
+    "userRatingCount": 8,
+    "types": [
+      "service",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "coast",
+      "sea",
+      "scenic",
+      "rider",
+      "panoramic"
+    ],
+    "aliases": [
+      "The Amalfi Coast Wedding Planner"
+    ],
+    "score": 37
+  },
+  {
+    "id": "spot-affitto-appartamento-attico-vista-mare-loano-ChIJp6m9",
+    "name": "Affitto appartamento attico vista mare Loano",
+    "slug": "affitto-appartamento-attico-vista-mare-loano",
+    "type": "coastal_view",
+    "rideType": "coastal",
+    "country": "IT",
+    "scope": "italy-coastal",
+    "scopeName": "Italia Coste",
+    "lat": 44.1275227,
+    "lng": 8.2591427,
+    "regionHint": "Liguria Coast",
+    "address": "Via Simone Stella, 33, 17025 Loano SV, Italy",
+    "rating": 4.7,
+    "userRatingCount": 35,
+    "types": [
+      "apartment_complex",
+      "extended_stay_hotel",
+      "bed_and_breakfast",
+      "hotel",
+      "real_estate_agency",
+      "lodging",
+      "travel_agency",
+      "point_of_interest",
+      "service",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "coast",
+      "sea",
+      "scenic",
+      "rider",
+      "panoramic"
+    ],
+    "aliases": [
+      "Affitto appartamento attico vista mare Loano"
+    ],
+    "score": 36
+  },
+  {
+    "id": "spot-bed-breakfast-campo-del-mare-ancona-ChIJeQ7Z",
+    "name": "Bed & Breakfast Campo del Mare Ancona",
+    "slug": "bed-breakfast-campo-del-mare-ancona",
+    "type": "coastal_view",
+    "rideType": "coastal",
+    "country": "IT",
+    "scope": "italy-coastal",
+    "scopeName": "Italia Coste",
+    "lat": 43.51880440000001,
+    "lng": 13.585549799999999,
+    "regionHint": "Conero / Adriatic Coast",
+    "address": "Frazione Massignano, 128, 60129 Ancona AN, Italy",
+    "rating": 4.8,
+    "userRatingCount": 68,
+    "types": [
+      "bed_and_breakfast",
+      "health",
+      "lodging",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "coast",
+      "sea",
+      "scenic",
+      "rider",
+      "panoramic"
+    ],
+    "aliases": [
+      "Bed & Breakfast Campo del Mare Ancona"
+    ],
+    "score": 36
+  },
+  {
+    "id": "spot-osteria-rivamare-ChIJ0Y5U",
+    "name": "Osteria Rivamare",
+    "slug": "osteria-rivamare",
+    "type": "coastal_view",
+    "rideType": "coastal",
+    "country": "IT",
+    "scope": "italy-coastal",
+    "scopeName": "Italia Coste",
+    "lat": 44.1572266,
+    "lng": 8.3073721,
+    "regionHint": "Liguria Coast",
+    "address": "SS 1, 27, 17022 Borgio SV, Italy",
+    "rating": 4.5,
+    "userRatingCount": 503,
+    "types": [
+      "inn",
+      "lodging",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "coast",
+      "sea",
+      "scenic",
+      "rider",
+      "panoramic"
+    ],
+    "aliases": [
+      "Osteria Rivamare"
+    ],
+    "score": 36
+  },
+  {
+    "id": "spot-pane-panorama-ChIJB0SS",
+    "name": "Pane & Panorama",
+    "slug": "pane-panorama",
+    "type": "coastal_view",
+    "rideType": "coastal",
+    "country": "IT",
+    "scope": "italy-coastal",
+    "scopeName": "Italia Coste",
+    "lat": 40.6711193,
+    "lng": 14.731933,
+    "regionHint": "Amalfi Coast",
+    "address": "Via Enrico de Marinis Orientale , 13, 84019 Vietri sul Mare SA, Italy",
+    "rating": 4.5,
+    "userRatingCount": 505,
+    "types": [
+      "sandwich_shop",
+      "restaurant",
+      "food",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "coast",
+      "sea",
+      "scenic",
+      "rider",
+      "panoramic"
+    ],
+    "aliases": [
+      "Pane & Panorama"
+    ],
+    "score": 36
+  },
+  {
+    "id": "spot-punto-panoramico-ChIJ08iK",
+    "name": "Punto panoramico",
+    "slug": "punto-panoramico",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "italy-coastal",
+    "scopeName": "Italia Coste",
+    "lat": 44.190395900000006,
+    "lng": 8.4116201,
+    "regionHint": "Liguria Coast",
+    "address": "Str. Panoramica Manie, 17024 Finale Ligure SV, Italy",
+    "rating": 4.9,
+    "userRatingCount": 42,
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider"
+    ],
+    "aliases": [
+      "Punto panoramico"
+    ],
+    "score": 36
+  },
+  {
+    "id": "spot-punto-panoramico-piazzale-del-fasce-ChIJLXjm",
+    "name": "Punto Panoramico Piazzale del Fasce",
+    "slug": "punto-panoramico-piazzale-del-fasce",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "italy-coastal",
+    "scopeName": "Italia Coste",
+    "lat": 44.4163244,
+    "lng": 9.0442807,
+    "regionHint": "Liguria Coast",
+    "address": "SP67, 16133 Genova GE, Italy",
+    "rating": 4.7,
+    "userRatingCount": 176,
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider"
+    ],
+    "aliases": [
+      "Punto Panoramico Piazzale del Fasce"
+    ],
+    "score": 36
+  },
+  {
+    "id": "spot-punto-panoramico-rebus-ChIJwxKh",
+    "name": "Punto Panoramico REBUS",
+    "slug": "punto-panoramico-rebus",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "italy-coastal",
+    "scopeName": "Italia Coste",
+    "lat": 38.7538032,
+    "lng": 16.564327199999997,
+    "regionHint": "Calabria Ionian",
+    "address": "S.da Statale 106 Jonica, 173, 88069 Stalettì CZ, Italy",
+    "rating": 4.9,
+    "userRatingCount": 65,
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider"
+    ],
+    "aliases": [
+      "Punto Panoramico REBUS"
+    ],
+    "score": 36
+  },
+  {
+    "id": "spot-sotto-le-stelle-il-mare-ChIJ06eP",
+    "name": "Sotto le stelle... il mare",
+    "slug": "sotto-le-stelle-il-mare",
+    "type": "coastal_view",
+    "rideType": "coastal",
+    "country": "IT",
+    "scope": "italy-coastal",
+    "scopeName": "Italia Coste",
+    "lat": 44.1513743,
+    "lng": 8.2785967,
+    "regionHint": "Liguria Coast",
+    "address": "Via Piave, 100, 17027 Pietra Ligure SV, Italy",
+    "rating": 4.9,
+    "userRatingCount": 53,
+    "types": [
+      "bed_and_breakfast",
+      "lodging",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "coast",
+      "sea",
+      "scenic",
+      "rider",
+      "panoramic"
+    ],
+    "aliases": [
+      "Sotto le stelle... il mare"
+    ],
+    "score": 36
+  },
+  {
+    "id": "spot-belvedere-di-san-mauro-ChIJ7Q7N",
+    "name": "Belvedere di San Mauro",
+    "slug": "belvedere-di-san-mauro",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "italy-coastal",
+    "scopeName": "Italia Coste",
+    "lat": 40.1153153,
+    "lng": 18.0093598,
+    "regionHint": "Salento Coast",
+    "address": "73017 Lido Conchiglie, Province of Lecce, Italy",
+    "rating": 4.6,
+    "userRatingCount": 122,
+    "types": [
+      "nature_preserve",
+      "tourist_attraction",
+      "park",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider"
+    ],
+    "aliases": [
+      "Belvedere di San Mauro"
+    ],
+    "score": 35
+  },
+  {
+    "id": "spot-tiriolo-belvedere-ChIJr2P-",
+    "name": "Tiriolo, Belvedere",
+    "slug": "tiriolo-belvedere",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "italy-coastal",
+    "scopeName": "Italia Coste",
+    "lat": 38.9495364,
+    "lng": 16.507362,
+    "regionHint": "Calabria Ionian",
+    "address": "88056 Tiriolo, Province of Catanzaro, Italy",
+    "rating": 4.9,
+    "userRatingCount": 21,
+    "types": [
+      "tourist_attraction",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider"
+    ],
+    "aliases": [
+      "Tiriolo, Belvedere"
+    ],
+    "score": 35
+  },
+  {
+    "id": "spot-viewpoint-ChIJ143x",
+    "name": "Viewpoint",
+    "slug": "viewpoint",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "italy-coastal",
+    "scopeName": "Italia Coste",
+    "lat": 44.0506834,
+    "lng": 9.836273499999999,
+    "regionHint": "Cinque Terre / Levante",
+    "address": "19025 Porto Venere, SP, Italy",
+    "rating": 5,
+    "userRatingCount": 21,
+    "types": [
+      "tourist_attraction",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider"
+    ],
+    "aliases": [
+      "Viewpoint"
+    ],
+    "score": 35
+  },
+  {
+    "id": "spot-viewpoint-balcone-delle-marche-ChIJ0zUy",
+    "name": "Viewpoint Balcone delle Marche",
+    "slug": "viewpoint-balcone-delle-marche",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "italy-coastal",
+    "scopeName": "Italia Coste",
+    "lat": 43.3741297,
+    "lng": 13.2182271,
+    "regionHint": "Conero / Adriatic Coast",
+    "address": "Via S. Filippo, 1, 62011 Cingoli MC, Italy",
+    "rating": 5,
+    "userRatingCount": 8,
+    "types": [
+      "tourist_attraction",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider"
+    ],
+    "aliases": [
+      "Viewpoint Balcone delle Marche"
+    ],
+    "score": 35
+  },
+  {
+    "id": "spot-viewpoint-from-terrace-ChIJF-S9",
+    "name": "Viewpoint from Terrace",
+    "slug": "viewpoint-from-terrace",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "italy-coastal",
+    "scopeName": "Italia Coste",
+    "lat": 40.8205264,
+    "lng": 14.1201008,
+    "regionHint": "Amalfi Coast",
+    "address": "R4CC+62, 80078 Pozzuoli, Metropolitan City of Naples, Italy",
+    "rating": 4.8,
+    "userRatingCount": 19,
+    "types": [
+      "tourist_attraction",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider"
+    ],
+    "aliases": [
+      "Viewpoint from Terrace"
+    ],
+    "score": 35
+  },
+  {
+    "id": "spot-belvedere-ChIJrXiF",
+    "name": "Belvedere",
+    "slug": "belvedere",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "italy-coastal",
+    "scopeName": "Italia Coste",
+    "lat": 43.96892150000001,
+    "lng": 10.2389416,
+    "regionHint": "Cinque Terre / Levante",
+    "address": "Via Capriglia, 96, 55045 Capriglia LU, Italy",
+    "rating": 4.7,
+    "userRatingCount": 145,
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider"
+    ],
+    "aliases": [
+      "Belvedere"
+    ],
+    "score": 34
+  },
+  {
+    "id": "spot-belvedere-madonna-dell-accoglienza-ChIJWe7G",
+    "name": "Belvedere \"Madonna dell'Accoglienza\"",
+    "slug": "belvedere-madonna-dell-accoglienza",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "italy-coastal",
+    "scopeName": "Italia Coste",
+    "lat": 40.6584808,
+    "lng": 14.498304099999999,
+    "regionHint": "Amalfi Coast",
+    "address": "Via Nuova Monte Faito, 80069 Vico Equense NA, Italy",
+    "rating": 4.8,
+    "userRatingCount": 98,
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider"
+    ],
+    "aliases": [
+      "Belvedere \"Madonna dell'Accoglienza\""
+    ],
+    "score": 34
+  },
+  {
+    "id": "spot-belvedere-del-faiallo-ChIJiWXn",
+    "name": "Belvedere del Faiallo",
+    "slug": "belvedere-del-faiallo",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "italy-coastal",
+    "scopeName": "Italia Coste",
+    "lat": 44.4664524,
+    "lng": 8.670824,
+    "regionHint": "Liguria Coast",
+    "address": "SP73, 16158 Masone GE, Italy",
+    "rating": 4.9,
+    "userRatingCount": 58,
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider"
+    ],
+    "aliases": [
+      "Belvedere del Faiallo"
+    ],
+    "score": 34
+  },
+  {
+    "id": "spot-belvedere-della-madonnina-ChIJ8eWc",
+    "name": "Belvedere della Madonnina",
+    "slug": "belvedere-della-madonnina",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "italy-coastal",
+    "scopeName": "Italia Coste",
+    "lat": 43.5298231,
+    "lng": 13.602982599999999,
+    "regionHint": "Conero / Adriatic Coast",
+    "address": "Via Cave, 60020 Sirolo AN, Italy",
+    "rating": 4.8,
+    "userRatingCount": 51,
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider"
+    ],
+    "aliases": [
+      "Belvedere della Madonnina"
+    ],
+    "score": 34
+  },
+  {
+    "id": "spot-belvedere-sul-golfo-ChIJE24i",
+    "name": "Belvedere sul golfo",
+    "slug": "belvedere-sul-golfo",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "italy-coastal",
+    "scopeName": "Italia Coste",
+    "lat": 40.6728977,
+    "lng": 14.457197299999999,
+    "regionHint": "Amalfi Coast",
+    "address": "Via Faito, 80069 Vico Equense NA, Italy",
+    "rating": 4.9,
+    "userRatingCount": 64,
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider"
+    ],
+    "aliases": [
+      "Belvedere sul golfo"
+    ],
+    "score": 34
+  },
+  {
+    "id": "spot-punto-panoramico-ChIJkepL",
+    "name": "Punto panoramico",
+    "slug": "punto-panoramico",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "italy-coastal",
+    "scopeName": "Italia Coste",
+    "lat": 44.3276295,
+    "lng": 9.1601947,
+    "regionHint": "Liguria Coast",
+    "address": "Unnamed Road, 16032, 16032, 16032 Camogli GE, Italy",
+    "rating": 4.5,
+    "userRatingCount": 2,
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider"
+    ],
+    "aliases": [
+      "Punto panoramico"
+    ],
+    "score": 34
+  },
+  {
+    "id": "spot-viewpoint-of-the-santa-maria-del-castello-ChIJBb_p",
+    "name": "Viewpoint of the Santa Maria Del Castello",
+    "slug": "viewpoint-of-the-santa-maria-del-castello",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "italy-coastal",
+    "scopeName": "Italia Coste",
+    "lat": 40.637478699999996,
+    "lng": 14.480309700000001,
+    "regionHint": "Amalfi Coast",
+    "address": "Via Santa Maria del Castello, 80069 Vico Equense NA, Italy",
+    "rating": 4.8,
+    "userRatingCount": 77,
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider"
+    ],
+    "aliases": [
+      "Viewpoint of the Santa Maria Del Castello"
+    ],
+    "score": 34
+  },
+  {
+    "id": "spot-viewpoint-5-amalfi-dr-ChIJm5m-",
+    "name": "Viewpoint.5-Amalfi Dr",
+    "slug": "viewpoint-5-amalfi-dr",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "italy-coastal",
+    "scopeName": "Italia Coste",
+    "lat": 40.6175804,
+    "lng": 14.440536400000001,
+    "regionHint": "Amalfi Coast",
+    "address": "SS163, 80063 Vico Equense NA, Italy",
+    "rating": 4.8,
+    "userRatingCount": 135,
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider"
+    ],
+    "aliases": [
+      "Viewpoint.5-Amalfi Dr"
+    ],
+    "score": 34
+  },
+  {
+    "id": "spot-casetta-dei-sapori-sas-di-martino-maria-grazia-ChIJV1gX",
+    "name": "Casetta dei Sapori Sas di Martino Maria Grazia",
+    "slug": "casetta-dei-sapori-sas-di-martino-maria-grazia",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "italy-coastal",
+    "scopeName": "Italia Coste",
+    "lat": 40.6887267,
+    "lng": 14.467230099999998,
+    "regionHint": "Amalfi Coast",
+    "address": "Str. Panoramica, 60, 80053 Castellammare di Stabia NA, Italy",
+    "rating": 4.3,
+    "userRatingCount": 11,
+    "types": [
+      "bar",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider"
+    ],
+    "aliases": [
+      "Casetta dei Sapori Sas di Martino Maria Grazia"
+    ],
+    "score": 33
+  },
+  {
+    "id": "spot-amalfi-coast-destination-private-tours-ChIJ__JJ",
+    "name": "Amalfi Coast Destination Private Tours",
+    "slug": "amalfi-coast-destination-private-tours",
+    "type": "coastal_view",
+    "rideType": "coastal",
+    "country": "IT",
+    "scope": "italy-coastal",
+    "scopeName": "Italia Coste",
+    "lat": 40.619076799999995,
+    "lng": 14.561580999999999,
+    "regionHint": "Amalfi Coast",
+    "address": "V. Tobulum, 4, 84011 Amalfi SA, Italy",
+    "rating": 4.5,
+    "userRatingCount": 16,
+    "types": [
+      "chauffeur_service",
+      "transportation_service",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "coast",
+      "sea",
+      "scenic",
+      "rider",
+      "panoramic"
+    ],
+    "aliases": [
+      "Amalfi Coast Destination Private Tours"
+    ],
+    "score": 32
+  },
+  {
+    "id": "spot-borgo-santa-rosa-ChIJU4_w",
+    "name": "Borgo Santa Rosa",
+    "slug": "borgo-santa-rosa",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "italy-coastal",
+    "scopeName": "Italia Coste",
+    "lat": 38.8691483,
+    "lng": 16.5512823,
+    "regionHint": "Calabria Ionian",
+    "address": "STRADA PROVINCIALE 46 CDA PROFETA, 88050 Caraffa di Catanzaro CZ, Italy",
+    "rating": 4.4,
+    "userRatingCount": 423,
+    "types": [
+      "bed_and_breakfast",
+      "farmstay",
+      "lodging",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider"
+    ],
+    "aliases": [
+      "Borgo Santa Rosa"
+    ],
+    "score": 32
+  },
+  {
+    "id": "spot-monte-d-aria-ChIJbYxh",
+    "name": "Monte D’Aria",
+    "slug": "monte-d-aria",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "italy-coastal",
+    "scopeName": "Italia Coste",
+    "lat": 43.175985999999995,
+    "lng": 13.188513900000002,
+    "regionHint": "Conero / Adriatic Coast",
+    "address": "Unnamed Road, 62020 Serrapetrona MC, Italy",
+    "rating": 4.8,
+    "userRatingCount": 42,
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider"
+    ],
+    "aliases": [
+      "Monte D’Aria"
+    ],
+    "score": 32
+  },
+  {
+    "id": "spot-pania-di-corfino-ChIJD57n",
+    "name": "Pania di Corfino",
+    "slug": "pania-di-corfino",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "italy-coastal",
+    "scopeName": "Italia Coste",
+    "lat": 44.19767470000001,
+    "lng": 10.3839264,
+    "regionHint": "Cinque Terre / Levante",
+    "address": "Unnamed Road, 55030, 55030 Villa Collemandina LU, Italy",
+    "rating": 4.8,
+    "userRatingCount": 30,
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider"
+    ],
+    "aliases": [
+      "Pania di Corfino"
+    ],
+    "score": 32
+  },
+  {
+    "id": "spot-panorama-sulle-due-sorelle-ChIJkzKf",
+    "name": "Panorama sulle Due Sorelle",
+    "slug": "panorama-sulle-due-sorelle",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "italy-coastal",
+    "scopeName": "Italia Coste",
+    "lat": 40.2687684,
+    "lng": 18.436858,
+    "regionHint": "Salento Coast",
+    "address": "Unnamed Road, 73026, 73026 Torre dell'Orso LE, Italy",
+    "rating": 4.8,
+    "userRatingCount": 124,
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider"
+    ],
+    "aliases": [
+      "Panorama sulle Due Sorelle"
+    ],
+    "score": 32
+  },
+  {
+    "id": "spot-sella-derbi-ChIJs3WM",
+    "name": "Sella Derbi",
+    "slug": "sella-derbi",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "italy-coastal",
+    "scopeName": "Italia Coste",
+    "lat": 44.0614451,
+    "lng": 9.8185681,
+    "regionHint": "Cinque Terre / Levante",
+    "address": "Unnamed Road,19132, 19025 Porto Venere SP, Italy",
+    "rating": 4.8,
+    "userRatingCount": 109,
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider"
+    ],
+    "aliases": [
+      "Sella Derbi"
+    ],
+    "score": 32
+  },
+  {
+    "id": "spot-sentiero-avg5t-detto-anche-sentiero-dell-infinito-ChIJe_JC",
+    "name": "Sentiero AVG5T detto anche Sentiero dell'infinito",
+    "slug": "sentiero-avg5t-detto-anche-sentiero-dell-infinito",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "italy-coastal",
+    "scopeName": "Italia Coste",
+    "lat": 44.0624178,
+    "lng": 9.8166973,
+    "regionHint": "Cinque Terre / Levante",
+    "address": "Unnamed Road, 19132, 19025 Portovenere SP, Italy",
+    "rating": 4.7,
+    "userRatingCount": 158,
+    "types": [
+      "hiking_area",
+      "sports_activity_location",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider"
+    ],
+    "aliases": [
+      "Sentiero AVG5T detto anche Sentiero dell'infinito"
+    ],
+    "score": 32
+  },
+  {
+    "id": "spot-sentiero-san-bernardo-pieve-ligure-ChIJZ2ND",
+    "name": "Sentiero San Bernardo Pieve Ligure",
+    "slug": "sentiero-san-bernardo-pieve-ligure",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "italy-coastal",
+    "scopeName": "Italia Coste",
+    "lat": 44.382106300000004,
+    "lng": 9.0806082,
+    "regionHint": "Liguria Coast",
+    "address": "Unnamed Road, 16031, 16031 Bogliasco GE, Italy",
+    "rating": 4.7,
+    "userRatingCount": 93,
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider"
+    ],
+    "aliases": [
+      "Sentiero San Bernardo Pieve Ligure"
+    ],
+    "score": 32
+  },
+  {
+    "id": "spot-b-b-il-poeta-sul-mare-ChIJZ4Zr",
+    "name": "B&B il poeta sul mare",
+    "slug": "b-b-il-poeta-sul-mare",
+    "type": "coastal_view",
+    "rideType": "coastal",
+    "country": "IT",
+    "scope": "italy-coastal",
+    "scopeName": "Italia Coste",
+    "lat": 43.6092738,
+    "lng": 13.5047216,
+    "regionHint": "Conero / Adriatic Coast",
+    "address": "Via Giambattista Pergolesi, 26, 60125 Ancona AN, Italy",
+    "rating": 4.5,
+    "userRatingCount": 87,
+    "types": [
+      "bed_and_breakfast",
+      "lodging",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "coast",
+      "sea",
+      "scenic",
+      "rider",
+      "panoramic"
+    ],
+    "aliases": [
+      "B&B il poeta sul mare"
+    ],
+    "score": 31
+  },
+  {
+    "id": "spot-piazzola-panoramica-ChIJWSeH",
+    "name": "Piazzola Panoramica",
+    "slug": "piazzola-panoramica",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "italy-coastal",
+    "scopeName": "Italia Coste",
+    "lat": 38.7540616,
+    "lng": 16.565697699999998,
+    "regionHint": "Calabria Ionian",
+    "address": "S.da Statale 106 Jonica, 173, 88069 Stalettì CZ, Italy",
+    "rating": 5,
+    "userRatingCount": 5,
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider"
+    ],
+    "aliases": [
+      "Piazzola Panoramica"
+    ],
+    "score": 31
+  },
+  {
+    "id": "spot-punto-panoramico-ChIJneSJ",
+    "name": "Punto panoramico",
+    "slug": "punto-panoramico",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "italy-coastal",
+    "scopeName": "Italia Coste",
+    "lat": 44.1626165,
+    "lng": 8.3176214,
+    "regionHint": "Liguria Coast",
+    "address": "Sentiero Cultura, 17022 Borgio SV, Italy",
+    "rating": 4.9,
+    "userRatingCount": 20,
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider"
+    ],
+    "aliases": [
+      "Punto panoramico"
+    ],
+    "score": 31
+  },
+  {
+    "id": "spot-punto-panoramico-ChIJOXA0",
+    "name": "Punto panoramico",
+    "slug": "punto-panoramico",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "italy-coastal",
+    "scopeName": "Italia Coste",
+    "lat": 39.1612235,
+    "lng": 16.0785073,
+    "regionHint": "Calabria Tyrrhenian",
+    "address": "Via Michele Bianchi, 64, 87033 Belmonte Calabro CS, Italy",
+    "rating": 4.8,
+    "userRatingCount": 5,
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider"
+    ],
+    "aliases": [
+      "Punto panoramico"
+    ],
+    "score": 31
+  },
+  {
+    "id": "spot-punto-panoramico-ChIJM5eU",
+    "name": "Punto Panoramico",
+    "slug": "punto-panoramico",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "italy-coastal",
+    "scopeName": "Italia Coste",
+    "lat": 38.551849399999995,
+    "lng": 15.9372095,
+    "regionHint": "Calabria Tyrrhenian",
+    "address": "Viale Luigi Razza, 1, 89844 Nicotera VV, Italy",
+    "rating": 4.7,
+    "userRatingCount": 27,
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider"
+    ],
+    "aliases": [
+      "Punto Panoramico"
+    ],
+    "score": 31
+  },
+  {
+    "id": "spot-punto-panoramico-diano-ChIJBXpw",
+    "name": "Punto Panoramico (Diano)",
+    "slug": "punto-panoramico-diano",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "italy-coastal",
+    "scopeName": "Italia Coste",
+    "lat": 43.896386899999996,
+    "lng": 8.0766948,
+    "regionHint": "Liguria Coast",
+    "address": "18013 Diano Marina, Province of Imperia, Italy",
+    "rating": 4.4,
+    "userRatingCount": 132,
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider"
+    ],
+    "aliases": [
+      "Punto Panoramico (Diano)"
+    ],
+    "score": 31
+  },
+  {
+    "id": "spot-punto-panoramico-santo-stefano-ChIJ3cIg",
+    "name": "Punto panoramico Santo Stefano",
+    "slug": "punto-panoramico-santo-stefano",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "italy-coastal",
+    "scopeName": "Italia Coste",
+    "lat": 44.3590759,
+    "lng": 7.8776266,
+    "regionHint": "Liguria Coast",
+    "address": "Via S. Stefano, 12080 Vicoforte CN, Italy",
+    "rating": 5,
+    "userRatingCount": 3,
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider"
+    ],
+    "aliases": [
+      "Punto panoramico Santo Stefano"
+    ],
+    "score": 31
+  },
+  {
+    "id": "spot-terrazza-panoramica-staletti-ChIJEbOA",
+    "name": "Terrazza panoramica Stalettì",
+    "slug": "terrazza-panoramica-staletti",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "italy-coastal",
+    "scopeName": "Italia Coste",
+    "lat": 38.7531812,
+    "lng": 16.5638557,
+    "regionHint": "Calabria Ionian",
+    "address": "S.da Statale 106 Jonica, 173, 88069 Stalettì CZ, Italy",
+    "rating": 4.9,
+    "userRatingCount": 11,
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider"
+    ],
+    "aliases": [
+      "Terrazza panoramica Stalettì"
+    ],
+    "score": 31
+  },
+  {
+    "id": "spot-belvedere-di-santa-maria-ChIJj7di",
+    "name": "Belvedere di Santa Maria",
+    "slug": "belvedere-di-santa-maria",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "italy-coastal",
+    "scopeName": "Italia Coste",
+    "lat": 43.903683799999996,
+    "lng": 8.029596999999999,
+    "regionHint": "Liguria Coast",
+    "address": "Salita Santa Maria Maggiore, 18100 Imperia IM, Italy",
+    "rating": 4.7,
+    "userRatingCount": 3,
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider"
+    ],
+    "aliases": [
+      "Belvedere di Santa Maria"
+    ],
+    "score": 29
+  },
+  {
+    "id": "spot-harley-davidson-route-76-ChIJuzfN",
+    "name": "Harley-Davidson Route 76",
+    "slug": "harley-davidson-route-76",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "italy-coastal",
+    "scopeName": "Italia Coste",
+    "lat": 43.5289497,
+    "lng": 13.2597694,
+    "regionHint": "Conero / Adriatic Coast",
+    "address": "Via Don A. Rettaroli, 19, 60035 Jesi AN, Italy",
+    "rating": 4.8,
+    "userRatingCount": 508,
+    "types": [
+      "store",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider"
+    ],
+    "aliases": [
+      "Harley-Davidson Route 76"
+    ],
+    "score": 29
+  },
+  {
+    "id": "spot-piazzetta-del-cerbero-ChIJj4dU",
+    "name": "Piazzetta del Cerbero",
+    "slug": "piazzetta-del-cerbero",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "italy-coastal",
+    "scopeName": "Italia Coste",
+    "lat": 43.8519139,
+    "lng": 7.9633438,
+    "regionHint": "Liguria Coast",
+    "address": "Unnamed Road, 18017, 18017 San Lorenzo al Mare IM, Italy",
+    "rating": 4,
+    "userRatingCount": 1,
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider"
+    ],
+    "aliases": [
+      "Piazzetta del Cerbero"
+    ],
+    "score": 29
+  },
+  {
+    "id": "spot-strada-panoramica-ChIJv2B4",
+    "name": "Strada Panoramica",
+    "slug": "strada-panoramica",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "italy-coastal",
+    "scopeName": "Italia Coste",
+    "lat": 40.7207012,
+    "lng": 13.9597313,
+    "regionHint": "Amalfi Coast",
+    "address": "Via Campagnano, 100, 80077 Ischia NA, Italy",
+    "rating": 4.2,
+    "userRatingCount": 15,
+    "types": [
+      "resort_hotel",
+      "hotel",
+      "lodging",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider"
+    ],
+    "aliases": [
+      "Strada Panoramica"
+    ],
+    "score": 29
+  }
+]

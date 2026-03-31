@@ -25,7 +25,7 @@ import path from "path";
 import process from "process";
 
 const ROOT = process.cwd();
-const INPUT = path.join(ROOT, "client", "public", "data", "routes.it.final.json");
+const INPUT = path.join(ROOT, "client", "public", "data", "routes.json");
 const OUTPUT_CLEAN = path.join(ROOT, "client", "public", "data", "routes.it.real.cleaned.json");
 const OUTPUT_REVIEW = path.join(ROOT, "client", "public", "data", "routes.it.real.review.json");
 const OUTPUT_STATS = path.join(ROOT, "client", "public", "data", "routes.it.real.stats.json");
@@ -653,32 +653,58 @@ function endpointsNear(pointsA, pointsB) {
   return direct || reverse;
 }
 
-function classifyRouteFamily(blob, points) {
+function classifyRouteFamily(blob, points, route = {}) {
   const coastalScore = countAny(blob, COASTAL_WORDS);
   const lakeScore = countAny(blob, LAKE_WORDS);
   const mountainScore = countAny(blob, MOUNTAIN_WORDS);
   const scenicScore = countAny(blob, SCENIC_WORDS);
 
-  if (mountainScore >= 2 && mountainScore >= coastalScore && mountainScore >= lakeScore) {
-    return "mountain";
-  }
+  const regionBlob = normalizeText([
+    route?.region,
+    route?.state,
+    route?.area,
+    route?.province,
+    route?.countryName,
+    route?.country
+  ].filter(Boolean).join(" | "));
 
-  if (coastalScore >= 2 && coastalScore >= lakeScore) {
-    return "coastal";
-  }
+  const hasLakeStrong =
+    lakeScore >= 1 ||
+    regionBlob.includes("lago") ||
+    regionBlob.includes("lake") ||
+    regionBlob.includes("garda") ||
+    regionBlob.includes("como") ||
+    regionBlob.includes("maggiore") ||
+    regionBlob.includes("iseo") ||
+    regionBlob.includes("trasimeno");
 
-  if (lakeScore >= 1 && lakeScore >= coastalScore) {
-    return "lake";
-  }
+  const hasCoastalStrong =
+    coastalScore >= 1 ||
+    regionBlob.includes("coast") ||
+    regionBlob.includes("costiera") ||
+    regionBlob.includes("liguria") ||
+    regionBlob.includes("salento") ||
+    regionBlob.includes("sardegna") ||
+    regionBlob.includes("sicilia") ||
+    regionBlob.includes("riviera");
 
-  if (scenicScore >= 2) {
-    return "scenic";
-  }
+  const hasMountainStrong =
+    mountainScore >= 1 ||
+    regionBlob.includes("alpi") ||
+    regionBlob.includes("dolomiti") ||
+    regionBlob.includes("appennino") ||
+    regionBlob.includes("stelvio") ||
+    regionBlob.includes("passo");
 
-  if (points.length >= 4) return "mixed";
+  // priorità commerciale: laghi e mare prima di montagna
+  if (hasLakeStrong) return "lake";
+  if (hasCoastalStrong) return "coastal";
+  if (hasMountainStrong) return "mountain";
+
+  if (scenicScore >= 1) return "scenic";
+  if (points.length >= 4) return "scenic";
   return "scenic";
 }
-
 function buildSearchTags(blob, family, hero, region, route) {
   const tags = new Set();
 
@@ -720,8 +746,7 @@ function classify(route) {
     (points.length >= 2 && haversineKm(points[0], points[points.length - 1]) <= 25);
 
   const hero = HERO_HINTS.some((w) => blob.includes(normalizeText(w)));
-  const routeFamily = classifyRouteFamily(blob, points);
-
+const routeFamily = classifyRouteFamily(blob, points, route);
   let status = "keep";
   let reason = "real_route";
 
