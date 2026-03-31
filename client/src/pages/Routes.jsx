@@ -313,7 +313,88 @@ function SkeletonLoading() {
     </div>
   );
 }
+function formatRouteKm(km) {
+  const n = Number(km || 0);
+  if (!Number.isFinite(n) || n <= 0) return "—";
+  return `${Math.round(n)} km`;
+}
 
+function getRoutePointNames(route, max = 4) {
+  const out = [];
+  const seen = new Set();
+
+  const pool = [
+    ...(Array.isArray(route?.spots) ? route.spots : []),
+    ...(Array.isArray(route?.waypoints) ? route.waypoints : []),
+  ];
+
+  for (const p of pool) {
+    const name = String(p?.name || "").trim();
+    const key = normalizeText(name);
+    if (!name || seen.has(key)) continue;
+    seen.add(key);
+    out.push(name);
+    if (out.length >= max) break;
+  }
+
+  if (!out.length) {
+    if (route?.start?.name) out.push(route.start.name);
+    if (route?.end?.name && normalizeText(route.end.name) !== normalizeText(route.start?.name || "")) {
+      out.push(route.end.name);
+    }
+  }
+
+  return out;
+}
+
+function isMechanicalDescription(text = "") {
+  const t = String(text || "").trim().toLowerCase();
+  if (!t) return true;
+
+  return (
+    t.includes("generato da rider spots reali") ||
+    t.includes("scope ") ||
+    t.includes("modalità ") ||
+    t.includes("modalita ") ||
+    t.includes("focus su guida motociclistica")
+  );
+}
+
+function buildPrettyRouteDescription(route) {
+  const region = route?.region || "questa zona";
+  const rideType = normalizeCategory(route);
+  const km = formatRouteKm(route?.distanceKm);
+  const names = getRoutePointNames(route, 4);
+
+  const a = names[0] || null;
+  const b = names[1] || null;
+  const c = names[2] || null;
+  const d = names[3] || null;
+
+  const pointsSentence = a && b && c && d
+    ? `Tocca ${a}, ${b}, ${c} e ${d}, costruendo una progressione credibile e piacevole da seguire anche in sella.`
+    : a && b && c
+    ? `Unisce ${a}, ${b} e ${c}, mantenendo una linea coerente tra guida, paesaggio e ritmo.`
+    : a && b
+    ? `Collega ${a} e ${b} con un percorso che ha senso da vivere in moto, senza l’effetto artificiale da traccia casuale.`
+    : a
+    ? `Si sviluppa attorno a ${a}, usandolo come riferimento principale del giro.`
+    : `Si sviluppa su una sequenza di punti reali selezionati per dare continuità, lettura del territorio e piacere di guida.`;
+
+  if (rideType === "mountain") {
+    return `Un itinerario di montagna rider-oriented nella zona ${region}, pensato per chi cerca quota, curve e carattere. ${pointsSentence} Nel complesso è un giro da circa ${km}, con tratti panoramici, ritmo variabile e una guida che sa farsi ricordare.`;
+  }
+
+  if (rideType === "lake") {
+    return `Un itinerario lago panoramico nella zona ${region}, costruito per valorizzare sponde, salite e collegamenti davvero interessanti in moto. ${pointsSentence} Nel complesso è un giro da circa ${km}, ideale per chi vuole alternare guida pulita, vista aperta e sostanza.`;
+  }
+
+  if (rideType === "coastal") {
+    return `Un itinerario costiero nella zona ${region}, pensato per sfruttare al meglio mare, strada aperta e passaggi dal forte impatto visivo. ${pointsSentence} Nel complesso è un giro da circa ${km}, scorrevole ma non banale, perfetto per una giornata di moto con panorama vero.`;
+  }
+
+  return `Un itinerario panoramico rider nella zona ${region}, costruito attorno a strade e punti che possono davvero generare un giro credibile. ${pointsSentence} Nel complesso è un percorso da circa ${km}, con un buon equilibrio tra guida, paesaggio e piacere generale del viaggio.`;
+}
 export default function Routes() {
   const [routes, setRoutes] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -953,9 +1034,10 @@ function RouteDetail({ route }) {
   const [wxBusy, setWxBusy] = useState(false);
 
   const routeKey = buildRouteKey(route);
-  const displayDescription =
-    String(route?.description || "").trim() || "Descrizione non disponibile.";
-
+const rawDescription = String(route?.description || "").trim();
+const displayDescription = isMechanicalDescription(rawDescription)
+  ? buildPrettyRouteDescription(route)
+  : rawDescription || "Descrizione non disponibile.";
   useEffect(() => {
     let alive = true;
 
