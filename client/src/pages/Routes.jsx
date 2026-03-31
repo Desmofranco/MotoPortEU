@@ -7,15 +7,16 @@
 // ✅ Loading skeleton
 // ✅ Meteo + Google Maps
 // ✅ FIX mobile: no aperture accidentali durante scroll
-// ✅ NEW: ricerca intelligente su:
+// ✅ Ricerca intelligente su:
 //    - name
 //    - description
 //    - aliases
 //    - searchText
 //    - tags
 //    - waypoints[].name
-// ✅ NEW: priorità hero routes
-// ✅ NEW: supporto completo nuovo dataset routes.json
+// ✅ Filtri: Paese / Regione / Categoria
+// ✅ Categorie commerciali: Montagna / Laghi / Mare
+// ✅ Supporto completo nuovo dataset routes.json
 // =======================================================
 
 import React, { useEffect, useMemo, useRef, useState } from "react";
@@ -104,6 +105,7 @@ function normalizeRoute(route) {
     ...route,
     aliases: Array.isArray(route?.aliases) ? route.aliases : [],
     tags: Array.isArray(route?.tags) ? route.tags : [],
+    searchTags: Array.isArray(route?.searchTags) ? route.searchTags : [],
     waypoints: Array.isArray(route?.waypoints) ? route.waypoints : [],
     spots: Array.isArray(route?.spots) ? route.spots : [],
     coords: Array.isArray(route?.coords) ? route.coords : [],
@@ -121,37 +123,26 @@ function routeSearchBlob(route) {
     route?.name,
     route?.region,
     route?.country,
+    route?.countryName,
     route?.description,
     route?.bestSeason,
     route?.pace,
     route?.rideType,
+    route?.routeFamily,
     route?.mode,
     route?.surface,
     route?.difficulty,
     route?.searchText,
     ...(route?.aliases || []),
     ...(route?.tags || []),
+    ...(route?.searchTags || []),
     ...(route?.waypoints || []).map((w) => w?.name),
+    ...(route?.spots || []).map((s) => s?.name),
     route?.start?.name,
     route?.end?.name,
   ].filter(Boolean);
 
   return normalizeText(parts.join(" "));
-}
-
-function getRouteRatingForSort(route) {
-  if (Number.isFinite(toNum(route?.rating))) return Number(route.rating);
-  if (route?.hero) return 5;
-  return 0;
-}
-
-function getRouteCurvesForSort(route) {
-  if (Number.isFinite(toNum(route?.curvesScore))) return Number(route.curvesScore);
-  if (route?.rideType === "mountain") return 8;
-  if (route?.rideType === "scenic") return 6;
-  if (route?.rideType === "lake") return 5;
-  if (route?.rideType === "coastal") return 5;
-  return 0;
 }
 
 function pickRoutePoint(route) {
@@ -191,6 +182,94 @@ function pickRoutePoint(route) {
   }
 
   return null;
+}
+
+function normalizeCategory(route) {
+  const family = normalizeText(route?.routeFamily || route?.rideType);
+
+  if (family === "mountain") return "mountain";
+  if (family === "lake") return "lake";
+  if (family === "coastal") return "coastal";
+
+  const tags = Array.isArray(route?.searchTags)
+    ? route.searchTags.map((x) => normalizeText(x))
+    : [];
+
+  if (tags.includes("montagna")) return "mountain";
+  if (tags.includes("lago") || tags.includes("laghi")) return "lake";
+  if (tags.includes("mare")) return "coastal";
+
+  const blob = routeSearchBlob(route);
+
+  if (
+    blob.includes("lago") ||
+    blob.includes("lake") ||
+    blob.includes("garda") ||
+    blob.includes("como") ||
+    blob.includes("maggiore") ||
+    blob.includes("iseo") ||
+    blob.includes("trasimeno") ||
+    blob.includes("ledro") ||
+    blob.includes("orta")
+  ) {
+    return "lake";
+  }
+
+  if (
+    blob.includes("coast") ||
+    blob.includes("costiera") ||
+    blob.includes("mare") ||
+    blob.includes("riviera") ||
+    blob.includes("amalfi") ||
+    blob.includes("salento") ||
+    blob.includes("liguria") ||
+    blob.includes("sardegna") ||
+    blob.includes("sicilia") ||
+    blob.includes("adriatic") ||
+    blob.includes("tirreno") ||
+    blob.includes("ionio") ||
+    blob.includes("conero")
+  ) {
+    return "coastal";
+  }
+
+  return "mountain";
+}
+
+function categoryLabel(category) {
+  if (category === "mountain") return "Montagna";
+  if (category === "lake") return "Laghi";
+  if (category === "coastal") return "Mare";
+  return "Tutte";
+}
+
+function countryLabel(code) {
+  const map = {
+    IT: "Italia",
+    FR: "Francia",
+    CH: "Svizzera",
+    AT: "Austria",
+    DE: "Germania",
+    ES: "Spagna",
+    PT: "Portogallo",
+    SI: "Slovenia",
+    HR: "Croazia",
+    BA: "Bosnia",
+    ME: "Montenegro",
+    AL: "Albania",
+    RO: "Romania",
+    SK: "Slovacchia",
+    CZ: "Cechia",
+    PL: "Polonia",
+    NO: "Norvegia",
+    SE: "Svezia",
+    UK: "Regno Unito",
+    IE: "Irlanda",
+    BE: "Belgio",
+    NL: "Olanda",
+    LU: "Lussemburgo",
+  };
+  return map[code] || code;
 }
 
 function SkeletonLoading() {
@@ -242,7 +321,8 @@ export default function Routes() {
 
   const [q, setQ] = useState("");
   const [country, setCountry] = useState("ALL");
-  const [sortBy, setSortBy] = useState("hero");
+  const [region, setRegion] = useState("ALL");
+  const [category, setCategory] = useState("ALL");
 
   const [activeKey, setActiveKey] = useState(null);
   const [selected, setSelected] = useState(null);
@@ -305,78 +385,78 @@ export default function Routes() {
 
   const countries = useMemo(() => {
     const set = new Set(
-      routes.map((r) => String(r.country || "").toUpperCase()).filter(Boolean)
+      routes
+        .map((r) => String(r.country || r.countryName || "").toUpperCase())
+        .filter(Boolean)
     );
     return ["ALL", ...Array.from(set).sort()];
   }, [routes]);
+
+  const regions = useMemo(() => {
+    const set = new Set();
+
+    routes.forEach((r) => {
+      const rc = String(r.country || r.countryName || "").toUpperCase();
+      if (country !== "ALL" && rc !== country) return;
+
+      const rg = String(r.region || "").trim();
+      if (rg) set.add(rg);
+    });
+
+    return ["ALL", ...Array.from(set).sort((a, b) => a.localeCompare(b, "it"))];
+  }, [routes, country]);
+
+  useEffect(() => {
+    setRegion("ALL");
+  }, [country]);
 
   const filtered = useMemo(() => {
     const query = normalizeText(q.trim());
     let out = [...routes];
 
-    if (query) {
-      out = out
-        .map((r) => {
-          const blob = routeSearchBlob(r);
-          const exactName = normalizeText(r.name) === query;
-          const aliasHit = (r.aliases || []).some((a) => normalizeText(a).includes(query));
-          const heroBoost = r.hero ? 1000 : 0;
-          const exactBoost = exactName ? 500 : 0;
-          const aliasBoost = aliasHit ? 250 : 0;
-          const textBoost = blob.includes(query) ? 100 : 0;
-          const score = heroBoost + exactBoost + aliasBoost + textBoost;
-
-          return {
-            ...r,
-            _searchScore: score,
-          };
-        })
-        .filter((r) => r._searchScore > 0);
-    }
-
     if (country !== "ALL") {
       out = out.filter(
-        (r) => String(r.country || "").toUpperCase() === country
+        (r) => String(r.country || r.countryName || "").toUpperCase() === country
       );
     }
 
-    const sorter =
-      {
-        hero: (a, b) => {
-          const ah = a.hero ? 1 : 0;
-          const bh = b.hero ? 1 : 0;
-          if (bh !== ah) return bh - ah;
-          const as = Number(a._searchScore || 0);
-          const bs = Number(b._searchScore || 0);
-          if (bs !== as) return bs - as;
-          return Number(b.distanceKm || 0) - Number(a.distanceKm || 0);
-        },
-        rating: (a, b) => {
-          const ah = a.hero ? 1 : 0;
-          const bh = b.hero ? 1 : 0;
-          if (bh !== ah) return bh - ah;
-          return getRouteRatingForSort(b) - getRouteRatingForSort(a);
-        },
-        distance: (a, b) => {
-          const ah = a.hero ? 1 : 0;
-          const bh = b.hero ? 1 : 0;
-          if (bh !== ah) return bh - ah;
-          return Number(b.distanceKm || 0) - Number(a.distanceKm || 0);
-        },
-        curves: (a, b) => {
-          const ah = a.hero ? 1 : 0;
-          const bh = b.hero ? 1 : 0;
-          if (bh !== ah) return bh - ah;
-          return getRouteCurvesForSort(b) - getRouteCurvesForSort(a);
-        },
-      }[sortBy] || (() => 0);
+    if (region !== "ALL") {
+      out = out.filter((r) => String(r.region || "").trim() === region);
+    }
 
-    out.sort(sorter);
+    if (category !== "ALL") {
+      out = out.filter((r) => normalizeCategory(r) === category);
+    }
+
+    if (query) {
+      out = out.filter((r) => routeSearchBlob(r).includes(query));
+    }
+
+    out.sort((a, b) => {
+      const ca = normalizeCategory(a);
+      const cb = normalizeCategory(b);
+
+      if (category === "ALL" && ca !== cb) {
+        const order = { mountain: 1, lake: 2, coastal: 3 };
+        return (order[ca] || 99) - (order[cb] || 99);
+      }
+
+      const ra = String(a.region || "");
+      const rb = String(b.region || "");
+      if (ra !== rb) return ra.localeCompare(rb, "it");
+
+      return Number(b.distanceKm || 0) - Number(a.distanceKm || 0);
+    });
+
     return out;
-  }, [routes, q, country, sortBy]);
+  }, [routes, q, country, region, category]);
 
   useEffect(() => {
-    if (!filtered.length) return;
+    if (!filtered.length) {
+      setActiveKey(null);
+      setSelected(null);
+      return;
+    }
 
     const exists = filtered.some((r) => buildRouteKey(r) === activeKey);
 
@@ -444,7 +524,7 @@ export default function Routes() {
               className="routes-search"
               value={q}
               onChange={(e) => setQ(e.target.value)}
-              placeholder="Cerca: Stelvio, Forra, Dolomiti, Grossglockner…"
+              placeholder="Cerca: Stelvio, Garda, Amalfi, Dolomiti…"
               style={{
                 width: "min(520px, 100%)",
                 padding: "10px 12px",
@@ -480,27 +560,46 @@ export default function Routes() {
               >
                 {countries.map((c) => (
                   <option key={c} value={c}>
-                    {c === "ALL" ? "Tutti" : c}
+                    {c === "ALL" ? "Tutti" : countryLabel(c)}
                   </option>
                 ))}
               </select>
             </label>
 
             <label style={{ display: "grid", gap: 6 }}>
-              <span style={{ fontSize: 12, opacity: 0.75 }}>Ordina</span>
+              <span style={{ fontSize: 12, opacity: 0.75 }}>Regione</span>
               <select
-                value={sortBy}
-                onChange={(e) => setSortBy(e.target.value)}
+                value={region}
+                onChange={(e) => setRegion(e.target.value)}
                 style={{
                   padding: "10px 12px",
                   borderRadius: 12,
                   border: "1px solid rgba(0,0,0,0.15)",
                 }}
               >
-                <option value="hero">Hero / rilevanza</option>
-                <option value="rating">Rating</option>
-                <option value="distance">Distanza (desc)</option>
-                <option value="curves">Curve (desc)</option>
+                {regions.map((r) => (
+                  <option key={r} value={r}>
+                    {r === "ALL" ? "Tutte" : r}
+                  </option>
+                ))}
+              </select>
+            </label>
+
+            <label style={{ display: "grid", gap: 6 }}>
+              <span style={{ fontSize: 12, opacity: 0.75 }}>Categoria</span>
+              <select
+                value={category}
+                onChange={(e) => setCategory(e.target.value)}
+                style={{
+                  padding: "10px 12px",
+                  borderRadius: 12,
+                  border: "1px solid rgba(0,0,0,0.15)",
+                }}
+              >
+                <option value="ALL">Tutte</option>
+                <option value="mountain">Montagna</option>
+                <option value="lake">Laghi</option>
+                <option value="coastal">Mare</option>
               </select>
             </label>
           </div>
@@ -566,7 +665,7 @@ export default function Routes() {
                     textOverflow: "ellipsis",
                   }}
                 >
-                  {selected.name}
+                  {selected?.name}
                 </div>
               </div>
 
@@ -660,6 +759,7 @@ export default function Routes() {
 
 function RouteCard({ route, active, onSelect }) {
   const photo = route.photo || FALLBACK_PHOTO;
+  const category = normalizeCategory(route);
 
   const touchRef = useRef({
     startX: 0,
@@ -766,7 +866,6 @@ function RouteCard({ route, active, onSelect }) {
                 whiteSpace: "nowrap",
               }}
             >
-              {route.hero ? "🔥 " : ""}
               {route.country ? `${route.country} ` : ""}
               {route.name}
             </div>
@@ -778,15 +877,17 @@ function RouteCard({ route, active, onSelect }) {
           <div
             style={{
               marginTop: 2,
+              display: "flex",
+              gap: 6,
+              alignItems: "center",
+              flexWrap: "wrap",
               fontSize: 11,
-              opacity: 0.75,
-              overflow: "hidden",
-              textOverflow: "ellipsis",
-              whiteSpace: "nowrap",
+              opacity: 0.82,
             }}
           >
-            {route.region || "—"} · {route.rideType || "touring"} ·{" "}
-            {route.hero ? "hero" : "standard"}
+            <span>{route.region || "—"}</span>
+            <span>·</span>
+            <span>{categoryLabel(category)}</span>
           </div>
         </div>
       </div>
@@ -805,7 +906,6 @@ function RouteCard({ route, active, onSelect }) {
             style={{ display: "flex", justifyContent: "space-between", gap: 10 }}
           >
             <div style={{ fontWeight: 900, lineHeight: 1.15 }}>
-              {route.hero ? "🔥 " : ""}
               {route.country ? `${route.country} ` : ""}
               {route.name}
             </div>
@@ -814,9 +914,19 @@ function RouteCard({ route, active, onSelect }) {
             </div>
           </div>
 
-          <div style={{ marginTop: 4, fontSize: 12, opacity: 0.75 }}>
-            {route.region || "—"} · {route.rideType || "touring"} ·{" "}
-            {route.difficulty || "—"}
+          <div
+            style={{
+              marginTop: 6,
+              display: "flex",
+              gap: 8,
+              flexWrap: "wrap",
+              alignItems: "center",
+            }}
+          >
+            <span style={pill("light")}>{categoryLabel(category)}</span>
+            <span style={{ fontSize: 12, opacity: 0.75 }}>
+              {route.region || "—"}
+            </span>
           </div>
         </div>
       </div>
@@ -837,6 +947,7 @@ function RouteDetail({ route }) {
   const startNavUrl = navPoint
     ? buildNavigateUrl(latLonStr(navPoint), "driving")
     : null;
+  const category = normalizeCategory(route);
 
   const [wx, setWx] = useState(null);
   const [wxBusy, setWxBusy] = useState(false);
@@ -899,24 +1010,20 @@ function RouteDetail({ route }) {
         >
           <div style={{ fontSize: 12, opacity: 0.92 }}>
             {route.country || "—"} · {route.region || "—"} ·{" "}
-            {route.rideType || "touring"}
+            {categoryLabel(category)}
           </div>
           <div style={{ fontSize: 26, fontWeight: 950, lineHeight: 1.05 }}>
-            {route.hero ? "🔥 " : ""}
             {route.name}
           </div>
 
           <div style={{ marginTop: 8, display: "flex", gap: 8, flexWrap: "wrap" }}>
-            {route.hero ? <span style={pill("dark")}>Hero</span> : null}
             <span style={pill("dark")}>
               📏 {route.distanceKm ? `${route.distanceKm} km` : "—"}
             </span>
             {route.durationMin != null ? (
               <span style={pill("dark")}>⏱ {route.durationMin} min</span>
             ) : null}
-            <span style={pill("dark")}>
-              🏍️ {route.rideType || "touring"}
-            </span>
+            <span style={pill("dark")}>🏍️ {categoryLabel(category)}</span>
             {route.difficulty ? (
               <span style={pill("dark")}>⚡ {route.difficulty}</span>
             ) : null}
