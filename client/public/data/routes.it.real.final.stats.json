@@ -1,0 +1,17 @@
+{
+  "baseRoutes": 3,
+  "recoverableReviewRoutes": 0,
+  "clustersFound": 0,
+  "goodClusters": 0,
+  "syntheticRoutes": 0,
+  "finalRoutes": 3,
+  "finalByRideType": {
+    "mountain": 2,
+    "appennino": 1
+  },
+  "finalByRegion": {
+    "Dolomiti": 1,
+    "Appennino Tosco-Emiliano": 1,
+    "Abruzzo": 1
+  }
+}

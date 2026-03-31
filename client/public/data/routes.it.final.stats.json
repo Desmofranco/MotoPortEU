@@ -1,0 +1,41 @@
+{
+  "inputScopes": {
+    "italy-nw": 53,
+    "italy-ne": 35,
+    "italy-center": 24,
+    "italy-south": 11,
+    "sicily": 12,
+    "sardinia": 22
+  },
+  "inputTotal": 157,
+  "preliminaryAccepted": 123,
+  "reviewCount": 34,
+  "dedupeRemoved": 53,
+  "finalRoutes": 70,
+  "finalHeroRoutes": 43,
+  "finalByRideType": {
+    "scenic": 29,
+    "mountain": 39,
+    "lake": 2
+  },
+  "finalByRegion": {
+    "Sicilia": 3,
+    "Valle d'Aosta / Alpi": 5,
+    "Sardegna": 9,
+    "Nord-Ovest": 11,
+    "Centro Italia": 5,
+    "Toscana / Emilia-Romagna / Appennino": 6,
+    "Piemonte / Alpi": 5,
+    "Dolomiti": 11,
+    "Lombardia / Alpi": 3,
+    "Sud Italia": 5,
+    "Trentino / Veneto / Friuli": 6,
+    "Nord-Est": 1
+  },
+  "reviewBreakdown": {
+    "too_short": 26,
+    "bad_distance": 1,
+    "dirty_source_or_name": 7,
+    "duplicate_removed": 53
+  }
+}

@@ -1,0 +1,86 @@
+[
+  {
+    "id": "rt-002",
+    "name": "Dolomiti Loop",
+    "country": "IT",
+    "region": "Dolomiti",
+    "distanceKm": 180,
+    "curvesScore": 8,
+    "asphaltScore": 8,
+    "bestSeason": "Jun–Sep",
+    "pace": "misto",
+    "photo": "https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=1600&q=80",
+    "start": [
+      46.4333,
+      11.85
+    ],
+    "end": [
+      46.4333,
+      11.85
+    ],
+    "description": "Dolomiti Loop è pensato per una guida stradale coinvolgente, con un ritmo da vero rider e non da semplice turista. Il percorso alterna curve, cambi di direzione e tratti panoramici che premiano precisione, fluidità e piacere di guida, soprattutto nei passaggi più guidati. L’asfalto è in genere valido per il mototurismo e la guida dinamica, pur con possibili variazioni di fondo o traffico a seconda della zona e della stagione. Ideale per rider che cercano curve, panorama e continuità di guida in un contesto adatto a uscite medio-lunghe.",
+    "countryName": "Italy",
+    "hero": true,
+    "qualityTag": "full_itinerary",
+    "italianConfidence": "high",
+    "cleanedAt": "2026-03-29T20:33:50.361Z",
+    "cleanedBy": "cleanItalyRealRoutes_v2",
+    "rideType": "mountain"
+  },
+  {
+    "id": "rt-026",
+    "name": "Raticosa + Giogo (Combo)",
+    "country": "IT",
+    "region": "Appennino Tosco-Emiliano",
+    "distanceKm": 120,
+    "curvesScore": 9,
+    "asphaltScore": 7,
+    "bestSeason": "Apr–Oct",
+    "pace": "misto",
+    "photo": "https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=1600&q=80",
+    "start": [
+      43.769,
+      11.255
+    ],
+    "end": [
+      44.494,
+      11.342
+    ],
+    "description": "Raticosa + Giogo (Combo) è pensato per una guida stradale coinvolgente, con un ritmo da vero rider e non da semplice turista. Il percorso offre una guida fluida e appagante, con curve scorrevoli, ritmo regolare e tratti che valorizzano il piacere motociclistico più della semplice destinazione. L’asfalto è in genere valido per il mototurismo e la guida dinamica, pur con possibili variazioni di fondo o traffico a seconda della zona e della stagione. Ideale per rider che cercano curve, panorama e continuità di guida in un contesto adatto a uscite medio-lunghe.",
+    "countryName": "Italy",
+    "hero": true,
+    "qualityTag": "full_itinerary",
+    "italianConfidence": "high",
+    "cleanedAt": "2026-03-29T20:33:50.382Z",
+    "cleanedBy": "cleanItalyRealRoutes_v2",
+    "rideType": "appennino"
+  },
+  {
+    "id": "rt-030",
+    "name": "Campo Imperatore (Gran Sasso)",
+    "country": "IT",
+    "region": "Abruzzo",
+    "distanceKm": 95,
+    "curvesScore": 7,
+    "asphaltScore": 7,
+    "bestSeason": "May–Oct",
+    "pace": "touring",
+    "photo": "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1600&q=80",
+    "start": [
+      42.35,
+      13.4
+    ],
+    "end": [
+      42.444,
+      13.565
+    ],
+    "description": "Campo Imperatore (Gran Sasso) è pensato per una guida stradale coinvolgente, con un ritmo da vero rider e non da semplice turista. Il percorso offre una guida fluida e appagante, con curve scorrevoli, ritmo regolare e tratti che valorizzano il piacere motociclistico più della semplice destinazione. L’asfalto è in genere valido per il mototurismo e la guida dinamica, pur con possibili variazioni di fondo o traffico a seconda della zona e della stagione. Ideale per rider che cercano curve, panorama e continuità di guida in un contesto adatto a uscite medio-lunghe.",
+    "countryName": "Italy",
+    "hero": true,
+    "qualityTag": "short_real_itinerary",
+    "italianConfidence": "high",
+    "cleanedAt": "2026-03-29T20:33:50.382Z",
+    "cleanedBy": "cleanItalyRealRoutes_v2",
+    "rideType": "mountain"
+  }
+]

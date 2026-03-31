@@ -1,0 +1,2244 @@
+[
+  {
+    "id": "spot-panoramic-flat-amalfi-coast-sea-view-ChIJ7ZyQ",
+    "name": "Panoramic flat Amalfi Coast - Sea View",
+    "slug": "panoramic-flat-amalfi-coast-sea-view",
+    "type": "coastal_view",
+    "rideType": "coastal",
+    "country": "IT",
+    "scope": "italy-south",
+    "scopeName": "Italia Sud",
+    "lat": 40.670282,
+    "lng": 14.726997800000001,
+    "regionHint": "Costiera Amalfitana",
+    "address": "Via Diego Taiani, 118, 84019 Vietri sul Mare SA, Italy",
+    "rating": 4.9,
+    "userRatingCount": 74,
+    "types": [
+      "lodging",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "coast",
+      "sea",
+      "scenic",
+      "rider",
+      "panoramic"
+    ],
+    "aliases": [
+      "Panoramic flat Amalfi Coast - Sea View"
+    ],
+    "score": 78
+  },
+  {
+    "id": "spot-amalfi-coast-viewpoint-ChIJFW3v",
+    "name": "Amalfi Coast Viewpoint",
+    "slug": "amalfi-coast-viewpoint",
+    "type": "coastal_view",
+    "rideType": "coastal",
+    "country": "IT",
+    "scope": "italy-south",
+    "scopeName": "Italia Sud",
+    "lat": 40.6220271,
+    "lng": 14.5474514,
+    "regionHint": "Costiera Amalfitana",
+    "address": "Via Belvedere, 84010 Pianillo NA, Italy",
+    "rating": 4.8,
+    "userRatingCount": 372,
+    "types": [
+      "observation_deck",
+      "landmark",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "coast",
+      "sea",
+      "scenic",
+      "rider",
+      "panoramic"
+    ],
+    "aliases": [
+      "Amalfi Coast Viewpoint",
+      "Amalfi Coast"
+    ],
+    "score": 67
+  },
+  {
+    "id": "spot-punto-panoramico-ChIJgzSQ",
+    "name": "Punto Panoramico",
+    "slug": "punto-panoramico",
+    "type": "coastal_view",
+    "rideType": "coastal",
+    "country": "IT",
+    "scope": "italy-south",
+    "scopeName": "Italia Sud",
+    "lat": 40.6878433,
+    "lng": 14.451451299999997,
+    "regionHint": "Costiera Amalfitana",
+    "address": "Strada Statale 145 Sorrentina, 145, 80053 Castellammare di Stabia NA, Italy",
+    "rating": 4.7,
+    "userRatingCount": 156,
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "coast",
+      "sea",
+      "scenic",
+      "rider",
+      "panoramic"
+    ],
+    "aliases": [
+      "Punto Panoramico"
+    ],
+    "score": 56
+  },
+  {
+    "id": "spot-viewpoint-of-the-coastline-ChIJDWoy",
+    "name": "Viewpoint of the Coastline",
+    "slug": "viewpoint-of-the-coastline",
+    "type": "coastal_view",
+    "rideType": "coastal",
+    "country": "IT",
+    "scope": "italy-south",
+    "scopeName": "Italia Sud",
+    "lat": 40.844829999999995,
+    "lng": 14.2440467,
+    "regionHint": "Costiera Amalfitana",
+    "address": "Vittorio Emanuele, Vico Trinitá delle Monache, 80134 Napoli NA, Italy",
+    "rating": 5,
+    "userRatingCount": 1,
+    "types": [
+      "tourist_attraction",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "coast",
+      "sea",
+      "scenic",
+      "rider",
+      "panoramic"
+    ],
+    "aliases": [
+      "Viewpoint of the Coastline"
+    ],
+    "score": 53
+  },
+  {
+    "id": "spot-molo-punta-licosa-scenic-viewpoint-ChIJSTr1",
+    "name": "Molo Punta Licosa Scenic Viewpoint",
+    "slug": "molo-punta-licosa-scenic-viewpoint",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "italy-south",
+    "scopeName": "Italia Sud",
+    "lat": 40.2545245,
+    "lng": 14.905874,
+    "regionHint": "Costiera Amalfitana",
+    "address": "Punta Licosa, 84048 Castellabate SA, Italy",
+    "rating": 4.7,
+    "userRatingCount": 306,
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider"
+    ],
+    "aliases": [
+      "Molo Punta Licosa Scenic Viewpoint"
+    ],
+    "score": 51
+  },
+  {
+    "id": "spot-belvedere-di-san-nicola-ChIJex4_",
+    "name": "Belvedere di San Nicola",
+    "slug": "belvedere-di-san-nicola",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "italy-south",
+    "scopeName": "Italia Sud",
+    "lat": 39.8495415,
+    "lng": 15.791776100000002,
+    "regionHint": "Pollino",
+    "address": "Corso Umberto I, 87020 San Nicola Arcella CS, Italy",
+    "rating": 4.8,
+    "userRatingCount": 1066,
+    "types": [
+      "scenic_spot",
+      "tourist_attraction",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider"
+    ],
+    "aliases": [
+      "Belvedere di San Nicola"
+    ],
+    "score": 50
+  },
+  {
+    "id": "spot-sorrento-viewpoint-ChIJsTUl",
+    "name": "Sorrento Viewpoint",
+    "slug": "sorrento-viewpoint",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "italy-south",
+    "scopeName": "Italia Sud",
+    "lat": 40.649585099999996,
+    "lng": 14.4106108,
+    "regionHint": "Costiera Amalfitana",
+    "address": "80062 Meta, Metropolitan City of Naples, Italy",
+    "rating": 4.8,
+    "userRatingCount": 2522,
+    "types": [
+      "scenic_spot",
+      "tourist_attraction",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider"
+    ],
+    "aliases": [
+      "Sorrento Viewpoint"
+    ],
+    "score": 50
+  },
+  {
+    "id": "spot-amalfi-coast-in-tour-panoramic-golf-cart-experience-ChIJRfxz",
+    "name": "Amalfi Coast in Tour – Panoramic Golf Cart Experience",
+    "slug": "amalfi-coast-in-tour-panoramic-golf-cart-experience",
+    "type": "coastal_view",
+    "rideType": "coastal",
+    "country": "IT",
+    "scope": "italy-south",
+    "scopeName": "Italia Sud",
+    "lat": 40.6494765,
+    "lng": 14.625888199999999,
+    "regionHint": "Costiera Amalfitana",
+    "address": "V Alfonso Gatto, 19, 84010 Minori SA, Italy",
+    "rating": 5,
+    "userRatingCount": 27,
+    "types": [
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "coast",
+      "sea",
+      "scenic",
+      "rider",
+      "panoramic"
+    ],
+    "aliases": [
+      "Amalfi Coast in Tour – Panoramic Golf Cart Experience"
+    ],
+    "score": 49
+  },
+  {
+    "id": "spot-ravello-panorama-amalfi-coast-ChIJY_ir",
+    "name": "Ravello Panorama Amalfi Coast",
+    "slug": "ravello-panorama-amalfi-coast",
+    "type": "coastal_view",
+    "rideType": "coastal",
+    "country": "IT",
+    "scope": "italy-south",
+    "scopeName": "Italia Sud",
+    "lat": 40.649249999999995,
+    "lng": 14.6134,
+    "regionHint": "Costiera Amalfitana",
+    "address": "84010 Ravello, SA, Italy",
+    "rating": 4.9,
+    "userRatingCount": 174,
+    "types": [
+      "tourist_attraction",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "coast",
+      "sea",
+      "scenic",
+      "rider",
+      "panoramic"
+    ],
+    "aliases": [
+      "Ravello Panorama Amalfi Coast"
+    ],
+    "score": 48
+  },
+  {
+    "id": "spot-wine-tour-amalfi-coast-ChIJDbqx",
+    "name": "wine tour amalfi coast",
+    "slug": "wine-tour-amalfi-coast",
+    "type": "coastal_view",
+    "rideType": "coastal",
+    "country": "IT",
+    "scope": "italy-south",
+    "scopeName": "Italia Sud",
+    "lat": 40.6168784,
+    "lng": 14.567306799999999,
+    "regionHint": "Costiera Amalfitana",
+    "address": "Via I Maggio, n°22, 84010 Conca dei Marini SA, Italy",
+    "rating": 5,
+    "userRatingCount": 37,
+    "types": [
+      "tourist_attraction",
+      "association_or_organization",
+      "food",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "coast",
+      "sea",
+      "scenic",
+      "rider",
+      "panoramic"
+    ],
+    "aliases": [
+      "wine tour amalfi coast"
+    ],
+    "score": 48
+  },
+  {
+    "id": "spot-marina-del-gargano-porto-turistico-di-manfredonia-fg-ChIJJeay",
+    "name": "Marina del Gargano Porto Turistico di Manfredonia (FG)",
+    "slug": "marina-del-gargano-porto-turistico-di-manfredonia-fg",
+    "type": "coastal_view",
+    "rideType": "coastal",
+    "country": "IT",
+    "scope": "italy-south",
+    "scopeName": "Italia Sud",
+    "lat": 41.6214388,
+    "lng": 15.9095523,
+    "regionHint": "Gargano",
+    "address": "Lungomare del Sole, 1/A1, 71043 Manfredonia FG, Italy",
+    "rating": 4.5,
+    "userRatingCount": 1301,
+    "types": [
+      "marina",
+      "tourist_attraction",
+      "resort_hotel",
+      "hotel",
+      "lodging",
+      "service",
+      "point_of_interest",
+      "manufacturer",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "coast",
+      "sea",
+      "scenic",
+      "rider",
+      "panoramic"
+    ],
+    "aliases": [
+      "Marina del Gargano Porto Turistico di Manfredonia (FG)"
+    ],
+    "score": 47
+  },
+  {
+    "id": "spot-viewpoint-ChIJuZfO",
+    "name": "Viewpoint",
+    "slug": "viewpoint",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "italy-south",
+    "scopeName": "Italia Sud",
+    "lat": 40.996786199999995,
+    "lng": 17.219603499999998,
+    "regionHint": "Murge / Valle d'Itria",
+    "address": "Via Porto, 83, 70044 Polignano a Mare BA, Italy",
+    "rating": 4.8,
+    "userRatingCount": 4,
+    "types": [
+      "tourist_attraction",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider"
+    ],
+    "aliases": [
+      "Viewpoint"
+    ],
+    "score": 47
+  },
+  {
+    "id": "spot-belvedere-malvento-ChIJHw9S",
+    "name": "Belvedere Malvento",
+    "slug": "belvedere-malvento",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "italy-south",
+    "scopeName": "Italia Sud",
+    "lat": 39.9027078,
+    "lng": 16.137371100000003,
+    "regionHint": "Pollino",
+    "address": "85040 Viggianello, Province of Potenza, Italy",
+    "rating": 4.8,
+    "userRatingCount": 415,
+    "types": [
+      "tourist_attraction",
+      "hiking_area",
+      "landmark",
+      "sports_activity_location",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider"
+    ],
+    "aliases": [
+      "Belvedere Malvento"
+    ],
+    "score": 45
+  },
+  {
+    "id": "spot-viewpoint-8-amalfi-dr-ChIJx-4B",
+    "name": "Viewpoint.8-Amalfi Dr",
+    "slug": "viewpoint-8-amalfi-dr",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "italy-south",
+    "scopeName": "Italia Sud",
+    "lat": 40.620318499999996,
+    "lng": 14.466795,
+    "regionHint": "Costiera Amalfitana",
+    "address": "SS163, 80069 Vico Equense NA, Italy",
+    "rating": 4.8,
+    "userRatingCount": 930,
+    "types": [
+      "tourist_attraction",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider"
+    ],
+    "aliases": [
+      "Viewpoint.8-Amalfi Dr"
+    ],
+    "score": 45
+  },
+  {
+    "id": "spot-medieval-castle-castellammare-di-stabia-ChIJRZk4",
+    "name": "Medieval Castle - Castellammare di Stabia",
+    "slug": "medieval-castle-castellammare-di-stabia",
+    "type": "coastal_view",
+    "rideType": "coastal",
+    "country": "IT",
+    "scope": "italy-south",
+    "scopeName": "Italia Sud",
+    "lat": 40.688202499999996,
+    "lng": 14.474094,
+    "regionHint": "Costiera Amalfitana",
+    "address": "Strada Statale 145 Sorrentina, km 10.10, 80053 Castellammare di Stabia NA, Italy",
+    "rating": 4.5,
+    "userRatingCount": 856,
+    "types": [
+      "castle",
+      "wedding_venue",
+      "historical_place",
+      "event_venue",
+      "service",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "coast",
+      "sea",
+      "scenic",
+      "rider",
+      "panoramic"
+    ],
+    "aliases": [
+      "Medieval Castle - Castellammare di Stabia"
+    ],
+    "score": 44
+  },
+  {
+    "id": "spot-craco-historical-center-ChIJFc26",
+    "name": "Craco Historical Center",
+    "slug": "craco-historical-center",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "italy-south",
+    "scopeName": "Italia Sud",
+    "lat": 40.3781678,
+    "lng": 16.4403541,
+    "regionHint": "Pollino",
+    "address": "Strada Comunale Craco-Montalbano Jonico, 6, 75010 Craco MT, Italy",
+    "rating": 4.5,
+    "userRatingCount": 3214,
+    "types": [
+      "tourist_attraction",
+      "visitor_center",
+      "tourist_information_center",
+      "historical_place",
+      "tour_agency",
+      "travel_agency",
+      "point_of_interest",
+      "service",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider"
+    ],
+    "aliases": [
+      "Craco Historical Center"
+    ],
+    "score": 43
+  },
+  {
+    "id": "spot-punto-panoramico-terrazza-sul-mare-3-scogli-ChIJDcr_",
+    "name": "Punto Panoramico - Terrazza sul Mare 3 scogli",
+    "slug": "punto-panoramico-terrazza-sul-mare-3-scogli",
+    "type": "coastal_view",
+    "rideType": "coastal",
+    "country": "IT",
+    "scope": "italy-south",
+    "scopeName": "Italia Sud",
+    "lat": 40.058348099999996,
+    "lng": 15.5001684,
+    "regionHint": "Cilento",
+    "address": "Terza Traversa Rione Nuovo, 13, 84070 Scario SA, Italy",
+    "rating": 5,
+    "userRatingCount": 4,
+    "types": [
+      "hiking_area",
+      "sports_activity_location",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "coast",
+      "sea",
+      "scenic",
+      "rider",
+      "panoramic"
+    ],
+    "aliases": [
+      "Punto Panoramico - Terrazza sul Mare 3 scogli"
+    ],
+    "score": 43
+  },
+  {
+    "id": "spot-amalfi-coast-private-driver-ChIJbyeV",
+    "name": "Amalfi Coast Private Driver",
+    "slug": "amalfi-coast-private-driver",
+    "type": "coastal_view",
+    "rideType": "coastal",
+    "country": "IT",
+    "scope": "italy-south",
+    "scopeName": "Italia Sud",
+    "lat": 40.6364781,
+    "lng": 14.592389800000001,
+    "regionHint": "Costiera Amalfitana",
+    "address": "Via Giovanni Amendola, 34, 84011 Amalfi SA, Italy",
+    "rating": 4.9,
+    "userRatingCount": 64,
+    "types": [
+      "transportation_service",
+      "chauffeur_service",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "coast",
+      "sea",
+      "scenic",
+      "rider",
+      "panoramic"
+    ],
+    "aliases": [
+      "Amalfi Coast Private Driver"
+    ],
+    "score": 42
+  },
+  {
+    "id": "spot-casa-gargano-ravello-amalfi-coast-ChIJI8Ox",
+    "name": "Casa Gargano Ravello Amalfi Coast",
+    "slug": "casa-gargano-ravello-amalfi-coast",
+    "type": "coastal_view",
+    "rideType": "coastal",
+    "country": "IT",
+    "scope": "italy-south",
+    "scopeName": "Italia Sud",
+    "lat": 40.6371971,
+    "lng": 14.611790500000001,
+    "regionHint": "Costiera Amalfitana",
+    "address": "via Amalfi 12, 84010 Castiglione di, 84010 Ravello SA, Italy",
+    "rating": 4.9,
+    "userRatingCount": 37,
+    "types": [
+      "extended_stay_hotel",
+      "hotel",
+      "apartment_building",
+      "lodging",
+      "service",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "coast",
+      "sea",
+      "scenic",
+      "rider",
+      "panoramic"
+    ],
+    "aliases": [
+      "Casa Gargano Ravello Amalfi Coast"
+    ],
+    "score": 42
+  },
+  {
+    "id": "spot-palazzo-san-giovanni-amalfi-coast-ChIJ2aMG",
+    "name": "Palazzo San Giovanni Amalfi Coast",
+    "slug": "palazzo-san-giovanni-amalfi-coast",
+    "type": "coastal_view",
+    "rideType": "coastal",
+    "country": "IT",
+    "scope": "italy-south",
+    "scopeName": "Italia Sud",
+    "lat": 40.643364,
+    "lng": 14.602447399999999,
+    "regionHint": "Costiera Amalfitana",
+    "address": "Via Noce, 9, 84010 Pontone SA, Italy",
+    "rating": 4.7,
+    "userRatingCount": 139,
+    "types": [
+      "hotel",
+      "lodging",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "coast",
+      "sea",
+      "scenic",
+      "rider",
+      "panoramic"
+    ],
+    "aliases": [
+      "Palazzo San Giovanni Amalfi Coast"
+    ],
+    "score": 42
+  },
+  {
+    "id": "spot-passo-delle-crocelle-ChIJ7a74",
+    "name": "Passo delle Crocelle",
+    "slug": "passo-delle-crocelle",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "italy-south",
+    "scopeName": "Italia Sud",
+    "lat": 40.783333299999995,
+    "lng": 15.549999999999999,
+    "regionHint": "Dolomiti Lucane",
+    "address": "Passo delle Crocelle, 85051 Bella, Province of Potenza, Italy",
+    "rating": 4.6,
+    "userRatingCount": 5,
+    "types": [
+      "natural_feature",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic"
+    ],
+    "aliases": [
+      "Passo delle Crocelle"
+    ],
+    "score": 42
+  },
+  {
+    "id": "spot-passo-dello-scalone-ChIJ1V38",
+    "name": "Passo dello Scalone",
+    "slug": "passo-dello-scalone",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "italy-south",
+    "scopeName": "Italia Sud",
+    "lat": 39.6299912,
+    "lng": 15.9402622,
+    "regionHint": "Pollino",
+    "address": "Passo dello Scalone, 87010 Sant'Agata di Esaro, Province of Cosenza, Italy",
+    "rating": 4.6,
+    "userRatingCount": 21,
+    "types": [
+      "natural_feature",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic"
+    ],
+    "aliases": [
+      "Passo dello Scalone"
+    ],
+    "score": 42
+  },
+  {
+    "id": "spot-landscape-on-procida-and-ischia-ChIJ74IU",
+    "name": "Landscape on Procida and Ischia",
+    "slug": "landscape-on-procida-and-ischia",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "italy-south",
+    "scopeName": "Italia Sud",
+    "lat": 40.7889293,
+    "lng": 14.0599987,
+    "regionHint": "Costiera Amalfitana",
+    "address": "Via Panoramica, 80070 Monte di Procida NA, Italy",
+    "rating": 4.8,
+    "userRatingCount": 528,
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider"
+    ],
+    "aliases": [
+      "Landscape on Procida and Ischia"
+    ],
+    "score": 41
+  },
+  {
+    "id": "spot-maratea-viewpoint-ChIJEeWe",
+    "name": "Maratea Viewpoint",
+    "slug": "maratea-viewpoint",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "italy-south",
+    "scopeName": "Italia Sud",
+    "lat": 39.987565,
+    "lng": 15.708703000000002,
+    "regionHint": "Dolomiti Lucane",
+    "address": "Via Maremorto, snc, 85046 Maratea PZ, Italy",
+    "rating": 5,
+    "userRatingCount": 1,
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider"
+    ],
+    "aliases": [
+      "Maratea Viewpoint"
+    ],
+    "score": 41
+  },
+  {
+    "id": "spot-scenic-road-to-sorrento-ChIJbRnQ",
+    "name": "Scenic Road to Sorrento",
+    "slug": "scenic-road-to-sorrento",
+    "type": "coastal_view",
+    "rideType": "coastal",
+    "country": "IT",
+    "scope": "italy-south",
+    "scopeName": "Italia Sud",
+    "lat": 40.688806,
+    "lng": 14.472835000000002,
+    "regionHint": "Costiera Amalfitana",
+    "address": "Salita Quisisana, 62, 80053 Castellammare di Stabia NA, Italy",
+    "rating": 4.2,
+    "userRatingCount": 17,
+    "types": [
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "coast",
+      "sea",
+      "scenic",
+      "rider",
+      "panoramic"
+    ],
+    "aliases": [
+      "Scenic Road to Sorrento"
+    ],
+    "score": 41
+  },
+  {
+    "id": "spot-trulli-panoramic-view-ChIJ-4Fu",
+    "name": "Trulli Panoramic View",
+    "slug": "trulli-panoramic-view",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "italy-south",
+    "scopeName": "Italia Sud",
+    "lat": 40.7835026,
+    "lng": 17.238069199999998,
+    "regionHint": "Murge / Valle d'Itria",
+    "address": "Piazza Plebiscito, 70011 Alberobello BA, Italy",
+    "rating": 4.8,
+    "userRatingCount": 482,
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider"
+    ],
+    "aliases": [
+      "Trulli Panoramic View"
+    ],
+    "score": 41
+  },
+  {
+    "id": "spot-passeggiata-panoramica-passo-delle-cornacchie-ChIJSVks",
+    "name": "Passeggiata Panoramica - Passo delle Cornacchie",
+    "slug": "passeggiata-panoramica-passo-delle-cornacchie",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "italy-south",
+    "scopeName": "Italia Sud",
+    "lat": 39.248092299999996,
+    "lng": 16.521952199999998,
+    "regionHint": "Sila / Aspromonte",
+    "address": "SS108bis, 12, 87055 San Giovanni in Fiore CS, Italy",
+    "rating": 2.8,
+    "userRatingCount": 4,
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic"
+    ],
+    "aliases": [
+      "Passeggiata Panoramica - Passo delle Cornacchie"
+    ],
+    "score": 40
+  },
+  {
+    "id": "spot-belvedere-murgia-timone-ChIJy4kr",
+    "name": "Belvedere Murgia Timone",
+    "slug": "belvedere-murgia-timone",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "italy-south",
+    "scopeName": "Italia Sud",
+    "lat": 40.6638793,
+    "lng": 16.6179409,
+    "regionHint": "Murge / Valle d'Itria",
+    "address": "Contrada Murgia Timone, 75100 Matera MT, Italy",
+    "rating": 4.7,
+    "userRatingCount": 866,
+    "types": [
+      "observation_deck",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider"
+    ],
+    "aliases": [
+      "Belvedere Murgia Timone"
+    ],
+    "score": 39
+  },
+  {
+    "id": "spot-belvedere-san-costabile-ChIJ34jh",
+    "name": "Belvedere San Costabile",
+    "slug": "belvedere-san-costabile",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "italy-south",
+    "scopeName": "Italia Sud",
+    "lat": 40.27962540000001,
+    "lng": 14.9517113,
+    "regionHint": "Cilento",
+    "address": "84048 Castellabate, SA, Italy",
+    "rating": 4.8,
+    "userRatingCount": 545,
+    "types": [
+      "observation_deck",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider"
+    ],
+    "aliases": [
+      "Belvedere San Costabile"
+    ],
+    "score": 39
+  },
+  {
+    "id": "spot-punto-panoramico-san-nicola-ChIJWwdw",
+    "name": "Punto panoramico San Nicola",
+    "slug": "punto-panoramico-san-nicola",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "italy-south",
+    "scopeName": "Italia Sud",
+    "lat": 39.846039000000005,
+    "lng": 15.779439,
+    "regionHint": "Pollino",
+    "address": "Unnamed Road, 87020, 87020 San Nicola Arcella CS, Italy",
+    "rating": 4.8,
+    "userRatingCount": 9,
+    "types": [
+      "observation_deck",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider"
+    ],
+    "aliases": [
+      "Punto panoramico San Nicola"
+    ],
+    "score": 39
+  },
+  {
+    "id": "spot-viewpoint-ChIJmUbS",
+    "name": "Viewpoint",
+    "slug": "viewpoint",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "italy-south",
+    "scopeName": "Italia Sud",
+    "lat": 40.6167346,
+    "lng": 14.4387764,
+    "regionHint": "Costiera Amalfitana",
+    "address": "SS163, 80063 Vico Equense NA, Italy",
+    "rating": 4.9,
+    "userRatingCount": 214,
+    "types": [
+      "observation_deck",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider"
+    ],
+    "aliases": [
+      "Viewpoint"
+    ],
+    "score": 39
+  },
+  {
+    "id": "spot-punto-panoramico-ChIJK6yo",
+    "name": "Punto Panoramico",
+    "slug": "punto-panoramico",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "italy-south",
+    "scopeName": "Italia Sud",
+    "lat": 39.8648648,
+    "lng": 15.794951300000001,
+    "regionHint": "Pollino",
+    "address": "SP1, 87020 Praia a Mare CS, Italy",
+    "rating": 4.5,
+    "userRatingCount": 20,
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider"
+    ],
+    "aliases": [
+      "Punto Panoramico"
+    ],
+    "score": 38
+  },
+  {
+    "id": "spot-rb-ride-giostra-di-holler-ChIJh7DV",
+    "name": "RB- RIDE, Giostra di Holler",
+    "slug": "rb-ride-giostra-di-holler",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "italy-south",
+    "scopeName": "Italia Sud",
+    "lat": 40.0207422,
+    "lng": 16.1547467,
+    "regionHint": "Pollino",
+    "address": "Unnamed Road,, 85030 San Severino Lucano PZ, Italy",
+    "rating": 4.5,
+    "userRatingCount": 223,
+    "types": [
+      "tourist_attraction",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider"
+    ],
+    "aliases": [
+      "RB- RIDE, Giostra di Holler"
+    ],
+    "score": 38
+  },
+  {
+    "id": "spot-passo-acquabona-ChIJbxt_",
+    "name": "Passo Acquabona",
+    "slug": "passo-acquabona",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "italy-south",
+    "scopeName": "Italia Sud",
+    "lat": 39.033333299999995,
+    "lng": 16.3333333,
+    "regionHint": "Sila / Aspromonte",
+    "address": "Passo Acquabona, 88041 Decollatura, Province of Catanzaro, Italy",
+    "rating": 4.3,
+    "userRatingCount": 3,
+    "types": [
+      "natural_feature",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic"
+    ],
+    "aliases": [
+      "Passo Acquabona"
+    ],
+    "score": 37
+  },
+  {
+    "id": "spot-passo-ceraso-ChIJQ9n2",
+    "name": "Passo Ceraso",
+    "slug": "passo-ceraso",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "italy-south",
+    "scopeName": "Italia Sud",
+    "lat": 39.0520597,
+    "lng": 16.2867853,
+    "regionHint": "Sila / Aspromonte",
+    "address": "Passo Ceraso, 88040 Conflenti CZ, Italy",
+    "rating": 4.2,
+    "userRatingCount": 6,
+    "types": [
+      "natural_feature",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic"
+    ],
+    "aliases": [
+      "Passo Ceraso"
+    ],
+    "score": 37
+  },
+  {
+    "id": "spot-passo-crocetta-ChIJr2Nq",
+    "name": "Passo Crocetta",
+    "slug": "passo-crocetta",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "italy-south",
+    "scopeName": "Italia Sud",
+    "lat": 39.3166667,
+    "lng": 16.1166667,
+    "regionHint": "Sila / Aspromonte",
+    "address": "Passo Crocetta, 87037 San Fili CS, Italy",
+    "rating": 4,
+    "userRatingCount": 7,
+    "types": [
+      "natural_feature",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic"
+    ],
+    "aliases": [
+      "Passo Crocetta"
+    ],
+    "score": 37
+  },
+  {
+    "id": "spot-the-amalfi-coast-wedding-planner-ChIJZ2yf",
+    "name": "The Amalfi Coast Wedding Planner",
+    "slug": "the-amalfi-coast-wedding-planner",
+    "type": "coastal_view",
+    "rideType": "coastal",
+    "country": "IT",
+    "scope": "italy-south",
+    "scopeName": "Italia Sud",
+    "lat": 40.635708400000006,
+    "lng": 14.6021725,
+    "regionHint": "Costiera Amalfitana",
+    "address": "Supportico Rua, 8, 84011 Amalfi SA, Italy",
+    "rating": 5,
+    "userRatingCount": 8,
+    "types": [
+      "service",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "coast",
+      "sea",
+      "scenic",
+      "rider",
+      "panoramic"
+    ],
+    "aliases": [
+      "The Amalfi Coast Wedding Planner"
+    ],
+    "score": 37
+  },
+  {
+    "id": "spot-lungomare-la-rotonda-ChIJ_3oi",
+    "name": "Lungomare La Rotonda",
+    "slug": "lungomare-la-rotonda",
+    "type": "coastal_view",
+    "rideType": "coastal",
+    "country": "IT",
+    "scope": "italy-south",
+    "scopeName": "Italia Sud",
+    "lat": 41.633385,
+    "lng": 15.927668699999998,
+    "regionHint": "Gargano",
+    "address": "71043 Manfredonia, Province of Foggia, Italy",
+    "rating": 4.4,
+    "userRatingCount": 229,
+    "types": [
+      "observation_deck",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "coast",
+      "sea",
+      "scenic",
+      "rider",
+      "panoramic"
+    ],
+    "aliases": [
+      "Lungomare La Rotonda"
+    ],
+    "score": 36
+  },
+  {
+    "id": "spot-pane-panorama-ChIJB0SS",
+    "name": "Pane & Panorama",
+    "slug": "pane-panorama",
+    "type": "coastal_view",
+    "rideType": "coastal",
+    "country": "IT",
+    "scope": "italy-south",
+    "scopeName": "Italia Sud",
+    "lat": 40.6711193,
+    "lng": 14.731933,
+    "regionHint": "Costiera Amalfitana",
+    "address": "Via Enrico de Marinis Orientale , 13, 84019 Vietri sul Mare SA, Italy",
+    "rating": 4.5,
+    "userRatingCount": 505,
+    "types": [
+      "sandwich_shop",
+      "restaurant",
+      "food",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "coast",
+      "sea",
+      "scenic",
+      "rider",
+      "panoramic"
+    ],
+    "aliases": [
+      "Pane & Panorama"
+    ],
+    "score": 36
+  },
+  {
+    "id": "spot-panoramic-terrace-ChIJlf1Q",
+    "name": "Panoramic terrace",
+    "slug": "panoramic-terrace",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "italy-south",
+    "scopeName": "Italia Sud",
+    "lat": 40.5303275,
+    "lng": 16.046693299999998,
+    "regionHint": "Dolomiti Lucane",
+    "address": "Via Regina Margherita, 2, 85010 Castelmezzano PZ, Italy",
+    "rating": 4.9,
+    "userRatingCount": 42,
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider"
+    ],
+    "aliases": [
+      "Panoramic terrace"
+    ],
+    "score": 36
+  },
+  {
+    "id": "spot-terrazza-sul-mare-pisciotta-palinuro-ChIJjZAt",
+    "name": "Terrazza sul mare Pisciotta - Palinuro",
+    "slug": "terrazza-sul-mare-pisciotta-palinuro",
+    "type": "coastal_view",
+    "rideType": "coastal",
+    "country": "IT",
+    "scope": "italy-south",
+    "scopeName": "Italia Sud",
+    "lat": 40.10585,
+    "lng": 15.236831399999998,
+    "regionHint": "Cilento",
+    "address": "Via Fiori, 84066 Pisciotta SA, Italy",
+    "rating": 4.8,
+    "userRatingCount": 78,
+    "types": [
+      "lodging",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "coast",
+      "sea",
+      "scenic",
+      "rider",
+      "panoramic"
+    ],
+    "aliases": [
+      "Terrazza sul mare Pisciotta - Palinuro"
+    ],
+    "score": 36
+  },
+  {
+    "id": "spot-colle-dell-impiso-ChIJQVho",
+    "name": "Colle dell'Impiso",
+    "slug": "colle-dell-impiso",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "italy-south",
+    "scopeName": "Italia Sud",
+    "lat": 39.9337152,
+    "lng": 16.162034,
+    "regionHint": "Pollino",
+    "address": "85040 Viggianello, Province of Potenza, Italy",
+    "rating": 4.7,
+    "userRatingCount": 313,
+    "types": [
+      "hiking_area",
+      "tourist_attraction",
+      "sports_activity_location",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic"
+    ],
+    "aliases": [
+      "Colle dell'Impiso"
+    ],
+    "score": 35
+  },
+  {
+    "id": "spot-localita-panoramica-postiglione-ChIJUYuy",
+    "name": "Località panoramica \"Postiglione\"",
+    "slug": "localita-panoramica-postiglione",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "italy-south",
+    "scopeName": "Italia Sud",
+    "lat": 40.3421047,
+    "lng": 15.2616,
+    "regionHint": "Cilento",
+    "address": "Unnamed Road, 84050, 84050 Magliano Vetere SA, Italy",
+    "rating": 4,
+    "userRatingCount": 3,
+    "types": [
+      "tourist_attraction",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider"
+    ],
+    "aliases": [
+      "Località panoramica \"Postiglione\""
+    ],
+    "score": 35
+  },
+  {
+    "id": "spot-panorama-belvedere-ChIJY-WK",
+    "name": "Panorama belvedere",
+    "slug": "panorama-belvedere",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "italy-south",
+    "scopeName": "Italia Sud",
+    "lat": 40.8485331,
+    "lng": 15.5400964,
+    "regionHint": "Dolomiti Lucane",
+    "address": "85020 Ruvo del Monte, Province of Potenza, Italy",
+    "rating": 5,
+    "userRatingCount": 2,
+    "types": [
+      "tourist_attraction",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider"
+    ],
+    "aliases": [
+      "Panorama belvedere"
+    ],
+    "score": 35
+  },
+  {
+    "id": "spot-viewpoint-ChIJVRYP",
+    "name": "Viewpoint",
+    "slug": "viewpoint",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "italy-south",
+    "scopeName": "Italia Sud",
+    "lat": 40.7350316,
+    "lng": 17.577780999999998,
+    "regionHint": "Murge / Valle d'Itria",
+    "address": "Via Clemente Leonardo, 111, 72017 Ostuni BR, Italy",
+    "rating": 4.8,
+    "userRatingCount": 8,
+    "types": [
+      "tourist_attraction",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider"
+    ],
+    "aliases": [
+      "Viewpoint"
+    ],
+    "score": 35
+  },
+  {
+    "id": "spot-viewpoint-from-terrace-ChIJF-S9",
+    "name": "Viewpoint from Terrace",
+    "slug": "viewpoint-from-terrace",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "italy-south",
+    "scopeName": "Italia Sud",
+    "lat": 40.8205264,
+    "lng": 14.1201008,
+    "regionHint": "Costiera Amalfitana",
+    "address": "R4CC+62, 80078 Pozzuoli, Metropolitan City of Naples, Italy",
+    "rating": 4.8,
+    "userRatingCount": 19,
+    "types": [
+      "tourist_attraction",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider"
+    ],
+    "aliases": [
+      "Viewpoint from Terrace"
+    ],
+    "score": 35
+  },
+  {
+    "id": "spot-appartamenti-in-riva-al-mare-ChIJCwBy",
+    "name": "Appartamenti In Riva Al Mare",
+    "slug": "appartamenti-in-riva-al-mare",
+    "type": "coastal_view",
+    "rideType": "coastal",
+    "country": "IT",
+    "scope": "italy-south",
+    "scopeName": "Italia Sud",
+    "lat": 41.9466616,
+    "lng": 16.0094219,
+    "regionHint": "Gargano",
+    "address": "Strada Prov.le Della, Via Marina, 7, 71010 Peschici FG, Italy",
+    "rating": 4.3,
+    "userRatingCount": 39,
+    "types": [
+      "extended_stay_hotel",
+      "hotel",
+      "lodging",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "coast",
+      "sea",
+      "scenic",
+      "rider",
+      "panoramic"
+    ],
+    "aliases": [
+      "Appartamenti In Riva Al Mare"
+    ],
+    "score": 34
+  },
+  {
+    "id": "spot-strada-panoramica-ChIJxxxB",
+    "name": "Strada Panoramica",
+    "slug": "strada-panoramica",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "italy-south",
+    "scopeName": "Italia Sud",
+    "lat": 40.4999391,
+    "lng": 16.448823,
+    "regionHint": "Dolomiti Lucane",
+    "address": "Strada Provinciale Ferrandina - Stigliano, 211, 75013 Ferrandina MT, Italy",
+    "rating": 4.5,
+    "userRatingCount": 2,
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider"
+    ],
+    "aliases": [
+      "Strada Panoramica"
+    ],
+    "score": 34
+  },
+  {
+    "id": "spot-viewpoint-of-the-santa-maria-del-castello-ChIJBb_p",
+    "name": "Viewpoint of the Santa Maria Del Castello",
+    "slug": "viewpoint-of-the-santa-maria-del-castello",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "italy-south",
+    "scopeName": "Italia Sud",
+    "lat": 40.637478699999996,
+    "lng": 14.480309700000001,
+    "regionHint": "Costiera Amalfitana",
+    "address": "Via Santa Maria del Castello, 80069 Vico Equense NA, Italy",
+    "rating": 4.8,
+    "userRatingCount": 77,
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider"
+    ],
+    "aliases": [
+      "Viewpoint of the Santa Maria Del Castello"
+    ],
+    "score": 34
+  },
+  {
+    "id": "spot-viewpoint-5-amalfi-dr-ChIJm5m-",
+    "name": "Viewpoint.5-Amalfi Dr",
+    "slug": "viewpoint-5-amalfi-dr",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "italy-south",
+    "scopeName": "Italia Sud",
+    "lat": 40.6175804,
+    "lng": 14.440536400000001,
+    "regionHint": "Costiera Amalfitana",
+    "address": "SS163, 80063 Vico Equense NA, Italy",
+    "rating": 4.8,
+    "userRatingCount": 135,
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider"
+    ],
+    "aliases": [
+      "Viewpoint.5-Amalfi Dr"
+    ],
+    "score": 34
+  },
+  {
+    "id": "spot-passo-s-vito-ChIJX0LB",
+    "name": "Passo S.Vito",
+    "slug": "passo-s-vito",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "italy-south",
+    "scopeName": "Italia Sud",
+    "lat": 40.3149977,
+    "lng": 15.997713499999998,
+    "regionHint": "Dolomiti Lucane",
+    "address": "85053 Montemurro, Province of Potenza, Italy",
+    "rating": 4,
+    "userRatingCount": 2,
+    "types": [
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic"
+    ],
+    "aliases": [
+      "Passo S.Vito"
+    ],
+    "score": 33
+  },
+  {
+    "id": "spot-amalfi-coast-destination-private-tours-ChIJ__JJ",
+    "name": "Amalfi Coast Destination Private Tours",
+    "slug": "amalfi-coast-destination-private-tours",
+    "type": "coastal_view",
+    "rideType": "coastal",
+    "country": "IT",
+    "scope": "italy-south",
+    "scopeName": "Italia Sud",
+    "lat": 40.619076799999995,
+    "lng": 14.561580999999999,
+    "regionHint": "Costiera Amalfitana",
+    "address": "V. Tobulum, 4, 84011 Amalfi SA, Italy",
+    "rating": 4.5,
+    "userRatingCount": 16,
+    "types": [
+      "chauffeur_service",
+      "transportation_service",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "coast",
+      "sea",
+      "scenic",
+      "rider",
+      "panoramic"
+    ],
+    "aliases": [
+      "Amalfi Coast Destination Private Tours"
+    ],
+    "score": 32
+  },
+  {
+    "id": "spot-passo-sella-di-conza-ChIJV0Rn",
+    "name": "Passo Sella di Conza",
+    "slug": "passo-sella-di-conza",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "italy-south",
+    "scopeName": "Italia Sud",
+    "lat": 40.8383768,
+    "lng": 15.3029694,
+    "regionHint": "Dolomiti Lucane",
+    "address": "Passo Sella di Conza, 84020 Castelnuovo di Conza SA, Italy",
+    "rating": 2.7,
+    "userRatingCount": 6,
+    "types": [
+      "natural_feature",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic"
+    ],
+    "aliases": [
+      "Passo Sella di Conza"
+    ],
+    "score": 32
+  },
+  {
+    "id": "spot-roadhouse-motorcycle-s-r-l-ChIJ50Ms",
+    "name": "Roadhouse Motorcycle S.R.L.",
+    "slug": "roadhouse-motorcycle-s-r-l",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "italy-south",
+    "scopeName": "Italia Sud",
+    "lat": 40.5877178,
+    "lng": 17.0564042,
+    "regionHint": "Murge / Valle d'Itria",
+    "address": "Contrada Lupini snc c/o Triumph, Via Enrico de Nicola, 12, 74019 Palagiano TA, Italy",
+    "rating": 4.4,
+    "userRatingCount": 250,
+    "types": [
+      "clothing_store",
+      "bicycle_store",
+      "sports_activity_location",
+      "sporting_goods_store",
+      "auto_parts_store",
+      "car_repair",
+      "manufacturer",
+      "store",
+      "point_of_interest",
+      "service",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider"
+    ],
+    "aliases": [
+      "Roadhouse Motorcycle S.R.L."
+    ],
+    "score": 32
+  },
+  {
+    "id": "spot-acquedotto-punto-panoramico-ChIJ87zA",
+    "name": "Acquedotto - Punto panoramico",
+    "slug": "acquedotto-punto-panoramico",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "italy-south",
+    "scopeName": "Italia Sud",
+    "lat": 41.085028,
+    "lng": 14.504554499999998,
+    "regionHint": "Irpinia / Sannio",
+    "address": "3GP3+2P, 82019 Sant'Agata de' Goti, Province of Benevento, Italy",
+    "rating": 5,
+    "userRatingCount": 2,
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider"
+    ],
+    "aliases": [
+      "Acquedotto - Punto panoramico"
+    ],
+    "score": 31
+  },
+  {
+    "id": "spot-punto-panoramico-ChIJ61jA",
+    "name": "Punto panoramico",
+    "slug": "punto-panoramico",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "italy-south",
+    "scopeName": "Italia Sud",
+    "lat": 40.2115308,
+    "lng": 16.204813899999998,
+    "regionHint": "Dolomiti Lucane",
+    "address": "Via Vittorio Emanuele, 13, 85036 Roccanova PZ, Italy",
+    "rating": 5,
+    "userRatingCount": 1,
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider"
+    ],
+    "aliases": [
+      "Punto panoramico"
+    ],
+    "score": 31
+  },
+  {
+    "id": "spot-punto-panoramico-pietrapertosa-ChIJseUB",
+    "name": "Punto panoramico Pietrapertosa",
+    "slug": "punto-panoramico-pietrapertosa",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "italy-south",
+    "scopeName": "Italia Sud",
+    "lat": 40.516996,
+    "lng": 16.062886,
+    "regionHint": "Dolomiti Lucane",
+    "address": "Via della Speranza, 105, 85010 Pietrapertosa PZ, Italy",
+    "rating": 4.8,
+    "userRatingCount": 16,
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider"
+    ],
+    "aliases": [
+      "Punto panoramico Pietrapertosa"
+    ],
+    "score": 31
+  },
+  {
+    "id": "spot-rotonda-vista-panoramica-ChIJ0VEh",
+    "name": "Rotonda Vista Panoramica",
+    "slug": "rotonda-vista-panoramica",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "italy-south",
+    "scopeName": "Italia Sud",
+    "lat": 40.831859,
+    "lng": 17.3317802,
+    "regionHint": "Murge / Valle d'Itria",
+    "address": "SP2, 31, 72015 Selva di Fasano BR, Italy",
+    "rating": 4.5,
+    "userRatingCount": 74,
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider"
+    ],
+    "aliases": [
+      "Rotonda Vista Panoramica"
+    ],
+    "score": 31
+  },
+  {
+    "id": "spot-terrazze-panoramiche-ChIJiZnK",
+    "name": "Terrazze panoramiche",
+    "slug": "terrazze-panoramiche",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "italy-south",
+    "scopeName": "Italia Sud",
+    "lat": 40.7539783,
+    "lng": 15.485766300000002,
+    "regionHint": "Dolomiti Lucane",
+    "address": "Via Raia, 1, 85054 Muro Lucano PZ, Italy",
+    "rating": 5,
+    "userRatingCount": 1,
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider"
+    ],
+    "aliases": [
+      "Terrazze panoramiche"
+    ],
+    "score": 31
+  },
+  {
+    "id": "spot-vista-panoramica-ChIJFxgO",
+    "name": "Vista panoramica",
+    "slug": "vista-panoramica",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "italy-south",
+    "scopeName": "Italia Sud",
+    "lat": 40.7351518,
+    "lng": 17.5779168,
+    "regionHint": "Murge / Valle d'Itria",
+    "address": "Via Clemente Leonardo, 123, 72017 Ostuni BR, Italy",
+    "rating": 4.7,
+    "userRatingCount": 26,
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider"
+    ],
+    "aliases": [
+      "Vista panoramica"
+    ],
+    "score": 31
+  },
+  {
+    "id": "spot-big-mountain-of-viggiano-ChIJs1gP",
+    "name": "Big Mountain Of Viggiano",
+    "slug": "big-mountain-of-viggiano",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "italy-south",
+    "scopeName": "Italia Sud",
+    "lat": 40.3809946,
+    "lng": 15.857045699999999,
+    "regionHint": "Dolomiti Lucane",
+    "address": "85059 Viggiano, Province of Potenza, Italy",
+    "rating": 4.6,
+    "userRatingCount": 360,
+    "types": [
+      "ski_resort",
+      "tourist_attraction",
+      "sports_activity_location",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic"
+    ],
+    "aliases": [
+      "Big Mountain Of Viggiano"
+    ],
+    "score": 30
+  },
+  {
+    "id": "spot-gole-e-cascate-del-crocchio-ChIJGZFU",
+    "name": "Gole e cascate del Crocchio",
+    "slug": "gole-e-cascate-del-crocchio",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "italy-south",
+    "scopeName": "Italia Sud",
+    "lat": 39.0201728,
+    "lng": 16.7319605,
+    "regionHint": "Sila / Aspromonte",
+    "address": "SS 109 della Piccola Sila, 88050, 88050 Cerva CZ, Italy",
+    "rating": 4.6,
+    "userRatingCount": 264,
+    "types": [
+      "tourist_attraction",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic"
+    ],
+    "aliases": [
+      "Gole e cascate del Crocchio"
+    ],
+    "score": 30
+  },
+  {
+    "id": "spot-amazing-viewpoint-ChIJwemn",
+    "name": "Amazing Viewpoint",
+    "slug": "amazing-viewpoint",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "italy-south",
+    "scopeName": "Italia Sud",
+    "lat": 39.9745698,
+    "lng": 15.739674199999998,
+    "regionHint": "Dolomiti Lucane",
+    "address": "85046 Maratea, Province of Potenza, Italy",
+    "rating": 5,
+    "userRatingCount": 6,
+    "types": [
+      "observation_deck",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider"
+    ],
+    "aliases": [
+      "Amazing Viewpoint"
+    ],
+    "score": 29
+  },
+  {
+    "id": "spot-belvedere-ChIJ8bYM",
+    "name": "Belvedere",
+    "slug": "belvedere",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "italy-south",
+    "scopeName": "Italia Sud",
+    "lat": 40.920491999999996,
+    "lng": 14.9966256,
+    "regionHint": "Irpinia / Sannio",
+    "address": "Via S. Benedetto di Sopra, 28, 83040 Montemarano AV, Italy",
+    "rating": 5,
+    "userRatingCount": 4,
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider"
+    ],
+    "aliases": [
+      "Belvedere"
+    ],
+    "score": 29
+  },
+  {
+    "id": "spot-belvedere-murese-murano-ChIJ6wA0",
+    "name": "Belvedere murese/murano",
+    "slug": "belvedere-murese-murano",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "italy-south",
+    "scopeName": "Italia Sud",
+    "lat": 40.7517886,
+    "lng": 15.4836315,
+    "regionHint": "Dolomiti Lucane",
+    "address": "SS7, 68, 85054 Muro Lucano PZ, Italy",
+    "rating": 4.8,
+    "userRatingCount": 22,
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider"
+    ],
+    "aliases": [
+      "Belvedere murese/murano"
+    ],
+    "score": 29
+  },
+  {
+    "id": "spot-piazzola-belvedere-ChIJlzrS",
+    "name": "Piazzola Belvedere",
+    "slug": "piazzola-belvedere",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "italy-south",
+    "scopeName": "Italia Sud",
+    "lat": 40.072849,
+    "lng": 15.750663900000001,
+    "regionHint": "Cilento",
+    "address": "SS585, 85040 Rivello PZ, Italy",
+    "rating": 4.7,
+    "userRatingCount": 26,
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider"
+    ],
+    "aliases": [
+      "Piazzola Belvedere"
+    ],
+    "score": 29
+  },
+  {
+    "id": "spot-statua-del-cristo-lower-viewpoint-ChIJ7eFS",
+    "name": "Statua del Cristo Lower Viewpoint",
+    "slug": "statua-del-cristo-lower-viewpoint",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "italy-south",
+    "scopeName": "Italia Sud",
+    "lat": 39.987493,
+    "lng": 15.723404999999998,
+    "regionHint": "Dolomiti Lucane",
+    "address": "Via Castello, 2, 85046 Santa Caterina PZ, Italy",
+    "rating": 5,
+    "userRatingCount": 7,
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider"
+    ],
+    "aliases": [
+      "Statua del Cristo Lower Viewpoint"
+    ],
+    "score": 29
+  },
+  {
+    "id": "spot-viewpoint-corso-vittorio-emmanuel-ii-ChIJgTs0",
+    "name": "Viewpoint Corso Vittorio Emmanuel II",
+    "slug": "viewpoint-corso-vittorio-emmanuel-ii",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "italy-south",
+    "scopeName": "Italia Sud",
+    "lat": 40.729744100000005,
+    "lng": 17.583489399999998,
+    "regionHint": "Murge / Valle d'Itria",
+    "address": "Corso Vittorio Emanuele II, 161A, 72017 Ostuni BR, Italy",
+    "rating": 5,
+    "userRatingCount": 10,
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider"
+    ],
+    "aliases": [
+      "Viewpoint Corso Vittorio Emmanuel II"
+    ],
+    "score": 29
+  },
+  {
+    "id": "spot-murgia-di-sant-oronzo-ChIJxe3w",
+    "name": "Murgia Di Sant'Oronzo",
+    "slug": "murgia-di-sant-oronzo",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "italy-south",
+    "scopeName": "Italia Sud",
+    "lat": 40.258588599999996,
+    "lng": 16.125954300000004,
+    "regionHint": "Pollino",
+    "address": "Unnamed Road,, 85010 Gallicchio PZ, Italy",
+    "rating": 4.4,
+    "userRatingCount": 9,
+    "types": [
+      "scenic_spot",
+      "tourist_attraction",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider"
+    ],
+    "aliases": [
+      "Murgia Di Sant'Oronzo"
+    ],
+    "score": 28
+  }
+]

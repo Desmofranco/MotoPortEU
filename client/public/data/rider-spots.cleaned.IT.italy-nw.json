@@ -1,0 +1,2722 @@
+[
+  {
+    "id": "spot-col-de-joux-ChIJT_HD",
+    "sourceId": "spot-col-de-joux-ChIJT_HD",
+    "googlePlaceId": null,
+    "name": "Col de Joux",
+    "slug": "col-de-joux",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "italy-nw",
+    "scopeName": "Italia Nord-Ovest",
+    "lat": 45.7540767,
+    "lng": 7.7028586,
+    "region": null,
+    "regionHint": "Aosta / Monte Bianco",
+    "address": "Col de Joux, 11027 Saint-Vincent, Aosta Valley, Italy",
+    "rating": 4.7,
+    "userRatingCount": 139,
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "types": [
+      "natural_feature",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Col de Joux"
+    ],
+    "riderScore": 100
+  },
+  {
+    "id": "spot-col-de-la-seche-ChIJsaUl",
+    "sourceId": "spot-col-de-la-seche-ChIJsaUl",
+    "googlePlaceId": null,
+    "name": "Col de la Sèche",
+    "slug": "col-de-la-seche",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "italy-nw",
+    "scopeName": "Italia Nord-Ovest",
+    "lat": 44.231105899999996,
+    "lng": 7.028121,
+    "region": null,
+    "regionHint": "Cuneese / Alpi Marittime",
+    "address": "Col de la Sèche, Vinadio, Province of Cuneo, Italy",
+    "rating": 5,
+    "userRatingCount": 2,
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "types": [
+      "natural_feature",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Col de la Sèche"
+    ],
+    "riderScore": 100
+  },
+  {
+    "id": "spot-col-de-tende-ChIJSTC9",
+    "sourceId": "spot-col-de-tende-ChIJSTC9",
+    "googlePlaceId": null,
+    "name": "Col de Tende",
+    "slug": "col-de-tende",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "italy-nw",
+    "scopeName": "Italia Nord-Ovest",
+    "lat": 44.1493173,
+    "lng": 7.5617231,
+    "region": null,
+    "regionHint": "Cuneese / Alpi Marittime",
+    "address": "Col de Tende",
+    "rating": 4.5,
+    "userRatingCount": 421,
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "types": [
+      "natural_feature",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Col de Tende"
+    ],
+    "riderScore": 100
+  },
+  {
+    "id": "spot-col-du-loson-ChIJaeBT",
+    "sourceId": "spot-col-du-loson-ChIJaeBT",
+    "googlePlaceId": null,
+    "name": "Col du Loson",
+    "slug": "col-du-loson",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "italy-nw",
+    "scopeName": "Italia Nord-Ovest",
+    "lat": 45.577598699999996,
+    "lng": 7.269273200000001,
+    "region": null,
+    "regionHint": "Aosta / Monte Bianco",
+    "address": "Col du Loson, 11012 Cogne AO, Italy",
+    "rating": 5,
+    "userRatingCount": 19,
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "types": [
+      "natural_feature",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Col du Loson"
+    ],
+    "riderScore": 100
+  },
+  {
+    "id": "spot-col-ferret-ChIJ_3zl",
+    "sourceId": "spot-col-ferret-ChIJ_3zl",
+    "googlePlaceId": null,
+    "name": "Col Ferret",
+    "slug": "col-ferret",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "italy-nw",
+    "scopeName": "Italia Nord-Ovest",
+    "lat": 45.898399999999995,
+    "lng": 7.0683,
+    "region": null,
+    "regionHint": "Aosta / Monte Bianco",
+    "address": "Col Ferret, 11013 Courmayeur, Aosta Valley, Italy",
+    "rating": 4.7,
+    "userRatingCount": 27,
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "types": [
+      "natural_feature",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Col Ferret"
+    ],
+    "riderScore": 100
+  },
+  {
+    "id": "spot-prze-ecz-stelvio-ChIJfbDR",
+    "sourceId": "spot-prze-ecz-stelvio-ChIJfbDR",
+    "googlePlaceId": null,
+    "name": "Passo Stelvio",
+    "slug": "prze-ecz-stelvio",
+    "type": "mountain_pass",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "italy-nw",
+    "scopeName": "Italia Nord-Ovest",
+    "lat": 46.5286571,
+    "lng": 10.4529105,
+    "region": null,
+    "regionHint": "Lago di Como / Stelvio",
+    "address": "Strada del Passo dello Stelvio, 6, 39029 Stelvio BZ, Italy",
+    "rating": 5,
+    "userRatingCount": 4,
+    "rawTypes": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "mountain",
+      "twisty",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Przełęcz Stelvio",
+      "Passo Stelvio"
+    ],
+    "riderScore": 100
+  },
+  {
+    "id": "spot-passo-di-mezzeno-ChIJN81f",
+    "sourceId": "spot-passo-di-mezzeno-ChIJN81f",
+    "googlePlaceId": null,
+    "name": "Passo di Mezzeno",
+    "slug": "passo-di-mezzeno",
+    "type": "mountain_pass",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "italy-nw",
+    "scopeName": "Italia Nord-Ovest",
+    "lat": 45.9799757,
+    "lng": 9.8025846,
+    "region": null,
+    "regionHint": "Lago di Como / Stelvio",
+    "address": "Unnamed Road, BG, 24010 Roncobello BG, Italy",
+    "rating": 4.7,
+    "userRatingCount": 281,
+    "rawTypes": [
+      "scenic_spot",
+      "tourist_attraction",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "scenic_spot",
+      "tourist_attraction",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "mountain",
+      "twisty",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Passo di Mezzeno"
+    ],
+    "riderScore": 95
+  },
+  {
+    "id": "spot-passo-dei-salati-ChIJ5ZI6",
+    "sourceId": "spot-passo-dei-salati-ChIJ5ZI6",
+    "googlePlaceId": null,
+    "name": "Passo dei Salati",
+    "slug": "passo-dei-salati",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "italy-nw",
+    "scopeName": "Italia Nord-Ovest",
+    "lat": 45.8770748,
+    "lng": 7.867871299999999,
+    "region": null,
+    "regionHint": "Aosta / Monte Bianco",
+    "address": "Passo dei Salati, 13021 Alagna Valsesia, Province of Vercelli, Italy",
+    "rating": 4.8,
+    "userRatingCount": 262,
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "types": [
+      "natural_feature",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Passo dei Salati"
+    ],
+    "riderScore": 93
+  },
+  {
+    "id": "spot-passo-d-ampola-ChIJU2FE",
+    "sourceId": "spot-passo-d-ampola-ChIJU2FE",
+    "googlePlaceId": null,
+    "name": "Passo d'Ámpola",
+    "slug": "passo-d-ampola",
+    "type": "mountain_pass",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "italy-nw",
+    "scopeName": "Italia Nord-Ovest",
+    "lat": 45.864399999999996,
+    "lng": 10.6455,
+    "region": null,
+    "regionHint": "Lago di Garda Ovest",
+    "address": "Strada Provinciale 8, 8, 37020 Ferrara di Monte Baldo VR, Italy",
+    "rating": 4.6,
+    "userRatingCount": 302,
+    "rawTypes": [
+      "tourist_attraction",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "tourist_attraction",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "mountain",
+      "twisty",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Passo d'Ámpola"
+    ],
+    "riderScore": 90
+  },
+  {
+    "id": "spot-col-citrin-ChIJGYBD",
+    "sourceId": "spot-col-citrin-ChIJGYBD",
+    "googlePlaceId": null,
+    "name": "Col Citrin",
+    "slug": "col-citrin",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "italy-nw",
+    "scopeName": "Italia Nord-Ovest",
+    "lat": 45.795842099999994,
+    "lng": 7.1444237,
+    "region": null,
+    "regionHint": "Aosta / Monte Bianco",
+    "address": "Col Citrin, 11010 Avise, Aosta Valley, Italy",
+    "rating": 0,
+    "userRatingCount": 0,
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "types": [
+      "natural_feature",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Col Citrin"
+    ],
+    "riderScore": 88
+  },
+  {
+    "id": "spot-col-d-esischie-ChIJCUb9",
+    "sourceId": "spot-col-d-esischie-ChIJCUb9",
+    "googlePlaceId": null,
+    "name": "Col d'Esischie",
+    "slug": "col-d-esischie",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "italy-nw",
+    "scopeName": "Italia Nord-Ovest",
+    "lat": 44.3963629,
+    "lng": 7.1245009999999995,
+    "region": null,
+    "regionHint": "Cuneese / Alpi Marittime",
+    "address": "Colle d'Esischie, 12020 Castelmagno CN, Italy",
+    "rating": 4.7,
+    "userRatingCount": 100,
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "types": [
+      "natural_feature",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Col d'Esischie"
+    ],
+    "riderScore": 88
+  },
+  {
+    "id": "spot-col-de-gippiera-ChIJTbDr",
+    "sourceId": "spot-col-de-gippiera-ChIJTbDr",
+    "googlePlaceId": null,
+    "name": "Col de Gippiera",
+    "slug": "col-de-gippiera",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "italy-nw",
+    "scopeName": "Italia Nord-Ovest",
+    "lat": 44.533333299999995,
+    "lng": 6.8666667,
+    "region": null,
+    "regionHint": "Cuneese / Alpi Marittime",
+    "address": "Col de Gippiera, 12021 Acceglio, Province of Cuneo, Italy",
+    "rating": 0,
+    "userRatingCount": 0,
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "types": [
+      "natural_feature",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Col de Gippiera"
+    ],
+    "riderScore": 88
+  },
+  {
+    "id": "spot-col-de-valsorey-ChIJ_9vL",
+    "sourceId": "spot-col-de-valsorey-ChIJ_9vL",
+    "googlePlaceId": null,
+    "name": "Col de Valsorey",
+    "slug": "col-de-valsorey",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "italy-nw",
+    "scopeName": "Italia Nord-Ovest",
+    "lat": 45.899899999999995,
+    "lng": 7.27334,
+    "region": null,
+    "regionHint": "Aosta / Monte Bianco",
+    "address": "Col de Valsorey, 11010 Ollomont AO, Italy",
+    "rating": 0,
+    "userRatingCount": 0,
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "types": [
+      "natural_feature",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Col de Valsorey"
+    ],
+    "riderScore": 88
+  },
+  {
+    "id": "spot-col-sud-de-menouve-ChIJLyTk",
+    "sourceId": "spot-col-sud-de-menouve-ChIJLyTk",
+    "googlePlaceId": null,
+    "name": "Col Sud de Menouve",
+    "slug": "col-sud-de-menouve",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "italy-nw",
+    "scopeName": "Italia Nord-Ovest",
+    "lat": 45.8776,
+    "lng": 7.20437,
+    "region": null,
+    "regionHint": "Aosta / Monte Bianco",
+    "address": "Col Sud de Menouve, 11014 Etroubles, Aosta Valley, Italy",
+    "rating": 0,
+    "userRatingCount": 0,
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "types": [
+      "natural_feature",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Col Sud de Menouve"
+    ],
+    "riderScore": 88
+  },
+  {
+    "id": "spot-col-vert-ChIJmWZC",
+    "sourceId": "spot-col-vert-ChIJmWZC",
+    "googlePlaceId": null,
+    "name": "Col Vert",
+    "slug": "col-vert",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "italy-nw",
+    "scopeName": "Italia Nord-Ovest",
+    "lat": 45.9201,
+    "lng": 7.290369999999999,
+    "region": null,
+    "regionHint": "Aosta / Monte Bianco",
+    "address": "Col Vert, Ollomont, Aosta Valley, Italy",
+    "rating": 0,
+    "userRatingCount": 0,
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "types": [
+      "natural_feature",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Col Vert"
+    ],
+    "riderScore": 88
+  },
+  {
+    "id": "spot-passo-teglia-ChIJ5Xpk",
+    "sourceId": "spot-passo-teglia-ChIJ5Xpk",
+    "googlePlaceId": null,
+    "name": "Passo Teglia",
+    "slug": "passo-teglia",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "italy-nw",
+    "scopeName": "Italia Nord-Ovest",
+    "lat": 43.9953435,
+    "lng": 7.8336619999999995,
+    "region": null,
+    "regionHint": "Cuneese / Alpi Marittime",
+    "address": "18010 Molini di Triora, Province of Imperia, Italy",
+    "rating": 4.7,
+    "userRatingCount": 122,
+    "rawTypes": [
+      "historical_landmark",
+      "historical_place",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "historical_landmark",
+      "historical_place",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Passo Teglia"
+    ],
+    "riderScore": 85
+  },
+  {
+    "id": "spot-passo-dei-laghi-gemelli-ChIJ2-kA",
+    "sourceId": "spot-passo-dei-laghi-gemelli-ChIJ2-kA",
+    "googlePlaceId": null,
+    "name": "Passo dei Laghi Gemelli",
+    "slug": "passo-dei-laghi-gemelli",
+    "type": "mountain_pass",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "italy-nw",
+    "scopeName": "Italia Nord-Ovest",
+    "lat": 45.979305499999995,
+    "lng": 9.8111716,
+    "region": null,
+    "regionHint": "Lago di Como / Stelvio",
+    "address": "Unnamed Road, Provincia di, 24020 Bergamo BG, Italy",
+    "rating": 4.9,
+    "userRatingCount": 89,
+    "rawTypes": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "mountain",
+      "twisty",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Passo dei Laghi Gemelli"
+    ],
+    "riderScore": 83
+  },
+  {
+    "id": "spot-passo-del-prale-ChIJ2WNL",
+    "sourceId": "spot-passo-del-prale-ChIJ2WNL",
+    "googlePlaceId": null,
+    "name": "Passo del Prale",
+    "slug": "passo-del-prale",
+    "type": "mountain_pass",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "italy-nw",
+    "scopeName": "Italia Nord-Ovest",
+    "lat": 44.1082122,
+    "lng": 7.9215884,
+    "region": null,
+    "regionHint": "Cuneese / Alpi Marittime",
+    "address": "Unnamed Road,18026, 18026 Armo IM, Italy",
+    "rating": 4.8,
+    "userRatingCount": 31,
+    "rawTypes": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "mountain",
+      "twisty",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Passo del Prale"
+    ],
+    "riderScore": 83
+  },
+  {
+    "id": "spot-passo-della-guardia-ChIJ3Uju",
+    "sourceId": "spot-passo-della-guardia-ChIJ3Uju",
+    "googlePlaceId": null,
+    "name": "Passo della Guardia",
+    "slug": "passo-della-guardia",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "italy-nw",
+    "scopeName": "Italia Nord-Ovest",
+    "lat": 44.0426642,
+    "lng": 7.7446707,
+    "region": null,
+    "regionHint": "Cuneese / Alpi Marittime",
+    "address": "Passo della Guardia, 18010 Triora IM, Italy",
+    "rating": 4.7,
+    "userRatingCount": 29,
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "types": [
+      "natural_feature",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Passo della Guardia"
+    ],
+    "riderScore": 83
+  },
+  {
+    "id": "spot-passo-della-teglia-ChIJofvG",
+    "sourceId": "spot-passo-della-teglia-ChIJofvG",
+    "googlePlaceId": null,
+    "name": "Passo della Teglia",
+    "slug": "passo-della-teglia",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "italy-nw",
+    "scopeName": "Italia Nord-Ovest",
+    "lat": 44,
+    "lng": 7.85,
+    "region": null,
+    "regionHint": "Cuneese / Alpi Marittime",
+    "address": "Passo della Teglia, 18026 Rezzo, Province of Imperia, Italy",
+    "rating": 4.7,
+    "userRatingCount": 34,
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "types": [
+      "natural_feature",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Passo della Teglia"
+    ],
+    "riderScore": 83
+  },
+  {
+    "id": "spot-passo-campiano-ChIJt-UR",
+    "sourceId": "spot-passo-campiano-ChIJt-UR",
+    "googlePlaceId": null,
+    "name": "Passo Campiano",
+    "slug": "passo-campiano",
+    "type": "mountain_pass",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "italy-nw",
+    "scopeName": "Italia Nord-Ovest",
+    "lat": 45.7636008,
+    "lng": 10.8233704,
+    "region": null,
+    "regionHint": "Lago di Garda Ovest",
+    "address": "Via Panoramica, 113-107, 37018 Malcesine VR, Italy",
+    "rating": 4.9,
+    "userRatingCount": 11,
+    "rawTypes": [
+      "tourist_attraction",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "tourist_attraction",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "mountain",
+      "twisty",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Passo Campiano"
+    ],
+    "riderScore": 80
+  },
+  {
+    "id": "spot-passo-folungo-ChIJ2Qjf",
+    "sourceId": "spot-passo-folungo-ChIJ2Qjf",
+    "googlePlaceId": null,
+    "name": "Passo Folungo",
+    "slug": "passo-folungo",
+    "type": "mountain_pass",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "italy-nw",
+    "scopeName": "Italia Nord-Ovest",
+    "lat": 46.040771199999995,
+    "lng": 8.5828603,
+    "region": null,
+    "regionHint": "Lago Maggiore",
+    "address": "Strada Militare Cadorna, 28812 Aurano VB, Italy",
+    "rating": 4.5,
+    "userRatingCount": 80,
+    "rawTypes": [
+      "hiking_area",
+      "tourist_attraction",
+      "scenic_spot",
+      "sports_activity_location",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "hiking_area",
+      "tourist_attraction",
+      "scenic_spot",
+      "sports_activity_location",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "mountain",
+      "twisty",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Passo Folungo"
+    ],
+    "riderScore": 80
+  },
+  {
+    "id": "spot-passo-del-cane-ChIJxUZc",
+    "sourceId": "spot-passo-del-cane-ChIJxUZc",
+    "googlePlaceId": null,
+    "name": "Passo del Cane",
+    "slug": "passo-del-cane",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "italy-nw",
+    "scopeName": "Italia Nord-Ovest",
+    "lat": 43.8833333,
+    "lng": 7.6,
+    "region": null,
+    "regionHint": "Cuneese / Alpi Marittime",
+    "address": "Passo del Cane, 18030 Rocchetta Nervina, Province of Imperia, Italy",
+    "rating": 5,
+    "userRatingCount": 2,
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "types": [
+      "natural_feature",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Passo del Cane"
+    ],
+    "riderScore": 78
+  },
+  {
+    "id": "spot-passo-della-gardetta-ChIJZyme",
+    "sourceId": "spot-passo-della-gardetta-ChIJZyme",
+    "googlePlaceId": null,
+    "name": "Passo Della Gardetta",
+    "slug": "passo-della-gardetta",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "italy-nw",
+    "scopeName": "Italia Nord-Ovest",
+    "lat": 44.4112861,
+    "lng": 7.0027132,
+    "region": null,
+    "regionHint": "Cuneese / Alpi Marittime",
+    "address": "Passo Della Gardetta, 12020 Canosio CN, Italy",
+    "rating": 4.6,
+    "userRatingCount": 28,
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "types": [
+      "natural_feature",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Passo Della Gardetta"
+    ],
+    "riderScore": 78
+  },
+  {
+    "id": "spot-passo-di-rocca-brancia-ChIJ7Xdq",
+    "sourceId": "spot-passo-di-rocca-brancia-ChIJ7Xdq",
+    "googlePlaceId": null,
+    "name": "Passo di Rocca Brancia",
+    "slug": "passo-di-rocca-brancia",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "italy-nw",
+    "scopeName": "Italia Nord-Ovest",
+    "lat": 44.402038,
+    "lng": 6.998569,
+    "region": null,
+    "regionHint": "Cuneese / Alpi Marittime",
+    "address": "Unnamed Road, 12020, 12010 Argentera CN, Italy",
+    "rating": 4.8,
+    "userRatingCount": 16,
+    "rawTypes": [
+      "wildlife_refuge",
+      "park",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "wildlife_refuge",
+      "park",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Passo di Rocca Brancia"
+    ],
+    "riderScore": 78
+  },
+  {
+    "id": "spot-passo-di-san-chiaffredo-ChIJk4Al",
+    "sourceId": "spot-passo-di-san-chiaffredo-ChIJk4Al",
+    "googlePlaceId": null,
+    "name": "Passo di San Chiaffredo",
+    "slug": "passo-di-san-chiaffredo",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "italy-nw",
+    "scopeName": "Italia Nord-Ovest",
+    "lat": 44.641835300000004,
+    "lng": 7.1081382,
+    "region": null,
+    "regionHint": "Cuneese / Alpi Marittime",
+    "address": "Passo di San Chiaffredo, 12020 Pontechianale CN, Italy",
+    "rating": 5,
+    "userRatingCount": 4,
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "types": [
+      "natural_feature",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Passo di San Chiaffredo"
+    ],
+    "riderScore": 78
+  },
+  {
+    "id": "spot-passo-di-tanarello-ChIJZckT",
+    "sourceId": "spot-passo-di-tanarello-ChIJZckT",
+    "googlePlaceId": null,
+    "name": "Passo di Tanarello",
+    "slug": "passo-di-tanarello",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "italy-nw",
+    "scopeName": "Italia Nord-Ovest",
+    "lat": 44.0833333,
+    "lng": 7.7166667,
+    "region": null,
+    "regionHint": "Cuneese / Alpi Marittime",
+    "address": "Passo di Tanarello, 06430 Briga Alta, Province of Cuneo, Italy",
+    "rating": 5,
+    "userRatingCount": 1,
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "types": [
+      "natural_feature",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Passo di Tanarello"
+    ],
+    "riderScore": 78
+  },
+  {
+    "id": "spot-passo-di-ventina-sud-ChIJCYe9",
+    "sourceId": "spot-passo-di-ventina-sud-ChIJCYe9",
+    "googlePlaceId": null,
+    "name": "Passo di Ventina Sud",
+    "slug": "passo-di-ventina-sud",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "italy-nw",
+    "scopeName": "Italia Nord-Ovest",
+    "lat": 45.927,
+    "lng": 7.71592,
+    "region": null,
+    "regionHint": "Aosta / Monte Bianco",
+    "address": "Passo di Ventina Sud, 11028 Valtournenche AO, Italy",
+    "rating": 5,
+    "userRatingCount": 1,
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "types": [
+      "natural_feature",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Passo di Ventina Sud"
+    ],
+    "riderScore": 78
+  },
+  {
+    "id": "spot-passo-fronte-ChIJZVn0",
+    "sourceId": "spot-passo-fronte-ChIJZVn0",
+    "googlePlaceId": null,
+    "name": "Passo Frontè",
+    "slug": "passo-fronte",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "italy-nw",
+    "scopeName": "Italia Nord-Ovest",
+    "lat": 44.0588011,
+    "lng": 7.757982500000001,
+    "region": null,
+    "regionHint": "Cuneese / Alpi Marittime",
+    "address": "Passo Frontè, 18025 Mendatica IM, Italy",
+    "rating": 5,
+    "userRatingCount": 2,
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "types": [
+      "natural_feature",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Passo Frontè"
+    ],
+    "riderScore": 78
+  },
+  {
+    "id": "spot-passo-scolettas-ChIJn218",
+    "sourceId": "spot-passo-scolettas-ChIJn218",
+    "googlePlaceId": null,
+    "name": "Passo Scolettas",
+    "slug": "passo-scolettas",
+    "type": "mountain_pass",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "italy-nw",
+    "scopeName": "Italia Nord-Ovest",
+    "lat": 44.307790999999995,
+    "lng": 6.993347,
+    "region": null,
+    "regionHint": "Cuneese / Alpi Marittime",
+    "address": "Unnamed Road, 12010, 12010 Pietraporzio CN, Italy",
+    "rating": 5,
+    "userRatingCount": 5,
+    "rawTypes": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "mountain",
+      "twisty",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Passo Scolettas"
+    ],
+    "riderScore": 78
+  },
+  {
+    "id": "spot-passo-zube-ChIJ5X7l",
+    "sourceId": "spot-passo-zube-ChIJ5X7l",
+    "googlePlaceId": null,
+    "name": "Passo Zube",
+    "slug": "passo-zube",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "italy-nw",
+    "scopeName": "Italia Nord-Ovest",
+    "lat": 45.8608568,
+    "lng": 7.874778399999999,
+    "region": null,
+    "regionHint": "Aosta / Monte Bianco",
+    "address": "Passo Zube, 11020 Gressoney-La-Trinité AO, Italy",
+    "rating": 5,
+    "userRatingCount": 1,
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "types": [
+      "natural_feature",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Passo Zube"
+    ],
+    "riderScore": 78
+  },
+  {
+    "id": "spot-strada-della-forra-ChIJsRRQ",
+    "sourceId": "spot-strada-della-forra-ChIJsRRQ",
+    "googlePlaceId": null,
+    "name": "Strada della Forra",
+    "slug": "strada-della-forra",
+    "type": "coastal_view",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "italy-nw",
+    "scopeName": "Italia Nord-Ovest",
+    "lat": 45.7741106,
+    "lng": 10.7659152,
+    "region": null,
+    "regionHint": "Lago di Garda Ovest",
+    "address": "Via Benaco, 25010 Tremosine sul Garda BS, Italy",
+    "rating": 4.8,
+    "userRatingCount": 4263,
+    "rawTypes": [
+      "tourist_attraction",
+      "cultural_landmark",
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "tourist_attraction",
+      "cultural_landmark",
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "rider-spot"
+    ],
+    "aliases": [
+      "Strada della Forra"
+    ],
+    "riderScore": 74
+  },
+  {
+    "id": "spot-furggjoch-ChIJy8eh",
+    "sourceId": "spot-furggjoch-ChIJy8eh",
+    "googlePlaceId": null,
+    "name": "Furggjoch",
+    "slug": "furggjoch",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "italy-nw",
+    "scopeName": "Italia Nord-Ovest",
+    "lat": 45.967999999999996,
+    "lng": 7.67374,
+    "region": null,
+    "regionHint": "Aosta / Monte Bianco",
+    "address": "Furggjoch, 11028 Valtournenche, Aosta Valley, Italy",
+    "rating": 5,
+    "userRatingCount": 1,
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "types": [
+      "natural_feature",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Furggjoch"
+    ],
+    "riderScore": 73
+  },
+  {
+    "id": "spot-grand-col-ferret-ChIJHbEy",
+    "sourceId": "spot-grand-col-ferret-ChIJHbEy",
+    "googlePlaceId": null,
+    "name": "Grand Col Ferret",
+    "slug": "grand-col-ferret",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "italy-nw",
+    "scopeName": "Italia Nord-Ovest",
+    "lat": 45.88890000000001,
+    "lng": 7.077859999999999,
+    "region": null,
+    "regionHint": "Aosta / Monte Bianco",
+    "address": "Grand Col Ferret, 11013 Courmayeur, Aosta Valley, Italy",
+    "rating": 4.9,
+    "userRatingCount": 18,
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "types": [
+      "natural_feature",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Grand Col Ferret"
+    ],
+    "riderScore": 73
+  },
+  {
+    "id": "spot-passo-della-croce-ChIJPfl5",
+    "sourceId": "spot-passo-della-croce-ChIJPfl5",
+    "googlePlaceId": null,
+    "name": "Passo della Croce",
+    "slug": "passo-della-croce",
+    "type": "mountain_pass",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "italy-nw",
+    "scopeName": "Italia Nord-Ovest",
+    "lat": 45.759967200000006,
+    "lng": 10.3945882,
+    "region": null,
+    "regionHint": "Lago di Garda Ovest",
+    "address": "Unnamed Road, 25078, 25074 Pertica Bassa BS, Italy",
+    "rating": 4.5,
+    "userRatingCount": 2,
+    "rawTypes": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "mountain",
+      "twisty",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Passo della Croce"
+    ],
+    "riderScore": 73
+  },
+  {
+    "id": "spot-passo-dell-invergneux-ChIJVS0A",
+    "sourceId": "spot-passo-dell-invergneux-ChIJVS0A",
+    "googlePlaceId": null,
+    "name": "Passo dell'Invergneux",
+    "slug": "passo-dell-invergneux",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "italy-nw",
+    "scopeName": "Italia Nord-Ovest",
+    "lat": 45.6130494,
+    "lng": 7.4505595,
+    "region": null,
+    "regionHint": "Aosta / Monte Bianco",
+    "address": "Vilage de Cogne, 11012 Cogne AO, Italy",
+    "rating": 4.6,
+    "userRatingCount": 29,
+    "rawTypes": [
+      "scenic_spot",
+      "tourist_attraction",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "scenic_spot",
+      "tourist_attraction",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Passo dell'Invergneux"
+    ],
+    "riderScore": 72
+  },
+  {
+    "id": "spot-passo-del-ghiffi-ChIJIUeo",
+    "sourceId": "spot-passo-del-ghiffi-ChIJIUeo",
+    "googlePlaceId": null,
+    "name": "Passo del Ghiffi",
+    "slug": "passo-del-ghiffi",
+    "type": "mountain_pass",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "italy-nw",
+    "scopeName": "Italia Nord-Ovest",
+    "lat": 44.4380009,
+    "lng": 9.4456183,
+    "region": null,
+    "regionHint": "Appennino Ligure",
+    "address": "Strada Provinciale 49, 43059 Borzonasca GE, Italy",
+    "rating": 4.3,
+    "userRatingCount": 43,
+    "rawTypes": [
+      "tourist_attraction",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "tourist_attraction",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "mountain",
+      "twisty",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Passo del Ghiffi"
+    ],
+    "riderScore": 70
+  },
+  {
+    "id": "spot-colle-del-nivolet-ChIJrWrV",
+    "sourceId": "spot-colle-del-nivolet-ChIJrWrV",
+    "googlePlaceId": null,
+    "name": "Colle del Nivolet",
+    "slug": "colle-del-nivolet",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "italy-nw",
+    "scopeName": "Italia Nord-Ovest",
+    "lat": 45.4803,
+    "lng": 7.1421,
+    "region": null,
+    "regionHint": "Aosta / Monte Bianco",
+    "address": "Colle del Nivolet, 11010 Valsavarenche, Aosta Valley, Italy",
+    "rating": 4.9,
+    "userRatingCount": 1133,
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "types": [
+      "natural_feature",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Colle del Nivolet"
+    ],
+    "riderScore": 68
+  },
+  {
+    "id": "spot-great-st-bernard-pass-ChIJFfAA",
+    "sourceId": "spot-great-st-bernard-pass-ChIJFfAA",
+    "googlePlaceId": null,
+    "name": "Great St Bernard Pass",
+    "slug": "great-st-bernard-pass",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "italy-nw",
+    "scopeName": "Italia Nord-Ovest",
+    "lat": 45.8938773,
+    "lng": 7.187543700000001,
+    "region": null,
+    "regionHint": "Aosta / Monte Bianco",
+    "address": "Great St Bernard Pass",
+    "rating": 4.8,
+    "userRatingCount": 1479,
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "types": [
+      "natural_feature",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Great St Bernard Pass"
+    ],
+    "riderScore": 68
+  },
+  {
+    "id": "spot-lago-di-valvestino-ChIJT1xy",
+    "sourceId": "spot-lago-di-valvestino-ChIJT1xy",
+    "googlePlaceId": null,
+    "name": "Lago di Valvestino",
+    "slug": "lago-di-valvestino",
+    "type": "lake_view",
+    "rideType": "lake",
+    "country": "IT",
+    "scope": "italy-nw",
+    "scopeName": "Italia Nord-Ovest",
+    "lat": 45.7184351,
+    "lng": 10.6097251,
+    "region": null,
+    "regionHint": "Lago di Garda Ovest",
+    "address": "Lago di Valvestino, Provincia di Brescia, Italy",
+    "rating": 4.6,
+    "userRatingCount": 229,
+    "rawTypes": [
+      "lake",
+      "natural_feature",
+      "establishment"
+    ],
+    "types": [
+      "lake",
+      "natural_feature",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "lake",
+      "scenic",
+      "rider",
+      "panoramic",
+      "rider-spot"
+    ],
+    "aliases": [
+      "Lago di Valvestino"
+    ],
+    "riderScore": 67
+  },
+  {
+    "id": "spot-passo-santa-franca-mt-1275-ChIJ06TH",
+    "sourceId": "spot-passo-santa-franca-mt-1275-ChIJ06TH",
+    "googlePlaceId": null,
+    "name": "Passo Santa Franca - mt 1275",
+    "slug": "passo-santa-franca-mt-1275",
+    "type": "mountain_pass",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "italy-nw",
+    "scopeName": "Italia Nord-Ovest",
+    "lat": 44.7151018,
+    "lng": 9.6541493,
+    "region": null,
+    "regionHint": "Appennino Ligure",
+    "address": "Unnamed Road, 29023, 29023 Farini PC, Italy",
+    "rating": 4.4,
+    "userRatingCount": 7,
+    "rawTypes": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "mountain",
+      "twisty",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Passo Santa Franca - mt 1275"
+    ],
+    "riderScore": 63
+  },
+  {
+    "id": "spot-colle-del-piccolo-san-bernardo-ChIJgQSX",
+    "sourceId": "spot-colle-del-piccolo-san-bernardo-ChIJgQSX",
+    "googlePlaceId": null,
+    "name": "Colle del Piccolo San Bernardo",
+    "slug": "colle-del-piccolo-san-bernardo",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "italy-nw",
+    "scopeName": "Italia Nord-Ovest",
+    "lat": 45.683313399999996,
+    "lng": 6.886035799999999,
+    "region": null,
+    "regionHint": "Aosta / Monte Bianco",
+    "address": "Colle piccolo San Bernardo, 11016 La Thuile AO, Italy",
+    "rating": 4.8,
+    "userRatingCount": 843,
+    "rawTypes": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Colle del Piccolo San Bernardo"
+    ],
+    "riderScore": 60
+  },
+  {
+    "id": "spot-colle-di-sampeyre-ChIJeUZC",
+    "sourceId": "spot-colle-di-sampeyre-ChIJeUZC",
+    "googlePlaceId": null,
+    "name": "Colle di Sampeyre",
+    "slug": "colle-di-sampeyre",
+    "type": "mountain_pass",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "italy-nw",
+    "scopeName": "Italia Nord-Ovest",
+    "lat": 44.551111,
+    "lng": 7.118888999999999,
+    "region": null,
+    "regionHint": "Cuneese / Alpi Marittime",
+    "address": "Unnamed Road, 12020, 12020 Sampeyre CN, Italy",
+    "rating": 4.7,
+    "userRatingCount": 268,
+    "rawTypes": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Colle di Sampeyre"
+    ],
+    "riderScore": 58
+  },
+  {
+    "id": "spot-colle-fauniera-ChIJs1TE",
+    "sourceId": "spot-colle-fauniera-ChIJs1TE",
+    "googlePlaceId": null,
+    "name": "Colle Fauniera",
+    "slug": "colle-fauniera",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "italy-nw",
+    "scopeName": "Italia Nord-Ovest",
+    "lat": 44.3858513,
+    "lng": 7.121637100000001,
+    "region": null,
+    "regionHint": "Cuneese / Alpi Marittime",
+    "address": "Colle Fauniera, Province of Cuneo, Italy",
+    "rating": 4.8,
+    "userRatingCount": 426,
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "types": [
+      "natural_feature",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Colle Fauniera"
+    ],
+    "riderScore": 58
+  },
+  {
+    "id": "spot-colle-san-carlo-ChIJSc2t",
+    "sourceId": "spot-colle-san-carlo-ChIJSc2t",
+    "googlePlaceId": null,
+    "name": "Colle San Carlo",
+    "slug": "colle-san-carlo",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "italy-nw",
+    "scopeName": "Italia Nord-Ovest",
+    "lat": 45.742400599999996,
+    "lng": 6.9912958,
+    "region": null,
+    "regionHint": "Aosta / Monte Bianco",
+    "address": "Colle San Carlo, 11017 Morgex AO, Italy",
+    "rating": 4.7,
+    "userRatingCount": 184,
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "types": [
+      "natural_feature",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Colle San Carlo"
+    ],
+    "riderScore": 58
+  },
+  {
+    "id": "spot-colle-valcavera-ChIJtZaH",
+    "sourceId": "spot-colle-valcavera-ChIJtZaH",
+    "googlePlaceId": null,
+    "name": "Colle Valcavera",
+    "slug": "colle-valcavera",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "italy-nw",
+    "scopeName": "Italia Nord-Ovest",
+    "lat": 44.381713999999995,
+    "lng": 7.1007454,
+    "region": null,
+    "regionHint": "Cuneese / Alpi Marittime",
+    "address": "Unnamed Road,12010, 12010 Sambuco CN, Italy",
+    "rating": 4.8,
+    "userRatingCount": 114,
+    "rawTypes": [
+      "hiking_area",
+      "sports_activity_location",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "hiking_area",
+      "sports_activity_location",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Colle Valcavera"
+    ],
+    "riderScore": 58
+  },
+  {
+    "id": "spot-dordona-viewpoint-ChIJ4wgQ",
+    "sourceId": "spot-dordona-viewpoint-ChIJ4wgQ",
+    "googlePlaceId": null,
+    "name": "Dordona viewpoint",
+    "slug": "dordona-viewpoint",
+    "type": "mountain_pass",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "italy-nw",
+    "scopeName": "Italia Nord-Ovest",
+    "lat": 46.0566223,
+    "lng": 9.763301499999999,
+    "region": null,
+    "regionHint": "Lago di Como / Stelvio",
+    "address": "Str. del Passo Dordona, 24010 Fusine SO, Italy",
+    "rating": 0,
+    "userRatingCount": 0,
+    "rawTypes": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "mountain",
+      "twisty",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Dordona viewpoint"
+    ],
+    "riderScore": 55
+  },
+  {
+    "id": "spot-salo-panorama-lago-ChIJCT1a",
+    "sourceId": "spot-salo-panorama-lago-ChIJCT1a",
+    "googlePlaceId": null,
+    "name": "Salò Panorama Lago",
+    "slug": "salo-panorama-lago",
+    "type": "lake_view",
+    "rideType": "lake",
+    "country": "IT",
+    "scope": "italy-nw",
+    "scopeName": "Italia Nord-Ovest",
+    "lat": 45.60453950000001,
+    "lng": 10.5227105,
+    "region": null,
+    "regionHint": "Lago di Garda Ovest",
+    "address": "Piazza Decorati al Valor Civile, 1449, 25087 Salò BS, Italy",
+    "rating": 4.7,
+    "userRatingCount": 527,
+    "rawTypes": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "lake",
+      "scenic",
+      "rider",
+      "panoramic",
+      "rider-spot"
+    ],
+    "aliases": [
+      "Salò Panorama Lago"
+    ],
+    "riderScore": 54
+  },
+  {
+    "id": "spot-lago-di-cancano-ChIJu3EE",
+    "sourceId": "spot-lago-di-cancano-ChIJu3EE",
+    "googlePlaceId": null,
+    "name": "Lago di Cancano",
+    "slug": "lago-di-cancano",
+    "type": "lake_view",
+    "rideType": "lake",
+    "country": "IT",
+    "scope": "italy-nw",
+    "scopeName": "Italia Nord-Ovest",
+    "lat": 46.528174799999995,
+    "lng": 10.299408,
+    "region": null,
+    "regionHint": "Lago di Como / Stelvio",
+    "address": "Lago di Cancano, 23038 Valdidentro SO, Italy",
+    "rating": 4.7,
+    "userRatingCount": 240,
+    "rawTypes": [
+      "lake",
+      "natural_feature",
+      "establishment"
+    ],
+    "types": [
+      "lake",
+      "natural_feature",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "lake",
+      "scenic",
+      "rider",
+      "panoramic",
+      "rider-spot"
+    ],
+    "aliases": [
+      "Lago di Cancano"
+    ],
+    "riderScore": 52
+  },
+  {
+    "id": "spot-lago-valbiolo-ChIJtaVA",
+    "sourceId": "spot-lago-valbiolo-ChIJtaVA",
+    "googlePlaceId": null,
+    "name": "Lago Valbiolo",
+    "slug": "lago-valbiolo",
+    "type": "lake_view",
+    "rideType": "lake",
+    "country": "IT",
+    "scope": "italy-nw",
+    "scopeName": "Italia Nord-Ovest",
+    "lat": 46.2721668,
+    "lng": 10.5889887,
+    "region": null,
+    "regionHint": "Lago di Como / Stelvio",
+    "address": "Unnamed Road, 38029, 38029 Vermiglio TN, Italy",
+    "rating": 4.7,
+    "userRatingCount": 241,
+    "rawTypes": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "lake",
+      "scenic",
+      "rider",
+      "panoramic",
+      "rider-spot"
+    ],
+    "aliases": [
+      "Lago Valbiolo"
+    ],
+    "riderScore": 52
+  },
+  {
+    "id": "spot-le-magdeleine-vista-panoramica-ChIJj7_H",
+    "sourceId": "spot-le-magdeleine-vista-panoramica-ChIJj7_H",
+    "googlePlaceId": null,
+    "name": "Le Magdeleine Vista Panoramica",
+    "slug": "le-magdeleine-vista-panoramica",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "italy-nw",
+    "scopeName": "Italia Nord-Ovest",
+    "lat": 45.8163474,
+    "lng": 7.6071681999999985,
+    "region": null,
+    "regionHint": "Canavese / Gran Paradiso",
+    "address": "Unnamed Road, 11020, 11020 La Magdeleine AO, Italy",
+    "rating": 4.8,
+    "userRatingCount": 204,
+    "rawTypes": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "rider-spot"
+    ],
+    "aliases": [
+      "Le Magdeleine Vista Panoramica"
+    ],
+    "riderScore": 48
+  },
+  {
+    "id": "spot-mezzaluna-pass-ChIJMyGo",
+    "sourceId": "spot-mezzaluna-pass-ChIJMyGo",
+    "googlePlaceId": null,
+    "name": "Mezzaluna Pass",
+    "slug": "mezzaluna-pass",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "italy-nw",
+    "scopeName": "Italia Nord-Ovest",
+    "lat": 44.0132225,
+    "lng": 7.808755,
+    "region": null,
+    "regionHint": "Cuneese / Alpi Marittime",
+    "address": "Mezzaluna Pass, 18026 Rezzo, Province of Imperia, Italy",
+    "rating": 4.7,
+    "userRatingCount": 41,
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "types": [
+      "natural_feature",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Mezzaluna Pass"
+    ],
+    "riderScore": 48
+  },
+  {
+    "id": "spot-lago-di-lova-ChIJc_NS",
+    "sourceId": "spot-lago-di-lova-ChIJc_NS",
+    "googlePlaceId": null,
+    "name": "Lago di Lova",
+    "slug": "lago-di-lova",
+    "type": "lake_view",
+    "rideType": "lake",
+    "country": "IT",
+    "scope": "italy-nw",
+    "scopeName": "Italia Nord-Ovest",
+    "lat": 45.97,
+    "lng": 10.209999999999999,
+    "region": null,
+    "regionHint": "Lago di Como / Stelvio",
+    "address": "Lago di Lova, 25042 Borno BS, Italy",
+    "rating": 4.5,
+    "userRatingCount": 117,
+    "rawTypes": [
+      "lake",
+      "natural_feature",
+      "establishment"
+    ],
+    "types": [
+      "lake",
+      "natural_feature",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "lake",
+      "scenic",
+      "rider",
+      "panoramic",
+      "rider-spot"
+    ],
+    "aliases": [
+      "Lago di Lova"
+    ],
+    "riderScore": 47
+  },
+  {
+    "id": "spot-colle-di-nava-ChIJW1lO",
+    "sourceId": "spot-colle-di-nava-ChIJW1lO",
+    "googlePlaceId": null,
+    "name": "Colle di Nava",
+    "slug": "colle-di-nava",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "italy-nw",
+    "scopeName": "Italia Nord-Ovest",
+    "lat": 44.0833333,
+    "lng": 7.883333299999999,
+    "region": null,
+    "regionHint": "Cuneese / Alpi Marittime",
+    "address": "Colle di Nava, 18024 Pornassio, Province of Imperia, Italy",
+    "rating": 4.4,
+    "userRatingCount": 245,
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "types": [
+      "natural_feature",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Colle di Nava"
+    ],
+    "riderScore": 43
+  },
+  {
+    "id": "spot-base-o-ChIJ56TW",
+    "sourceId": "spot-base-o-ChIJ56TW",
+    "googlePlaceId": null,
+    "name": "Base O",
+    "slug": "base-o",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "italy-nw",
+    "scopeName": "Italia Nord-Ovest",
+    "lat": 44.310501599999995,
+    "lng": 9.180369599999999,
+    "region": null,
+    "regionHint": "Appennino Ligure",
+    "address": "Unnamed Road, 16032 Camogli GE, Italy",
+    "rating": 4.8,
+    "userRatingCount": 106,
+    "rawTypes": [
+      "scenic_spot",
+      "tourist_attraction",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "scenic_spot",
+      "tourist_attraction",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "rider-spot"
+    ],
+    "aliases": [
+      "Base O"
+    ],
+    "riderScore": 42
+  },
+  {
+    "id": "spot-sacrario-di-agueglio-ChIJBW19",
+    "sourceId": "spot-sacrario-di-agueglio-ChIJBW19",
+    "googlePlaceId": null,
+    "name": "Sacrario di Agueglio",
+    "slug": "sacrario-di-agueglio",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "italy-nw",
+    "scopeName": "Italia Nord-Ovest",
+    "lat": 46.0129977,
+    "lng": 9.3143452,
+    "region": null,
+    "regionHint": "Lago Maggiore",
+    "address": "Unnamed Road, 23828 Perledo LC, Italy",
+    "rating": 4.7,
+    "userRatingCount": 107,
+    "rawTypes": [
+      "scenic_spot",
+      "tourist_attraction",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "scenic_spot",
+      "tourist_attraction",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "rider-spot"
+    ],
+    "aliases": [
+      "Sacrario di Agueglio"
+    ],
+    "riderScore": 42
+  },
+  {
+    "id": "spot-banchina-panoramica-da-riva-del-garda-a-limone-del-garda-ChIJ67zu",
+    "sourceId": "spot-banchina-panoramica-da-riva-del-garda-a-limone-del-garda-ChIJ67zu",
+    "googlePlaceId": null,
+    "name": "Banchina Panoramica da Riva del Garda a Limone del Garda",
+    "slug": "banchina-panoramica-da-riva-del-garda-a-limone-del-garda",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "italy-nw",
+    "scopeName": "Italia Nord-Ovest",
+    "lat": 45.837655299999994,
+    "lng": 10.8256555,
+    "region": null,
+    "regionHint": "Lago di Garda Ovest",
+    "address": "SS45bis, 38066 Riva del Garda TN, Italy",
+    "rating": 4.7,
+    "userRatingCount": 329,
+    "rawTypes": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "rider-spot"
+    ],
+    "aliases": [
+      "Banchina Panoramica da Riva del Garda a Limone del Garda"
+    ],
+    "riderScore": 40
+  },
+  {
+    "id": "spot-panoramic-view-of-monaco-ChIJt-mc",
+    "sourceId": "spot-panoramic-view-of-monaco-ChIJt-mc",
+    "googlePlaceId": null,
+    "name": "Panoramic view of Monaco",
+    "slug": "panoramic-view-of-monaco",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "italy-nw",
+    "scopeName": "Italia Nord-Ovest",
+    "lat": 43.7318259,
+    "lng": 7.4236159,
+    "region": null,
+    "regionHint": "Cuneese / Alpi Marittime",
+    "address": "32 Rue des Remparts, 98000 Monaco",
+    "rating": 4.9,
+    "userRatingCount": 382,
+    "rawTypes": [
+      "observation_deck",
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "observation_deck",
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "rider-spot"
+    ],
+    "aliases": [
+      "Panoramic view of Monaco"
+    ],
+    "riderScore": 40
+  },
+  {
+    "id": "spot-sosta-panoramica-ChIJ7cOU",
+    "sourceId": "spot-sosta-panoramica-ChIJ7cOU",
+    "googlePlaceId": null,
+    "name": "Sosta Panoramica",
+    "slug": "sosta-panoramica",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "italy-nw",
+    "scopeName": "Italia Nord-Ovest",
+    "lat": 45.7086812,
+    "lng": 10.693411099999999,
+    "region": null,
+    "regionHint": "Lago di Garda Ovest",
+    "address": "Via Repubblica, 25084 Gargnano BS, Italy",
+    "rating": 4.7,
+    "userRatingCount": 157,
+    "rawTypes": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "rider-spot"
+    ],
+    "aliases": [
+      "Sosta Panoramica"
+    ],
+    "riderScore": 40
+  },
+  {
+    "id": "spot-lakeside-lavena-ponte-tresa-ChIJB-n9",
+    "sourceId": "spot-lakeside-lavena-ponte-tresa-ChIJB-n9",
+    "googlePlaceId": null,
+    "name": "Lakeside Lavena Ponte Tresa",
+    "slug": "lakeside-lavena-ponte-tresa",
+    "type": "lake_view",
+    "rideType": "lake",
+    "country": "IT",
+    "scope": "italy-nw",
+    "scopeName": "Italia Nord-Ovest",
+    "lat": 45.9624461,
+    "lng": 8.8603674,
+    "region": null,
+    "regionHint": "Lago Maggiore",
+    "address": "Via Ungheria, 12/A, 21037 Lavena Ponte Tresa VA, Italy",
+    "rating": 4.5,
+    "userRatingCount": 459,
+    "rawTypes": [
+      "park",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "park",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "lake",
+      "scenic",
+      "rider",
+      "panoramic",
+      "rider-spot"
+    ],
+    "aliases": [
+      "Lakeside Lavena Ponte Tresa"
+    ],
+    "riderScore": 39
+  },
+  {
+    "id": "spot-cima-monte-bignone-punto-panoramico-ChIJuyH3",
+    "sourceId": "spot-cima-monte-bignone-punto-panoramico-ChIJuyH3",
+    "googlePlaceId": null,
+    "name": "Cima Monte Bignone, punto panoramico",
+    "slug": "cima-monte-bignone-punto-panoramico",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "italy-nw",
+    "scopeName": "Italia Nord-Ovest",
+    "lat": 43.873522,
+    "lng": 7.733676000000001,
+    "region": null,
+    "regionHint": "Cuneese / Alpi Marittime",
+    "address": "Unnamed Road, 18038 Sanremo IM, Italy",
+    "rating": 4.7,
+    "userRatingCount": 31,
+    "rawTypes": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "rider-spot"
+    ],
+    "aliases": [
+      "Cima Monte Bignone, punto panoramico"
+    ],
+    "riderScore": 38
+  },
+  {
+    "id": "spot-curva-panoramica-ChIJ6RBv",
+    "sourceId": "spot-curva-panoramica-ChIJ6RBv",
+    "googlePlaceId": null,
+    "name": "Curva Panoramica",
+    "slug": "curva-panoramica",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "italy-nw",
+    "scopeName": "Italia Nord-Ovest",
+    "lat": 43.8307168,
+    "lng": 7.720002,
+    "region": null,
+    "regionHint": "Cuneese / Alpi Marittime",
+    "address": "Unnamed Road, 18038 Sanremo IM, Italy",
+    "rating": 4.8,
+    "userRatingCount": 73,
+    "rawTypes": [
+      "observation_deck",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "observation_deck",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "rider-spot"
+    ],
+    "aliases": [
+      "Curva Panoramica"
+    ],
+    "riderScore": 38
+  },
+  {
+    "id": "spot-strada-dei-cannoni-ChIJj9fL",
+    "sourceId": "spot-strada-dei-cannoni-ChIJj9fL",
+    "googlePlaceId": null,
+    "name": "Strada dei Cannoni",
+    "slug": "strada-dei-cannoni",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "italy-nw",
+    "scopeName": "Italia Nord-Ovest",
+    "lat": 44.5440567,
+    "lng": 7.1377565,
+    "region": null,
+    "regionHint": "Cuneese / Alpi Marittime",
+    "address": "Unnamed Road, 12020, 12020 Stroppo CN, Italy",
+    "rating": 4.9,
+    "userRatingCount": 42,
+    "rawTypes": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "rider-spot"
+    ],
+    "aliases": [
+      "Strada dei Cannoni"
+    ],
+    "riderScore": 38
+  },
+  {
+    "id": "spot-strada-panoramica-ChIJmSJ8",
+    "sourceId": "spot-strada-panoramica-ChIJmSJ8",
+    "googlePlaceId": null,
+    "name": "Strada panoramica",
+    "slug": "strada-panoramica",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "italy-nw",
+    "scopeName": "Italia Nord-Ovest",
+    "lat": 45.7984103,
+    "lng": 10.0577316,
+    "region": null,
+    "regionHint": "Lago di Como / Stelvio",
+    "address": "SS469, 24063 Castro BG, Italy",
+    "rating": 4.9,
+    "userRatingCount": 20,
+    "rawTypes": [
+      "hiking_area",
+      "sports_activity_location",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "hiking_area",
+      "sports_activity_location",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "rider-spot"
+    ],
+    "aliases": [
+      "Strada panoramica"
+    ],
+    "riderScore": 38
+  },
+  {
+    "id": "spot-strada-panoramica-ChIJbza0",
+    "sourceId": "spot-strada-panoramica-ChIJbza0",
+    "googlePlaceId": null,
+    "name": "Strada Panoramica",
+    "slug": "strada-panoramica",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "italy-nw",
+    "scopeName": "Italia Nord-Ovest",
+    "lat": 45.6892127,
+    "lng": 10.75776,
+    "region": null,
+    "regionHint": "Lago di Garda Ovest",
+    "address": "Località Fasor, 22, 37010 Brenzone sul Garda VR, Italy",
+    "rating": 4.7,
+    "userRatingCount": 29,
+    "rawTypes": [
+      "hiking_area",
+      "sports_activity_location",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "hiking_area",
+      "sports_activity_location",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "rider-spot"
+    ],
+    "aliases": [
+      "Strada Panoramica"
+    ],
+    "riderScore": 38
+  }
+]

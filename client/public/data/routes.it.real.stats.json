@@ -1,0 +1,41 @@
+{
+  "inputTotal": 70,
+  "preliminaryKeep": 65,
+  "discarded": 2,
+  "review": 3,
+  "dedupeRemoved": 28,
+  "finalRoutes": 37,
+  "reasonBreakdown": {
+    "track_or_circuit": 2,
+    "real_route": 65,
+    "pass_cluster_but_not_full_itinerary": 3
+  },
+  "finalHeroRoutes": 32,
+  "finalLongRoutes120Plus": 26,
+  "finalRegions": {
+    "Valle d'Aosta / Alpi": 3,
+    "Sardegna": 3,
+    "Nord-Ovest": 5,
+    "Centro Italia": 3,
+    "Toscana / Emilia-Romagna / Appennino": 3,
+    "Dolomiti": 8,
+    "Lombardia / Alpi": 2,
+    "Sud Italia": 2,
+    "Piemonte / Alpi": 3,
+    "Trentino / Veneto / Friuli": 3,
+    "Nord-Est": 1,
+    "Sicilia": 1
+  },
+  "finalByRouteFamily": {
+    "mountain": 33,
+    "scenic": 3,
+    "lake": 1
+  },
+  "sourceQualityBreakdown": {
+    "high": 31,
+    "medium": 6
+  },
+  "italianConfidenceBreakdown": {
+    "high": 37
+  }
+}

@@ -1,0 +1,2216 @@
+[
+  {
+    "id": "spot-belvedere-castellammare-del-golfo-ChIJHycI",
+    "name": "Belvedere Castellammare del Golfo",
+    "slug": "belvedere-castellammare-del-golfo",
+    "type": "coastal_view",
+    "rideType": "coastal",
+    "country": "IT",
+    "scope": "sicily",
+    "scopeName": "Sicilia",
+    "lat": 38.0314264,
+    "lng": 12.8742187,
+    "regionHint": "Palermo / Trapani Coast",
+    "address": "Località Belvedere, 53, 91014 Castellammare del Golfo TP, Italy",
+    "rating": 4.8,
+    "userRatingCount": 6700,
+    "types": [
+      "scenic_spot",
+      "tourist_attraction",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "coast",
+      "sea",
+      "scenic",
+      "rider",
+      "panoramic"
+    ],
+    "aliases": [
+      "Belvedere Castellammare del Golfo"
+    ],
+    "score": 62
+  },
+  {
+    "id": "spot-passo-dei-dammusi-ChIJJ3LQ",
+    "name": "Passo dei Dammusi",
+    "slug": "passo-dei-dammusi",
+    "type": "mountain_pass",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "sicily",
+    "scopeName": "Sicilia",
+    "lat": 37.8203661,
+    "lng": 15.011501999999998,
+    "regionHint": "Etna",
+    "address": "Unnamed Road,, 95012 Castiglione di Sicilia CT, Italy",
+    "rating": 4.9,
+    "userRatingCount": 14,
+    "types": [
+      "scenic_spot",
+      "tourist_attraction",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "mountain",
+      "twisty"
+    ],
+    "aliases": [
+      "Passo dei Dammusi"
+    ],
+    "score": 57
+  },
+  {
+    "id": "spot-al-passo-di-eolo-ChIJA7Vx",
+    "name": "Al passo di Eolo",
+    "slug": "al-passo-di-eolo",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "sicily",
+    "scopeName": "Sicilia",
+    "lat": 37.9009833,
+    "lng": 14.3089857,
+    "regionHint": "Etna",
+    "address": "C/da Scifo, 98070 Castel di Lucio ME, Italy",
+    "rating": 4.9,
+    "userRatingCount": 249,
+    "types": [
+      "deli",
+      "food_store",
+      "food",
+      "store",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic"
+    ],
+    "aliases": [
+      "Al passo di Eolo"
+    ],
+    "score": 53
+  },
+  {
+    "id": "spot-pizzo-viewpoint-ChIJXZgr",
+    "name": "Pizzo viewpoint",
+    "slug": "pizzo-viewpoint",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "sicily",
+    "scopeName": "Sicilia",
+    "lat": 36.8665763,
+    "lng": 14.759766399999998,
+    "regionHint": "Ragusa / Val di Noto",
+    "address": "Via Floridia, 116, 97015 Modica RG, Italy",
+    "rating": 4.7,
+    "userRatingCount": 1316,
+    "types": [
+      "scenic_spot",
+      "tourist_attraction",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider"
+    ],
+    "aliases": [
+      "Pizzo viewpoint"
+    ],
+    "score": 50
+  },
+  {
+    "id": "spot-belvedere-di-dinnammare-ChIJ_zgP",
+    "name": "Belvedere di Dinnammare",
+    "slug": "belvedere-di-dinnammare",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "sicily",
+    "scopeName": "Sicilia",
+    "lat": 38.1584702,
+    "lng": 15.465048999999999,
+    "regionHint": "Etna",
+    "address": "Unnamed Road,98144, 98144 Messina ME, Italy",
+    "rating": 4.9,
+    "userRatingCount": 16,
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider"
+    ],
+    "aliases": [
+      "Belvedere di Dinnammare"
+    ],
+    "score": 49
+  },
+  {
+    "id": "spot-panoramic-view-of-the-coast-isola-delle-femmine-ChIJeQTy",
+    "name": "panoramic view of the coast - Isola delle Femmine",
+    "slug": "panoramic-view-of-the-coast-isola-delle-femmine",
+    "type": "coastal_view",
+    "rideType": "coastal",
+    "country": "IT",
+    "scope": "sicily",
+    "scopeName": "Sicilia",
+    "lat": 38.1845619,
+    "lng": 13.258578199999999,
+    "regionHint": "Palermo / Trapani Coast",
+    "address": "90040 Torretta, PA, Italy",
+    "rating": 5,
+    "userRatingCount": 4,
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "coast",
+      "sea",
+      "scenic",
+      "rider",
+      "panoramic"
+    ],
+    "aliases": [
+      "panoramic view of the coast - Isola delle Femmine"
+    ],
+    "score": 49
+  },
+  {
+    "id": "spot-motor-system-di-panzera-alessandro-ChIJsWoD",
+    "name": "Motor System Di Panzera Alessandro",
+    "slug": "motor-system-di-panzera-alessandro",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "sicily",
+    "scopeName": "Sicilia",
+    "lat": 37.578968599999996,
+    "lng": 14.978743699999999,
+    "regionHint": "Etna",
+    "address": "Via I Retta di Levante, 2d, 95032 Belpasso CT, Italy",
+    "rating": 4.8,
+    "userRatingCount": 53,
+    "types": [
+      "auto_parts_store",
+      "car_repair",
+      "point_of_interest",
+      "store",
+      "service",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic"
+    ],
+    "aliases": [
+      "Motor System Di Panzera Alessandro"
+    ],
+    "score": 48
+  },
+  {
+    "id": "spot-marina-di-castellammare-del-golfo-ChIJl_ps",
+    "name": "Marina di Castellammare del Golfo",
+    "slug": "marina-di-castellammare-del-golfo",
+    "type": "coastal_view",
+    "rideType": "coastal",
+    "country": "IT",
+    "scope": "sicily",
+    "scopeName": "Sicilia",
+    "lat": 38.0301537,
+    "lng": 12.8811965,
+    "regionHint": "Palermo / Trapani Coast",
+    "address": "91014 Castellammare del Golfo, Free municipal consortium of Trapani, Italy",
+    "rating": 4.6,
+    "userRatingCount": 6818,
+    "types": [
+      "marina",
+      "tourist_attraction",
+      "service",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "coast",
+      "sea",
+      "scenic",
+      "rider",
+      "panoramic"
+    ],
+    "aliases": [
+      "Marina di Castellammare del Golfo"
+    ],
+    "score": 47
+  },
+  {
+    "id": "spot-panoramic-viewpoint-ChIJ5XLI",
+    "name": "Panoramic Viewpoint",
+    "slug": "panoramic-viewpoint",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "sicily",
+    "scopeName": "Sicilia",
+    "lat": 37.8594276,
+    "lng": 15.276305899999999,
+    "regionHint": "Etna",
+    "address": "Via Alcide de Gasperi, 70, 98030 Castelmola ME, Italy",
+    "rating": 4.8,
+    "userRatingCount": 22,
+    "types": [
+      "tourist_attraction",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider"
+    ],
+    "aliases": [
+      "Panoramic Viewpoint",
+      "Viewpoint"
+    ],
+    "score": 47
+  },
+  {
+    "id": "spot-passo-di-zingaro-ChIJNf-_",
+    "name": "Passo di Zingaro",
+    "slug": "passo-di-zingaro",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "sicily",
+    "scopeName": "Sicilia",
+    "lat": 37.7166667,
+    "lng": 14.833333299999998,
+    "regionHint": "Etna",
+    "address": "Passo di Zingaro, 95031 Adrano, Metropolitan city of Catania, Italy",
+    "rating": 4.7,
+    "userRatingCount": 9,
+    "types": [
+      "natural_feature",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic"
+    ],
+    "aliases": [
+      "Passo di Zingaro"
+    ],
+    "score": 47
+  },
+  {
+    "id": "spot-mxsimeto-off-road-park-ChIJ-8fM",
+    "name": "MXSIMETO OFF ROAD PARK",
+    "slug": "mxsimeto-off-road-park",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "sicily",
+    "scopeName": "Sicilia",
+    "lat": 37.530428,
+    "lng": 14.904329999999998,
+    "regionHint": "Etna",
+    "address": "37°31'49. 14°54'15., Via VI Traversa, 5, 95032 Belpasso CT, Italy",
+    "rating": 4.6,
+    "userRatingCount": 11,
+    "types": [
+      "gym",
+      "sports_activity_location",
+      "health",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic"
+    ],
+    "aliases": [
+      "MXSIMETO OFF ROAD PARK"
+    ],
+    "score": 46
+  },
+  {
+    "id": "spot-lago-pozzillo-ChIJxVDc",
+    "name": "Lago Pozzillo",
+    "slug": "lago-pozzillo",
+    "type": "lake_view",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "sicily",
+    "scopeName": "Sicilia",
+    "lat": 37.6586855,
+    "lng": 14.617828200000002,
+    "regionHint": "Etna",
+    "address": "Unnamed Road, 94017, 94017 Regalbuto EN, Italy",
+    "rating": 5,
+    "userRatingCount": 8,
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "lake"
+    ],
+    "aliases": [
+      "Lago Pozzillo"
+    ],
+    "score": 45
+  },
+  {
+    "id": "spot-viewpoint-belvedere-ChIJTad1",
+    "name": "Viewpoint - Belvedere",
+    "slug": "viewpoint-belvedere",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "sicily",
+    "scopeName": "Sicilia",
+    "lat": 37.8490414,
+    "lng": 15.283770100000002,
+    "regionHint": "Etna",
+    "address": "Via Roma, 25, 98039 Taormina ME, Italy",
+    "rating": 5,
+    "userRatingCount": 2,
+    "types": [
+      "tourist_attraction",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider"
+    ],
+    "aliases": [
+      "Viewpoint - Belvedere"
+    ],
+    "score": 45
+  },
+  {
+    "id": "spot-belvedere-di-via-pirandello-ChIJY-W9",
+    "name": "Belvedere di Via Pirandello",
+    "slug": "belvedere-di-via-pirandello",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "sicily",
+    "scopeName": "Sicilia",
+    "lat": 37.851341999999995,
+    "lng": 15.295768599999999,
+    "regionHint": "Messina / Peloritani",
+    "address": "Via Luigi Pirandello, 83-85, 98039 Taormina ME, Italy",
+    "rating": 4.8,
+    "userRatingCount": 1241,
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider"
+    ],
+    "aliases": [
+      "Belvedere di Via Pirandello"
+    ],
+    "score": 44
+  },
+  {
+    "id": "spot-punto-panoramico-ChIJIcQZ",
+    "name": "Punto Panoramico",
+    "slug": "punto-panoramico",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "sicily",
+    "scopeName": "Sicilia",
+    "lat": 38.0385606,
+    "lng": 14.024123999999999,
+    "regionHint": "Madonie",
+    "address": "Unnamed Road, 90015, 90015 Cefalù PA, Italy",
+    "rating": 4.9,
+    "userRatingCount": 80,
+    "types": [
+      "hiking_area",
+      "sports_activity_location",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider"
+    ],
+    "aliases": [
+      "Punto Panoramico"
+    ],
+    "score": 44
+  },
+  {
+    "id": "spot-madonie-a-passo-lento-ChIJcUsG",
+    "name": "Madonie a Passo Lento",
+    "slug": "madonie-a-passo-lento",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "sicily",
+    "scopeName": "Sicilia",
+    "lat": 37.915486699999995,
+    "lng": 14.1918545,
+    "regionHint": "Madonie",
+    "address": "Via Giuseppe Garibaldi, 4, 90010 San Mauro Castelverde PA, Italy",
+    "rating": 4.9,
+    "userRatingCount": 13,
+    "types": [
+      "tour_agency",
+      "travel_agency",
+      "point_of_interest",
+      "service",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic"
+    ],
+    "aliases": [
+      "Madonie a Passo Lento"
+    ],
+    "score": 43
+  },
+  {
+    "id": "spot-pista-altomontana-etna-cancello-filiciusa-ChIJpxK5",
+    "name": "Pista Altomontana Etna - Cancello Filiciusa",
+    "slug": "pista-altomontana-etna-cancello-filiciusa",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "sicily",
+    "scopeName": "Sicilia",
+    "lat": 37.6916351,
+    "lng": 14.969794400000001,
+    "regionHint": "Etna",
+    "address": "strada per salire al Galvarina, 95054 Ragalna CT, Italy",
+    "rating": 4.8,
+    "userRatingCount": 204,
+    "types": [
+      "hiking_area",
+      "tourist_attraction",
+      "sports_activity_location",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider"
+    ],
+    "aliases": [
+      "Pista Altomontana Etna - Cancello Filiciusa"
+    ],
+    "score": 43
+  },
+  {
+    "id": "spot-punto-panoramico-ChIJL_fn",
+    "name": "Punto Panoramico",
+    "slug": "punto-panoramico",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "sicily",
+    "scopeName": "Sicilia",
+    "lat": 38.1217639,
+    "lng": 15.076340400000001,
+    "regionHint": "Nebrodi",
+    "address": "Via Lungomare Ovest, 98060 Falcone ME, Italy",
+    "rating": 4.5,
+    "userRatingCount": 43,
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider"
+    ],
+    "aliases": [
+      "Punto Panoramico"
+    ],
+    "score": 43
+  },
+  {
+    "id": "spot-ippocampo-discesa-pubblica-al-mare-ChIJzzyA",
+    "name": "Ippocampo - Discesa pubblica al mare",
+    "slug": "ippocampo-discesa-pubblica-al-mare",
+    "type": "coastal_view",
+    "rideType": "coastal",
+    "country": "IT",
+    "scope": "sicily",
+    "scopeName": "Sicilia",
+    "lat": 38.1132671,
+    "lng": 13.5205536,
+    "regionHint": "Palermo / Trapani Coast",
+    "address": "V. Francesco Perez, 90011 Bagheria PA, Italy",
+    "rating": 4.6,
+    "userRatingCount": 325,
+    "types": [
+      "tourist_attraction",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "coast",
+      "sea",
+      "scenic",
+      "rider",
+      "panoramic"
+    ],
+    "aliases": [
+      "Ippocampo - Discesa pubblica al mare"
+    ],
+    "score": 42
+  },
+  {
+    "id": "spot-passo-passo-trekking-ChIJS1lL",
+    "name": "Passo Passo Trekking",
+    "slug": "passo-passo-trekking",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "sicily",
+    "scopeName": "Sicilia",
+    "lat": 37.7543201,
+    "lng": 15.144174,
+    "regionHint": "Etna",
+    "address": "via Guardiula n.33, Strada Provinciale Nunziata Puntalazzo, di, 95010 Mascali CT, Italy",
+    "rating": 4.3,
+    "userRatingCount": 4,
+    "types": [
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic"
+    ],
+    "aliases": [
+      "Passo Passo Trekking"
+    ],
+    "score": 41
+  },
+  {
+    "id": "spot-parco-dell-etna-ChIJs59k",
+    "name": "Parco dell'Etna",
+    "slug": "parco-dell-etna",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "sicily",
+    "scopeName": "Sicilia",
+    "lat": 37.751926,
+    "lng": 14.9913151,
+    "regionHint": "Etna",
+    "address": "Via del Convento, 95030 Nicolosi CT, Italy",
+    "rating": 4.7,
+    "userRatingCount": 20522,
+    "types": [
+      "national_park",
+      "tourist_attraction",
+      "hiking_area",
+      "park",
+      "sports_activity_location",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic"
+    ],
+    "aliases": [
+      "Parco dell'Etna"
+    ],
+    "score": 40
+  },
+  {
+    "id": "spot-silvestri-craters-ChIJiVmp",
+    "name": "Silvestri Craters",
+    "slug": "silvestri-craters",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "sicily",
+    "scopeName": "Sicilia",
+    "lat": 37.6977815,
+    "lng": 15.00498,
+    "regionHint": "Etna",
+    "address": "Via Catania, 95052 Nicolosi CT, Italy",
+    "rating": 4.7,
+    "userRatingCount": 11227,
+    "types": [
+      "nature_preserve",
+      "tourist_attraction",
+      "park",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic"
+    ],
+    "aliases": [
+      "Silvestri Craters"
+    ],
+    "score": 40
+  },
+  {
+    "id": "spot-viewpoint-ChIJQ5bH",
+    "name": "Viewpoint",
+    "slug": "viewpoint",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "sicily",
+    "scopeName": "Sicilia",
+    "lat": 37.6657928,
+    "lng": 15.0268363,
+    "regionHint": "Etna",
+    "address": "Vico Etna, 95052 Ragalna CT, Italy",
+    "rating": 4.7,
+    "userRatingCount": 37,
+    "types": [
+      "tourist_attraction",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider"
+    ],
+    "aliases": [
+      "Viewpoint"
+    ],
+    "score": 40
+  },
+  {
+    "id": "spot-viewpoint-ChIJUd5-",
+    "name": "Viewpoint",
+    "slug": "viewpoint",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "sicily",
+    "scopeName": "Sicilia",
+    "lat": 37.0879544,
+    "lng": 15.2992314,
+    "regionHint": "Ragusa / Val di Noto",
+    "address": "37QX+7H, 96100 Syracuse, Free municipal consortium of Syracuse, Italy",
+    "rating": 4.7,
+    "userRatingCount": 32,
+    "types": [
+      "tourist_attraction",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider"
+    ],
+    "aliases": [
+      "Viewpoint"
+    ],
+    "score": 40
+  },
+  {
+    "id": "spot-belvedere-di-san-benedetto-ChIJPxpP",
+    "name": "Belvedere di San Benedetto",
+    "slug": "belvedere-di-san-benedetto",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "sicily",
+    "scopeName": "Sicilia",
+    "lat": 36.8634676,
+    "lng": 14.757612599999998,
+    "regionHint": "Ragusa / Val di Noto",
+    "address": "Via S. Benedetto da Norcia, 97015 Modica RG, Italy",
+    "rating": 4.7,
+    "userRatingCount": 619,
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider"
+    ],
+    "aliases": [
+      "Belvedere di San Benedetto"
+    ],
+    "score": 39
+  },
+  {
+    "id": "spot-fiumara-d-arte-pyramid-parallel-38-ChIJBe1l",
+    "name": "Fiumara d'Arte - Pyramid Parallel 38",
+    "slug": "fiumara-d-arte-pyramid-parallel-38",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "sicily",
+    "scopeName": "Sicilia",
+    "lat": 37.999744,
+    "lng": 14.278727,
+    "regionHint": "Nebrodi",
+    "address": "Contrada, Via Belvedere, 98070 Motta D'affermo ME, Italy",
+    "rating": 4.5,
+    "userRatingCount": 1347,
+    "types": [
+      "sculpture",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider"
+    ],
+    "aliases": [
+      "Fiumara d'Arte - Pyramid Parallel 38"
+    ],
+    "score": 39
+  },
+  {
+    "id": "spot-punto-panoramico-faraglioni-e-spiaggia-praia-vinci-ChIJDdeG",
+    "name": "Punto panoramico faraglioni e spiaggia Praia Vinci",
+    "slug": "punto-panoramico-faraglioni-e-spiaggia-praia-vinci",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "sicily",
+    "scopeName": "Sicilia",
+    "lat": 38.4434283,
+    "lng": 14.945511,
+    "regionHint": "Nebrodi",
+    "address": "Unnamed Road, 98050, 98050 Lipari ME, Italy",
+    "rating": 5,
+    "userRatingCount": 14,
+    "types": [
+      "hiking_area",
+      "sports_activity_location",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider"
+    ],
+    "aliases": [
+      "Punto panoramico faraglioni e spiaggia Praia Vinci"
+    ],
+    "score": 39
+  },
+  {
+    "id": "spot-vista-panoramica-ChIJWRtO",
+    "name": "Vista panoramica",
+    "slug": "vista-panoramica",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "sicily",
+    "scopeName": "Sicilia",
+    "lat": 38.0594883,
+    "lng": 12.5854243,
+    "regionHint": "Palermo / Trapani Coast",
+    "address": "Unnamed Road, 91016, 91016 Erice TP, Italy",
+    "rating": 5,
+    "userRatingCount": 1,
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider"
+    ],
+    "aliases": [
+      "Vista panoramica"
+    ],
+    "score": 39
+  },
+  {
+    "id": "spot-pizzo-manolfo-ChIJV0oS",
+    "name": "Pizzo Manolfo",
+    "slug": "pizzo-manolfo",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "sicily",
+    "scopeName": "Sicilia",
+    "lat": 38.177006999999996,
+    "lng": 13.271472,
+    "regionHint": "Palermo / Trapani Coast",
+    "address": "Unnamed Road, Provincia di, 90147 Palermo PA, Italy",
+    "rating": 4.8,
+    "userRatingCount": 179,
+    "types": [
+      "scenic_spot",
+      "tourist_attraction",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider"
+    ],
+    "aliases": [
+      "Pizzo Manolfo"
+    ],
+    "score": 38
+  },
+  {
+    "id": "spot-punto-panoramico-ChIJwQIw",
+    "name": "Punto Panoramico",
+    "slug": "punto-panoramico",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "sicily",
+    "scopeName": "Sicilia",
+    "lat": 37.5603109,
+    "lng": 15.161231299999999,
+    "regionHint": "Etna",
+    "address": "Via Lungomare Dei Ciclopi, 133/129, 95021 Aci Castello CT, Italy",
+    "rating": 4.6,
+    "userRatingCount": 13,
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider"
+    ],
+    "aliases": [
+      "Punto Panoramico"
+    ],
+    "score": 38
+  },
+  {
+    "id": "spot-capo-milazzo-ChIJ7Z-R",
+    "name": "Capo Milazzo",
+    "slug": "capo-milazzo",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "sicily",
+    "scopeName": "Sicilia",
+    "lat": 38.2695247,
+    "lng": 15.227588800000001,
+    "regionHint": "Etna",
+    "address": "Unnamed Road, 98057 Milazzo ME, Italy",
+    "rating": 4.8,
+    "userRatingCount": 321,
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider"
+    ],
+    "aliases": [
+      "Capo Milazzo"
+    ],
+    "score": 37
+  },
+  {
+    "id": "spot-panoramic-view-ChIJgzpA",
+    "name": "Panoramic view",
+    "slug": "panoramic-view",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "sicily",
+    "scopeName": "Sicilia",
+    "lat": 37.8067385,
+    "lng": 15.180564099999998,
+    "regionHint": "Etna",
+    "address": "Via Forni, 73, 95017 Piedimonte Etneo CT, Italy",
+    "rating": 5,
+    "userRatingCount": 3,
+    "types": [
+      "tourist_attraction",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider"
+    ],
+    "aliases": [
+      "Panoramic view"
+    ],
+    "score": 37
+  },
+  {
+    "id": "spot-punto-panoramico-ChIJobXL",
+    "name": "Punto panoramico",
+    "slug": "punto-panoramico",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "sicily",
+    "scopeName": "Sicilia",
+    "lat": 36.7956371,
+    "lng": 14.710291999999997,
+    "regionHint": "Ragusa / Val di Noto",
+    "address": "Contrada Balata, 97018 Scicli RG, Italy",
+    "rating": 4.5,
+    "userRatingCount": 36,
+    "types": [
+      "tourist_attraction",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider"
+    ],
+    "aliases": [
+      "Punto panoramico"
+    ],
+    "score": 37
+  },
+  {
+    "id": "spot-scenic-lookout-savoca-ChIJgxQw",
+    "name": "Scenic Lookout Savoca",
+    "slug": "scenic-lookout-savoca",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "sicily",
+    "scopeName": "Sicilia",
+    "lat": 37.951158299999996,
+    "lng": 15.339404799999999,
+    "regionHint": "Nebrodi",
+    "address": "98038 Savoca, Metropolitan City of Messina, Italy",
+    "rating": 4.8,
+    "userRatingCount": 5,
+    "types": [
+      "tourist_attraction",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider"
+    ],
+    "aliases": [
+      "Scenic Lookout Savoca"
+    ],
+    "score": 37
+  },
+  {
+    "id": "spot-terrazza-panoramica-lato-nord-santuario-di-tindari-ChIJqWF2",
+    "name": "Terrazza panoramica lato Nord Santuario di Tindari",
+    "slug": "terrazza-panoramica-lato-nord-santuario-di-tindari",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "sicily",
+    "scopeName": "Sicilia",
+    "lat": 38.1415636,
+    "lng": 15.046256699999999,
+    "regionHint": "Messina / Peloritani",
+    "address": "98066 Tindari, Metropolitan City of Messina, Italy",
+    "rating": 5,
+    "userRatingCount": 3,
+    "types": [
+      "tourist_attraction",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider"
+    ],
+    "aliases": [
+      "Terrazza panoramica lato Nord Santuario di Tindari"
+    ],
+    "score": 37
+  },
+  {
+    "id": "spot-torre-bennistra-ChIJtbih",
+    "name": "Torre Bennistra",
+    "slug": "torre-bennistra",
+    "type": "coastal_view",
+    "rideType": "coastal",
+    "country": "IT",
+    "scope": "sicily",
+    "scopeName": "Sicilia",
+    "lat": 38.0689804,
+    "lng": 12.814655,
+    "regionHint": "Palermo / Trapani Coast",
+    "address": "Castellamare del Golfo, Contrada Scopello, 91014 Castellammare del Golfo TP, Italy",
+    "rating": 4.5,
+    "userRatingCount": 137,
+    "types": [
+      "historical_landmark",
+      "tourist_attraction",
+      "historical_place",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "coast",
+      "sea",
+      "scenic",
+      "rider",
+      "panoramic"
+    ],
+    "aliases": [
+      "Torre Bennistra"
+    ],
+    "score": 37
+  },
+  {
+    "id": "spot-viewpoint-to-mediterranean-sea-ChIJX8XM",
+    "name": "Viewpoint to Mediterranean Sea",
+    "slug": "viewpoint-to-mediterranean-sea",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "sicily",
+    "scopeName": "Sicilia",
+    "lat": 37.9593644,
+    "lng": 13.6696647,
+    "regionHint": "Madonie",
+    "address": "Contrada Serra Vaccara, 90018 Termini Imerese PA, Italy",
+    "rating": 4.3,
+    "userRatingCount": 3,
+    "types": [
+      "tourist_attraction",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "coast",
+      "sea"
+    ],
+    "aliases": [
+      "Viewpoint to Mediterranean Sea"
+    ],
+    "score": 37
+  },
+  {
+    "id": "spot-belvedere-punto-panoramico-di-san-vito-lo-capo-ChIJY_oI",
+    "name": "Belvedere punto panoramico di San Vito Lo Capo",
+    "slug": "belvedere-punto-panoramico-di-san-vito-lo-capo",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "sicily",
+    "scopeName": "Sicilia",
+    "lat": 38.171688599999996,
+    "lng": 12.729591300000001,
+    "regionHint": "Palermo / Trapani Coast",
+    "address": "91010 San Vito Lo Capo, Free municipal consortium of Trapani, Italy",
+    "rating": 4.6,
+    "userRatingCount": 16,
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider"
+    ],
+    "aliases": [
+      "Belvedere punto panoramico di San Vito Lo Capo"
+    ],
+    "score": 36
+  },
+  {
+    "id": "spot-lungomare-di-terrasini-ChIJ0TnU",
+    "name": "Lungomare di Terrasini",
+    "slug": "lungomare-di-terrasini",
+    "type": "coastal_view",
+    "rideType": "coastal",
+    "country": "IT",
+    "scope": "sicily",
+    "scopeName": "Sicilia",
+    "lat": 38.1541855,
+    "lng": 13.0805326,
+    "regionHint": "Palermo / Trapani Coast",
+    "address": "Lungomare Peppino Impastato, 90049 Terrasini PA, Italy",
+    "rating": 4.6,
+    "userRatingCount": 605,
+    "types": [
+      "hiking_area",
+      "sports_activity_location",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "coast",
+      "sea",
+      "scenic",
+      "rider",
+      "panoramic"
+    ],
+    "aliases": [
+      "Lungomare di Terrasini"
+    ],
+    "score": 36
+  },
+  {
+    "id": "spot-molo-sant-erasmo-trattoria-sul-mare-ChIJn4fs",
+    "name": "Molo Sant'Erasmo - Trattoria sul Mare",
+    "slug": "molo-sant-erasmo-trattoria-sul-mare",
+    "type": "coastal_view",
+    "rideType": "coastal",
+    "country": "IT",
+    "scope": "sicily",
+    "scopeName": "Sicilia",
+    "lat": 38.1133677,
+    "lng": 13.3789464,
+    "regionHint": "Palermo / Trapani Coast",
+    "address": "Caletta Sant'Erasmo, 90123 Palermo PA, Italy",
+    "rating": 4.1,
+    "userRatingCount": 1480,
+    "types": [
+      "seafood_restaurant",
+      "restaurant",
+      "food",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "coast",
+      "sea",
+      "scenic",
+      "rider",
+      "panoramic"
+    ],
+    "aliases": [
+      "Molo Sant'Erasmo - Trattoria sul Mare"
+    ],
+    "score": 36
+  },
+  {
+    "id": "spot-monte-pellegrino-punto-panoramico-sull-addaura-ChIJLVct",
+    "name": "Monte Pellegrino: punto panoramico sull'Addaura",
+    "slug": "monte-pellegrino-punto-panoramico-sull-addaura",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "sicily",
+    "scopeName": "Sicilia",
+    "lat": 38.1841794,
+    "lng": 13.351104399999999,
+    "regionHint": "Palermo / Trapani Coast",
+    "address": "90149 Palermo, PA, Italy",
+    "rating": 4.8,
+    "userRatingCount": 187,
+    "types": [
+      "wildlife_refuge",
+      "park",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider"
+    ],
+    "aliases": [
+      "Monte Pellegrino: punto panoramico sull'Addaura"
+    ],
+    "score": 36
+  },
+  {
+    "id": "spot-panoramic-view-of-avola-ChIJAUV0",
+    "name": "Panoramic view of Avola",
+    "slug": "panoramic-view-of-avola",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "sicily",
+    "scopeName": "Sicilia",
+    "lat": 36.931389599999996,
+    "lng": 15.1078825,
+    "regionHint": "Ragusa / Val di Noto",
+    "address": "96012 Avola, Free municipal consortium of Syracuse, Italy",
+    "rating": 4.7,
+    "userRatingCount": 165,
+    "types": [
+      "observation_deck",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider"
+    ],
+    "aliases": [
+      "Panoramic view of Avola"
+    ],
+    "score": 36
+  },
+  {
+    "id": "spot-punto-panoramico-view-taormina-castelmola-ChIJU31K",
+    "name": "Punto Panoramico/View Taormina-Castelmola",
+    "slug": "punto-panoramico-view-taormina-castelmola",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "sicily",
+    "scopeName": "Sicilia",
+    "lat": 37.8590987,
+    "lng": 15.2800988,
+    "regionHint": "Etna",
+    "address": "98030 Castelmola, Metropolitan City of Messina, Italy",
+    "rating": 4.8,
+    "userRatingCount": 46,
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider"
+    ],
+    "aliases": [
+      "Punto Panoramico/View Taormina-Castelmola"
+    ],
+    "score": 36
+  },
+  {
+    "id": "spot-rifugio-alpino-ragabo-ChIJWQl5",
+    "name": "Rifugio Alpino Ragabo",
+    "slug": "rifugio-alpino-ragabo",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "sicily",
+    "scopeName": "Sicilia",
+    "lat": 37.808111200000006,
+    "lng": 15.074760200000002,
+    "regionHint": "Etna",
+    "address": "Strade Mareneve, 95015 Linguaglossa CT, Italy",
+    "rating": 4.3,
+    "userRatingCount": 1657,
+    "types": [
+      "lodging",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic"
+    ],
+    "aliases": [
+      "Rifugio Alpino Ragabo"
+    ],
+    "score": 36
+  },
+  {
+    "id": "spot-belvedere-valle-del-bove-ChIJV8uj",
+    "name": "Belvedere Valle del Bove",
+    "slug": "belvedere-valle-del-bove",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "sicily",
+    "scopeName": "Sicilia",
+    "lat": 37.7284913,
+    "lng": 15.010238399999999,
+    "regionHint": "Etna",
+    "address": "P2H6+93, 95019 Zafferana Etnea, Metropolitan city of Catania, Italy",
+    "rating": 5,
+    "userRatingCount": 27,
+    "types": [
+      "tourist_attraction",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider"
+    ],
+    "aliases": [
+      "Belvedere Valle del Bove"
+    ],
+    "score": 35
+  },
+  {
+    "id": "spot-pineta-monti-rossi-ChIJAS9e",
+    "name": "Pineta Monti Rossi",
+    "slug": "pineta-monti-rossi",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "sicily",
+    "scopeName": "Sicilia",
+    "lat": 37.623275199999995,
+    "lng": 15.012360300000001,
+    "regionHint": "Etna",
+    "address": "SP92, 175, 95052 Nicolosi CT, Italy",
+    "rating": 4.4,
+    "userRatingCount": 2411,
+    "types": [
+      "hiking_area",
+      "tourist_attraction",
+      "sports_activity_location",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic"
+    ],
+    "aliases": [
+      "Pineta Monti Rossi"
+    ],
+    "score": 35
+  },
+  {
+    "id": "spot-area-marina-protetta-di-capo-milazzo-ChIJ94Ky",
+    "name": "Area Marina Protetta di Capo Milazzo",
+    "slug": "area-marina-protetta-di-capo-milazzo",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "sicily",
+    "scopeName": "Sicilia",
+    "lat": 38.2689355,
+    "lng": 15.232765200000001,
+    "regionHint": "Etna",
+    "address": "Strada Panoramica Capo, 98057 Milazzo ME, Italy",
+    "rating": 4.6,
+    "userRatingCount": 17,
+    "types": [
+      "nature_preserve",
+      "park",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider"
+    ],
+    "aliases": [
+      "Area Marina Protetta di Capo Milazzo"
+    ],
+    "score": 34
+  },
+  {
+    "id": "spot-baia-cirucco-amp-ChIJM8EA",
+    "name": "Baia Cirucco - AMP",
+    "slug": "baia-cirucco-amp",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "sicily",
+    "scopeName": "Sicilia",
+    "lat": 38.2641177,
+    "lng": 15.243403500000001,
+    "regionHint": "Etna",
+    "address": "Strada Panoramica Capo, 98057 Milazzo ME, Italy",
+    "rating": 4.5,
+    "userRatingCount": 2,
+    "types": [
+      "nature_preserve",
+      "park",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider"
+    ],
+    "aliases": [
+      "Baia Cirucco - AMP"
+    ],
+    "score": 34
+  },
+  {
+    "id": "spot-etna-esagonal-trekking-tour-ChIJBxmf",
+    "name": "Etna Esagonal Trekking Tour",
+    "slug": "etna-esagonal-trekking-tour",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "sicily",
+    "scopeName": "Sicilia",
+    "lat": 37.7000586,
+    "lng": 14.9991259,
+    "regionHint": "Etna",
+    "address": "Piazzale Rifugio Sapienza, 95052 Nicolosi CT, Italy",
+    "rating": 4.9,
+    "userRatingCount": 1859,
+    "types": [
+      "tour_agency",
+      "travel_agency",
+      "point_of_interest",
+      "service",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic"
+    ],
+    "aliases": [
+      "Etna Esagonal Trekking Tour"
+    ],
+    "score": 34
+  },
+  {
+    "id": "spot-santa-maria-di-loreto-viewpoint-ChIJfdOb",
+    "name": "Santa Maria di Loreto Viewpoint",
+    "slug": "santa-maria-di-loreto-viewpoint",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "sicily",
+    "scopeName": "Sicilia",
+    "lat": 37.7940587,
+    "lng": 14.1101767,
+    "regionHint": "Madonie",
+    "address": "90026 Petralia Soprana, PA, Italy",
+    "rating": 4.8,
+    "userRatingCount": 37,
+    "types": [
+      "observation_deck",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider"
+    ],
+    "aliases": [
+      "Santa Maria di Loreto Viewpoint"
+    ],
+    "score": 34
+  },
+  {
+    "id": "spot-punto-panoramico-ChIJHRpi",
+    "name": "Punto Panoramico",
+    "slug": "punto-panoramico",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "sicily",
+    "scopeName": "Sicilia",
+    "lat": 37.8559911,
+    "lng": 15.3024936,
+    "regionHint": "Nebrodi",
+    "address": "Sicily, Italy",
+    "rating": 4.6,
+    "userRatingCount": 15,
+    "types": [
+      "tourist_attraction",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider"
+    ],
+    "aliases": [
+      "Punto Panoramico"
+    ],
+    "score": 32
+  },
+  {
+    "id": "spot-mezzo-arancio-punto-panoramico-ChIJM8JD",
+    "name": "Mezzo Arancio (Punto panoramico)",
+    "slug": "mezzo-arancio-punto-panoramico",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "sicily",
+    "scopeName": "Sicilia",
+    "lat": 38.154227600000006,
+    "lng": 13.360652400000001,
+    "regionHint": "Palermo / Trapani Coast",
+    "address": "Via Bonanno Pietro, 90142 Palermo PA, Italy",
+    "rating": 4.6,
+    "userRatingCount": 39,
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider"
+    ],
+    "aliases": [
+      "Mezzo Arancio (Punto panoramico)"
+    ],
+    "score": 31
+  },
+  {
+    "id": "spot-punto-panoramico-ChIJNyPo",
+    "name": "Punto Panoramico",
+    "slug": "punto-panoramico",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "sicily",
+    "scopeName": "Sicilia",
+    "lat": 37.9884845,
+    "lng": 14.9028026,
+    "regionHint": "Nebrodi",
+    "address": "98030 Floresta, Metropolitan City of Messina, Italy",
+    "rating": 4.7,
+    "userRatingCount": 13,
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider"
+    ],
+    "aliases": [
+      "Punto Panoramico"
+    ],
+    "score": 31
+  },
+  {
+    "id": "spot-punto-panoramico-ChIJKd3S",
+    "name": "Punto Panoramico",
+    "slug": "punto-panoramico",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "sicily",
+    "scopeName": "Sicilia",
+    "lat": 38.1840645,
+    "lng": 13.272836199999999,
+    "regionHint": "Palermo / Trapani Coast",
+    "address": "90147 Torretta, PA, Italy",
+    "rating": 4.5,
+    "userRatingCount": 53,
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider"
+    ],
+    "aliases": [
+      "Punto Panoramico"
+    ],
+    "score": 31
+  },
+  {
+    "id": "spot-punto-panoramico-ChIJNQks",
+    "name": "Punto Panoramico",
+    "slug": "punto-panoramico",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "sicily",
+    "scopeName": "Sicilia",
+    "lat": 37.9888171,
+    "lng": 12.685057299999999,
+    "regionHint": "Palermo / Trapani Coast",
+    "address": "Via Messina, 90, 91012 Città Povera TP, Italy",
+    "rating": 5,
+    "userRatingCount": 2,
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider"
+    ],
+    "aliases": [
+      "Punto Panoramico"
+    ],
+    "score": 31
+  },
+  {
+    "id": "spot-punto-panoramico-palermo-ChIJKcjw",
+    "name": "Punto panoramico PALERMO",
+    "slug": "punto-panoramico-palermo",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "sicily",
+    "scopeName": "Sicilia",
+    "lat": 38.1562851,
+    "lng": 13.352653,
+    "regionHint": "Palermo / Trapani Coast",
+    "address": "Via Padre Ennio Pintacuda, 1, 90142 Palermo PA, Italy",
+    "rating": 4.9,
+    "userRatingCount": 18,
+    "types": [
+      "observation_deck",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider"
+    ],
+    "aliases": [
+      "Punto panoramico PALERMO"
+    ],
+    "score": 31
+  },
+  {
+    "id": "spot-scenic-lookout-ChIJ91iC",
+    "name": "Scenic Lookout",
+    "slug": "scenic-lookout",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "sicily",
+    "scopeName": "Sicilia",
+    "lat": 37.8513501,
+    "lng": 15.295774199999999,
+    "regionHint": "Etna",
+    "address": "Via Luigi Pirandello, 40, 98039 Taormina ME, Italy",
+    "rating": 4.9,
+    "userRatingCount": 28,
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider"
+    ],
+    "aliases": [
+      "Scenic Lookout"
+    ],
+    "score": 31
+  },
+  {
+    "id": "spot-villare-sulla-panoramica-ChIJp-hL",
+    "name": "Villarè sulla Panoramica",
+    "slug": "villare-sulla-panoramica",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "sicily",
+    "scopeName": "Sicilia",
+    "lat": 38.223388299999996,
+    "lng": 15.564686199999999,
+    "regionHint": "Messina / Peloritani",
+    "address": "nei pressi dell'Eden Park, S.da Panoramica dello Stretto, 98168 Messina ME, Italy",
+    "rating": 5,
+    "userRatingCount": 1,
+    "types": [
+      "farm",
+      "service",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider"
+    ],
+    "aliases": [
+      "Villarè sulla Panoramica"
+    ],
+    "score": 31
+  },
+  {
+    "id": "spot-la-montagnola-ChIJfwU2",
+    "name": "La Montagnola",
+    "slug": "la-montagnola",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "sicily",
+    "scopeName": "Sicilia",
+    "lat": 37.7174701,
+    "lng": 15.0052428,
+    "regionHint": "Etna",
+    "address": "Parco dell'Etna, SP92, 95052 Nicolosi CT, Italy",
+    "rating": 4.7,
+    "userRatingCount": 49,
+    "types": [
+      "tourist_attraction",
+      "wildlife_refuge",
+      "park",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic"
+    ],
+    "aliases": [
+      "La Montagnola"
+    ],
+    "score": 30
+  },
+  {
+    "id": "spot-ashara-etna-stromboli-guides-ChIJmzq8",
+    "name": "Ashàra Etna & Stromboli Guides",
+    "slug": "ashara-etna-stromboli-guides",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "sicily",
+    "scopeName": "Sicilia",
+    "lat": 37.699603499999995,
+    "lng": 14.9986871,
+    "regionHint": "Etna",
+    "address": "Piazzale Rifugio Sapienza, 95052 Nicolosi CT, Italy",
+    "rating": 4.9,
+    "userRatingCount": 863,
+    "types": [
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic"
+    ],
+    "aliases": [
+      "Ashàra Etna & Stromboli Guides"
+    ],
+    "score": 29
+  },
+  {
+    "id": "spot-belvedere-san-pietro-ChIJ014L",
+    "name": "Belvedere San Pietro",
+    "slug": "belvedere-san-pietro",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "sicily",
+    "scopeName": "Sicilia",
+    "lat": 36.8601631,
+    "lng": 14.759703,
+    "regionHint": "Ragusa / Val di Noto",
+    "address": "Str. Campailla, 43, 97015 Modica RG, Italy",
+    "rating": 4.9,
+    "userRatingCount": 8,
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider"
+    ],
+    "aliases": [
+      "Belvedere San Pietro"
+    ],
+    "score": 29
+  },
+  {
+    "id": "spot-cesaro-viewpoint-ChIJOdRu",
+    "name": "Cesaro viewpoint",
+    "slug": "cesaro-viewpoint",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "sicily",
+    "scopeName": "Sicilia",
+    "lat": 37.8359274,
+    "lng": 14.726023200000002,
+    "regionHint": "Nebrodi",
+    "address": "SS120, 98033 Cesarò ME, Italy",
+    "rating": 5,
+    "userRatingCount": 4,
+    "types": [
+      "observation_deck",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider"
+    ],
+    "aliases": [
+      "Cesaro viewpoint"
+    ],
+    "score": 29
+  },
+  {
+    "id": "spot-etna-alpine-guides-excursions-ChIJl2QJ",
+    "name": "Etna Alpine Guides Excursions",
+    "slug": "etna-alpine-guides-excursions",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "sicily",
+    "scopeName": "Sicilia",
+    "lat": 37.7002829,
+    "lng": 14.9984032,
+    "regionHint": "Etna",
+    "address": "Piazzale Rifugio Sapienza, 95052 Nicolosi CT, Italy",
+    "rating": 4.7,
+    "userRatingCount": 392,
+    "types": [
+      "tour_agency",
+      "travel_agency",
+      "point_of_interest",
+      "service",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic"
+    ],
+    "aliases": [
+      "Etna Alpine Guides Excursions"
+    ],
+    "score": 29
+  },
+  {
+    "id": "spot-etna-s-south-eastern-crater-ChIJL376",
+    "name": "Etna's South Eastern Crater",
+    "slug": "etna-s-south-eastern-crater",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "sicily",
+    "scopeName": "Sicilia",
+    "lat": 37.7475337,
+    "lng": 15.000679,
+    "regionHint": "Etna",
+    "address": "Parco dell'Etna, 95030 Nicolosi CT, Italy",
+    "rating": 4.9,
+    "userRatingCount": 205,
+    "types": [
+      "scenic_spot",
+      "wildlife_refuge",
+      "park",
+      "historical_place",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic"
+    ],
+    "aliases": [
+      "Etna's South Eastern Crater"
+    ],
+    "score": 29
+  },
+  {
+    "id": "spot-gruppo-guide-alpine-etna-sud-soc-coop-sede-amministrativa-ChIJsZHX",
+    "name": "Gruppo Guide Alpine Etna Sud Soc. Coop (sede amministrativa)",
+    "slug": "gruppo-guide-alpine-etna-sud-soc-coop-sede-amministrativa",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "sicily",
+    "scopeName": "Sicilia",
+    "lat": 37.614480799999995,
+    "lng": 15.026155799999998,
+    "regionHint": "Etna",
+    "address": "Piazza Vittorio Emanuele, 43, 95052 Nicolosi CT, Italy",
+    "rating": 4.7,
+    "userRatingCount": 250,
+    "types": [
+      "tour_agency",
+      "travel_agency",
+      "point_of_interest",
+      "service",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic"
+    ],
+    "aliases": [
+      "Gruppo Guide Alpine Etna Sud Soc. Coop (sede amministrativa)"
+    ],
+    "score": 29
+  },
+  {
+    "id": "spot-rifugio-sapienza-ChIJCaEV",
+    "name": "Rifugio Sapienza",
+    "slug": "rifugio-sapienza",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "sicily",
+    "scopeName": "Sicilia",
+    "lat": 37.700512499999995,
+    "lng": 14.9985029,
+    "regionHint": "Etna",
+    "address": "Piazzale Rifugio Sapienza, 95052 Nicolosi CT, Italy",
+    "rating": 4.4,
+    "userRatingCount": 15199,
+    "types": [
+      "bed_and_breakfast",
+      "pizza_restaurant",
+      "hotel",
+      "lodging",
+      "restaurant",
+      "food",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic"
+    ],
+    "aliases": [
+      "Rifugio Sapienza"
+    ],
+    "score": 29
+  },
+  {
+    "id": "spot-viewpoint-ogliastro-ChIJnbUi",
+    "name": "Viewpoint Ogliastro",
+    "slug": "viewpoint-ogliastro",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "sicily",
+    "scopeName": "Sicilia",
+    "lat": 37.8779307,
+    "lng": 15.266699200000001,
+    "regionHint": "Etna",
+    "address": "Contrada Spasale, 29, 98030 Castelmola ME, Italy",
+    "rating": 5,
+    "userRatingCount": 1,
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider"
+    ],
+    "aliases": [
+      "Viewpoint Ogliastro"
+    ],
+    "score": 29
+  },
+  {
+    "id": "spot-passo-dopo-passo-pelletteria-ChIJmR_w",
+    "name": "Passo Dopo Passo Pelletteria",
+    "slug": "passo-dopo-passo-pelletteria",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "sicily",
+    "scopeName": "Sicilia",
+    "lat": 37.616188,
+    "lng": 15.0804748,
+    "regionHint": "Nebrodi",
+    "address": "95039 Trecastagni Metropolitan city of Catania, Italy",
+    "rating": null,
+    "userRatingCount": null,
+    "types": [
+      "store",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic"
+    ],
+    "aliases": [
+      "Passo Dopo Passo Pelletteria"
+    ],
+    "score": 28
+  }
+]

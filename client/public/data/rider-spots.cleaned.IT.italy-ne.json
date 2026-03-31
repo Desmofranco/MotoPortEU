@@ -1,0 +1,4850 @@
+[
+  {
+    "id": "spot-col-alto-ChIJmY4m",
+    "sourceId": "spot-col-alto-ChIJmY4m",
+    "googlePlaceId": null,
+    "name": "Col Alto",
+    "slug": "col-alto",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "italy-ne",
+    "scopeName": "Italia Nord-Est",
+    "lat": 46.0947222,
+    "lng": 12.5344444,
+    "region": null,
+    "regionHint": "Dolomiti Est / Cortina",
+    "address": "Col Alto, 33081 Aviano, Province of Pordenone, Italy",
+    "rating": 4.8,
+    "userRatingCount": 24,
+    "rawTypes": [
+      "mountain_peak",
+      "natural_feature",
+      "establishment"
+    ],
+    "types": [
+      "mountain_peak",
+      "natural_feature",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Col Alto"
+    ],
+    "riderScore": 100
+  },
+  {
+    "id": "spot-col-bechei-ChIJo42K",
+    "sourceId": "spot-col-bechei-ChIJo42K",
+    "googlePlaceId": null,
+    "name": "Col Bechei",
+    "slug": "col-bechei",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "italy-ne",
+    "scopeName": "Italia Nord-Est",
+    "lat": 46.607448999999995,
+    "lng": 12.043712,
+    "region": null,
+    "regionHint": "Dolomiti Est / Cortina",
+    "address": "Col Bechei, 39030 Mareo, Autonomous Province of Bolzano – South Tyrol, Italy",
+    "rating": 4.9,
+    "userRatingCount": 11,
+    "rawTypes": [
+      "mountain_peak",
+      "natural_feature",
+      "establishment"
+    ],
+    "types": [
+      "mountain_peak",
+      "natural_feature",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Col Bechei"
+    ],
+    "riderScore": 100
+  },
+  {
+    "id": "spot-col-dei-bos-ChIJC83h",
+    "sourceId": "spot-col-dei-bos-ChIJC83h",
+    "googlePlaceId": null,
+    "name": "Col dei Bos",
+    "slug": "col-dei-bos",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "italy-ne",
+    "scopeName": "Italia Nord-Est",
+    "lat": 46.531304,
+    "lng": 12.023106,
+    "region": null,
+    "regionHint": "Dolomiti Est / Cortina",
+    "address": "Col dei Bos, 32043 Cortina d'Ampezzo BL, Italy",
+    "rating": 4.8,
+    "userRatingCount": 33,
+    "rawTypes": [
+      "mountain_peak",
+      "natural_feature",
+      "establishment"
+    ],
+    "types": [
+      "mountain_peak",
+      "natural_feature",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Col dei Bos"
+    ],
+    "riderScore": 100
+  },
+  {
+    "id": "spot-col-dei-rossi-ChIJmRp2",
+    "sourceId": "spot-col-dei-rossi-ChIJmRp2",
+    "googlePlaceId": null,
+    "name": "Col dei Rossi",
+    "slug": "col-dei-rossi",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "italy-ne",
+    "scopeName": "Italia Nord-Est",
+    "lat": 46.4743399,
+    "lng": 11.8017626,
+    "region": null,
+    "regionHint": "Dolomiti Ovest",
+    "address": "Col dei Rossi, 38032 Canazei TN, Italy",
+    "rating": 4.7,
+    "userRatingCount": 139,
+    "rawTypes": [
+      "mountain_peak",
+      "natural_feature",
+      "establishment"
+    ],
+    "types": [
+      "mountain_peak",
+      "natural_feature",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Col dei Rossi"
+    ],
+    "riderScore": 100
+  },
+  {
+    "id": "spot-col-di-lana-ChIJd9kw",
+    "sourceId": "spot-col-di-lana-ChIJd9kw",
+    "googlePlaceId": null,
+    "name": "Col di Lana",
+    "slug": "col-di-lana",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "italy-ne",
+    "scopeName": "Italia Nord-Est",
+    "lat": 46.489999999999995,
+    "lng": 11.969999999999999,
+    "region": null,
+    "regionHint": "Dolomiti Est / Cortina",
+    "address": "Col di Lana, 32020 Livinallongo del Col di Lana, Province of Belluno, Italy",
+    "rating": 4.9,
+    "userRatingCount": 114,
+    "rawTypes": [
+      "mountain_peak",
+      "natural_feature",
+      "establishment"
+    ],
+    "types": [
+      "mountain_peak",
+      "natural_feature",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Col di Lana"
+    ],
+    "riderScore": 100
+  },
+  {
+    "id": "spot-col-gentile-ChIJGWlx",
+    "sourceId": "spot-col-gentile-ChIJGWlx",
+    "googlePlaceId": null,
+    "name": "Col Gentile",
+    "slug": "col-gentile",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "italy-ne",
+    "scopeName": "Italia Nord-Est",
+    "lat": 46.467222199999995,
+    "lng": 12.805277799999999,
+    "region": null,
+    "regionHint": "Friuli Carnia",
+    "address": "Col Gentile, 33025 Ovaro, Province of Udine, Italy",
+    "rating": 4.8,
+    "userRatingCount": 10,
+    "rawTypes": [
+      "mountain_peak",
+      "natural_feature",
+      "establishment"
+    ],
+    "types": [
+      "mountain_peak",
+      "natural_feature",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Col Gentile"
+    ],
+    "riderScore": 100
+  },
+  {
+    "id": "spot-col-moscher-ChIJC2Ch",
+    "sourceId": "spot-col-moscher-ChIJC2Ch",
+    "googlePlaceId": null,
+    "name": "Col Moscher",
+    "slug": "col-moscher",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "italy-ne",
+    "scopeName": "Italia Nord-Est",
+    "lat": 45.98861110000001,
+    "lng": 12.014444399999999,
+    "region": null,
+    "regionHint": "Dolomiti Est / Cortina",
+    "address": "Col Moscher, 32020 Borgo Valbelluna, Province of Belluno, Italy",
+    "rating": 5,
+    "userRatingCount": 5,
+    "rawTypes": [
+      "mountain_peak",
+      "natural_feature",
+      "establishment"
+    ],
+    "types": [
+      "mountain_peak",
+      "natural_feature",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Col Moscher"
+    ],
+    "riderScore": 100
+  },
+  {
+    "id": "spot-col-nudo-ChIJM2nO",
+    "sourceId": "spot-col-nudo-ChIJM2nO",
+    "googlePlaceId": null,
+    "name": "Col Nudo",
+    "slug": "col-nudo",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "italy-ne",
+    "scopeName": "Italia Nord-Est",
+    "lat": 46.2280556,
+    "lng": 12.4016667,
+    "region": null,
+    "regionHint": "Friuli Carnia",
+    "address": "Col Nudo, 32010 Alpago, Province of Belluno, Italy",
+    "rating": 4.7,
+    "userRatingCount": 29,
+    "rawTypes": [
+      "mountain_peak",
+      "natural_feature",
+      "establishment"
+    ],
+    "types": [
+      "mountain_peak",
+      "natural_feature",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Col Nudo"
+    ],
+    "riderScore": 100
+  },
+  {
+    "id": "spot-col-quaterna-ChIJH8lQ",
+    "sourceId": "spot-col-quaterna-ChIJH8lQ",
+    "googlePlaceId": null,
+    "name": "Col Quaternà",
+    "slug": "col-quaterna",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "italy-ne",
+    "scopeName": "Italia Nord-Est",
+    "lat": 46.6673741,
+    "lng": 12.4725723,
+    "region": null,
+    "regionHint": "Dolomiti Est / Cortina",
+    "address": "Col Quaternà, 32040 Comelico Superiore BL, Italy",
+    "rating": 4.7,
+    "userRatingCount": 44,
+    "rawTypes": [
+      "mountain_peak",
+      "natural_feature",
+      "establishment"
+    ],
+    "types": [
+      "mountain_peak",
+      "natural_feature",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Col Quaternà"
+    ],
+    "riderScore": 100
+  },
+  {
+    "id": "spot-col-vidal-ChIJSwky",
+    "sourceId": "spot-col-vidal-ChIJSwky",
+    "googlePlaceId": null,
+    "name": "Col Vidal",
+    "slug": "col-vidal",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "italy-ne",
+    "scopeName": "Italia Nord-Est",
+    "lat": 46.5191667,
+    "lng": 12.4325,
+    "region": null,
+    "regionHint": "Dolomiti Est / Cortina",
+    "address": "Col Vidal, 32040 Lozzo di Cadore, Province of Belluno, Italy",
+    "rating": 4.8,
+    "userRatingCount": 4,
+    "rawTypes": [
+      "mountain_peak",
+      "natural_feature",
+      "establishment"
+    ],
+    "types": [
+      "mountain_peak",
+      "natural_feature",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Col Vidal"
+    ],
+    "riderScore": 100
+  },
+  {
+    "id": "spot-grodner-joch-aussicht-ju-de-frara-ChIJHX6X",
+    "sourceId": "spot-grodner-joch-aussicht-ju-de-frara-ChIJHX6X",
+    "googlePlaceId": null,
+    "name": "Grödner Joch Aussicht (Ju de Frara)",
+    "slug": "grodner-joch-aussicht-ju-de-frara",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "italy-ne",
+    "scopeName": "Italia Nord-Est",
+    "lat": 46.54776,
+    "lng": 11.8054613,
+    "region": null,
+    "regionHint": "Dolomiti Ovest",
+    "address": "Passo Gardena, 39048 Selva di Val Gardena BZ, Italy",
+    "rating": 4.8,
+    "userRatingCount": 62,
+    "rawTypes": [
+      "tourist_attraction",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "tourist_attraction",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Grödner Joch Aussicht (Ju de Frara)"
+    ],
+    "riderScore": 100
+  },
+  {
+    "id": "spot-passo-campolongo-1-875-m-ChIJf4G4",
+    "sourceId": "spot-passo-campolongo-1-875-m-ChIJf4G4",
+    "googlePlaceId": null,
+    "name": "Passo Campolongo 1.875 m",
+    "slug": "passo-campolongo-1-875-m",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "italy-ne",
+    "scopeName": "Italia Nord-Est",
+    "lat": 46.513671099999996,
+    "lng": 11.8724487,
+    "region": null,
+    "regionHint": "Dolomiti Ovest",
+    "address": "Passo Campolongo, 32020 Livinallongo del Col di Lana BL, Italy",
+    "rating": 4.6,
+    "userRatingCount": 357,
+    "rawTypes": [
+      "tourist_attraction",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "tourist_attraction",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Passo Campolongo 1.875 m"
+    ],
+    "riderScore": 100
+  },
+  {
+    "id": "spot-passo-del-pordoi-ChIJJVyG",
+    "sourceId": "spot-passo-del-pordoi-ChIJJVyG",
+    "googlePlaceId": null,
+    "name": "Passo del Pordoi",
+    "slug": "passo-del-pordoi",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "italy-ne",
+    "scopeName": "Italia Nord-Est",
+    "lat": 46.488461799999996,
+    "lng": 11.810896399999999,
+    "region": null,
+    "regionHint": "Dolomiti Ovest",
+    "address": "Passo Pordoi, 15, 38032 Livinallongo del Col di Lana BL, Italy",
+    "rating": 4.8,
+    "userRatingCount": 30,
+    "rawTypes": [
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Passo del Pordoi"
+    ],
+    "riderScore": 100
+  },
+  {
+    "id": "spot-passo-fedaia-ChIJ8cMd",
+    "sourceId": "spot-passo-fedaia-ChIJ8cMd",
+    "googlePlaceId": null,
+    "name": "Passo Fedaia",
+    "slug": "passo-fedaia",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "italy-ne",
+    "scopeName": "Italia Nord-Est",
+    "lat": 46.4535,
+    "lng": 11.889,
+    "region": null,
+    "regionHint": "Dolomiti Ovest",
+    "address": "Passo Fedaia, 32023 Rocca Pietore, Province of Belluno, Italy",
+    "rating": 4.7,
+    "userRatingCount": 600,
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "types": [
+      "natural_feature",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Passo Fedaia"
+    ],
+    "riderScore": 100
+  },
+  {
+    "id": "spot-giau-pass-ChIJb3K0",
+    "sourceId": "spot-giau-pass-ChIJb3K0",
+    "googlePlaceId": null,
+    "name": "Passo Giau",
+    "slug": "passo-giau",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "italy-ne",
+    "scopeName": "Italia Nord-Est",
+    "lat": 46.4830556,
+    "lng": 12.054166700000001,
+    "region": null,
+    "regionHint": "Dolomiti Est / Cortina",
+    "address": "Passo Giau, 32020 Colle Santa Lucia BL, Italy",
+    "rating": 4.9,
+    "userRatingCount": 1453,
+    "rawTypes": [
+      "mountain_peak",
+      "natural_feature",
+      "establishment"
+    ],
+    "types": [
+      "mountain_peak",
+      "natural_feature",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Giau Pass",
+      "Passo Giau"
+    ],
+    "riderScore": 100
+  },
+  {
+    "id": "spot-passo-pordoi-2-239-m-ChIJwx0e",
+    "sourceId": "spot-passo-pordoi-2-239-m-ChIJwx0e",
+    "googlePlaceId": null,
+    "name": "Passo Pordoi 2.239 m",
+    "slug": "passo-pordoi-2-239-m",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "italy-ne",
+    "scopeName": "Italia Nord-Est",
+    "lat": 46.487339299999995,
+    "lng": 11.8135788,
+    "region": null,
+    "regionHint": "Dolomiti Ovest",
+    "address": "SS48, 32020 Livinallongo del Col di Lana BL, Italy",
+    "rating": 4.8,
+    "userRatingCount": 6538,
+    "rawTypes": [
+      "tourist_attraction",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "tourist_attraction",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Passo Pordoi 2.239 m"
+    ],
+    "riderScore": 100
+  },
+  {
+    "id": "spot-san-pellegrino-pass-ChIJxQA9",
+    "sourceId": "spot-san-pellegrino-pass-ChIJxQA9",
+    "googlePlaceId": null,
+    "name": "Passo San Pellegrino",
+    "slug": "passo-san-pellegrino",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "italy-ne",
+    "scopeName": "Italia Nord-Est",
+    "lat": 46.3833333,
+    "lng": 11.783333299999999,
+    "region": null,
+    "regionHint": "Dolomiti Ovest",
+    "address": "Strada Statale 346 del Passo di S. Pellegrino, 17, 38035 Piè Falcade BL, Italy",
+    "rating": 4.7,
+    "userRatingCount": 741,
+    "rawTypes": [
+      "ski_resort",
+      "sports_activity_location",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "ski_resort",
+      "sports_activity_location",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "San Pellegrino Pass",
+      "Passo San Pellegrino"
+    ],
+    "riderScore": 100
+  },
+  {
+    "id": "spot-penser-joch-ChIJXYVk",
+    "sourceId": "spot-penser-joch-ChIJXYVk",
+    "googlePlaceId": null,
+    "name": "Penser Joch",
+    "slug": "penser-joch",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "italy-ne",
+    "scopeName": "Italia Nord-Est",
+    "lat": 46.8187194,
+    "lng": 11.440927499999999,
+    "region": null,
+    "regionHint": "Dolomiti Est / Cortina",
+    "address": "Passo, 39040 Pennes BZ, Italy",
+    "rating": 4.7,
+    "userRatingCount": 3230,
+    "rawTypes": [
+      "tourist_attraction",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "tourist_attraction",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Penser Joch"
+    ],
+    "riderScore": 100
+  },
+  {
+    "id": "spot-col-san-angelo-ChIJ0eEv",
+    "sourceId": "spot-col-san-angelo-ChIJ0eEv",
+    "googlePlaceId": null,
+    "name": "Col San Angelo",
+    "slug": "col-san-angelo",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "italy-ne",
+    "scopeName": "Italia Nord-Est",
+    "lat": 46.5888889,
+    "lng": 12.2902778,
+    "region": null,
+    "regionHint": "Dolomiti Est / Cortina",
+    "address": "Col San Angelo, 32041 Auronzo di Cadore, Province of Belluno, Italy",
+    "rating": 4.5,
+    "userRatingCount": 2,
+    "rawTypes": [
+      "mountain_peak",
+      "natural_feature",
+      "establishment"
+    ],
+    "types": [
+      "mountain_peak",
+      "natural_feature",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Col San Angelo"
+    ],
+    "riderScore": 98
+  },
+  {
+    "id": "spot-passo-tre-croci-ChIJ-wak",
+    "sourceId": "spot-passo-tre-croci-ChIJ-wak",
+    "googlePlaceId": null,
+    "name": "Passo Tre Croci",
+    "slug": "passo-tre-croci",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "italy-ne",
+    "scopeName": "Italia Nord-Est",
+    "lat": 46.5577778,
+    "lng": 12.2036111,
+    "region": null,
+    "regionHint": "Dolomiti Ovest",
+    "address": "Passo Tre Croci, 32043 Cortina d'Ampezzo, Province of Belluno, Italy",
+    "rating": 4.6,
+    "userRatingCount": 538,
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "types": [
+      "natural_feature",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Passo Tre Croci"
+    ],
+    "riderScore": 98
+  },
+  {
+    "id": "spot-wurzjoch-ChIJ8x6t",
+    "sourceId": "spot-wurzjoch-ChIJ8x6t",
+    "googlePlaceId": null,
+    "name": "Würzjoch",
+    "slug": "wurzjoch",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "italy-ne",
+    "scopeName": "Italia Nord-Est",
+    "lat": 46.675,
+    "lng": 11.814167,
+    "region": null,
+    "regionHint": "Dolomiti Ovest",
+    "address": "Würzjoch, 39030 San Martin de Tor, Autonomous Province of Bolzano – South Tyrol, Italy",
+    "rating": 4.8,
+    "userRatingCount": 979,
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "types": [
+      "natural_feature",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Würzjoch"
+    ],
+    "riderScore": 98
+  },
+  {
+    "id": "spot-passo-costalunga-ChIJZQ6K",
+    "sourceId": "spot-passo-costalunga-ChIJZQ6K",
+    "googlePlaceId": null,
+    "name": "Passo Costalunga",
+    "slug": "passo-costalunga",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "italy-ne",
+    "scopeName": "Italia Nord-Est",
+    "lat": 46.4043099,
+    "lng": 11.6089275,
+    "region": null,
+    "regionHint": "Dolomiti Ovest",
+    "address": "SS241, 39030 Nova Levante BZ, Italy",
+    "rating": 4.7,
+    "userRatingCount": 2300,
+    "rawTypes": [
+      "scenic_spot",
+      "tourist_attraction",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "scenic_spot",
+      "tourist_attraction",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Passo Costalunga"
+    ],
+    "riderScore": 97
+  },
+  {
+    "id": "spot-laghetto-passo-s-pellegrino-ChIJ_Vqm",
+    "sourceId": "spot-laghetto-passo-s-pellegrino-ChIJ_Vqm",
+    "googlePlaceId": null,
+    "name": "Laghetto passo s. Pellegrino",
+    "slug": "laghetto-passo-s-pellegrino",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "italy-ne",
+    "scopeName": "Italia Nord-Est",
+    "lat": 46.3766299,
+    "lng": 11.7845626,
+    "region": null,
+    "regionHint": "Dolomiti Ovest",
+    "address": "Strada Statale 346 del Passo di S. Pellegrino, 15, 38035 Moena TN, Italy",
+    "rating": 4.7,
+    "userRatingCount": 325,
+    "rawTypes": [
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Laghetto passo s. Pellegrino"
+    ],
+    "riderScore": 93
+  },
+  {
+    "id": "spot-passo-del-cason-di-lanza-ChIJY_OZ",
+    "sourceId": "spot-passo-del-cason-di-lanza-ChIJY_OZ",
+    "googlePlaceId": null,
+    "name": "Passo del Cason di Lanza",
+    "slug": "passo-del-cason-di-lanza",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "italy-ne",
+    "scopeName": "Italia Nord-Est",
+    "lat": 46.5656397,
+    "lng": 13.170959,
+    "region": null,
+    "regionHint": "Friuli Carnia",
+    "address": "Passo del Cason di Lanza, 33027 Paularo, Province of Udine, Italy",
+    "rating": 4.7,
+    "userRatingCount": 146,
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "types": [
+      "natural_feature",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Passo del Cason di Lanza",
+      "Passo Del Cason di Lanza"
+    ],
+    "riderScore": 93
+  },
+  {
+    "id": "spot-passo-di-oclini-ChIJQ96G",
+    "sourceId": "spot-passo-di-oclini-ChIJQ96G",
+    "googlePlaceId": null,
+    "name": "Passo di Oclini",
+    "slug": "passo-di-oclini",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "italy-ne",
+    "scopeName": "Italia Nord-Est",
+    "lat": 46.3472685,
+    "lng": 11.4515867,
+    "region": null,
+    "regionHint": "Dolomiti Ovest",
+    "address": "Passo di Oclini, 39040 Aldino BZ, Italy",
+    "rating": 4.7,
+    "userRatingCount": 145,
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "types": [
+      "natural_feature",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Passo di Oclini"
+    ],
+    "riderScore": 93
+  },
+  {
+    "id": "spot-passo-di-stalle-ChIJJ-b2",
+    "sourceId": "spot-passo-di-stalle-ChIJJ-b2",
+    "googlePlaceId": null,
+    "name": "Passo di Stalle",
+    "slug": "passo-di-stalle",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "italy-ne",
+    "scopeName": "Italia Nord-Est",
+    "lat": 46.8833333,
+    "lng": 12.2,
+    "region": null,
+    "regionHint": "Dolomiti Ovest",
+    "address": "Passo di Stalle, 39030 Rasen-Antholz, Autonomous Province of Bolzano – South Tyrol, Italy",
+    "rating": 4.8,
+    "userRatingCount": 153,
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "types": [
+      "natural_feature",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Passo di Stalle"
+    ],
+    "riderScore": 93
+  },
+  {
+    "id": "spot-san-boldo-pass-ChIJnZTn",
+    "sourceId": "spot-san-boldo-pass-ChIJnZTn",
+    "googlePlaceId": null,
+    "name": "Passo San Boldo",
+    "slug": "passo-san-boldo",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "italy-ne",
+    "scopeName": "Italia Nord-Est",
+    "lat": 46,
+    "lng": 12.166666699999999,
+    "region": null,
+    "regionHint": "Dolomiti Est / Cortina",
+    "address": "Passo San Boldo, 31030 San Boldo TV, Italy",
+    "rating": 4.7,
+    "userRatingCount": 133,
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "types": [
+      "natural_feature",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "San Boldo Pass",
+      "Passo San boldo",
+      "Passo San Boldo"
+    ],
+    "riderScore": 93
+  },
+  {
+    "id": "spot-forcella-del-col-de-mezzo-ChIJG4wS",
+    "sourceId": "spot-forcella-del-col-de-mezzo-ChIJG4wS",
+    "googlePlaceId": null,
+    "name": "Forcella del Col de Mezzo",
+    "slug": "forcella-del-col-de-mezzo",
+    "type": "mountain_pass",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "italy-ne",
+    "scopeName": "Italia Nord-Est",
+    "lat": 46.617399899999995,
+    "lng": 12.2845301,
+    "region": null,
+    "regionHint": "Dolomiti Est / Cortina",
+    "address": "Unnamed Road,39034, 39034 Dobbiaco BZ, Italy",
+    "rating": 4.8,
+    "userRatingCount": 164,
+    "rawTypes": [
+      "tourist_attraction",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "tourist_attraction",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "mountain",
+      "twisty",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Forcella del Col de Mezzo"
+    ],
+    "riderScore": 90
+  },
+  {
+    "id": "spot-funifor-alba-col-dei-rossi-ChIJ25zr",
+    "sourceId": "spot-funifor-alba-col-dei-rossi-ChIJ25zr",
+    "googlePlaceId": null,
+    "name": "Funifor Alba - Col dei Rossi",
+    "slug": "funifor-alba-col-dei-rossi",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "italy-ne",
+    "scopeName": "Italia Nord-Est",
+    "lat": 46.4576682,
+    "lng": 11.7889419,
+    "region": null,
+    "regionHint": "Dolomiti Ovest",
+    "address": "S.da de Contrin, 25 A, 38032 Canazei TN, Italy",
+    "rating": 4.7,
+    "userRatingCount": 726,
+    "rawTypes": [
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Funifor Alba - Col dei Rossi"
+    ],
+    "riderScore": 90
+  },
+  {
+    "id": "spot-col-paurion-ChIJVUhD",
+    "sourceId": "spot-col-paurion-ChIJVUhD",
+    "googlePlaceId": null,
+    "name": "Col Paurion",
+    "slug": "col-paurion",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "italy-ne",
+    "scopeName": "Italia Nord-Est",
+    "lat": 46.1872222,
+    "lng": 12.8405556,
+    "region": null,
+    "regionHint": "Friuli Carnia",
+    "address": "Col Paurion, 33090 Travesio, Province of Pordenone, Italy",
+    "rating": 0,
+    "userRatingCount": 0,
+    "rawTypes": [
+      "mountain_peak",
+      "natural_feature",
+      "establishment"
+    ],
+    "types": [
+      "mountain_peak",
+      "natural_feature",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Col Paurion"
+    ],
+    "riderScore": 88
+  },
+  {
+    "id": "spot-kreuzbergpass-ChIJp2Qa",
+    "sourceId": "spot-kreuzbergpass-ChIJp2Qa",
+    "googlePlaceId": null,
+    "name": "KreuzPassos",
+    "slug": "kreuzbergpass",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "italy-ne",
+    "scopeName": "Italia Nord-Est",
+    "lat": 46.655833,
+    "lng": 12.420278000000001,
+    "region": null,
+    "regionHint": "Dolomiti Ovest",
+    "address": "Kreuzbergpass, 39030 Sexten, Autonomous Province of Bolzano – South Tyrol, Italy",
+    "rating": 4.6,
+    "userRatingCount": 257,
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "types": [
+      "natural_feature",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Kreuzbergpass",
+      "KreuzPassos"
+    ],
+    "riderScore": 88
+  },
+  {
+    "id": "spot-valparola-pass-ChIJ_Xv9",
+    "sourceId": "spot-valparola-pass-ChIJ_Xv9",
+    "googlePlaceId": null,
+    "name": "Valparola Pass",
+    "slug": "valparola-pass",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "italy-ne",
+    "scopeName": "Italia Nord-Est",
+    "lat": 46.5333,
+    "lng": 11.9833,
+    "region": null,
+    "regionHint": "Dolomiti Ovest",
+    "address": "Valparola Pass, 32020 Livinallongo del Col di Lana, Province of Belluno, Italy",
+    "rating": 4.8,
+    "userRatingCount": 297,
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "types": [
+      "natural_feature",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Valparola Pass"
+    ],
+    "riderScore": 88
+  },
+  {
+    "id": "spot-mountains-view-point-ChIJid-E",
+    "sourceId": "spot-mountains-view-point-ChIJid-E",
+    "googlePlaceId": null,
+    "name": "Mountains view point",
+    "slug": "mountains-view-point",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "italy-ne",
+    "scopeName": "Italia Nord-Est",
+    "lat": 46.5560073,
+    "lng": 11.811707499999999,
+    "region": null,
+    "regionHint": "Dolomiti Ovest",
+    "address": "Passo Gardena, 39033 Colfosco BZ, Italy",
+    "rating": 4.9,
+    "userRatingCount": 106,
+    "rawTypes": [
+      "tourist_attraction",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "tourist_attraction",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Mountains view point"
+    ],
+    "riderScore": 87
+  },
+  {
+    "id": "spot-valles-pass-ChIJ27UF",
+    "sourceId": "spot-valles-pass-ChIJ27UF",
+    "googlePlaceId": null,
+    "name": "Passo Valles",
+    "slug": "passo-valles",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "italy-ne",
+    "scopeName": "Italia Nord-Est",
+    "lat": 46.3333333,
+    "lng": 11.799999999999999,
+    "region": null,
+    "regionHint": "Dolomiti Ovest",
+    "address": "SP81, 32020 Falcade BL, Italy",
+    "rating": 4.7,
+    "userRatingCount": 158,
+    "rawTypes": [
+      "tourist_attraction",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "tourist_attraction",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Valles Pass",
+      "Passo Valles"
+    ],
+    "riderScore": 87
+  },
+  {
+    "id": "spot-ferrata-degli-alpini-ChIJyVOt",
+    "sourceId": "spot-ferrata-degli-alpini-ChIJyVOt",
+    "googlePlaceId": null,
+    "name": "Ferrata degli Alpini",
+    "slug": "ferrata-degli-alpini",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "italy-ne",
+    "scopeName": "Italia Nord-Est",
+    "lat": 46.5261001,
+    "lng": 12.027442899999999,
+    "region": null,
+    "regionHint": "Dolomiti Est / Cortina",
+    "address": "Passo Falzarego, 32043 Cortina d'Ampezzo BL, Italy",
+    "rating": 4.8,
+    "userRatingCount": 102,
+    "rawTypes": [
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Ferrata degli Alpini"
+    ],
+    "riderScore": 85
+  },
+  {
+    "id": "spot-passo-della-forcella-pas-de-forcjute-ChIJOSbd",
+    "sourceId": "spot-passo-della-forcella-pas-de-forcjute-ChIJOSbd",
+    "googlePlaceId": null,
+    "name": "Passo della Forcella / Pas de Forcjute",
+    "slug": "passo-della-forcella-pas-de-forcjute",
+    "type": "mountain_pass",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "italy-ne",
+    "scopeName": "Italia Nord-Est",
+    "lat": 46.487530799999995,
+    "lng": 12.810401400000002,
+    "region": null,
+    "regionHint": "Dolomiti Est / Cortina",
+    "address": "Unnamed Road,33025, 33025 Ovaro UD, Italy",
+    "rating": 4.9,
+    "userRatingCount": 82,
+    "rawTypes": [
+      "tourist_attraction",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "tourist_attraction",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "mountain",
+      "twisty",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Passo della Forcella / Pas de Forcjute"
+    ],
+    "riderScore": 85
+  },
+  {
+    "id": "spot-sellaronda-ChIJU8qX",
+    "sourceId": "spot-sellaronda-ChIJU8qX",
+    "googlePlaceId": null,
+    "name": "Sellaronda",
+    "slug": "sellaronda",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "italy-ne",
+    "scopeName": "Italia Nord-Est",
+    "lat": 46.499331399999996,
+    "lng": 11.7502964,
+    "region": null,
+    "regionHint": "Dolomiti Ovest",
+    "address": "Località Passo Sella, 38031 Campitello di Fassa TN, Italy",
+    "rating": 4.9,
+    "userRatingCount": 206,
+    "rawTypes": [
+      "ski_resort",
+      "sports_activity_location",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "ski_resort",
+      "sports_activity_location",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Sellaronda"
+    ],
+    "riderScore": 85
+  },
+  {
+    "id": "spot-strada-a-serpente-passo-giau-ChIJIQ93",
+    "sourceId": "spot-strada-a-serpente-passo-giau-ChIJIQ93",
+    "googlePlaceId": null,
+    "name": "Strada a serpente Passo Giau",
+    "slug": "strada-a-serpente-passo-giau",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "italy-ne",
+    "scopeName": "Italia Nord-Est",
+    "lat": 46.5021809,
+    "lng": 12.075647,
+    "region": null,
+    "regionHint": "Dolomiti Est / Cortina",
+    "address": "G32G+V7, 32043 Cortina d'Ampezzo, Province of Belluno, Italy",
+    "rating": 4.7,
+    "userRatingCount": 21,
+    "rawTypes": [
+      "tourist_attraction",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "tourist_attraction",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Strada a serpente Passo Giau"
+    ],
+    "riderScore": 85
+  },
+  {
+    "id": "spot-campolongo-pass-ChIJmRtv",
+    "sourceId": "spot-campolongo-pass-ChIJmRtv",
+    "googlePlaceId": null,
+    "name": "Campolongo Pass",
+    "slug": "campolongo-pass",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "italy-ne",
+    "scopeName": "Italia Nord-Est",
+    "lat": 46.519605,
+    "lng": 11.8737906,
+    "region": null,
+    "regionHint": "Dolomiti Ovest",
+    "address": "Campolongo Pass, 32020 Livinallongo del Col di Lana, Province of Belluno, Italy",
+    "rating": 4.6,
+    "userRatingCount": 267,
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "types": [
+      "natural_feature",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Campolongo Pass"
+    ],
+    "riderScore": 83
+  },
+  {
+    "id": "spot-passo-di-gardena-ChIJlcPY",
+    "sourceId": "spot-passo-di-gardena-ChIJlcPY",
+    "googlePlaceId": null,
+    "name": "Passo di Gardena",
+    "slug": "passo-di-gardena",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "italy-ne",
+    "scopeName": "Italia Nord-Est",
+    "lat": 46.55,
+    "lng": 11.799999999999999,
+    "region": null,
+    "regionHint": "Dolomiti Ovest",
+    "address": "Passo di Gardena, 39048 Sëlva, Autonomous Province of Bolzano – South Tyrol, Italy",
+    "rating": 4.8,
+    "userRatingCount": 21,
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "types": [
+      "natural_feature",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Passo di Gardena"
+    ],
+    "riderScore": 83
+  },
+  {
+    "id": "spot-passo-di-nevea-ChIJIyPG",
+    "sourceId": "spot-passo-di-nevea-ChIJIyPG",
+    "googlePlaceId": null,
+    "name": "Passo di Nevea",
+    "slug": "passo-di-nevea",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "italy-ne",
+    "scopeName": "Italia Nord-Est",
+    "lat": 46.385833299999994,
+    "lng": 13.4830556,
+    "region": null,
+    "regionHint": "Friuli Carnia",
+    "address": "Passo di Nevea, 33010 Chiusaforte, Province of Udine, Italy",
+    "rating": 4.7,
+    "userRatingCount": 37,
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "types": [
+      "natural_feature",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Passo di Nevea"
+    ],
+    "riderScore": 83
+  },
+  {
+    "id": "spot-seggiovia-col-de-varda-ChIJiQvj",
+    "sourceId": "spot-seggiovia-col-de-varda-ChIJiQvj",
+    "googlePlaceId": null,
+    "name": "Seggiovia Col de Varda",
+    "slug": "seggiovia-col-de-varda",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "italy-ne",
+    "scopeName": "Italia Nord-Est",
+    "lat": 46.5782726,
+    "lng": 12.2534935,
+    "region": null,
+    "regionHint": "Dolomiti Est / Cortina",
+    "address": "Strada Provinciale 49 di Misurina, 32041 Misurina BL, Italy",
+    "rating": 4.4,
+    "userRatingCount": 853,
+    "rawTypes": [
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Seggiovia Col de Varda"
+    ],
+    "riderScore": 83
+  },
+  {
+    "id": "spot-passo-pura-perkh-ChIJF9Wx",
+    "sourceId": "spot-passo-pura-perkh-ChIJF9Wx",
+    "googlePlaceId": null,
+    "name": "Passo Pura / Perkh",
+    "slug": "passo-pura-perkh",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "italy-ne",
+    "scopeName": "Italia Nord-Est",
+    "lat": 46.422987,
+    "lng": 12.743597999999999,
+    "region": null,
+    "regionHint": "Friuli Carnia",
+    "address": "Via S. Valentino, 33021 Ampezzo UD, Italy",
+    "rating": 4.6,
+    "userRatingCount": 248,
+    "rawTypes": [
+      "scenic_spot",
+      "tourist_attraction",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "scenic_spot",
+      "tourist_attraction",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Passo Pura / Perkh"
+    ],
+    "riderScore": 82
+  },
+  {
+    "id": "spot-cirjoch-ChIJFwjy",
+    "sourceId": "spot-cirjoch-ChIJFwjy",
+    "googlePlaceId": null,
+    "name": "Cirjoch",
+    "slug": "cirjoch",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "italy-ne",
+    "scopeName": "Italia Nord-Est",
+    "lat": 46.5612539,
+    "lng": 11.8157254,
+    "region": null,
+    "regionHint": "Dolomiti Ovest",
+    "address": "Unnamed Road,39033, 39033 Wolkenstein in Gröden, Autonome Provinz Bozen - Südtirol, Italy",
+    "rating": 4.7,
+    "userRatingCount": 87,
+    "rawTypes": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Cirjoch"
+    ],
+    "riderScore": 78
+  },
+  {
+    "id": "spot-col-de-locia-ChIJ1d6z",
+    "sourceId": "spot-col-de-locia-ChIJ1d6z",
+    "googlePlaceId": null,
+    "name": "Col de Locia",
+    "slug": "col-de-locia",
+    "type": "mountain_pass",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "italy-ne",
+    "scopeName": "Italia Nord-Est",
+    "lat": 46.5655801,
+    "lng": 11.998621,
+    "region": null,
+    "regionHint": "Sellaronda",
+    "address": "Unnamed Road, 39030, 39030 Marebbe BZ, Italy",
+    "rating": 4.7,
+    "userRatingCount": 31,
+    "rawTypes": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "mountain",
+      "twisty",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Col de Locia"
+    ],
+    "riderScore": 78
+  },
+  {
+    "id": "spot-passo-cimabanche-ChIJ_-TU",
+    "sourceId": "spot-passo-cimabanche-ChIJ_-TU",
+    "googlePlaceId": null,
+    "name": "Passo Cimabanche",
+    "slug": "passo-cimabanche",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "italy-ne",
+    "scopeName": "Italia Nord-Est",
+    "lat": 46.6167482,
+    "lng": 12.170160599999999,
+    "region": null,
+    "regionHint": "Dolomiti Est / Cortina",
+    "address": "Passo Cimabanche, 32043 Cortina d'Ampezzo BL, Italy",
+    "rating": 4.6,
+    "userRatingCount": 34,
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "types": [
+      "natural_feature",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Passo Cimabanche"
+    ],
+    "riderScore": 78
+  },
+  {
+    "id": "spot-passo-del-zovo-ChIJvUI9",
+    "sourceId": "spot-passo-del-zovo-ChIJvUI9",
+    "googlePlaceId": null,
+    "name": "Passo del Zovo",
+    "slug": "passo-del-zovo",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "italy-ne",
+    "scopeName": "Italia Nord-Est",
+    "lat": 46.568333300000006,
+    "lng": 12.469166699999999,
+    "region": null,
+    "regionHint": "Friuli Carnia",
+    "address": "Passo del Zovo, 32041 Auronzo di Cadore, Province of Belluno, Italy",
+    "rating": 5,
+    "userRatingCount": 3,
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "types": [
+      "natural_feature",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Passo del Zovo"
+    ],
+    "riderScore": 78
+  },
+  {
+    "id": "spot-passo-dell-oregone-ChIJQUD9",
+    "sourceId": "spot-passo-dell-oregone-ChIJQUD9",
+    "googlePlaceId": null,
+    "name": "Passo dell'Oregone",
+    "slug": "passo-dell-oregone",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "italy-ne",
+    "scopeName": "Italia Nord-Est",
+    "lat": 46.6333333,
+    "lng": 12.7333333,
+    "region": null,
+    "regionHint": "Dolomiti Est / Cortina",
+    "address": "Passo dell'Oregone, 33020 Forni Avoltri, Province of Udine, Italy",
+    "rating": 4.8,
+    "userRatingCount": 9,
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "types": [
+      "natural_feature",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Passo dell'Oregone"
+    ],
+    "riderScore": 78
+  },
+  {
+    "id": "spot-passo-della-digola-ChIJV9mB",
+    "sourceId": "spot-passo-della-digola-ChIJV9mB",
+    "googlePlaceId": null,
+    "name": "Passo della Digola",
+    "slug": "passo-della-digola",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "italy-ne",
+    "scopeName": "Italia Nord-Est",
+    "lat": 46.5525,
+    "lng": 12.624722199999999,
+    "region": null,
+    "regionHint": "Dolomiti Est / Cortina",
+    "address": "Passo della Digola, 33012 Sappada, Province of Udine, Italy",
+    "rating": 4.8,
+    "userRatingCount": 6,
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "types": [
+      "natural_feature",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Passo della Digola"
+    ],
+    "riderScore": 78
+  },
+  {
+    "id": "spot-passo-della-sella-ChIJ73je",
+    "sourceId": "spot-passo-della-sella-ChIJ73je",
+    "googlePlaceId": null,
+    "name": "Passo della Sella",
+    "slug": "passo-della-sella",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "italy-ne",
+    "scopeName": "Italia Nord-Est",
+    "lat": 46.868888899999995,
+    "lng": 12.0630556,
+    "region": null,
+    "regionHint": "Dolomiti Est / Cortina",
+    "address": "Passo della Sella, 39030 Percha, Autonomous Province of Bolzano – South Tyrol, Italy",
+    "rating": 5,
+    "userRatingCount": 3,
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "types": [
+      "natural_feature",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Passo della Sella"
+    ],
+    "riderScore": 78
+  },
+  {
+    "id": "spot-passo-delle-ciaresole-ChIJ55B_",
+    "sourceId": "spot-passo-delle-ciaresole-ChIJ55B_",
+    "googlePlaceId": null,
+    "name": "Passo delle Ciaresole",
+    "slug": "passo-delle-ciaresole",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "italy-ne",
+    "scopeName": "Italia Nord-Est",
+    "lat": 46.4830416,
+    "lng": 11.6723787,
+    "region": null,
+    "regionHint": "Dolomiti Ovest",
+    "address": "Passo delle Ciaresole, 38031 Campitello di Fassa TN, Italy",
+    "rating": 4.9,
+    "userRatingCount": 12,
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "types": [
+      "natural_feature",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Passo delle Ciaresole"
+    ],
+    "riderScore": 78
+  },
+  {
+    "id": "spot-passo-delle-scalette-ChIJF8Ts",
+    "sourceId": "spot-passo-delle-scalette-ChIJF8Ts",
+    "googlePlaceId": null,
+    "name": "Passo Delle Scalette",
+    "slug": "passo-delle-scalette",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "italy-ne",
+    "scopeName": "Italia Nord-Est",
+    "lat": 46.457847199999996,
+    "lng": 11.660166799999999,
+    "region": null,
+    "regionHint": "Dolomiti Ovest",
+    "address": "Passo Delle Scalette, 38036 San Giovanni di Fassa TN, Italy",
+    "rating": 5,
+    "userRatingCount": 4,
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "types": [
+      "natural_feature",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Passo Delle Scalette"
+    ],
+    "riderScore": 78
+  },
+  {
+    "id": "spot-passo-di-falzarego-ChIJjSFG",
+    "sourceId": "spot-passo-di-falzarego-ChIJjSFG",
+    "googlePlaceId": null,
+    "name": "Passo di Falzarego",
+    "slug": "passo-di-falzarego",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "italy-ne",
+    "scopeName": "Italia Nord-Est",
+    "lat": 46.5208333,
+    "lng": 12.0127778,
+    "region": null,
+    "regionHint": "Dolomiti Ovest",
+    "address": "Passo di Falzarego, 32043 Cortina d'Ampezzo, Province of Belluno, Italy",
+    "rating": 4.7,
+    "userRatingCount": 15,
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "types": [
+      "natural_feature",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Passo di Falzarego"
+    ],
+    "riderScore": 78
+  },
+  {
+    "id": "spot-passo-di-lusia-ChIJ5dUv",
+    "sourceId": "spot-passo-di-lusia-ChIJ5dUv",
+    "googlePlaceId": null,
+    "name": "Passo di Lùsia",
+    "slug": "passo-di-lusia",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "italy-ne",
+    "scopeName": "Italia Nord-Est",
+    "lat": 46.3436747,
+    "lng": 11.701324699999999,
+    "region": null,
+    "regionHint": "Dolomiti Ovest",
+    "address": "Unnamed Road, 38037, 38037 Predazzo TN, Italy",
+    "rating": 4.9,
+    "userRatingCount": 11,
+    "rawTypes": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Passo di Lùsia"
+    ],
+    "riderScore": 78
+  },
+  {
+    "id": "spot-passo-di-suola-ChIJFybL",
+    "sourceId": "spot-passo-di-suola-ChIJFybL",
+    "googlePlaceId": null,
+    "name": "Passo di Suola",
+    "slug": "passo-di-suola",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "italy-ne",
+    "scopeName": "Italia Nord-Est",
+    "lat": 46.383055600000006,
+    "lng": 12.582777799999999,
+    "region": null,
+    "regionHint": "Dolomiti Est / Cortina",
+    "address": "Passo di Suola, 33024 Forni di Sopra, Province of Udine, Italy",
+    "rating": 5,
+    "userRatingCount": 1,
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "types": [
+      "natural_feature",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Passo di Suola"
+    ],
+    "riderScore": 78
+  },
+  {
+    "id": "spot-passo-di-tanamea-ChIJh74f",
+    "sourceId": "spot-passo-di-tanamea-ChIJh74f",
+    "googlePlaceId": null,
+    "name": "Passo di Tanamea",
+    "slug": "passo-di-tanamea",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "italy-ne",
+    "scopeName": "Italia Nord-Est",
+    "lat": 46.3052778,
+    "lng": 13.349722199999999,
+    "region": null,
+    "regionHint": "Friuli Carnia",
+    "address": "Passo di Tanamea, 33010 Lusevera, Province of Udine, Italy",
+    "rating": 4.6,
+    "userRatingCount": 43,
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "types": [
+      "natural_feature",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Passo di Tanamea"
+    ],
+    "riderScore": 78
+  },
+  {
+    "id": "spot-passo-gobbera-ChIJafhW",
+    "sourceId": "spot-passo-gobbera-ChIJafhW",
+    "googlePlaceId": null,
+    "name": "Passo Gobbera",
+    "slug": "passo-gobbera",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "italy-ne",
+    "scopeName": "Italia Nord-Est",
+    "lat": 46.15,
+    "lng": 11.75,
+    "region": null,
+    "regionHint": "Dolomiti Ovest",
+    "address": "Passo Gobbera, 38050 Canal San Bovo TN, Italy",
+    "rating": 4.6,
+    "userRatingCount": 27,
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "types": [
+      "natural_feature",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Passo Gobbera"
+    ],
+    "riderScore": 78
+  },
+  {
+    "id": "spot-passo-limo-ChIJQ92S",
+    "sourceId": "spot-passo-limo-ChIJQ92S",
+    "googlePlaceId": null,
+    "name": "Passo Limo",
+    "slug": "passo-limo",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "italy-ne",
+    "scopeName": "Italia Nord-Est",
+    "lat": 46.6083333,
+    "lng": 12.0169444,
+    "region": null,
+    "regionHint": "Dolomiti Ovest",
+    "address": "Passo Limo, 39030 Mareo, Autonomous Province of Bolzano – South Tyrol, Italy",
+    "rating": 4.9,
+    "userRatingCount": 7,
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "types": [
+      "natural_feature",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Passo Limo"
+    ],
+    "riderScore": 78
+  },
+  {
+    "id": "spot-passo-rest-ChIJL6N8",
+    "sourceId": "spot-passo-rest-ChIJL6N8",
+    "googlePlaceId": null,
+    "name": "passo Rest",
+    "slug": "passo-rest",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "italy-ne",
+    "scopeName": "Italia Nord-Est",
+    "lat": 46.356388900000006,
+    "lng": 12.7836111,
+    "region": null,
+    "regionHint": "Dolomiti Est / Cortina",
+    "address": "passo Rest, 33020 Socchieve UD, Italy",
+    "rating": 4.5,
+    "userRatingCount": 69,
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "types": [
+      "natural_feature",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "passo Rest",
+      "Passo Rest"
+    ],
+    "riderScore": 78
+  },
+  {
+    "id": "spot-passo-valbana-ChIJ0U_r",
+    "sourceId": "spot-passo-valbana-ChIJ0U_r",
+    "googlePlaceId": null,
+    "name": "Passo Valbana",
+    "slug": "passo-valbana",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "italy-ne",
+    "scopeName": "Italia Nord-Est",
+    "lat": 46.2219444,
+    "lng": 12.402777799999999,
+    "region": null,
+    "regionHint": "Dolomiti Est / Cortina",
+    "address": "Passo Valbana, 32010 Alpago, Province of Belluno, Italy",
+    "rating": 5,
+    "userRatingCount": 3,
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "types": [
+      "natural_feature",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Passo Valbana"
+    ],
+    "riderScore": 78
+  },
+  {
+    "id": "spot-passo-volaia-ChIJ0RQm",
+    "sourceId": "spot-passo-volaia-ChIJ0RQm",
+    "googlePlaceId": null,
+    "name": "Passo Volaia",
+    "slug": "passo-volaia",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "italy-ne",
+    "scopeName": "Italia Nord-Est",
+    "lat": 46.6073927,
+    "lng": 12.869282499999999,
+    "region": null,
+    "regionHint": "Friuli Carnia",
+    "address": "33020 Forni Avoltri, Province of Udine, Italy",
+    "rating": 4.8,
+    "userRatingCount": 95,
+    "rawTypes": [
+      "tourist_attraction",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "tourist_attraction",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Passo Volaia"
+    ],
+    "riderScore": 77
+  },
+  {
+    "id": "spot-belvedere-segantini-ChIJQ_YM",
+    "sourceId": "spot-belvedere-segantini-ChIJQ_YM",
+    "googlePlaceId": null,
+    "name": "Belvedere Segantini",
+    "slug": "belvedere-segantini",
+    "type": "mountain_pass",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "italy-ne",
+    "scopeName": "Italia Nord-Est",
+    "lat": 46.2979742,
+    "lng": 11.803033899999999,
+    "region": null,
+    "regionHint": "Dolomiti Est / Cortina",
+    "address": "Via Passo Rolle, 1, 38054 San Martino di Castrozza TN, Italy",
+    "rating": 4.9,
+    "userRatingCount": 22,
+    "rawTypes": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "mountain",
+      "twisty",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Belvedere Segantini"
+    ],
+    "riderScore": 75
+  },
+  {
+    "id": "spot-catinaccio-funivie-ChIJLycG",
+    "sourceId": "spot-catinaccio-funivie-ChIJLycG",
+    "googlePlaceId": null,
+    "name": "Catinaccio Funivie",
+    "slug": "catinaccio-funivie",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "italy-ne",
+    "scopeName": "Italia Nord-Est",
+    "lat": 46.421268000000005,
+    "lng": 11.671353199999999,
+    "region": null,
+    "regionHint": "Dolomiti Ovest",
+    "address": "Str. de Col de Mè, 10, 38036 Vigo di Fassa TN, Italy",
+    "rating": 4.4,
+    "userRatingCount": 2562,
+    "rawTypes": [
+      "ski_resort",
+      "sports_activity_location",
+      "transportation_service",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "ski_resort",
+      "sports_activity_location",
+      "transportation_service",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Catinaccio Funivie"
+    ],
+    "riderScore": 75
+  },
+  {
+    "id": "spot-kofeljoch-ChIJ4yq3",
+    "sourceId": "spot-kofeljoch-ChIJ4yq3",
+    "googlePlaceId": null,
+    "name": "Kofeljoch",
+    "slug": "kofeljoch",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "italy-ne",
+    "scopeName": "Italia Nord-Est",
+    "lat": 46.666580599999996,
+    "lng": 11.7721849,
+    "region": null,
+    "regionHint": "Dolomiti Ovest",
+    "address": "Kofeljoch, 39040 Villnöß, Autonome Provinz Bozen - Südtirol, Italy",
+    "rating": 5,
+    "userRatingCount": 2,
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "types": [
+      "natural_feature",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Kofeljoch"
+    ],
+    "riderScore": 73
+  },
+  {
+    "id": "spot-monte-col-ChIJbQ6x",
+    "sourceId": "spot-monte-col-ChIJbQ6x",
+    "googlePlaceId": null,
+    "name": "Monte Col",
+    "slug": "monte-col",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "italy-ne",
+    "scopeName": "Italia Nord-Est",
+    "lat": 46.5394444,
+    "lng": 12.5688889,
+    "region": null,
+    "regionHint": "Dolomiti Ovest",
+    "address": "Monte Col, 32045 Santo Stefano di Cadore, Province of Belluno, Italy",
+    "rating": 5,
+    "userRatingCount": 4,
+    "rawTypes": [
+      "mountain_peak",
+      "natural_feature",
+      "establishment"
+    ],
+    "types": [
+      "mountain_peak",
+      "natural_feature",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Monte Col"
+    ],
+    "riderScore": 73
+  },
+  {
+    "id": "spot-passo-della-forcella-ChIJ1-r8",
+    "sourceId": "spot-passo-della-forcella-ChIJ1-r8",
+    "googlePlaceId": null,
+    "name": "Passo della Forcella",
+    "slug": "passo-della-forcella",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "italy-ne",
+    "scopeName": "Italia Nord-Est",
+    "lat": 46.0709512,
+    "lng": 11.5927797,
+    "region": null,
+    "regionHint": "Dolomiti Ovest",
+    "address": "Passo della Forcella, 38050 Pieve Tesino TN, Italy",
+    "rating": 4.6,
+    "userRatingCount": 15,
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "types": [
+      "natural_feature",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Passo della Forcella"
+    ],
+    "riderScore": 73
+  },
+  {
+    "id": "spot-passo-della-sentinella-ChIJF3q7",
+    "sourceId": "spot-passo-della-sentinella-ChIJF3q7",
+    "googlePlaceId": null,
+    "name": "Passo della sentinella",
+    "slug": "passo-della-sentinella",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "italy-ne",
+    "scopeName": "Italia Nord-Est",
+    "lat": 46.641330499999995,
+    "lng": 12.3786226,
+    "region": null,
+    "regionHint": "Dolomiti Est / Cortina",
+    "address": "Passo della sentinella, 39030 Sesto BZ, Italy",
+    "rating": 4.6,
+    "userRatingCount": 12,
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "types": [
+      "natural_feature",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Passo della sentinella"
+    ],
+    "riderScore": 73
+  },
+  {
+    "id": "spot-passo-gioiche-ChIJ1yjH",
+    "sourceId": "spot-passo-gioiche-ChIJ1yjH",
+    "googlePlaceId": null,
+    "name": "Passo Gioiche",
+    "slug": "passo-gioiche",
+    "type": "mountain_pass",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "italy-ne",
+    "scopeName": "Italia Nord-Est",
+    "lat": 45.629845700000004,
+    "lng": 11.164719199999999,
+    "region": null,
+    "regionHint": "Lessinia / Monte Baldo",
+    "address": "Unnamed Road,37030, 37030 Selva di Progno VI, Italy",
+    "rating": 4.6,
+    "userRatingCount": 15,
+    "rawTypes": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "mountain",
+      "twisty",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Passo Gioiche"
+    ],
+    "riderScore": 73
+  },
+  {
+    "id": "spot-passo-giramondo-ChIJI-Cx",
+    "sourceId": "spot-passo-giramondo-ChIJI-Cx",
+    "googlePlaceId": null,
+    "name": "Passo Giramondo",
+    "slug": "passo-giramondo",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "italy-ne",
+    "scopeName": "Italia Nord-Est",
+    "lat": 46.616655699999995,
+    "lng": 12.816721699999999,
+    "region": null,
+    "regionHint": "Friuli Carnia",
+    "address": "Passo Giramondo, 33020 Forni Avoltri, Province of Udine, Italy",
+    "rating": 4.5,
+    "userRatingCount": 4,
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "types": [
+      "natural_feature",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Passo Giramondo"
+    ],
+    "riderScore": 73
+  },
+  {
+    "id": "spot-passo-posporcora-ChIJQbk0",
+    "sourceId": "spot-passo-posporcora-ChIJQbk0",
+    "googlePlaceId": null,
+    "name": "Passo Pospòrcora",
+    "slug": "passo-posporcora",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "italy-ne",
+    "scopeName": "Italia Nord-Est",
+    "lat": 46.5824329,
+    "lng": 12.095512699999999,
+    "region": null,
+    "regionHint": "Dolomiti Est / Cortina",
+    "address": "Passo Pospòrcora, 32043 Cortina d'Ampezzo BL, Italy",
+    "rating": 4.6,
+    "userRatingCount": 5,
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "types": [
+      "natural_feature",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Passo Pospòrcora"
+    ],
+    "riderScore": 73
+  },
+  {
+    "id": "spot-passo-di-nevea-na-zlebeh-1200-m-ChIJhXjA",
+    "sourceId": "spot-passo-di-nevea-na-zlebeh-1200-m-ChIJhXjA",
+    "googlePlaceId": null,
+    "name": "Passo di Nevea/Na Žlebeh (1200 m)",
+    "slug": "passo-di-nevea-na-zlebeh-1200-m",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "italy-ne",
+    "scopeName": "Italia Nord-Est",
+    "lat": 46.390226999999996,
+    "lng": 13.482337,
+    "region": null,
+    "regionHint": "Friuli Carnia",
+    "address": "SP76, 33010 Chiusaforte UD, Italy",
+    "rating": 4.8,
+    "userRatingCount": 11,
+    "rawTypes": [
+      "tourist_attraction",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "tourist_attraction",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Passo di Nevea/Na Žlebeh (1200 m)"
+    ],
+    "riderScore": 72
+  },
+  {
+    "id": "spot-passo-elbel-ChIJm5f5",
+    "sourceId": "spot-passo-elbel-ChIJm5f5",
+    "googlePlaceId": null,
+    "name": "Passo Elbel",
+    "slug": "passo-elbel",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "italy-ne",
+    "scopeName": "Italia Nord-Est",
+    "lat": 46.5193452,
+    "lng": 12.6505101,
+    "region": null,
+    "regionHint": "Friuli Carnia",
+    "address": "33020 Prato Carnico, Province of Udine, Italy",
+    "rating": 5,
+    "userRatingCount": 2,
+    "rawTypes": [
+      "tourist_attraction",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "tourist_attraction",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Passo Elbel"
+    ],
+    "riderScore": 72
+  },
+  {
+    "id": "spot-passo-monte-croce-di-comelico-ChIJ15gE",
+    "sourceId": "spot-passo-monte-croce-di-comelico-ChIJ15gE",
+    "googlePlaceId": null,
+    "name": "Passo Monte Croce di Comelico",
+    "slug": "passo-monte-croce-di-comelico",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "italy-ne",
+    "scopeName": "Italia Nord-Est",
+    "lat": 46.6577778,
+    "lng": 12.4205556,
+    "region": null,
+    "regionHint": "Dolomiti Est / Cortina",
+    "address": "32040 Comelico Superiore, Province of Belluno, Italy",
+    "rating": 4.5,
+    "userRatingCount": 30,
+    "rawTypes": [
+      "tourist_attraction",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "tourist_attraction",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Passo Monte Croce di Comelico"
+    ],
+    "riderScore": 72
+  },
+  {
+    "id": "spot-passo-pinei-ChIJa3nB",
+    "sourceId": "spot-passo-pinei-ChIJa3nB",
+    "googlePlaceId": null,
+    "name": "Passo Pinei",
+    "slug": "passo-pinei",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "italy-ne",
+    "scopeName": "Italia Nord-Est",
+    "lat": 46.5802919,
+    "lng": 11.6230009,
+    "region": null,
+    "regionHint": "Dolomiti Ovest",
+    "address": "Str. Pinei, 44, 39040 Castelrotto BZ, Italy",
+    "rating": 4.4,
+    "userRatingCount": 270,
+    "rawTypes": [
+      "hiking_area",
+      "tourist_attraction",
+      "sports_activity_location",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "hiking_area",
+      "tourist_attraction",
+      "sports_activity_location",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Passo Pinei"
+    ],
+    "riderScore": 72
+  },
+  {
+    "id": "spot-gran-cir-ChIJA297",
+    "sourceId": "spot-gran-cir-ChIJA297",
+    "googlePlaceId": null,
+    "name": "Gran Cir",
+    "slug": "gran-cir",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "italy-ne",
+    "scopeName": "Italia Nord-Est",
+    "lat": 46.5588033,
+    "lng": 11.8062414,
+    "region": null,
+    "regionHint": "Dolomiti Ovest",
+    "address": "39048 Grödner Joch, Autonome Provinz Bozen - Südtirol, Italy",
+    "rating": 5,
+    "userRatingCount": 52,
+    "rawTypes": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Gran Cir"
+    ],
+    "riderScore": 70
+  },
+  {
+    "id": "spot-passo-dell-arco-ChIJ9Xp1",
+    "sourceId": "spot-passo-dell-arco-ChIJ9Xp1",
+    "googlePlaceId": null,
+    "name": "Passo dell'Arco",
+    "slug": "passo-dell-arco",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "italy-ne",
+    "scopeName": "Italia Nord-Est",
+    "lat": 46.540265999999995,
+    "lng": 12.681282999999999,
+    "region": null,
+    "regionHint": "Friuli Carnia",
+    "address": "46°32'25.0\"N 12°40'52., Corso Italia, 6, 32046 San Vito di Cadore UD, Italy",
+    "rating": 4.8,
+    "userRatingCount": 18,
+    "rawTypes": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Passo dell'Arco"
+    ],
+    "riderScore": 70
+  },
+  {
+    "id": "spot-passo-geu-basso-ChIJj68N",
+    "sourceId": "spot-passo-geu-basso-ChIJj68N",
+    "googlePlaceId": null,
+    "name": "Passo Geu basso",
+    "slug": "passo-geu-basso",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "italy-ne",
+    "scopeName": "Italia Nord-Est",
+    "lat": 46.5514851,
+    "lng": 12.745992699999999,
+    "region": null,
+    "regionHint": "Friuli Carnia",
+    "address": "HP2W+H9, 33020 Forni Avoltri, Province of Udine, Italy",
+    "rating": 5,
+    "userRatingCount": 1,
+    "rawTypes": [
+      "hiking_area",
+      "sports_activity_location",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "hiking_area",
+      "sports_activity_location",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Passo Geu basso"
+    ],
+    "riderScore": 70
+  },
+  {
+    "id": "spot-skiarea-sanpellegrino-ChIJ5c3j",
+    "sourceId": "spot-skiarea-sanpellegrino-ChIJ5c3j",
+    "googlePlaceId": null,
+    "name": "Skiarea Sanpellegrino",
+    "slug": "skiarea-sanpellegrino",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "italy-ne",
+    "scopeName": "Italia Nord-Est",
+    "lat": 46.3790402,
+    "lng": 11.7859079,
+    "region": null,
+    "regionHint": "Dolomiti Ovest",
+    "address": "Passo San Pellegrino, 38035 Moena TN, Italy",
+    "rating": 4.4,
+    "userRatingCount": 267,
+    "rawTypes": [
+      "ski_resort",
+      "sports_activity_location",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "ski_resort",
+      "sports_activity_location",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Skiarea Sanpellegrino"
+    ],
+    "riderScore": 70
+  },
+  {
+    "id": "spot-val-san-nicolo-ChIJ95bI",
+    "sourceId": "spot-val-san-nicolo-ChIJ95bI",
+    "googlePlaceId": null,
+    "name": "Val San Nicolò",
+    "slug": "val-san-nicolo",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "italy-ne",
+    "scopeName": "Italia Nord-Est",
+    "lat": 46.4240706,
+    "lng": 11.753387799999999,
+    "region": null,
+    "regionHint": "Dolomiti Ovest",
+    "address": "Strada Val S. Nicolò, 38036 San Giovanni di Fassa TN, Italy",
+    "rating": 4.7,
+    "userRatingCount": 867,
+    "rawTypes": [
+      "hiking_area",
+      "tourist_attraction",
+      "sports_activity_location",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "hiking_area",
+      "tourist_attraction",
+      "sports_activity_location",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Val San Nicolò"
+    ],
+    "riderScore": 70
+  },
+  {
+    "id": "spot-alpe-di-siusi-ChIJryhk",
+    "sourceId": "spot-alpe-di-siusi-ChIJryhk",
+    "googlePlaceId": null,
+    "name": "Alpe di Siusi",
+    "slug": "alpe-di-siusi",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "italy-ne",
+    "scopeName": "Italia Nord-Est",
+    "lat": 46.5423435,
+    "lng": 11.6168855,
+    "region": null,
+    "regionHint": "Dolomiti Ovest",
+    "address": "Alpe di Siusi, Provincia autonoma di Bolzano - Alto Adige, Italy",
+    "rating": 4.7,
+    "userRatingCount": 4366,
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "types": [
+      "natural_feature",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Alpe di Siusi"
+    ],
+    "riderScore": 68
+  },
+  {
+    "id": "spot-falzarego-pass-ChIJ6-Vz",
+    "sourceId": "spot-falzarego-pass-ChIJ6-Vz",
+    "googlePlaceId": null,
+    "name": "Falzarego Pass",
+    "slug": "falzarego-pass",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "italy-ne",
+    "scopeName": "Italia Nord-Est",
+    "lat": 46.5191252,
+    "lng": 12.0089186,
+    "region": null,
+    "regionHint": "Dolomiti Ovest",
+    "address": "Falzarego Pass, 32043 Cortina d'Ampezzo, Province of Belluno, Italy",
+    "rating": 4.8,
+    "userRatingCount": 1699,
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "types": [
+      "natural_feature",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Falzarego Pass"
+    ],
+    "riderScore": 68
+  },
+  {
+    "id": "spot-gardena-pass-ChIJuVOi",
+    "sourceId": "spot-gardena-pass-ChIJuVOi",
+    "googlePlaceId": null,
+    "name": "Gardena Pass",
+    "slug": "gardena-pass",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "italy-ne",
+    "scopeName": "Italia Nord-Est",
+    "lat": 46.55,
+    "lng": 11.809444,
+    "region": null,
+    "regionHint": "Dolomiti Ovest",
+    "address": "Gardena Pass, 39033 Corvara, Autonomous Province of Bolzano – South Tyrol, Italy",
+    "rating": 4.9,
+    "userRatingCount": 1289,
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "types": [
+      "natural_feature",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Gardena Pass"
+    ],
+    "riderScore": 68
+  },
+  {
+    "id": "spot-monte-zoncolan-ChIJNbpa",
+    "sourceId": "spot-monte-zoncolan-ChIJNbpa",
+    "googlePlaceId": null,
+    "name": "Monte Zoncolan",
+    "slug": "monte-zoncolan",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "italy-ne",
+    "scopeName": "Italia Nord-Est",
+    "lat": 46.4996935,
+    "lng": 12.9192317,
+    "region": null,
+    "regionHint": "Friuli Carnia",
+    "address": "Monte Zoncolan, 33025 Ovaro, Province of Udine, Italy",
+    "rating": 4.7,
+    "userRatingCount": 764,
+    "rawTypes": [
+      "mountain_peak",
+      "natural_feature",
+      "establishment"
+    ],
+    "types": [
+      "mountain_peak",
+      "natural_feature",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Monte Zoncolan"
+    ],
+    "riderScore": 68
+  },
+  {
+    "id": "spot-passo-di-mauria-ChIJEdVl",
+    "sourceId": "spot-passo-di-mauria-ChIJEdVl",
+    "googlePlaceId": null,
+    "name": "Passo di Mauria",
+    "slug": "passo-di-mauria",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "italy-ne",
+    "scopeName": "Italia Nord-Est",
+    "lat": 46.457777799999995,
+    "lng": 12.5125,
+    "region": null,
+    "regionHint": "Dolomiti Est / Cortina",
+    "address": "Passo di Mauria, 32040 Lorenzago di Cadore, Province of Belluno, Italy",
+    "rating": 4.3,
+    "userRatingCount": 30,
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "types": [
+      "natural_feature",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Passo di Mauria"
+    ],
+    "riderScore": 68
+  },
+  {
+    "id": "spot-passo-di-sant-antonio-ChIJCZ-n",
+    "sourceId": "spot-passo-di-sant-antonio-ChIJCZ-n",
+    "googlePlaceId": null,
+    "name": "Passo di Sant'Antonio",
+    "slug": "passo-di-sant-antonio",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "italy-ne",
+    "scopeName": "Italia Nord-Est",
+    "lat": 46.5572404,
+    "lng": 12.4837921,
+    "region": null,
+    "regionHint": "Dolomiti Est / Cortina",
+    "address": "Passo di Sant'Antonio, 32041 Auronzo di Cadore BL, Italy",
+    "rating": 4,
+    "userRatingCount": 22,
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "types": [
+      "natural_feature",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Passo di Sant'Antonio"
+    ],
+    "riderScore": 68
+  },
+  {
+    "id": "spot-sella-pass-ChIJRQw4",
+    "sourceId": "spot-sella-pass-ChIJRQw4",
+    "googlePlaceId": null,
+    "name": "Sella Pass",
+    "slug": "sella-pass",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "italy-ne",
+    "scopeName": "Italia Nord-Est",
+    "lat": 46.509175,
+    "lng": 11.758276799999999,
+    "region": null,
+    "regionHint": "Dolomiti Ovest",
+    "address": "Sella Pass, 39048 Sëlva, Autonomous Province of Bolzano – South Tyrol, Italy",
+    "rating": 4.9,
+    "userRatingCount": 2252,
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "types": [
+      "natural_feature",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Sella Pass"
+    ],
+    "riderScore": 68
+  },
+  {
+    "id": "spot-forcella-col-piombin-ChIJi23O",
+    "sourceId": "spot-forcella-col-piombin-ChIJi23O",
+    "googlePlaceId": null,
+    "name": "Forcella Col Piombin",
+    "slug": "forcella-col-piombin",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "italy-ne",
+    "scopeName": "Italia Nord-Est",
+    "lat": 46.4764796,
+    "lng": 12.0621149,
+    "region": null,
+    "regionHint": "Dolomiti Est / Cortina",
+    "address": "32046 San Vito di Cadore, Province of Belluno, Italy",
+    "rating": 4.9,
+    "userRatingCount": 18,
+    "rawTypes": [
+      "hiking_area",
+      "sports_activity_location",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "hiking_area",
+      "sports_activity_location",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Forcella Col Piombin"
+    ],
+    "riderScore": 65
+  },
+  {
+    "id": "spot-monte-brutto-passo-ChIJg1TS",
+    "sourceId": "spot-monte-brutto-passo-ChIJg1TS",
+    "googlePlaceId": null,
+    "name": "Monte Brutto Passo",
+    "slug": "monte-brutto-passo",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "italy-ne",
+    "scopeName": "Italia Nord-Est",
+    "lat": 46.425555599999996,
+    "lng": 12.6838889,
+    "region": null,
+    "regionHint": "Friuli Carnia",
+    "address": "Monte Brutto Passo, 33021 Ampezzo, Province of Udine, Italy",
+    "rating": 0,
+    "userRatingCount": 0,
+    "rawTypes": [
+      "mountain_peak",
+      "natural_feature",
+      "establishment"
+    ],
+    "types": [
+      "mountain_peak",
+      "natural_feature",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Monte Brutto Passo"
+    ],
+    "riderScore": 63
+  },
+  {
+    "id": "spot-passo-d-entralais-ChIJBXDo",
+    "sourceId": "spot-passo-d-entralais-ChIJBXDo",
+    "googlePlaceId": null,
+    "name": "Passo d'Entralais",
+    "slug": "passo-d-entralais",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "italy-ne",
+    "scopeName": "Italia Nord-Est",
+    "lat": 46.5527778,
+    "lng": 12.7680556,
+    "region": null,
+    "regionHint": "Friuli Carnia",
+    "address": "Passo d'Entralais, 33020 Forni Avoltri, Province of Udine, Italy",
+    "rating": 0,
+    "userRatingCount": 0,
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "types": [
+      "natural_feature",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Passo d'Entralais"
+    ],
+    "riderScore": 63
+  },
+  {
+    "id": "spot-passo-di-monte-croce-ChIJxYTW",
+    "sourceId": "spot-passo-di-monte-croce-ChIJxYTW",
+    "googlePlaceId": null,
+    "name": "Passo di Monte Croce",
+    "slug": "passo-di-monte-croce",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "italy-ne",
+    "scopeName": "Italia Nord-Est",
+    "lat": 46.199166700000006,
+    "lng": 13.2913889,
+    "region": null,
+    "regionHint": "Friuli Carnia",
+    "address": "Passo di Monte Croce, 33040 Nimis, Province of Udine, Italy",
+    "rating": 4,
+    "userRatingCount": 3,
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "types": [
+      "natural_feature",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Passo di Monte Croce"
+    ],
+    "riderScore": 63
+  },
+  {
+    "id": "spot-passo-di-san-lugano-ChIJZxCt",
+    "sourceId": "spot-passo-di-san-lugano-ChIJZxCt",
+    "googlePlaceId": null,
+    "name": "Passo di San Lugano",
+    "slug": "passo-di-san-lugano",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "italy-ne",
+    "scopeName": "Italia Nord-Est",
+    "lat": 46.3106321,
+    "lng": 11.396747699999999,
+    "region": null,
+    "regionHint": "Dolomiti Ovest",
+    "address": "Passo di San Lugano, 39040 Trodena nel Parco naturale BZ, Italy",
+    "rating": 3.8,
+    "userRatingCount": 16,
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "types": [
+      "natural_feature",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Passo di San Lugano"
+    ],
+    "riderScore": 63
+  },
+  {
+    "id": "spot-passo-di-sant-osvaldo-ChIJT1CM",
+    "sourceId": "spot-passo-di-sant-osvaldo-ChIJT1CM",
+    "googlePlaceId": null,
+    "name": "Passo di Sant'Osvaldo",
+    "slug": "passo-di-sant-osvaldo",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "italy-ne",
+    "scopeName": "Italia Nord-Est",
+    "lat": 46.2854343,
+    "lng": 12.4084756,
+    "region": null,
+    "regionHint": "Dolomiti Ovest",
+    "address": "Passo di Sant'Osvaldo, 33080 Cimolais, Province of Pordenone, Italy",
+    "rating": 4.2,
+    "userRatingCount": 17,
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "types": [
+      "natural_feature",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Passo di Sant'Osvaldo"
+    ],
+    "riderScore": 63
+  },
+  {
+    "id": "spot-monte-zoncolan-concolan-ChIJ-VcT",
+    "sourceId": "spot-monte-zoncolan-concolan-ChIJ-VcT",
+    "googlePlaceId": null,
+    "name": "Monte Zoncolan / Çoncolan",
+    "slug": "monte-zoncolan-concolan",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "italy-ne",
+    "scopeName": "Italia Nord-Est",
+    "lat": 46.5062594,
+    "lng": 12.9313207,
+    "region": null,
+    "regionHint": "Friuli Carnia",
+    "address": "33020 Sutrio, Province of Udine, Italy",
+    "rating": 4.7,
+    "userRatingCount": 1042,
+    "rawTypes": [
+      "ski_resort",
+      "hiking_area",
+      "sports_activity_location",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "ski_resort",
+      "hiking_area",
+      "sports_activity_location",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Monte Zoncolan / Çoncolan"
+    ],
+    "riderScore": 60
+  },
+  {
+    "id": "spot-strada-del-menador-punto-panoramico-ChIJb1QY",
+    "sourceId": "spot-strada-del-menador-punto-panoramico-ChIJb1QY",
+    "googlePlaceId": null,
+    "name": "Strada del Menador - Punto Panoramico",
+    "slug": "strada-del-menador-punto-panoramico",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "italy-ne",
+    "scopeName": "Italia Nord-Est",
+    "lat": 45.976253199999995,
+    "lng": 11.290287099999999,
+    "region": null,
+    "regionHint": "Dolomiti Ovest",
+    "address": "Kaiserjägerstraße, 38052 Caldonazzo TN, Italy",
+    "rating": 4.7,
+    "userRatingCount": 1288,
+    "rawTypes": [
+      "scenic_spot",
+      "tourist_attraction",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "scenic_spot",
+      "tourist_attraction",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "rider-spot"
+    ],
+    "aliases": [
+      "Strada del Menador - Punto Panoramico"
+    ],
+    "riderScore": 60
+  },
+  {
+    "id": "spot-duran-pass-ChIJx44x",
+    "sourceId": "spot-duran-pass-ChIJx44x",
+    "googlePlaceId": null,
+    "name": "Duran Pass",
+    "slug": "duran-pass",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "italy-ne",
+    "scopeName": "Italia Nord-Est",
+    "lat": 46.3250722,
+    "lng": 12.0961985,
+    "region": null,
+    "regionHint": "Dolomiti Ovest",
+    "address": "Duran Pass, 32020 La Valle Agordina, Province of Belluno, Italy",
+    "rating": 4.6,
+    "userRatingCount": 298,
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "types": [
+      "natural_feature",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Duran Pass"
+    ],
+    "riderScore": 53
+  },
+  {
+    "id": "spot-furkelpass-ChIJb2XZ",
+    "sourceId": "spot-furkelpass-ChIJb2XZ",
+    "googlePlaceId": null,
+    "name": "Furkelpass",
+    "slug": "furkelpass",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "italy-ne",
+    "scopeName": "Italia Nord-Est",
+    "lat": 46.7230205,
+    "lng": 11.9693363,
+    "region": null,
+    "regionHint": "Dolomiti Est / Cortina",
+    "address": "Furkelpass, 39030 Mareo, Autonomous Province of Bolzano – South Tyrol, Italy",
+    "rating": 4.5,
+    "userRatingCount": 184,
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "types": [
+      "natural_feature",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Furkelpass"
+    ],
+    "riderScore": 53
+  },
+  {
+    "id": "spot-gampen-pass-ChIJeT11",
+    "sourceId": "spot-gampen-pass-ChIJeT11",
+    "googlePlaceId": null,
+    "name": "Gampen Pass",
+    "slug": "gampen-pass",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "italy-ne",
+    "scopeName": "Italia Nord-Est",
+    "lat": 46.530556,
+    "lng": 11.112222,
+    "region": null,
+    "regionHint": "Dolomiti Ovest",
+    "address": "Gampen Pass, 39010 Unsere Liebe Frau im Walde-St. Felix, Autonomous Province of Bolzano – South Tyrol, Italy",
+    "rating": 4.5,
+    "userRatingCount": 300,
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "types": [
+      "natural_feature",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Gampen Pass"
+    ],
+    "riderScore": 53
+  },
+  {
+    "id": "spot-karerpass-ChIJjT0Z",
+    "sourceId": "spot-karerpass-ChIJjT0Z",
+    "googlePlaceId": null,
+    "name": "Karerpass",
+    "slug": "karerpass",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "italy-ne",
+    "scopeName": "Italia Nord-Est",
+    "lat": 46.4,
+    "lng": 11.6,
+    "region": null,
+    "regionHint": "Dolomiti Ovest",
+    "address": "Karerpass, 39056 Welschnofen, Autonomous Province of Bolzano – South Tyrol, Italy",
+    "rating": 4.6,
+    "userRatingCount": 269,
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "types": [
+      "natural_feature",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Karerpass"
+    ],
+    "riderScore": 53
+  },
+  {
+    "id": "spot-plocken-pass-ChIJaddk",
+    "sourceId": "spot-plocken-pass-ChIJaddk",
+    "googlePlaceId": null,
+    "name": "Plöcken Pass",
+    "slug": "plocken-pass",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "italy-ne",
+    "scopeName": "Italia Nord-Est",
+    "lat": 46.6,
+    "lng": 12.9666667,
+    "region": null,
+    "regionHint": "Dolomiti Est / Cortina",
+    "address": "Plöcken Pass, 33026 Paluzza, Province of Udine, Italy",
+    "rating": 4.6,
+    "userRatingCount": 268,
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "types": [
+      "natural_feature",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Plöcken Pass"
+    ],
+    "riderScore": 53
+  },
+  {
+    "id": "spot-belvedere-di-canazei-ChIJO__c",
+    "sourceId": "spot-belvedere-di-canazei-ChIJO__c",
+    "googlePlaceId": null,
+    "name": "Belvedere di Canazei",
+    "slug": "belvedere-di-canazei",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "italy-ne",
+    "scopeName": "Italia Nord-Est",
+    "lat": 46.474660899999996,
+    "lng": 11.8029824,
+    "region": null,
+    "regionHint": "Dolomiti Ovest",
+    "address": "Unnamed Road, 38032, 38032, 38032 Canazei TN, Italy",
+    "rating": 4.8,
+    "userRatingCount": 889,
+    "rawTypes": [
+      "tourist_attraction",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "tourist_attraction",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "rider-spot"
+    ],
+    "aliases": [
+      "Belvedere di Canazei"
+    ],
+    "riderScore": 52
+  },
+  {
+    "id": "spot-atw-cable-car-col-druscie-ra-valles-ChIJmcvT",
+    "sourceId": "spot-atw-cable-car-col-druscie-ra-valles-ChIJmcvT",
+    "googlePlaceId": null,
+    "name": "ATW - Cable Car Col Drusciè/Ra Valles",
+    "slug": "atw-cable-car-col-druscie-ra-valles",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "italy-ne",
+    "scopeName": "Italia Nord-Est",
+    "lat": 46.547751899999994,
+    "lng": 12.0852752,
+    "region": null,
+    "regionHint": "Dolomiti Est / Cortina",
+    "address": "32043 Cortina d'Ampezzo, Province of Belluno, Italy",
+    "rating": 4.3,
+    "userRatingCount": 3,
+    "rawTypes": [
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "ATW - Cable Car Col Drusciè/Ra Valles"
+    ],
+    "riderScore": 50
+  },
+  {
+    "id": "spot-entry-to-strada-della-forra-ChIJxQxZ",
+    "sourceId": "spot-entry-to-strada-della-forra-ChIJxQxZ",
+    "googlePlaceId": null,
+    "name": "Entry to Strada della Forra",
+    "slug": "entry-to-strada-della-forra",
+    "type": "coastal_view",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "italy-ne",
+    "scopeName": "Italia Nord-Est",
+    "lat": 45.776599999999995,
+    "lng": 10.7605,
+    "region": null,
+    "regionHint": "Lessinia / Monte Baldo",
+    "address": "Tremosine rist. la forra, 25010, 25010 Tremosine sul Garda BS, Italy",
+    "rating": 4.6,
+    "userRatingCount": 30,
+    "rawTypes": [
+      "tourist_attraction",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "tourist_attraction",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "rider-spot"
+    ],
+    "aliases": [
+      "Entry to Strada della Forra"
+    ],
+    "riderScore": 49
+  },
+  {
+    "id": "spot-alpinisteig-ChIJVTom",
+    "sourceId": "spot-alpinisteig-ChIJVTom",
+    "googlePlaceId": null,
+    "name": "Alpinisteig",
+    "slug": "alpinisteig",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "italy-ne",
+    "scopeName": "Italia Nord-Est",
+    "lat": 46.630059599999996,
+    "lng": 12.374785099999999,
+    "region": null,
+    "regionHint": "Dolomiti Est / Cortina",
+    "address": "Unnamed Road, 39030, 39030 Sexten, Autonome Provinz Bozen - Südtirol, Italy",
+    "rating": 4.8,
+    "userRatingCount": 34,
+    "rawTypes": [
+      "historical_landmark",
+      "hiking_area",
+      "historical_place",
+      "sports_activity_location",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "historical_landmark",
+      "hiking_area",
+      "historical_place",
+      "sports_activity_location",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Alpinisteig"
+    ],
+    "riderScore": 48
+  },
+  {
+    "id": "spot-carnic-alps-ChIJKUPa",
+    "sourceId": "spot-carnic-alps-ChIJKUPa",
+    "googlePlaceId": null,
+    "name": "Carnic Alps",
+    "slug": "carnic-alps",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "italy-ne",
+    "scopeName": "Italia Nord-Est",
+    "lat": 46.572965599999996,
+    "lng": 12.8883938,
+    "region": null,
+    "regionHint": "Friuli Carnia",
+    "address": "Carnic Alps, 33020 Rigolato, Province of Udine, Italy",
+    "rating": 4.7,
+    "userRatingCount": 31,
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "types": [
+      "natural_feature",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Carnic Alps"
+    ],
+    "riderScore": 48
+  },
+  {
+    "id": "spot-dolomite-mountains-tour-operator-ChIJC4eF",
+    "sourceId": "spot-dolomite-mountains-tour-operator-ChIJC4eF",
+    "googlePlaceId": null,
+    "name": "Dolomite Mountains Tour Operator",
+    "slug": "dolomite-mountains-tour-operator",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "italy-ne",
+    "scopeName": "Italia Nord-Est",
+    "lat": 46.5717384,
+    "lng": 11.9318148,
+    "region": null,
+    "regionHint": "Dolomiti Ovest",
+    "address": "Strada Micurà de Rü, 23, 39036 San Cassiano BZ, Italy",
+    "rating": 4.9,
+    "userRatingCount": 88,
+    "rawTypes": [
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Dolomite Mountains Tour Operator"
+    ],
+    "riderScore": 48
+  },
+  {
+    "id": "spot-belvedere-strada-della-forra-ChIJdSGZ",
+    "sourceId": "spot-belvedere-strada-della-forra-ChIJdSGZ",
+    "googlePlaceId": null,
+    "name": "Belvedere Strada della Forra",
+    "slug": "belvedere-strada-della-forra",
+    "type": "coastal_view",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "italy-ne",
+    "scopeName": "Italia Nord-Est",
+    "lat": 45.7739421,
+    "lng": 10.7664423,
+    "region": null,
+    "regionHint": "Lessinia / Monte Baldo",
+    "address": "25010 Tremosine sul Garda, Province of Brescia, Italy",
+    "rating": 4.6,
+    "userRatingCount": 86,
+    "rawTypes": [
+      "observation_deck",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "observation_deck",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "rider-spot"
+    ],
+    "aliases": [
+      "Belvedere Strada della Forra"
+    ],
+    "riderScore": 47
+  },
+  {
+    "id": "spot-bullaccia-punto-panoramico-ChIJMSxo",
+    "sourceId": "spot-bullaccia-punto-panoramico-ChIJMSxo",
+    "googlePlaceId": null,
+    "name": "Bullaccia punto panoramico",
+    "slug": "bullaccia-punto-panoramico",
+    "type": "lake_view",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "italy-ne",
+    "scopeName": "Italia Nord-Est",
+    "lat": 46.5639617,
+    "lng": 11.616964099999999,
+    "region": null,
+    "regionHint": "Dolomiti Ovest",
+    "address": "39040 Kastelruth, Autonomous Province of Bolzano – South Tyrol, Italy",
+    "rating": 4.9,
+    "userRatingCount": 146,
+    "rawTypes": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "lake",
+      "rider-spot"
+    ],
+    "aliases": [
+      "Bullaccia punto panoramico"
+    ],
+    "riderScore": 46
+  },
+  {
+    "id": "spot-funivie-ortisei-alpe-di-siusi-mont-seuc-seilbahn-st-ulrich-seiseralm-ChIJidVs",
+    "sourceId": "spot-funivie-ortisei-alpe-di-siusi-mont-seuc-seilbahn-st-ulrich-seiseralm-ChIJidVs",
+    "googlePlaceId": null,
+    "name": "Funivie Ortisei - Alpe di Siusi / Mont Sëuc - Seilbahn St. Ulrich Seiseralm",
+    "slug": "funivie-ortisei-alpe-di-siusi-mont-seuc-seilbahn-st-ulrich-seiseralm",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "italy-ne",
+    "scopeName": "Italia Nord-Est",
+    "lat": 46.5729094,
+    "lng": 11.6712967,
+    "region": null,
+    "regionHint": "Dolomiti Ovest",
+    "address": "Via Setil, 9, 39046 Ortisei BZ, Italy",
+    "rating": 4.4,
+    "userRatingCount": 2848,
+    "rawTypes": [
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Funivie Ortisei - Alpe di Siusi / Mont Sëuc - Seilbahn St. Ulrich Seiseralm"
+    ],
+    "riderScore": 45
+  },
+  {
+    "id": "spot-forcella-denti-di-terrarossa-ChIJ9awf",
+    "sourceId": "spot-forcella-denti-di-terrarossa-ChIJ9awf",
+    "googlePlaceId": null,
+    "name": "Forcella Denti di Terrarossa",
+    "slug": "forcella-denti-di-terrarossa",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "italy-ne",
+    "scopeName": "Italia Nord-Est",
+    "lat": 46.501520799999994,
+    "lng": 11.6376226,
+    "region": null,
+    "regionHint": "Dolomiti Ovest",
+    "address": "Unnamed Road, 38031 Campitello di Fassa TN, Italy",
+    "rating": 4.9,
+    "userRatingCount": 280,
+    "rawTypes": [
+      "scenic_spot",
+      "tourist_attraction",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "scenic_spot",
+      "tourist_attraction",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "rider-spot"
+    ],
+    "aliases": [
+      "Forcella Denti di Terrarossa"
+    ],
+    "riderScore": 42
+  },
+  {
+    "id": "spot-ausserraschotzer-kreuz-ChIJfTLJ",
+    "sourceId": "spot-ausserraschotzer-kreuz-ChIJfTLJ",
+    "googlePlaceId": null,
+    "name": "Ausserraschötzer Kreuz",
+    "slug": "ausserraschotzer-kreuz",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "italy-ne",
+    "scopeName": "Italia Nord-Est",
+    "lat": 46.603372799999995,
+    "lng": 11.6562378,
+    "region": null,
+    "regionHint": "Dolomiti Ovest",
+    "address": "Unnamed Road, 39046 Ortisei BZ, Italy",
+    "rating": 4.8,
+    "userRatingCount": 194,
+    "rawTypes": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "rider-spot"
+    ],
+    "aliases": [
+      "Ausserraschötzer Kreuz"
+    ],
+    "riderScore": 40
+  },
+  {
+    "id": "spot-reinswald-sattele-ChIJi1H9",
+    "sourceId": "spot-reinswald-sattele-ChIJi1H9",
+    "googlePlaceId": null,
+    "name": "Reinswald Sattele",
+    "slug": "reinswald-sattele",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "italy-ne",
+    "scopeName": "Italia Nord-Est",
+    "lat": 46.700458999999995,
+    "lng": 11.455765,
+    "region": null,
+    "regionHint": "Dolomiti Ovest",
+    "address": "Unnamed Road, 39058, 39058 Sarntal, Autonome Provinz Bozen - Südtirol, Italy",
+    "rating": 4.7,
+    "userRatingCount": 127,
+    "rawTypes": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "rider-spot"
+    ],
+    "aliases": [
+      "Reinswald Sattele"
+    ],
+    "riderScore": 40
+  },
+  {
+    "id": "spot-sella-derbi-ChIJs3WM",
+    "sourceId": "spot-sella-derbi-ChIJs3WM",
+    "googlePlaceId": null,
+    "name": "Sella Derbi",
+    "slug": "sella-derbi",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "italy-ne",
+    "scopeName": "Italia Nord-Est",
+    "lat": 44.0614451,
+    "lng": 9.8185681,
+    "region": null,
+    "regionHint": "Appennino Tosco-Emiliano",
+    "address": "Unnamed Road,19132, 19025 Porto Venere SP, Italy",
+    "rating": 4.8,
+    "userRatingCount": 109,
+    "rawTypes": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "rider-spot"
+    ],
+    "aliases": [
+      "Sella Derbi"
+    ],
+    "riderScore": 40
+  },
+  {
+    "id": "spot-sosta-panoramica-ChIJ7cOU",
+    "sourceId": "spot-sosta-panoramica-ChIJ7cOU",
+    "googlePlaceId": null,
+    "name": "Sosta Panoramica",
+    "slug": "sosta-panoramica",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "italy-ne",
+    "scopeName": "Italia Nord-Est",
+    "lat": 45.7086812,
+    "lng": 10.693411099999999,
+    "region": null,
+    "regionHint": "Lessinia / Monte Baldo",
+    "address": "Via Repubblica, 25084 Gargnano BS, Italy",
+    "rating": 4.7,
+    "userRatingCount": 157,
+    "rawTypes": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "rider-spot"
+    ],
+    "aliases": [
+      "Sosta Panoramica"
+    ],
+    "riderScore": 40
+  },
+  {
+    "id": "spot-strada-panoramica-delle-vette-ChIJ0Wwg",
+    "sourceId": "spot-strada-panoramica-delle-vette-ChIJ0Wwg",
+    "googlePlaceId": null,
+    "name": "Strada Panoramica delle vette",
+    "slug": "strada-panoramica-delle-vette",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "italy-ne",
+    "scopeName": "Italia Nord-Est",
+    "lat": 46.5551111,
+    "lng": 12.911444399999999,
+    "region": null,
+    "regionHint": "Dolomiti Est / Cortina",
+    "address": "HW46+2H, 33023 Comeglians, Province of Udine, Italy",
+    "rating": 4.9,
+    "userRatingCount": 35,
+    "rawTypes": [
+      "tourist_attraction",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "tourist_attraction",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "rider-spot"
+    ],
+    "aliases": [
+      "Strada Panoramica delle vette"
+    ],
+    "riderScore": 40
+  },
+  {
+    "id": "spot-strada-panoramica-monte-serra-ChIJk65u",
+    "sourceId": "spot-strada-panoramica-monte-serra-ChIJk65u",
+    "googlePlaceId": null,
+    "name": "Strada panoramica monte Serra",
+    "slug": "strada-panoramica-monte-serra",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "italy-ne",
+    "scopeName": "Italia Nord-Est",
+    "lat": 43.7574324,
+    "lng": 10.5366438,
+    "region": null,
+    "regionHint": "Appennino Tosco-Emiliano",
+    "address": "56011 Capannori, Province of Lucca, Italy",
+    "rating": 4.7,
+    "userRatingCount": 21,
+    "rawTypes": [
+      "tourist_attraction",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "tourist_attraction",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "rider-spot"
+    ],
+    "aliases": [
+      "Strada panoramica monte Serra"
+    ],
+    "riderScore": 40
+  }
+]

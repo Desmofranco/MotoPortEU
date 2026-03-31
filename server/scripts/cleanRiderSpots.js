@@ -93,6 +93,289 @@ function inferCountry(address = "", region = "", explicitCountry = null) {
   return null;
 }
 
+function buildScopeMatchers(scopeCfg, countryCode) {
+  const regionTerms = (scopeCfg?.regions || []).map((x) => normalizeText(x));
+  const areaTerms = (scopeCfg?.areas || [])
+    .map((x) => normalizeText(x.name))
+    .filter(Boolean);
+
+  const italyTermsCommon = [
+    "italy",
+    "italia",
+
+    "valle d aosta",
+    "valle d'aosta",
+    "aosta valley",
+    "aosta",
+    "piemonte",
+    "lombardia",
+    "liguria",
+    "trentino",
+    "alto adige",
+    "sudtirol",
+    "veneto",
+    "friuli venezia giulia",
+    "emilia romagna",
+    "toscana",
+    "umbria",
+    "marche",
+    "lazio",
+    "abruzzo",
+    "molise",
+    "campania",
+    "basilicata",
+    "puglia",
+    "calabria",
+    "sicilia",
+    "sardegna",
+
+    "dolomiti",
+    "appennino",
+    "monte bianco",
+    "gran paradiso",
+    "stelvio",
+    "gavia",
+    "mortirolo",
+    "tonale",
+    "spluga",
+    "bernina",
+    "mendola",
+    "resia",
+    "forra",
+    "valvestino",
+    "gardesana",
+    "chianti",
+    "val d orcia",
+    "crete senesi",
+    "gran sasso",
+    "majella",
+    "etna",
+    "costiera amalfitana",
+    "amalfitana",
+    "gargano",
+    "pollino",
+    "sila",
+    "aspromonte",
+    "supramonte",
+    "ogliastra",
+    "barbagia",
+    "nebrodi",
+    "madonie",
+  ].map(normalizeText);
+
+  const nwTerms = [
+    "lago di como",
+    "lake como",
+    "como",
+    "lago maggiore",
+    "lake maggiore",
+    "maggiore",
+    "lago di garda",
+    "lake garda",
+    "garda",
+    "bormio",
+    "livigno",
+    "tirano",
+    "sestriere",
+    "cuneo",
+    "imperia",
+    "savona",
+    "genova",
+    "la spezia",
+    "canavese",
+    "appennino ligure",
+    "alpi marittime",
+    "gran paradiso",
+    "monte bianco",
+    "aosta",
+    "saint-vincent",
+    "col de joux",
+  ].map(normalizeText);
+
+  const neTerms = [
+    "sellaronda",
+    "cortina",
+    "pordoi",
+    "giau",
+    "falzarego",
+    "gardena",
+    "campolongo",
+    "fedaia",
+    "carnia",
+    "lessinia",
+    "monte baldo",
+    "trentino laghi",
+    "appennino tosco emiliano",
+  ].map(normalizeText);
+
+  const centerTerms = [
+    "chianti",
+    "crete senesi",
+    "garfagnana",
+    "apuane",
+    "casentino",
+    "val d orcia",
+    "amiata",
+    "umbria",
+    "sibillini",
+    "gran sasso",
+    "majella",
+    "terminillo",
+  ].map(normalizeText);
+
+  const southTerms = [
+    "costiera amalfitana",
+    "cilento",
+    "irpinia",
+    "sannio",
+    "pollino",
+    "dolomiti lucane",
+    "gargano",
+    "murge",
+    "valle d itria",
+    "sila",
+    "aspromonte",
+  ].map(normalizeText);
+
+  const sicilyTerms = [
+    "sicilia",
+    "sicily",
+    "etna",
+    "nebrodi",
+    "madonie",
+    "palermo",
+    "trapani",
+    "ragusa",
+    "val di noto",
+    "messina",
+    "peloritani",
+  ].map(normalizeText);
+
+  const sardiniaTerms = [
+    "sardegna",
+    "sardinia",
+    "costa smeralda",
+    "gallura",
+    "supramonte",
+    "ogliastra",
+    "sulcis",
+    "iglesiente",
+    "alghero",
+    "bosa",
+    "barbagia",
+  ].map(normalizeText);
+
+  let extraCountryTerms = [];
+  if (countryCode === "IT") {
+    if (scope === "italy-nw") extraCountryTerms = nwTerms;
+    else if (scope === "italy-ne") extraCountryTerms = neTerms;
+    else if (scope === "italy-center") extraCountryTerms = centerTerms;
+    else if (scope === "italy-south") extraCountryTerms = southTerms;
+    else if (scope === "sicily") extraCountryTerms = sicilyTerms;
+    else if (scope === "sardinia") extraCountryTerms = sardiniaTerms;
+  }
+
+  const foreignTerms = [
+    "france",
+    "francia",
+    "switzerland",
+    "svizzera",
+    "austria",
+    "osterreich",
+    "österreich",
+    "slovenia",
+    "croatia",
+    "croazia",
+    "germany",
+    "germania",
+    "provence",
+    "provenza",
+    "haute savoie",
+    "savoie",
+    "nice",
+    "menton",
+    "eze",
+    "chamonix mont blanc",
+    "chamonix-mont-blanc",
+    "trient",
+    "orsieres",
+    "evolene",
+    "ollon",
+    "morzine",
+    "bonneval sur arc",
+    "bonneval-sur-arc",
+    "saint dalmas le selvage",
+    "saint-dalmas-le-selvage",
+    "saint etienne de tinee",
+    "saint-etienne-de-tinee",
+    "luceram",
+    "gorbio",
+    "peille",
+    "uvernet fours",
+    "uvernet-fours",
+    "molines en queyras",
+    "molines-en-queyras",
+  ].map(normalizeText);
+
+  return {
+    regionTerms: [...new Set(regionTerms)],
+    areaTerms: [...new Set(areaTerms)],
+    italyTermsCommon: [...new Set(italyTermsCommon)],
+    extraCountryTerms: [...new Set(extraCountryTerms)],
+    foreignTerms: [...new Set(foreignTerms)],
+  };
+}
+
+const scopeMatchers = buildScopeMatchers(scopeCfg, country);
+
+function isSpotAllowedForItalianScope(spot, matchers) {
+  const blob = normalizeText([
+    spot.name,
+    spot.region,
+    spot.regionHint,
+    typeof spot.address === "string" ? spot.address : "",
+    spot.address?.formattedAddress,
+    spot.address?.country,
+    spot.address?.countryCode,
+    spot.scopeName,
+    ...(spot.tags || []),
+  ].filter(Boolean).join(" | "));
+
+  const explicitCountry = String(spot.country || "").toUpperCase();
+  if (explicitCountry && explicitCountry !== "IT") return false;
+
+  const inferred = inferCountry(
+    typeof spot.address === "string" ? spot.address : "",
+    `${spot.region || ""} ${spot.regionHint || ""}`,
+    explicitCountry || null
+  );
+
+  if (inferred && inferred !== "IT") return false;
+
+  const hasForeignSignal = matchers.foreignTerms.some((t) => blob.includes(t));
+  if (hasForeignSignal) return false;
+
+  const hasItalianSignal =
+    matchers.italyTermsCommon.some((t) => blob.includes(t)) ||
+    matchers.extraCountryTerms.some((t) => blob.includes(t)) ||
+    matchers.regionTerms.some((t) => blob.includes(t)) ||
+    matchers.areaTerms.some((t) => blob.includes(t));
+
+  if (hasItalianSignal) return true;
+
+  // fallback geografico: se non ho un segnale testuale chiaro,
+  // tengo solo spot molto vicini al cuore di almeno una area dello scope
+  const lat = toNum(spot.lat);
+  const lng = toNum(spot.lng);
+  if (lat == null || lng == null) return false;
+
+  const nearCoreArea = (scopeCfg?.areas || []).some((area) => {
+    const dist = haversineKm(lat, lng, area.lat, area.lng);
+    return dist <= Math.min(area.radius / 1000, 42);
+  });
+
+  return nearCoreArea;
+}
 function isMatchingCountry(spot, countryCode) {
   const explicit = String(spot.country || "").toUpperCase();
   if (explicit && explicit === countryCode) return true;
@@ -114,7 +397,15 @@ function isMatchingCountry(spot, countryCode) {
       text.includes("como") ||
       text.includes("stelvio") ||
       text.includes("gavia") ||
-      text.includes("spluga")
+      text.includes("spluga") ||
+      text.includes("mortirolo") ||
+      text.includes("tonale") ||
+      text.includes("resia") ||
+      text.includes("mendola") ||
+      text.includes("piemonte") ||
+      text.includes("lombardia") ||
+      text.includes("valle d aosta") ||
+      text.includes("aosta valley")
     );
   }
 
@@ -392,9 +683,15 @@ function inferSpotType(spot) {
     text.includes(" col ") ||
     text.startsWith("col ") ||
     text.includes("joch") ||
+    text.includes("passhohe") ||
     text.includes("stelvio") ||
     text.includes("gavia") ||
     text.includes("spluga") ||
+    text.includes("bernina") ||
+    text.includes("mortirolo") ||
+    text.includes("tonale") ||
+    text.includes("mendola") ||
+    text.includes("resia") ||
     tags.includes("mountain")
   ) {
     return "mountain_pass";
@@ -444,7 +741,6 @@ function inferSpotType(spot) {
 
   return spot.type || "scenic_road";
 }
-
 function inferRideType(spot) {
   const type = inferSpotType(spot);
   const tags = (spot.tags || []).map(norm);
@@ -623,14 +919,30 @@ async function main() {
 
   const raw = await readInput();
 
-  const filtered = raw
-    .filter((spot) => spot && spot.name && spot.lat != null && spot.lng != null)
-    .filter((spot) => isMatchingCountry(spot, country))
-    .filter((spot) => withinScopeRadius(spot, scopeCfg.areas))
-    .filter((spot) => hasPassSignal(spot.name, spot.address, rawTypesOf(spot), spot))
-    .filter((spot) => !hasBadWord(textOf(spot)))
-    .filter((spot) => !hasBadRawType(rawTypesOf(spot)))
-    .filter((spot) => !isTouristOnlySpot(spot))
+  const baseValid = raw.filter((spot) => spot && spot.name && spot.lat != null && spot.lng != null);
+
+  const countryFiltered = baseValid.filter((spot) => isMatchingCountry(spot, country));
+
+  const scopeRadiusFiltered = countryFiltered.filter((spot) =>
+    withinScopeRadius(spot, scopeCfg.areas)
+  );
+
+  const passSignalFiltered = scopeRadiusFiltered.filter((spot) =>
+    hasPassSignal(spot.name, spot.address, rawTypesOf(spot), spot)
+  );
+
+  const noBadWordFiltered = passSignalFiltered.filter((spot) => !hasBadWord(textOf(spot)));
+  const noBadTypeFiltered = noBadWordFiltered.filter((spot) => !hasBadRawType(rawTypesOf(spot)));
+  const noTouristOnlyFiltered = noBadTypeFiltered.filter((spot) => !isTouristOnlySpot(spot));
+
+  const scopeCountryStrictFiltered = noTouristOnlyFiltered.filter((spot) => {
+    if (country === "IT") {
+      return isSpotAllowedForItalianScope(spot, scopeMatchers);
+    }
+    return true;
+  });
+
+  const filtered = scopeCountryStrictFiltered
     .map((spot, index) => {
       const countryCode = inferCountry(spot.address, spot.region || spot.regionHint, spot.country);
       const cleanedName = normalizeForeignPassName(spot.name || "");
@@ -689,6 +1001,14 @@ async function main() {
   await fs.writeFile(OUT_PATH, JSON.stringify(unique, null, 2), "utf8");
 
   console.log(`✅ Input: ${raw.length}`);
+  console.log(`✅ Base validi: ${baseValid.length}`);
+  console.log(`✅ Dopo country: ${countryFiltered.length}`);
+  console.log(`✅ Dopo radius scope: ${scopeRadiusFiltered.length}`);
+  console.log(`✅ Dopo pass signal: ${passSignalFiltered.length}`);
+  console.log(`✅ Dopo bad words/types/tourist: ${noTouristOnlyFiltered.length}`);
+  if (country === "IT") {
+    console.log(`✅ Dopo filtro IT scope-strict: ${scopeCountryStrictFiltered.length}`);
+  }
   console.log(`✅ Output pulito PRO: ${unique.length}`);
   console.log(`📁 Salvato in: ${OUT_PATH}`);
 }
