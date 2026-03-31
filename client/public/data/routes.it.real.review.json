@@ -1,74 +1,10 @@
 [
   {
     "type": "dedupe_removed",
-    "removedName": "Giro Panoramico Lago di Como: Centro Porsche Como → Panoramic Hiking Tours → Viewpoint - Clivio Centro → Torriggia - Via Panoramica 24",
-    "keptName": "Giro Panoramico Lago di Como: Dordona viewpoint → Bema Strada Panoramica",
-    "removedDistanceKm": 53.3,
-    "keptDistanceKm": 76.6,
-    "reason": "duplicate_route"
-  },
-  {
-    "type": "dedupe_removed",
-    "removedName": "Giro Panoramico Lago di Como: Dordona viewpoint → Bema Strada Panoramica",
-    "keptName": "Giro Panoramico Lago di Como: Dordona viewpoint → Bema Strada Panoramica → Scenic Point Cino",
-    "removedDistanceKm": 76.6,
-    "keptDistanceKm": 98.2,
-    "reason": "duplicate_route"
-  },
-  {
-    "type": "dedupe_removed",
-    "removedName": "Giro Panoramico Lago di Como: Dordona viewpoint → Bema Strada Panoramica → Scenic Point Cino",
-    "keptName": "Giro Panoramico Lago di Como: Dordona viewpoint → Bema Strada Panoramica → Scenic Point Cino → Morterone Panoramic Point / Panchina dell'amore",
-    "removedDistanceKm": 98.2,
-    "keptDistanceKm": 158.1,
-    "reason": "duplicate_route"
-  },
-  {
-    "type": "dedupe_removed",
-    "removedName": "Giro Panoramico Lago di Como: Dordona viewpoint → Scenic Point Cino",
-    "keptName": "Giro Panoramico Lago di Como: Dordona viewpoint → Bema Strada Panoramica → Scenic Point Cino → Morterone Panoramic Point / Panchina dell'amore",
-    "removedDistanceKm": 85.7,
-    "keptDistanceKm": 158.1,
-    "reason": "duplicate_route"
-  },
-  {
-    "type": "dedupe_removed",
-    "removedName": "Giro Panoramico Lago di Como: Panoramic Point Sentiero del Viandante → Belvedere Macallè → Sacrario di Agueglio",
-    "keptName": "Giro Panoramico Lago di Como: Panoramic Point Sentiero del Viandante → Belvedere Macallè → Sacrario di Agueglio → Località Cendraro Lago Viewpoint",
-    "removedDistanceKm": 88,
-    "keptDistanceKm": 119.4,
-    "reason": "duplicate_route"
-  },
-  {
-    "type": "dedupe_removed",
-    "removedName": "Giro Panoramico Lago di Como: Passo Pertüs 1307m → Morterone Panoramic Point / Panchina dell'amore",
-    "keptName": "Giro Panoramico Lago di Como: Dordona viewpoint → Bema Strada Panoramica → Scenic Point Cino → Morterone Panoramic Point / Panchina dell'amore",
-    "removedDistanceKm": 54.8,
-    "keptDistanceKm": 158.1,
-    "reason": "duplicate_route"
-  },
-  {
-    "type": "dedupe_removed",
-    "removedName": "Giro Panoramico Lago di Como: Passo Pertüs 1307m → Monte Pesora",
-    "keptName": "Giro Panoramico Lago di Como: Passo Pertüs 1307m → Morterone Panoramic Point / Panchina dell'amore → Monte Pesora",
-    "removedDistanceKm": 57.7,
-    "keptDistanceKm": 85.2,
-    "reason": "duplicate_route"
-  },
-  {
-    "type": "dedupe_removed",
-    "removedName": "Giro Panoramico Lago di Como: Panoramic Point Sentiero del Viandante → Belvedere Macallè → Sacrario di Agueglio → Località Cendraro Lago Viewpoint",
+    "removedName": "Giro Panoramico Lago di Como: Passo Pertüs 1307m → Morterone Panoramic Point / Panchina dell'amore → Monte Pesora",
     "keptName": "Giro Panoramico Lago di Como: Passo Pertüs 1307m → Morterone Panoramic Point / Panchina dell'amore → Monte Pesora → CazzieMarc Viewpoint bergamo",
-    "removedDistanceKm": 119.4,
+    "removedDistanceKm": 85.2,
     "keptDistanceKm": 137.1,
-    "reason": "duplicate_route"
-  },
-  {
-    "type": "dedupe_removed",
-    "removedName": "Giro Panoramico Lago di Garda: Passo Campiano → Strada della Forra → Banchina Panoramica da Riva del Garda a Limone del Garda",
-    "keptName": "Giro Panoramico Lago di Garda: Passo Campiano → Strada della Forra → Banchina Panoramica da Riva del Garda a Limone del Garda → Strada Panoramica",
-    "removedDistanceKm": 57.6,
-    "keptDistanceKm": 97.2,
     "reason": "duplicate_route"
   }
 ]

@@ -1,12 +1,12 @@
 {
-  "inputTotal": 50,
-  "preliminaryKeep": 50,
+  "inputTotal": 41,
+  "preliminaryKeep": 41,
   "discarded": 0,
   "review": 0,
-  "dedupeRemoved": 9,
-  "finalRoutes": 41,
+  "dedupeRemoved": 1,
+  "finalRoutes": 40,
   "reasonBreakdown": {
-    "real_route": 50
+    "real_route": 41
   },
   "finalHeroRoutes": 14,
   "finalLongRoutes120Plus": 27,
@@ -23,7 +23,7 @@
     "Centro Italia": 3,
     "Sud Italia": 2,
     "Piemonte / Alpi": 3,
-    "Lago di Como": 4,
+    "Lago di Como": 3,
     "Trentino / Veneto / Friuli": 3,
     "Lago Maggiore": 1,
     "Lake Iseo": 1,
@@ -31,14 +31,14 @@
   },
   "finalByRouteFamily": {
     "mountain": 25,
-    "lake": 10,
+    "lake": 9,
     "coastal": 6
   },
   "sourceQualityBreakdown": {
     "high": 31,
-    "medium": 10
+    "medium": 9
   },
   "italianConfidenceBreakdown": {
-    "high": 41
+    "high": 40
   }
 }

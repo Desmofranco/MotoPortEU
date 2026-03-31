@@ -36,6 +36,14 @@ const MAX_SEEDS_PER_CLUSTER = 8;
 const MAX_CANDIDATES_PER_CLUSTER = 24;
 const MAX_FINAL_ROUTES = 2500;
 
+const lakeScopes = new Set(["como", "garda", "maggiore"]);
+const scopeLower = String(scope || "").toLowerCase();
+const scopeNameLower = String(scopeCfg?.scopeName || "").toLowerCase();
+const isLakeScope =
+  lakeScopes.has(scopeLower) ||
+  /\blago\b|\blake\b/.test(scopeNameLower) ||
+  /\bcomo\b|\bgarda\b|\bmaggiore\b/.test(scopeNameLower);
+
 // -------------------------------------------------------
 
 function slugify(input) {
@@ -90,6 +98,14 @@ function normalizeRegionHint(s) {
     .replace(/^[A-Z]{2}-/i, "")
     .replace(/[-_]+/g, " ")
     .trim();
+}
+
+function titleCase(input = "") {
+  return String(input)
+    .split(" ")
+    .filter(Boolean)
+    .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
+    .join(" ");
 }
 
 // -------------------------------------------------------
@@ -164,6 +180,17 @@ function isStrongRiderSpot(spot) {
     "lago di garda",
     "lago di como",
     "lago maggiore",
+    "lake como",
+    "lake garda",
+    "lake maggiore",
+    "como",
+    "bellagio",
+    "menaggio",
+    "varenna",
+    "lecco",
+    "stresa",
+    "verbania",
+    "arona",
     "costiera",
     "twisty",
     "mountain pass",
@@ -175,13 +202,15 @@ function isStrongRiderSpot(spot) {
     strongSignals.some((s) => text.includes(s)) ||
     tags.includes("mountain") ||
     tags.includes("twisty") ||
-    rideType === "mountain";
+    tags.includes("lake") ||
+    rideType === "mountain" ||
+    rideType === "lake";
 
   if (isWeakGenericName(spot.name || "")) return false;
   if (rawScore >= 70) return true;
   if (rawScore >= 55 && hasStrongSignal) return true;
   if (rideType === "mountain" && rawScore >= 48) return true;
-  if ((rideType === "lake" || rideType === "coastal") && rawScore >= 52 && hasStrongSignal) return true;
+  if ((rideType === "lake" || rideType === "coastal") && rawScore >= 48 && hasStrongSignal) return true;
 
   return false;
 }
@@ -192,7 +221,7 @@ function isAllowedNeighborSpot(spot) {
 
   if (isWeakGenericName(spot.name || "")) return false;
   if (text.includes("monaco")) return false;
-  if (rawScore < 38) return false;
+  if (rawScore < (isLakeScope ? 24 : 38)) return false;
 
   return true;
 }
@@ -217,6 +246,14 @@ function routeQualityScore(points, rideType, region) {
     "lago di garda",
     "lago di como",
     "lago maggiore",
+    "como",
+    "bellagio",
+    "menaggio",
+    "varenna",
+    "lecco",
+    "stresa",
+    "verbania",
+    "arona",
   ];
 
   for (const s of iconicSignals) {
@@ -224,7 +261,7 @@ function routeQualityScore(points, rideType, region) {
   }
 
   if (rideType === "mountain") score += 12;
-  if (rideType === "lake") score += 8;
+  if (rideType === "lake") score += 12;
   if (rideType === "coastal") score += 8;
 
   const uniqueNames = new Set(names);
@@ -237,6 +274,15 @@ function routeQualityScore(points, rideType, region) {
   if (normalizeText(region).includes("lago di como")) {
     if (allText.includes("stelvio") || allText.includes("gavia") || allText.includes("spluga")) {
       score -= 20;
+    }
+    if (
+      allText.includes("como") ||
+      allText.includes("bellagio") ||
+      allText.includes("menaggio") ||
+      allText.includes("varenna") ||
+      allText.includes("lecco")
+    ) {
+      score += 18;
     }
   }
 
@@ -256,8 +302,12 @@ function guessMacroRegion(spot) {
   if (s.includes("garda") || s.includes("valvestino") || s.includes("forra") || s.includes("gardesana")) {
     return "Lago di Garda";
   }
-  if (s.includes("como")) return "Lago di Como";
-  if (s.includes("maggiore")) return "Lago Maggiore";
+  if (s.includes("como") || s.includes("bellagio") || s.includes("menaggio") || s.includes("varenna") || s.includes("lecco")) {
+    return "Lago di Como";
+  }
+  if (s.includes("maggiore") || s.includes("stresa") || s.includes("verbania") || s.includes("arona")) {
+    return "Lago Maggiore";
+  }
   if (s.includes("liguria")) return "Liguria";
   if (s.includes("monte bianco") || s.includes("aosta")) return "Valle d'Aosta";
   if (s.includes("dolom")) return "Dolomiti";
@@ -376,19 +426,42 @@ function buildTitle(points, region, rideType) {
   return `${prefix} ${region}: ${names.slice(0, 4).join(" → ")}`;
 }
 
-function buildDescription(points, region, countryCode, rideType, mode, distanceKm, scopeName) {
-  const names = points.slice(0, 5).map((p) => p.name).join(", ");
-  const labelByType = {
-    mountain: "di montagna",
-    coastal: "costiero",
-    lake: "sui laghi",
-    scenic: "panoramico",
-    fjord: "tra fiordi e strade panoramiche",
-    forest: "tra boschi e strade verdi",
-  };
-  const t = labelByType[rideType] || "rider";
+function buildDescription(points, region, countryCode, rideType, mode, distanceKm) {
+  const names = points.slice(0, 4).map((p) => p.name).filter(Boolean);
+  const first = names[0] || "il punto di partenza";
+  const second = names[1] || null;
+  const third = names[2] || null;
+  const fourth = names[3] || null;
 
-  return `Itinerario ${t} in ${region}${countryCode ? ` (${countryCode})` : ""}, generato da rider spots reali. Scope ${scopeName || "generale"}. Modalità ${mode}. Percorso da circa ${distanceKm} km con focus su guida motociclistica, panorami e punti rider principali: ${names}.`;
+  if (rideType === "mountain") {
+    return [
+      `Un itinerario di montagna vero, pensato per chi cerca quota, curve e panorami forti nella zona ${region}.`,
+      `Si parte da ${first}${second ? ` e si sale verso ${second}` : ""}${third ? ` passando per ${third}` : ""}${fourth ? ` fino a ${fourth}` : ""}.`,
+      `Il risultato è un giro da circa ${distanceKm} km con carattere rider, ritmo variabile e tratti ideali per una guida piena e coinvolgente.`
+    ].join(" ");
+  }
+
+  if (rideType === "lake") {
+    return [
+      `Un giro lago panoramico e rider-oriented nella zona ${region}, costruito per valorizzare sponde, salite e punti vista davvero interessanti.`,
+      `L’itinerario unisce ${first}${second ? `, ${second}` : ""}${third ? ` e ${third}` : ""}${fourth ? ` fino a ${fourth}` : ""},`,
+      `per un percorso da circa ${distanceKm} km adatto a chi vuole guidare bene, vedere tanto e restare sempre dentro a un contesto credibile per la moto.`
+    ].join(" ");
+  }
+
+  if (rideType === "coastal") {
+    return [
+      `Un itinerario costiero pensato per la guida panoramica, tra mare, strade aperte e passaggi dal forte impatto visivo nella zona ${region}.`,
+      `Si sviluppa da ${first}${second ? ` verso ${second}` : ""}${third ? ` passando per ${third}` : ""}${fourth ? ` fino a ${fourth}` : ""},`,
+      `per circa ${distanceKm} km di guida scorrevole e fotografica, perfetta per una giornata di moto senza fretta ma con sostanza.`
+    ].join(" ");
+  }
+
+  return [
+    `Un itinerario panoramico rider nella zona ${region}, costruito attorno a punti interessanti e strade che hanno senso da vivere in moto.`,
+    `Tocca ${first}${second ? `, ${second}` : ""}${third ? `, ${third}` : ""}${fourth ? ` e ${fourth}` : ""},`,
+    `per un totale di circa ${distanceKm} km con mix di guida, panorama e ritmo adatto a un uso touring intelligente.`
+  ].join(" ");
 }
 
 async function getOsrmRoute(points) {
@@ -414,9 +487,51 @@ async function getOsrmRoute(points) {
   };
 }
 
-function buildShapeFields(points, osrm) {
+function buildFallbackGeometry(points) {
+  const coordsLngLat = points.map((p) => [roundCoord(p.lng), roundCoord(p.lat)]);
+  let distanceKm = 0;
+
+  for (let i = 1; i < points.length; i += 1) {
+    distanceKm += haversineKm(
+      Number(points[i - 1].lat),
+      Number(points[i - 1].lng),
+      Number(points[i].lat),
+      Number(points[i].lng)
+    );
+  }
+
+  const estimatedKm = Math.round(distanceKm * 1.22 * 10) / 10;
+  const estimatedDurationMin = Math.max(35, Math.round((estimatedKm / 52) * 60));
+
+  return {
+    geometry: {
+      type: "LineString",
+      coordinates: coordsLngLat,
+    },
+    distanceKm: estimatedKm,
+    durationMin: estimatedDurationMin,
+    isFallback: true,
+  };
+}
+
+function buildShapeFields(points, routeShape) {
   const start = points[0];
   const end = points[points.length - 1];
+  const geometry = routeShape?.geometry?.coordinates?.length
+    ? routeShape.geometry
+    : {
+        type: "LineString",
+        coordinates: points.map((p) => [roundCoord(p.lng), roundCoord(p.lat)]),
+      };
+
+  const sampledCoordsLatLng = geometry.coordinates
+    .map(([lng, lat], i, arr) => {
+      if (i !== 0 && i !== arr.length - 1 && i % 3 !== 0) return null;
+      return [roundCoord(lat), roundCoord(lng)];
+    })
+    .filter(Boolean);
+
+  const polyline = sampledCoordsLatLng.map(([lat, lng]) => [lat, lng]);
 
   return {
     start: {
@@ -436,12 +551,9 @@ function buildShapeFields(points, osrm) {
       type: p.type || "scenic_road",
       rideType: p.rideType || "scenic",
     })),
-    coords: osrm.geometry.coordinates
-      .map(([lng, lat], i, arr) => {
-        if (i !== 0 && i !== arr.length - 1 && i % 3 !== 0) return null;
-        return [roundCoord(lat), roundCoord(lng)];
-      })
-      .filter(Boolean),
+    coords: sampledCoordsLatLng,
+    polyline,
+    geometry,
   };
 }
 
@@ -611,10 +723,18 @@ async function main() {
 
     for (const cand of candidates) {
       try {
-        const osrm = await getOsrmRoute(cand.points);
+        let routeShape;
+        try {
+          routeShape = await getOsrmRoute(cand.points);
+        } catch (err) {
+          routeShape = buildFallbackGeometry(cand.points);
+          console.warn(
+            `   ⚠️ fallback geometry: ${cand.points.map((p) => p.name).join(" → ").slice(0, 120)} | ${err.message}`
+          );
+        }
 
-        if (osrm.distanceKm < MIN_ROUTE_DISTANCE_KM) continue;
-        if (osrm.distanceKm > MAX_ROUTE_DISTANCE_KM) continue;
+        if (routeShape.distanceKm < MIN_ROUTE_DISTANCE_KM) continue;
+        if (routeShape.distanceKm > MAX_ROUTE_DISTANCE_KM) continue;
 
         const title = buildTitle(cand.points, region, rideType);
         const description = buildDescription(
@@ -623,10 +743,9 @@ async function main() {
           countryCode,
           rideType,
           cand.mode,
-          osrm.distanceKm,
-          scopeCfg.scopeName
+          routeShape.distanceKm
         );
-        const shape = buildShapeFields(cand.points, osrm);
+        const shape = buildShapeFields(cand.points, routeShape);
         const center = averageLatLng(cand.points);
 
         const routeId = buildRouteId(routeCounter, countryCode, scopeKey, title);
@@ -642,10 +761,12 @@ async function main() {
           scope: scopeKey,
           scopeName: scopeCfg.scopeName,
           region,
-          source: "generated_from_rider_spots",
-          distanceKm: osrm.distanceKm,
-          durationMin: osrm.durationMin,
-          difficulty: buildDifficulty(osrm.distanceKm, rideType, cand.points.length),
+          source: routeShape.isFallback
+            ? "generated_from_rider_spots_fallback_geometry"
+            : "generated_from_rider_spots",
+          distanceKm: routeShape.distanceKm,
+          durationMin: routeShape.durationMin,
+          difficulty: buildDifficulty(routeShape.distanceKm, rideType, cand.points.length),
           surface: buildSurface(rideType),
           tags: buildTags(
             rideType,
