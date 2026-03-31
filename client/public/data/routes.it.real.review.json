@@ -1,10 +1,1 @@
-[
-  {
-    "type": "dedupe_removed",
-    "removedName": "Giro Panoramico Lago di Como: Passo Pertüs 1307m → Morterone Panoramic Point / Panchina dell'amore → Monte Pesora",
-    "keptName": "Giro Panoramico Lago di Como: Passo Pertüs 1307m → Morterone Panoramic Point / Panchina dell'amore → Monte Pesora → CazzieMarc Viewpoint bergamo",
-    "removedDistanceKm": 85.2,
-    "keptDistanceKm": 137.1,
-    "reason": "duplicate_route"
-  }
-]
+[]

@@ -342,6 +342,46 @@
     "riderScore": 50
   },
   {
+    "id": "spot-punto-panoramico-strada-statale-129bis-bosa-ChIJtyE4",
+    "sourceId": "spot-punto-panoramico-strada-statale-129bis-bosa-ChIJtyE4",
+    "googlePlaceId": null,
+    "name": "Punto panoramico Strada Statale 129bis - Bosa",
+    "slug": "punto-panoramico-strada-statale-129bis-bosa",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "sardinia",
+    "scopeName": "Sardegna",
+    "lat": 40.28857130000001,
+    "lng": 8.503376099999999,
+    "region": null,
+    "regionHint": "Alghero / Bosa Coast",
+    "address": "SS 129bis Trasversale Sarda, 3, 08013 Bosa OR, Italy",
+    "rating": 4.7,
+    "userRatingCount": 127,
+    "rawTypes": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "rider-spot"
+    ],
+    "aliases": [
+      "Punto panoramico Strada Statale 129bis - Bosa"
+    ],
+    "riderScore": 48
+  },
+  {
     "id": "spot-nuraghe-serbissi-ChIJWU01",
     "sourceId": "spot-nuraghe-serbissi-ChIJWU01",
     "googlePlaceId": null,
@@ -380,6 +420,88 @@
       "Nuraghe Serbissi"
     ],
     "riderScore": 42
+  },
+  {
+    "id": "spot-piazzola-panoramica-lago-coghinas-ChIJTYCh",
+    "sourceId": "spot-piazzola-panoramica-lago-coghinas-ChIJTYCh",
+    "googlePlaceId": null,
+    "name": "Piazzola panoramica Lago Coghinas",
+    "slug": "piazzola-panoramica-lago-coghinas",
+    "type": "lake_view",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "sardinia",
+    "scopeName": "Sardegna",
+    "lat": 40.7587019,
+    "lng": 9.0131959,
+    "region": null,
+    "regionHint": "Costa Smeralda / Gallura",
+    "address": "07010 Lago, Coghinas SS, Italy",
+    "rating": 4.5,
+    "userRatingCount": 52,
+    "rawTypes": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "lake",
+      "rider-spot"
+    ],
+    "aliases": [
+      "Piazzola panoramica Lago Coghinas"
+    ],
+    "riderScore": 41
+  },
+  {
+    "id": "spot-terrazza-panoramica-sul-lago-del-flumendosa-ChIJc12z",
+    "sourceId": "spot-terrazza-panoramica-sul-lago-del-flumendosa-ChIJc12z",
+    "googlePlaceId": null,
+    "name": "Terrazza panoramica sul lago del Flumendosa",
+    "slug": "terrazza-panoramica-sul-lago-del-flumendosa",
+    "type": "lake_view",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "sardinia",
+    "scopeName": "Sardegna",
+    "lat": 39.686380299999996,
+    "lng": 9.2866579,
+    "region": null,
+    "regionHint": "Supramonte",
+    "address": "08030 Orroli, Metropolitan City of Cagliari, Italy",
+    "rating": 5,
+    "userRatingCount": 17,
+    "rawTypes": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "lake",
+      "rider-spot"
+    ],
+    "aliases": [
+      "Terrazza panoramica sul lago del Flumendosa"
+    ],
+    "riderScore": 41
   },
   {
     "id": "spot-canyon-gorropu-scenic-overlook-ChIJ9SGR",

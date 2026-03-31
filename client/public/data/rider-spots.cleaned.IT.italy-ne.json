@@ -86,6 +86,49 @@
     "riderScore": 100
   },
   {
+    "id": "spot-col-de-moi-ChIJM8Ua",
+    "sourceId": "spot-col-de-moi-ChIJM8Ua",
+    "googlePlaceId": null,
+    "name": "Col de Moi",
+    "slug": "col-de-moi",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "italy-ne",
+    "scopeName": "Italia Nord-Est",
+    "lat": 46.003055599999996,
+    "lng": 12.1266667,
+    "region": null,
+    "regionHint": "Dolomiti Est / Cortina",
+    "address": "Col de Moi, 32026 Borgo Valbelluna, Province of Belluno, Italy",
+    "rating": 4.8,
+    "userRatingCount": 34,
+    "rawTypes": [
+      "mountain_peak",
+      "natural_feature",
+      "establishment"
+    ],
+    "types": [
+      "mountain_peak",
+      "natural_feature",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Col de Moi"
+    ],
+    "riderScore": 100
+  },
+  {
     "id": "spot-col-dei-bos-ChIJC83h",
     "sourceId": "spot-col-dei-bos-ChIJC83h",
     "googlePlaceId": null,
@@ -271,7 +314,7 @@
     "lat": 45.98861110000001,
     "lng": 12.014444399999999,
     "region": null,
-    "regionHint": "Dolomiti Est / Cortina",
+    "regionHint": "Dolomiti Ovest",
     "address": "Col Moscher, 32020 Borgo Valbelluna, Province of Belluno, Italy",
     "rating": 5,
     "userRatingCount": 5,
@@ -915,7 +958,7 @@
     "regionHint": "Dolomiti Ovest",
     "address": "SS241, 39030 Nova Levante BZ, Italy",
     "rating": 4.7,
-    "userRatingCount": 2300,
+    "userRatingCount": 2301,
     "rawTypes": [
       "scenic_spot",
       "tourist_attraction",
@@ -1043,7 +1086,7 @@
     "regionHint": "Dolomiti Ovest",
     "address": "Passo di Oclini, 39040 Aldino BZ, Italy",
     "rating": 4.7,
-    "userRatingCount": 145,
+    "userRatingCount": 146,
     "rawTypes": [
       "natural_feature",
       "establishment"
@@ -1146,8 +1189,8 @@
     ],
     "aliases": [
       "San Boldo Pass",
-      "Passo San boldo",
-      "Passo San Boldo"
+      "Passo San Boldo",
+      "Passo San boldo"
     ],
     "riderScore": 93
   },
@@ -1211,7 +1254,7 @@
     "regionHint": "Dolomiti Ovest",
     "address": "S.da de Contrin, 25 A, 38032 Canazei TN, Italy",
     "rating": 4.7,
-    "userRatingCount": 726,
+    "userRatingCount": 727,
     "rawTypes": [
       "point_of_interest",
       "establishment"
@@ -1828,6 +1871,51 @@
       "Passo Pura / Perkh"
     ],
     "riderScore": 82
+  },
+  {
+    "id": "spot-appostamento-di-col-ciampon-ChIJmWaf",
+    "sourceId": "spot-appostamento-di-col-ciampon-ChIJmWaf",
+    "googlePlaceId": null,
+    "name": "Appostamento di Col Ciampon",
+    "slug": "appostamento-di-col-ciampon",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "italy-ne",
+    "scopeName": "Italia Nord-Est",
+    "lat": 46.509318,
+    "lng": 12.476753599999999,
+    "region": null,
+    "regionHint": "Dolomiti Est / Cortina",
+    "address": "32040 Vigo di Cadore BL, Italy",
+    "rating": 4.7,
+    "userRatingCount": 138,
+    "rawTypes": [
+      "historical_landmark",
+      "historical_place",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "historical_landmark",
+      "historical_place",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Appostamento di Col Ciampon"
+    ],
+    "riderScore": 80
   },
   {
     "id": "spot-cirjoch-ChIJFwjy",
@@ -2577,49 +2665,6 @@
     "riderScore": 77
   },
   {
-    "id": "spot-belvedere-segantini-ChIJQ_YM",
-    "sourceId": "spot-belvedere-segantini-ChIJQ_YM",
-    "googlePlaceId": null,
-    "name": "Belvedere Segantini",
-    "slug": "belvedere-segantini",
-    "type": "mountain_pass",
-    "rideType": "scenic",
-    "country": "IT",
-    "scope": "italy-ne",
-    "scopeName": "Italia Nord-Est",
-    "lat": 46.2979742,
-    "lng": 11.803033899999999,
-    "region": null,
-    "regionHint": "Dolomiti Est / Cortina",
-    "address": "Via Passo Rolle, 1, 38054 San Martino di Castrozza TN, Italy",
-    "rating": 4.9,
-    "userRatingCount": 22,
-    "rawTypes": [
-      "scenic_spot",
-      "point_of_interest",
-      "establishment"
-    ],
-    "types": [
-      "scenic_spot",
-      "point_of_interest",
-      "establishment"
-    ],
-    "source": "google_places",
-    "tags": [
-      "scenic",
-      "panoramic",
-      "rider",
-      "mountain",
-      "twisty",
-      "rider-spot",
-      "mountain-pass"
-    ],
-    "aliases": [
-      "Belvedere Segantini"
-    ],
-    "riderScore": 75
-  },
-  {
     "id": "spot-catinaccio-funivie-ChIJLycG",
     "sourceId": "spot-catinaccio-funivie-ChIJLycG",
     "googlePlaceId": null,
@@ -2639,15 +2684,15 @@
     "userRatingCount": 2562,
     "rawTypes": [
       "ski_resort",
-      "sports_activity_location",
       "transportation_service",
+      "sports_activity_location",
       "point_of_interest",
       "establishment"
     ],
     "types": [
       "ski_resort",
-      "sports_activity_location",
       "transportation_service",
+      "sports_activity_location",
       "point_of_interest",
       "establishment"
     ],
@@ -3691,49 +3736,6 @@
     "riderScore": 65
   },
   {
-    "id": "spot-monte-brutto-passo-ChIJg1TS",
-    "sourceId": "spot-monte-brutto-passo-ChIJg1TS",
-    "googlePlaceId": null,
-    "name": "Monte Brutto Passo",
-    "slug": "monte-brutto-passo",
-    "type": "mountain_pass",
-    "rideType": "mountain",
-    "country": "IT",
-    "scope": "italy-ne",
-    "scopeName": "Italia Nord-Est",
-    "lat": 46.425555599999996,
-    "lng": 12.6838889,
-    "region": null,
-    "regionHint": "Friuli Carnia",
-    "address": "Monte Brutto Passo, 33021 Ampezzo, Province of Udine, Italy",
-    "rating": 0,
-    "userRatingCount": 0,
-    "rawTypes": [
-      "mountain_peak",
-      "natural_feature",
-      "establishment"
-    ],
-    "types": [
-      "mountain_peak",
-      "natural_feature",
-      "establishment"
-    ],
-    "source": "google_places",
-    "tags": [
-      "mountain",
-      "scenic",
-      "rider",
-      "twisty",
-      "panoramic",
-      "rider-spot",
-      "mountain-pass"
-    ],
-    "aliases": [
-      "Monte Brutto Passo"
-    ],
-    "riderScore": 63
-  },
-  {
     "id": "spot-passo-d-entralais-ChIJBXDo",
     "sourceId": "spot-passo-d-entralais-ChIJBXDo",
     "googlePlaceId": null,
@@ -3985,6 +3987,86 @@
       "Strada del Menador - Punto Panoramico"
     ],
     "riderScore": 60
+  },
+  {
+    "id": "spot-entry-to-strada-della-forra-ChIJxQxZ",
+    "sourceId": "spot-entry-to-strada-della-forra-ChIJxQxZ",
+    "googlePlaceId": null,
+    "name": "Entry to Strada della Forra",
+    "slug": "entry-to-strada-della-forra",
+    "type": "coastal_view",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "italy-ne",
+    "scopeName": "Italia Nord-Est",
+    "lat": 45.776599999999995,
+    "lng": 10.7605,
+    "region": null,
+    "regionHint": "Lessinia / Monte Baldo",
+    "address": "Tremosine rist. la forra, 25010, 25010 Tremosine sul Garda BS, Italy",
+    "rating": 4.6,
+    "userRatingCount": 30,
+    "rawTypes": [
+      "tourist_attraction",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "tourist_attraction",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "rider-spot"
+    ],
+    "aliases": [
+      "Entry to Strada della Forra"
+    ],
+    "riderScore": 59
+  },
+  {
+    "id": "spot-belvedere-strada-della-forra-ChIJdSGZ",
+    "sourceId": "spot-belvedere-strada-della-forra-ChIJdSGZ",
+    "googlePlaceId": null,
+    "name": "Belvedere Strada della Forra",
+    "slug": "belvedere-strada-della-forra",
+    "type": "coastal_view",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "italy-ne",
+    "scopeName": "Italia Nord-Est",
+    "lat": 45.7739421,
+    "lng": 10.7664423,
+    "region": null,
+    "regionHint": "Lessinia / Monte Baldo",
+    "address": "25010 Tremosine sul Garda, Province of Brescia, Italy",
+    "rating": 4.6,
+    "userRatingCount": 86,
+    "rawTypes": [
+      "observation_deck",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "observation_deck",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "rider-spot"
+    ],
+    "aliases": [
+      "Belvedere Strada della Forra"
+    ],
+    "riderScore": 57
   },
   {
     "id": "spot-duran-pass-ChIJx44x",
@@ -4273,30 +4355,30 @@
     "riderScore": 50
   },
   {
-    "id": "spot-entry-to-strada-della-forra-ChIJxQxZ",
-    "sourceId": "spot-entry-to-strada-della-forra-ChIJxQxZ",
+    "id": "spot-bullaccia-punto-panoramico-ChIJMSxo",
+    "sourceId": "spot-bullaccia-punto-panoramico-ChIJMSxo",
     "googlePlaceId": null,
-    "name": "Entry to Strada della Forra",
-    "slug": "entry-to-strada-della-forra",
-    "type": "coastal_view",
+    "name": "Bullaccia punto panoramico",
+    "slug": "bullaccia-punto-panoramico",
+    "type": "lake_view",
     "rideType": "scenic",
     "country": "IT",
     "scope": "italy-ne",
     "scopeName": "Italia Nord-Est",
-    "lat": 45.776599999999995,
-    "lng": 10.7605,
+    "lat": 46.5639617,
+    "lng": 11.616964099999999,
     "region": null,
-    "regionHint": "Lessinia / Monte Baldo",
-    "address": "Tremosine rist. la forra, 25010, 25010 Tremosine sul Garda BS, Italy",
-    "rating": 4.6,
-    "userRatingCount": 30,
+    "regionHint": "Dolomiti Ovest",
+    "address": "39040 Kastelruth, Autonomous Province of Bolzano – South Tyrol, Italy",
+    "rating": 4.9,
+    "userRatingCount": 146,
     "rawTypes": [
-      "tourist_attraction",
+      "scenic_spot",
       "point_of_interest",
       "establishment"
     ],
     "types": [
-      "tourist_attraction",
+      "scenic_spot",
       "point_of_interest",
       "establishment"
     ],
@@ -4305,12 +4387,13 @@
       "scenic",
       "panoramic",
       "rider",
+      "lake",
       "rider-spot"
     ],
     "aliases": [
-      "Entry to Strada della Forra"
+      "Bullaccia punto panoramico"
     ],
-    "riderScore": 49
+    "riderScore": 50
   },
   {
     "id": "spot-alpinisteig-ChIJVTom",
@@ -4444,87 +4527,6 @@
     "riderScore": 48
   },
   {
-    "id": "spot-belvedere-strada-della-forra-ChIJdSGZ",
-    "sourceId": "spot-belvedere-strada-della-forra-ChIJdSGZ",
-    "googlePlaceId": null,
-    "name": "Belvedere Strada della Forra",
-    "slug": "belvedere-strada-della-forra",
-    "type": "coastal_view",
-    "rideType": "scenic",
-    "country": "IT",
-    "scope": "italy-ne",
-    "scopeName": "Italia Nord-Est",
-    "lat": 45.7739421,
-    "lng": 10.7664423,
-    "region": null,
-    "regionHint": "Lessinia / Monte Baldo",
-    "address": "25010 Tremosine sul Garda, Province of Brescia, Italy",
-    "rating": 4.6,
-    "userRatingCount": 86,
-    "rawTypes": [
-      "observation_deck",
-      "point_of_interest",
-      "establishment"
-    ],
-    "types": [
-      "observation_deck",
-      "point_of_interest",
-      "establishment"
-    ],
-    "source": "google_places",
-    "tags": [
-      "scenic",
-      "panoramic",
-      "rider",
-      "rider-spot"
-    ],
-    "aliases": [
-      "Belvedere Strada della Forra"
-    ],
-    "riderScore": 47
-  },
-  {
-    "id": "spot-bullaccia-punto-panoramico-ChIJMSxo",
-    "sourceId": "spot-bullaccia-punto-panoramico-ChIJMSxo",
-    "googlePlaceId": null,
-    "name": "Bullaccia punto panoramico",
-    "slug": "bullaccia-punto-panoramico",
-    "type": "lake_view",
-    "rideType": "scenic",
-    "country": "IT",
-    "scope": "italy-ne",
-    "scopeName": "Italia Nord-Est",
-    "lat": 46.5639617,
-    "lng": 11.616964099999999,
-    "region": null,
-    "regionHint": "Dolomiti Ovest",
-    "address": "39040 Kastelruth, Autonomous Province of Bolzano – South Tyrol, Italy",
-    "rating": 4.9,
-    "userRatingCount": 146,
-    "rawTypes": [
-      "scenic_spot",
-      "point_of_interest",
-      "establishment"
-    ],
-    "types": [
-      "scenic_spot",
-      "point_of_interest",
-      "establishment"
-    ],
-    "source": "google_places",
-    "tags": [
-      "scenic",
-      "panoramic",
-      "rider",
-      "lake",
-      "rider-spot"
-    ],
-    "aliases": [
-      "Bullaccia punto panoramico"
-    ],
-    "riderScore": 46
-  },
-  {
     "id": "spot-funivie-ortisei-alpe-di-siusi-mont-seuc-seilbahn-st-ulrich-seiseralm-ChIJidVs",
     "sourceId": "spot-funivie-ortisei-alpe-di-siusi-mont-seuc-seilbahn-st-ulrich-seiseralm-ChIJidVs",
     "googlePlaceId": null,
@@ -4564,6 +4566,47 @@
       "Funivie Ortisei - Alpe di Siusi / Mont Sëuc - Seilbahn St. Ulrich Seiseralm"
     ],
     "riderScore": 45
+  },
+  {
+    "id": "spot-punto-panoramico-sul-lago-di-santa-giustina-ChIJtxSC",
+    "sourceId": "spot-punto-panoramico-sul-lago-di-santa-giustina-ChIJtxSC",
+    "googlePlaceId": null,
+    "name": "Punto Panoramico sul Lago di Santa Giustina",
+    "slug": "punto-panoramico-sul-lago-di-santa-giustina",
+    "type": "lake_view",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "italy-ne",
+    "scopeName": "Italia Nord-Est",
+    "lat": 46.392226,
+    "lng": 11.0254015,
+    "region": null,
+    "regionHint": "Dolomiti Ovest",
+    "address": "SS 42, 38020 Livo TN, Italy",
+    "rating": 4.6,
+    "userRatingCount": 44,
+    "rawTypes": [
+      "tourist_attraction",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "tourist_attraction",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "lake",
+      "rider-spot"
+    ],
+    "aliases": [
+      "Punto Panoramico sul Lago di Santa Giustina"
+    ],
+    "riderScore": 43
   },
   {
     "id": "spot-forcella-denti-di-terrarossa-ChIJ9awf",

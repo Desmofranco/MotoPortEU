@@ -1,0 +1,1487 @@
+[
+  {
+    "id": "spot-passo-folungo-ChIJ2Qjf",
+    "sourceId": "spot-passo-folungo-ChIJ2Qjf",
+    "googlePlaceId": null,
+    "name": "Passo Folungo",
+    "slug": "passo-folungo",
+    "type": "mountain_pass",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "maggiore",
+    "scopeName": "Lago Maggiore",
+    "lat": 46.040771199999995,
+    "lng": 8.5828603,
+    "region": null,
+    "regionHint": "Stresa / Mottarone",
+    "address": "Strada Militare Cadorna, 28812 Aurano VB, Italy",
+    "rating": 4.5,
+    "userRatingCount": 80,
+    "rawTypes": [
+      "hiking_area",
+      "scenic_spot",
+      "tourist_attraction",
+      "sports_activity_location",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "hiking_area",
+      "scenic_spot",
+      "tourist_attraction",
+      "sports_activity_location",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "mountain",
+      "twisty",
+      "rider-spot",
+      "lake-scope",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Passo Folungo"
+    ],
+    "riderScore": 100
+  },
+  {
+    "id": "spot-lungo-lago-arona-ChIJI2DZ",
+    "sourceId": "spot-lungo-lago-arona-ChIJI2DZ",
+    "googlePlaceId": null,
+    "name": "Lungo Lago Arona",
+    "slug": "lungo-lago-arona",
+    "type": "lake_view",
+    "rideType": "lake",
+    "country": "IT",
+    "scope": "maggiore",
+    "scopeName": "Lago Maggiore",
+    "lat": 45.7491422,
+    "lng": 8.5660821,
+    "region": null,
+    "regionHint": "Arona / South Maggiore",
+    "address": "Corso Europa, 24, 28041 Arona NO, Italy",
+    "rating": 4.6,
+    "userRatingCount": 2520,
+    "rawTypes": [
+      "cycling_park",
+      "tourist_attraction",
+      "park",
+      "sports_activity_location",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "cycling_park",
+      "tourist_attraction",
+      "park",
+      "sports_activity_location",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "lake",
+      "scenic",
+      "rider",
+      "panoramic",
+      "rider-spot",
+      "lake-scope"
+    ],
+    "aliases": [
+      "Lungo Lago Arona"
+    ],
+    "riderScore": 88
+  },
+  {
+    "id": "spot-panoramic-viewpoint-como-lake-north-ChIJbQ-m",
+    "sourceId": "spot-panoramic-viewpoint-como-lake-north-ChIJbQ-m",
+    "googlePlaceId": null,
+    "name": "Panoramic Viewpoint - Como Lake North",
+    "slug": "panoramic-viewpoint-como-lake-north",
+    "type": "lake_view",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "maggiore",
+    "scopeName": "Lago Maggiore",
+    "lat": 46.0759628,
+    "lng": 9.2378913,
+    "region": null,
+    "regionHint": "Luino / East Shore",
+    "address": "Via ai Monti, 22010 San Siro CO, Italy",
+    "rating": 4.7,
+    "userRatingCount": 49,
+    "rawTypes": [
+      "tourist_attraction",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "tourist_attraction",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "lake",
+      "rider-spot",
+      "lake-scope"
+    ],
+    "aliases": [
+      "Panoramic Viewpoint - Como Lake North"
+    ],
+    "riderScore": 83
+  },
+  {
+    "id": "spot-terrace-lookout-over-lake-maggiore-ChIJL2T-",
+    "sourceId": "spot-terrace-lookout-over-lake-maggiore-ChIJL2T-",
+    "googlePlaceId": null,
+    "name": "Terrace lookout over Lake Maggiore",
+    "slug": "terrace-lookout-over-lake-maggiore",
+    "type": "lake_view",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "maggiore",
+    "scopeName": "Lago Maggiore",
+    "lat": 46.0052082,
+    "lng": 8.6261429,
+    "region": null,
+    "regionHint": "Stresa / Mottarone",
+    "address": "28824 Oggebbio, Province of Verbano-Cusio-Ossola, Italy",
+    "rating": 4.7,
+    "userRatingCount": 413,
+    "rawTypes": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "lake",
+      "rider-spot",
+      "lake-scope"
+    ],
+    "aliases": [
+      "Terrace lookout over Lake Maggiore"
+    ],
+    "riderScore": 83
+  },
+  {
+    "id": "spot-belvedere-panoramico-del-lago-maggiore-ChIJSfeu",
+    "sourceId": "spot-belvedere-panoramico-del-lago-maggiore-ChIJSfeu",
+    "googlePlaceId": null,
+    "name": "Belvedere Panoramico del Lago Maggiore",
+    "slug": "belvedere-panoramico-del-lago-maggiore",
+    "type": "lake_view",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "maggiore",
+    "scopeName": "Lago Maggiore",
+    "lat": 45.969615600000004,
+    "lng": 8.5910713,
+    "region": null,
+    "regionHint": "Stresa / Mottarone",
+    "address": "Viale G. Marsaglia, 26, 28818 Premeno VB, Italy",
+    "rating": 4.8,
+    "userRatingCount": 61,
+    "rawTypes": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "lake",
+      "rider-spot",
+      "lake-scope"
+    ],
+    "aliases": [
+      "Belvedere Panoramico del Lago Maggiore"
+    ],
+    "riderScore": 81
+  },
+  {
+    "id": "spot-la-conca-dei-rododendri-ChIJS7wv",
+    "sourceId": "spot-la-conca-dei-rododendri-ChIJS7wv",
+    "googlePlaceId": null,
+    "name": "La Conca Dei Rododendri",
+    "slug": "la-conca-dei-rododendri",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "maggiore",
+    "scopeName": "Lago Maggiore",
+    "lat": 45.6746316,
+    "lng": 8.1542953,
+    "region": null,
+    "regionHint": "Stresa / Mottarone",
+    "address": "Strada Provinciale 232 Panoramica Zegna, 10, 13835 Valdilana BI, Italy",
+    "rating": 4.6,
+    "userRatingCount": 1345,
+    "rawTypes": [
+      "tourist_attraction",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "tourist_attraction",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "rider-spot",
+      "lake-scope"
+    ],
+    "aliases": [
+      "La Conca Dei Rododendri"
+    ],
+    "riderScore": 80
+  },
+  {
+    "id": "spot-lungolago-ispra-ChIJf2Nl",
+    "sourceId": "spot-lungolago-ispra-ChIJf2Nl",
+    "googlePlaceId": null,
+    "name": "Lungolago Ispra",
+    "slug": "lungolago-ispra",
+    "type": "lake_view",
+    "rideType": "lake",
+    "country": "IT",
+    "scope": "maggiore",
+    "scopeName": "Lago Maggiore",
+    "lat": 45.8105015,
+    "lng": 8.6079517,
+    "region": null,
+    "regionHint": "Arona / South Maggiore",
+    "address": "Via F. Magellano Lungolago, 29, 21027 Ispra VA, Italy",
+    "rating": 4.5,
+    "userRatingCount": 1682,
+    "rawTypes": [
+      "hiking_area",
+      "sports_activity_location",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "hiking_area",
+      "sports_activity_location",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "lake",
+      "scenic",
+      "rider",
+      "panoramic",
+      "rider-spot",
+      "lake-scope"
+    ],
+    "aliases": [
+      "Lungolago Ispra"
+    ],
+    "riderScore": 78
+  },
+  {
+    "id": "spot-santuario-della-madonna-del-sasso-ChIJhyhz",
+    "sourceId": "spot-santuario-della-madonna-del-sasso-ChIJhyhz",
+    "googlePlaceId": null,
+    "name": "Santuario della Madonna del Sasso",
+    "slug": "santuario-della-madonna-del-sasso",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "maggiore",
+    "scopeName": "Lago Maggiore",
+    "lat": 45.7882927,
+    "lng": 8.3742451,
+    "region": null,
+    "regionHint": "Stresa / Mottarone",
+    "address": "Via Panoramica, 28894 Madonna del Sasso VB, Italy",
+    "rating": 4.8,
+    "userRatingCount": 1035,
+    "rawTypes": [
+      "tourist_attraction",
+      "church",
+      "place_of_worship",
+      "association_or_organization",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "tourist_attraction",
+      "church",
+      "place_of_worship",
+      "association_or_organization",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "rider-spot",
+      "lake-scope"
+    ],
+    "aliases": [
+      "Santuario della Madonna del Sasso"
+    ],
+    "riderScore": 77
+  },
+  {
+    "id": "spot-zegna-panoramic-ChIJcYTX",
+    "sourceId": "spot-zegna-panoramic-ChIJcYTX",
+    "googlePlaceId": null,
+    "name": "Zegna Panoramic",
+    "slug": "zegna-panoramic",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "maggiore",
+    "scopeName": "Lago Maggiore",
+    "lat": 45.6604844,
+    "lng": 8.074983399999999,
+    "region": null,
+    "regionHint": "Stresa / Mottarone",
+    "address": "13844 Piatto BI, Italy",
+    "rating": 4.7,
+    "userRatingCount": 997,
+    "rawTypes": [
+      "hiking_area",
+      "tourist_attraction",
+      "sports_activity_location",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "hiking_area",
+      "tourist_attraction",
+      "sports_activity_location",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "rider-spot",
+      "lake-scope"
+    ],
+    "aliases": [
+      "Zegna Panoramic"
+    ],
+    "riderScore": 77
+  },
+  {
+    "id": "spot-punto-panoramico-lago-maggiore-ChIJtbCs",
+    "sourceId": "spot-punto-panoramico-lago-maggiore-ChIJtbCs",
+    "googlePlaceId": null,
+    "name": "Punto panoramico Lago Maggiore",
+    "slug": "punto-panoramico-lago-maggiore",
+    "type": "lake_view",
+    "rideType": "lake",
+    "country": "IT",
+    "scope": "maggiore",
+    "scopeName": "Lago Maggiore",
+    "lat": 45.7862636,
+    "lng": 8.573050799999999,
+    "region": null,
+    "regionHint": "Arona / South Maggiore",
+    "address": "21021 Angera, VA, Italy",
+    "rating": 4.7,
+    "userRatingCount": 3,
+    "rawTypes": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "lake",
+      "scenic",
+      "rider",
+      "panoramic",
+      "rider-spot",
+      "lake-scope"
+    ],
+    "aliases": [
+      "Punto panoramico Lago Maggiore"
+    ],
+    "riderScore": 76
+  },
+  {
+    "id": "spot-belvedere-di-quarna-lake-orta-viewpoint-ChIJt71m",
+    "sourceId": "spot-belvedere-di-quarna-lake-orta-viewpoint-ChIJt71m",
+    "googlePlaceId": null,
+    "name": "Belvedere di Quarna - Lake Orta viewpoint",
+    "slug": "belvedere-di-quarna-lake-orta-viewpoint",
+    "type": "lake_view",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "maggiore",
+    "scopeName": "Lago Maggiore",
+    "lat": 45.871063199999995,
+    "lng": 8.3770971,
+    "region": null,
+    "regionHint": "Stresa / Mottarone",
+    "address": "Località, Via Belvedere, 28898 Quarna Sopra VB, Italy",
+    "rating": 4.8,
+    "userRatingCount": 208,
+    "rawTypes": [
+      "observation_deck",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "observation_deck",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "lake",
+      "rider-spot",
+      "lake-scope"
+    ],
+    "aliases": [
+      "Belvedere di Quarna - Lake Orta viewpoint"
+    ],
+    "riderScore": 73
+  },
+  {
+    "id": "spot-lake-como-cycling-ChIJ0zRE",
+    "sourceId": "spot-lake-como-cycling-ChIJ0zRE",
+    "googlePlaceId": null,
+    "name": "Lake Como Cycling",
+    "slug": "lake-como-cycling",
+    "type": "lake_view",
+    "rideType": "lake",
+    "country": "IT",
+    "scope": "maggiore",
+    "scopeName": "Lago Maggiore",
+    "lat": 45.8409638,
+    "lng": 9.0513817,
+    "region": null,
+    "regionHint": "Arona / South Maggiore",
+    "address": "Via Folla, 2/A, 22026 Maslianico CO, Italy",
+    "rating": 4.8,
+    "userRatingCount": 73,
+    "rawTypes": [
+      "service",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "service",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "lake",
+      "scenic",
+      "rider",
+      "panoramic",
+      "rider-spot",
+      "lake-scope"
+    ],
+    "aliases": [
+      "Lake Como Cycling"
+    ],
+    "riderScore": 73
+  },
+  {
+    "id": "spot-view-of-the-city-from-piazzale-belvedere-and-from-orino-fortress-ChIJm2UQ",
+    "sourceId": "spot-view-of-the-city-from-piazzale-belvedere-and-from-orino-fortress-ChIJm2UQ",
+    "googlePlaceId": null,
+    "name": "View of the City from Piazzale Belvedere and from Orino Fortress",
+    "slug": "view-of-the-city-from-piazzale-belvedere-and-from-orino-fortress",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "maggiore",
+    "scopeName": "Lago Maggiore",
+    "lat": 45.866191699999995,
+    "lng": 8.7742034,
+    "region": null,
+    "regionHint": "Stresa / Mottarone",
+    "address": "Santa Maria del Monte, 21020 Varese VA, Italy",
+    "rating": 4.8,
+    "userRatingCount": 533,
+    "rawTypes": [
+      "tourist_attraction",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "tourist_attraction",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "rider-spot",
+      "lake-scope"
+    ],
+    "aliases": [
+      "View of the City from Piazzale Belvedere and from Orino Fortress"
+    ],
+    "riderScore": 69
+  },
+  {
+    "id": "spot-monte-faie-ChIJUZIx",
+    "sourceId": "spot-monte-faie-ChIJUZIx",
+    "googlePlaceId": null,
+    "name": "Monte Faiè",
+    "slug": "monte-faie",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "maggiore",
+    "scopeName": "Lago Maggiore",
+    "lat": 45.9871954,
+    "lng": 8.4529099,
+    "region": null,
+    "regionHint": "Stresa / Mottarone",
+    "address": "Unnamed Road, 28804 San Bernardino Verbano VB, Italy",
+    "rating": 4.8,
+    "userRatingCount": 357,
+    "rawTypes": [
+      "scenic_spot",
+      "tourist_attraction",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "scenic_spot",
+      "tourist_attraction",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "rider-spot",
+      "lake-scope"
+    ],
+    "aliases": [
+      "Monte Faiè"
+    ],
+    "riderScore": 67
+  },
+  {
+    "id": "spot-terrazza-panoramica-monte-san-giulio-ChIJVSXL",
+    "sourceId": "spot-terrazza-panoramica-monte-san-giulio-ChIJVSXL",
+    "googlePlaceId": null,
+    "name": "Terrazza panoramica Monte San Giulio",
+    "slug": "terrazza-panoramica-monte-san-giulio",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "maggiore",
+    "scopeName": "Lago Maggiore",
+    "lat": 45.8044898,
+    "lng": 8.381761,
+    "region": null,
+    "regionHint": "Arona / South Maggiore",
+    "address": "Frazione S. Giulio Monte, 18, 28010 Pella NO, Italy",
+    "rating": 4.8,
+    "userRatingCount": 131,
+    "rawTypes": [
+      "tourist_attraction",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "tourist_attraction",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "rider-spot",
+      "lake-scope"
+    ],
+    "aliases": [
+      "Terrazza panoramica Monte San Giulio"
+    ],
+    "riderScore": 67
+  },
+  {
+    "id": "spot-area-panoramica-del-lago-di-varese-ChIJB0JC",
+    "sourceId": "spot-area-panoramica-del-lago-di-varese-ChIJB0JC",
+    "googlePlaceId": null,
+    "name": "Area panoramica del Lago di Varese",
+    "slug": "area-panoramica-del-lago-di-varese",
+    "type": "lake_view",
+    "rideType": "lake",
+    "country": "IT",
+    "scope": "maggiore",
+    "scopeName": "Lago Maggiore",
+    "lat": 45.83903,
+    "lng": 8.7205813,
+    "region": null,
+    "regionHint": "Arona / South Maggiore",
+    "address": "Lungolago Isola Virginia, 21026 Gavirate VA, Italy",
+    "rating": 5,
+    "userRatingCount": 3,
+    "rawTypes": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "lake",
+      "scenic",
+      "rider",
+      "panoramic",
+      "rider-spot",
+      "lake-scope"
+    ],
+    "aliases": [
+      "Area panoramica del Lago di Varese"
+    ],
+    "riderScore": 66
+  },
+  {
+    "id": "spot-pandora-lake-view-stresa-ChIJoyAL",
+    "sourceId": "spot-pandora-lake-view-stresa-ChIJoyAL",
+    "googlePlaceId": null,
+    "name": "Pandora Lake View Stresa",
+    "slug": "pandora-lake-view-stresa",
+    "type": "lake_view",
+    "rideType": "lake",
+    "country": "IT",
+    "scope": "maggiore",
+    "scopeName": "Lago Maggiore",
+    "lat": 45.89395,
+    "lng": 8.5143747,
+    "region": null,
+    "regionHint": "Arona / South Maggiore",
+    "address": "28838 Stresa, Province of Verbano-Cusio-Ossola, Italy",
+    "rating": 5,
+    "userRatingCount": 1,
+    "rawTypes": [
+      "lodging",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "lodging",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "lake",
+      "scenic",
+      "rider",
+      "panoramic",
+      "rider-spot",
+      "lake-scope"
+    ],
+    "aliases": [
+      "Pandora Lake View Stresa"
+    ],
+    "riderScore": 66
+  },
+  {
+    "id": "spot-belvedere-di-azzate-ChIJLxGe",
+    "sourceId": "spot-belvedere-di-azzate-ChIJLxGe",
+    "googlePlaceId": null,
+    "name": "Belvedere di Azzate",
+    "slug": "belvedere-di-azzate",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "maggiore",
+    "scopeName": "Lago Maggiore",
+    "lat": 45.7814684,
+    "lng": 8.794449,
+    "region": null,
+    "regionHint": "Stresa / Mottarone",
+    "address": "Piazza Antonio Ghiringhelli, 13, 21022 Azzate VA, Italy",
+    "rating": 4.6,
+    "userRatingCount": 1999,
+    "rawTypes": [
+      "scenic_spot",
+      "tourist_attraction",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "scenic_spot",
+      "tourist_attraction",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "rider-spot",
+      "lake-scope"
+    ],
+    "aliases": [
+      "Belvedere di Azzate"
+    ],
+    "riderScore": 64
+  },
+  {
+    "id": "spot-passeggiata-lungolago-ChIJQ9id",
+    "sourceId": "spot-passeggiata-lungolago-ChIJQ9id",
+    "googlePlaceId": null,
+    "name": "Passeggiata Lungolago",
+    "slug": "passeggiata-lungolago",
+    "type": "lake_view",
+    "rideType": "lake",
+    "country": "IT",
+    "scope": "maggiore",
+    "scopeName": "Lago Maggiore",
+    "lat": 45.7949811,
+    "lng": 8.412188,
+    "region": null,
+    "regionHint": "Arona / South Maggiore",
+    "address": "Str. della Litarda, 28016 Orta San Giulio NO, Italy",
+    "rating": 4.7,
+    "userRatingCount": 29,
+    "rawTypes": [
+      "hiking_area",
+      "sports_activity_location",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "hiking_area",
+      "sports_activity_location",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "lake",
+      "scenic",
+      "rider",
+      "panoramic",
+      "rider-spot",
+      "lake-scope"
+    ],
+    "aliases": [
+      "Passeggiata Lungolago"
+    ],
+    "riderScore": 63
+  },
+  {
+    "id": "spot-mulini-di-piero-ChIJwYdt",
+    "sourceId": "spot-mulini-di-piero-ChIJwYdt",
+    "googlePlaceId": null,
+    "name": "Mulini di Piero",
+    "slug": "mulini-di-piero",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "maggiore",
+    "scopeName": "Lago Maggiore",
+    "lat": 46.077789499999994,
+    "lng": 8.8200792,
+    "region": null,
+    "regionHint": "Stresa / Mottarone",
+    "address": "Unnamed Road, 21010 Curiglia VA, Italy",
+    "rating": 4.5,
+    "userRatingCount": 466,
+    "rawTypes": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "rider-spot",
+      "lake-scope"
+    ],
+    "aliases": [
+      "Mulini di Piero"
+    ],
+    "riderScore": 60
+  },
+  {
+    "id": "spot-torriggia-via-panoramica-24-ChIJI62O",
+    "sourceId": "spot-torriggia-via-panoramica-24-ChIJI62O",
+    "googlePlaceId": null,
+    "name": "Torriggia - Via Panoramica 24",
+    "slug": "torriggia-via-panoramica-24",
+    "type": "lake_view",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "maggiore",
+    "scopeName": "Lago Maggiore",
+    "lat": 45.88982,
+    "lng": 9.14283,
+    "region": null,
+    "regionHint": "Cannobio / Alto Verbano",
+    "address": "22010 Laglio Province of Como, Italy",
+    "rating": 5,
+    "userRatingCount": 1,
+    "rawTypes": [
+      "bus_stop",
+      "transit_stop",
+      "transit_station",
+      "transportation_service",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "bus_stop",
+      "transit_stop",
+      "transit_station",
+      "transportation_service",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "rider-spot",
+      "lake-scope"
+    ],
+    "aliases": [
+      "Torriggia - Via Panoramica 24"
+    ],
+    "riderScore": 60
+  },
+  {
+    "id": "spot-panoramic-viewpoint-stresa-ChIJg4tK",
+    "sourceId": "spot-panoramic-viewpoint-stresa-ChIJg4tK",
+    "googlePlaceId": null,
+    "name": "Panoramic Viewpoint - Stresa",
+    "slug": "panoramic-viewpoint-stresa",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "maggiore",
+    "scopeName": "Lago Maggiore",
+    "lat": 45.8740941,
+    "lng": 8.5462488,
+    "region": null,
+    "regionHint": "Stresa / Mottarone",
+    "address": "Via per Gignese, 19, 28838 Stresa VB, Italy",
+    "rating": 4.6,
+    "userRatingCount": 50,
+    "rawTypes": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "rider-spot",
+      "lake-scope"
+    ],
+    "aliases": [
+      "Panoramic Viewpoint - Stresa"
+    ],
+    "riderScore": 58
+  },
+  {
+    "id": "spot-punto-panoramico-arona-ChIJYaCu",
+    "sourceId": "spot-punto-panoramico-arona-ChIJYaCu",
+    "googlePlaceId": null,
+    "name": "Punto Panoramico Arona",
+    "slug": "punto-panoramico-arona",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "maggiore",
+    "scopeName": "Lago Maggiore",
+    "lat": 45.767710099999995,
+    "lng": 8.549320999999999,
+    "region": null,
+    "regionHint": "Arona / South Maggiore",
+    "address": "Via Sempione, 5, 28041 Arona NO, Italy",
+    "rating": 4.5,
+    "userRatingCount": 61,
+    "rawTypes": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "rider-spot",
+      "lake-scope"
+    ],
+    "aliases": [
+      "Punto Panoramico Arona"
+    ],
+    "riderScore": 58
+  },
+  {
+    "id": "spot-belvedere-di-campagnano-ChIJ986a",
+    "sourceId": "spot-belvedere-di-campagnano-ChIJ986a",
+    "googlePlaceId": null,
+    "name": "Belvedere di Campagnano",
+    "slug": "belvedere-di-campagnano",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "maggiore",
+    "scopeName": "Lago Maggiore",
+    "lat": 46.0525015,
+    "lng": 8.741668899999999,
+    "region": null,
+    "regionHint": "Verbania",
+    "address": "San Rocco (chiesa) - bivio Musignano, 21061, 21061 Campagnano VA, Italy",
+    "rating": 4.8,
+    "userRatingCount": 119,
+    "rawTypes": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "rider-spot",
+      "lake-scope"
+    ],
+    "aliases": [
+      "Belvedere di Campagnano"
+    ],
+    "riderScore": 57
+  },
+  {
+    "id": "spot-viewpoint-giro-del-sole-ChIJbXuM",
+    "sourceId": "spot-viewpoint-giro-del-sole-ChIJbXuM",
+    "googlePlaceId": null,
+    "name": "Viewpoint Giro del Sole",
+    "slug": "viewpoint-giro-del-sole",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "maggiore",
+    "scopeName": "Lago Maggiore",
+    "lat": 46.037534799999996,
+    "lng": 8.7529576,
+    "region": null,
+    "regionHint": "Stresa / Mottarone",
+    "address": "21010 Agra, VA, Italy",
+    "rating": 4.7,
+    "userRatingCount": 178,
+    "rawTypes": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "rider-spot",
+      "lake-scope"
+    ],
+    "aliases": [
+      "Viewpoint Giro del Sole"
+    ],
+    "riderScore": 57
+  },
+  {
+    "id": "spot-punto-panoramico-ChIJRTV7",
+    "sourceId": "spot-punto-panoramico-ChIJRTV7",
+    "googlePlaceId": null,
+    "name": "Punto panoramico",
+    "slug": "punto-panoramico",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "maggiore",
+    "scopeName": "Lago Maggiore",
+    "lat": 46.050907099999996,
+    "lng": 8.7444086,
+    "region": null,
+    "regionHint": "Stresa / Mottarone",
+    "address": "Via S. Rocco, 2, 21061 Campagnano VA, Italy",
+    "rating": 4.7,
+    "userRatingCount": 39,
+    "rawTypes": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "rider-spot",
+      "lake-scope"
+    ],
+    "aliases": [
+      "Punto panoramico"
+    ],
+    "riderScore": 55
+  },
+  {
+    "id": "spot-punto-panoramico-monte-pravello-ChIJr9AN",
+    "sourceId": "spot-punto-panoramico-monte-pravello-ChIJr9AN",
+    "googlePlaceId": null,
+    "name": "Punto panoramico Monte Pravello",
+    "slug": "punto-panoramico-monte-pravello",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "maggiore",
+    "scopeName": "Lago Maggiore",
+    "lat": 45.8921849,
+    "lng": 8.9241168,
+    "region": null,
+    "regionHint": "Stresa / Mottarone",
+    "address": "21059 Viggiù VA, Italy",
+    "rating": 4.8,
+    "userRatingCount": 85,
+    "rawTypes": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "rider-spot",
+      "lake-scope"
+    ],
+    "aliases": [
+      "Punto panoramico Monte Pravello"
+    ],
+    "riderScore": 55
+  },
+  {
+    "id": "spot-viewpoint-ChIJCSvk",
+    "sourceId": "spot-viewpoint-ChIJCSvk",
+    "googlePlaceId": null,
+    "name": "Viewpoint",
+    "slug": "viewpoint",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "maggiore",
+    "scopeName": "Lago Maggiore",
+    "lat": 45.8791468,
+    "lng": 8.541762199999999,
+    "region": null,
+    "regionHint": "Stresa / Mottarone",
+    "address": "Via per Binda, 44, 28838 Stresa VB, Italy",
+    "rating": 4.7,
+    "userRatingCount": 33,
+    "rawTypes": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "rider-spot",
+      "lake-scope"
+    ],
+    "aliases": [
+      "Viewpoint"
+    ],
+    "riderScore": 55
+  },
+  {
+    "id": "spot-vista-panoramica-su-laghi-e-sud-provincia-ChIJYTfy",
+    "sourceId": "spot-vista-panoramica-su-laghi-e-sud-provincia-ChIJYTfy",
+    "googlePlaceId": null,
+    "name": "Vista panoramica su Laghi e sud provincia",
+    "slug": "vista-panoramica-su-laghi-e-sud-provincia",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "maggiore",
+    "scopeName": "Lago Maggiore",
+    "lat": 45.866221100000004,
+    "lng": 8.7741702,
+    "region": null,
+    "regionHint": "Luino / East Shore",
+    "address": "Via Campo dei Fiori, 21100 Varese VA, Italy",
+    "rating": 4.8,
+    "userRatingCount": 21,
+    "rawTypes": [
+      "observation_deck",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "observation_deck",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "rider-spot",
+      "lake-scope"
+    ],
+    "aliases": [
+      "Vista panoramica su Laghi e sud provincia"
+    ],
+    "riderScore": 55
+  },
+  {
+    "id": "spot-punto-panoramico-piancavallo-ChIJEdJ2",
+    "sourceId": "spot-punto-panoramico-piancavallo-ChIJEdJ2",
+    "googlePlaceId": null,
+    "name": "Punto panoramico Piancavallo",
+    "slug": "punto-panoramico-piancavallo",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "maggiore",
+    "scopeName": "Lago Maggiore",
+    "lat": 46.0052272,
+    "lng": 8.6259721,
+    "region": null,
+    "regionHint": "Stresa / Mottarone",
+    "address": "28824 Oggebbio, Province of Verbano-Cusio-Ossola, Italy",
+    "rating": 4.7,
+    "userRatingCount": 18,
+    "rawTypes": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "rider-spot",
+      "lake-scope"
+    ],
+    "aliases": [
+      "Punto panoramico Piancavallo"
+    ],
+    "riderScore": 50
+  },
+  {
+    "id": "spot-punto-panoramico-valle-ticino-ChIJ7YEK",
+    "sourceId": "spot-punto-panoramico-valle-ticino-ChIJ7YEK",
+    "googlePlaceId": null,
+    "name": "PUNTO PANORAMICO VALLE TICINO",
+    "slug": "punto-panoramico-valle-ticino",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "maggiore",
+    "scopeName": "Lago Maggiore",
+    "lat": 45.5830177,
+    "lng": 8.7079165,
+    "region": null,
+    "regionHint": "Stresa / Mottarone",
+    "address": "21015 Tornavento, VA, Italy",
+    "rating": 4.6,
+    "userRatingCount": 93,
+    "rawTypes": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "rider-spot",
+      "lake-scope"
+    ],
+    "aliases": [
+      "PUNTO PANORAMICO VALLE TICINO"
+    ],
+    "riderScore": 50
+  },
+  {
+    "id": "spot-belvedere-del-rondo-ChIJSVWd",
+    "sourceId": "spot-belvedere-del-rondo-ChIJSVWd",
+    "googlePlaceId": null,
+    "name": "Belvedere del rondò",
+    "slug": "belvedere-del-rondo",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "maggiore",
+    "scopeName": "Lago Maggiore",
+    "lat": 45.8399685,
+    "lng": 8.7401299,
+    "region": null,
+    "regionHint": "Luino / East Shore",
+    "address": "Via G. Borghi, 11, 21025 Comerio VA, Italy",
+    "rating": 4.7,
+    "userRatingCount": 40,
+    "rawTypes": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "rider-spot",
+      "lake-scope"
+    ],
+    "aliases": [
+      "Belvedere del rondò"
+    ],
+    "riderScore": 47
+  },
+  {
+    "id": "spot-belvedere-mandelli-ChIJQ8Ul",
+    "sourceId": "spot-belvedere-mandelli-ChIJQ8Ul",
+    "googlePlaceId": null,
+    "name": "Belvedere Mandelli",
+    "slug": "belvedere-mandelli",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "maggiore",
+    "scopeName": "Lago Maggiore",
+    "lat": 46.037169399999996,
+    "lng": 8.7576111,
+    "region": null,
+    "regionHint": "Verbania",
+    "address": "21010 Agra, VA, Italy",
+    "rating": 4.8,
+    "userRatingCount": 69,
+    "rawTypes": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "rider-spot",
+      "lake-scope"
+    ],
+    "aliases": [
+      "Belvedere Mandelli"
+    ],
+    "riderScore": 47
+  },
+  {
+    "id": "spot-panoramic-viewpoint-baveno-ChIJ1zoh",
+    "sourceId": "spot-panoramic-viewpoint-baveno-ChIJ1zoh",
+    "googlePlaceId": null,
+    "name": "Panoramic Viewpoint - Baveno",
+    "slug": "panoramic-viewpoint-baveno",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "maggiore",
+    "scopeName": "Lago Maggiore",
+    "lat": 45.9072789,
+    "lng": 8.505757899999999,
+    "region": null,
+    "regionHint": "Stresa / Mottarone",
+    "address": "Viale della Vittoria, 42/44, 28831 Baveno VB, Italy",
+    "rating": 4.6,
+    "userRatingCount": 15,
+    "rawTypes": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "rider-spot",
+      "lake-scope"
+    ],
+    "aliases": [
+      "Panoramic Viewpoint - Baveno"
+    ],
+    "riderScore": 45
+  },
+  {
+    "id": "spot-viewpoint-clivio-centro-ChIJKU7p",
+    "sourceId": "spot-viewpoint-clivio-centro-ChIJKU7p",
+    "googlePlaceId": null,
+    "name": "Viewpoint - Clivio Centro",
+    "slug": "viewpoint-clivio-centro",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "maggiore",
+    "scopeName": "Lago Maggiore",
+    "lat": 45.8640785,
+    "lng": 8.934162599999999,
+    "region": null,
+    "regionHint": "Stresa / Mottarone",
+    "address": "Via San Carpoforo, 5, 21050 Clivio VA, Italy",
+    "rating": 5,
+    "userRatingCount": 1,
+    "rawTypes": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "rider-spot",
+      "lake-scope"
+    ],
+    "aliases": [
+      "Viewpoint - Clivio Centro"
+    ],
+    "riderScore": 42
+  }
+]

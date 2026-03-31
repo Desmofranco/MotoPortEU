@@ -139,7 +139,7 @@
     "regionHint": "Gran Sasso / Majella",
     "address": "Passo Godi, 67038 Scanno AQ, Italy",
     "rating": 4.7,
-    "userRatingCount": 141,
+    "userRatingCount": 142,
     "rawTypes": [
       "mountain_peak",
       "natural_feature",
@@ -346,7 +346,7 @@
     "regionHint": "Garfagnana / Apuane",
     "address": "Passo Lagastrello, 54015 Comano, Province of Massa and Carrara, Italy",
     "rating": 4.5,
-    "userRatingCount": 324,
+    "userRatingCount": 325,
     "rawTypes": [
       "natural_feature",
       "establishment"
@@ -710,6 +710,47 @@
     "aliases": [
       "Passo dell'Alpino",
       "Passo dell' Alpino"
+    ],
+    "riderScore": 83
+  },
+  {
+    "id": "spot-passo-della-tambura-ChIJFaHm",
+    "sourceId": "spot-passo-della-tambura-ChIJFaHm",
+    "googlePlaceId": null,
+    "name": "Passo della Tambura",
+    "slug": "passo-della-tambura",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "italy-center",
+    "scopeName": "Italia Centro",
+    "lat": 44.1012005,
+    "lng": 10.2340114,
+    "region": null,
+    "regionHint": "Garfagnana / Apuane",
+    "address": "Passo della Tambura, 54100 Massa MS, Italy",
+    "rating": 4.9,
+    "userRatingCount": 40,
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "types": [
+      "natural_feature",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Passo della Tambura"
     ],
     "riderScore": 83
   },
@@ -1627,6 +1668,47 @@
     "riderScore": 78
   },
   {
+    "id": "spot-passo-dell-arco-ChIJmWGb",
+    "sourceId": "spot-passo-dell-arco-ChIJmWGb",
+    "googlePlaceId": null,
+    "name": "Passo dell'Arco",
+    "slug": "passo-dell-arco",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "italy-center",
+    "scopeName": "Italia Centro",
+    "lat": 44.015299399999996,
+    "lng": 10.3353547,
+    "region": null,
+    "regionHint": "Garfagnana / Apuane",
+    "address": "Passo dell'Arco, 55040 Stazzema LU, Italy",
+    "rating": 4.7,
+    "userRatingCount": 3,
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "types": [
+      "natural_feature",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Passo dell'Arco"
+    ],
+    "riderScore": 78
+  },
+  {
     "id": "spot-passo-dell-ospedalaccio-ChIJWypG",
     "sourceId": "spot-passo-dell-ospedalaccio-ChIJWypG",
     "googlePlaceId": null,
@@ -2332,6 +2414,47 @@
     "riderScore": 73
   },
   {
+    "id": "spot-passo-della-nevaia-ChIJ4TrS",
+    "sourceId": "spot-passo-della-nevaia-ChIJ4TrS",
+    "googlePlaceId": null,
+    "name": "Passo della Nevaia",
+    "slug": "passo-della-nevaia",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "italy-center",
+    "scopeName": "Italia Centro",
+    "lat": 44.0936053,
+    "lng": 10.848340499999999,
+    "region": null,
+    "regionHint": "Garfagnana / Apuane",
+    "address": "Passo della Nevaia, 51028 San Marcello Piteglio PT, Italy",
+    "rating": 4.5,
+    "userRatingCount": 15,
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "types": [
+      "natural_feature",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Passo della Nevaia"
+    ],
+    "riderScore": 73
+  },
+  {
     "id": "spot-passo-delle-pecore-ChIJAZdE",
     "sourceId": "spot-passo-delle-pecore-ChIJAZdE",
     "googlePlaceId": null,
@@ -2349,6 +2472,47 @@
     "address": "Passo delle Pecore, 55034 Minucciano LU, Italy",
     "rating": 4.5,
     "userRatingCount": 6,
+    "rawTypes": [
+      "natural_feature",
+      "establishment"
+    ],
+    "types": [
+      "natural_feature",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Passo delle Pecore"
+    ],
+    "riderScore": 73
+  },
+  {
+    "id": "spot-passo-delle-pecore-ChIJRxTS",
+    "sourceId": "spot-passo-delle-pecore-ChIJRxTS",
+    "googlePlaceId": null,
+    "name": "Passo delle Pecore",
+    "slug": "passo-delle-pecore",
+    "type": "mountain_pass",
+    "rideType": "mountain",
+    "country": "IT",
+    "scope": "italy-center",
+    "scopeName": "Italia Centro",
+    "lat": 44.045275,
+    "lng": 10.2158193,
+    "region": null,
+    "regionHint": "Garfagnana / Apuane",
+    "address": "Passo delle Pecore, 55047 Seravezza LU, Italy",
+    "rating": 4.6,
+    "userRatingCount": 7,
     "rawTypes": [
       "natural_feature",
       "establishment"
@@ -2595,7 +2759,7 @@
     "lat": 43.291384799999996,
     "lng": 12.056707099999999,
     "region": null,
-    "regionHint": "Umbria centrale",
+    "regionHint": "Umbria Centrale",
     "address": "Strada Provinciale Umbro Cortonese, 52044 Cortona AR, Italy",
     "rating": 4.2,
     "userRatingCount": 10,
@@ -3043,6 +3207,47 @@
     "riderScore": 55
   },
   {
+    "id": "spot-bolsena-lake-viewpoint-ChIJCaIg",
+    "sourceId": "spot-bolsena-lake-viewpoint-ChIJCaIg",
+    "googlePlaceId": null,
+    "name": "Bolsena Lake Viewpoint",
+    "slug": "bolsena-lake-viewpoint",
+    "type": "lake_view",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "italy-center",
+    "scopeName": "Italia Centro",
+    "lat": 42.647275300000004,
+    "lng": 11.9981943,
+    "region": null,
+    "regionHint": "Umbria Centrale",
+    "address": "Via Orvietana, 144, 01023 Bolsena VT, Italy",
+    "rating": 4.7,
+    "userRatingCount": 104,
+    "rawTypes": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "lake",
+      "rider-spot"
+    ],
+    "aliases": [
+      "Bolsena Lake Viewpoint"
+    ],
+    "riderScore": 48
+  },
+  {
     "id": "spot-corno-piccolo-ChIJM7O_",
     "sourceId": "spot-corno-piccolo-ChIJM7O_",
     "googlePlaceId": null,
@@ -3056,7 +3261,7 @@
     "lat": 42.4833333,
     "lng": 13.566666699999999,
     "region": null,
-    "regionHint": "Terminillo / Lazio nord",
+    "regionHint": "Terminillo / Lazio Nord",
     "address": "Corno Piccolo, 64047 Pietracamela TE, Italy",
     "rating": 4.8,
     "userRatingCount": 66,
@@ -3225,7 +3430,7 @@
     "lat": 43.010157299999996,
     "lng": 13.226400799999999,
     "region": null,
-    "regionHint": "Umbria centrale",
+    "regionHint": "Umbria Centrale",
     "address": "Strada Provinciale 120, 62028 Bolognola MC, Italy",
     "rating": 4.7,
     "userRatingCount": 315,
@@ -3252,6 +3457,47 @@
       "Valico di Santa Maria Maddalena"
     ],
     "riderScore": 42
+  },
+  {
+    "id": "spot-punto-vista-lago-ChIJ3YBP",
+    "sourceId": "spot-punto-vista-lago-ChIJ3YBP",
+    "googlePlaceId": null,
+    "name": "Punto vista lago",
+    "slug": "punto-vista-lago",
+    "type": "lake_view",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "italy-center",
+    "scopeName": "Italia Centro",
+    "lat": 42.47997720000001,
+    "lng": 12.8454809,
+    "region": null,
+    "regionHint": "Umbria Centrale",
+    "address": "Unnamed Road, 02018, 02018 Rieti RI, Italy",
+    "rating": 5,
+    "userRatingCount": 1,
+    "rawTypes": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "lake",
+      "rider-spot"
+    ],
+    "aliases": [
+      "Punto vista lago"
+    ],
+    "riderScore": 41
   },
   {
     "id": "spot-itinerario-strada-verde-casa-leonardo-ChIJsf7K",

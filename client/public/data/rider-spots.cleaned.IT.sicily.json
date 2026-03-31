@@ -290,15 +290,15 @@
     "rawTypes": [
       "tour_agency",
       "travel_agency",
-      "point_of_interest",
       "service",
+      "point_of_interest",
       "establishment"
     ],
     "types": [
       "tour_agency",
       "travel_agency",
-      "point_of_interest",
       "service",
+      "point_of_interest",
       "establishment"
     ],
     "source": "google_places",
@@ -445,6 +445,47 @@
       "Pizzo Manolfo"
     ],
     "riderScore": 42
+  },
+  {
+    "id": "spot-lago-pozzillo-ChIJxVDc",
+    "sourceId": "spot-lago-pozzillo-ChIJxVDc",
+    "googlePlaceId": null,
+    "name": "Lago Pozzillo",
+    "slug": "lago-pozzillo",
+    "type": "lake_view",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "sicily",
+    "scopeName": "Sicilia",
+    "lat": 37.6586855,
+    "lng": 14.617828200000002,
+    "region": null,
+    "regionHint": "Etna",
+    "address": "Unnamed Road, 94017, 94017 Regalbuto EN, Italy",
+    "rating": 5,
+    "userRatingCount": 8,
+    "rawTypes": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "lake",
+      "rider-spot"
+    ],
+    "aliases": [
+      "Lago Pozzillo"
+    ],
+    "riderScore": 41
   },
   {
     "id": "spot-panoramic-view-of-the-coast-isola-delle-femmine-ChIJeQTy",

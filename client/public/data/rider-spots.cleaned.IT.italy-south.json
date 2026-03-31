@@ -433,9 +433,9 @@
     "rating": 4.5,
     "userRatingCount": 3214,
     "rawTypes": [
-      "tourist_attraction",
       "visitor_center",
       "tourist_information_center",
+      "tourist_attraction",
       "historical_place",
       "tour_agency",
       "travel_agency",
@@ -444,9 +444,9 @@
       "establishment"
     ],
     "types": [
-      "tourist_attraction",
       "visitor_center",
       "tourist_information_center",
+      "tourist_attraction",
       "historical_place",
       "tour_agency",
       "travel_agency",

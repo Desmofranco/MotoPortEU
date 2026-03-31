@@ -1,12 +1,12 @@
 {
-  "inputTotal": 41,
-  "preliminaryKeep": 41,
+  "inputTotal": 40,
+  "preliminaryKeep": 40,
   "discarded": 0,
   "review": 0,
-  "dedupeRemoved": 1,
+  "dedupeRemoved": 0,
   "finalRoutes": 40,
   "reasonBreakdown": {
-    "real_route": 41
+    "real_route": 40
   },
   "finalHeroRoutes": 14,
   "finalLongRoutes120Plus": 27,

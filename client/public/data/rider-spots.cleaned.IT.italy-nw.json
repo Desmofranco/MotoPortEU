@@ -123,47 +123,6 @@
     "riderScore": 100
   },
   {
-    "id": "spot-col-du-loson-ChIJaeBT",
-    "sourceId": "spot-col-du-loson-ChIJaeBT",
-    "googlePlaceId": null,
-    "name": "Col du Loson",
-    "slug": "col-du-loson",
-    "type": "mountain_pass",
-    "rideType": "mountain",
-    "country": "IT",
-    "scope": "italy-nw",
-    "scopeName": "Italia Nord-Ovest",
-    "lat": 45.577598699999996,
-    "lng": 7.269273200000001,
-    "region": null,
-    "regionHint": "Aosta / Monte Bianco",
-    "address": "Col du Loson, 11012 Cogne AO, Italy",
-    "rating": 5,
-    "userRatingCount": 19,
-    "rawTypes": [
-      "natural_feature",
-      "establishment"
-    ],
-    "types": [
-      "natural_feature",
-      "establishment"
-    ],
-    "source": "google_places",
-    "tags": [
-      "mountain",
-      "scenic",
-      "rider",
-      "twisty",
-      "panoramic",
-      "rider-spot",
-      "mountain-pass"
-    ],
-    "aliases": [
-      "Col du Loson"
-    ],
-    "riderScore": 100
-  },
-  {
     "id": "spot-col-ferret-ChIJ_3zl",
     "sourceId": "spot-col-ferret-ChIJ_3zl",
     "googlePlaceId": null,
@@ -378,47 +337,6 @@
     "riderScore": 90
   },
   {
-    "id": "spot-col-citrin-ChIJGYBD",
-    "sourceId": "spot-col-citrin-ChIJGYBD",
-    "googlePlaceId": null,
-    "name": "Col Citrin",
-    "slug": "col-citrin",
-    "type": "mountain_pass",
-    "rideType": "mountain",
-    "country": "IT",
-    "scope": "italy-nw",
-    "scopeName": "Italia Nord-Ovest",
-    "lat": 45.795842099999994,
-    "lng": 7.1444237,
-    "region": null,
-    "regionHint": "Aosta / Monte Bianco",
-    "address": "Col Citrin, 11010 Avise, Aosta Valley, Italy",
-    "rating": 0,
-    "userRatingCount": 0,
-    "rawTypes": [
-      "natural_feature",
-      "establishment"
-    ],
-    "types": [
-      "natural_feature",
-      "establishment"
-    ],
-    "source": "google_places",
-    "tags": [
-      "mountain",
-      "scenic",
-      "rider",
-      "twisty",
-      "panoramic",
-      "rider-spot",
-      "mountain-pass"
-    ],
-    "aliases": [
-      "Col Citrin"
-    ],
-    "riderScore": 88
-  },
-  {
     "id": "spot-col-d-esischie-ChIJCUb9",
     "sourceId": "spot-col-d-esischie-ChIJCUb9",
     "googlePlaceId": null,
@@ -583,47 +501,6 @@
     "riderScore": 88
   },
   {
-    "id": "spot-col-vert-ChIJmWZC",
-    "sourceId": "spot-col-vert-ChIJmWZC",
-    "googlePlaceId": null,
-    "name": "Col Vert",
-    "slug": "col-vert",
-    "type": "mountain_pass",
-    "rideType": "mountain",
-    "country": "IT",
-    "scope": "italy-nw",
-    "scopeName": "Italia Nord-Ovest",
-    "lat": 45.9201,
-    "lng": 7.290369999999999,
-    "region": null,
-    "regionHint": "Aosta / Monte Bianco",
-    "address": "Col Vert, Ollomont, Aosta Valley, Italy",
-    "rating": 0,
-    "userRatingCount": 0,
-    "rawTypes": [
-      "natural_feature",
-      "establishment"
-    ],
-    "types": [
-      "natural_feature",
-      "establishment"
-    ],
-    "source": "google_places",
-    "tags": [
-      "mountain",
-      "scenic",
-      "rider",
-      "twisty",
-      "panoramic",
-      "rider-spot",
-      "mountain-pass"
-    ],
-    "aliases": [
-      "Col Vert"
-    ],
-    "riderScore": 88
-  },
-  {
     "id": "spot-passo-teglia-ChIJ5Xpk",
     "sourceId": "spot-passo-teglia-ChIJ5Xpk",
     "googlePlaceId": null,
@@ -667,6 +544,50 @@
       "Passo Teglia"
     ],
     "riderScore": 85
+  },
+  {
+    "id": "spot-strada-della-forra-ChIJsRRQ",
+    "sourceId": "spot-strada-della-forra-ChIJsRRQ",
+    "googlePlaceId": null,
+    "name": "Strada della Forra",
+    "slug": "strada-della-forra",
+    "type": "coastal_view",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "italy-nw",
+    "scopeName": "Italia Nord-Ovest",
+    "lat": 45.7741106,
+    "lng": 10.7659152,
+    "region": null,
+    "regionHint": "Lago di Garda Ovest",
+    "address": "Via Benaco, 25010 Tremosine sul Garda BS, Italy",
+    "rating": 4.8,
+    "userRatingCount": 4266,
+    "rawTypes": [
+      "tourist_attraction",
+      "scenic_spot",
+      "cultural_landmark",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "tourist_attraction",
+      "scenic_spot",
+      "cultural_landmark",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "rider-spot"
+    ],
+    "aliases": [
+      "Strada della Forra"
+    ],
+    "riderScore": 84
   },
   {
     "id": "spot-passo-dei-laghi-gemelli-ChIJ2-kA",
@@ -899,16 +820,16 @@
     "userRatingCount": 80,
     "rawTypes": [
       "hiking_area",
-      "tourist_attraction",
       "scenic_spot",
+      "tourist_attraction",
       "sports_activity_location",
       "point_of_interest",
       "establishment"
     ],
     "types": [
       "hiking_area",
-      "tourist_attraction",
       "scenic_spot",
+      "tourist_attraction",
       "sports_activity_location",
       "point_of_interest",
       "establishment"
@@ -1179,47 +1100,6 @@
     "riderScore": 78
   },
   {
-    "id": "spot-passo-fronte-ChIJZVn0",
-    "sourceId": "spot-passo-fronte-ChIJZVn0",
-    "googlePlaceId": null,
-    "name": "Passo Frontè",
-    "slug": "passo-fronte",
-    "type": "mountain_pass",
-    "rideType": "mountain",
-    "country": "IT",
-    "scope": "italy-nw",
-    "scopeName": "Italia Nord-Ovest",
-    "lat": 44.0588011,
-    "lng": 7.757982500000001,
-    "region": null,
-    "regionHint": "Cuneese / Alpi Marittime",
-    "address": "Passo Frontè, 18025 Mendatica IM, Italy",
-    "rating": 5,
-    "userRatingCount": 2,
-    "rawTypes": [
-      "natural_feature",
-      "establishment"
-    ],
-    "types": [
-      "natural_feature",
-      "establishment"
-    ],
-    "source": "google_places",
-    "tags": [
-      "mountain",
-      "scenic",
-      "rider",
-      "twisty",
-      "panoramic",
-      "rider-spot",
-      "mountain-pass"
-    ],
-    "aliases": [
-      "Passo Frontè"
-    ],
-    "riderScore": 78
-  },
-  {
     "id": "spot-passo-scolettas-ChIJn218",
     "sourceId": "spot-passo-scolettas-ChIJn218",
     "googlePlaceId": null,
@@ -1302,50 +1182,6 @@
       "Passo Zube"
     ],
     "riderScore": 78
-  },
-  {
-    "id": "spot-strada-della-forra-ChIJsRRQ",
-    "sourceId": "spot-strada-della-forra-ChIJsRRQ",
-    "googlePlaceId": null,
-    "name": "Strada della Forra",
-    "slug": "strada-della-forra",
-    "type": "coastal_view",
-    "rideType": "scenic",
-    "country": "IT",
-    "scope": "italy-nw",
-    "scopeName": "Italia Nord-Ovest",
-    "lat": 45.7741106,
-    "lng": 10.7659152,
-    "region": null,
-    "regionHint": "Lago di Garda Ovest",
-    "address": "Via Benaco, 25010 Tremosine sul Garda BS, Italy",
-    "rating": 4.8,
-    "userRatingCount": 4263,
-    "rawTypes": [
-      "tourist_attraction",
-      "cultural_landmark",
-      "scenic_spot",
-      "point_of_interest",
-      "establishment"
-    ],
-    "types": [
-      "tourist_attraction",
-      "cultural_landmark",
-      "scenic_spot",
-      "point_of_interest",
-      "establishment"
-    ],
-    "source": "google_places",
-    "tags": [
-      "scenic",
-      "panoramic",
-      "rider",
-      "rider-spot"
-    ],
-    "aliases": [
-      "Strada della Forra"
-    ],
-    "riderScore": 74
   },
   {
     "id": "spot-furggjoch-ChIJy8eh",
@@ -1518,6 +1354,47 @@
     "riderScore": 72
   },
   {
+    "id": "spot-lago-di-valvestino-ChIJT1xy",
+    "sourceId": "spot-lago-di-valvestino-ChIJT1xy",
+    "googlePlaceId": null,
+    "name": "Lago di Valvestino",
+    "slug": "lago-di-valvestino",
+    "type": "lake_view",
+    "rideType": "lake",
+    "country": "IT",
+    "scope": "italy-nw",
+    "scopeName": "Italia Nord-Ovest",
+    "lat": 45.7184351,
+    "lng": 10.6097251,
+    "region": null,
+    "regionHint": "Lago di Garda Ovest",
+    "address": "Lago di Valvestino, Provincia di Brescia, Italy",
+    "rating": 4.6,
+    "userRatingCount": 229,
+    "rawTypes": [
+      "lake",
+      "natural_feature",
+      "establishment"
+    ],
+    "types": [
+      "lake",
+      "natural_feature",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "lake",
+      "scenic",
+      "rider",
+      "panoramic",
+      "rider-spot"
+    ],
+    "aliases": [
+      "Lago di Valvestino"
+    ],
+    "riderScore": 71
+  },
+  {
     "id": "spot-passo-del-ghiffi-ChIJIUeo",
     "sourceId": "spot-passo-del-ghiffi-ChIJIUeo",
     "googlePlaceId": null,
@@ -1643,31 +1520,31 @@
     "riderScore": 68
   },
   {
-    "id": "spot-lago-di-valvestino-ChIJT1xy",
-    "sourceId": "spot-lago-di-valvestino-ChIJT1xy",
+    "id": "spot-lago-di-lecco-vista-panoramica-sul-ramo-di-lecco-ChIJq2Sn",
+    "sourceId": "spot-lago-di-lecco-vista-panoramica-sul-ramo-di-lecco-ChIJq2Sn",
     "googlePlaceId": null,
-    "name": "Lago di Valvestino",
-    "slug": "lago-di-valvestino",
+    "name": "Lago di Lecco - Vista panoramica sul ramo di Lecco",
+    "slug": "lago-di-lecco-vista-panoramica-sul-ramo-di-lecco",
     "type": "lake_view",
     "rideType": "lake",
     "country": "IT",
     "scope": "italy-nw",
     "scopeName": "Italia Nord-Ovest",
-    "lat": 45.7184351,
-    "lng": 10.6097251,
+    "lat": 45.8992475,
+    "lng": 9.3059692,
     "region": null,
-    "regionHint": "Lago di Garda Ovest",
-    "address": "Lago di Valvestino, Provincia di Brescia, Italy",
-    "rating": 4.6,
-    "userRatingCount": 229,
+    "regionHint": "Lago Maggiore",
+    "address": "Via Milano, 30, 22039 Valbrona CO, Italy",
+    "rating": 4.8,
+    "userRatingCount": 228,
     "rawTypes": [
-      "lake",
-      "natural_feature",
+      "scenic_spot",
+      "point_of_interest",
       "establishment"
     ],
     "types": [
-      "lake",
-      "natural_feature",
+      "scenic_spot",
+      "point_of_interest",
       "establishment"
     ],
     "source": "google_places",
@@ -1679,9 +1556,9 @@
       "rider-spot"
     ],
     "aliases": [
-      "Lago di Valvestino"
+      "Lago di Lecco - Vista panoramica sul ramo di Lecco"
     ],
-    "riderScore": 67
+    "riderScore": 64
   },
   {
     "id": "spot-passo-santa-franca-mt-1275-ChIJ06TH",
@@ -1776,7 +1653,7 @@
     "name": "Colle di Sampeyre",
     "slug": "colle-di-sampeyre",
     "type": "mountain_pass",
-    "rideType": "scenic",
+    "rideType": "mountain",
     "country": "IT",
     "scope": "italy-nw",
     "scopeName": "Italia Nord-Ovest",
@@ -1940,6 +1817,211 @@
     "riderScore": 58
   },
   {
+    "id": "spot-panoramic-viewpoint-como-lake-north-ChIJbQ-m",
+    "sourceId": "spot-panoramic-viewpoint-como-lake-north-ChIJbQ-m",
+    "googlePlaceId": null,
+    "name": "Panoramic Viewpoint - Como Lake North",
+    "slug": "panoramic-viewpoint-como-lake-north",
+    "type": "lake_view",
+    "rideType": "lake",
+    "country": "IT",
+    "scope": "italy-nw",
+    "scopeName": "Italia Nord-Ovest",
+    "lat": 46.0759628,
+    "lng": 9.2378913,
+    "region": null,
+    "regionHint": "Lago Maggiore",
+    "address": "Via ai Monti, 22010 San Siro CO, Italy",
+    "rating": 4.7,
+    "userRatingCount": 49,
+    "rawTypes": [
+      "tourist_attraction",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "tourist_attraction",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "lake",
+      "scenic",
+      "rider",
+      "panoramic",
+      "rider-spot"
+    ],
+    "aliases": [
+      "Panoramic Viewpoint - Como Lake North"
+    ],
+    "riderScore": 58
+  },
+  {
+    "id": "spot-salo-panorama-lago-ChIJCT1a",
+    "sourceId": "spot-salo-panorama-lago-ChIJCT1a",
+    "googlePlaceId": null,
+    "name": "Salò Panorama Lago",
+    "slug": "salo-panorama-lago",
+    "type": "lake_view",
+    "rideType": "lake",
+    "country": "IT",
+    "scope": "italy-nw",
+    "scopeName": "Italia Nord-Ovest",
+    "lat": 45.60453950000001,
+    "lng": 10.5227105,
+    "region": null,
+    "regionHint": "Lago di Garda Ovest",
+    "address": "Piazza Decorati al Valor Civile, 1449, 25087 Salò BS, Italy",
+    "rating": 4.7,
+    "userRatingCount": 527,
+    "rawTypes": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "lake",
+      "scenic",
+      "rider",
+      "panoramic",
+      "rider-spot"
+    ],
+    "aliases": [
+      "Salò Panorama Lago"
+    ],
+    "riderScore": 58
+  },
+  {
+    "id": "spot-terrace-lookout-over-lake-maggiore-ChIJL2T-",
+    "sourceId": "spot-terrace-lookout-over-lake-maggiore-ChIJL2T-",
+    "googlePlaceId": null,
+    "name": "Terrace lookout over Lake Maggiore",
+    "slug": "terrace-lookout-over-lake-maggiore",
+    "type": "lake_view",
+    "rideType": "lake",
+    "country": "IT",
+    "scope": "italy-nw",
+    "scopeName": "Italia Nord-Ovest",
+    "lat": 46.0052082,
+    "lng": 8.6261429,
+    "region": null,
+    "regionHint": "Lago Maggiore",
+    "address": "28824 Oggebbio, Province of Verbano-Cusio-Ossola, Italy",
+    "rating": 4.7,
+    "userRatingCount": 413,
+    "rawTypes": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "lake",
+      "scenic",
+      "rider",
+      "panoramic",
+      "rider-spot"
+    ],
+    "aliases": [
+      "Terrace lookout over Lake Maggiore"
+    ],
+    "riderScore": 58
+  },
+  {
+    "id": "spot-lago-di-cancano-ChIJu3EE",
+    "sourceId": "spot-lago-di-cancano-ChIJu3EE",
+    "googlePlaceId": null,
+    "name": "Lago di Cancano",
+    "slug": "lago-di-cancano",
+    "type": "lake_view",
+    "rideType": "lake",
+    "country": "IT",
+    "scope": "italy-nw",
+    "scopeName": "Italia Nord-Ovest",
+    "lat": 46.528174799999995,
+    "lng": 10.299408,
+    "region": null,
+    "regionHint": "Lago di Como / Stelvio",
+    "address": "Lago di Cancano, 23038 Valdidentro SO, Italy",
+    "rating": 4.7,
+    "userRatingCount": 240,
+    "rawTypes": [
+      "lake",
+      "natural_feature",
+      "establishment"
+    ],
+    "types": [
+      "lake",
+      "natural_feature",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "lake",
+      "scenic",
+      "rider",
+      "panoramic",
+      "rider-spot"
+    ],
+    "aliases": [
+      "Lago di Cancano"
+    ],
+    "riderScore": 56
+  },
+  {
+    "id": "spot-lago-valbiolo-ChIJtaVA",
+    "sourceId": "spot-lago-valbiolo-ChIJtaVA",
+    "googlePlaceId": null,
+    "name": "Lago Valbiolo",
+    "slug": "lago-valbiolo",
+    "type": "lake_view",
+    "rideType": "lake",
+    "country": "IT",
+    "scope": "italy-nw",
+    "scopeName": "Italia Nord-Ovest",
+    "lat": 46.2721668,
+    "lng": 10.5889887,
+    "region": null,
+    "regionHint": "Lago di Como / Stelvio",
+    "address": "Unnamed Road, 38029, 38029 Vermiglio TN, Italy",
+    "rating": 4.7,
+    "userRatingCount": 241,
+    "rawTypes": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "lake",
+      "scenic",
+      "rider",
+      "panoramic",
+      "rider-spot"
+    ],
+    "aliases": [
+      "Lago Valbiolo"
+    ],
+    "riderScore": 56
+  },
+  {
     "id": "spot-dordona-viewpoint-ChIJ4wgQ",
     "sourceId": "spot-dordona-viewpoint-ChIJ4wgQ",
     "googlePlaceId": null,
@@ -1983,23 +2065,109 @@
     "riderScore": 55
   },
   {
-    "id": "spot-salo-panorama-lago-ChIJCT1a",
-    "sourceId": "spot-salo-panorama-lago-ChIJCT1a",
+    "id": "spot-lungolago-di-intra-ChIJw04x",
+    "sourceId": "spot-lungolago-di-intra-ChIJw04x",
     "googlePlaceId": null,
-    "name": "Salò Panorama Lago",
-    "slug": "salo-panorama-lago",
+    "name": "Lungolago di Intra",
+    "slug": "lungolago-di-intra",
     "type": "lake_view",
     "rideType": "lake",
     "country": "IT",
     "scope": "italy-nw",
     "scopeName": "Italia Nord-Ovest",
-    "lat": 45.60453950000001,
-    "lng": 10.5227105,
+    "lat": 45.9362418,
+    "lng": 8.576424099999999,
+    "region": null,
+    "regionHint": "Lago Maggiore",
+    "address": "S.da Statale 34 del Lago Maggiore, 28921, 28921 Intra VB, Italy",
+    "rating": 4.5,
+    "userRatingCount": 338,
+    "rawTypes": [
+      "hiking_area",
+      "tourist_attraction",
+      "sports_activity_location",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "hiking_area",
+      "tourist_attraction",
+      "sports_activity_location",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "lake",
+      "scenic",
+      "rider",
+      "panoramic",
+      "rider-spot"
+    ],
+    "aliases": [
+      "Lungolago di Intra"
+    ],
+    "riderScore": 55
+  },
+  {
+    "id": "spot-lago-di-lova-ChIJc_NS",
+    "sourceId": "spot-lago-di-lova-ChIJc_NS",
+    "googlePlaceId": null,
+    "name": "Lago di Lova",
+    "slug": "lago-di-lova",
+    "type": "lake_view",
+    "rideType": "lake",
+    "country": "IT",
+    "scope": "italy-nw",
+    "scopeName": "Italia Nord-Ovest",
+    "lat": 45.97,
+    "lng": 10.209999999999999,
+    "region": null,
+    "regionHint": "Lago di Como / Stelvio",
+    "address": "Lago di Lova, 25042 Borno BS, Italy",
+    "rating": 4.5,
+    "userRatingCount": 117,
+    "rawTypes": [
+      "lake",
+      "natural_feature",
+      "establishment"
+    ],
+    "types": [
+      "lake",
+      "natural_feature",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "lake",
+      "scenic",
+      "rider",
+      "panoramic",
+      "rider-spot"
+    ],
+    "aliases": [
+      "Lago di Lova"
+    ],
+    "riderScore": 51
+  },
+  {
+    "id": "spot-banchina-panoramica-da-riva-del-garda-a-limone-del-garda-ChIJ67zu",
+    "sourceId": "spot-banchina-panoramica-da-riva-del-garda-a-limone-del-garda-ChIJ67zu",
+    "googlePlaceId": null,
+    "name": "Banchina Panoramica da Riva del Garda a Limone del Garda",
+    "slug": "banchina-panoramica-da-riva-del-garda-a-limone-del-garda",
+    "type": "lake_view",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "italy-nw",
+    "scopeName": "Italia Nord-Ovest",
+    "lat": 45.837655299999994,
+    "lng": 10.8256555,
     "region": null,
     "regionHint": "Lago di Garda Ovest",
-    "address": "Piazza Decorati al Valor Civile, 1449, 25087 Salò BS, Italy",
+    "address": "SS45bis, 38066 Riva del Garda TN, Italy",
     "rating": 4.7,
-    "userRatingCount": 527,
+    "userRatingCount": 329,
     "rawTypes": [
       "scenic_spot",
       "point_of_interest",
@@ -2012,83 +2180,41 @@
     ],
     "source": "google_places",
     "tags": [
-      "lake",
       "scenic",
-      "rider",
       "panoramic",
+      "rider",
       "rider-spot"
     ],
     "aliases": [
-      "Salò Panorama Lago"
+      "Banchina Panoramica da Riva del Garda a Limone del Garda"
     ],
-    "riderScore": 54
+    "riderScore": 50
   },
   {
-    "id": "spot-lago-di-cancano-ChIJu3EE",
-    "sourceId": "spot-lago-di-cancano-ChIJu3EE",
+    "id": "spot-belvedere-di-quarna-lake-orta-viewpoint-ChIJt71m",
+    "sourceId": "spot-belvedere-di-quarna-lake-orta-viewpoint-ChIJt71m",
     "googlePlaceId": null,
-    "name": "Lago di Cancano",
-    "slug": "lago-di-cancano",
+    "name": "Belvedere di Quarna - Lake Orta viewpoint",
+    "slug": "belvedere-di-quarna-lake-orta-viewpoint",
     "type": "lake_view",
     "rideType": "lake",
     "country": "IT",
     "scope": "italy-nw",
     "scopeName": "Italia Nord-Ovest",
-    "lat": 46.528174799999995,
-    "lng": 10.299408,
+    "lat": 45.871063199999995,
+    "lng": 8.3770971,
     "region": null,
-    "regionHint": "Lago di Como / Stelvio",
-    "address": "Lago di Cancano, 23038 Valdidentro SO, Italy",
-    "rating": 4.7,
-    "userRatingCount": 240,
+    "regionHint": "Lago Maggiore",
+    "address": "Località, Via Belvedere, 28898 Quarna Sopra VB, Italy",
+    "rating": 4.8,
+    "userRatingCount": 208,
     "rawTypes": [
-      "lake",
-      "natural_feature",
-      "establishment"
-    ],
-    "types": [
-      "lake",
-      "natural_feature",
-      "establishment"
-    ],
-    "source": "google_places",
-    "tags": [
-      "lake",
-      "scenic",
-      "rider",
-      "panoramic",
-      "rider-spot"
-    ],
-    "aliases": [
-      "Lago di Cancano"
-    ],
-    "riderScore": 52
-  },
-  {
-    "id": "spot-lago-valbiolo-ChIJtaVA",
-    "sourceId": "spot-lago-valbiolo-ChIJtaVA",
-    "googlePlaceId": null,
-    "name": "Lago Valbiolo",
-    "slug": "lago-valbiolo",
-    "type": "lake_view",
-    "rideType": "lake",
-    "country": "IT",
-    "scope": "italy-nw",
-    "scopeName": "Italia Nord-Ovest",
-    "lat": 46.2721668,
-    "lng": 10.5889887,
-    "region": null,
-    "regionHint": "Lago di Como / Stelvio",
-    "address": "Unnamed Road, 38029, 38029 Vermiglio TN, Italy",
-    "rating": 4.7,
-    "userRatingCount": 241,
-    "rawTypes": [
-      "scenic_spot",
+      "observation_deck",
       "point_of_interest",
       "establishment"
     ],
     "types": [
-      "scenic_spot",
+      "observation_deck",
       "point_of_interest",
       "establishment"
     ],
@@ -2101,9 +2227,9 @@
       "rider-spot"
     ],
     "aliases": [
-      "Lago Valbiolo"
+      "Belvedere di Quarna - Lake Orta viewpoint"
     ],
-    "riderScore": 52
+    "riderScore": 48
   },
   {
     "id": "spot-le-magdeleine-vista-panoramica-ChIJj7_H",
@@ -2187,31 +2313,73 @@
     "riderScore": 48
   },
   {
-    "id": "spot-lago-di-lova-ChIJc_NS",
-    "sourceId": "spot-lago-di-lova-ChIJc_NS",
+    "id": "spot-strada-panoramica-ChIJbza0",
+    "sourceId": "spot-strada-panoramica-ChIJbza0",
     "googlePlaceId": null,
-    "name": "Lago di Lova",
-    "slug": "lago-di-lova",
+    "name": "Strada Panoramica",
+    "slug": "strada-panoramica",
+    "type": "lake_view",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "italy-nw",
+    "scopeName": "Italia Nord-Ovest",
+    "lat": 45.6892127,
+    "lng": 10.75776,
+    "region": null,
+    "regionHint": "Lago di Garda Ovest",
+    "address": "Località Fasor, 22, 37010 Brenzone sul Garda VR, Italy",
+    "rating": 4.7,
+    "userRatingCount": 29,
+    "rawTypes": [
+      "hiking_area",
+      "sports_activity_location",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "hiking_area",
+      "sports_activity_location",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "rider-spot"
+    ],
+    "aliases": [
+      "Strada Panoramica"
+    ],
+    "riderScore": 48
+  },
+  {
+    "id": "spot-vista-panoramica-sul-lago-d-iseo-ChIJUdL-",
+    "sourceId": "spot-vista-panoramica-sul-lago-d-iseo-ChIJUdL-",
+    "googlePlaceId": null,
+    "name": "Vista panoramica sul Lago d'Iseo",
+    "slug": "vista-panoramica-sul-lago-d-iseo",
     "type": "lake_view",
     "rideType": "lake",
     "country": "IT",
     "scope": "italy-nw",
     "scopeName": "Italia Nord-Ovest",
-    "lat": 45.97,
-    "lng": 10.209999999999999,
+    "lat": 45.8019246,
+    "lng": 10.129092799999999,
     "region": null,
-    "regionHint": "Lago di Como / Stelvio",
-    "address": "Lago di Lova, 25042 Borno BS, Italy",
-    "rating": 4.5,
-    "userRatingCount": 117,
+    "regionHint": "Lago di Garda Ovest",
+    "address": "Via Imavilla, 2, 25055 Grignaghe BS, Italy",
+    "rating": 4.8,
+    "userRatingCount": 26,
     "rawTypes": [
-      "lake",
-      "natural_feature",
+      "scenic_spot",
+      "point_of_interest",
       "establishment"
     ],
     "types": [
-      "lake",
-      "natural_feature",
+      "scenic_spot",
+      "point_of_interest",
       "establishment"
     ],
     "source": "google_places",
@@ -2223,9 +2391,9 @@
       "rider-spot"
     ],
     "aliases": [
-      "Lago di Lova"
+      "Vista panoramica sul Lago d'Iseo"
     ],
-    "riderScore": 47
+    "riderScore": 46
   },
   {
     "id": "spot-colle-di-nava-ChIJW1lO",
@@ -2265,6 +2433,46 @@
     ],
     "aliases": [
       "Colle di Nava"
+    ],
+    "riderScore": 43
+  },
+  {
+    "id": "spot-strada-panoramica-ChIJfTk0",
+    "sourceId": "spot-strada-panoramica-ChIJfTk0",
+    "googlePlaceId": null,
+    "name": "Strada Panoramica",
+    "slug": "strada-panoramica",
+    "type": "lake_view",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "italy-nw",
+    "scopeName": "Italia Nord-Ovest",
+    "lat": 45.858599399999996,
+    "lng": 10.8325658,
+    "region": null,
+    "regionHint": "Lago di Garda Ovest",
+    "address": "SS45bis, 38066 Riva del Garda TN, Italy",
+    "rating": 4.7,
+    "userRatingCount": 9,
+    "rawTypes": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "rider-spot"
+    ],
+    "aliases": [
+      "Strada Panoramica"
     ],
     "riderScore": 43
   },
@@ -2353,23 +2561,269 @@
     "riderScore": 42
   },
   {
-    "id": "spot-banchina-panoramica-da-riva-del-garda-a-limone-del-garda-ChIJ67zu",
-    "sourceId": "spot-banchina-panoramica-da-riva-del-garda-a-limone-del-garda-ChIJ67zu",
+    "id": "spot-area-panoramica-del-lago-di-varese-ChIJB0JC",
+    "sourceId": "spot-area-panoramica-del-lago-di-varese-ChIJB0JC",
     "googlePlaceId": null,
-    "name": "Banchina Panoramica da Riva del Garda a Limone del Garda",
-    "slug": "banchina-panoramica-da-riva-del-garda-a-limone-del-garda",
-    "type": "scenic_road",
+    "name": "Area panoramica del Lago di Varese",
+    "slug": "area-panoramica-del-lago-di-varese",
+    "type": "lake_view",
+    "rideType": "lake",
+    "country": "IT",
+    "scope": "italy-nw",
+    "scopeName": "Italia Nord-Ovest",
+    "lat": 45.83903,
+    "lng": 8.7205813,
+    "region": null,
+    "regionHint": "Lago Maggiore",
+    "address": "Lungolago Isola Virginia, 21026 Gavirate VA, Italy",
+    "rating": 5,
+    "userRatingCount": 3,
+    "rawTypes": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "lake",
+      "scenic",
+      "rider",
+      "panoramic",
+      "rider-spot"
+    ],
+    "aliases": [
+      "Area panoramica del Lago di Varese"
+    ],
+    "riderScore": 41
+  },
+  {
+    "id": "spot-lago-belviso-ChIJq5V3",
+    "sourceId": "spot-lago-belviso-ChIJq5V3",
+    "googlePlaceId": null,
+    "name": "Lago Belviso",
+    "slug": "lago-belviso",
+    "type": "lake_view",
+    "rideType": "lake",
+    "country": "IT",
+    "scope": "italy-nw",
+    "scopeName": "Italia Nord-Ovest",
+    "lat": 46.094134499999996,
+    "lng": 10.1321472,
+    "region": null,
+    "regionHint": "Lago di Como / Stelvio",
+    "address": "Lago Belviso, 23036 Teglio SO, Italy",
+    "rating": 4.6,
+    "userRatingCount": 73,
+    "rawTypes": [
+      "lake",
+      "natural_feature",
+      "establishment"
+    ],
+    "types": [
+      "lake",
+      "natural_feature",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "lake",
+      "scenic",
+      "rider",
+      "panoramic",
+      "rider-spot"
+    ],
+    "aliases": [
+      "Lago Belviso"
+    ],
+    "riderScore": 41
+  },
+  {
+    "id": "spot-lago-di-coca-ChIJ-0Zc",
+    "sourceId": "spot-lago-di-coca-ChIJ-0Zc",
+    "googlePlaceId": null,
+    "name": "Lago di Coca",
+    "slug": "lago-di-coca",
+    "type": "lake_view",
+    "rideType": "lake",
+    "country": "IT",
+    "scope": "italy-nw",
+    "scopeName": "Italia Nord-Ovest",
+    "lat": 46.063286999999995,
+    "lng": 9.9994187,
+    "region": null,
+    "regionHint": "Lago di Como / Stelvio",
+    "address": "Unnamed Road, 24020, 24020 Valbondione BG, Italy",
+    "rating": 4.9,
+    "userRatingCount": 11,
+    "rawTypes": [
+      "sports_activity_location",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "sports_activity_location",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "lake",
+      "scenic",
+      "rider",
+      "panoramic",
+      "rider-spot"
+    ],
+    "aliases": [
+      "Lago di Coca"
+    ],
+    "riderScore": 41
+  },
+  {
+    "id": "spot-lago-lochien-ChIJrzZV",
+    "sourceId": "spot-lago-lochien-ChIJrzZV",
+    "googlePlaceId": null,
+    "name": "Lago Lochíen",
+    "slug": "lago-lochien",
+    "type": "lake_view",
     "rideType": "scenic",
     "country": "IT",
     "scope": "italy-nw",
     "scopeName": "Italia Nord-Ovest",
-    "lat": 45.837655299999994,
-    "lng": 10.8256555,
+    "lat": 45.848749999999995,
+    "lng": 7.716437,
+    "region": null,
+    "regionHint": "Canavese / Gran Paradiso",
+    "address": "Unnamed Road, 11020, 11020 Ayas AO, Italy",
+    "rating": 4.6,
+    "userRatingCount": 35,
+    "rawTypes": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "lake",
+      "rider-spot"
+    ],
+    "aliases": [
+      "Lago Lochíen"
+    ],
+    "riderScore": 41
+  },
+  {
+    "id": "spot-madonnina-sul-lago-ChIJ1ZzY",
+    "sourceId": "spot-madonnina-sul-lago-ChIJ1ZzY",
+    "googlePlaceId": null,
+    "name": "Madonnina sul Lago",
+    "slug": "madonnina-sul-lago",
+    "type": "lake_view",
+    "rideType": "lake",
+    "country": "IT",
+    "scope": "italy-nw",
+    "scopeName": "Italia Nord-Ovest",
+    "lat": 45.8776917,
+    "lng": 10.1544229,
+    "region": null,
+    "regionHint": "Lago di Como / Stelvio",
+    "address": "Unnamed Road, 25040, 25040 Angolo Terme BS, Italy",
+    "rating": 4.7,
+    "userRatingCount": 11,
+    "rawTypes": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "lake",
+      "scenic",
+      "rider",
+      "panoramic",
+      "rider-spot"
+    ],
+    "aliases": [
+      "Madonnina sul Lago"
+    ],
+    "riderScore": 41
+  },
+  {
+    "id": "spot-punto-panoramico-sul-lago-d-iseo-toline-ChIJcUuU",
+    "sourceId": "spot-punto-panoramico-sul-lago-d-iseo-toline-ChIJcUuU",
+    "googlePlaceId": null,
+    "name": "Punto panoramico sul Lago d'Iseo - Toline",
+    "slug": "punto-panoramico-sul-lago-d-iseo-toline",
+    "type": "lake_view",
+    "rideType": "lake",
+    "country": "IT",
+    "scope": "italy-nw",
+    "scopeName": "Italia Nord-Ovest",
+    "lat": 45.7886326,
+    "lng": 10.0909437,
     "region": null,
     "regionHint": "Lago di Garda Ovest",
-    "address": "SS45bis, 38066 Riva del Garda TN, Italy",
+    "address": "Via Don Faustino Bonetti, 8, 25055 Toline BS, Italy",
     "rating": 4.7,
-    "userRatingCount": 329,
+    "userRatingCount": 13,
+    "rawTypes": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "lake",
+      "scenic",
+      "rider",
+      "panoramic",
+      "rider-spot"
+    ],
+    "aliases": [
+      "Punto panoramico sul Lago d'Iseo - Toline"
+    ],
+    "riderScore": 41
+  },
+  {
+    "id": "spot-colle-san-giacomo-ChIJb2rx",
+    "sourceId": "spot-colle-san-giacomo-ChIJb2rx",
+    "googlePlaceId": null,
+    "name": "Colle San Giacomo",
+    "slug": "colle-san-giacomo",
+    "type": "lake_view",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "italy-nw",
+    "scopeName": "Italia Nord-Ovest",
+    "lat": 45.3267101,
+    "lng": 7.4169889,
+    "region": null,
+    "regionHint": "Canavese / Gran Paradiso",
+    "address": "Unnamed Road,10070, 10070 Ceres TO, Italy",
+    "rating": 4.7,
+    "userRatingCount": 43,
     "rawTypes": [
       "scenic_spot",
       "point_of_interest",
@@ -2388,7 +2842,47 @@
       "rider-spot"
     ],
     "aliases": [
-      "Banchina Panoramica da Riva del Garda a Limone del Garda"
+      "Colle San Giacomo"
+    ],
+    "riderScore": 40
+  },
+  {
+    "id": "spot-morterone-panoramic-point-panchina-dell-amore-ChIJTyxS",
+    "sourceId": "spot-morterone-panoramic-point-panchina-dell-amore-ChIJTyxS",
+    "googlePlaceId": null,
+    "name": "Morterone Panoramic Point / Panchina dell'amore",
+    "slug": "morterone-panoramic-point-panchina-dell-amore",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "italy-nw",
+    "scopeName": "Italia Nord-Ovest",
+    "lat": 45.8831328,
+    "lng": 9.434449899999999,
+    "region": null,
+    "regionHint": "Lago di Como / Stelvio",
+    "address": "SP63, 23900 Lecco LC, Italy",
+    "rating": 4.8,
+    "userRatingCount": 57,
+    "rawTypes": [
+      "tourist_attraction",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "tourist_attraction",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "rider-spot"
+    ],
+    "aliases": [
+      "Morterone Panoramic Point / Panchina dell'amore"
     ],
     "riderScore": 40
   },
@@ -2435,6 +2929,47 @@
     "riderScore": 40
   },
   {
+    "id": "spot-passeggiata-sul-lago-ChIJnzrr",
+    "sourceId": "spot-passeggiata-sul-lago-ChIJnzrr",
+    "googlePlaceId": null,
+    "name": "Passeggiata Sul Lago",
+    "slug": "passeggiata-sul-lago",
+    "type": "lake_view",
+    "rideType": "lake",
+    "country": "IT",
+    "scope": "italy-nw",
+    "scopeName": "Italia Nord-Ovest",
+    "lat": 45.903137799999996,
+    "lng": 8.904603999999999,
+    "region": null,
+    "regionHint": "Lago Maggiore",
+    "address": "Via Butti, 5, 21050 Porto Ceresio VA, Italy",
+    "rating": 4.8,
+    "userRatingCount": 25,
+    "rawTypes": [
+      "tourist_attraction",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "tourist_attraction",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "lake",
+      "scenic",
+      "rider",
+      "panoramic",
+      "rider-spot"
+    ],
+    "aliases": [
+      "Passeggiata Sul Lago"
+    ],
+    "riderScore": 40
+  },
+  {
     "id": "spot-sosta-panoramica-ChIJ7cOU",
     "sourceId": "spot-sosta-panoramica-ChIJ7cOU",
     "googlePlaceId": null,
@@ -2473,47 +3008,6 @@
       "Sosta Panoramica"
     ],
     "riderScore": 40
-  },
-  {
-    "id": "spot-lakeside-lavena-ponte-tresa-ChIJB-n9",
-    "sourceId": "spot-lakeside-lavena-ponte-tresa-ChIJB-n9",
-    "googlePlaceId": null,
-    "name": "Lakeside Lavena Ponte Tresa",
-    "slug": "lakeside-lavena-ponte-tresa",
-    "type": "lake_view",
-    "rideType": "lake",
-    "country": "IT",
-    "scope": "italy-nw",
-    "scopeName": "Italia Nord-Ovest",
-    "lat": 45.9624461,
-    "lng": 8.8603674,
-    "region": null,
-    "regionHint": "Lago Maggiore",
-    "address": "Via Ungheria, 12/A, 21037 Lavena Ponte Tresa VA, Italy",
-    "rating": 4.5,
-    "userRatingCount": 459,
-    "rawTypes": [
-      "park",
-      "point_of_interest",
-      "establishment"
-    ],
-    "types": [
-      "park",
-      "point_of_interest",
-      "establishment"
-    ],
-    "source": "google_places",
-    "tags": [
-      "lake",
-      "scenic",
-      "rider",
-      "panoramic",
-      "rider-spot"
-    ],
-    "aliases": [
-      "Lakeside Lavena Ponte Tresa"
-    ],
-    "riderScore": 39
   },
   {
     "id": "spot-cima-monte-bignone-punto-panoramico-ChIJuyH3",
@@ -2596,6 +3090,129 @@
     "riderScore": 38
   },
   {
+    "id": "spot-lago-di-colina-ChIJ-fQJ",
+    "sourceId": "spot-lago-di-colina-ChIJ-fQJ",
+    "googlePlaceId": null,
+    "name": "Lago di Colina",
+    "slug": "lago-di-colina",
+    "type": "lake_view",
+    "rideType": "lake",
+    "country": "IT",
+    "scope": "italy-nw",
+    "scopeName": "Italia Nord-Ovest",
+    "lat": 46.214070799999995,
+    "lng": 9.7839183,
+    "region": null,
+    "regionHint": "Lago di Como / Stelvio",
+    "address": "23010 Postalesio, Province of Sondrio, Italy",
+    "rating": 4.8,
+    "userRatingCount": 77,
+    "rawTypes": [
+      "sports_activity_location",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "sports_activity_location",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "lake",
+      "scenic",
+      "rider",
+      "panoramic",
+      "rider-spot"
+    ],
+    "aliases": [
+      "Lago di Colina"
+    ],
+    "riderScore": 38
+  },
+  {
+    "id": "spot-lookout-of-lake-comi-ChIJG3Ky",
+    "sourceId": "spot-lookout-of-lake-comi-ChIJG3Ky",
+    "googlePlaceId": null,
+    "name": "Lookout of Lake Comi",
+    "slug": "lookout-of-lake-comi",
+    "type": "lake_view",
+    "rideType": "lake",
+    "country": "IT",
+    "scope": "italy-nw",
+    "scopeName": "Italia Nord-Ovest",
+    "lat": 45.858678,
+    "lng": 9.1435573,
+    "region": null,
+    "regionHint": "Lago Maggiore",
+    "address": "Strada Provinciale 43, 3, 22020 Riva CO, Italy",
+    "rating": 4.5,
+    "userRatingCount": 2,
+    "rawTypes": [
+      "tourist_attraction",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "tourist_attraction",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "lake",
+      "scenic",
+      "rider",
+      "panoramic",
+      "rider-spot"
+    ],
+    "aliases": [
+      "Lookout of Lake Comi"
+    ],
+    "riderScore": 38
+  },
+  {
+    "id": "spot-panorama-lago-d-iseo-xino-ChIJ73DX",
+    "sourceId": "spot-panorama-lago-d-iseo-xino-ChIJ73DX",
+    "googlePlaceId": null,
+    "name": "Panorama lago d'iseo xino",
+    "slug": "panorama-lago-d-iseo-xino",
+    "type": "lake_view",
+    "rideType": "lake",
+    "country": "IT",
+    "scope": "italy-nw",
+    "scopeName": "Italia Nord-Ovest",
+    "lat": 45.7681481,
+    "lng": 10.029092,
+    "region": null,
+    "regionHint": "Lago di Garda Ovest",
+    "address": "SP77, 36, 24060 Solto Collina BG, Italy",
+    "rating": 4.8,
+    "userRatingCount": 26,
+    "rawTypes": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "lake",
+      "scenic",
+      "rider",
+      "panoramic",
+      "rider-spot"
+    ],
+    "aliases": [
+      "Panorama lago d'iseo xino"
+    ],
+    "riderScore": 38
+  },
+  {
     "id": "spot-strada-dei-cannoni-ChIJj9fL",
     "sourceId": "spot-strada-dei-cannoni-ChIJj9fL",
     "googlePlaceId": null,
@@ -2674,48 +3291,6 @@
     ],
     "aliases": [
       "Strada panoramica"
-    ],
-    "riderScore": 38
-  },
-  {
-    "id": "spot-strada-panoramica-ChIJbza0",
-    "sourceId": "spot-strada-panoramica-ChIJbza0",
-    "googlePlaceId": null,
-    "name": "Strada Panoramica",
-    "slug": "strada-panoramica",
-    "type": "scenic_road",
-    "rideType": "scenic",
-    "country": "IT",
-    "scope": "italy-nw",
-    "scopeName": "Italia Nord-Ovest",
-    "lat": 45.6892127,
-    "lng": 10.75776,
-    "region": null,
-    "regionHint": "Lago di Garda Ovest",
-    "address": "Località Fasor, 22, 37010 Brenzone sul Garda VR, Italy",
-    "rating": 4.7,
-    "userRatingCount": 29,
-    "rawTypes": [
-      "hiking_area",
-      "sports_activity_location",
-      "point_of_interest",
-      "establishment"
-    ],
-    "types": [
-      "hiking_area",
-      "sports_activity_location",
-      "point_of_interest",
-      "establishment"
-    ],
-    "source": "google_places",
-    "tags": [
-      "scenic",
-      "panoramic",
-      "rider",
-      "rider-spot"
-    ],
-    "aliases": [
-      "Strada Panoramica"
     ],
     "riderScore": 38
   }

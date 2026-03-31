@@ -44,50 +44,6 @@
     "riderScore": 100
   },
   {
-    "id": "spot-passo-pertus-1307m-ChIJLVbB",
-    "sourceId": "spot-passo-pertus-1307m-ChIJLVbB",
-    "googlePlaceId": null,
-    "name": "Passo Pertüs 1307m",
-    "slug": "passo-pertus-1307m",
-    "type": "mountain_pass",
-    "rideType": "scenic",
-    "country": "IT",
-    "scope": "como",
-    "scopeName": "Lago di Como",
-    "lat": 45.806478,
-    "lng": 9.4928239,
-    "region": null,
-    "regionHint": "Lecco / Valsassina",
-    "address": "Unnamed Road, 24030 Carenno LC, Italy",
-    "rating": 4.5,
-    "userRatingCount": 52,
-    "rawTypes": [
-      "tourist_attraction",
-      "point_of_interest",
-      "establishment"
-    ],
-    "types": [
-      "tourist_attraction",
-      "point_of_interest",
-      "establishment"
-    ],
-    "source": "google_places",
-    "tags": [
-      "scenic",
-      "panoramic",
-      "rider",
-      "mountain",
-      "twisty",
-      "rider-spot",
-      "lake-scope",
-      "mountain-pass"
-    ],
-    "aliases": [
-      "Passo Pertüs 1307m"
-    ],
-    "riderScore": 100
-  },
-  {
     "id": "spot-punto-panoramico-ChIJmyet",
     "sourceId": "spot-punto-panoramico-ChIJmyet",
     "googlePlaceId": null,
@@ -500,20 +456,20 @@
     "userRatingCount": 53,
     "rawTypes": [
       "bicycle_store",
-      "sporting_goods_store",
-      "store",
-      "service",
       "manufacturer",
+      "sporting_goods_store",
+      "service",
       "point_of_interest",
+      "store",
       "establishment"
     ],
     "types": [
       "bicycle_store",
-      "sporting_goods_store",
-      "store",
-      "service",
       "manufacturer",
+      "sporting_goods_store",
+      "service",
       "point_of_interest",
+      "store",
       "establishment"
     ],
     "source": "google_places",
@@ -805,10 +761,10 @@
       "tour_agency",
       "travel_agency",
       "clothing_store",
+      "manufacturer",
       "sporting_goods_store",
       "service",
       "point_of_interest",
-      "manufacturer",
       "store",
       "establishment"
     ],
@@ -818,10 +774,10 @@
       "tour_agency",
       "travel_agency",
       "clothing_store",
+      "manufacturer",
       "sporting_goods_store",
       "service",
       "point_of_interest",
-      "manufacturer",
       "store",
       "establishment"
     ],
@@ -942,13 +898,13 @@
     "rating": 4.6,
     "userRatingCount": 70,
     "rawTypes": [
-      "store",
       "point_of_interest",
+      "store",
       "establishment"
     ],
     "types": [
-      "store",
       "point_of_interest",
+      "store",
       "establishment"
     ],
     "source": "google_places",
@@ -1471,6 +1427,49 @@
     ],
     "aliases": [
       "Torriggia - Via Panoramica 24"
+    ],
+    "riderScore": 60
+  },
+  {
+    "id": "spot-via-verde-sentiero-panoramico-da-moltrasio-a-laglio-ChIJY5Ov",
+    "sourceId": "spot-via-verde-sentiero-panoramico-da-moltrasio-a-laglio-ChIJY5Ov",
+    "googlePlaceId": null,
+    "name": "Via Verde: Sentiero Panoramico da Moltrasio a Laglio",
+    "slug": "via-verde-sentiero-panoramico-da-moltrasio-a-laglio",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "como",
+    "scopeName": "Lago di Como",
+    "lat": 45.8647906,
+    "lng": 9.103616299999999,
+    "region": null,
+    "regionHint": "Menaggio",
+    "address": "V. Linera, 22010 Moltrasio CO, Italy",
+    "rating": 4.6,
+    "userRatingCount": 222,
+    "rawTypes": [
+      "hiking_area",
+      "sports_activity_location",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "hiking_area",
+      "sports_activity_location",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "rider-spot",
+      "lake-scope"
+    ],
+    "aliases": [
+      "Via Verde: Sentiero Panoramico da Moltrasio a Laglio"
     ],
     "riderScore": 60
   },
