@@ -100,14 +100,6 @@ function normalizeRegionHint(s) {
     .trim();
 }
 
-function titleCase(input = "") {
-  return String(input)
-    .split(" ")
-    .filter(Boolean)
-    .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
-    .join(" ");
-}
-
 // -------------------------------------------------------
 // QUALITY FILTERS
 // -------------------------------------------------------
@@ -426,42 +418,116 @@ function buildTitle(points, region, rideType) {
   return `${prefix} ${region}: ${names.slice(0, 4).join(" → ")}`;
 }
 
-function buildDescription(points, region, countryCode, rideType, mode, distanceKm) {
-  const names = points.slice(0, 4).map((p) => p.name).filter(Boolean);
-  const first = names[0] || "il punto di partenza";
-  const second = names[1] || null;
-  const third = names[2] || null;
-  const fourth = names[3] || null;
+// -------------------------------------------------------
+// DESCRIPTION ENGINE
+// -------------------------------------------------------
+
+function uniqueNames(points = [], max = 4) {
+  const out = [];
+  const seen = new Set();
+
+  for (const p of points || []) {
+    const n = String(p?.name || "").trim();
+    const k = normalizeText(n);
+    if (!n || seen.has(k)) continue;
+    seen.add(k);
+    out.push(n);
+    if (out.length >= max) break;
+  }
+
+  return out;
+}
+
+function formatKm(distanceKm) {
+  const km = Number(distanceKm || 0);
+  if (!Number.isFinite(km) || km <= 0) return "—";
+  return `${Math.round(km)} km`;
+}
+
+function modePhrase(mode) {
+  if (mode === "loop") return "in anello";
+  if (mode === "point_to_point") return "lineare tra due punti forti";
+  return "lineare e scorrevole";
+}
+
+function buildPointSentence(names) {
+  const [a, b, c, d] = names;
+
+  if (a && b && c && d) {
+    return `Tocca ${a}, ${b}, ${c} e ${d}, costruendo un percorso con riferimenti chiari e ben leggibili anche in sella.`;
+  }
+  if (a && b && c) {
+    return `Unisce ${a}, ${b} e ${c}, creando una sequenza coerente di punti rider e passaggi panoramici.`;
+  }
+  if (a && b) {
+    return `Collega ${a} e ${b} con una linea credibile per una guida motociclistica vera, senza deviazioni inutili.`;
+  }
+  if (a) {
+    return `Si sviluppa attorno a ${a}, usando la zona come riferimento principale del giro.`;
+  }
+  return `Si sviluppa su punti reali selezionati per dare continuità, senso geografico e piacere di guida.`;
+}
+
+function buildClosingSentence(rideType, distanceKm, mode, pointsCount) {
+  const kmText = formatKm(distanceKm);
+  const modeText = modePhrase(mode);
 
   if (rideType === "mountain") {
-    return [
-      `Un itinerario di montagna vero, pensato per chi cerca quota, curve e panorami forti nella zona ${region}.`,
-      `Si parte da ${first}${second ? ` e si sale verso ${second}` : ""}${third ? ` passando per ${third}` : ""}${fourth ? ` fino a ${fourth}` : ""}.`,
-      `Il risultato è un giro da circa ${distanceKm} km con carattere rider, ritmo variabile e tratti ideali per una guida piena e coinvolgente.`
-    ].join(" ");
+    return `Nel complesso è un itinerario ${modeText}, da circa ${kmText}, con quota, ritmo variabile e tratti capaci di premiare chi cerca curve, panorama e carattere.`;
   }
 
   if (rideType === "lake") {
-    return [
-      `Un giro lago panoramico e rider-oriented nella zona ${region}, costruito per valorizzare sponde, salite e punti vista davvero interessanti.`,
-      `L’itinerario unisce ${first}${second ? `, ${second}` : ""}${third ? ` e ${third}` : ""}${fourth ? ` fino a ${fourth}` : ""},`,
-      `per un percorso da circa ${distanceKm} km adatto a chi vuole guidare bene, vedere tanto e restare sempre dentro a un contesto credibile per la moto.`
-    ].join(" ");
+    return `Nel complesso è un itinerario ${modeText}, da circa ${kmText}, ideale per chi vuole alternare guida, vista aperta e passaggi eleganti lungo laghi e salite vicine.`;
   }
 
   if (rideType === "coastal") {
-    return [
-      `Un itinerario costiero pensato per la guida panoramica, tra mare, strade aperte e passaggi dal forte impatto visivo nella zona ${region}.`,
-      `Si sviluppa da ${first}${second ? ` verso ${second}` : ""}${third ? ` passando per ${third}` : ""}${fourth ? ` fino a ${fourth}` : ""},`,
-      `per circa ${distanceKm} km di guida scorrevole e fotografica, perfetta per una giornata di moto senza fretta ma con sostanza.`
-    ].join(" ");
+    return `Nel complesso è un itinerario ${modeText}, da circa ${kmText}, pensato per chi ama l’orizzonte aperto, il ritmo touring e la bellezza delle strade di costa.`;
   }
 
-  return [
-    `Un itinerario panoramico rider nella zona ${region}, costruito attorno a punti interessanti e strade che hanno senso da vivere in moto.`,
-    `Tocca ${first}${second ? `, ${second}` : ""}${third ? `, ${third}` : ""}${fourth ? ` e ${fourth}` : ""},`,
-    `per un totale di circa ${distanceKm} km con mix di guida, panorama e ritmo adatto a un uso touring intelligente.`
-  ].join(" ");
+  if (rideType === "forest") {
+    return `Nel complesso è un itinerario ${modeText}, da circa ${kmText}, con atmosfera più raccolta, buon respiro visivo e una guida piacevole tra verde e curve pulite.`;
+  }
+
+  if (rideType === "fjord") {
+    return `Nel complesso è un itinerario ${modeText}, da circa ${kmText}, con forte impatto paesaggistico e una progressione pensata per godersi acqua, rilievi e strada.`;
+  }
+
+  return `Nel complesso è un itinerario ${modeText}, da circa ${kmText}, con un equilibrio credibile tra guida, panorama e qualità generale del percorso.`;
+}
+
+function buildIntroSentence(region, rideType, countryCode) {
+  const regionText = region || countryCode || "questa zona";
+
+  if (rideType === "mountain") {
+    return `Un itinerario di montagna rider-oriented nella zona ${regionText}, pensato per chi cerca strada vera, quota e passaggi dal profilo deciso.`;
+  }
+
+  if (rideType === "lake") {
+    return `Un itinerario lago panoramico nella zona ${regionText}, costruito per valorizzare sponde, balconi naturali e collegamenti che hanno davvero senso in moto.`;
+  }
+
+  if (rideType === "coastal") {
+    return `Un itinerario costiero nella zona ${regionText}, pensato per sfruttare al meglio mare, strada aperta e punti visivi ad alto impatto.`;
+  }
+
+  if (rideType === "forest") {
+    return `Un itinerario immerso in una zona verde e rider-friendly, dove la qualità del percorso conta più del semplice trasferimento.`;
+  }
+
+  if (rideType === "fjord") {
+    return `Un itinerario panoramico d’acqua e rilievi nella zona ${regionText}, costruito per dare continuità a una guida suggestiva e ben leggibile.`;
+  }
+
+  return `Un itinerario panoramico rider nella zona ${regionText}, costruito attorno a strade e punti che possono davvero generare un giro credibile.`;
+}
+
+function buildDescription(points, region, countryCode, rideType, mode, distanceKm) {
+  const names = uniqueNames(points, 4);
+  const intro = buildIntroSentence(region, rideType, countryCode);
+  const middle = buildPointSentence(names);
+  const closing = buildClosingSentence(rideType, distanceKm, mode, points?.length || 0);
+
+  return `${intro} ${middle} ${closing}`;
 }
 
 async function getOsrmRoute(points) {
