@@ -27,6 +27,14 @@ const OUT_PATH = path.resolve(
   `client/public/data/rider-spots.cleaned.${scopeSuffix}.json`
 );
 
+const lakeScopes = new Set(["como", "garda", "maggiore"]);
+const scopeLower = String(scope || "").toLowerCase();
+const scopeNameLower = String(scopeCfg?.scopeName || "").toLowerCase();
+const isLakeScope =
+  lakeScopes.has(scopeLower) ||
+  /\blago\b|\blake\b/.test(scopeNameLower) ||
+  /\bcomo\b|\bgarda\b|\bmaggiore\b/.test(scopeNameLower);
+
 function slugify(str = "") {
   return String(str)
     .toLowerCase()
@@ -161,18 +169,53 @@ function buildScopeMatchers(scopeCfg, countryCode) {
     "barbagia",
     "nebrodi",
     "madonie",
+    "lago di como",
+    "lake como",
+    "como",
+    "bellagio",
+    "menaggio",
+    "varenna",
+    "lecco",
+    "lago maggiore",
+    "lake maggiore",
+    "maggiore",
+    "stresa",
+    "verbania",
+    "arona",
+    "lago di garda",
+    "lake garda",
+    "garda",
+    "riva del garda",
+    "limone sul garda",
+    "malcesine",
+    "gardone",
+    "salò",
+    "salo",
   ].map(normalizeText);
 
   const nwTerms = [
     "lago di como",
     "lake como",
     "como",
+    "bellagio",
+    "menaggio",
+    "varenna",
+    "lecco",
     "lago maggiore",
     "lake maggiore",
     "maggiore",
+    "stresa",
+    "verbania",
+    "arona",
     "lago di garda",
     "lake garda",
     "garda",
+    "riva del garda",
+    "limone sul garda",
+    "malcesine",
+    "gardone",
+    "salo",
+    "salò",
     "bormio",
     "livigno",
     "tirano",
@@ -273,6 +316,9 @@ function buildScopeMatchers(scopeCfg, countryCode) {
     else if (scope === "italy-south") extraCountryTerms = southTerms;
     else if (scope === "sicily") extraCountryTerms = sicilyTerms;
     else if (scope === "sardinia") extraCountryTerms = sardiniaTerms;
+    else if (scope === "como") extraCountryTerms = ["lago di como", "lake como", "como", "bellagio", "menaggio", "varenna", "lecco"].map(normalizeText);
+    else if (scope === "maggiore") extraCountryTerms = ["lago maggiore", "lake maggiore", "maggiore", "stresa", "verbania", "arona"].map(normalizeText);
+    else if (scope === "garda") extraCountryTerms = ["lago di garda", "lake garda", "garda", "riva del garda", "limone sul garda", "malcesine", "gardone", "salo", "salò"].map(normalizeText);
   }
 
   const foreignTerms = [
@@ -363,19 +409,18 @@ function isSpotAllowedForItalianScope(spot, matchers) {
 
   if (hasItalianSignal) return true;
 
-  // fallback geografico: se non ho un segnale testuale chiaro,
-  // tengo solo spot molto vicini al cuore di almeno una area dello scope
   const lat = toNum(spot.lat);
   const lng = toNum(spot.lng);
   if (lat == null || lng == null) return false;
 
   const nearCoreArea = (scopeCfg?.areas || []).some((area) => {
     const dist = haversineKm(lat, lng, area.lat, area.lng);
-    return dist <= Math.min(area.radius / 1000, 42);
+    return dist <= Math.min(area.radius / 1000, isLakeScope ? 55 : 42);
   });
 
   return nearCoreArea;
 }
+
 function isMatchingCountry(spot, countryCode) {
   const explicit = String(spot.country || "").toUpperCase();
   if (explicit && explicit === countryCode) return true;
@@ -395,6 +440,11 @@ function isMatchingCountry(spot, countryCode) {
       text.includes("amalfitana") ||
       text.includes("garda") ||
       text.includes("como") ||
+      text.includes("maggiore") ||
+      text.includes("bellagio") ||
+      text.includes("menaggio") ||
+      text.includes("varenna") ||
+      text.includes("lecco") ||
       text.includes("stelvio") ||
       text.includes("gavia") ||
       text.includes("spluga") ||
@@ -420,7 +470,7 @@ function withinScopeRadius(spot, areas) {
 
   return areas.some((area) => {
     const dist = haversineKm(lat, lng, area.lat, area.lng);
-    return dist <= area.radius / 1000 + 18;
+    return dist <= area.radius / 1000 + (isLakeScope ? 28 : 18);
   });
 }
 
@@ -460,6 +510,17 @@ function hasPassSignal(name = "", address = "", rawTypes = [], spot = {}) {
     "lago di garda",
     "lago di como",
     "lago maggiore",
+    "lake como",
+    "lake garda",
+    "lake maggiore",
+    "como",
+    "bellagio",
+    "menaggio",
+    "varenna",
+    "lecco",
+    "stresa",
+    "verbania",
+    "arona",
     "twisty",
   ];
 
@@ -608,7 +669,7 @@ function isTouristOnlySpot(spot) {
   const address = normalizeText(spot.address || "");
   const types = rawTypesOf(spot);
 
-  if (isWeakGenericName(name)) return true;
+  if (!isLakeScope && isWeakGenericName(name)) return true;
 
   const weakSpotWords = [
     "viewpoint",
@@ -636,14 +697,27 @@ function isTouristOnlySpot(spot) {
     "mendola",
     "tonale",
     "san marco",
+    "lago",
+    "lake",
+    "como",
+    "garda",
+    "maggiore",
+    "bellagio",
+    "menaggio",
+    "varenna",
+    "lecco",
+    "stresa",
+    "verbania",
+    "arona",
   ];
 
   const hasWeak = weakSpotWords.some((w) => name.includes(w) || address.includes(w));
   const hasStrong = strongRoadWords.some((w) => name.includes(w) || address.includes(w));
 
-  if (hasWeak && !hasStrong) return true;
+  if (!isLakeScope && hasWeak && !hasStrong) return true;
 
   if (
+    !isLakeScope &&
     types.includes("tourist_attraction") &&
     !types.includes("route") &&
     !types.includes("road") &&
@@ -708,7 +782,14 @@ function inferSpotType(spot) {
     return "coastal_view";
   }
 
-  if (text.includes("lake") || text.includes("lago") || tags.includes("lake")) {
+  if (
+    text.includes("lake") ||
+    text.includes("lago") ||
+    text.includes("como") ||
+    text.includes("garda") ||
+    text.includes("maggiore") ||
+    tags.includes("lake")
+  ) {
     return "lake_view";
   }
 
@@ -734,13 +815,15 @@ function inferSpotType(spot) {
     types.includes("road") ||
     text.includes("road") ||
     text.includes("strada") ||
-    text.includes("panoramic")
+    text.includes("panoramic") ||
+    text.includes("scenic")
   ) {
     return "scenic_road";
   }
 
   return spot.type || "scenic_road";
 }
+
 function inferRideType(spot) {
   const type = inferSpotType(spot);
   const tags = (spot.tags || []).map(norm);
@@ -786,11 +869,21 @@ function buildScore(spot) {
   if (text.includes("coast")) score += 10;
   if (text.includes("lake")) score += 6;
   if (text.includes("lago")) score += 6;
+  if (text.includes("como")) score += 10;
+  if (text.includes("garda")) score += 10;
+  if (text.includes("maggiore")) score += 10;
+  if (text.includes("bellagio")) score += 8;
+  if (text.includes("menaggio")) score += 8;
+  if (text.includes("varenna")) score += 8;
+  if (text.includes("lecco")) score += 8;
+  if (text.includes("stresa")) score += 8;
+  if (text.includes("verbania")) score += 8;
+  if (text.includes("arona")) score += 8;
   if (text.includes("strada")) score += 8;
   if (text.includes("road")) score += 8;
 
-  if (isWeakGenericName(spot.name || "")) score -= 30;
-  if (isTouristOnlySpot(spot)) score -= 25;
+  if (!isLakeScope && isWeakGenericName(spot.name || "")) score -= 30;
+  if (!isLakeScope && isTouristOnlySpot(spot)) score -= 25;
 
   const rating = Number(spot.rating || 0);
   const userRatingCount = Number(spot.userRatingCount || 0);
@@ -810,9 +903,11 @@ function buildScore(spot) {
   const tags = (spot.tags || []).map(norm);
   if (tags.includes("mountain")) score += 10;
   if (tags.includes("coast")) score += 6;
-  if (tags.includes("lake")) score += 6;
+  if (tags.includes("lake")) score += 10;
   if (tags.includes("forest")) score += 5;
   if (tags.includes("twisty")) score += 8;
+
+  if (isLakeScope) score += 25;
 
   return Math.min(score, 100);
 }
@@ -846,7 +941,7 @@ function dedupe(spots) {
         String(s.googlePlaceId) === String(ex.googlePlaceId);
 
       const close =
-        haversineKm(Number(s.lat), Number(s.lng), Number(ex.lat), Number(ex.lng)) <= 8;
+        haversineKm(Number(s.lat), Number(s.lng), Number(ex.lat), Number(ex.lng)) <= (isLakeScope ? 10 : 8);
 
       const sameName = sKey && sKey === canonicalNameKey(ex.name);
 
@@ -927,12 +1022,32 @@ async function main() {
     withinScopeRadius(spot, scopeCfg.areas)
   );
 
-  const passSignalFiltered = scopeRadiusFiltered.filter((spot) =>
-    hasPassSignal(spot.name, spot.address, rawTypesOf(spot), spot)
-  );
+  const passSignalFiltered = scopeRadiusFiltered.filter((spot) => {
+    if (isLakeScope) return true;
+    return hasPassSignal(spot.name, spot.address, rawTypesOf(spot), spot);
+  });
 
-  const noBadWordFiltered = passSignalFiltered.filter((spot) => !hasBadWord(textOf(spot)));
-  const noBadTypeFiltered = noBadWordFiltered.filter((spot) => !hasBadRawType(rawTypesOf(spot)));
+  const noBadWordFiltered = passSignalFiltered.filter((spot) => {
+    if (isLakeScope) {
+      const txt = textOf(spot);
+      const hasRoadLakeSignal =
+        /\blago\b|\blake\b|\bcomo\b|\bgarda\b|\bmaggiore\b|\bbellagio\b|\bmenaggio\b|\bvarenna\b|\blecco\b|\bstresa\b|\bverbania\b|\barona\b|\bstrada\b|\broad\b/.test(
+          normalizeText(txt)
+        );
+      if (hasRoadLakeSignal) return true;
+    }
+    return !hasBadWord(textOf(spot));
+  });
+
+  const noBadTypeFiltered = noBadWordFiltered.filter((spot) => {
+    if (isLakeScope) {
+      const rawTypes = rawTypesOf(spot);
+      const softAllowed = ["natural_feature", "tourist_attraction", "point_of_interest", "route", "road"];
+      if (rawTypes.some((t) => softAllowed.includes(t))) return true;
+    }
+    return !hasBadRawType(rawTypesOf(spot));
+  });
+
   const noTouristOnlyFiltered = noBadTypeFiltered.filter((spot) => !isTouristOnlySpot(spot));
 
   const scopeCountryStrictFiltered = noTouristOnlyFiltered.filter((spot) => {
@@ -941,6 +1056,8 @@ async function main() {
     }
     return true;
   });
+
+  const minScore = isLakeScope ? 24 : 38;
 
   const filtered = scopeCountryStrictFiltered
     .map((spot, index) => {
@@ -976,6 +1093,7 @@ async function main() {
             [
               ...(spot.tags || []),
               "rider-spot",
+              isLakeScope ? "lake-scope" : null,
               type === "mountain_pass" ? "mountain-pass" : null,
             ].filter(Boolean)
           )
@@ -988,7 +1106,7 @@ async function main() {
       normalized.riderScore = buildScore(normalized);
       return normalized;
     })
-    .filter((spot) => spot.riderScore >= 38);
+    .filter((spot) => spot.riderScore >= minScore);
 
   const unique = dedupe(filtered).sort((a, b) => {
     if ((b.riderScore || 0) !== (a.riderScore || 0)) {

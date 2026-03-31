@@ -1,19 +1,19 @@
 {
-  "inputTotal": 62,
-  "preliminaryKeep": 62,
+  "inputTotal": 50,
+  "preliminaryKeep": 50,
   "discarded": 0,
   "review": 0,
-  "dedupeRemoved": 24,
-  "finalRoutes": 38,
+  "dedupeRemoved": 9,
+  "finalRoutes": 41,
   "reasonBreakdown": {
-    "real_route": 62
+    "real_route": 50
   },
-  "finalHeroRoutes": 15,
-  "finalLongRoutes120Plus": 25,
+  "finalHeroRoutes": 14,
+  "finalLongRoutes120Plus": 27,
   "finalRegions": {
     "Toscana / Emilia-Romagna / Appennino": 2,
     "Dolomiti": 8,
-    "Lago di Garda": 3,
+    "Lago di Garda": 2,
     "Lombardia / Alpi": 1,
     "Sicilia": 1,
     "Valle d'Aosta / Alpi": 3,
@@ -23,6 +23,7 @@
     "Centro Italia": 3,
     "Sud Italia": 2,
     "Piemonte / Alpi": 3,
+    "Lago di Como": 4,
     "Trentino / Veneto / Friuli": 3,
     "Lago Maggiore": 1,
     "Lake Iseo": 1,
@@ -30,14 +31,14 @@
   },
   "finalByRouteFamily": {
     "mountain": 25,
-    "lake": 7,
+    "lake": 10,
     "coastal": 6
   },
   "sourceQualityBreakdown": {
-    "high": 29,
-    "medium": 9
+    "high": 31,
+    "medium": 10
   },
   "italianConfidenceBreakdown": {
-    "high": 38
+    "high": 41
   }
 }

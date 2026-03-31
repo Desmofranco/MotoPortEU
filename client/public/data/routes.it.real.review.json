@@ -1,194 +1,74 @@
 [
   {
     "type": "dedupe_removed",
-    "removedName": "Giro Panoramico Lago di Como: Passo Pertüs 1307m → Dordona viewpoint",
-    "keptName": "Giro Panoramico Lago di Como: Dordona viewpoint → Sacrario di Agueglio",
-    "removedDistanceKm": 74.4,
-    "keptDistanceKm": 87.9,
+    "removedName": "Giro Panoramico Lago di Como: Centro Porsche Como → Panoramic Hiking Tours → Viewpoint - Clivio Centro → Torriggia - Via Panoramica 24",
+    "keptName": "Giro Panoramico Lago di Como: Dordona viewpoint → Bema Strada Panoramica",
+    "removedDistanceKm": 53.3,
+    "keptDistanceKm": 76.6,
     "reason": "duplicate_route"
   },
   {
     "type": "dedupe_removed",
-    "removedName": "Giro Panoramico Lago di Como: Passo Pertüs 1307m → Sacrario di Agueglio",
-    "keptName": "Giro Panoramico Lago di Como: Dordona viewpoint → Sacrario di Agueglio",
-    "removedDistanceKm": 80.2,
-    "keptDistanceKm": 87.9,
+    "removedName": "Giro Panoramico Lago di Como: Dordona viewpoint → Bema Strada Panoramica",
+    "keptName": "Giro Panoramico Lago di Como: Dordona viewpoint → Bema Strada Panoramica → Scenic Point Cino",
+    "removedDistanceKm": 76.6,
+    "keptDistanceKm": 98.2,
     "reason": "duplicate_route"
   },
   {
     "type": "dedupe_removed",
-    "removedName": "Giro Panoramico Lago di Como: Dordona viewpoint → Sacrario di Agueglio",
-    "keptName": "Giro Panoramico Lago di Como: Passo Pertüs 1307m → Sacrario di Agueglio → Dordona viewpoint",
-    "removedDistanceKm": 87.9,
-    "keptDistanceKm": 181.7,
+    "removedName": "Giro Panoramico Lago di Como: Dordona viewpoint → Bema Strada Panoramica → Scenic Point Cino",
+    "keptName": "Giro Panoramico Lago di Como: Dordona viewpoint → Bema Strada Panoramica → Scenic Point Cino → Morterone Panoramic Point / Panchina dell'amore",
+    "removedDistanceKm": 98.2,
+    "keptDistanceKm": 158.1,
     "reason": "duplicate_route"
   },
   {
     "type": "dedupe_removed",
-    "removedName": "Giro Panoramico Lago di Garda: Passo Campiano → Strada della Forra → Strada della Forra • punto di partenza",
-    "keptName": "Giro Panoramico Lago di Garda: Passo Campiano → Strada della Forra → Strada della Forra • punto di partenza → Entry to Strada della Forra",
-    "removedDistanceKm": 57.6,
-    "keptDistanceKm": 60.8,
+    "removedName": "Giro Panoramico Lago di Como: Dordona viewpoint → Scenic Point Cino",
+    "keptName": "Giro Panoramico Lago di Como: Dordona viewpoint → Bema Strada Panoramica → Scenic Point Cino → Morterone Panoramic Point / Panchina dell'amore",
+    "removedDistanceKm": 85.7,
+    "keptDistanceKm": 158.1,
     "reason": "duplicate_route"
   },
   {
     "type": "dedupe_removed",
-    "removedName": "Giro Panoramico Lago di Garda: Passo d'Ámpola → Entry to Strada della Forra",
-    "keptName": "Giro Panoramico Lago di Garda: Passo Campiano → Strada della Forra → Strada della Forra • punto di partenza → Entry to Strada della Forra",
-    "removedDistanceKm": 48.1,
-    "keptDistanceKm": 60.8,
+    "removedName": "Giro Panoramico Lago di Como: Panoramic Point Sentiero del Viandante → Belvedere Macallè → Sacrario di Agueglio",
+    "keptName": "Giro Panoramico Lago di Como: Panoramic Point Sentiero del Viandante → Belvedere Macallè → Sacrario di Agueglio → Località Cendraro Lago Viewpoint",
+    "removedDistanceKm": 88,
+    "keptDistanceKm": 119.4,
     "reason": "duplicate_route"
   },
   {
     "type": "dedupe_removed",
-    "removedName": "Giro Panoramico Lago di Garda: Passo Campiano → Strada della Forra → Strada della Forra • punto di partenza → Entry to Strada della Forra",
-    "keptName": "Giro Panoramico Lago di Garda: Passo d'Ámpola → Entry to Strada della Forra → Strada della Forra",
-    "removedDistanceKm": 60.8,
-    "keptDistanceKm": 63.6,
+    "removedName": "Giro Panoramico Lago di Como: Passo Pertüs 1307m → Morterone Panoramic Point / Panchina dell'amore",
+    "keptName": "Giro Panoramico Lago di Como: Dordona viewpoint → Bema Strada Panoramica → Scenic Point Cino → Morterone Panoramic Point / Panchina dell'amore",
+    "removedDistanceKm": 54.8,
+    "keptDistanceKm": 158.1,
     "reason": "duplicate_route"
   },
   {
     "type": "dedupe_removed",
-    "removedName": "Giro Panoramico Lago di Garda: Passo d'Ámpola → Entry to Strada della Forra → Strada della Forra",
-    "keptName": "Giro Panoramico Lago di Garda: Passo d'Ámpola → Entry to Strada della Forra → Strada della Forra → Strada della Forra • punto di partenza",
-    "removedDistanceKm": 63.6,
-    "keptDistanceKm": 82.2,
+    "removedName": "Giro Panoramico Lago di Como: Passo Pertüs 1307m → Monte Pesora",
+    "keptName": "Giro Panoramico Lago di Como: Passo Pertüs 1307m → Morterone Panoramic Point / Panchina dell'amore → Monte Pesora",
+    "removedDistanceKm": 57.7,
+    "keptDistanceKm": 85.2,
     "reason": "duplicate_route"
   },
   {
     "type": "dedupe_removed",
-    "removedName": "Giro Panoramico Lago di Garda: Passo d'Ámpola → Entry to Strada della Forra → Strada della Forra → Strada della Forra • punto di partenza",
-    "keptName": "Giro Panoramico Lago di Garda: Passo della Croce → Passo d'Ámpola → Sosta Panoramica",
-    "removedDistanceKm": 82.2,
-    "keptDistanceKm": 94.2,
+    "removedName": "Giro Panoramico Lago di Como: Panoramic Point Sentiero del Viandante → Belvedere Macallè → Sacrario di Agueglio → Località Cendraro Lago Viewpoint",
+    "keptName": "Giro Panoramico Lago di Como: Passo Pertüs 1307m → Morterone Panoramic Point / Panchina dell'amore → Monte Pesora → CazzieMarc Viewpoint bergamo",
+    "removedDistanceKm": 119.4,
+    "keptDistanceKm": 137.1,
     "reason": "duplicate_route"
   },
   {
     "type": "dedupe_removed",
-    "removedName": "Giro Panoramico Lago di Garda: Passo della Croce → Passo d'Ámpola → Sosta Panoramica",
-    "keptName": "Giro Panoramico Lago di Garda: Passo della Croce → Passo d'Ámpola → Sosta Panoramica → Strada panoramica",
-    "removedDistanceKm": 94.2,
-    "keptDistanceKm": 198.2,
-    "reason": "duplicate_route"
-  },
-  {
-    "type": "dedupe_removed",
-    "removedName": "Giro Panoramico Lago di Garda: Passo della Croce → Sosta Panoramica",
-    "keptName": "Giro Panoramico Lago di Garda: Passo della Croce → Passo d'Ámpola → Sosta Panoramica → Strada panoramica",
-    "removedDistanceKm": 53.9,
-    "keptDistanceKm": 198.2,
-    "reason": "duplicate_route"
-  },
-  {
-    "type": "dedupe_removed",
-    "removedName": "Giro Panoramico Liguria: Passo del Prale → Base O",
-    "keptName": "Giro Panoramico Liguria: Passo del Prale → Cima Monte Bignone, punto panoramico → Base O",
-    "removedDistanceKm": 153.5,
-    "keptDistanceKm": 288.1,
-    "reason": "duplicate_route"
-  },
-  {
-    "type": "dedupe_removed",
-    "removedName": "Giro Lago Lago di Garda: Lago di Valvestino → Panoramica",
-    "keptName": "Giro Panoramico Lago di Garda: Passo della Croce → Passo d'Ámpola → Sosta Panoramica → Strada panoramica",
-    "removedDistanceKm": 93.8,
-    "keptDistanceKm": 198.2,
-    "reason": "duplicate_route"
-  },
-  {
-    "type": "dedupe_removed",
-    "removedName": "Giro Lago Lago di Garda: Lago di Valvestino → Salò Panorama Lago → Panoramica",
+    "removedName": "Giro Panoramico Lago di Garda: Passo Campiano → Strada della Forra → Banchina Panoramica da Riva del Garda a Limone del Garda",
     "keptName": "Giro Panoramico Lago di Garda: Passo Campiano → Strada della Forra → Banchina Panoramica da Riva del Garda a Limone del Garda → Strada Panoramica",
-    "removedDistanceKm": 95.3,
+    "removedDistanceKm": 57.6,
     "keptDistanceKm": 97.2,
-    "reason": "duplicate_route"
-  },
-  {
-    "type": "dedupe_removed",
-    "removedName": "Giro Panoramico Lago di Garda: Passo d'Ámpola → Strada della Forra → Banchina Panoramica da Riva del Garda a Limone del Garda",
-    "keptName": "Giro Panoramico Lago di Garda: Passo della Croce → Passo d'Ámpola → Sosta Panoramica → Strada panoramica",
-    "removedDistanceKm": 61.3,
-    "keptDistanceKm": 198.2,
-    "reason": "duplicate_route"
-  },
-  {
-    "type": "dedupe_removed",
-    "removedName": "Giro Panoramico Lago di Garda: Passo d'Ámpola → Strada della Forra → Banchina Panoramica da Riva del Garda a Limone del Garda → Sosta Panoramica",
-    "keptName": "Giro Panoramico Lago di Garda: Passo della Croce → Passo d'Ámpola → Sosta Panoramica → Strada panoramica",
-    "removedDistanceKm": 82.1,
-    "keptDistanceKm": 198.2,
-    "reason": "duplicate_route"
-  },
-  {
-    "type": "dedupe_removed",
-    "removedName": "Giro Panoramico Lago di Garda: Passo della Croce → Passo d'Ámpola → Sosta Panoramica",
-    "keptName": "Giro Panoramico Lago di Garda: Passo della Croce → Passo d'Ámpola → Sosta Panoramica → Strada panoramica",
-    "removedDistanceKm": 94.2,
-    "keptDistanceKm": 198.2,
-    "reason": "duplicate_route"
-  },
-  {
-    "type": "dedupe_removed",
-    "removedName": "Giro Panoramico Lago di Garda: Passo della Croce → Passo d'Ámpola → Sosta Panoramica → Strada panoramica",
-    "keptName": "Giro Panoramico Lago di Garda: Passo della Croce → Passo d'Ámpola → Sosta Panoramica → Strada panoramica",
-    "removedDistanceKm": 198.2,
-    "keptDistanceKm": 198.2,
-    "reason": "duplicate_route"
-  },
-  {
-    "type": "dedupe_removed",
-    "removedName": "Giro Panoramico Lago di Garda: Passo della Croce → Sosta Panoramica",
-    "keptName": "Giro Panoramico Lago di Garda: Passo della Croce → Passo d'Ámpola → Sosta Panoramica → Strada panoramica",
-    "removedDistanceKm": 53.9,
-    "keptDistanceKm": 198.2,
-    "reason": "duplicate_route"
-  },
-  {
-    "type": "dedupe_removed",
-    "removedName": "Giro Panoramico Lago di Garda: Strada della Forra → Passo Campiano",
-    "keptName": "Giro Panoramico Lago di Garda: Passo della Croce → Passo d'Ámpola → Sosta Panoramica → Strada panoramica",
-    "removedDistanceKm": 45.2,
-    "keptDistanceKm": 198.2,
-    "reason": "duplicate_route"
-  },
-  {
-    "type": "dedupe_removed",
-    "removedName": "Giro Panoramico Lago di Garda: Strada della Forra → Passo Campiano → Banchina Panoramica da Riva del Garda a Limone del Garda → Sosta Panoramica",
-    "keptName": "Giro Panoramico Lago di Garda: Passo della Croce → Passo d'Ámpola → Sosta Panoramica → Strada panoramica",
-    "removedDistanceKm": 91,
-    "keptDistanceKm": 198.2,
-    "reason": "duplicate_route"
-  },
-  {
-    "type": "dedupe_removed",
-    "removedName": "Giro Panoramico Lago Maggiore: Passo Folungo → La Conca Dei Rododendri",
-    "keptName": "Giro Panoramico Lago Maggiore: Passo Folungo → Monte Faiè → La Conca Dei Rododendri",
-    "removedDistanceKm": 107,
-    "keptDistanceKm": 122,
-    "reason": "duplicate_route"
-  },
-  {
-    "type": "dedupe_removed",
-    "removedName": "Giro Panoramico Lago di Garda: Passo della Croce → Passo d'Ámpola → Sosta Panoramica → Strada della Forra",
-    "keptName": "Giro Panoramico Lago di Garda: Passo della Croce → Passo d'Ámpola → Sosta Panoramica → Strada panoramica",
-    "removedDistanceKm": 105.3,
-    "keptDistanceKm": 198.2,
-    "reason": "duplicate_route"
-  },
-  {
-    "type": "dedupe_removed",
-    "removedName": "Giro Panoramico Alpi: Passo del Prale → Cima Monte Bignone, punto panoramico → Curva Panoramica → Passo Scolettas",
-    "keptName": "Giro Panoramico Liguria: Passo del Prale → Cima Monte Bignone, punto panoramico → Base O",
-    "removedDistanceKm": 254.6,
-    "keptDistanceKm": 288.1,
-    "reason": "duplicate_route"
-  },
-  {
-    "type": "dedupe_removed",
-    "removedName": "Giro Panoramico Lago di Como: Passo Pertüs 1307m → Sacrario di Agueglio → Dordona viewpoint",
-    "keptName": "Giro Panoramico Lago Maggiore: Passo Folungo → Sacrario di Agueglio",
-    "removedDistanceKm": 181.7,
-    "keptDistanceKm": 187.5,
     "reason": "duplicate_route"
   }
 ]

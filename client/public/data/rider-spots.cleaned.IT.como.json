@@ -1,5 +1,49 @@
 [
   {
+    "id": "spot-lake-como-scooter-rent-ChIJ42gj",
+    "sourceId": "spot-lake-como-scooter-rent-ChIJ42gj",
+    "googlePlaceId": null,
+    "name": "Lake Como Scooter Rent",
+    "slug": "lake-como-scooter-rent",
+    "type": "lake_view",
+    "rideType": "lake",
+    "country": "IT",
+    "scope": "como",
+    "scopeName": "Lago di Como",
+    "lat": 46.019639,
+    "lng": 9.238640199999999,
+    "region": null,
+    "regionHint": "Como",
+    "address": "Piazza Giuseppe Garibaldi, 10, 22017 Menaggio CO, Italy",
+    "rating": 4.9,
+    "userRatingCount": 675,
+    "rawTypes": [
+      "car_rental",
+      "service",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "car_rental",
+      "service",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "lake",
+      "scenic",
+      "rider",
+      "panoramic",
+      "rider-spot",
+      "lake-scope"
+    ],
+    "aliases": [
+      "Lake Como Scooter Rent"
+    ],
+    "riderScore": 100
+  },
+  {
     "id": "spot-passo-pertus-1307m-ChIJLVbB",
     "sourceId": "spot-passo-pertus-1307m-ChIJLVbB",
     "googlePlaceId": null,
@@ -35,31 +79,32 @@
       "mountain",
       "twisty",
       "rider-spot",
+      "lake-scope",
       "mountain-pass"
     ],
     "aliases": [
       "Passo Pertüs 1307m"
     ],
-    "riderScore": 80
+    "riderScore": 100
   },
   {
-    "id": "spot-dordona-viewpoint-ChIJ4wgQ",
-    "sourceId": "spot-dordona-viewpoint-ChIJ4wgQ",
+    "id": "spot-punto-panoramico-ChIJmyet",
+    "sourceId": "spot-punto-panoramico-ChIJmyet",
     "googlePlaceId": null,
-    "name": "Dordona viewpoint",
-    "slug": "dordona-viewpoint",
+    "name": "Punto Panoramico",
+    "slug": "punto-panoramico",
     "type": "mountain_pass",
     "rideType": "scenic",
     "country": "IT",
     "scope": "como",
     "scopeName": "Lago di Como",
-    "lat": 46.0566223,
-    "lng": 9.763301499999999,
+    "lat": 46.4409656,
+    "lng": 9.344439699999999,
     "region": null,
     "regionHint": "Colico / Alto Lario",
-    "address": "Str. del Passo Dordona, 24010 Fusine SO, Italy",
-    "rating": 0,
-    "userRatingCount": 0,
+    "address": "SS 36 del Lago di Como e dello Spluga, 138, 23024 Madesimo SO, Italy",
+    "rating": 4.7,
+    "userRatingCount": 110,
     "rawTypes": [
       "scenic_spot",
       "point_of_interest",
@@ -75,15 +120,277 @@
       "scenic",
       "panoramic",
       "rider",
-      "mountain",
-      "twisty",
+      "lake",
       "rider-spot",
+      "lake-scope",
       "mountain-pass"
     ],
     "aliases": [
-      "Dordona viewpoint"
+      "Punto Panoramico"
     ],
-    "riderScore": 55
+    "riderScore": 100
+  },
+  {
+    "id": "spot-punto-panoramico-localita-cimaganda-ChIJ258x",
+    "sourceId": "spot-punto-panoramico-localita-cimaganda-ChIJ258x",
+    "googlePlaceId": null,
+    "name": "Punto panoramico località Cimaganda",
+    "slug": "punto-panoramico-localita-cimaganda",
+    "type": "mountain_pass",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "como",
+    "scopeName": "Lago di Como",
+    "lat": 46.3699369,
+    "lng": 9.359226,
+    "region": null,
+    "regionHint": "Colico / Alto Lario",
+    "address": "SS 36 del Lago di Como e dello Spluga, 1, 23020 San Giacomo Filippo SO, Italy",
+    "rating": 4.9,
+    "userRatingCount": 21,
+    "rawTypes": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "lake",
+      "rider-spot",
+      "lake-scope",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Punto panoramico località Cimaganda"
+    ],
+    "riderScore": 100
+  },
+  {
+    "id": "spot-lake-como-viewpoint-ChIJ34CI",
+    "sourceId": "spot-lake-como-viewpoint-ChIJ34CI",
+    "googlePlaceId": null,
+    "name": "Lake Como viewpoint",
+    "slug": "lake-como-viewpoint",
+    "type": "mountain_pass",
+    "rideType": "lake",
+    "country": "IT",
+    "scope": "como",
+    "scopeName": "Lago di Como",
+    "lat": 46.0069507,
+    "lng": 9.2952356,
+    "region": null,
+    "regionHint": "Como",
+    "address": "SS 36 del Lago di Como e dello Spluga, 23828 Bellano LC, Italy",
+    "rating": 5,
+    "userRatingCount": 18,
+    "rawTypes": [
+      "observation_deck",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "observation_deck",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "lake",
+      "scenic",
+      "rider",
+      "panoramic",
+      "rider-spot",
+      "lake-scope",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Lake Como viewpoint"
+    ],
+    "riderScore": 98
+  },
+  {
+    "id": "spot-greenway-del-lago-di-como-ChIJ2Vf9",
+    "sourceId": "spot-greenway-del-lago-di-como-ChIJ2Vf9",
+    "googlePlaceId": null,
+    "name": "Greenway del Lago di Como",
+    "slug": "greenway-del-lago-di-como",
+    "type": "lake_view",
+    "rideType": "lake",
+    "country": "IT",
+    "scope": "como",
+    "scopeName": "Lago di Como",
+    "lat": 45.9560533,
+    "lng": 9.1502473,
+    "region": null,
+    "regionHint": "Como",
+    "address": "Via Luigi Civetta, 22010 Colonno CO, Italy",
+    "rating": 4.6,
+    "userRatingCount": 1947,
+    "rawTypes": [
+      "hiking_area",
+      "tourist_attraction",
+      "sports_activity_location",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "hiking_area",
+      "tourist_attraction",
+      "sports_activity_location",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "lake",
+      "scenic",
+      "rider",
+      "panoramic",
+      "rider-spot",
+      "lake-scope"
+    ],
+    "aliases": [
+      "Greenway del Lago di Como"
+    ],
+    "riderScore": 90
+  },
+  {
+    "id": "spot-lungolago-viale-geno-ChIJAQ9M",
+    "sourceId": "spot-lungolago-viale-geno-ChIJAQ9M",
+    "googlePlaceId": null,
+    "name": "Lungolago Viale Geno",
+    "slug": "lungolago-viale-geno",
+    "type": "lake_view",
+    "rideType": "lake",
+    "country": "IT",
+    "scope": "como",
+    "scopeName": "Lago di Como",
+    "lat": 45.8184624,
+    "lng": 9.0811453,
+    "region": null,
+    "regionHint": "Como",
+    "address": "Viale Geno, 22100 Como CO, Italy",
+    "rating": 4.5,
+    "userRatingCount": 1660,
+    "rawTypes": [
+      "hiking_area",
+      "tourist_attraction",
+      "sports_activity_location",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "hiking_area",
+      "tourist_attraction",
+      "sports_activity_location",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "lake",
+      "scenic",
+      "rider",
+      "panoramic",
+      "rider-spot",
+      "lake-scope"
+    ],
+    "aliases": [
+      "Lungolago Viale Geno"
+    ],
+    "riderScore": 90
+  },
+  {
+    "id": "spot-lago-di-lecco-vista-panoramica-sul-ramo-di-lecco-ChIJq2Sn",
+    "sourceId": "spot-lago-di-lecco-vista-panoramica-sul-ramo-di-lecco-ChIJq2Sn",
+    "googlePlaceId": null,
+    "name": "Lago di Lecco - Vista panoramica sul ramo di Lecco",
+    "slug": "lago-di-lecco-vista-panoramica-sul-ramo-di-lecco",
+    "type": "lake_view",
+    "rideType": "lake",
+    "country": "IT",
+    "scope": "como",
+    "scopeName": "Lago di Como",
+    "lat": 45.8992475,
+    "lng": 9.3059692,
+    "region": null,
+    "regionHint": "Como",
+    "address": "Via Milano, 30, 22039 Valbrona CO, Italy",
+    "rating": 4.8,
+    "userRatingCount": 228,
+    "rawTypes": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "lake",
+      "scenic",
+      "rider",
+      "panoramic",
+      "rider-spot",
+      "lake-scope"
+    ],
+    "aliases": [
+      "Lago di Lecco - Vista panoramica sul ramo di Lecco"
+    ],
+    "riderScore": 89
+  },
+  {
+    "id": "spot-panoramic-viewpoint-como-lake-north-ChIJbQ-m",
+    "sourceId": "spot-panoramic-viewpoint-como-lake-north-ChIJbQ-m",
+    "googlePlaceId": null,
+    "name": "Panoramic Viewpoint - Como Lake North",
+    "slug": "panoramic-viewpoint-como-lake-north",
+    "type": "lake_view",
+    "rideType": "lake",
+    "country": "IT",
+    "scope": "como",
+    "scopeName": "Lago di Como",
+    "lat": 46.0759628,
+    "lng": 9.2378913,
+    "region": null,
+    "regionHint": "Como",
+    "address": "Via ai Monti, 22010 San Siro CO, Italy",
+    "rating": 4.7,
+    "userRatingCount": 49,
+    "rawTypes": [
+      "tourist_attraction",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "tourist_attraction",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "lake",
+      "scenic",
+      "rider",
+      "panoramic",
+      "rider-spot",
+      "lake-scope"
+    ],
+    "aliases": [
+      "Panoramic Viewpoint - Como Lake North"
+    ],
+    "riderScore": 83
   },
   {
     "id": "spot-cernobbio-panoramica-sul-lago-ChIJuVJ6",
@@ -121,12 +428,583 @@
       "scenic",
       "rider",
       "panoramic",
-      "rider-spot"
+      "rider-spot",
+      "lake-scope"
     ],
     "aliases": [
       "Cernobbio panoramica sul lago"
     ],
-    "riderScore": 42
+    "riderScore": 81
+  },
+  {
+    "id": "spot-dordona-viewpoint-ChIJ4wgQ",
+    "sourceId": "spot-dordona-viewpoint-ChIJ4wgQ",
+    "googlePlaceId": null,
+    "name": "Dordona viewpoint",
+    "slug": "dordona-viewpoint",
+    "type": "mountain_pass",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "como",
+    "scopeName": "Lago di Como",
+    "lat": 46.0566223,
+    "lng": 9.763301499999999,
+    "region": null,
+    "regionHint": "Colico / Alto Lario",
+    "address": "Str. del Passo Dordona, 24010 Fusine SO, Italy",
+    "rating": 0,
+    "userRatingCount": 0,
+    "rawTypes": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "mountain",
+      "twisty",
+      "rider-spot",
+      "lake-scope",
+      "mountain-pass"
+    ],
+    "aliases": [
+      "Dordona viewpoint"
+    ],
+    "riderScore": 80
+  },
+  {
+    "id": "spot-lake-como-bike-ChIJoZLJ",
+    "sourceId": "spot-lake-como-bike-ChIJoZLJ",
+    "googlePlaceId": null,
+    "name": "Lake Como Bike",
+    "slug": "lake-como-bike",
+    "type": "lake_view",
+    "rideType": "lake",
+    "country": "IT",
+    "scope": "como",
+    "scopeName": "Lago di Como",
+    "lat": 45.857872099999994,
+    "lng": 9.38508,
+    "region": null,
+    "regionHint": "Como",
+    "address": "Lungolario Luigi Cadorna, 4, 23900 Lecco LC, Italy",
+    "rating": 4.6,
+    "userRatingCount": 53,
+    "rawTypes": [
+      "bicycle_store",
+      "sporting_goods_store",
+      "store",
+      "service",
+      "manufacturer",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "bicycle_store",
+      "sporting_goods_store",
+      "store",
+      "service",
+      "manufacturer",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "lake",
+      "scenic",
+      "rider",
+      "panoramic",
+      "rider-spot",
+      "lake-scope"
+    ],
+    "aliases": [
+      "Lake Como Bike"
+    ],
+    "riderScore": 76
+  },
+  {
+    "id": "spot-punto-panoramico-lago-maggiore-ChIJtbCs",
+    "sourceId": "spot-punto-panoramico-lago-maggiore-ChIJtbCs",
+    "googlePlaceId": null,
+    "name": "Punto panoramico Lago Maggiore",
+    "slug": "punto-panoramico-lago-maggiore",
+    "type": "lake_view",
+    "rideType": "lake",
+    "country": "IT",
+    "scope": "como",
+    "scopeName": "Lago di Como",
+    "lat": 45.7862636,
+    "lng": 8.573050799999999,
+    "region": null,
+    "regionHint": "Como",
+    "address": "21021 Angera, VA, Italy",
+    "rating": 4.7,
+    "userRatingCount": 3,
+    "rawTypes": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "lake",
+      "scenic",
+      "rider",
+      "panoramic",
+      "rider-spot",
+      "lake-scope"
+    ],
+    "aliases": [
+      "Punto panoramico Lago Maggiore"
+    ],
+    "riderScore": 76
+  },
+  {
+    "id": "spot-punto-panoramico-ChIJd7RG",
+    "sourceId": "spot-punto-panoramico-ChIJd7RG",
+    "googlePlaceId": null,
+    "name": "Punto Panoramico",
+    "slug": "punto-panoramico",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "como",
+    "scopeName": "Lago di Como",
+    "lat": 45.825846,
+    "lng": 9.0964805,
+    "region": null,
+    "regionHint": "Como",
+    "address": "Via Pissarottino, 28, 22034 Brunate CO, Italy",
+    "rating": 4.7,
+    "userRatingCount": 616,
+    "rawTypes": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "rider-spot",
+      "lake-scope"
+    ],
+    "aliases": [
+      "Punto Panoramico"
+    ],
+    "riderScore": 75
+  },
+  {
+    "id": "spot-lake-como-cycling-ChIJ0zRE",
+    "sourceId": "spot-lake-como-cycling-ChIJ0zRE",
+    "googlePlaceId": null,
+    "name": "Lake Como Cycling",
+    "slug": "lake-como-cycling",
+    "type": "lake_view",
+    "rideType": "lake",
+    "country": "IT",
+    "scope": "como",
+    "scopeName": "Lago di Como",
+    "lat": 45.8409638,
+    "lng": 9.0513817,
+    "region": null,
+    "regionHint": "Como",
+    "address": "Via Folla, 2/A, 22026 Maslianico CO, Italy",
+    "rating": 4.8,
+    "userRatingCount": 73,
+    "rawTypes": [
+      "service",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "service",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "lake",
+      "scenic",
+      "rider",
+      "panoramic",
+      "rider-spot",
+      "lake-scope"
+    ],
+    "aliases": [
+      "Lake Como Cycling"
+    ],
+    "riderScore": 73
+  },
+  {
+    "id": "spot-lakecomomotorbike-ChIJswxA",
+    "sourceId": "spot-lakecomomotorbike-ChIJswxA",
+    "googlePlaceId": null,
+    "name": "LakeComoMotorbike",
+    "slug": "lakecomomotorbike",
+    "type": "lake_view",
+    "rideType": "lake",
+    "country": "IT",
+    "scope": "como",
+    "scopeName": "Lago di Como",
+    "lat": 45.8150592,
+    "lng": 9.0638027,
+    "region": null,
+    "regionHint": "Como",
+    "address": "Via Nino Bixio, 17, 22100 Como CO, Italy",
+    "rating": 5,
+    "userRatingCount": 24,
+    "rawTypes": [
+      "service",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "service",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "lake",
+      "scenic",
+      "rider",
+      "panoramic",
+      "rider-spot",
+      "lake-scope"
+    ],
+    "aliases": [
+      "LakeComoMotorbike"
+    ],
+    "riderScore": 73
+  },
+  {
+    "id": "spot-panoramic-point-sentiero-del-viandante-ChIJjeoL",
+    "sourceId": "spot-panoramic-point-sentiero-del-viandante-ChIJjeoL",
+    "googlePlaceId": null,
+    "name": "Panoramic Point Sentiero del Viandante",
+    "slug": "panoramic-point-sentiero-del-viandante",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "como",
+    "scopeName": "Lago di Como",
+    "lat": 45.9722589,
+    "lng": 9.3130478,
+    "region": null,
+    "regionHint": "Como",
+    "address": "X8G7+PJ, 23827 Varenna, Province of Lecco, Italy",
+    "rating": 4.8,
+    "userRatingCount": 24,
+    "rawTypes": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "rider-spot",
+      "lake-scope"
+    ],
+    "aliases": [
+      "Panoramic Point Sentiero del Viandante"
+    ],
+    "riderScore": 71
+  },
+  {
+    "id": "spot-centro-porsche-como-ChIJjd-k",
+    "sourceId": "spot-centro-porsche-como-ChIJjd-k",
+    "googlePlaceId": null,
+    "name": "Centro Porsche Como",
+    "slug": "centro-porsche-como",
+    "type": "lake_view",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "como",
+    "scopeName": "Lago di Como",
+    "lat": 45.7632701,
+    "lng": 9.0550167,
+    "region": null,
+    "regionHint": "Como",
+    "address": "Via Strada Statale dei Giovi, 54, 22070 Grandate CO, Italy",
+    "rating": 4.5,
+    "userRatingCount": 262,
+    "rawTypes": [
+      "car_dealer",
+      "store",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "car_dealer",
+      "store",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "rider-spot",
+      "lake-scope"
+    ],
+    "aliases": [
+      "Centro Porsche Como"
+    ],
+    "riderScore": 70
+  },
+  {
+    "id": "spot-lakebikecomo-ChIJjY7q",
+    "sourceId": "spot-lakebikecomo-ChIJjY7q",
+    "googlePlaceId": null,
+    "name": "LakeBikeComo",
+    "slug": "lakebikecomo",
+    "type": "lake_view",
+    "rideType": "lake",
+    "country": "IT",
+    "scope": "como",
+    "scopeName": "Lago di Como",
+    "lat": 45.8125341,
+    "lng": 9.0704576,
+    "region": null,
+    "regionHint": "Como",
+    "address": "Viale Fratelli Rosselli, 24B, 22100 Como CO, Italy",
+    "rating": 4.6,
+    "userRatingCount": 84,
+    "rawTypes": [
+      "bicycle_store",
+      "sportswear_store",
+      "tour_agency",
+      "travel_agency",
+      "clothing_store",
+      "sporting_goods_store",
+      "service",
+      "point_of_interest",
+      "manufacturer",
+      "store",
+      "establishment"
+    ],
+    "types": [
+      "bicycle_store",
+      "sportswear_store",
+      "tour_agency",
+      "travel_agency",
+      "clothing_store",
+      "sporting_goods_store",
+      "service",
+      "point_of_interest",
+      "manufacturer",
+      "store",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "lake",
+      "scenic",
+      "rider",
+      "panoramic",
+      "rider-spot",
+      "lake-scope"
+    ],
+    "aliases": [
+      "LakeBikeComo"
+    ],
+    "riderScore": 68
+  },
+  {
+    "id": "spot-lungolago-e-borgo-di-cima-ChIJT0ym",
+    "sourceId": "spot-lungolago-e-borgo-di-cima-ChIJT0ym",
+    "googlePlaceId": null,
+    "name": "Lungolago e Borgo di Cima",
+    "slug": "lungolago-e-borgo-di-cima",
+    "type": "lake_view",
+    "rideType": "lake",
+    "country": "IT",
+    "scope": "como",
+    "scopeName": "Lago di Como",
+    "lat": 46.0244631,
+    "lng": 9.0904825,
+    "region": null,
+    "regionHint": "Como",
+    "address": "22018 Cima, Province of Como, Italy",
+    "rating": 5,
+    "userRatingCount": 2,
+    "rawTypes": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "lake",
+      "scenic",
+      "rider",
+      "panoramic",
+      "rider-spot",
+      "lake-scope"
+    ],
+    "aliases": [
+      "Lungolago e Borgo di Cima"
+    ],
+    "riderScore": 68
+  },
+  {
+    "id": "spot-lungolago-valmadrera-pare-ChIJE-qO",
+    "sourceId": "spot-lungolago-valmadrera-pare-ChIJE-qO",
+    "googlePlaceId": null,
+    "name": "Lungolago Valmadrera - Paré",
+    "slug": "lungolago-valmadrera-pare",
+    "type": "lake_view",
+    "rideType": "lake",
+    "country": "IT",
+    "scope": "como",
+    "scopeName": "Lago di Como",
+    "lat": 45.8581363,
+    "lng": 9.3666209,
+    "region": null,
+    "regionHint": "Como",
+    "address": "SP583, Viale Giuseppe Parini, 41, 23868 Valmadrera LC, Italy",
+    "rating": 4.5,
+    "userRatingCount": 486,
+    "rawTypes": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "lake",
+      "scenic",
+      "rider",
+      "panoramic",
+      "rider-spot",
+      "lake-scope"
+    ],
+    "aliases": [
+      "Lungolago Valmadrera - Paré"
+    ],
+    "riderScore": 68
+  },
+  {
+    "id": "spot-rat-bike-service-harley-davidson-specialist-como-lake-ChIJXyXD",
+    "sourceId": "spot-rat-bike-service-harley-davidson-specialist-como-lake-ChIJXyXD",
+    "googlePlaceId": null,
+    "name": "Rat Bike Service - Harley Davidson Specialist Como Lake",
+    "slug": "rat-bike-service-harley-davidson-specialist-como-lake",
+    "type": "lake_view",
+    "rideType": "lake",
+    "country": "IT",
+    "scope": "como",
+    "scopeName": "Lago di Como",
+    "lat": 45.796045799999995,
+    "lng": 9.0996201,
+    "region": null,
+    "regionHint": "Como",
+    "address": "Via Carso, 14, 22100 Como CO, Italy",
+    "rating": 4.6,
+    "userRatingCount": 70,
+    "rawTypes": [
+      "store",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "store",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "lake",
+      "scenic",
+      "rider",
+      "panoramic",
+      "rider-spot",
+      "lake-scope"
+    ],
+    "aliases": [
+      "Rat Bike Service - Harley Davidson Specialist Como Lake"
+    ],
+    "riderScore": 68
+  },
+  {
+    "id": "spot-panoramic-hiking-tours-ChIJld6J",
+    "sourceId": "spot-panoramic-hiking-tours-ChIJld6J",
+    "googlePlaceId": null,
+    "name": "Panoramic Hiking Tours",
+    "slug": "panoramic-hiking-tours",
+    "type": "lake_view",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "como",
+    "scopeName": "Lago di Como",
+    "lat": 45.8178443,
+    "lng": 9.0849578,
+    "region": null,
+    "regionHint": "Como",
+    "address": "Via Prudenziana, 44, 22100 Como CO, Italy",
+    "rating": 4.7,
+    "userRatingCount": 46,
+    "rawTypes": [
+      "tourist_attraction",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "tourist_attraction",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "rider-spot",
+      "lake-scope"
+    ],
+    "aliases": [
+      "Panoramic Hiking Tours"
+    ],
+    "riderScore": 67
   },
   {
     "id": "spot-sacrario-di-agueglio-ChIJBW19",
@@ -163,31 +1041,32 @@
       "scenic",
       "panoramic",
       "rider",
-      "rider-spot"
+      "rider-spot",
+      "lake-scope"
     ],
     "aliases": [
       "Sacrario di Agueglio"
     ],
-    "riderScore": 42
+    "riderScore": 67
   },
   {
-    "id": "spot-lungolago-valmadrera-pare-ChIJE-qO",
-    "sourceId": "spot-lungolago-valmadrera-pare-ChIJE-qO",
+    "id": "spot-area-panoramica-del-lago-di-varese-ChIJB0JC",
+    "sourceId": "spot-area-panoramica-del-lago-di-varese-ChIJB0JC",
     "googlePlaceId": null,
-    "name": "Lungolago Valmadrera - Paré",
-    "slug": "lungolago-valmadrera-pare",
+    "name": "Area panoramica del Lago di Varese",
+    "slug": "area-panoramica-del-lago-di-varese",
     "type": "lake_view",
     "rideType": "lake",
     "country": "IT",
     "scope": "como",
     "scopeName": "Lago di Como",
-    "lat": 45.8581363,
-    "lng": 9.3666209,
+    "lat": 45.83903,
+    "lng": 8.7205813,
     "region": null,
     "regionHint": "Como",
-    "address": "SP583, Viale Giuseppe Parini, 41, 23868 Valmadrera LC, Italy",
-    "rating": 4.5,
-    "userRatingCount": 486,
+    "address": "Lungolago Isola Virginia, 21026 Gavirate VA, Italy",
+    "rating": 5,
+    "userRatingCount": 3,
     "rawTypes": [
       "scenic_spot",
       "point_of_interest",
@@ -204,11 +1083,1184 @@
       "scenic",
       "rider",
       "panoramic",
-      "rider-spot"
+      "rider-spot",
+      "lake-scope"
     ],
     "aliases": [
-      "Lungolago Valmadrera - Paré"
+      "Area panoramica del Lago di Varese"
     ],
-    "riderScore": 39
+    "riderScore": 66
+  },
+  {
+    "id": "spot-terrace-lake-view-ChIJKcPP",
+    "sourceId": "spot-terrace-lake-view-ChIJKcPP",
+    "googlePlaceId": null,
+    "name": "Terrace Lake View",
+    "slug": "terrace-lake-view",
+    "type": "lake_view",
+    "rideType": "lake",
+    "country": "IT",
+    "scope": "como",
+    "scopeName": "Lago di Como",
+    "lat": 45.8614819,
+    "lng": 9.0983809,
+    "region": null,
+    "regionHint": "Como",
+    "address": "Unnamed Road,22010, 22010 Moltrasio CO, Italy",
+    "rating": 5,
+    "userRatingCount": 5,
+    "rawTypes": [
+      "lodging",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "lodging",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "lake",
+      "scenic",
+      "rider",
+      "panoramic",
+      "rider-spot",
+      "lake-scope"
+    ],
+    "aliases": [
+      "Terrace Lake View"
+    ],
+    "riderScore": 66
+  },
+  {
+    "id": "spot-belvedere-macalle-ChIJTdFY",
+    "sourceId": "spot-belvedere-macalle-ChIJTdFY",
+    "googlePlaceId": null,
+    "name": "Belvedere Macallè",
+    "slug": "belvedere-macalle",
+    "type": "lake_view",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "como",
+    "scopeName": "Lago di Como",
+    "lat": 45.9633634,
+    "lng": 9.2574617,
+    "region": null,
+    "regionHint": "Como",
+    "address": "22021 Bellagio, Province of Como, Italy",
+    "rating": 4.7,
+    "userRatingCount": 96,
+    "rawTypes": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "rider-spot",
+      "lake-scope"
+    ],
+    "aliases": [
+      "Belvedere Macallè"
+    ],
+    "riderScore": 65
+  },
+  {
+    "id": "spot-morterone-panoramic-point-panchina-dell-amore-ChIJTyxS",
+    "sourceId": "spot-morterone-panoramic-point-panchina-dell-amore-ChIJTyxS",
+    "googlePlaceId": null,
+    "name": "Morterone Panoramic Point / Panchina dell'amore",
+    "slug": "morterone-panoramic-point-panchina-dell-amore",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "como",
+    "scopeName": "Lago di Como",
+    "lat": 45.8831328,
+    "lng": 9.434449899999999,
+    "region": null,
+    "regionHint": "Como",
+    "address": "SP63, 23900 Lecco LC, Italy",
+    "rating": 4.8,
+    "userRatingCount": 57,
+    "rawTypes": [
+      "tourist_attraction",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "tourist_attraction",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "rider-spot",
+      "lake-scope"
+    ],
+    "aliases": [
+      "Morterone Panoramic Point / Panchina dell'amore"
+    ],
+    "riderScore": 65
+  },
+  {
+    "id": "spot-lookout-of-lake-comi-ChIJG3Ky",
+    "sourceId": "spot-lookout-of-lake-comi-ChIJG3Ky",
+    "googlePlaceId": null,
+    "name": "Lookout of Lake Comi",
+    "slug": "lookout-of-lake-comi",
+    "type": "lake_view",
+    "rideType": "lake",
+    "country": "IT",
+    "scope": "como",
+    "scopeName": "Lago di Como",
+    "lat": 45.858678,
+    "lng": 9.1435573,
+    "region": null,
+    "regionHint": "Como",
+    "address": "Strada Provinciale 43, 3, 22020 Riva CO, Italy",
+    "rating": 4.5,
+    "userRatingCount": 2,
+    "rawTypes": [
+      "tourist_attraction",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "tourist_attraction",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "lake",
+      "scenic",
+      "rider",
+      "panoramic",
+      "rider-spot",
+      "lake-scope"
+    ],
+    "aliases": [
+      "Lookout of Lake Comi"
+    ],
+    "riderScore": 63
+  },
+  {
+    "id": "spot-a-vintage-jewel-with-panoramic-lake-views-ChIJKXXU",
+    "sourceId": "spot-a-vintage-jewel-with-panoramic-lake-views-ChIJKXXU",
+    "googlePlaceId": null,
+    "name": "A Vintage Jewel with Panoramic Lake Views",
+    "slug": "a-vintage-jewel-with-panoramic-lake-views",
+    "type": "lake_view",
+    "rideType": "lake",
+    "country": "IT",
+    "scope": "como",
+    "scopeName": "Lago di Como",
+    "lat": 45.940815,
+    "lng": 9.1282558,
+    "region": null,
+    "regionHint": "Como",
+    "address": "22010 Argegno, Province of Como, Italy",
+    "rating": 0,
+    "userRatingCount": 0,
+    "rawTypes": [
+      "lodging",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "lodging",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "lake",
+      "scenic",
+      "rider",
+      "panoramic",
+      "rider-spot",
+      "lake-scope"
+    ],
+    "aliases": [
+      "A Vintage Jewel with Panoramic Lake Views"
+    ],
+    "riderScore": 61
+  },
+  {
+    "id": "spot-panoramic-spot-como-lake-ChIJyd3h",
+    "sourceId": "spot-panoramic-spot-como-lake-ChIJyd3h",
+    "googlePlaceId": null,
+    "name": "Panoramic Spot - Como Lake",
+    "slug": "panoramic-spot-como-lake",
+    "type": "lake_view",
+    "rideType": "lake",
+    "country": "IT",
+    "scope": "como",
+    "scopeName": "Lago di Como",
+    "lat": 45.8799455,
+    "lng": 9.157405899999999,
+    "region": null,
+    "regionHint": "Como",
+    "address": "Via Matteotti, 27, 22020 Pognana Lario CO, Italy",
+    "rating": 3.7,
+    "userRatingCount": 3,
+    "rawTypes": [
+      "observation_deck",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "observation_deck",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "lake",
+      "scenic",
+      "rider",
+      "panoramic",
+      "rider-spot",
+      "lake-scope"
+    ],
+    "aliases": [
+      "Panoramic Spot - Como Lake"
+    ],
+    "riderScore": 61
+  },
+  {
+    "id": "spot-monte-pesora-ChIJkZY7",
+    "sourceId": "spot-monte-pesora-ChIJkZY7",
+    "googlePlaceId": null,
+    "name": "Monte Pesora",
+    "slug": "monte-pesora",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "como",
+    "scopeName": "Lago di Como",
+    "lat": 45.83495980000001,
+    "lng": 9.2945771,
+    "region": null,
+    "regionHint": "Como",
+    "address": "Unnamed Road, 22030, 22030 Canzo CO, Italy",
+    "rating": 4.6,
+    "userRatingCount": 255,
+    "rawTypes": [
+      "scenic_spot",
+      "hiking_area",
+      "sports_activity_location",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "scenic_spot",
+      "hiking_area",
+      "sports_activity_location",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "rider-spot",
+      "lake-scope"
+    ],
+    "aliases": [
+      "Monte Pesora"
+    ],
+    "riderScore": 60
+  },
+  {
+    "id": "spot-mulini-di-piero-ChIJwYdt",
+    "sourceId": "spot-mulini-di-piero-ChIJwYdt",
+    "googlePlaceId": null,
+    "name": "Mulini di Piero",
+    "slug": "mulini-di-piero",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "como",
+    "scopeName": "Lago di Como",
+    "lat": 46.077789499999994,
+    "lng": 8.8200792,
+    "region": null,
+    "regionHint": "Como",
+    "address": "Unnamed Road, 21010 Curiglia VA, Italy",
+    "rating": 4.5,
+    "userRatingCount": 466,
+    "rawTypes": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "rider-spot",
+      "lake-scope"
+    ],
+    "aliases": [
+      "Mulini di Piero"
+    ],
+    "riderScore": 60
+  },
+  {
+    "id": "spot-torriggia-via-panoramica-24-ChIJI62O",
+    "sourceId": "spot-torriggia-via-panoramica-24-ChIJI62O",
+    "googlePlaceId": null,
+    "name": "Torriggia - Via Panoramica 24",
+    "slug": "torriggia-via-panoramica-24",
+    "type": "lake_view",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "como",
+    "scopeName": "Lago di Como",
+    "lat": 45.88982,
+    "lng": 9.14283,
+    "region": null,
+    "regionHint": "Como",
+    "address": "22010 Laglio Province of Como, Italy",
+    "rating": 5,
+    "userRatingCount": 1,
+    "rawTypes": [
+      "bus_stop",
+      "transit_stop",
+      "transit_station",
+      "transportation_service",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "bus_stop",
+      "transit_stop",
+      "transit_station",
+      "transportation_service",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "rider-spot",
+      "lake-scope"
+    ],
+    "aliases": [
+      "Torriggia - Via Panoramica 24"
+    ],
+    "riderScore": 60
+  },
+  {
+    "id": "spot-lake-view-point-ChIJz3jk",
+    "sourceId": "spot-lake-view-point-ChIJz3jk",
+    "googlePlaceId": null,
+    "name": "Lake view Point",
+    "slug": "lake-view-point",
+    "type": "lake_view",
+    "rideType": "lake",
+    "country": "IT",
+    "scope": "como",
+    "scopeName": "Lago di Como",
+    "lat": 45.980354,
+    "lng": 9.210011999999999,
+    "region": null,
+    "regionHint": "Como",
+    "address": "Via S. Ambrogio, 2B, 22019 Tremezzo CO, Italy",
+    "rating": 4.5,
+    "userRatingCount": 2,
+    "rawTypes": [
+      "tourist_attraction",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "tourist_attraction",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "lake",
+      "scenic",
+      "rider",
+      "panoramic",
+      "rider-spot",
+      "lake-scope"
+    ],
+    "aliases": [
+      "Lake view Point"
+    ],
+    "riderScore": 55
+  },
+  {
+    "id": "spot-punto-panoramico-monte-pravello-ChIJr9AN",
+    "sourceId": "spot-punto-panoramico-monte-pravello-ChIJr9AN",
+    "googlePlaceId": null,
+    "name": "Punto panoramico Monte Pravello",
+    "slug": "punto-panoramico-monte-pravello",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "como",
+    "scopeName": "Lago di Como",
+    "lat": 45.8921849,
+    "lng": 8.9241168,
+    "region": null,
+    "regionHint": "Como",
+    "address": "21059 Viggiù VA, Italy",
+    "rating": 4.8,
+    "userRatingCount": 85,
+    "rawTypes": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "rider-spot",
+      "lake-scope"
+    ],
+    "aliases": [
+      "Punto panoramico Monte Pravello"
+    ],
+    "riderScore": 55
+  },
+  {
+    "id": "spot-punto-panoramico-ChIJt1o_",
+    "sourceId": "spot-punto-panoramico-ChIJt1o_",
+    "googlePlaceId": null,
+    "name": "Punto Panoramico",
+    "slug": "punto-panoramico",
+    "type": "lake_view",
+    "rideType": "lake",
+    "country": "IT",
+    "scope": "como",
+    "scopeName": "Lago di Como",
+    "lat": 45.7815514,
+    "lng": 9.213861699999999,
+    "region": null,
+    "regionHint": "Como",
+    "address": "Via al Lago, 22040 Alserio CO, Italy",
+    "rating": 4.1,
+    "userRatingCount": 7,
+    "rawTypes": [
+      "tourist_attraction",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "tourist_attraction",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "lake",
+      "scenic",
+      "rider",
+      "panoramic",
+      "rider-spot",
+      "lake-scope"
+    ],
+    "aliases": [
+      "Punto Panoramico"
+    ],
+    "riderScore": 53
+  },
+  {
+    "id": "spot-caglio-viewpoint-ChIJW4vD",
+    "sourceId": "spot-caglio-viewpoint-ChIJW4vD",
+    "googlePlaceId": null,
+    "name": "Caglio Viewpoint",
+    "slug": "caglio-viewpoint",
+    "type": "lake_view",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "como",
+    "scopeName": "Lago di Como",
+    "lat": 45.882665499999995,
+    "lng": 9.229277399999999,
+    "region": null,
+    "regionHint": "Como",
+    "address": "22030 Caglio, Province of Como, Italy",
+    "rating": 4.9,
+    "userRatingCount": 7,
+    "rawTypes": [
+      "observation_deck",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "observation_deck",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "rider-spot",
+      "lake-scope"
+    ],
+    "aliases": [
+      "Caglio Viewpoint"
+    ],
+    "riderScore": 52
+  },
+  {
+    "id": "spot-punto-panoramico-monte-molinasco-ChIJdS43",
+    "sourceId": "spot-punto-panoramico-monte-molinasco-ChIJdS43",
+    "googlePlaceId": null,
+    "name": "Punto Panoramico Monte Molinasco",
+    "slug": "punto-panoramico-monte-molinasco",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "como",
+    "scopeName": "Lago di Como",
+    "lat": 45.8544282,
+    "lng": 9.641807799999999,
+    "region": null,
+    "regionHint": "Lecco / Valsassina",
+    "address": "24016 San Pellegrino Terme, Province of Bergamo, Italy",
+    "rating": 4.6,
+    "userRatingCount": 61,
+    "rawTypes": [
+      "scenic_spot",
+      "tourist_attraction",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "scenic_spot",
+      "tourist_attraction",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "rider-spot",
+      "lake-scope"
+    ],
+    "aliases": [
+      "Punto Panoramico Monte Molinasco"
+    ],
+    "riderScore": 52
+  },
+  {
+    "id": "spot-belvedere-ChIJ7Vlb",
+    "sourceId": "spot-belvedere-ChIJ7Vlb",
+    "googlePlaceId": null,
+    "name": "Belvedere",
+    "slug": "belvedere",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "como",
+    "scopeName": "Lago di Como",
+    "lat": 46.0471544,
+    "lng": 9.3477975,
+    "region": null,
+    "regionHint": "Bellagio",
+    "address": "Unnamed Road, 23838, 23838 Bellano LC, Italy",
+    "rating": 5,
+    "userRatingCount": 8,
+    "rawTypes": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "rider-spot",
+      "lake-scope"
+    ],
+    "aliases": [
+      "Belvedere"
+    ],
+    "riderScore": 50
+  },
+  {
+    "id": "spot-punto-panoramico-belvedere-ChIJufCx",
+    "sourceId": "spot-punto-panoramico-belvedere-ChIJufCx",
+    "googlePlaceId": null,
+    "name": "Punto Panoramico Belvedere",
+    "slug": "punto-panoramico-belvedere",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "como",
+    "scopeName": "Lago di Como",
+    "lat": 46.298196999999995,
+    "lng": 9.4266531,
+    "region": null,
+    "regionHint": "Colico / Alto Lario",
+    "address": "23020 Prata Camportaccio, Province of Sondrio, Italy",
+    "rating": 5,
+    "userRatingCount": 1,
+    "rawTypes": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "rider-spot",
+      "lake-scope"
+    ],
+    "aliases": [
+      "Punto Panoramico Belvedere",
+      "Punto panoramico"
+    ],
+    "riderScore": 50
+  },
+  {
+    "id": "spot-punto-panoramico-monte-robbio-ChIJV-UM",
+    "sourceId": "spot-punto-panoramico-monte-robbio-ChIJV-UM",
+    "googlePlaceId": null,
+    "name": "Punto Panoramico Monte Robbio",
+    "slug": "punto-panoramico-monte-robbio",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "como",
+    "scopeName": "Lago di Como",
+    "lat": 45.6916264,
+    "lng": 9.4458069,
+    "region": null,
+    "regionHint": "Lecco / Valsassina",
+    "address": "Via Carlo Porta, 23899 Robbiate LC, Italy",
+    "rating": 5,
+    "userRatingCount": 3,
+    "rawTypes": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "rider-spot",
+      "lake-scope"
+    ],
+    "aliases": [
+      "Punto Panoramico Monte Robbio"
+    ],
+    "riderScore": 50
+  },
+  {
+    "id": "spot-punto-panoramico-sulla-valle-del-lambro-ChIJNaPZ",
+    "sourceId": "spot-punto-panoramico-sulla-valle-del-lambro-ChIJNaPZ",
+    "googlePlaceId": null,
+    "name": "Punto panoramico sulla valle del Lambro",
+    "slug": "punto-panoramico-sulla-valle-del-lambro",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "como",
+    "scopeName": "Lago di Como",
+    "lat": 45.7432977,
+    "lng": 9.2270082,
+    "region": null,
+    "regionHint": "Como",
+    "address": "Via Crivelli, 19, 22044 Inverigo CO, Italy",
+    "rating": 4.8,
+    "userRatingCount": 12,
+    "rawTypes": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "rider-spot",
+      "lake-scope"
+    ],
+    "aliases": [
+      "Punto panoramico sulla valle del Lambro"
+    ],
+    "riderScore": 50
+  },
+  {
+    "id": "spot-viewpoint-ChIJmWlv",
+    "sourceId": "spot-viewpoint-ChIJmWlv",
+    "googlePlaceId": null,
+    "name": "Viewpoint",
+    "slug": "viewpoint",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "como",
+    "scopeName": "Lago di Como",
+    "lat": 45.9624142,
+    "lng": 9.251758599999999,
+    "region": null,
+    "regionHint": "Como",
+    "address": "V. Valassina, 161, 22021 Bellagio CO, Italy",
+    "rating": 4.8,
+    "userRatingCount": 6,
+    "rawTypes": [
+      "observation_deck",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "observation_deck",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "rider-spot",
+      "lake-scope"
+    ],
+    "aliases": [
+      "Viewpoint"
+    ],
+    "riderScore": 50
+  },
+  {
+    "id": "spot-vista-panoramica-ChIJSe8B",
+    "sourceId": "spot-vista-panoramica-ChIJSe8B",
+    "googlePlaceId": null,
+    "name": "Vista panoramica",
+    "slug": "vista-panoramica",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "como",
+    "scopeName": "Lago di Como",
+    "lat": 46.1445174,
+    "lng": 9.6548009,
+    "region": null,
+    "regionHint": "Colico / Alto Lario",
+    "address": "23010 Forcola, Province of Sondrio, Italy",
+    "rating": 5,
+    "userRatingCount": 2,
+    "rawTypes": [
+      "hiking_area",
+      "sports_activity_location",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "hiking_area",
+      "sports_activity_location",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "rider-spot",
+      "lake-scope"
+    ],
+    "aliases": [
+      "Vista panoramica"
+    ],
+    "riderScore": 50
+  },
+  {
+    "id": "spot-scenic-point-cino-ChIJA_pY",
+    "sourceId": "spot-scenic-point-cino-ChIJA_pY",
+    "googlePlaceId": null,
+    "name": "Scenic Point Cino",
+    "slug": "scenic-point-cino",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "como",
+    "scopeName": "Lago di Como",
+    "lat": 46.1579529,
+    "lng": 9.4911545,
+    "region": null,
+    "regionHint": "Colico / Alto Lario",
+    "address": "23010 Cino, Province of Sondrio, Italy",
+    "rating": 4.6,
+    "userRatingCount": 12,
+    "rawTypes": [
+      "tourist_attraction",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "tourist_attraction",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "rider-spot",
+      "lake-scope"
+    ],
+    "aliases": [
+      "Scenic Point Cino"
+    ],
+    "riderScore": 47
+  },
+  {
+    "id": "spot-bema-strada-panoramica-ChIJgxIK",
+    "sourceId": "spot-bema-strada-panoramica-ChIJgxIK",
+    "googlePlaceId": null,
+    "name": "Bema Strada Panoramica",
+    "slug": "bema-strada-panoramica",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "como",
+    "scopeName": "Lago di Como",
+    "lat": 46.106467599999995,
+    "lng": 9.559832499999999,
+    "region": null,
+    "regionHint": "Colico / Alto Lario",
+    "address": "Strada Provinciale per Bema, 3, 23010 Bema SO, Italy",
+    "rating": 4.4,
+    "userRatingCount": 5,
+    "rawTypes": [
+      "tourist_attraction",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "tourist_attraction",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "rider-spot",
+      "lake-scope"
+    ],
+    "aliases": [
+      "Bema Strada Panoramica"
+    ],
+    "riderScore": 45
+  },
+  {
+    "id": "spot-localita-cendraro-lago-viewpoint-ChIJSdoF",
+    "sourceId": "spot-localita-cendraro-lago-viewpoint-ChIJSdoF",
+    "googlePlaceId": null,
+    "name": "Località Cendraro Lago Viewpoint",
+    "slug": "localita-cendraro-lago-viewpoint",
+    "type": "lake_view",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "como",
+    "scopeName": "Lago di Como",
+    "lat": 45.949064,
+    "lng": 9.2043312,
+    "region": null,
+    "regionHint": "Menaggio",
+    "address": "Località Cendraro Lago, 8, 22025 Lezzeno CO, Italy",
+    "rating": 4,
+    "userRatingCount": 1,
+    "rawTypes": [
+      "tourist_attraction",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "tourist_attraction",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "lake",
+      "rider-spot",
+      "lake-scope"
+    ],
+    "aliases": [
+      "Località Cendraro Lago Viewpoint"
+    ],
+    "riderScore": 45
+  },
+  {
+    "id": "spot-belvedere-di-nesso-ChIJJZGf",
+    "sourceId": "spot-belvedere-di-nesso-ChIJJZGf",
+    "googlePlaceId": null,
+    "name": "Belvedere di Nesso",
+    "slug": "belvedere-di-nesso",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "como",
+    "scopeName": "Lago di Como",
+    "lat": 45.910241899999995,
+    "lng": 9.1557493,
+    "region": null,
+    "regionHint": "Como",
+    "address": "Via Coatesa, 22020 Nesso CO, Italy",
+    "rating": 4.8,
+    "userRatingCount": 11,
+    "rawTypes": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "rider-spot",
+      "lake-scope"
+    ],
+    "aliases": [
+      "Belvedere di Nesso"
+    ],
+    "riderScore": 42
+  },
+  {
+    "id": "spot-belvedere-scioscia-ChIJN_vd",
+    "sourceId": "spot-belvedere-scioscia-ChIJN_vd",
+    "googlePlaceId": null,
+    "name": "Belvedere Scioscia",
+    "slug": "belvedere-scioscia",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "como",
+    "scopeName": "Lago di Como",
+    "lat": 45.8336425,
+    "lng": 9.2652143,
+    "region": null,
+    "regionHint": "Como",
+    "address": "SP41, 22030 Canzo CO, Italy",
+    "rating": 4.6,
+    "userRatingCount": 48,
+    "rawTypes": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "rider-spot",
+      "lake-scope"
+    ],
+    "aliases": [
+      "Belvedere Scioscia"
+    ],
+    "riderScore": 42
+  },
+  {
+    "id": "spot-cazziemarc-viewpoint-bergamo-ChIJfbRs",
+    "sourceId": "spot-cazziemarc-viewpoint-bergamo-ChIJfbRs",
+    "googlePlaceId": null,
+    "name": "CazzieMarc Viewpoint bergamo",
+    "slug": "cazziemarc-viewpoint-bergamo",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "como",
+    "scopeName": "Lago di Como",
+    "lat": 45.7081437,
+    "lng": 9.654750199999999,
+    "region": null,
+    "regionHint": "Lecco / Valsassina",
+    "address": "Vicolo Sottoripa, 3-1, 24129 Bergamo BG, Italy",
+    "rating": 5,
+    "userRatingCount": 1,
+    "rawTypes": [
+      "historical_landmark",
+      "historical_place",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "historical_landmark",
+      "historical_place",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "rider-spot",
+      "lake-scope"
+    ],
+    "aliases": [
+      "CazzieMarc Viewpoint bergamo"
+    ],
+    "riderScore": 42
+  },
+  {
+    "id": "spot-punto-panoramico-ChIJodt3",
+    "sourceId": "spot-punto-panoramico-ChIJodt3",
+    "googlePlaceId": null,
+    "name": "Punto panoramico",
+    "slug": "punto-panoramico",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "como",
+    "scopeName": "Lago di Como",
+    "lat": 45.7665065,
+    "lng": 9.3707947,
+    "region": null,
+    "regionHint": "Como",
+    "address": "Via S. Nicola, 21, 23886 Colle Brianza LC, Italy",
+    "rating": 4.3,
+    "userRatingCount": 43,
+    "rawTypes": [
+      "tourist_attraction",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "tourist_attraction",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "rider-spot",
+      "lake-scope"
+    ],
+    "aliases": [
+      "Punto panoramico"
+    ],
+    "riderScore": 42
+  },
+  {
+    "id": "spot-viewpoint-clivio-centro-ChIJKU7p",
+    "sourceId": "spot-viewpoint-clivio-centro-ChIJKU7p",
+    "googlePlaceId": null,
+    "name": "Viewpoint - Clivio Centro",
+    "slug": "viewpoint-clivio-centro",
+    "type": "scenic_road",
+    "rideType": "scenic",
+    "country": "IT",
+    "scope": "como",
+    "scopeName": "Lago di Como",
+    "lat": 45.8640785,
+    "lng": 8.934162599999999,
+    "region": null,
+    "regionHint": "Como",
+    "address": "Via San Carpoforo, 5, 21050 Clivio VA, Italy",
+    "rating": 5,
+    "userRatingCount": 1,
+    "rawTypes": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "types": [
+      "scenic_spot",
+      "point_of_interest",
+      "establishment"
+    ],
+    "source": "google_places",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "rider-spot",
+      "lake-scope"
+    ],
+    "aliases": [
+      "Viewpoint - Clivio Centro"
+    ],
+    "riderScore": 42
   }
 ]
