@@ -1,15 +1,19 @@
 // =======================================================
 // src/components/RouteMap.jsx
-// Leaflet map: polyline se c'è, altrimenti start->end,
-// fallback finale su coords singolo punto
-// ✅ Supporta: [lat,lng], {lat,lng}, {lat,lon}, {latitude,longitude}
-// ✅ Auto start/end se mancano ma esiste polyline
-// ✅ Fallback su route.coords / center / location
-// ✅ Link Google Maps directions se esistono start/end
-// ✅ Link Google Maps place se esiste solo un punto
+// Leaflet map robusta per itinerari Routes.jsx
+// ✅ Supporta:
+//    - route.polyline           -> [[lat,lng], ...]
+//    - route.coords             -> [[lat,lng], ...]
+//    - route.geometry.coordinates -> [[lng,lat], ...] GeoJSON
+//    - route.start / route.end  -> {lat,lng} o array
+//    - route.center / location  -> fallback singolo punto
+// ✅ Auto start/end se mancano ma esiste una linea
+// ✅ Google Maps directions con eventuali waypoint
+// ✅ Fallback finale su singolo punto
 // =======================================================
 import { MapContainer, TileLayer, Polyline, Marker, Popup } from "react-leaflet";
 import L from "leaflet";
+import { useEffect } from "react";
 
 const icon = new L.Icon({
   iconUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png",
@@ -41,11 +45,39 @@ function toLatLng(p) {
   return null;
 }
 
+function toLatLngFromGeoJsonCoord(p) {
+  if (!Array.isArray(p) || p.length < 2) return null;
+  const lng = toNum(p[0]);
+  const lat = toNum(p[1]);
+  return lat !== null && lng !== null ? [lat, lng] : null;
+}
+
+function normalizePointArray(arr) {
+  if (!Array.isArray(arr)) return null;
+  const pts = arr.map(toLatLng).filter(Boolean);
+  return pts.length >= 2 ? pts : null;
+}
+
+function normalizeGeoJsonLine(route) {
+  const coords = route?.geometry?.coordinates;
+  if (!Array.isArray(coords) || coords.length < 2) return null;
+  const pts = coords.map(toLatLngFromGeoJsonCoord).filter(Boolean);
+  return pts.length >= 2 ? pts : null;
+}
+
 function safePolyline(route) {
   const pl = route?.polyline;
   if (!Array.isArray(pl) || pl.length < 2) return null;
 
   const pts = pl.map(toLatLng).filter(Boolean);
+  return pts.length >= 2 ? pts : null;
+}
+
+function safeCoordsLine(route) {
+  const coords = route?.coords;
+  if (!Array.isArray(coords) || coords.length < 2) return null;
+
+  const pts = coords.map(toLatLng).filter(Boolean);
   return pts.length >= 2 ? pts : null;
 }
 
@@ -57,10 +89,23 @@ function fallbackLine(route) {
 }
 
 function fallbackPoint(route) {
+  const coords = route?.coords;
+
+  if (Array.isArray(coords) && coords.length) {
+    if (Array.isArray(coords[0])) {
+      const p = toLatLng(coords[0]);
+      if (p) return p;
+    } else {
+      const p = toLatLng(coords);
+      if (p) return p;
+    }
+  }
+
   return (
-    toLatLng(route?.coords) ||
     toLatLng(route?.center) ||
     toLatLng(route?.location) ||
+    toLatLng(route?.start) ||
+    toLatLng(route?.end) ||
     null
   );
 }
@@ -73,13 +118,25 @@ function boundsFor(points) {
   }
 }
 
-function googleDirectionsUrl(start, end) {
+function googleDirectionsUrl(start, end, waypoints = []) {
   if (!start || !end) return null;
+
   const origin = `${start[0]},${start[1]}`;
   const dest = `${end[0]},${end[1]}`;
-  return `https://www.google.com/maps/dir/?api=1&origin=${encodeURIComponent(
-    origin
-  )}&destination=${encodeURIComponent(dest)}&travelmode=driving`;
+
+  const mids = (Array.isArray(waypoints) ? waypoints : [])
+    .map(toLatLng)
+    .filter(Boolean)
+    .slice(0, 8)
+    .map((p) => `${p[0]},${p[1]}`);
+
+  return (
+    `https://www.google.com/maps/dir/?api=1` +
+    `&origin=${encodeURIComponent(origin)}` +
+    `&destination=${encodeURIComponent(dest)}` +
+    `&travelmode=driving` +
+    (mids.length ? `&waypoints=${encodeURIComponent(mids.join("|"))}` : "")
+  );
 }
 
 function googlePlaceUrl(point) {
@@ -89,15 +146,25 @@ function googlePlaceUrl(point) {
   )}`;
 }
 
+function MapAutoFit({ bounds, singlePoint }) {
+  useEffect(() => {}, [bounds, singlePoint]);
+  return null;
+}
+
 export default function RouteMap({ route }) {
-  const poly = safePolyline(route) || fallbackLine(route);
+  const poly =
+    safePolyline(route) ||
+    safeCoordsLine(route) ||
+    normalizeGeoJsonLine(route) ||
+    fallbackLine(route);
+
   const singlePoint = !poly ? fallbackPoint(route) : null;
 
   if (!poly && !singlePoint) {
     return (
       <div style={{ padding: 12, borderRadius: 16, background: "rgba(0,0,0,0.04)" }}>
-        Per vedere la mappa serve <strong>polyline</strong>, <strong>start/end</strong> oppure almeno{" "}
-        <strong>coords</strong> nel routes.json.
+        Per vedere la mappa serve <strong>polyline</strong>, <strong>coords</strong>,
+        <strong> geometry.coordinates</strong> oppure <strong>start/end</strong> nel routes.json.
       </div>
     );
   }
@@ -105,10 +172,14 @@ export default function RouteMap({ route }) {
   const start = poly ? toLatLng(route?.start) || poly[0] : singlePoint;
   const end = poly ? toLatLng(route?.end) || poly[poly.length - 1] : null;
 
+  const waypoints = Array.isArray(route?.waypoints)
+    ? route.waypoints.map(toLatLng).filter(Boolean)
+    : [];
+
   const center = poly ? poly[Math.floor(poly.length / 2)] : singlePoint;
   const b = poly ? boundsFor(poly) : null;
 
-  const gDirectionsUrl = poly && start && end ? googleDirectionsUrl(start, end) : null;
+  const gDirectionsUrl = poly && start && end ? googleDirectionsUrl(start, end, waypoints) : null;
   const gPlaceUrl = !poly && singlePoint ? googlePlaceUrl(singlePoint) : null;
 
   return (
@@ -158,14 +229,17 @@ export default function RouteMap({ route }) {
           center={center}
           zoom={poly ? 10 : 12}
           style={{ height: 360, width: "100%" }}
-          whenCreated={(map) => {
+          scrollWheelZoom
+          whenReady={(ev) => {
+            const map = ev?.target;
+            if (!map) return;
+
             if (b) {
               map.fitBounds(b, { padding: [20, 20] });
             } else if (singlePoint) {
               map.setView(singlePoint, 12);
             }
           }}
-          scrollWheelZoom
         >
           <TileLayer
             attribution="&copy; OpenStreetMap"
@@ -203,6 +277,22 @@ export default function RouteMap({ route }) {
               </Popup>
             </Marker>
           ) : null}
+
+          {poly && waypoints.length
+            ? waypoints.map((wp, idx) => (
+                <Marker key={`wp-${idx}-${wp[0]}-${wp[1]}`} position={wp} icon={icon}>
+                  <Popup>
+                    <strong>Tappa {idx + 1}</strong>
+                    <br />
+                    {route?.waypoints?.[idx]?.name || "Waypoint"}
+                    <br />
+                    <span style={{ opacity: 0.8, fontSize: 12 }}>
+                      {wp[0].toFixed(5)}, {wp[1].toFixed(5)}
+                    </span>
+                  </Popup>
+                </Marker>
+              ))
+            : null}
         </MapContainer>
       </div>
     </div>
