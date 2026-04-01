@@ -101,6 +101,32 @@ function inferCountry(address = "", region = "", explicitCountry = null) {
   return null;
 }
 
+function normalizeSpotName(name = "") {
+  let n = String(name || "").trim();
+  if (!n) return n;
+
+  const normalizedRaw = normalizeText(n);
+
+  const forcedNames = new Map([
+    ["przelecz stelvio", "Passo dello Stelvio"],
+    ["przelecz dello stelvio", "Passo dello Stelvio"],
+    ["stelvio pass", "Passo dello Stelvio"],
+    ["stilfser joch", "Passo dello Stelvio"],
+    ["passo stelvio", "Passo dello Stelvio"],
+    ["passo dello stelvio", "Passo dello Stelvio"],
+  ]);
+
+  if (forcedNames.has(normalizedRaw)) {
+    return forcedNames.get(normalizedRaw);
+  }
+
+  if (/\bstelvio\b/i.test(n)) {
+    return "Passo dello Stelvio";
+  }
+
+  return n;
+}
+
 function buildScopeMatchers(scopeCfg, countryCode) {
   const regionTerms = (scopeCfg?.regions || []).map((x) => normalizeText(x));
   const areaTerms = (scopeCfg?.areas || [])
@@ -316,9 +342,38 @@ function buildScopeMatchers(scopeCfg, countryCode) {
     else if (scope === "italy-south") extraCountryTerms = southTerms;
     else if (scope === "sicily") extraCountryTerms = sicilyTerms;
     else if (scope === "sardinia") extraCountryTerms = sardiniaTerms;
-    else if (scope === "como") extraCountryTerms = ["lago di como", "lake como", "como", "bellagio", "menaggio", "varenna", "lecco"].map(normalizeText);
-    else if (scope === "maggiore") extraCountryTerms = ["lago maggiore", "lake maggiore", "maggiore", "stresa", "verbania", "arona"].map(normalizeText);
-    else if (scope === "garda") extraCountryTerms = ["lago di garda", "lake garda", "garda", "riva del garda", "limone sul garda", "malcesine", "gardone", "salo", "salò"].map(normalizeText);
+    else if (scope === "como") {
+      extraCountryTerms = [
+        "lago di como",
+        "lake como",
+        "como",
+        "bellagio",
+        "menaggio",
+        "varenna",
+        "lecco",
+      ].map(normalizeText);
+    } else if (scope === "maggiore") {
+      extraCountryTerms = [
+        "lago maggiore",
+        "lake maggiore",
+        "maggiore",
+        "stresa",
+        "verbania",
+        "arona",
+      ].map(normalizeText);
+    } else if (scope === "garda") {
+      extraCountryTerms = [
+        "lago di garda",
+        "lake garda",
+        "garda",
+        "riva del garda",
+        "limone sul garda",
+        "malcesine",
+        "gardone",
+        "salo",
+        "salò",
+      ].map(normalizeText);
+    }
   }
 
   const foreignTerms = [
@@ -731,10 +786,11 @@ function isTouristOnlySpot(spot) {
 }
 
 function normalizeForeignPassName(name = "") {
-  let out = String(name || "").trim();
+  let out = normalizeSpotName(name);
 
   const replacements = [
     [/przełęcz/gi, "Passo"],
+    [/przelecz/gi, "Passo"],
     [/passhöhe/gi, "Passo"],
     [/bergpas/gi, "Passo"],
   ];
@@ -743,7 +799,9 @@ function normalizeForeignPassName(name = "") {
     out = out.replace(rx, rep);
   }
 
-  return out;
+  out = out.replace(/\s+/g, " ").trim();
+
+  return normalizeSpotName(out);
 }
 
 function inferSpotType(spot) {
