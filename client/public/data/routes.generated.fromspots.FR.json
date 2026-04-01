@@ -1,0 +1,6418 @@
+[
+  {
+    "id": "fr-france-cote-d-azur-belvedere-du-col-dilloire-passo-scolettas",
+    "name": "Giro Panoramico france-cote-d-azur: Belvédère du col d'Illoire → Passo Scolettas",
+    "country": "FR",
+    "region": "france-cote-d-azur",
+    "rideType": "scenic",
+    "score": 62,
+    "difficulty": "bassa",
+    "distanceKm": 83.3,
+    "bestSeason": "Primavera / Estate / Autunno",
+    "description": "itinerario panoramico nell'area france-cote-d-azur, costruito su spot rider reali e pensato per offrire una guida piacevole, coerente e credibile.",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "mountain",
+      "twisty"
+    ],
+    "start": {
+      "name": "Belvédère du col d'Illoire",
+      "lat": 43.775631,
+      "lng": 6.2603043
+    },
+    "end": {
+      "name": "Passo Scolettas",
+      "lat": 44.307790999999995,
+      "lng": 6.993347
+    },
+    "center": {
+      "lat": 44.04171,
+      "lng": 6.62683
+    },
+    "waypoints": [
+      {
+        "name": "Belvédère du col d'Illoire",
+        "lat": 43.775631,
+        "lng": 6.2603043,
+        "spotType": "viewpoint",
+        "score": 59
+      },
+      {
+        "name": "Passo Scolettas",
+        "lat": 44.307790999999995,
+        "lng": 6.993347,
+        "spotType": "pass",
+        "score": 51
+      }
+    ],
+    "spots": [
+      {
+        "name": "Belvédère du col d'Illoire",
+        "lat": 43.775631,
+        "lng": 6.2603043,
+        "spotType": "viewpoint",
+        "score": 59
+      },
+      {
+        "name": "Passo Scolettas",
+        "lat": 44.307790999999995,
+        "lng": 6.993347,
+        "spotType": "pass",
+        "score": 51
+      }
+    ],
+    "source": "rider-spots.eu",
+    "sourceScope": "from-spots"
+  },
+  {
+    "id": "fr-france-alps-south-passo-del-prale-colle-di-sampeyre",
+    "name": "Giro Panoramico france-alps-south: Passo del Prale → Colle di Sampeyre",
+    "country": "FR",
+    "region": "france-alps-south",
+    "rideType": "scenic",
+    "score": 61,
+    "difficulty": "bassa",
+    "distanceKm": 80.6,
+    "bestSeason": "Primavera / Estate / Autunno",
+    "description": "itinerario panoramico nell'area france-alps-south, costruito su spot rider reali e pensato per offrire una guida piacevole, coerente e credibile.",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "mountain",
+      "twisty",
+      "rider-spot"
+    ],
+    "start": {
+      "name": "Passo del Prale",
+      "lat": 44.1082122,
+      "lng": 7.9215884
+    },
+    "end": {
+      "name": "Colle di Sampeyre",
+      "lat": 44.5512273,
+      "lng": 7.1190470999999995
+    },
+    "center": {
+      "lat": 44.32972,
+      "lng": 7.52032
+    },
+    "waypoints": [
+      {
+        "name": "Passo del Prale",
+        "lat": 44.1082122,
+        "lng": 7.9215884,
+        "spotType": "pass",
+        "score": 56
+      },
+      {
+        "name": "Colle di Sampeyre",
+        "lat": 44.5512273,
+        "lng": 7.1190470999999995,
+        "spotType": "pass",
+        "score": 50
+      }
+    ],
+    "spots": [
+      {
+        "name": "Passo del Prale",
+        "lat": 44.1082122,
+        "lng": 7.9215884,
+        "spotType": "pass",
+        "score": 56
+      },
+      {
+        "name": "Colle di Sampeyre",
+        "lat": 44.5512273,
+        "lng": 7.1190470999999995,
+        "spotType": "pass",
+        "score": 50
+      }
+    ],
+    "source": "rider-spots.eu",
+    "sourceScope": "from-spots"
+  },
+  {
+    "id": "fr-france-alps-north-belvedere-du-mont-du-chat-colle-san-giacomo",
+    "name": "Giro Panoramico france-alps-north: Belvédère du Mont du Chat → Colle San Giacomo",
+    "country": "FR",
+    "region": "france-alps-north",
+    "rideType": "scenic",
+    "score": 59,
+    "difficulty": "media",
+    "distanceKm": 129.8,
+    "bestSeason": "Primavera / Estate / Autunno",
+    "description": "itinerario panoramico nell'area france-alps-north, costruito su spot rider reali e pensato per offrire una guida piacevole, coerente e credibile.",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "lake",
+      "rider-spot"
+    ],
+    "start": {
+      "name": "Belvédère du Mont du Chat",
+      "lat": 45.6608988,
+      "lng": 5.8215699999999995
+    },
+    "end": {
+      "name": "Colle San Giacomo",
+      "lat": 45.3267101,
+      "lng": 7.4169889
+    },
+    "center": {
+      "lat": 45.4938,
+      "lng": 6.61928
+    },
+    "waypoints": [
+      {
+        "name": "Belvédère du Mont du Chat",
+        "lat": 45.6608988,
+        "lng": 5.8215699999999995,
+        "spotType": "viewpoint",
+        "score": 55
+      },
+      {
+        "name": "Colle San Giacomo",
+        "lat": 45.3267101,
+        "lng": 7.4169889,
+        "spotType": "pass",
+        "score": 50
+      }
+    ],
+    "spots": [
+      {
+        "name": "Belvédère du Mont du Chat",
+        "lat": 45.6608988,
+        "lng": 5.8215699999999995,
+        "spotType": "viewpoint",
+        "score": 55
+      },
+      {
+        "name": "Colle San Giacomo",
+        "lat": 45.3267101,
+        "lng": 7.4169889,
+        "spotType": "pass",
+        "score": 50
+      }
+    ],
+    "source": "rider-spots.eu",
+    "sourceScope": "from-spots"
+  },
+  {
+    "id": "fr-france-alps-south-passo-del-prale-strada-dei-cannoni-colle-di-sampeyre",
+    "name": "Giro Panoramico france-alps-south: Passo del Prale → Strada dei Cannoni → Colle di Sampeyre",
+    "country": "FR",
+    "region": "france-alps-south",
+    "rideType": "scenic",
+    "score": 59,
+    "difficulty": "bassa",
+    "distanceKm": 80.7,
+    "bestSeason": "Primavera / Estate / Autunno",
+    "description": "itinerario panoramico nell'area france-alps-south, costruito su spot rider reali e pensato per offrire una guida piacevole, coerente e credibile.",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "mountain",
+      "twisty",
+      "rider-spot"
+    ],
+    "start": {
+      "name": "Passo del Prale",
+      "lat": 44.1082122,
+      "lng": 7.9215884
+    },
+    "end": {
+      "name": "Colle di Sampeyre",
+      "lat": 44.5512273,
+      "lng": 7.1190470999999995
+    },
+    "center": {
+      "lat": 44.40117,
+      "lng": 7.3928
+    },
+    "waypoints": [
+      {
+        "name": "Passo del Prale",
+        "lat": 44.1082122,
+        "lng": 7.9215884,
+        "spotType": "pass",
+        "score": 56
+      },
+      {
+        "name": "Strada dei Cannoni",
+        "lat": 44.5440567,
+        "lng": 7.1377565,
+        "spotType": "viewpoint",
+        "score": 50
+      },
+      {
+        "name": "Colle di Sampeyre",
+        "lat": 44.5512273,
+        "lng": 7.1190470999999995,
+        "spotType": "pass",
+        "score": 50
+      }
+    ],
+    "spots": [
+      {
+        "name": "Passo del Prale",
+        "lat": 44.1082122,
+        "lng": 7.9215884,
+        "spotType": "pass",
+        "score": 56
+      },
+      {
+        "name": "Strada dei Cannoni",
+        "lat": 44.5440567,
+        "lng": 7.1377565,
+        "spotType": "viewpoint",
+        "score": 50
+      },
+      {
+        "name": "Colle di Sampeyre",
+        "lat": 44.5512273,
+        "lng": 7.1190470999999995,
+        "spotType": "pass",
+        "score": 50
+      }
+    ],
+    "source": "rider-spots.eu",
+    "sourceScope": "from-spots"
+  },
+  {
+    "id": "fr-france-cote-d-azur-belvedere-du-col-dilloire-cima-monte-bignone-punto-panoramico-passo-scolettas",
+    "name": "Giro Panoramico france-cote-d-azur: Belvédère du col d'Illoire → Cima Monte Bignone, punto panoramico → Passo Scolettas",
+    "country": "FR",
+    "region": "france-cote-d-azur",
+    "rideType": "scenic",
+    "score": 59,
+    "difficulty": "media",
+    "distanceKm": 195,
+    "bestSeason": "Primavera / Estate / Autunno",
+    "description": "itinerario panoramico nell'area france-cote-d-azur, costruito su spot rider reali e pensato per offrire una guida piacevole, coerente e credibile.",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "mountain",
+      "twisty",
+      "rider-spot"
+    ],
+    "start": {
+      "name": "Belvédère du col d'Illoire",
+      "lat": 43.775631,
+      "lng": 6.2603043
+    },
+    "end": {
+      "name": "Passo Scolettas",
+      "lat": 44.307790999999995,
+      "lng": 6.993347
+    },
+    "center": {
+      "lat": 43.98565,
+      "lng": 6.99578
+    },
+    "waypoints": [
+      {
+        "name": "Belvédère du col d'Illoire",
+        "lat": 43.775631,
+        "lng": 6.2603043,
+        "spotType": "viewpoint",
+        "score": 59
+      },
+      {
+        "name": "Cima Monte Bignone, punto panoramico",
+        "lat": 43.873522,
+        "lng": 7.733676000000001,
+        "spotType": "viewpoint",
+        "score": 50
+      },
+      {
+        "name": "Passo Scolettas",
+        "lat": 44.307790999999995,
+        "lng": 6.993347,
+        "spotType": "pass",
+        "score": 51
+      }
+    ],
+    "spots": [
+      {
+        "name": "Belvédère du col d'Illoire",
+        "lat": 43.775631,
+        "lng": 6.2603043,
+        "spotType": "viewpoint",
+        "score": 59
+      },
+      {
+        "name": "Cima Monte Bignone, punto panoramico",
+        "lat": 43.873522,
+        "lng": 7.733676000000001,
+        "spotType": "viewpoint",
+        "score": 50
+      },
+      {
+        "name": "Passo Scolettas",
+        "lat": 44.307790999999995,
+        "lng": 6.993347,
+        "spotType": "pass",
+        "score": 51
+      }
+    ],
+    "source": "rider-spots.eu",
+    "sourceScope": "from-spots"
+  },
+  {
+    "id": "fr-france-alps-north-colle-san-giacomo-belvedere-du-mont-du-chat-belvedere-de-la-chambotte",
+    "name": "Giro Panoramico france-alps-north: Colle San Giacomo → Belvédère du Mont du Chat → Belvédère de la Chambotte",
+    "country": "FR",
+    "region": "france-alps-north",
+    "rideType": "scenic",
+    "score": 58,
+    "difficulty": "media",
+    "distanceKm": 142.9,
+    "bestSeason": "Primavera / Estate / Autunno",
+    "description": "itinerario panoramico nell'area france-alps-north, costruito su spot rider reali e pensato per offrire una guida piacevole, coerente e credibile.",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "rider-spot",
+      "lake"
+    ],
+    "start": {
+      "name": "Colle San Giacomo",
+      "lat": 45.3267101,
+      "lng": 7.4169889
+    },
+    "end": {
+      "name": "Belvédère de la Chambotte",
+      "lat": 45.7734908,
+      "lng": 5.8733669
+    },
+    "center": {
+      "lat": 45.58703,
+      "lng": 6.37064
+    },
+    "waypoints": [
+      {
+        "name": "Colle San Giacomo",
+        "lat": 45.3267101,
+        "lng": 7.4169889,
+        "spotType": "pass",
+        "score": 50
+      },
+      {
+        "name": "Belvédère du Mont du Chat",
+        "lat": 45.6608988,
+        "lng": 5.8215699999999995,
+        "spotType": "viewpoint",
+        "score": 55
+      },
+      {
+        "name": "Belvédère de la Chambotte",
+        "lat": 45.7734908,
+        "lng": 5.8733669,
+        "spotType": "viewpoint",
+        "score": 50
+      }
+    ],
+    "spots": [
+      {
+        "name": "Colle San Giacomo",
+        "lat": 45.3267101,
+        "lng": 7.4169889,
+        "spotType": "pass",
+        "score": 50
+      },
+      {
+        "name": "Belvédère du Mont du Chat",
+        "lat": 45.6608988,
+        "lng": 5.8215699999999995,
+        "spotType": "viewpoint",
+        "score": 55
+      },
+      {
+        "name": "Belvédère de la Chambotte",
+        "lat": 45.7734908,
+        "lng": 5.8733669,
+        "spotType": "viewpoint",
+        "score": 50
+      }
+    ],
+    "source": "rider-spots.eu",
+    "sourceScope": "from-spots"
+  },
+  {
+    "id": "fr-france-cote-d-azur-belvedere-du-col-dilloire-curva-panoramica-cima-monte-bignone-punto-panoramico-passo-scolettas",
+    "name": "Giro Panoramico france-cote-d-azur: Belvédère du col d'Illoire → Curva Panoramica → Cima Monte Bignone, punto panoramico → Passo Scolettas",
+    "country": "FR",
+    "region": "france-cote-d-azur",
+    "rideType": "scenic",
+    "score": 58,
+    "difficulty": "media",
+    "distanceKm": 198.5,
+    "bestSeason": "Primavera / Estate / Autunno",
+    "description": "itinerario panoramico nell'area france-cote-d-azur, costruito su spot rider reali e pensato per offrire una guida piacevole, coerente e credibile.",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "mountain",
+      "twisty",
+      "rider-spot"
+    ],
+    "start": {
+      "name": "Belvédère du col d'Illoire",
+      "lat": 43.775631,
+      "lng": 6.2603043
+    },
+    "end": {
+      "name": "Passo Scolettas",
+      "lat": 44.307790999999995,
+      "lng": 6.993347
+    },
+    "center": {
+      "lat": 43.94692,
+      "lng": 7.17683
+    },
+    "waypoints": [
+      {
+        "name": "Belvédère du col d'Illoire",
+        "lat": 43.775631,
+        "lng": 6.2603043,
+        "spotType": "viewpoint",
+        "score": 59
+      },
+      {
+        "name": "Curva Panoramica",
+        "lat": 43.8307168,
+        "lng": 7.720002,
+        "spotType": "viewpoint",
+        "score": 50
+      },
+      {
+        "name": "Cima Monte Bignone, punto panoramico",
+        "lat": 43.873522,
+        "lng": 7.733676000000001,
+        "spotType": "viewpoint",
+        "score": 50
+      },
+      {
+        "name": "Passo Scolettas",
+        "lat": 44.307790999999995,
+        "lng": 6.993347,
+        "spotType": "pass",
+        "score": 51
+      }
+    ],
+    "spots": [
+      {
+        "name": "Belvédère du col d'Illoire",
+        "lat": 43.775631,
+        "lng": 6.2603043,
+        "spotType": "viewpoint",
+        "score": 59
+      },
+      {
+        "name": "Curva Panoramica",
+        "lat": 43.8307168,
+        "lng": 7.720002,
+        "spotType": "viewpoint",
+        "score": 50
+      },
+      {
+        "name": "Cima Monte Bignone, punto panoramico",
+        "lat": 43.873522,
+        "lng": 7.733676000000001,
+        "spotType": "viewpoint",
+        "score": 50
+      },
+      {
+        "name": "Passo Scolettas",
+        "lat": 44.307790999999995,
+        "lng": 6.993347,
+        "spotType": "pass",
+        "score": 51
+      }
+    ],
+    "source": "rider-spots.eu",
+    "sourceScope": "from-spots"
+  },
+  {
+    "id": "fr-france-alps-north-colle-san-giacomo-belvedere-de-la-chambotte",
+    "name": "Giro Panoramico france-alps-north: Colle San Giacomo → Belvédère de la Chambotte",
+    "country": "FR",
+    "region": "france-alps-north",
+    "rideType": "scenic",
+    "score": 57,
+    "difficulty": "media",
+    "distanceKm": 130.1,
+    "bestSeason": "Primavera / Estate / Autunno",
+    "description": "itinerario panoramico nell'area france-alps-north, costruito su spot rider reali e pensato per offrire una guida piacevole, coerente e credibile.",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "rider-spot",
+      "lake"
+    ],
+    "start": {
+      "name": "Colle San Giacomo",
+      "lat": 45.3267101,
+      "lng": 7.4169889
+    },
+    "end": {
+      "name": "Belvédère de la Chambotte",
+      "lat": 45.7734908,
+      "lng": 5.8733669
+    },
+    "center": {
+      "lat": 45.5501,
+      "lng": 6.64518
+    },
+    "waypoints": [
+      {
+        "name": "Colle San Giacomo",
+        "lat": 45.3267101,
+        "lng": 7.4169889,
+        "spotType": "pass",
+        "score": 50
+      },
+      {
+        "name": "Belvédère de la Chambotte",
+        "lat": 45.7734908,
+        "lng": 5.8733669,
+        "spotType": "viewpoint",
+        "score": 50
+      }
+    ],
+    "spots": [
+      {
+        "name": "Colle San Giacomo",
+        "lat": 45.3267101,
+        "lng": 7.4169889,
+        "spotType": "pass",
+        "score": 50
+      },
+      {
+        "name": "Belvédère de la Chambotte",
+        "lat": 45.7734908,
+        "lng": 5.8733669,
+        "spotType": "viewpoint",
+        "score": 50
+      }
+    ],
+    "source": "rider-spots.eu",
+    "sourceScope": "from-spots"
+  },
+  {
+    "id": "fr-france-alps-north-colle-san-giacomo-belvedere-du-mont-grele-belvedere-du-mont-du-chat-belvedere-de-la-chambotte",
+    "name": "Giro Panoramico france-alps-north: Colle San Giacomo → Belvédère du Mont-Grèle → Belvédère du Mont du Chat → Belvédère de la Chambotte",
+    "country": "FR",
+    "region": "france-alps-north",
+    "rideType": "scenic",
+    "score": 57,
+    "difficulty": "media",
+    "distanceKm": 155.9,
+    "bestSeason": "Primavera / Estate / Autunno",
+    "description": "itinerario panoramico nell'area france-alps-north, costruito su spot rider reali e pensato per offrire una guida piacevole, coerente e credibile.",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "rider-spot",
+      "lake"
+    ],
+    "start": {
+      "name": "Colle San Giacomo",
+      "lat": 45.3267101,
+      "lng": 7.4169889
+    },
+    "end": {
+      "name": "Belvédère de la Chambotte",
+      "lat": 45.7734908,
+      "lng": 5.8733669
+    },
+    "center": {
+      "lat": 45.56996,
+      "lng": 6.23156
+    },
+    "waypoints": [
+      {
+        "name": "Colle San Giacomo",
+        "lat": 45.3267101,
+        "lng": 7.4169889,
+        "spotType": "pass",
+        "score": 50
+      },
+      {
+        "name": "Belvédère du Mont-Grèle",
+        "lat": 45.518746199999995,
+        "lng": 5.814324,
+        "spotType": "viewpoint",
+        "score": 50
+      },
+      {
+        "name": "Belvédère du Mont du Chat",
+        "lat": 45.6608988,
+        "lng": 5.8215699999999995,
+        "spotType": "viewpoint",
+        "score": 55
+      },
+      {
+        "name": "Belvédère de la Chambotte",
+        "lat": 45.7734908,
+        "lng": 5.8733669,
+        "spotType": "viewpoint",
+        "score": 50
+      }
+    ],
+    "spots": [
+      {
+        "name": "Colle San Giacomo",
+        "lat": 45.3267101,
+        "lng": 7.4169889,
+        "spotType": "pass",
+        "score": 50
+      },
+      {
+        "name": "Belvédère du Mont-Grèle",
+        "lat": 45.518746199999995,
+        "lng": 5.814324,
+        "spotType": "viewpoint",
+        "score": 50
+      },
+      {
+        "name": "Belvédère du Mont du Chat",
+        "lat": 45.6608988,
+        "lng": 5.8215699999999995,
+        "spotType": "viewpoint",
+        "score": 55
+      },
+      {
+        "name": "Belvédère de la Chambotte",
+        "lat": 45.7734908,
+        "lng": 5.8733669,
+        "spotType": "viewpoint",
+        "score": 50
+      }
+    ],
+    "source": "rider-spots.eu",
+    "sourceScope": "from-spots"
+  },
+  {
+    "id": "fr-france-cote-d-azur-passo-scolettas-cima-monte-bignone-punto-panoramico",
+    "name": "Giro Panoramico france-cote-d-azur: Passo Scolettas → Cima Monte Bignone, punto panoramico",
+    "country": "FR",
+    "region": "france-cote-d-azur",
+    "rideType": "scenic",
+    "score": 57,
+    "difficulty": "bassa",
+    "distanceKm": 76.3,
+    "bestSeason": "Primavera / Estate / Autunno",
+    "description": "itinerario panoramico nell'area france-cote-d-azur, costruito su spot rider reali e pensato per offrire una guida piacevole, coerente e credibile.",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "mountain",
+      "twisty",
+      "rider-spot"
+    ],
+    "start": {
+      "name": "Passo Scolettas",
+      "lat": 44.307790999999995,
+      "lng": 6.993347
+    },
+    "end": {
+      "name": "Cima Monte Bignone, punto panoramico",
+      "lat": 43.873522,
+      "lng": 7.733676000000001
+    },
+    "center": {
+      "lat": 44.09066,
+      "lng": 7.36351
+    },
+    "waypoints": [
+      {
+        "name": "Passo Scolettas",
+        "lat": 44.307790999999995,
+        "lng": 6.993347,
+        "spotType": "pass",
+        "score": 51
+      },
+      {
+        "name": "Cima Monte Bignone, punto panoramico",
+        "lat": 43.873522,
+        "lng": 7.733676000000001,
+        "spotType": "viewpoint",
+        "score": 50
+      }
+    ],
+    "spots": [
+      {
+        "name": "Passo Scolettas",
+        "lat": 44.307790999999995,
+        "lng": 6.993347,
+        "spotType": "pass",
+        "score": 51
+      },
+      {
+        "name": "Cima Monte Bignone, punto panoramico",
+        "lat": 43.873522,
+        "lng": 7.733676000000001,
+        "spotType": "viewpoint",
+        "score": 50
+      }
+    ],
+    "source": "rider-spots.eu",
+    "sourceScope": "from-spots"
+  },
+  {
+    "id": "fr-france-alps-north-colle-san-giacomo-belvedere-du-mont-grele-belvedere-de-la-chambotte",
+    "name": "Giro Panoramico france-alps-north: Colle San Giacomo → Belvédère du Mont-Grèle → Belvédère de la Chambotte",
+    "country": "FR",
+    "region": "france-alps-north",
+    "rideType": "scenic",
+    "score": 56,
+    "difficulty": "media",
+    "distanceKm": 155.6,
+    "bestSeason": "Primavera / Estate / Autunno",
+    "description": "itinerario panoramico nell'area france-alps-north, costruito su spot rider reali e pensato per offrire una guida piacevole, coerente e credibile.",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "rider-spot",
+      "lake"
+    ],
+    "start": {
+      "name": "Colle San Giacomo",
+      "lat": 45.3267101,
+      "lng": 7.4169889
+    },
+    "end": {
+      "name": "Belvédère de la Chambotte",
+      "lat": 45.7734908,
+      "lng": 5.8733669
+    },
+    "center": {
+      "lat": 45.53965,
+      "lng": 6.36823
+    },
+    "waypoints": [
+      {
+        "name": "Colle San Giacomo",
+        "lat": 45.3267101,
+        "lng": 7.4169889,
+        "spotType": "pass",
+        "score": 50
+      },
+      {
+        "name": "Belvédère du Mont-Grèle",
+        "lat": 45.518746199999995,
+        "lng": 5.814324,
+        "spotType": "viewpoint",
+        "score": 50
+      },
+      {
+        "name": "Belvédère de la Chambotte",
+        "lat": 45.7734908,
+        "lng": 5.8733669,
+        "spotType": "viewpoint",
+        "score": 50
+      }
+    ],
+    "spots": [
+      {
+        "name": "Colle San Giacomo",
+        "lat": 45.3267101,
+        "lng": 7.4169889,
+        "spotType": "pass",
+        "score": 50
+      },
+      {
+        "name": "Belvédère du Mont-Grèle",
+        "lat": 45.518746199999995,
+        "lng": 5.814324,
+        "spotType": "viewpoint",
+        "score": 50
+      },
+      {
+        "name": "Belvédère de la Chambotte",
+        "lat": 45.7734908,
+        "lng": 5.8733669,
+        "spotType": "viewpoint",
+        "score": 50
+      }
+    ],
+    "source": "rider-spots.eu",
+    "sourceScope": "from-spots"
+  },
+  {
+    "id": "fr-france-alps-north-colle-san-giacomo-belvedere-du-mont-grele-belvedere-de-la-chambotte-belvedere-sur-lac",
+    "name": "Giro Panoramico france-alps-north: Colle San Giacomo → Belvédère du Mont-Grèle → Belvédère de la Chambotte → Belvédère sur lac",
+    "country": "FR",
+    "region": "france-alps-north",
+    "rideType": "scenic",
+    "score": 56,
+    "difficulty": "media",
+    "distanceKm": 174.2,
+    "bestSeason": "Primavera / Estate / Autunno",
+    "description": "itinerario panoramico nell'area france-alps-north, costruito su spot rider reali e pensato per offrire una guida piacevole, coerente e credibile.",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "rider-spot",
+      "lake"
+    ],
+    "start": {
+      "name": "Colle San Giacomo",
+      "lat": 45.3267101,
+      "lng": 7.4169889
+    },
+    "end": {
+      "name": "Belvédère sur lac",
+      "lat": 45.801305899999996,
+      "lng": 6.1101152
+    },
+    "center": {
+      "lat": 45.60506,
+      "lng": 6.3037
+    },
+    "waypoints": [
+      {
+        "name": "Colle San Giacomo",
+        "lat": 45.3267101,
+        "lng": 7.4169889,
+        "spotType": "pass",
+        "score": 50
+      },
+      {
+        "name": "Belvédère du Mont-Grèle",
+        "lat": 45.518746199999995,
+        "lng": 5.814324,
+        "spotType": "viewpoint",
+        "score": 50
+      },
+      {
+        "name": "Belvédère de la Chambotte",
+        "lat": 45.7734908,
+        "lng": 5.8733669,
+        "spotType": "viewpoint",
+        "score": 50
+      },
+      {
+        "name": "Belvédère sur lac",
+        "lat": 45.801305899999996,
+        "lng": 6.1101152,
+        "spotType": "viewpoint",
+        "score": 50
+      }
+    ],
+    "spots": [
+      {
+        "name": "Colle San Giacomo",
+        "lat": 45.3267101,
+        "lng": 7.4169889,
+        "spotType": "pass",
+        "score": 50
+      },
+      {
+        "name": "Belvédère du Mont-Grèle",
+        "lat": 45.518746199999995,
+        "lng": 5.814324,
+        "spotType": "viewpoint",
+        "score": 50
+      },
+      {
+        "name": "Belvédère de la Chambotte",
+        "lat": 45.7734908,
+        "lng": 5.8733669,
+        "spotType": "viewpoint",
+        "score": 50
+      },
+      {
+        "name": "Belvédère sur lac",
+        "lat": 45.801305899999996,
+        "lng": 6.1101152,
+        "spotType": "viewpoint",
+        "score": 50
+      }
+    ],
+    "source": "rider-spots.eu",
+    "sourceScope": "from-spots"
+  },
+  {
+    "id": "fr-france-alps-south-passo-del-prale-strada-dei-cannoni-colle-di-sampeyre-le-rooftop",
+    "name": "Giro Panoramico france-alps-south: Passo del Prale → Strada dei Cannoni → Colle di Sampeyre → Le Rooftop",
+    "country": "FR",
+    "region": "france-alps-south",
+    "rideType": "scenic",
+    "score": 56,
+    "difficulty": "media",
+    "distanceKm": 131.8,
+    "bestSeason": "Primavera / Estate / Autunno",
+    "description": "itinerario panoramico nell'area france-alps-south, costruito su spot rider reali e pensato per offrire una guida piacevole, coerente e credibile.",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "mountain",
+      "twisty",
+      "rider-spot",
+      "lake"
+    ],
+    "start": {
+      "name": "Passo del Prale",
+      "lat": 44.1082122,
+      "lng": 7.9215884
+    },
+    "end": {
+      "name": "Le Rooftop",
+      "lat": 44.5512606,
+      "lng": 6.4732258
+    },
+    "center": {
+      "lat": 44.43869,
+      "lng": 7.1629
+    },
+    "waypoints": [
+      {
+        "name": "Passo del Prale",
+        "lat": 44.1082122,
+        "lng": 7.9215884,
+        "spotType": "pass",
+        "score": 56
+      },
+      {
+        "name": "Strada dei Cannoni",
+        "lat": 44.5440567,
+        "lng": 7.1377565,
+        "spotType": "viewpoint",
+        "score": 50
+      },
+      {
+        "name": "Colle di Sampeyre",
+        "lat": 44.5512273,
+        "lng": 7.1190470999999995,
+        "spotType": "pass",
+        "score": 50
+      },
+      {
+        "name": "Le Rooftop",
+        "lat": 44.5512606,
+        "lng": 6.4732258,
+        "spotType": "viewpoint",
+        "score": 40
+      }
+    ],
+    "spots": [
+      {
+        "name": "Passo del Prale",
+        "lat": 44.1082122,
+        "lng": 7.9215884,
+        "spotType": "pass",
+        "score": 56
+      },
+      {
+        "name": "Strada dei Cannoni",
+        "lat": 44.5440567,
+        "lng": 7.1377565,
+        "spotType": "viewpoint",
+        "score": 50
+      },
+      {
+        "name": "Colle di Sampeyre",
+        "lat": 44.5512273,
+        "lng": 7.1190470999999995,
+        "spotType": "pass",
+        "score": 50
+      },
+      {
+        "name": "Le Rooftop",
+        "lat": 44.5512606,
+        "lng": 6.4732258,
+        "spotType": "viewpoint",
+        "score": 40
+      }
+    ],
+    "source": "rider-spots.eu",
+    "sourceScope": "from-spots"
+  },
+  {
+    "id": "fr-france-cote-d-azur-curva-panoramica-cima-monte-bignone-punto-panoramico-passo-scolettas",
+    "name": "Giro Panoramico france-cote-d-azur: Curva Panoramica → Cima Monte Bignone, punto panoramico → Passo Scolettas",
+    "country": "FR",
+    "region": "france-cote-d-azur",
+    "rideType": "scenic",
+    "score": 56,
+    "difficulty": "bassa",
+    "distanceKm": 81.2,
+    "bestSeason": "Primavera / Estate / Autunno",
+    "description": "itinerario panoramico nell'area france-cote-d-azur, costruito su spot rider reali e pensato per offrire una guida piacevole, coerente e credibile.",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "rider-spot",
+      "mountain",
+      "twisty"
+    ],
+    "start": {
+      "name": "Curva Panoramica",
+      "lat": 43.8307168,
+      "lng": 7.720002
+    },
+    "end": {
+      "name": "Passo Scolettas",
+      "lat": 44.307790999999995,
+      "lng": 6.993347
+    },
+    "center": {
+      "lat": 44.00401,
+      "lng": 7.48234
+    },
+    "waypoints": [
+      {
+        "name": "Curva Panoramica",
+        "lat": 43.8307168,
+        "lng": 7.720002,
+        "spotType": "viewpoint",
+        "score": 50
+      },
+      {
+        "name": "Cima Monte Bignone, punto panoramico",
+        "lat": 43.873522,
+        "lng": 7.733676000000001,
+        "spotType": "viewpoint",
+        "score": 50
+      },
+      {
+        "name": "Passo Scolettas",
+        "lat": 44.307790999999995,
+        "lng": 6.993347,
+        "spotType": "pass",
+        "score": 51
+      }
+    ],
+    "spots": [
+      {
+        "name": "Curva Panoramica",
+        "lat": 43.8307168,
+        "lng": 7.720002,
+        "spotType": "viewpoint",
+        "score": 50
+      },
+      {
+        "name": "Cima Monte Bignone, punto panoramico",
+        "lat": 43.873522,
+        "lng": 7.733676000000001,
+        "spotType": "viewpoint",
+        "score": 50
+      },
+      {
+        "name": "Passo Scolettas",
+        "lat": 44.307790999999995,
+        "lng": 6.993347,
+        "spotType": "pass",
+        "score": 51
+      }
+    ],
+    "source": "rider-spots.eu",
+    "sourceScope": "from-spots"
+  },
+  {
+    "id": "fr-france-cote-d-azur-panoramic-view-of-monaco-curva-panoramica-cima-monte-bignone-punto-panoramico-passo-scolettas",
+    "name": "Giro Panoramico france-cote-d-azur: Panoramic view of Monaco → Curva Panoramica → Cima Monte Bignone, punto panoramico → Passo Scolettas",
+    "country": "FR",
+    "region": "france-cote-d-azur",
+    "rideType": "scenic",
+    "score": 56,
+    "difficulty": "media",
+    "distanceKm": 107.4,
+    "bestSeason": "Primavera / Estate / Autunno",
+    "description": "itinerario panoramico nell'area france-cote-d-azur, costruito su spot rider reali e pensato per offrire una guida piacevole, coerente e credibile.",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "rider-spot",
+      "mountain",
+      "twisty"
+    ],
+    "start": {
+      "name": "Panoramic view of Monaco",
+      "lat": 43.7318259,
+      "lng": 7.4236159
+    },
+    "end": {
+      "name": "Passo Scolettas",
+      "lat": 44.307790999999995,
+      "lng": 6.993347
+    },
+    "center": {
+      "lat": 43.93596,
+      "lng": 7.46766
+    },
+    "waypoints": [
+      {
+        "name": "Panoramic view of Monaco",
+        "lat": 43.7318259,
+        "lng": 7.4236159,
+        "spotType": "viewpoint",
+        "score": 50
+      },
+      {
+        "name": "Curva Panoramica",
+        "lat": 43.8307168,
+        "lng": 7.720002,
+        "spotType": "viewpoint",
+        "score": 50
+      },
+      {
+        "name": "Cima Monte Bignone, punto panoramico",
+        "lat": 43.873522,
+        "lng": 7.733676000000001,
+        "spotType": "viewpoint",
+        "score": 50
+      },
+      {
+        "name": "Passo Scolettas",
+        "lat": 44.307790999999995,
+        "lng": 6.993347,
+        "spotType": "pass",
+        "score": 51
+      }
+    ],
+    "spots": [
+      {
+        "name": "Panoramic view of Monaco",
+        "lat": 43.7318259,
+        "lng": 7.4236159,
+        "spotType": "viewpoint",
+        "score": 50
+      },
+      {
+        "name": "Curva Panoramica",
+        "lat": 43.8307168,
+        "lng": 7.720002,
+        "spotType": "viewpoint",
+        "score": 50
+      },
+      {
+        "name": "Cima Monte Bignone, punto panoramico",
+        "lat": 43.873522,
+        "lng": 7.733676000000001,
+        "spotType": "viewpoint",
+        "score": 50
+      },
+      {
+        "name": "Passo Scolettas",
+        "lat": 44.307790999999995,
+        "lng": 6.993347,
+        "spotType": "pass",
+        "score": 51
+      }
+    ],
+    "source": "rider-spots.eu",
+    "sourceScope": "from-spots"
+  },
+  {
+    "id": "fr-france-cote-d-azur-parc-departemental-grande-corniche-corniche-dor",
+    "name": "Giro Costiero france-cote-d-azur: Parc départemental Grande Corniche → Corniche d'Or",
+    "country": "FR",
+    "region": "france-cote-d-azur",
+    "rideType": "coastal",
+    "score": 45,
+    "difficulty": "media",
+    "distanceKm": 43.5,
+    "bestSeason": "Primavera / Estate / Autunno",
+    "description": "itinerario costiero nell'area france-cote-d-azur, costruito su spot rider reali e pensato per offrire una guida piacevole, coerente e credibile.",
+    "tags": [
+      "coast",
+      "sea",
+      "scenic",
+      "rider",
+      "panoramic",
+      "rider-spot"
+    ],
+    "start": {
+      "name": "Parc départemental Grande Corniche",
+      "lat": 43.7386131,
+      "lng": 7.365169
+    },
+    "end": {
+      "name": "Corniche d'Or",
+      "lat": 43.4928258,
+      "lng": 6.9451664
+    },
+    "center": {
+      "lat": 43.61572,
+      "lng": 7.15517
+    },
+    "waypoints": [
+      {
+        "name": "Parc départemental Grande Corniche",
+        "lat": 43.7386131,
+        "lng": 7.365169,
+        "spotType": "viewpoint",
+        "score": 50
+      },
+      {
+        "name": "Corniche d'Or",
+        "lat": 43.4928258,
+        "lng": 6.9451664,
+        "spotType": "viewpoint",
+        "score": 30
+      }
+    ],
+    "spots": [
+      {
+        "name": "Parc départemental Grande Corniche",
+        "lat": 43.7386131,
+        "lng": 7.365169,
+        "spotType": "viewpoint",
+        "score": 50
+      },
+      {
+        "name": "Corniche d'Or",
+        "lat": 43.4928258,
+        "lng": 6.9451664,
+        "spotType": "viewpoint",
+        "score": 30
+      }
+    ],
+    "source": "rider-spots.eu",
+    "sourceScope": "from-spots"
+  },
+  {
+    "id": "fr-corsica-col-de-vergio-depart-randonnee-capo-rosso",
+    "name": "Giro Panoramico corsica: Col de Vergio → Départ randonnée Capo Rosso",
+    "country": "FR",
+    "region": "corsica",
+    "rideType": "scenic",
+    "score": 55,
+    "difficulty": "bassa",
+    "distanceKm": 25,
+    "bestSeason": "Primavera / Estate / Autunno",
+    "description": "itinerario panoramico nell'area corsica, costruito su spot rider reali e pensato per offrire una guida piacevole, coerente e credibile.",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "mountain",
+      "twisty",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "start": {
+      "name": "Col de Vergio",
+      "lat": 42.290414500000004,
+      "lng": 8.8783424
+    },
+    "end": {
+      "name": "Départ randonnée Capo Rosso",
+      "lat": 42.235333,
+      "lng": 8.5833186
+    },
+    "center": {
+      "lat": 42.26287,
+      "lng": 8.73083
+    },
+    "waypoints": [
+      {
+        "name": "Col de Vergio",
+        "lat": 42.290414500000004,
+        "lng": 8.8783424,
+        "spotType": "viewpoint",
+        "score": 50
+      },
+      {
+        "name": "Départ randonnée Capo Rosso",
+        "lat": 42.235333,
+        "lng": 8.5833186,
+        "spotType": "viewpoint",
+        "score": 50
+      }
+    ],
+    "spots": [
+      {
+        "name": "Col de Vergio",
+        "lat": 42.290414500000004,
+        "lng": 8.8783424,
+        "spotType": "viewpoint",
+        "score": 50
+      },
+      {
+        "name": "Départ randonnée Capo Rosso",
+        "lat": 42.235333,
+        "lng": 8.5833186,
+        "spotType": "viewpoint",
+        "score": 50
+      }
+    ],
+    "source": "rider-spots.eu",
+    "sourceScope": "from-spots"
+  },
+  {
+    "id": "fr-corsica-depart-randonnee-capo-rosso-randonnee-du-mont-gozzi-rundighjata-a-u-monti-gozzi",
+    "name": "Giro Panoramico corsica: Départ randonnée Capo Rosso → Randonnée du Mont Gozzi - Rundighjata à u Monti Gozzi",
+    "country": "FR",
+    "region": "corsica",
+    "rideType": "scenic",
+    "score": 55,
+    "difficulty": "bassa",
+    "distanceKm": 29.3,
+    "bestSeason": "Primavera / Estate / Autunno",
+    "description": "itinerario panoramico nell'area corsica, costruito su spot rider reali e pensato per offrire una guida piacevole, coerente e credibile.",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "rider-spot"
+    ],
+    "start": {
+      "name": "Départ randonnée Capo Rosso",
+      "lat": 42.235333,
+      "lng": 8.5833186
+    },
+    "end": {
+      "name": "Randonnée du Mont Gozzi - Rundighjata à u Monti Gozzi",
+      "lat": 42.0102111,
+      "lng": 8.7688433
+    },
+    "center": {
+      "lat": 42.12277,
+      "lng": 8.67608
+    },
+    "waypoints": [
+      {
+        "name": "Départ randonnée Capo Rosso",
+        "lat": 42.235333,
+        "lng": 8.5833186,
+        "spotType": "viewpoint",
+        "score": 50
+      },
+      {
+        "name": "Randonnée du Mont Gozzi - Rundighjata à u Monti Gozzi",
+        "lat": 42.0102111,
+        "lng": 8.7688433,
+        "spotType": "viewpoint",
+        "score": 50
+      }
+    ],
+    "spots": [
+      {
+        "name": "Départ randonnée Capo Rosso",
+        "lat": 42.235333,
+        "lng": 8.5833186,
+        "spotType": "viewpoint",
+        "score": 50
+      },
+      {
+        "name": "Randonnée du Mont Gozzi - Rundighjata à u Monti Gozzi",
+        "lat": 42.0102111,
+        "lng": 8.7688433,
+        "spotType": "viewpoint",
+        "score": 50
+      }
+    ],
+    "source": "rider-spots.eu",
+    "sourceScope": "from-spots"
+  },
+  {
+    "id": "fr-corsica-randonnee-du-mont-gozzi-rundighjata-a-u-monti-gozzi-depart-randonnee-capo-rosso-col-de-vergio",
+    "name": "Giro Panoramico corsica: Randonnée du Mont Gozzi - Rundighjata à u Monti Gozzi → Départ randonnée Capo Rosso → Col de Vergio",
+    "country": "FR",
+    "region": "corsica",
+    "rideType": "scenic",
+    "score": 55,
+    "difficulty": "bassa",
+    "distanceKm": 54.4,
+    "bestSeason": "Primavera / Estate / Autunno",
+    "description": "itinerario panoramico nell'area corsica, costruito su spot rider reali e pensato per offrire una guida piacevole, coerente e credibile.",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "rider-spot",
+      "mountain",
+      "twisty",
+      "mountain-pass"
+    ],
+    "start": {
+      "name": "Randonnée du Mont Gozzi - Rundighjata à u Monti Gozzi",
+      "lat": 42.0102111,
+      "lng": 8.7688433
+    },
+    "end": {
+      "name": "Col de Vergio",
+      "lat": 42.290414500000004,
+      "lng": 8.8783424
+    },
+    "center": {
+      "lat": 42.17865,
+      "lng": 8.7435
+    },
+    "waypoints": [
+      {
+        "name": "Randonnée du Mont Gozzi - Rundighjata à u Monti Gozzi",
+        "lat": 42.0102111,
+        "lng": 8.7688433,
+        "spotType": "viewpoint",
+        "score": 50
+      },
+      {
+        "name": "Départ randonnée Capo Rosso",
+        "lat": 42.235333,
+        "lng": 8.5833186,
+        "spotType": "viewpoint",
+        "score": 50
+      },
+      {
+        "name": "Col de Vergio",
+        "lat": 42.290414500000004,
+        "lng": 8.8783424,
+        "spotType": "viewpoint",
+        "score": 50
+      }
+    ],
+    "spots": [
+      {
+        "name": "Randonnée du Mont Gozzi - Rundighjata à u Monti Gozzi",
+        "lat": 42.0102111,
+        "lng": 8.7688433,
+        "spotType": "viewpoint",
+        "score": 50
+      },
+      {
+        "name": "Départ randonnée Capo Rosso",
+        "lat": 42.235333,
+        "lng": 8.5833186,
+        "spotType": "viewpoint",
+        "score": 50
+      },
+      {
+        "name": "Col de Vergio",
+        "lat": 42.290414500000004,
+        "lng": 8.8783424,
+        "spotType": "viewpoint",
+        "score": 50
+      }
+    ],
+    "source": "rider-spots.eu",
+    "sourceScope": "from-spots"
+  },
+  {
+    "id": "fr-corsica-randonnee-du-mont-gozzi-rundighjata-a-u-monti-gozzi-torra-di-u-lioni-di-roccapina",
+    "name": "Giro Panoramico corsica: Randonnée du Mont Gozzi - Rundighjata à u Monti Gozzi → Torra di u Lioni di Roccapina",
+    "country": "FR",
+    "region": "corsica",
+    "rideType": "scenic",
+    "score": 55,
+    "difficulty": "bassa",
+    "distanceKm": 58.7,
+    "bestSeason": "Primavera / Estate / Autunno",
+    "description": "itinerario panoramico nell'area corsica, costruito su spot rider reali e pensato per offrire una guida piacevole, coerente e credibile.",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "rider-spot"
+    ],
+    "start": {
+      "name": "Randonnée du Mont Gozzi - Rundighjata à u Monti Gozzi",
+      "lat": 42.0102111,
+      "lng": 8.7688433
+    },
+    "end": {
+      "name": "Torra di u Lioni di Roccapina",
+      "lat": 41.4955388,
+      "lng": 8.928753
+    },
+    "center": {
+      "lat": 41.75287,
+      "lng": 8.8488
+    },
+    "waypoints": [
+      {
+        "name": "Randonnée du Mont Gozzi - Rundighjata à u Monti Gozzi",
+        "lat": 42.0102111,
+        "lng": 8.7688433,
+        "spotType": "viewpoint",
+        "score": 50
+      },
+      {
+        "name": "Torra di u Lioni di Roccapina",
+        "lat": 41.4955388,
+        "lng": 8.928753,
+        "spotType": "viewpoint",
+        "score": 50
+      }
+    ],
+    "spots": [
+      {
+        "name": "Randonnée du Mont Gozzi - Rundighjata à u Monti Gozzi",
+        "lat": 42.0102111,
+        "lng": 8.7688433,
+        "spotType": "viewpoint",
+        "score": 50
+      },
+      {
+        "name": "Torra di u Lioni di Roccapina",
+        "lat": 41.4955388,
+        "lng": 8.928753,
+        "spotType": "viewpoint",
+        "score": 50
+      }
+    ],
+    "source": "rider-spots.eu",
+    "sourceScope": "from-spots"
+  },
+  {
+    "id": "fr-corsica-torra-di-u-lioni-di-roccapina-randonnee-du-mont-gozzi-rundighjata-a-u-monti-gozzi-depart-randonnee-capo-rosso",
+    "name": "Giro Panoramico corsica: Torra di u Lioni di Roccapina → Randonnée du Mont Gozzi - Rundighjata à u Monti Gozzi → Départ randonnée Capo Rosso",
+    "country": "FR",
+    "region": "corsica",
+    "rideType": "scenic",
+    "score": 55,
+    "difficulty": "bassa",
+    "distanceKm": 88.1,
+    "bestSeason": "Primavera / Estate / Autunno",
+    "description": "itinerario panoramico nell'area corsica, costruito su spot rider reali e pensato per offrire una guida piacevole, coerente e credibile.",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "rider-spot"
+    ],
+    "start": {
+      "name": "Torra di u Lioni di Roccapina",
+      "lat": 41.4955388,
+      "lng": 8.928753
+    },
+    "end": {
+      "name": "Départ randonnée Capo Rosso",
+      "lat": 42.235333,
+      "lng": 8.5833186
+    },
+    "center": {
+      "lat": 41.91369,
+      "lng": 8.7603
+    },
+    "waypoints": [
+      {
+        "name": "Torra di u Lioni di Roccapina",
+        "lat": 41.4955388,
+        "lng": 8.928753,
+        "spotType": "viewpoint",
+        "score": 50
+      },
+      {
+        "name": "Randonnée du Mont Gozzi - Rundighjata à u Monti Gozzi",
+        "lat": 42.0102111,
+        "lng": 8.7688433,
+        "spotType": "viewpoint",
+        "score": 50
+      },
+      {
+        "name": "Départ randonnée Capo Rosso",
+        "lat": 42.235333,
+        "lng": 8.5833186,
+        "spotType": "viewpoint",
+        "score": 50
+      }
+    ],
+    "spots": [
+      {
+        "name": "Torra di u Lioni di Roccapina",
+        "lat": 41.4955388,
+        "lng": 8.928753,
+        "spotType": "viewpoint",
+        "score": 50
+      },
+      {
+        "name": "Randonnée du Mont Gozzi - Rundighjata à u Monti Gozzi",
+        "lat": 42.0102111,
+        "lng": 8.7688433,
+        "spotType": "viewpoint",
+        "score": 50
+      },
+      {
+        "name": "Départ randonnée Capo Rosso",
+        "lat": 42.235333,
+        "lng": 8.5833186,
+        "spotType": "viewpoint",
+        "score": 50
+      }
+    ],
+    "source": "rider-spots.eu",
+    "sourceScope": "from-spots"
+  },
+  {
+    "id": "fr-corsica-torra-di-u-lioni-di-roccapina-randonnee-du-mont-gozzi-rundighjata-a-u-monti-gozzi-depart-randonnee-capo-rosso",
+    "name": "Giro Panoramico corsica: Torra di u Lioni di Roccapina → Randonnée du Mont Gozzi - Rundighjata à u Monti Gozzi → Départ randonnée Capo Rosso → Col de Vergio",
+    "country": "FR",
+    "region": "corsica",
+    "rideType": "scenic",
+    "score": 55,
+    "difficulty": "media",
+    "distanceKm": 113.1,
+    "bestSeason": "Primavera / Estate / Autunno",
+    "description": "itinerario panoramico nell'area corsica, costruito su spot rider reali e pensato per offrire una guida piacevole, coerente e credibile.",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "rider-spot",
+      "mountain",
+      "twisty",
+      "mountain-pass"
+    ],
+    "start": {
+      "name": "Torra di u Lioni di Roccapina",
+      "lat": 41.4955388,
+      "lng": 8.928753
+    },
+    "end": {
+      "name": "Col de Vergio",
+      "lat": 42.290414500000004,
+      "lng": 8.8783424
+    },
+    "center": {
+      "lat": 42.00787,
+      "lng": 8.78981
+    },
+    "waypoints": [
+      {
+        "name": "Torra di u Lioni di Roccapina",
+        "lat": 41.4955388,
+        "lng": 8.928753,
+        "spotType": "viewpoint",
+        "score": 50
+      },
+      {
+        "name": "Randonnée du Mont Gozzi - Rundighjata à u Monti Gozzi",
+        "lat": 42.0102111,
+        "lng": 8.7688433,
+        "spotType": "viewpoint",
+        "score": 50
+      },
+      {
+        "name": "Départ randonnée Capo Rosso",
+        "lat": 42.235333,
+        "lng": 8.5833186,
+        "spotType": "viewpoint",
+        "score": 50
+      },
+      {
+        "name": "Col de Vergio",
+        "lat": 42.290414500000004,
+        "lng": 8.8783424,
+        "spotType": "viewpoint",
+        "score": 50
+      }
+    ],
+    "spots": [
+      {
+        "name": "Torra di u Lioni di Roccapina",
+        "lat": 41.4955388,
+        "lng": 8.928753,
+        "spotType": "viewpoint",
+        "score": 50
+      },
+      {
+        "name": "Randonnée du Mont Gozzi - Rundighjata à u Monti Gozzi",
+        "lat": 42.0102111,
+        "lng": 8.7688433,
+        "spotType": "viewpoint",
+        "score": 50
+      },
+      {
+        "name": "Départ randonnée Capo Rosso",
+        "lat": 42.235333,
+        "lng": 8.5833186,
+        "spotType": "viewpoint",
+        "score": 50
+      },
+      {
+        "name": "Col de Vergio",
+        "lat": 42.290414500000004,
+        "lng": 8.8783424,
+        "spotType": "viewpoint",
+        "score": 50
+      }
+    ],
+    "source": "rider-spots.eu",
+    "sourceScope": "from-spots"
+  },
+  {
+    "id": "fr-france-alps-north-belvedere-de-la-chambotte-belvedere-du-mont-grele",
+    "name": "Giro Panoramico france-alps-north: Belvédère de la Chambotte → Belvédère du Mont-Grèle",
+    "country": "FR",
+    "region": "france-alps-north",
+    "rideType": "scenic",
+    "score": 55,
+    "difficulty": "bassa",
+    "distanceKm": 28.7,
+    "bestSeason": "Primavera / Estate / Autunno",
+    "description": "itinerario panoramico nell'area france-alps-north, costruito su spot rider reali e pensato per offrire una guida piacevole, coerente e credibile.",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "lake",
+      "rider-spot"
+    ],
+    "start": {
+      "name": "Belvédère de la Chambotte",
+      "lat": 45.7734908,
+      "lng": 5.8733669
+    },
+    "end": {
+      "name": "Belvédère du Mont-Grèle",
+      "lat": 45.518746199999995,
+      "lng": 5.814324
+    },
+    "center": {
+      "lat": 45.64612,
+      "lng": 5.84385
+    },
+    "waypoints": [
+      {
+        "name": "Belvédère de la Chambotte",
+        "lat": 45.7734908,
+        "lng": 5.8733669,
+        "spotType": "viewpoint",
+        "score": 50
+      },
+      {
+        "name": "Belvédère du Mont-Grèle",
+        "lat": 45.518746199999995,
+        "lng": 5.814324,
+        "spotType": "viewpoint",
+        "score": 50
+      }
+    ],
+    "spots": [
+      {
+        "name": "Belvédère de la Chambotte",
+        "lat": 45.7734908,
+        "lng": 5.8733669,
+        "spotType": "viewpoint",
+        "score": 50
+      },
+      {
+        "name": "Belvédère du Mont-Grèle",
+        "lat": 45.518746199999995,
+        "lng": 5.814324,
+        "spotType": "viewpoint",
+        "score": 50
+      }
+    ],
+    "source": "rider-spots.eu",
+    "sourceScope": "from-spots"
+  },
+  {
+    "id": "fr-france-alps-north-belvedere-du-mont-grele-belvedere-de-la-chambotte-belvedere-sur-lac",
+    "name": "Giro Panoramico france-alps-north: Belvédère du Mont-Grèle → Belvédère de la Chambotte → Belvédère sur lac",
+    "country": "FR",
+    "region": "france-alps-north",
+    "rideType": "scenic",
+    "score": 55,
+    "difficulty": "bassa",
+    "distanceKm": 47.3,
+    "bestSeason": "Primavera / Estate / Autunno",
+    "description": "itinerario panoramico nell'area france-alps-north, costruito su spot rider reali e pensato per offrire una guida piacevole, coerente e credibile.",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "rider-spot",
+      "lake"
+    ],
+    "start": {
+      "name": "Belvédère du Mont-Grèle",
+      "lat": 45.518746199999995,
+      "lng": 5.814324
+    },
+    "end": {
+      "name": "Belvédère sur lac",
+      "lat": 45.801305899999996,
+      "lng": 6.1101152
+    },
+    "center": {
+      "lat": 45.69785,
+      "lng": 5.9326
+    },
+    "waypoints": [
+      {
+        "name": "Belvédère du Mont-Grèle",
+        "lat": 45.518746199999995,
+        "lng": 5.814324,
+        "spotType": "viewpoint",
+        "score": 50
+      },
+      {
+        "name": "Belvédère de la Chambotte",
+        "lat": 45.7734908,
+        "lng": 5.8733669,
+        "spotType": "viewpoint",
+        "score": 50
+      },
+      {
+        "name": "Belvédère sur lac",
+        "lat": 45.801305899999996,
+        "lng": 6.1101152,
+        "spotType": "viewpoint",
+        "score": 50
+      }
+    ],
+    "spots": [
+      {
+        "name": "Belvédère du Mont-Grèle",
+        "lat": 45.518746199999995,
+        "lng": 5.814324,
+        "spotType": "viewpoint",
+        "score": 50
+      },
+      {
+        "name": "Belvédère de la Chambotte",
+        "lat": 45.7734908,
+        "lng": 5.8733669,
+        "spotType": "viewpoint",
+        "score": 50
+      },
+      {
+        "name": "Belvédère sur lac",
+        "lat": 45.801305899999996,
+        "lng": 6.1101152,
+        "spotType": "viewpoint",
+        "score": 50
+      }
+    ],
+    "source": "rider-spots.eu",
+    "sourceScope": "from-spots"
+  },
+  {
+    "id": "fr-france-alps-north-belvedere-du-mont-grele-belvedere-de-la-chambotte-belvedere-sur-lac-la-croix-de-fer-1649-m",
+    "name": "Giro Panoramico france-alps-north: Belvédère du Mont-Grèle → Belvédère de la Chambotte → Belvédère sur lac → La croix de fer (1649 m)",
+    "country": "FR",
+    "region": "france-alps-north",
+    "rideType": "scenic",
+    "score": 55,
+    "difficulty": "bassa",
+    "distanceKm": 76,
+    "bestSeason": "Primavera / Estate / Autunno",
+    "description": "itinerario panoramico nell'area france-alps-north, costruito su spot rider reali e pensato per offrire una guida piacevole, coerente e credibile.",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "rider-spot",
+      "lake"
+    ],
+    "start": {
+      "name": "Belvédère du Mont-Grèle",
+      "lat": 45.518746199999995,
+      "lng": 5.814324
+    },
+    "end": {
+      "name": "La croix de fer (1649 m)",
+      "lat": 45.8632337,
+      "lng": 6.4694348999999995
+    },
+    "center": {
+      "lat": 45.73919,
+      "lng": 6.06681
+    },
+    "waypoints": [
+      {
+        "name": "Belvédère du Mont-Grèle",
+        "lat": 45.518746199999995,
+        "lng": 5.814324,
+        "spotType": "viewpoint",
+        "score": 50
+      },
+      {
+        "name": "Belvédère de la Chambotte",
+        "lat": 45.7734908,
+        "lng": 5.8733669,
+        "spotType": "viewpoint",
+        "score": 50
+      },
+      {
+        "name": "Belvédère sur lac",
+        "lat": 45.801305899999996,
+        "lng": 6.1101152,
+        "spotType": "viewpoint",
+        "score": 50
+      },
+      {
+        "name": "La croix de fer (1649 m)",
+        "lat": 45.8632337,
+        "lng": 6.4694348999999995,
+        "spotType": "viewpoint",
+        "score": 50
+      }
+    ],
+    "spots": [
+      {
+        "name": "Belvédère du Mont-Grèle",
+        "lat": 45.518746199999995,
+        "lng": 5.814324,
+        "spotType": "viewpoint",
+        "score": 50
+      },
+      {
+        "name": "Belvédère de la Chambotte",
+        "lat": 45.7734908,
+        "lng": 5.8733669,
+        "spotType": "viewpoint",
+        "score": 50
+      },
+      {
+        "name": "Belvédère sur lac",
+        "lat": 45.801305899999996,
+        "lng": 6.1101152,
+        "spotType": "viewpoint",
+        "score": 50
+      },
+      {
+        "name": "La croix de fer (1649 m)",
+        "lat": 45.8632337,
+        "lng": 6.4694348999999995,
+        "spotType": "viewpoint",
+        "score": 50
+      }
+    ],
+    "source": "rider-spots.eu",
+    "sourceScope": "from-spots"
+  },
+  {
+    "id": "fr-france-alps-north-belvedere-du-mont-grele-belvedere-sur-lac",
+    "name": "Giro Panoramico france-alps-north: Belvédère du Mont-Grèle → Belvédère sur lac",
+    "country": "FR",
+    "region": "france-alps-north",
+    "rideType": "scenic",
+    "score": 55,
+    "difficulty": "bassa",
+    "distanceKm": 38.9,
+    "bestSeason": "Primavera / Estate / Autunno",
+    "description": "itinerario panoramico nell'area france-alps-north, costruito su spot rider reali e pensato per offrire una guida piacevole, coerente e credibile.",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "rider-spot",
+      "lake"
+    ],
+    "start": {
+      "name": "Belvédère du Mont-Grèle",
+      "lat": 45.518746199999995,
+      "lng": 5.814324
+    },
+    "end": {
+      "name": "Belvédère sur lac",
+      "lat": 45.801305899999996,
+      "lng": 6.1101152
+    },
+    "center": {
+      "lat": 45.66003,
+      "lng": 5.96222
+    },
+    "waypoints": [
+      {
+        "name": "Belvédère du Mont-Grèle",
+        "lat": 45.518746199999995,
+        "lng": 5.814324,
+        "spotType": "viewpoint",
+        "score": 50
+      },
+      {
+        "name": "Belvédère sur lac",
+        "lat": 45.801305899999996,
+        "lng": 6.1101152,
+        "spotType": "viewpoint",
+        "score": 50
+      }
+    ],
+    "spots": [
+      {
+        "name": "Belvédère du Mont-Grèle",
+        "lat": 45.518746199999995,
+        "lng": 5.814324,
+        "spotType": "viewpoint",
+        "score": 50
+      },
+      {
+        "name": "Belvédère sur lac",
+        "lat": 45.801305899999996,
+        "lng": 6.1101152,
+        "spotType": "viewpoint",
+        "score": 50
+      }
+    ],
+    "source": "rider-spots.eu",
+    "sourceScope": "from-spots"
+  },
+  {
+    "id": "fr-france-alps-north-belvedere-du-mont-grele-belvedere-sur-lac-la-croix-de-fer-1649-m",
+    "name": "Giro Panoramico france-alps-north: Belvédère du Mont-Grèle → Belvédère sur lac → La croix de fer (1649 m)",
+    "country": "FR",
+    "region": "france-alps-north",
+    "rideType": "scenic",
+    "score": 55,
+    "difficulty": "bassa",
+    "distanceKm": 67.6,
+    "bestSeason": "Primavera / Estate / Autunno",
+    "description": "itinerario panoramico nell'area france-alps-north, costruito su spot rider reali e pensato per offrire una guida piacevole, coerente e credibile.",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "rider-spot",
+      "lake"
+    ],
+    "start": {
+      "name": "Belvédère du Mont-Grèle",
+      "lat": 45.518746199999995,
+      "lng": 5.814324
+    },
+    "end": {
+      "name": "La croix de fer (1649 m)",
+      "lat": 45.8632337,
+      "lng": 6.4694348999999995
+    },
+    "center": {
+      "lat": 45.72776,
+      "lng": 6.13129
+    },
+    "waypoints": [
+      {
+        "name": "Belvédère du Mont-Grèle",
+        "lat": 45.518746199999995,
+        "lng": 5.814324,
+        "spotType": "viewpoint",
+        "score": 50
+      },
+      {
+        "name": "Belvédère sur lac",
+        "lat": 45.801305899999996,
+        "lng": 6.1101152,
+        "spotType": "viewpoint",
+        "score": 50
+      },
+      {
+        "name": "La croix de fer (1649 m)",
+        "lat": 45.8632337,
+        "lng": 6.4694348999999995,
+        "spotType": "viewpoint",
+        "score": 50
+      }
+    ],
+    "spots": [
+      {
+        "name": "Belvédère du Mont-Grèle",
+        "lat": 45.518746199999995,
+        "lng": 5.814324,
+        "spotType": "viewpoint",
+        "score": 50
+      },
+      {
+        "name": "Belvédère sur lac",
+        "lat": 45.801305899999996,
+        "lng": 6.1101152,
+        "spotType": "viewpoint",
+        "score": 50
+      },
+      {
+        "name": "La croix de fer (1649 m)",
+        "lat": 45.8632337,
+        "lng": 6.4694348999999995,
+        "spotType": "viewpoint",
+        "score": 50
+      }
+    ],
+    "source": "rider-spots.eu",
+    "sourceScope": "from-spots"
+  },
+  {
+    "id": "fr-france-alps-north-belvedere-sur-lac-la-croix-de-fer-1649-m",
+    "name": "Giro Panoramico france-alps-north: Belvédère sur lac → La croix de fer (1649 m)",
+    "country": "FR",
+    "region": "france-alps-north",
+    "rideType": "scenic",
+    "score": 55,
+    "difficulty": "bassa",
+    "distanceKm": 28.7,
+    "bestSeason": "Primavera / Estate / Autunno",
+    "description": "itinerario panoramico nell'area france-alps-north, costruito su spot rider reali e pensato per offrire una guida piacevole, coerente e credibile.",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "lake",
+      "rider-spot"
+    ],
+    "start": {
+      "name": "Belvédère sur lac",
+      "lat": 45.801305899999996,
+      "lng": 6.1101152
+    },
+    "end": {
+      "name": "La croix de fer (1649 m)",
+      "lat": 45.8632337,
+      "lng": 6.4694348999999995
+    },
+    "center": {
+      "lat": 45.83227,
+      "lng": 6.28978
+    },
+    "waypoints": [
+      {
+        "name": "Belvédère sur lac",
+        "lat": 45.801305899999996,
+        "lng": 6.1101152,
+        "spotType": "viewpoint",
+        "score": 50
+      },
+      {
+        "name": "La croix de fer (1649 m)",
+        "lat": 45.8632337,
+        "lng": 6.4694348999999995,
+        "spotType": "viewpoint",
+        "score": 50
+      }
+    ],
+    "spots": [
+      {
+        "name": "Belvédère sur lac",
+        "lat": 45.801305899999996,
+        "lng": 6.1101152,
+        "spotType": "viewpoint",
+        "score": 50
+      },
+      {
+        "name": "La croix de fer (1649 m)",
+        "lat": 45.8632337,
+        "lng": 6.4694348999999995,
+        "spotType": "viewpoint",
+        "score": 50
+      }
+    ],
+    "source": "rider-spots.eu",
+    "sourceScope": "from-spots"
+  },
+  {
+    "id": "fr-france-alps-north-la-croix-de-fer-1649-m-lacs-robert",
+    "name": "Giro Panoramico france-alps-north: La croix de fer (1649 m) → Lacs Robert",
+    "country": "FR",
+    "region": "france-alps-north",
+    "rideType": "scenic",
+    "score": 55,
+    "difficulty": "bassa",
+    "distanceKm": 92.2,
+    "bestSeason": "Primavera / Estate / Autunno",
+    "description": "itinerario panoramico nell'area france-alps-north, costruito su spot rider reali e pensato per offrire una guida piacevole, coerente e credibile.",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "rider-spot",
+      "lake"
+    ],
+    "start": {
+      "name": "La croix de fer (1649 m)",
+      "lat": 45.8632337,
+      "lng": 6.4694348999999995
+    },
+    "end": {
+      "name": "Lacs Robert",
+      "lat": 45.131569,
+      "lng": 5.9124966
+    },
+    "center": {
+      "lat": 45.4974,
+      "lng": 6.19097
+    },
+    "waypoints": [
+      {
+        "name": "La croix de fer (1649 m)",
+        "lat": 45.8632337,
+        "lng": 6.4694348999999995,
+        "spotType": "viewpoint",
+        "score": 50
+      },
+      {
+        "name": "Lacs Robert",
+        "lat": 45.131569,
+        "lng": 5.9124966,
+        "spotType": "viewpoint",
+        "score": 50
+      }
+    ],
+    "spots": [
+      {
+        "name": "La croix de fer (1649 m)",
+        "lat": 45.8632337,
+        "lng": 6.4694348999999995,
+        "spotType": "viewpoint",
+        "score": 50
+      },
+      {
+        "name": "Lacs Robert",
+        "lat": 45.131569,
+        "lng": 5.9124966,
+        "spotType": "viewpoint",
+        "score": 50
+      }
+    ],
+    "source": "rider-spots.eu",
+    "sourceScope": "from-spots"
+  },
+  {
+    "id": "fr-france-alps-north-lacs-robert-belvedere-du-mont-grele-belvedere-sur-lac-la-croix-de-fer-1649-m",
+    "name": "Giro Panoramico france-alps-north: Lacs Robert → Belvédère du Mont-Grèle → Belvédère sur lac → La croix de fer (1649 m)",
+    "country": "FR",
+    "region": "france-alps-north",
+    "rideType": "scenic",
+    "score": 55,
+    "difficulty": "media",
+    "distanceKm": 111.3,
+    "bestSeason": "Primavera / Estate / Autunno",
+    "description": "itinerario panoramico nell'area france-alps-north, costruito su spot rider reali e pensato per offrire una guida piacevole, coerente e credibile.",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "lake",
+      "rider-spot"
+    ],
+    "start": {
+      "name": "Lacs Robert",
+      "lat": 45.131569,
+      "lng": 5.9124966
+    },
+    "end": {
+      "name": "La croix de fer (1649 m)",
+      "lat": 45.8632337,
+      "lng": 6.4694348999999995
+    },
+    "center": {
+      "lat": 45.57871,
+      "lng": 6.07659
+    },
+    "waypoints": [
+      {
+        "name": "Lacs Robert",
+        "lat": 45.131569,
+        "lng": 5.9124966,
+        "spotType": "viewpoint",
+        "score": 50
+      },
+      {
+        "name": "Belvédère du Mont-Grèle",
+        "lat": 45.518746199999995,
+        "lng": 5.814324,
+        "spotType": "viewpoint",
+        "score": 50
+      },
+      {
+        "name": "Belvédère sur lac",
+        "lat": 45.801305899999996,
+        "lng": 6.1101152,
+        "spotType": "viewpoint",
+        "score": 50
+      },
+      {
+        "name": "La croix de fer (1649 m)",
+        "lat": 45.8632337,
+        "lng": 6.4694348999999995,
+        "spotType": "viewpoint",
+        "score": 50
+      }
+    ],
+    "spots": [
+      {
+        "name": "Lacs Robert",
+        "lat": 45.131569,
+        "lng": 5.9124966,
+        "spotType": "viewpoint",
+        "score": 50
+      },
+      {
+        "name": "Belvédère du Mont-Grèle",
+        "lat": 45.518746199999995,
+        "lng": 5.814324,
+        "spotType": "viewpoint",
+        "score": 50
+      },
+      {
+        "name": "Belvédère sur lac",
+        "lat": 45.801305899999996,
+        "lng": 6.1101152,
+        "spotType": "viewpoint",
+        "score": 50
+      },
+      {
+        "name": "La croix de fer (1649 m)",
+        "lat": 45.8632337,
+        "lng": 6.4694348999999995,
+        "spotType": "viewpoint",
+        "score": 50
+      }
+    ],
+    "source": "rider-spots.eu",
+    "sourceScope": "from-spots"
+  },
+  {
+    "id": "fr-france-alps-north-lacs-robert-belvedere-sur-lac-la-croix-de-fer-1649-m",
+    "name": "Giro Panoramico france-alps-north: Lacs Robert → Belvédère sur lac → La croix de fer (1649 m)",
+    "country": "FR",
+    "region": "france-alps-north",
+    "rideType": "scenic",
+    "score": 55,
+    "difficulty": "media",
+    "distanceKm": 104.7,
+    "bestSeason": "Primavera / Estate / Autunno",
+    "description": "itinerario panoramico nell'area france-alps-north, costruito su spot rider reali e pensato per offrire una guida piacevole, coerente e credibile.",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "lake",
+      "rider-spot"
+    ],
+    "start": {
+      "name": "Lacs Robert",
+      "lat": 45.131569,
+      "lng": 5.9124966
+    },
+    "end": {
+      "name": "La croix de fer (1649 m)",
+      "lat": 45.8632337,
+      "lng": 6.4694348999999995
+    },
+    "center": {
+      "lat": 45.5987,
+      "lng": 6.16402
+    },
+    "waypoints": [
+      {
+        "name": "Lacs Robert",
+        "lat": 45.131569,
+        "lng": 5.9124966,
+        "spotType": "viewpoint",
+        "score": 50
+      },
+      {
+        "name": "Belvédère sur lac",
+        "lat": 45.801305899999996,
+        "lng": 6.1101152,
+        "spotType": "viewpoint",
+        "score": 50
+      },
+      {
+        "name": "La croix de fer (1649 m)",
+        "lat": 45.8632337,
+        "lng": 6.4694348999999995,
+        "spotType": "viewpoint",
+        "score": 50
+      }
+    ],
+    "spots": [
+      {
+        "name": "Lacs Robert",
+        "lat": 45.131569,
+        "lng": 5.9124966,
+        "spotType": "viewpoint",
+        "score": 50
+      },
+      {
+        "name": "Belvédère sur lac",
+        "lat": 45.801305899999996,
+        "lng": 6.1101152,
+        "spotType": "viewpoint",
+        "score": 50
+      },
+      {
+        "name": "La croix de fer (1649 m)",
+        "lat": 45.8632337,
+        "lng": 6.4694348999999995,
+        "spotType": "viewpoint",
+        "score": 50
+      }
+    ],
+    "source": "rider-spots.eu",
+    "sourceScope": "from-spots"
+  },
+  {
+    "id": "fr-france-alps-north-lacs-robert-belvedere-sur-lac-la-croix-de-fer-1649-m-le-pas-de-laigle",
+    "name": "Giro Panoramico france-alps-north: Lacs Robert → Belvédère sur lac → La croix de fer (1649 m) → Le Pas de l'Aigle",
+    "country": "FR",
+    "region": "france-alps-north",
+    "rideType": "scenic",
+    "score": 55,
+    "difficulty": "media",
+    "distanceKm": 141.9,
+    "bestSeason": "Primavera / Estate / Autunno",
+    "description": "itinerario panoramico nell'area france-alps-north, costruito su spot rider reali e pensato per offrire una guida piacevole, coerente e credibile.",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "lake",
+      "rider-spot"
+    ],
+    "start": {
+      "name": "Lacs Robert",
+      "lat": 45.131569,
+      "lng": 5.9124966
+    },
+    "end": {
+      "name": "Le Pas de l'Aigle",
+      "lat": 46.1473687,
+      "lng": 6.7230126
+    },
+    "center": {
+      "lat": 45.73587,
+      "lng": 6.30376
+    },
+    "waypoints": [
+      {
+        "name": "Lacs Robert",
+        "lat": 45.131569,
+        "lng": 5.9124966,
+        "spotType": "viewpoint",
+        "score": 50
+      },
+      {
+        "name": "Belvédère sur lac",
+        "lat": 45.801305899999996,
+        "lng": 6.1101152,
+        "spotType": "viewpoint",
+        "score": 50
+      },
+      {
+        "name": "La croix de fer (1649 m)",
+        "lat": 45.8632337,
+        "lng": 6.4694348999999995,
+        "spotType": "viewpoint",
+        "score": 50
+      },
+      {
+        "name": "Le Pas de l'Aigle",
+        "lat": 46.1473687,
+        "lng": 6.7230126,
+        "spotType": "viewpoint",
+        "score": 50
+      }
+    ],
+    "spots": [
+      {
+        "name": "Lacs Robert",
+        "lat": 45.131569,
+        "lng": 5.9124966,
+        "spotType": "viewpoint",
+        "score": 50
+      },
+      {
+        "name": "Belvédère sur lac",
+        "lat": 45.801305899999996,
+        "lng": 6.1101152,
+        "spotType": "viewpoint",
+        "score": 50
+      },
+      {
+        "name": "La croix de fer (1649 m)",
+        "lat": 45.8632337,
+        "lng": 6.4694348999999995,
+        "spotType": "viewpoint",
+        "score": 50
+      },
+      {
+        "name": "Le Pas de l'Aigle",
+        "lat": 46.1473687,
+        "lng": 6.7230126,
+        "spotType": "viewpoint",
+        "score": 50
+      }
+    ],
+    "source": "rider-spots.eu",
+    "sourceScope": "from-spots"
+  },
+  {
+    "id": "fr-france-alps-north-lacs-robert-la-croix-de-fer-1649-m-le-pas-de-laigle",
+    "name": "Giro Panoramico france-alps-north: Lacs Robert → La croix de fer (1649 m) → Le Pas de l'Aigle",
+    "country": "FR",
+    "region": "france-alps-north",
+    "rideType": "scenic",
+    "score": 55,
+    "difficulty": "media",
+    "distanceKm": 129.4,
+    "bestSeason": "Primavera / Estate / Autunno",
+    "description": "itinerario panoramico nell'area france-alps-north, costruito su spot rider reali e pensato per offrire una guida piacevole, coerente e credibile.",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "lake",
+      "rider-spot"
+    ],
+    "start": {
+      "name": "Lacs Robert",
+      "lat": 45.131569,
+      "lng": 5.9124966
+    },
+    "end": {
+      "name": "Le Pas de l'Aigle",
+      "lat": 46.1473687,
+      "lng": 6.7230126
+    },
+    "center": {
+      "lat": 45.71406,
+      "lng": 6.36831
+    },
+    "waypoints": [
+      {
+        "name": "Lacs Robert",
+        "lat": 45.131569,
+        "lng": 5.9124966,
+        "spotType": "viewpoint",
+        "score": 50
+      },
+      {
+        "name": "La croix de fer (1649 m)",
+        "lat": 45.8632337,
+        "lng": 6.4694348999999995,
+        "spotType": "viewpoint",
+        "score": 50
+      },
+      {
+        "name": "Le Pas de l'Aigle",
+        "lat": 46.1473687,
+        "lng": 6.7230126,
+        "spotType": "viewpoint",
+        "score": 50
+      }
+    ],
+    "spots": [
+      {
+        "name": "Lacs Robert",
+        "lat": 45.131569,
+        "lng": 5.9124966,
+        "spotType": "viewpoint",
+        "score": 50
+      },
+      {
+        "name": "La croix de fer (1649 m)",
+        "lat": 45.8632337,
+        "lng": 6.4694348999999995,
+        "spotType": "viewpoint",
+        "score": 50
+      },
+      {
+        "name": "Le Pas de l'Aigle",
+        "lat": 46.1473687,
+        "lng": 6.7230126,
+        "spotType": "viewpoint",
+        "score": 50
+      }
+    ],
+    "source": "rider-spots.eu",
+    "sourceScope": "from-spots"
+  },
+  {
+    "id": "fr-france-alps-north-lacs-robert-le-pas-de-laigle",
+    "name": "Giro Panoramico france-alps-north: Lacs Robert → Le Pas de l'Aigle",
+    "country": "FR",
+    "region": "france-alps-north",
+    "rideType": "scenic",
+    "score": 55,
+    "difficulty": "media",
+    "distanceKm": 129.3,
+    "bestSeason": "Primavera / Estate / Autunno",
+    "description": "itinerario panoramico nell'area france-alps-north, costruito su spot rider reali e pensato per offrire una guida piacevole, coerente e credibile.",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "lake",
+      "rider-spot"
+    ],
+    "start": {
+      "name": "Lacs Robert",
+      "lat": 45.131569,
+      "lng": 5.9124966
+    },
+    "end": {
+      "name": "Le Pas de l'Aigle",
+      "lat": 46.1473687,
+      "lng": 6.7230126
+    },
+    "center": {
+      "lat": 45.63947,
+      "lng": 6.31775
+    },
+    "waypoints": [
+      {
+        "name": "Lacs Robert",
+        "lat": 45.131569,
+        "lng": 5.9124966,
+        "spotType": "viewpoint",
+        "score": 50
+      },
+      {
+        "name": "Le Pas de l'Aigle",
+        "lat": 46.1473687,
+        "lng": 6.7230126,
+        "spotType": "viewpoint",
+        "score": 50
+      }
+    ],
+    "spots": [
+      {
+        "name": "Lacs Robert",
+        "lat": 45.131569,
+        "lng": 5.9124966,
+        "spotType": "viewpoint",
+        "score": 50
+      },
+      {
+        "name": "Le Pas de l'Aigle",
+        "lat": 46.1473687,
+        "lng": 6.7230126,
+        "spotType": "viewpoint",
+        "score": 50
+      }
+    ],
+    "source": "rider-spots.eu",
+    "sourceScope": "from-spots"
+  },
+  {
+    "id": "fr-france-alps-north-lacs-robert-molard-noir-la-croix-de-fer-1649-m-le-pas-de-laigle",
+    "name": "Giro Panoramico france-alps-north: Lacs Robert → Molard Noir → La croix de fer (1649 m) → Le Pas de l'Aigle",
+    "country": "FR",
+    "region": "france-alps-north",
+    "rideType": "scenic",
+    "score": 55,
+    "difficulty": "media",
+    "distanceKm": 151.6,
+    "bestSeason": "Primavera / Estate / Autunno",
+    "description": "itinerario panoramico nell'area france-alps-north, costruito su spot rider reali e pensato per offrire una guida piacevole, coerente e credibile.",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "lake",
+      "rider-spot"
+    ],
+    "start": {
+      "name": "Lacs Robert",
+      "lat": 45.131569,
+      "lng": 5.9124966
+    },
+    "end": {
+      "name": "Le Pas de l'Aigle",
+      "lat": 46.1473687,
+      "lng": 6.7230126
+    },
+    "center": {
+      "lat": 45.70346,
+      "lng": 6.23359
+    },
+    "waypoints": [
+      {
+        "name": "Lacs Robert",
+        "lat": 45.131569,
+        "lng": 5.9124966,
+        "spotType": "viewpoint",
+        "score": 50
+      },
+      {
+        "name": "Molard Noir",
+        "lat": 45.6716846,
+        "lng": 5.8294057,
+        "spotType": "viewpoint",
+        "score": 50
+      },
+      {
+        "name": "La croix de fer (1649 m)",
+        "lat": 45.8632337,
+        "lng": 6.4694348999999995,
+        "spotType": "viewpoint",
+        "score": 50
+      },
+      {
+        "name": "Le Pas de l'Aigle",
+        "lat": 46.1473687,
+        "lng": 6.7230126,
+        "spotType": "viewpoint",
+        "score": 50
+      }
+    ],
+    "spots": [
+      {
+        "name": "Lacs Robert",
+        "lat": 45.131569,
+        "lng": 5.9124966,
+        "spotType": "viewpoint",
+        "score": 50
+      },
+      {
+        "name": "Molard Noir",
+        "lat": 45.6716846,
+        "lng": 5.8294057,
+        "spotType": "viewpoint",
+        "score": 50
+      },
+      {
+        "name": "La croix de fer (1649 m)",
+        "lat": 45.8632337,
+        "lng": 6.4694348999999995,
+        "spotType": "viewpoint",
+        "score": 50
+      },
+      {
+        "name": "Le Pas de l'Aigle",
+        "lat": 46.1473687,
+        "lng": 6.7230126,
+        "spotType": "viewpoint",
+        "score": 50
+      }
+    ],
+    "source": "rider-spots.eu",
+    "sourceScope": "from-spots"
+  },
+  {
+    "id": "fr-france-alps-north-lacs-robert-molard-noir-le-pas-de-laigle",
+    "name": "Giro Panoramico france-alps-north: Lacs Robert → Molard Noir → Le Pas de l'Aigle",
+    "country": "FR",
+    "region": "france-alps-north",
+    "rideType": "scenic",
+    "score": 55,
+    "difficulty": "media",
+    "distanceKm": 147.5,
+    "bestSeason": "Primavera / Estate / Autunno",
+    "description": "itinerario panoramico nell'area france-alps-north, costruito su spot rider reali e pensato per offrire una guida piacevole, coerente e credibile.",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "lake",
+      "rider-spot"
+    ],
+    "start": {
+      "name": "Lacs Robert",
+      "lat": 45.131569,
+      "lng": 5.9124966
+    },
+    "end": {
+      "name": "Le Pas de l'Aigle",
+      "lat": 46.1473687,
+      "lng": 6.7230126
+    },
+    "center": {
+      "lat": 45.65021,
+      "lng": 6.15497
+    },
+    "waypoints": [
+      {
+        "name": "Lacs Robert",
+        "lat": 45.131569,
+        "lng": 5.9124966,
+        "spotType": "viewpoint",
+        "score": 50
+      },
+      {
+        "name": "Molard Noir",
+        "lat": 45.6716846,
+        "lng": 5.8294057,
+        "spotType": "viewpoint",
+        "score": 50
+      },
+      {
+        "name": "Le Pas de l'Aigle",
+        "lat": 46.1473687,
+        "lng": 6.7230126,
+        "spotType": "viewpoint",
+        "score": 50
+      }
+    ],
+    "spots": [
+      {
+        "name": "Lacs Robert",
+        "lat": 45.131569,
+        "lng": 5.9124966,
+        "spotType": "viewpoint",
+        "score": 50
+      },
+      {
+        "name": "Molard Noir",
+        "lat": 45.6716846,
+        "lng": 5.8294057,
+        "spotType": "viewpoint",
+        "score": 50
+      },
+      {
+        "name": "Le Pas de l'Aigle",
+        "lat": 46.1473687,
+        "lng": 6.7230126,
+        "spotType": "viewpoint",
+        "score": 50
+      }
+    ],
+    "source": "rider-spots.eu",
+    "sourceScope": "from-spots"
+  },
+  {
+    "id": "fr-france-alps-north-lacs-robert-molard-noir-le-pas-de-laigle-table-dorientation-du-col-de-crozet",
+    "name": "Giro Panoramico france-alps-north: Lacs Robert → Molard Noir → Le Pas de l'Aigle → Table d'orientation du col de Crozet",
+    "country": "FR",
+    "region": "france-alps-north",
+    "rideType": "scenic",
+    "score": 55,
+    "difficulty": "media",
+    "distanceKm": 207.8,
+    "bestSeason": "Primavera / Estate / Autunno",
+    "description": "itinerario panoramico nell'area france-alps-north, costruito su spot rider reali e pensato per offrire una guida piacevole, coerente e credibile.",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "lake",
+      "rider-spot",
+      "mountain",
+      "twisty",
+      "mountain-pass"
+    ],
+    "start": {
+      "name": "Lacs Robert",
+      "lat": 45.131569,
+      "lng": 5.9124966
+    },
+    "end": {
+      "name": "Table d'orientation du col de Crozet",
+      "lat": 46.29441,
+      "lng": 5.9674762
+    },
+    "center": {
+      "lat": 45.81126,
+      "lng": 6.1081
+    },
+    "waypoints": [
+      {
+        "name": "Lacs Robert",
+        "lat": 45.131569,
+        "lng": 5.9124966,
+        "spotType": "viewpoint",
+        "score": 50
+      },
+      {
+        "name": "Molard Noir",
+        "lat": 45.6716846,
+        "lng": 5.8294057,
+        "spotType": "viewpoint",
+        "score": 50
+      },
+      {
+        "name": "Le Pas de l'Aigle",
+        "lat": 46.1473687,
+        "lng": 6.7230126,
+        "spotType": "viewpoint",
+        "score": 50
+      },
+      {
+        "name": "Table d'orientation du col de Crozet",
+        "lat": 46.29441,
+        "lng": 5.9674762,
+        "spotType": "viewpoint",
+        "score": 50
+      }
+    ],
+    "spots": [
+      {
+        "name": "Lacs Robert",
+        "lat": 45.131569,
+        "lng": 5.9124966,
+        "spotType": "viewpoint",
+        "score": 50
+      },
+      {
+        "name": "Molard Noir",
+        "lat": 45.6716846,
+        "lng": 5.8294057,
+        "spotType": "viewpoint",
+        "score": 50
+      },
+      {
+        "name": "Le Pas de l'Aigle",
+        "lat": 46.1473687,
+        "lng": 6.7230126,
+        "spotType": "viewpoint",
+        "score": 50
+      },
+      {
+        "name": "Table d'orientation du col de Crozet",
+        "lat": 46.29441,
+        "lng": 5.9674762,
+        "spotType": "viewpoint",
+        "score": 50
+      }
+    ],
+    "source": "rider-spots.eu",
+    "sourceScope": "from-spots"
+  },
+  {
+    "id": "fr-france-alps-north-le-pas-de-laigle-molard-noir",
+    "name": "Giro Panoramico france-alps-north: Le Pas de l'Aigle → Molard Noir",
+    "country": "FR",
+    "region": "france-alps-north",
+    "rideType": "scenic",
+    "score": 55,
+    "difficulty": "bassa",
+    "distanceKm": 87,
+    "bestSeason": "Primavera / Estate / Autunno",
+    "description": "itinerario panoramico nell'area france-alps-north, costruito su spot rider reali e pensato per offrire una guida piacevole, coerente e credibile.",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "rider-spot"
+    ],
+    "start": {
+      "name": "Le Pas de l'Aigle",
+      "lat": 46.1473687,
+      "lng": 6.7230126
+    },
+    "end": {
+      "name": "Molard Noir",
+      "lat": 45.6716846,
+      "lng": 5.8294057
+    },
+    "center": {
+      "lat": 45.90953,
+      "lng": 6.27621
+    },
+    "waypoints": [
+      {
+        "name": "Le Pas de l'Aigle",
+        "lat": 46.1473687,
+        "lng": 6.7230126,
+        "spotType": "viewpoint",
+        "score": 50
+      },
+      {
+        "name": "Molard Noir",
+        "lat": 45.6716846,
+        "lng": 5.8294057,
+        "spotType": "viewpoint",
+        "score": 50
+      }
+    ],
+    "spots": [
+      {
+        "name": "Le Pas de l'Aigle",
+        "lat": 46.1473687,
+        "lng": 6.7230126,
+        "spotType": "viewpoint",
+        "score": 50
+      },
+      {
+        "name": "Molard Noir",
+        "lat": 45.6716846,
+        "lng": 5.8294057,
+        "spotType": "viewpoint",
+        "score": 50
+      }
+    ],
+    "source": "rider-spots.eu",
+    "sourceScope": "from-spots"
+  },
+  {
+    "id": "fr-france-alps-north-molard-noir-le-pas-de-laigle-table-dorientation-du-col-de-crozet",
+    "name": "Giro Panoramico france-alps-north: Molard Noir → Le Pas de l'Aigle → Table d'orientation du col de Crozet",
+    "country": "FR",
+    "region": "france-alps-north",
+    "rideType": "scenic",
+    "score": 55,
+    "difficulty": "media",
+    "distanceKm": 147.4,
+    "bestSeason": "Primavera / Estate / Autunno",
+    "description": "itinerario panoramico nell'area france-alps-north, costruito su spot rider reali e pensato per offrire una guida piacevole, coerente e credibile.",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "rider-spot",
+      "mountain",
+      "twisty",
+      "mountain-pass"
+    ],
+    "start": {
+      "name": "Molard Noir",
+      "lat": 45.6716846,
+      "lng": 5.8294057
+    },
+    "end": {
+      "name": "Table d'orientation du col de Crozet",
+      "lat": 46.29441,
+      "lng": 5.9674762
+    },
+    "center": {
+      "lat": 46.03782,
+      "lng": 6.1733
+    },
+    "waypoints": [
+      {
+        "name": "Molard Noir",
+        "lat": 45.6716846,
+        "lng": 5.8294057,
+        "spotType": "viewpoint",
+        "score": 50
+      },
+      {
+        "name": "Le Pas de l'Aigle",
+        "lat": 46.1473687,
+        "lng": 6.7230126,
+        "spotType": "viewpoint",
+        "score": 50
+      },
+      {
+        "name": "Table d'orientation du col de Crozet",
+        "lat": 46.29441,
+        "lng": 5.9674762,
+        "spotType": "viewpoint",
+        "score": 50
+      }
+    ],
+    "spots": [
+      {
+        "name": "Molard Noir",
+        "lat": 45.6716846,
+        "lng": 5.8294057,
+        "spotType": "viewpoint",
+        "score": 50
+      },
+      {
+        "name": "Le Pas de l'Aigle",
+        "lat": 46.1473687,
+        "lng": 6.7230126,
+        "spotType": "viewpoint",
+        "score": 50
+      },
+      {
+        "name": "Table d'orientation du col de Crozet",
+        "lat": 46.29441,
+        "lng": 5.9674762,
+        "spotType": "viewpoint",
+        "score": 50
+      }
+    ],
+    "source": "rider-spots.eu",
+    "sourceScope": "from-spots"
+  },
+  {
+    "id": "fr-france-alps-north-molard-noir-table-dorientation-du-col-de-crozet",
+    "name": "Giro Panoramico france-alps-north: Molard Noir → Table d'orientation du col de Crozet",
+    "country": "FR",
+    "region": "france-alps-north",
+    "rideType": "scenic",
+    "score": 55,
+    "difficulty": "bassa",
+    "distanceKm": 70.1,
+    "bestSeason": "Primavera / Estate / Autunno",
+    "description": "itinerario panoramico nell'area france-alps-north, costruito su spot rider reali e pensato per offrire una guida piacevole, coerente e credibile.",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "rider-spot",
+      "mountain",
+      "twisty",
+      "mountain-pass"
+    ],
+    "start": {
+      "name": "Molard Noir",
+      "lat": 45.6716846,
+      "lng": 5.8294057
+    },
+    "end": {
+      "name": "Table d'orientation du col de Crozet",
+      "lat": 46.29441,
+      "lng": 5.9674762
+    },
+    "center": {
+      "lat": 45.98305,
+      "lng": 5.89844
+    },
+    "waypoints": [
+      {
+        "name": "Molard Noir",
+        "lat": 45.6716846,
+        "lng": 5.8294057,
+        "spotType": "viewpoint",
+        "score": 50
+      },
+      {
+        "name": "Table d'orientation du col de Crozet",
+        "lat": 46.29441,
+        "lng": 5.9674762,
+        "spotType": "viewpoint",
+        "score": 50
+      }
+    ],
+    "spots": [
+      {
+        "name": "Molard Noir",
+        "lat": 45.6716846,
+        "lng": 5.8294057,
+        "spotType": "viewpoint",
+        "score": 50
+      },
+      {
+        "name": "Table d'orientation du col de Crozet",
+        "lat": 46.29441,
+        "lng": 5.9674762,
+        "spotType": "viewpoint",
+        "score": 50
+      }
+    ],
+    "source": "rider-spots.eu",
+    "sourceScope": "from-spots"
+  },
+  {
+    "id": "fr-france-cote-d-azur-curva-panoramica-panoramic-view-of-monaco",
+    "name": "Giro Panoramico france-cote-d-azur: Curva Panoramica → Panoramic view of Monaco",
+    "country": "FR",
+    "region": "france-cote-d-azur",
+    "rideType": "scenic",
+    "score": 55,
+    "difficulty": "bassa",
+    "distanceKm": 26.2,
+    "bestSeason": "Primavera / Estate / Autunno",
+    "description": "itinerario panoramico nell'area france-cote-d-azur, costruito su spot rider reali e pensato per offrire una guida piacevole, coerente e credibile.",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "rider-spot"
+    ],
+    "start": {
+      "name": "Curva Panoramica",
+      "lat": 43.8307168,
+      "lng": 7.720002
+    },
+    "end": {
+      "name": "Panoramic view of Monaco",
+      "lat": 43.7318259,
+      "lng": 7.4236159
+    },
+    "center": {
+      "lat": 43.78127,
+      "lng": 7.57181
+    },
+    "waypoints": [
+      {
+        "name": "Curva Panoramica",
+        "lat": 43.8307168,
+        "lng": 7.720002,
+        "spotType": "viewpoint",
+        "score": 50
+      },
+      {
+        "name": "Panoramic view of Monaco",
+        "lat": 43.7318259,
+        "lng": 7.4236159,
+        "spotType": "viewpoint",
+        "score": 50
+      }
+    ],
+    "spots": [
+      {
+        "name": "Curva Panoramica",
+        "lat": 43.8307168,
+        "lng": 7.720002,
+        "spotType": "viewpoint",
+        "score": 50
+      },
+      {
+        "name": "Panoramic view of Monaco",
+        "lat": 43.7318259,
+        "lng": 7.4236159,
+        "spotType": "viewpoint",
+        "score": 50
+      }
+    ],
+    "source": "rider-spots.eu",
+    "sourceScope": "from-spots"
+  },
+  {
+    "id": "fr-france-cote-d-azur-panoramic-view-of-monaco-curva-panoramica-cima-monte-bignone-punto-panoramico",
+    "name": "Giro Panoramico france-cote-d-azur: Panoramic view of Monaco → Curva Panoramica → Cima Monte Bignone, punto panoramico",
+    "country": "FR",
+    "region": "france-cote-d-azur",
+    "rideType": "scenic",
+    "score": 55,
+    "difficulty": "bassa",
+    "distanceKm": 31.1,
+    "bestSeason": "Primavera / Estate / Autunno",
+    "description": "itinerario panoramico nell'area france-cote-d-azur, costruito su spot rider reali e pensato per offrire una guida piacevole, coerente e credibile.",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "rider-spot"
+    ],
+    "start": {
+      "name": "Panoramic view of Monaco",
+      "lat": 43.7318259,
+      "lng": 7.4236159
+    },
+    "end": {
+      "name": "Cima Monte Bignone, punto panoramico",
+      "lat": 43.873522,
+      "lng": 7.733676000000001
+    },
+    "center": {
+      "lat": 43.81202,
+      "lng": 7.62576
+    },
+    "waypoints": [
+      {
+        "name": "Panoramic view of Monaco",
+        "lat": 43.7318259,
+        "lng": 7.4236159,
+        "spotType": "viewpoint",
+        "score": 50
+      },
+      {
+        "name": "Curva Panoramica",
+        "lat": 43.8307168,
+        "lng": 7.720002,
+        "spotType": "viewpoint",
+        "score": 50
+      },
+      {
+        "name": "Cima Monte Bignone, punto panoramico",
+        "lat": 43.873522,
+        "lng": 7.733676000000001,
+        "spotType": "viewpoint",
+        "score": 50
+      }
+    ],
+    "spots": [
+      {
+        "name": "Panoramic view of Monaco",
+        "lat": 43.7318259,
+        "lng": 7.4236159,
+        "spotType": "viewpoint",
+        "score": 50
+      },
+      {
+        "name": "Curva Panoramica",
+        "lat": 43.8307168,
+        "lng": 7.720002,
+        "spotType": "viewpoint",
+        "score": 50
+      },
+      {
+        "name": "Cima Monte Bignone, punto panoramico",
+        "lat": 43.873522,
+        "lng": 7.733676000000001,
+        "spotType": "viewpoint",
+        "score": 50
+      }
+    ],
+    "source": "rider-spots.eu",
+    "sourceScope": "from-spots"
+  },
+  {
+    "id": "fr-france-cote-d-azur-panoramic-view-of-monaco-rastel-dagay",
+    "name": "Giro Panoramico france-cote-d-azur: Panoramic view of Monaco → Rastel d'Agay",
+    "country": "FR",
+    "region": "france-cote-d-azur",
+    "rideType": "scenic",
+    "score": 55,
+    "difficulty": "bassa",
+    "distanceKm": 55.1,
+    "bestSeason": "Primavera / Estate / Autunno",
+    "description": "itinerario panoramico nell'area france-cote-d-azur, costruito su spot rider reali e pensato per offrire una guida piacevole, coerente e credibile.",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "rider-spot"
+    ],
+    "start": {
+      "name": "Panoramic view of Monaco",
+      "lat": 43.7318259,
+      "lng": 7.4236159
+    },
+    "end": {
+      "name": "Rastel d'Agay",
+      "lat": 43.4432325,
+      "lng": 6.8678259
+    },
+    "center": {
+      "lat": 43.58753,
+      "lng": 7.14572
+    },
+    "waypoints": [
+      {
+        "name": "Panoramic view of Monaco",
+        "lat": 43.7318259,
+        "lng": 7.4236159,
+        "spotType": "viewpoint",
+        "score": 50
+      },
+      {
+        "name": "Rastel d'Agay",
+        "lat": 43.4432325,
+        "lng": 6.8678259,
+        "spotType": "viewpoint",
+        "score": 50
+      }
+    ],
+    "spots": [
+      {
+        "name": "Panoramic view of Monaco",
+        "lat": 43.7318259,
+        "lng": 7.4236159,
+        "spotType": "viewpoint",
+        "score": 50
+      },
+      {
+        "name": "Rastel d'Agay",
+        "lat": 43.4432325,
+        "lng": 6.8678259,
+        "spotType": "viewpoint",
+        "score": 50
+      }
+    ],
+    "source": "rider-spots.eu",
+    "sourceScope": "from-spots"
+  },
+  {
+    "id": "fr-france-cote-d-azur-rastel-dagay-panoramic-view-of-monaco-curva-panoramica",
+    "name": "Giro Panoramico france-cote-d-azur: Rastel d'Agay → Panoramic view of Monaco → Curva Panoramica",
+    "country": "FR",
+    "region": "france-cote-d-azur",
+    "rideType": "scenic",
+    "score": 55,
+    "difficulty": "bassa",
+    "distanceKm": 81.3,
+    "bestSeason": "Primavera / Estate / Autunno",
+    "description": "itinerario panoramico nell'area france-cote-d-azur, costruito su spot rider reali e pensato per offrire una guida piacevole, coerente e credibile.",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "rider-spot"
+    ],
+    "start": {
+      "name": "Rastel d'Agay",
+      "lat": 43.4432325,
+      "lng": 6.8678259
+    },
+    "end": {
+      "name": "Curva Panoramica",
+      "lat": 43.8307168,
+      "lng": 7.720002
+    },
+    "center": {
+      "lat": 43.66859,
+      "lng": 7.33715
+    },
+    "waypoints": [
+      {
+        "name": "Rastel d'Agay",
+        "lat": 43.4432325,
+        "lng": 6.8678259,
+        "spotType": "viewpoint",
+        "score": 50
+      },
+      {
+        "name": "Panoramic view of Monaco",
+        "lat": 43.7318259,
+        "lng": 7.4236159,
+        "spotType": "viewpoint",
+        "score": 50
+      },
+      {
+        "name": "Curva Panoramica",
+        "lat": 43.8307168,
+        "lng": 7.720002,
+        "spotType": "viewpoint",
+        "score": 50
+      }
+    ],
+    "spots": [
+      {
+        "name": "Rastel d'Agay",
+        "lat": 43.4432325,
+        "lng": 6.8678259,
+        "spotType": "viewpoint",
+        "score": 50
+      },
+      {
+        "name": "Panoramic view of Monaco",
+        "lat": 43.7318259,
+        "lng": 7.4236159,
+        "spotType": "viewpoint",
+        "score": 50
+      },
+      {
+        "name": "Curva Panoramica",
+        "lat": 43.8307168,
+        "lng": 7.720002,
+        "spotType": "viewpoint",
+        "score": 50
+      }
+    ],
+    "source": "rider-spots.eu",
+    "sourceScope": "from-spots"
+  },
+  {
+    "id": "fr-france-cote-d-azur-rastel-dagay-panoramic-view-of-monaco-curva-panoramica-cima-monte-bignone-punto-panoramico",
+    "name": "Giro Panoramico france-cote-d-azur: Rastel d'Agay → Panoramic view of Monaco → Curva Panoramica → Cima Monte Bignone, punto panoramico",
+    "country": "FR",
+    "region": "france-cote-d-azur",
+    "rideType": "scenic",
+    "score": 55,
+    "difficulty": "bassa",
+    "distanceKm": 86.2,
+    "bestSeason": "Primavera / Estate / Autunno",
+    "description": "itinerario panoramico nell'area france-cote-d-azur, costruito su spot rider reali e pensato per offrire una guida piacevole, coerente e credibile.",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "rider-spot"
+    ],
+    "start": {
+      "name": "Rastel d'Agay",
+      "lat": 43.4432325,
+      "lng": 6.8678259
+    },
+    "end": {
+      "name": "Cima Monte Bignone, punto panoramico",
+      "lat": 43.873522,
+      "lng": 7.733676000000001
+    },
+    "center": {
+      "lat": 43.71982,
+      "lng": 7.43628
+    },
+    "waypoints": [
+      {
+        "name": "Rastel d'Agay",
+        "lat": 43.4432325,
+        "lng": 6.8678259,
+        "spotType": "viewpoint",
+        "score": 50
+      },
+      {
+        "name": "Panoramic view of Monaco",
+        "lat": 43.7318259,
+        "lng": 7.4236159,
+        "spotType": "viewpoint",
+        "score": 50
+      },
+      {
+        "name": "Curva Panoramica",
+        "lat": 43.8307168,
+        "lng": 7.720002,
+        "spotType": "viewpoint",
+        "score": 50
+      },
+      {
+        "name": "Cima Monte Bignone, punto panoramico",
+        "lat": 43.873522,
+        "lng": 7.733676000000001,
+        "spotType": "viewpoint",
+        "score": 50
+      }
+    ],
+    "spots": [
+      {
+        "name": "Rastel d'Agay",
+        "lat": 43.4432325,
+        "lng": 6.8678259,
+        "spotType": "viewpoint",
+        "score": 50
+      },
+      {
+        "name": "Panoramic view of Monaco",
+        "lat": 43.7318259,
+        "lng": 7.4236159,
+        "spotType": "viewpoint",
+        "score": 50
+      },
+      {
+        "name": "Curva Panoramica",
+        "lat": 43.8307168,
+        "lng": 7.720002,
+        "spotType": "viewpoint",
+        "score": 50
+      },
+      {
+        "name": "Cima Monte Bignone, punto panoramico",
+        "lat": 43.873522,
+        "lng": 7.733676000000001,
+        "spotType": "viewpoint",
+        "score": 50
+      }
+    ],
+    "source": "rider-spots.eu",
+    "sourceScope": "from-spots"
+  },
+  {
+    "id": "fr-corsica-torra-di-u-lioni-di-roccapina-randonnee-du-mont-gozzi-rundighjata-a-u-monti-gozzi-depart-randonnee-capo-rosso",
+    "name": "Giro Panoramico corsica: Torra di u Lioni di Roccapina → Randonnée du Mont Gozzi - Rundighjata à u Monti Gozzi → Départ randonnée Capo Rosso → Scenic viewpoint",
+    "country": "FR",
+    "region": "corsica",
+    "rideType": "scenic",
+    "score": 54,
+    "difficulty": "media",
+    "distanceKm": 125.3,
+    "bestSeason": "Primavera / Estate / Autunno",
+    "description": "itinerario panoramico nell'area corsica, costruito su spot rider reali e pensato per offrire una guida piacevole, coerente e credibile.",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "rider-spot"
+    ],
+    "start": {
+      "name": "Torra di u Lioni di Roccapina",
+      "lat": 41.4955388,
+      "lng": 8.928753
+    },
+    "end": {
+      "name": "Scenic viewpoint",
+      "lat": 42.347971,
+      "lng": 9.0094432
+    },
+    "center": {
+      "lat": 42.02226,
+      "lng": 8.82259
+    },
+    "waypoints": [
+      {
+        "name": "Torra di u Lioni di Roccapina",
+        "lat": 41.4955388,
+        "lng": 8.928753,
+        "spotType": "viewpoint",
+        "score": 50
+      },
+      {
+        "name": "Randonnée du Mont Gozzi - Rundighjata à u Monti Gozzi",
+        "lat": 42.0102111,
+        "lng": 8.7688433,
+        "spotType": "viewpoint",
+        "score": 50
+      },
+      {
+        "name": "Départ randonnée Capo Rosso",
+        "lat": 42.235333,
+        "lng": 8.5833186,
+        "spotType": "viewpoint",
+        "score": 50
+      },
+      {
+        "name": "Scenic viewpoint",
+        "lat": 42.347971,
+        "lng": 9.0094432,
+        "spotType": "viewpoint",
+        "score": 47
+      }
+    ],
+    "spots": [
+      {
+        "name": "Torra di u Lioni di Roccapina",
+        "lat": 41.4955388,
+        "lng": 8.928753,
+        "spotType": "viewpoint",
+        "score": 50
+      },
+      {
+        "name": "Randonnée du Mont Gozzi - Rundighjata à u Monti Gozzi",
+        "lat": 42.0102111,
+        "lng": 8.7688433,
+        "spotType": "viewpoint",
+        "score": 50
+      },
+      {
+        "name": "Départ randonnée Capo Rosso",
+        "lat": 42.235333,
+        "lng": 8.5833186,
+        "spotType": "viewpoint",
+        "score": 50
+      },
+      {
+        "name": "Scenic viewpoint",
+        "lat": 42.347971,
+        "lng": 9.0094432,
+        "spotType": "viewpoint",
+        "score": 47
+      }
+    ],
+    "source": "rider-spots.eu",
+    "sourceScope": "from-spots"
+  },
+  {
+    "id": "fr-corsica-torra-di-u-lioni-di-roccapina-randonnee-du-mont-gozzi-rundighjata-a-u-monti-gozzi-scenic-viewpoint",
+    "name": "Giro Panoramico corsica: Torra di u Lioni di Roccapina → Randonnée du Mont Gozzi - Rundighjata à u Monti Gozzi → Scenic viewpoint",
+    "country": "FR",
+    "region": "corsica",
+    "rideType": "scenic",
+    "score": 54,
+    "difficulty": "media",
+    "distanceKm": 101.2,
+    "bestSeason": "Primavera / Estate / Autunno",
+    "description": "itinerario panoramico nell'area corsica, costruito su spot rider reali e pensato per offrire una guida piacevole, coerente e credibile.",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "rider-spot"
+    ],
+    "start": {
+      "name": "Torra di u Lioni di Roccapina",
+      "lat": 41.4955388,
+      "lng": 8.928753
+    },
+    "end": {
+      "name": "Scenic viewpoint",
+      "lat": 42.347971,
+      "lng": 9.0094432
+    },
+    "center": {
+      "lat": 41.95124,
+      "lng": 8.90235
+    },
+    "waypoints": [
+      {
+        "name": "Torra di u Lioni di Roccapina",
+        "lat": 41.4955388,
+        "lng": 8.928753,
+        "spotType": "viewpoint",
+        "score": 50
+      },
+      {
+        "name": "Randonnée du Mont Gozzi - Rundighjata à u Monti Gozzi",
+        "lat": 42.0102111,
+        "lng": 8.7688433,
+        "spotType": "viewpoint",
+        "score": 50
+      },
+      {
+        "name": "Scenic viewpoint",
+        "lat": 42.347971,
+        "lng": 9.0094432,
+        "spotType": "viewpoint",
+        "score": 47
+      }
+    ],
+    "spots": [
+      {
+        "name": "Torra di u Lioni di Roccapina",
+        "lat": 41.4955388,
+        "lng": 8.928753,
+        "spotType": "viewpoint",
+        "score": 50
+      },
+      {
+        "name": "Randonnée du Mont Gozzi - Rundighjata à u Monti Gozzi",
+        "lat": 42.0102111,
+        "lng": 8.7688433,
+        "spotType": "viewpoint",
+        "score": 50
+      },
+      {
+        "name": "Scenic viewpoint",
+        "lat": 42.347971,
+        "lng": 9.0094432,
+        "spotType": "viewpoint",
+        "score": 47
+      }
+    ],
+    "source": "rider-spots.eu",
+    "sourceScope": "from-spots"
+  },
+  {
+    "id": "fr-corsica-torra-di-u-lioni-di-roccapina-scenic-viewpoint",
+    "name": "Giro Panoramico corsica: Torra di u Lioni di Roccapina → Scenic viewpoint",
+    "country": "FR",
+    "region": "corsica",
+    "rideType": "scenic",
+    "score": 54,
+    "difficulty": "bassa",
+    "distanceKm": 95,
+    "bestSeason": "Primavera / Estate / Autunno",
+    "description": "itinerario panoramico nell'area corsica, costruito su spot rider reali e pensato per offrire una guida piacevole, coerente e credibile.",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "rider-spot"
+    ],
+    "start": {
+      "name": "Torra di u Lioni di Roccapina",
+      "lat": 41.4955388,
+      "lng": 8.928753
+    },
+    "end": {
+      "name": "Scenic viewpoint",
+      "lat": 42.347971,
+      "lng": 9.0094432
+    },
+    "center": {
+      "lat": 41.92175,
+      "lng": 8.9691
+    },
+    "waypoints": [
+      {
+        "name": "Torra di u Lioni di Roccapina",
+        "lat": 41.4955388,
+        "lng": 8.928753,
+        "spotType": "viewpoint",
+        "score": 50
+      },
+      {
+        "name": "Scenic viewpoint",
+        "lat": 42.347971,
+        "lng": 9.0094432,
+        "spotType": "viewpoint",
+        "score": 47
+      }
+    ],
+    "spots": [
+      {
+        "name": "Torra di u Lioni di Roccapina",
+        "lat": 41.4955388,
+        "lng": 8.928753,
+        "spotType": "viewpoint",
+        "score": 50
+      },
+      {
+        "name": "Scenic viewpoint",
+        "lat": 42.347971,
+        "lng": 9.0094432,
+        "spotType": "viewpoint",
+        "score": 47
+      }
+    ],
+    "source": "rider-spots.eu",
+    "sourceScope": "from-spots"
+  },
+  {
+    "id": "fr-france-alps-north-molard-noir-belvedere-revard-le-pas-de-laigle-table-dorientation-du-col-de-crozet",
+    "name": "Giro Panoramico france-alps-north: Molard Noir → Belvedere Revard → Le Pas de l'Aigle → Table d'orientation du col de Crozet",
+    "country": "FR",
+    "region": "france-alps-north",
+    "rideType": "scenic",
+    "score": 54,
+    "difficulty": "media",
+    "distanceKm": 149.4,
+    "bestSeason": "Primavera / Estate / Autunno",
+    "description": "itinerario panoramico nell'area france-alps-north, costruito su spot rider reali e pensato per offrire una guida piacevole, coerente e credibile.",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "rider-spot",
+      "mountain",
+      "twisty",
+      "mountain-pass"
+    ],
+    "start": {
+      "name": "Molard Noir",
+      "lat": 45.6716846,
+      "lng": 5.8294057
+    },
+    "end": {
+      "name": "Table d'orientation du col de Crozet",
+      "lat": 46.29441,
+      "lng": 5.9674762
+    },
+    "center": {
+      "lat": 45.94886,
+      "lng": 6.12361
+    },
+    "waypoints": [
+      {
+        "name": "Molard Noir",
+        "lat": 45.6716846,
+        "lng": 5.8294057,
+        "spotType": "viewpoint",
+        "score": 50
+      },
+      {
+        "name": "Belvedere Revard",
+        "lat": 45.6819887,
+        "lng": 5.9745592,
+        "spotType": "viewpoint",
+        "score": 44
+      },
+      {
+        "name": "Le Pas de l'Aigle",
+        "lat": 46.1473687,
+        "lng": 6.7230126,
+        "spotType": "viewpoint",
+        "score": 50
+      },
+      {
+        "name": "Table d'orientation du col de Crozet",
+        "lat": 46.29441,
+        "lng": 5.9674762,
+        "spotType": "viewpoint",
+        "score": 50
+      }
+    ],
+    "spots": [
+      {
+        "name": "Molard Noir",
+        "lat": 45.6716846,
+        "lng": 5.8294057,
+        "spotType": "viewpoint",
+        "score": 50
+      },
+      {
+        "name": "Belvedere Revard",
+        "lat": 45.6819887,
+        "lng": 5.9745592,
+        "spotType": "viewpoint",
+        "score": 44
+      },
+      {
+        "name": "Le Pas de l'Aigle",
+        "lat": 46.1473687,
+        "lng": 6.7230126,
+        "spotType": "viewpoint",
+        "score": 50
+      },
+      {
+        "name": "Table d'orientation du col de Crozet",
+        "lat": 46.29441,
+        "lng": 5.9674762,
+        "spotType": "viewpoint",
+        "score": 50
+      }
+    ],
+    "source": "rider-spots.eu",
+    "sourceScope": "from-spots"
+  },
+  {
+    "id": "fr-france-cote-d-azur-rastel-dagay-le-ponton-lac-de-saint-cassien",
+    "name": "Giro Panoramico france-cote-d-azur: Rastel d'Agay → Le Ponton / Lac de Saint-Cassien",
+    "country": "FR",
+    "region": "france-cote-d-azur",
+    "rideType": "scenic",
+    "score": 54,
+    "difficulty": "bassa",
+    "distanceKm": 15,
+    "bestSeason": "Primavera / Estate / Autunno",
+    "description": "itinerario panoramico nell'area france-cote-d-azur, costruito su spot rider reali e pensato per offrire una guida piacevole, coerente e credibile.",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "rider-spot",
+      "lake"
+    ],
+    "start": {
+      "name": "Rastel d'Agay",
+      "lat": 43.4432325,
+      "lng": 6.8678259
+    },
+    "end": {
+      "name": "Le Ponton / Lac de Saint-Cassien",
+      "lat": 43.5687317,
+      "lng": 6.8007859999999996
+    },
+    "center": {
+      "lat": 43.50598,
+      "lng": 6.83431
+    },
+    "waypoints": [
+      {
+        "name": "Rastel d'Agay",
+        "lat": 43.4432325,
+        "lng": 6.8678259,
+        "spotType": "viewpoint",
+        "score": 50
+      },
+      {
+        "name": "Le Ponton / Lac de Saint-Cassien",
+        "lat": 43.5687317,
+        "lng": 6.8007859999999996,
+        "spotType": "viewpoint",
+        "score": 47
+      }
+    ],
+    "spots": [
+      {
+        "name": "Rastel d'Agay",
+        "lat": 43.4432325,
+        "lng": 6.8678259,
+        "spotType": "viewpoint",
+        "score": 50
+      },
+      {
+        "name": "Le Ponton / Lac de Saint-Cassien",
+        "lat": 43.5687317,
+        "lng": 6.8007859999999996,
+        "spotType": "viewpoint",
+        "score": 47
+      }
+    ],
+    "source": "rider-spots.eu",
+    "sourceScope": "from-spots"
+  },
+  {
+    "id": "fr-france-cote-d-azur-rastel-dagay-le-ponton-lac-de-saint-cassien-panoramic-view-of-monaco",
+    "name": "Giro Panoramico france-cote-d-azur: Rastel d'Agay → Le Ponton / Lac de Saint-Cassien → Panoramic view of Monaco",
+    "country": "FR",
+    "region": "france-cote-d-azur",
+    "rideType": "scenic",
+    "score": 54,
+    "difficulty": "bassa",
+    "distanceKm": 68.3,
+    "bestSeason": "Primavera / Estate / Autunno",
+    "description": "itinerario panoramico nell'area france-cote-d-azur, costruito su spot rider reali e pensato per offrire una guida piacevole, coerente e credibile.",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "rider-spot",
+      "lake"
+    ],
+    "start": {
+      "name": "Rastel d'Agay",
+      "lat": 43.4432325,
+      "lng": 6.8678259
+    },
+    "end": {
+      "name": "Panoramic view of Monaco",
+      "lat": 43.7318259,
+      "lng": 7.4236159
+    },
+    "center": {
+      "lat": 43.58126,
+      "lng": 7.03074
+    },
+    "waypoints": [
+      {
+        "name": "Rastel d'Agay",
+        "lat": 43.4432325,
+        "lng": 6.8678259,
+        "spotType": "viewpoint",
+        "score": 50
+      },
+      {
+        "name": "Le Ponton / Lac de Saint-Cassien",
+        "lat": 43.5687317,
+        "lng": 6.8007859999999996,
+        "spotType": "viewpoint",
+        "score": 47
+      },
+      {
+        "name": "Panoramic view of Monaco",
+        "lat": 43.7318259,
+        "lng": 7.4236159,
+        "spotType": "viewpoint",
+        "score": 50
+      }
+    ],
+    "spots": [
+      {
+        "name": "Rastel d'Agay",
+        "lat": 43.4432325,
+        "lng": 6.8678259,
+        "spotType": "viewpoint",
+        "score": 50
+      },
+      {
+        "name": "Le Ponton / Lac de Saint-Cassien",
+        "lat": 43.5687317,
+        "lng": 6.8007859999999996,
+        "spotType": "viewpoint",
+        "score": 47
+      },
+      {
+        "name": "Panoramic view of Monaco",
+        "lat": 43.7318259,
+        "lng": 7.4236159,
+        "spotType": "viewpoint",
+        "score": 50
+      }
+    ],
+    "source": "rider-spots.eu",
+    "sourceScope": "from-spots"
+  },
+  {
+    "id": "fr-france-cote-d-azur-rastel-dagay-le-ponton-lac-de-saint-cassien-panoramic-view-of-monaco-curva-panoramica",
+    "name": "Giro Panoramico france-cote-d-azur: Rastel d'Agay → Le Ponton / Lac de Saint-Cassien → Panoramic view of Monaco → Curva Panoramica",
+    "country": "FR",
+    "region": "france-cote-d-azur",
+    "rideType": "scenic",
+    "score": 54,
+    "difficulty": "bassa",
+    "distanceKm": 94.5,
+    "bestSeason": "Primavera / Estate / Autunno",
+    "description": "itinerario panoramico nell'area france-cote-d-azur, costruito su spot rider reali e pensato per offrire una guida piacevole, coerente e credibile.",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "rider-spot",
+      "lake"
+    ],
+    "start": {
+      "name": "Rastel d'Agay",
+      "lat": 43.4432325,
+      "lng": 6.8678259
+    },
+    "end": {
+      "name": "Curva Panoramica",
+      "lat": 43.8307168,
+      "lng": 7.720002
+    },
+    "center": {
+      "lat": 43.64363,
+      "lng": 7.20306
+    },
+    "waypoints": [
+      {
+        "name": "Rastel d'Agay",
+        "lat": 43.4432325,
+        "lng": 6.8678259,
+        "spotType": "viewpoint",
+        "score": 50
+      },
+      {
+        "name": "Le Ponton / Lac de Saint-Cassien",
+        "lat": 43.5687317,
+        "lng": 6.8007859999999996,
+        "spotType": "viewpoint",
+        "score": 47
+      },
+      {
+        "name": "Panoramic view of Monaco",
+        "lat": 43.7318259,
+        "lng": 7.4236159,
+        "spotType": "viewpoint",
+        "score": 50
+      },
+      {
+        "name": "Curva Panoramica",
+        "lat": 43.8307168,
+        "lng": 7.720002,
+        "spotType": "viewpoint",
+        "score": 50
+      }
+    ],
+    "spots": [
+      {
+        "name": "Rastel d'Agay",
+        "lat": 43.4432325,
+        "lng": 6.8678259,
+        "spotType": "viewpoint",
+        "score": 50
+      },
+      {
+        "name": "Le Ponton / Lac de Saint-Cassien",
+        "lat": 43.5687317,
+        "lng": 6.8007859999999996,
+        "spotType": "viewpoint",
+        "score": 47
+      },
+      {
+        "name": "Panoramic view of Monaco",
+        "lat": 43.7318259,
+        "lng": 7.4236159,
+        "spotType": "viewpoint",
+        "score": 50
+      },
+      {
+        "name": "Curva Panoramica",
+        "lat": 43.8307168,
+        "lng": 7.720002,
+        "spotType": "viewpoint",
+        "score": 50
+      }
+    ],
+    "source": "rider-spots.eu",
+    "sourceScope": "from-spots"
+  },
+  {
+    "id": "fr-corsica-torra-di-u-lioni-di-roccapina-randonnee-du-mont-gozzi-rundighjata-a-u-monti-gozzi-scenic-viewpoint-fugilaccia",
+    "name": "Giro Panoramico corsica: Torra di u Lioni di Roccapina → Randonnée du Mont Gozzi - Rundighjata à u Monti Gozzi → Scenic viewpoint → Fugilaccia viewpoint",
+    "country": "FR",
+    "region": "corsica",
+    "rideType": "scenic",
+    "score": 53,
+    "difficulty": "media",
+    "distanceKm": 128.5,
+    "bestSeason": "Primavera / Estate / Autunno",
+    "description": "itinerario panoramico nell'area corsica, costruito su spot rider reali e pensato per offrire una guida piacevole, coerente e credibile.",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "rider-spot",
+      "lake"
+    ],
+    "start": {
+      "name": "Torra di u Lioni di Roccapina",
+      "lat": 41.4955388,
+      "lng": 8.928753
+    },
+    "end": {
+      "name": "Fugilaccia viewpoint",
+      "lat": 42.3810819,
+      "lng": 8.6799301
+    },
+    "center": {
+      "lat": 42.0587,
+      "lng": 8.84674
+    },
+    "waypoints": [
+      {
+        "name": "Torra di u Lioni di Roccapina",
+        "lat": 41.4955388,
+        "lng": 8.928753,
+        "spotType": "viewpoint",
+        "score": 50
+      },
+      {
+        "name": "Randonnée du Mont Gozzi - Rundighjata à u Monti Gozzi",
+        "lat": 42.0102111,
+        "lng": 8.7688433,
+        "spotType": "viewpoint",
+        "score": 50
+      },
+      {
+        "name": "Scenic viewpoint",
+        "lat": 42.347971,
+        "lng": 9.0094432,
+        "spotType": "viewpoint",
+        "score": 47
+      },
+      {
+        "name": "Fugilaccia viewpoint",
+        "lat": 42.3810819,
+        "lng": 8.6799301,
+        "spotType": "viewpoint",
+        "score": 45
+      }
+    ],
+    "spots": [
+      {
+        "name": "Torra di u Lioni di Roccapina",
+        "lat": 41.4955388,
+        "lng": 8.928753,
+        "spotType": "viewpoint",
+        "score": 50
+      },
+      {
+        "name": "Randonnée du Mont Gozzi - Rundighjata à u Monti Gozzi",
+        "lat": 42.0102111,
+        "lng": 8.7688433,
+        "spotType": "viewpoint",
+        "score": 50
+      },
+      {
+        "name": "Scenic viewpoint",
+        "lat": 42.347971,
+        "lng": 9.0094432,
+        "spotType": "viewpoint",
+        "score": 47
+      },
+      {
+        "name": "Fugilaccia viewpoint",
+        "lat": 42.3810819,
+        "lng": 8.6799301,
+        "spotType": "viewpoint",
+        "score": 45
+      }
+    ],
+    "source": "rider-spots.eu",
+    "sourceScope": "from-spots"
+  },
+  {
+    "id": "fr-france-alps-north-molard-noir-belvedere-revard-table-dorientation-du-col-de-crozet",
+    "name": "Giro Panoramico france-alps-north: Molard Noir → Belvedere Revard → Table d'orientation du col de Crozet",
+    "country": "FR",
+    "region": "france-alps-north",
+    "rideType": "scenic",
+    "score": 53,
+    "difficulty": "bassa",
+    "distanceKm": 79.4,
+    "bestSeason": "Primavera / Estate / Autunno",
+    "description": "itinerario panoramico nell'area france-alps-north, costruito su spot rider reali e pensato per offrire una guida piacevole, coerente e credibile.",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "rider-spot",
+      "mountain",
+      "twisty",
+      "mountain-pass"
+    ],
+    "start": {
+      "name": "Molard Noir",
+      "lat": 45.6716846,
+      "lng": 5.8294057
+    },
+    "end": {
+      "name": "Table d'orientation du col de Crozet",
+      "lat": 46.29441,
+      "lng": 5.9674762
+    },
+    "center": {
+      "lat": 45.88269,
+      "lng": 5.92381
+    },
+    "waypoints": [
+      {
+        "name": "Molard Noir",
+        "lat": 45.6716846,
+        "lng": 5.8294057,
+        "spotType": "viewpoint",
+        "score": 50
+      },
+      {
+        "name": "Belvedere Revard",
+        "lat": 45.6819887,
+        "lng": 5.9745592,
+        "spotType": "viewpoint",
+        "score": 44
+      },
+      {
+        "name": "Table d'orientation du col de Crozet",
+        "lat": 46.29441,
+        "lng": 5.9674762,
+        "spotType": "viewpoint",
+        "score": 50
+      }
+    ],
+    "spots": [
+      {
+        "name": "Molard Noir",
+        "lat": 45.6716846,
+        "lng": 5.8294057,
+        "spotType": "viewpoint",
+        "score": 50
+      },
+      {
+        "name": "Belvedere Revard",
+        "lat": 45.6819887,
+        "lng": 5.9745592,
+        "spotType": "viewpoint",
+        "score": 44
+      },
+      {
+        "name": "Table d'orientation du col de Crozet",
+        "lat": 46.29441,
+        "lng": 5.9674762,
+        "spotType": "viewpoint",
+        "score": 50
+      }
+    ],
+    "source": "rider-spots.eu",
+    "sourceScope": "from-spots"
+  },
+  {
+    "id": "fr-france-alps-south-strada-dei-cannoni-colle-di-sampeyre-le-rooftop",
+    "name": "Giro Panoramico france-alps-south: Strada dei Cannoni → Colle di Sampeyre → Le Rooftop",
+    "country": "FR",
+    "region": "france-alps-south",
+    "rideType": "scenic",
+    "score": 53,
+    "difficulty": "bassa",
+    "distanceKm": 52.9,
+    "bestSeason": "Primavera / Estate / Autunno",
+    "description": "itinerario panoramico nell'area france-alps-south, costruito su spot rider reali e pensato per offrire una guida piacevole, coerente e credibile.",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "rider-spot",
+      "lake"
+    ],
+    "start": {
+      "name": "Strada dei Cannoni",
+      "lat": 44.5440567,
+      "lng": 7.1377565
+    },
+    "end": {
+      "name": "Le Rooftop",
+      "lat": 44.5512606,
+      "lng": 6.4732258
+    },
+    "center": {
+      "lat": 44.54885,
+      "lng": 6.91001
+    },
+    "waypoints": [
+      {
+        "name": "Strada dei Cannoni",
+        "lat": 44.5440567,
+        "lng": 7.1377565,
+        "spotType": "viewpoint",
+        "score": 50
+      },
+      {
+        "name": "Colle di Sampeyre",
+        "lat": 44.5512273,
+        "lng": 7.1190470999999995,
+        "spotType": "pass",
+        "score": 50
+      },
+      {
+        "name": "Le Rooftop",
+        "lat": 44.5512606,
+        "lng": 6.4732258,
+        "spotType": "viewpoint",
+        "score": 40
+      }
+    ],
+    "spots": [
+      {
+        "name": "Strada dei Cannoni",
+        "lat": 44.5440567,
+        "lng": 7.1377565,
+        "spotType": "viewpoint",
+        "score": 50
+      },
+      {
+        "name": "Colle di Sampeyre",
+        "lat": 44.5512273,
+        "lng": 7.1190470999999995,
+        "spotType": "pass",
+        "score": 50
+      },
+      {
+        "name": "Le Rooftop",
+        "lat": 44.5512606,
+        "lng": 6.4732258,
+        "spotType": "viewpoint",
+        "score": 40
+      }
+    ],
+    "source": "rider-spots.eu",
+    "sourceScope": "from-spots"
+  },
+  {
+    "id": "fr-france-cote-d-azur-rastel-dagay-le-ponton-lac-de-saint-cassien-panoramic-view-of-monaco-belvedere-des-glacieres",
+    "name": "Giro Panoramico france-cote-d-azur: Rastel d'Agay → Le Ponton / Lac de Saint-Cassien → Panoramic view of Monaco → Belvédère des Glacières",
+    "country": "FR",
+    "region": "france-cote-d-azur",
+    "rideType": "scenic",
+    "score": 53,
+    "difficulty": "media",
+    "distanceKm": 153.9,
+    "bestSeason": "Primavera / Estate / Autunno",
+    "description": "itinerario panoramico nell'area france-cote-d-azur, costruito su spot rider reali e pensato per offrire una guida piacevole, coerente e credibile.",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "rider-spot",
+      "lake"
+    ],
+    "start": {
+      "name": "Rastel d'Agay",
+      "lat": 43.4432325,
+      "lng": 6.8678259
+    },
+    "end": {
+      "name": "Belvédère des Glacières",
+      "lat": 43.7476984,
+      "lng": 6.3583035
+    },
+    "center": {
+      "lat": 43.62287,
+      "lng": 6.86263
+    },
+    "waypoints": [
+      {
+        "name": "Rastel d'Agay",
+        "lat": 43.4432325,
+        "lng": 6.8678259,
+        "spotType": "viewpoint",
+        "score": 50
+      },
+      {
+        "name": "Le Ponton / Lac de Saint-Cassien",
+        "lat": 43.5687317,
+        "lng": 6.8007859999999996,
+        "spotType": "viewpoint",
+        "score": 47
+      },
+      {
+        "name": "Panoramic view of Monaco",
+        "lat": 43.7318259,
+        "lng": 7.4236159,
+        "spotType": "viewpoint",
+        "score": 50
+      },
+      {
+        "name": "Belvédère des Glacières",
+        "lat": 43.7476984,
+        "lng": 6.3583035,
+        "spotType": "viewpoint",
+        "score": 45
+      }
+    ],
+    "spots": [
+      {
+        "name": "Rastel d'Agay",
+        "lat": 43.4432325,
+        "lng": 6.8678259,
+        "spotType": "viewpoint",
+        "score": 50
+      },
+      {
+        "name": "Le Ponton / Lac de Saint-Cassien",
+        "lat": 43.5687317,
+        "lng": 6.8007859999999996,
+        "spotType": "viewpoint",
+        "score": 47
+      },
+      {
+        "name": "Panoramic view of Monaco",
+        "lat": 43.7318259,
+        "lng": 7.4236159,
+        "spotType": "viewpoint",
+        "score": 50
+      },
+      {
+        "name": "Belvédère des Glacières",
+        "lat": 43.7476984,
+        "lng": 6.3583035,
+        "spotType": "viewpoint",
+        "score": 45
+      }
+    ],
+    "source": "rider-spots.eu",
+    "sourceScope": "from-spots"
+  },
+  {
+    "id": "fr-corsica-torra-di-u-lioni-di-roccapina-lac-de-tolla-viewpoint-scenic-viewpoint-fugilaccia-viewpoint",
+    "name": "Giro Panoramico corsica: Torra di u Lioni di Roccapina → Lac de Tolla Viewpoint → Scenic viewpoint → Fugilaccia viewpoint",
+    "country": "FR",
+    "region": "corsica",
+    "rideType": "scenic",
+    "score": 52,
+    "difficulty": "media",
+    "distanceKm": 122.4,
+    "bestSeason": "Primavera / Estate / Autunno",
+    "description": "itinerario panoramico nell'area corsica, costruito su spot rider reali e pensato per offrire una guida piacevole, coerente e credibile.",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "rider-spot",
+      "lake"
+    ],
+    "start": {
+      "name": "Torra di u Lioni di Roccapina",
+      "lat": 41.4955388,
+      "lng": 8.928753
+    },
+    "end": {
+      "name": "Fugilaccia viewpoint",
+      "lat": 42.3810819,
+      "lng": 8.6799301
+    },
+    "center": {
+      "lat": 42.04973,
+      "lng": 8.90215
+    },
+    "waypoints": [
+      {
+        "name": "Torra di u Lioni di Roccapina",
+        "lat": 41.4955388,
+        "lng": 8.928753,
+        "spotType": "viewpoint",
+        "score": 50
+      },
+      {
+        "name": "Lac de Tolla Viewpoint",
+        "lat": 41.9743247,
+        "lng": 8.9904602,
+        "spotType": "viewpoint",
+        "score": 45
+      },
+      {
+        "name": "Scenic viewpoint",
+        "lat": 42.347971,
+        "lng": 9.0094432,
+        "spotType": "viewpoint",
+        "score": 47
+      },
+      {
+        "name": "Fugilaccia viewpoint",
+        "lat": 42.3810819,
+        "lng": 8.6799301,
+        "spotType": "viewpoint",
+        "score": 45
+      }
+    ],
+    "spots": [
+      {
+        "name": "Torra di u Lioni di Roccapina",
+        "lat": 41.4955388,
+        "lng": 8.928753,
+        "spotType": "viewpoint",
+        "score": 50
+      },
+      {
+        "name": "Lac de Tolla Viewpoint",
+        "lat": 41.9743247,
+        "lng": 8.9904602,
+        "spotType": "viewpoint",
+        "score": 45
+      },
+      {
+        "name": "Scenic viewpoint",
+        "lat": 42.347971,
+        "lng": 9.0094432,
+        "spotType": "viewpoint",
+        "score": 47
+      },
+      {
+        "name": "Fugilaccia viewpoint",
+        "lat": 42.3810819,
+        "lng": 8.6799301,
+        "spotType": "viewpoint",
+        "score": 45
+      }
+    ],
+    "source": "rider-spots.eu",
+    "sourceScope": "from-spots"
+  },
+  {
+    "id": "fr-corsica-torra-di-u-lioni-di-roccapina-scenic-viewpoint-fugilaccia-viewpoint",
+    "name": "Giro Panoramico corsica: Torra di u Lioni di Roccapina → Scenic viewpoint → Fugilaccia viewpoint",
+    "country": "FR",
+    "region": "corsica",
+    "rideType": "scenic",
+    "score": 52,
+    "difficulty": "media",
+    "distanceKm": 122.3,
+    "bestSeason": "Primavera / Estate / Autunno",
+    "description": "itinerario panoramico nell'area corsica, costruito su spot rider reali e pensato per offrire una guida piacevole, coerente e credibile.",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "rider-spot",
+      "lake"
+    ],
+    "start": {
+      "name": "Torra di u Lioni di Roccapina",
+      "lat": 41.4955388,
+      "lng": 8.928753
+    },
+    "end": {
+      "name": "Fugilaccia viewpoint",
+      "lat": 42.3810819,
+      "lng": 8.6799301
+    },
+    "center": {
+      "lat": 42.07486,
+      "lng": 8.87271
+    },
+    "waypoints": [
+      {
+        "name": "Torra di u Lioni di Roccapina",
+        "lat": 41.4955388,
+        "lng": 8.928753,
+        "spotType": "viewpoint",
+        "score": 50
+      },
+      {
+        "name": "Scenic viewpoint",
+        "lat": 42.347971,
+        "lng": 9.0094432,
+        "spotType": "viewpoint",
+        "score": 47
+      },
+      {
+        "name": "Fugilaccia viewpoint",
+        "lat": 42.3810819,
+        "lng": 8.6799301,
+        "spotType": "viewpoint",
+        "score": 45
+      }
+    ],
+    "spots": [
+      {
+        "name": "Torra di u Lioni di Roccapina",
+        "lat": 41.4955388,
+        "lng": 8.928753,
+        "spotType": "viewpoint",
+        "score": 50
+      },
+      {
+        "name": "Scenic viewpoint",
+        "lat": 42.347971,
+        "lng": 9.0094432,
+        "spotType": "viewpoint",
+        "score": 47
+      },
+      {
+        "name": "Fugilaccia viewpoint",
+        "lat": 42.3810819,
+        "lng": 8.6799301,
+        "spotType": "viewpoint",
+        "score": 45
+      }
+    ],
+    "source": "rider-spots.eu",
+    "sourceScope": "from-spots"
+  },
+  {
+    "id": "fr-france-alps-north-strada-di-crinale-dellassietta-molard-noir-belvedere-revard-table-dorientation-du-col-de-crozet",
+    "name": "Giro Panoramico france-alps-north: Strada di Crinale dell'Assietta → Molard Noir → Belvedere Revard → Table d'orientation du col de Crozet",
+    "country": "FR",
+    "region": "france-alps-north",
+    "rideType": "scenic",
+    "score": 52,
+    "difficulty": "media",
+    "distanceKm": 190,
+    "bestSeason": "Primavera / Estate / Autunno",
+    "description": "itinerario panoramico nell'area france-alps-north, costruito su spot rider reali e pensato per offrire una guida piacevole, coerente e credibile.",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "rider-spot",
+      "mountain",
+      "twisty",
+      "mountain-pass"
+    ],
+    "start": {
+      "name": "Strada di Crinale dell'Assietta",
+      "lat": 45.065370099999996,
+      "lng": 6.951582999999999
+    },
+    "end": {
+      "name": "Table d'orientation du col de Crozet",
+      "lat": 46.29441,
+      "lng": 5.9674762
+    },
+    "center": {
+      "lat": 45.67836,
+      "lng": 6.18076
+    },
+    "waypoints": [
+      {
+        "name": "Strada di Crinale dell'Assietta",
+        "lat": 45.065370099999996,
+        "lng": 6.951582999999999,
+        "spotType": "viewpoint",
+        "score": 44
+      },
+      {
+        "name": "Molard Noir",
+        "lat": 45.6716846,
+        "lng": 5.8294057,
+        "spotType": "viewpoint",
+        "score": 50
+      },
+      {
+        "name": "Belvedere Revard",
+        "lat": 45.6819887,
+        "lng": 5.9745592,
+        "spotType": "viewpoint",
+        "score": 44
+      },
+      {
+        "name": "Table d'orientation du col de Crozet",
+        "lat": 46.29441,
+        "lng": 5.9674762,
+        "spotType": "viewpoint",
+        "score": 50
+      }
+    ],
+    "spots": [
+      {
+        "name": "Strada di Crinale dell'Assietta",
+        "lat": 45.065370099999996,
+        "lng": 6.951582999999999,
+        "spotType": "viewpoint",
+        "score": 44
+      },
+      {
+        "name": "Molard Noir",
+        "lat": 45.6716846,
+        "lng": 5.8294057,
+        "spotType": "viewpoint",
+        "score": 50
+      },
+      {
+        "name": "Belvedere Revard",
+        "lat": 45.6819887,
+        "lng": 5.9745592,
+        "spotType": "viewpoint",
+        "score": 44
+      },
+      {
+        "name": "Table d'orientation du col de Crozet",
+        "lat": 46.29441,
+        "lng": 5.9674762,
+        "spotType": "viewpoint",
+        "score": 50
+      }
+    ],
+    "source": "rider-spots.eu",
+    "sourceScope": "from-spots"
+  },
+  {
+    "id": "fr-france-alps-north-table-dorientation-du-col-de-crozet-belvedere-revard",
+    "name": "Giro Panoramico france-alps-north: Table d'orientation du col de Crozet → Belvedere Revard",
+    "country": "FR",
+    "region": "france-alps-north",
+    "rideType": "scenic",
+    "score": 52,
+    "difficulty": "bassa",
+    "distanceKm": 68.1,
+    "bestSeason": "Primavera / Estate / Autunno",
+    "description": "itinerario panoramico nell'area france-alps-north, costruito su spot rider reali e pensato per offrire una guida piacevole, coerente e credibile.",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "mountain",
+      "twisty",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "start": {
+      "name": "Table d'orientation du col de Crozet",
+      "lat": 46.29441,
+      "lng": 5.9674762
+    },
+    "end": {
+      "name": "Belvedere Revard",
+      "lat": 45.6819887,
+      "lng": 5.9745592
+    },
+    "center": {
+      "lat": 45.9882,
+      "lng": 5.97102
+    },
+    "waypoints": [
+      {
+        "name": "Table d'orientation du col de Crozet",
+        "lat": 46.29441,
+        "lng": 5.9674762,
+        "spotType": "viewpoint",
+        "score": 50
+      },
+      {
+        "name": "Belvedere Revard",
+        "lat": 45.6819887,
+        "lng": 5.9745592,
+        "spotType": "viewpoint",
+        "score": 44
+      }
+    ],
+    "spots": [
+      {
+        "name": "Table d'orientation du col de Crozet",
+        "lat": 46.29441,
+        "lng": 5.9674762,
+        "spotType": "viewpoint",
+        "score": 50
+      },
+      {
+        "name": "Belvedere Revard",
+        "lat": 45.6819887,
+        "lng": 5.9745592,
+        "spotType": "viewpoint",
+        "score": 44
+      }
+    ],
+    "source": "rider-spots.eu",
+    "sourceScope": "from-spots"
+  },
+  {
+    "id": "fr-france-cote-d-azur-rastel-dagay-le-ponton-lac-de-saint-cassien-belvedere-des-glacieres",
+    "name": "Giro Panoramico france-cote-d-azur: Rastel d'Agay → Le Ponton / Lac de Saint-Cassien → Belvédère des Glacières",
+    "country": "FR",
+    "region": "france-cote-d-azur",
+    "rideType": "scenic",
+    "score": 52,
+    "difficulty": "bassa",
+    "distanceKm": 55.7,
+    "bestSeason": "Primavera / Estate / Autunno",
+    "description": "itinerario panoramico nell'area france-cote-d-azur, costruito su spot rider reali e pensato per offrire una guida piacevole, coerente e credibile.",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "rider-spot",
+      "lake"
+    ],
+    "start": {
+      "name": "Rastel d'Agay",
+      "lat": 43.4432325,
+      "lng": 6.8678259
+    },
+    "end": {
+      "name": "Belvédère des Glacières",
+      "lat": 43.7476984,
+      "lng": 6.3583035
+    },
+    "center": {
+      "lat": 43.58655,
+      "lng": 6.67564
+    },
+    "waypoints": [
+      {
+        "name": "Rastel d'Agay",
+        "lat": 43.4432325,
+        "lng": 6.8678259,
+        "spotType": "viewpoint",
+        "score": 50
+      },
+      {
+        "name": "Le Ponton / Lac de Saint-Cassien",
+        "lat": 43.5687317,
+        "lng": 6.8007859999999996,
+        "spotType": "viewpoint",
+        "score": 47
+      },
+      {
+        "name": "Belvédère des Glacières",
+        "lat": 43.7476984,
+        "lng": 6.3583035,
+        "spotType": "viewpoint",
+        "score": 45
+      }
+    ],
+    "spots": [
+      {
+        "name": "Rastel d'Agay",
+        "lat": 43.4432325,
+        "lng": 6.8678259,
+        "spotType": "viewpoint",
+        "score": 50
+      },
+      {
+        "name": "Le Ponton / Lac de Saint-Cassien",
+        "lat": 43.5687317,
+        "lng": 6.8007859999999996,
+        "spotType": "viewpoint",
+        "score": 47
+      },
+      {
+        "name": "Belvédère des Glacières",
+        "lat": 43.7476984,
+        "lng": 6.3583035,
+        "spotType": "viewpoint",
+        "score": 45
+      }
+    ],
+    "source": "rider-spots.eu",
+    "sourceScope": "from-spots"
+  },
+  {
+    "id": "fr-france-cote-d-azur-rastel-dagay-le-ponton-lac-de-saint-cassien-monte-carlo-viewpoint-belvedere-des-glacieres",
+    "name": "Giro Panoramico france-cote-d-azur: Rastel d'Agay → Le Ponton / Lac de Saint-Cassien → Monte Carlo Viewpoint → Belvédère des Glacières",
+    "country": "FR",
+    "region": "france-cote-d-azur",
+    "rideType": "scenic",
+    "score": 52,
+    "difficulty": "media",
+    "distanceKm": 150.8,
+    "bestSeason": "Primavera / Estate / Autunno",
+    "description": "itinerario panoramico nell'area france-cote-d-azur, costruito su spot rider reali e pensato per offrire una guida piacevole, coerente e credibile.",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "rider-spot",
+      "lake"
+    ],
+    "start": {
+      "name": "Rastel d'Agay",
+      "lat": 43.4432325,
+      "lng": 6.8678259
+    },
+    "end": {
+      "name": "Belvédère des Glacières",
+      "lat": 43.7476984,
+      "lng": 6.3583035
+    },
+    "center": {
+      "lat": 43.62354,
+      "lng": 6.85758
+    },
+    "waypoints": [
+      {
+        "name": "Rastel d'Agay",
+        "lat": 43.4432325,
+        "lng": 6.8678259,
+        "spotType": "viewpoint",
+        "score": 50
+      },
+      {
+        "name": "Le Ponton / Lac de Saint-Cassien",
+        "lat": 43.5687317,
+        "lng": 6.8007859999999996,
+        "spotType": "viewpoint",
+        "score": 47
+      },
+      {
+        "name": "Monte Carlo Viewpoint",
+        "lat": 43.7344884,
+        "lng": 7.403417300000001,
+        "spotType": "viewpoint",
+        "score": 45
+      },
+      {
+        "name": "Belvédère des Glacières",
+        "lat": 43.7476984,
+        "lng": 6.3583035,
+        "spotType": "viewpoint",
+        "score": 45
+      }
+    ],
+    "spots": [
+      {
+        "name": "Rastel d'Agay",
+        "lat": 43.4432325,
+        "lng": 6.8678259,
+        "spotType": "viewpoint",
+        "score": 50
+      },
+      {
+        "name": "Le Ponton / Lac de Saint-Cassien",
+        "lat": 43.5687317,
+        "lng": 6.8007859999999996,
+        "spotType": "viewpoint",
+        "score": 47
+      },
+      {
+        "name": "Monte Carlo Viewpoint",
+        "lat": 43.7344884,
+        "lng": 7.403417300000001,
+        "spotType": "viewpoint",
+        "score": 45
+      },
+      {
+        "name": "Belvédère des Glacières",
+        "lat": 43.7476984,
+        "lng": 6.3583035,
+        "spotType": "viewpoint",
+        "score": 45
+      }
+    ],
+    "source": "rider-spots.eu",
+    "sourceScope": "from-spots"
+  },
+  {
+    "id": "fr-corsica-lac-de-tolla-viewpoint-scenic-viewpoint-fugilaccia-viewpoint",
+    "name": "Giro Panoramico corsica: Lac de Tolla Viewpoint → Scenic viewpoint → Fugilaccia viewpoint",
+    "country": "FR",
+    "region": "corsica",
+    "rideType": "scenic",
+    "score": 51,
+    "difficulty": "bassa",
+    "distanceKm": 68.9,
+    "bestSeason": "Primavera / Estate / Autunno",
+    "description": "itinerario panoramico nell'area corsica, costruito su spot rider reali e pensato per offrire una guida piacevole, coerente e credibile.",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "lake"
+    ],
+    "start": {
+      "name": "Lac de Tolla Viewpoint",
+      "lat": 41.9743247,
+      "lng": 8.9904602
+    },
+    "end": {
+      "name": "Fugilaccia viewpoint",
+      "lat": 42.3810819,
+      "lng": 8.6799301
+    },
+    "center": {
+      "lat": 42.23446,
+      "lng": 8.89328
+    },
+    "waypoints": [
+      {
+        "name": "Lac de Tolla Viewpoint",
+        "lat": 41.9743247,
+        "lng": 8.9904602,
+        "spotType": "viewpoint",
+        "score": 45
+      },
+      {
+        "name": "Scenic viewpoint",
+        "lat": 42.347971,
+        "lng": 9.0094432,
+        "spotType": "viewpoint",
+        "score": 47
+      },
+      {
+        "name": "Fugilaccia viewpoint",
+        "lat": 42.3810819,
+        "lng": 8.6799301,
+        "spotType": "viewpoint",
+        "score": 45
+      }
+    ],
+    "spots": [
+      {
+        "name": "Lac de Tolla Viewpoint",
+        "lat": 41.9743247,
+        "lng": 8.9904602,
+        "spotType": "viewpoint",
+        "score": 45
+      },
+      {
+        "name": "Scenic viewpoint",
+        "lat": 42.347971,
+        "lng": 9.0094432,
+        "spotType": "viewpoint",
+        "score": 47
+      },
+      {
+        "name": "Fugilaccia viewpoint",
+        "lat": 42.3810819,
+        "lng": 8.6799301,
+        "spotType": "viewpoint",
+        "score": 45
+      }
+    ],
+    "source": "rider-spots.eu",
+    "sourceScope": "from-spots"
+  },
+  {
+    "id": "fr-corsica-lac-de-tolla-viewpoint-scenic-viewpoint-fugilaccia-viewpoint-strada-panoramica",
+    "name": "Giro Panoramico corsica: Lac de Tolla Viewpoint → Scenic viewpoint → Fugilaccia viewpoint → Strada Panoramica",
+    "country": "FR",
+    "region": "corsica",
+    "rideType": "scenic",
+    "score": 51,
+    "difficulty": "media",
+    "distanceKm": 194.5,
+    "bestSeason": "Primavera / Estate / Autunno",
+    "description": "itinerario panoramico nell'area corsica, costruito su spot rider reali e pensato per offrire una guida piacevole, coerente e credibile.",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "lake"
+    ],
+    "start": {
+      "name": "Lac de Tolla Viewpoint",
+      "lat": 41.9743247,
+      "lng": 8.9904602
+    },
+    "end": {
+      "name": "Strada Panoramica",
+      "lat": 42.7377706,
+      "lng": 10.135033499999999
+    },
+    "center": {
+      "lat": 42.36029,
+      "lng": 9.20372
+    },
+    "waypoints": [
+      {
+        "name": "Lac de Tolla Viewpoint",
+        "lat": 41.9743247,
+        "lng": 8.9904602,
+        "spotType": "viewpoint",
+        "score": 45
+      },
+      {
+        "name": "Scenic viewpoint",
+        "lat": 42.347971,
+        "lng": 9.0094432,
+        "spotType": "viewpoint",
+        "score": 47
+      },
+      {
+        "name": "Fugilaccia viewpoint",
+        "lat": 42.3810819,
+        "lng": 8.6799301,
+        "spotType": "viewpoint",
+        "score": 45
+      },
+      {
+        "name": "Strada Panoramica",
+        "lat": 42.7377706,
+        "lng": 10.135033499999999,
+        "spotType": "viewpoint",
+        "score": 45
+      }
+    ],
+    "spots": [
+      {
+        "name": "Lac de Tolla Viewpoint",
+        "lat": 41.9743247,
+        "lng": 8.9904602,
+        "spotType": "viewpoint",
+        "score": 45
+      },
+      {
+        "name": "Scenic viewpoint",
+        "lat": 42.347971,
+        "lng": 9.0094432,
+        "spotType": "viewpoint",
+        "score": 47
+      },
+      {
+        "name": "Fugilaccia viewpoint",
+        "lat": 42.3810819,
+        "lng": 8.6799301,
+        "spotType": "viewpoint",
+        "score": 45
+      },
+      {
+        "name": "Strada Panoramica",
+        "lat": 42.7377706,
+        "lng": 10.135033499999999,
+        "spotType": "viewpoint",
+        "score": 45
+      }
+    ],
+    "source": "rider-spots.eu",
+    "sourceScope": "from-spots"
+  },
+  {
+    "id": "fr-corsica-scenic-viewpoint-fugilaccia-viewpoint",
+    "name": "Giro Panoramico corsica: Scenic viewpoint → Fugilaccia viewpoint",
+    "country": "FR",
+    "region": "corsica",
+    "rideType": "scenic",
+    "score": 51,
+    "difficulty": "bassa",
+    "distanceKm": 27.3,
+    "bestSeason": "Primavera / Estate / Autunno",
+    "description": "itinerario panoramico nell'area corsica, costruito su spot rider reali e pensato per offrire una guida piacevole, coerente e credibile.",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "lake"
+    ],
+    "start": {
+      "name": "Scenic viewpoint",
+      "lat": 42.347971,
+      "lng": 9.0094432
+    },
+    "end": {
+      "name": "Fugilaccia viewpoint",
+      "lat": 42.3810819,
+      "lng": 8.6799301
+    },
+    "center": {
+      "lat": 42.36453,
+      "lng": 8.84469
+    },
+    "waypoints": [
+      {
+        "name": "Scenic viewpoint",
+        "lat": 42.347971,
+        "lng": 9.0094432,
+        "spotType": "viewpoint",
+        "score": 47
+      },
+      {
+        "name": "Fugilaccia viewpoint",
+        "lat": 42.3810819,
+        "lng": 8.6799301,
+        "spotType": "viewpoint",
+        "score": 45
+      }
+    ],
+    "spots": [
+      {
+        "name": "Scenic viewpoint",
+        "lat": 42.347971,
+        "lng": 9.0094432,
+        "spotType": "viewpoint",
+        "score": 47
+      },
+      {
+        "name": "Fugilaccia viewpoint",
+        "lat": 42.3810819,
+        "lng": 8.6799301,
+        "spotType": "viewpoint",
+        "score": 45
+      }
+    ],
+    "source": "rider-spots.eu",
+    "sourceScope": "from-spots"
+  },
+  {
+    "id": "fr-france-alps-north-strada-di-crinale-dellassietta-belvedere-revard-table-dorientation-du-col-de-crozet",
+    "name": "Giro Panoramico france-alps-north: Strada di Crinale dell'Assietta → Belvedere Revard → Table d'orientation du col de Crozet",
+    "country": "FR",
+    "region": "france-alps-north",
+    "rideType": "scenic",
+    "score": 51,
+    "difficulty": "media",
+    "distanceKm": 170.7,
+    "bestSeason": "Primavera / Estate / Autunno",
+    "description": "itinerario panoramico nell'area france-alps-north, costruito su spot rider reali e pensato per offrire una guida piacevole, coerente e credibile.",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "mountain",
+      "twisty",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "start": {
+      "name": "Strada di Crinale dell'Assietta",
+      "lat": 45.065370099999996,
+      "lng": 6.951582999999999
+    },
+    "end": {
+      "name": "Table d'orientation du col de Crozet",
+      "lat": 46.29441,
+      "lng": 5.9674762
+    },
+    "center": {
+      "lat": 45.68059,
+      "lng": 6.29787
+    },
+    "waypoints": [
+      {
+        "name": "Strada di Crinale dell'Assietta",
+        "lat": 45.065370099999996,
+        "lng": 6.951582999999999,
+        "spotType": "viewpoint",
+        "score": 44
+      },
+      {
+        "name": "Belvedere Revard",
+        "lat": 45.6819887,
+        "lng": 5.9745592,
+        "spotType": "viewpoint",
+        "score": 44
+      },
+      {
+        "name": "Table d'orientation du col de Crozet",
+        "lat": 46.29441,
+        "lng": 5.9674762,
+        "spotType": "viewpoint",
+        "score": 50
+      }
+    ],
+    "spots": [
+      {
+        "name": "Strada di Crinale dell'Assietta",
+        "lat": 45.065370099999996,
+        "lng": 6.951582999999999,
+        "spotType": "viewpoint",
+        "score": 44
+      },
+      {
+        "name": "Belvedere Revard",
+        "lat": 45.6819887,
+        "lng": 5.9745592,
+        "spotType": "viewpoint",
+        "score": 44
+      },
+      {
+        "name": "Table d'orientation du col de Crozet",
+        "lat": 46.29441,
+        "lng": 5.9674762,
+        "spotType": "viewpoint",
+        "score": 50
+      }
+    ],
+    "source": "rider-spots.eu",
+    "sourceScope": "from-spots"
+  },
+  {
+    "id": "fr-france-cote-d-azur-le-ponton-lac-de-saint-cassien-belvedere-des-glacieres",
+    "name": "Giro Panoramico france-cote-d-azur: Le Ponton / Lac de Saint-Cassien → Belvédère des Glacières",
+    "country": "FR",
+    "region": "france-cote-d-azur",
+    "rideType": "scenic",
+    "score": 51,
+    "difficulty": "bassa",
+    "distanceKm": 40.8,
+    "bestSeason": "Primavera / Estate / Autunno",
+    "description": "itinerario panoramico nell'area france-cote-d-azur, costruito su spot rider reali e pensato per offrire una guida piacevole, coerente e credibile.",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "lake"
+    ],
+    "start": {
+      "name": "Le Ponton / Lac de Saint-Cassien",
+      "lat": 43.5687317,
+      "lng": 6.8007859999999996
+    },
+    "end": {
+      "name": "Belvédère des Glacières",
+      "lat": 43.7476984,
+      "lng": 6.3583035
+    },
+    "center": {
+      "lat": 43.65822,
+      "lng": 6.57954
+    },
+    "waypoints": [
+      {
+        "name": "Le Ponton / Lac de Saint-Cassien",
+        "lat": 43.5687317,
+        "lng": 6.8007859999999996,
+        "spotType": "viewpoint",
+        "score": 47
+      },
+      {
+        "name": "Belvédère des Glacières",
+        "lat": 43.7476984,
+        "lng": 6.3583035,
+        "spotType": "viewpoint",
+        "score": 45
+      }
+    ],
+    "spots": [
+      {
+        "name": "Le Ponton / Lac de Saint-Cassien",
+        "lat": 43.5687317,
+        "lng": 6.8007859999999996,
+        "spotType": "viewpoint",
+        "score": 47
+      },
+      {
+        "name": "Belvédère des Glacières",
+        "lat": 43.7476984,
+        "lng": 6.3583035,
+        "spotType": "viewpoint",
+        "score": 45
+      }
+    ],
+    "source": "rider-spots.eu",
+    "sourceScope": "from-spots"
+  },
+  {
+    "id": "fr-france-cote-d-azur-le-ponton-lac-de-saint-cassien-monte-carlo-viewpoint-belvedere-des-glacieres",
+    "name": "Giro Panoramico france-cote-d-azur: Le Ponton / Lac de Saint-Cassien → Monte Carlo Viewpoint → Belvédère des Glacières",
+    "country": "FR",
+    "region": "france-cote-d-azur",
+    "rideType": "scenic",
+    "score": 51,
+    "difficulty": "media",
+    "distanceKm": 135.8,
+    "bestSeason": "Primavera / Estate / Autunno",
+    "description": "itinerario panoramico nell'area france-cote-d-azur, costruito su spot rider reali e pensato per offrire una guida piacevole, coerente e credibile.",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "lake"
+    ],
+    "start": {
+      "name": "Le Ponton / Lac de Saint-Cassien",
+      "lat": 43.5687317,
+      "lng": 6.8007859999999996
+    },
+    "end": {
+      "name": "Belvédère des Glacières",
+      "lat": 43.7476984,
+      "lng": 6.3583035
+    },
+    "center": {
+      "lat": 43.68364,
+      "lng": 6.85417
+    },
+    "waypoints": [
+      {
+        "name": "Le Ponton / Lac de Saint-Cassien",
+        "lat": 43.5687317,
+        "lng": 6.8007859999999996,
+        "spotType": "viewpoint",
+        "score": 47
+      },
+      {
+        "name": "Monte Carlo Viewpoint",
+        "lat": 43.7344884,
+        "lng": 7.403417300000001,
+        "spotType": "viewpoint",
+        "score": 45
+      },
+      {
+        "name": "Belvédère des Glacières",
+        "lat": 43.7476984,
+        "lng": 6.3583035,
+        "spotType": "viewpoint",
+        "score": 45
+      }
+    ],
+    "spots": [
+      {
+        "name": "Le Ponton / Lac de Saint-Cassien",
+        "lat": 43.5687317,
+        "lng": 6.8007859999999996,
+        "spotType": "viewpoint",
+        "score": 47
+      },
+      {
+        "name": "Monte Carlo Viewpoint",
+        "lat": 43.7344884,
+        "lng": 7.403417300000001,
+        "spotType": "viewpoint",
+        "score": 45
+      },
+      {
+        "name": "Belvédère des Glacières",
+        "lat": 43.7476984,
+        "lng": 6.3583035,
+        "spotType": "viewpoint",
+        "score": 45
+      }
+    ],
+    "source": "rider-spots.eu",
+    "sourceScope": "from-spots"
+  },
+  {
+    "id": "fr-france-pyrenees-center-the-molar-viewpoint-viewpoint",
+    "name": "Giro Panoramico france-pyrenees-center: The Molar Viewpoint → Viewpoint",
+    "country": "FR",
+    "region": "france-pyrenees-center",
+    "rideType": "scenic",
+    "score": 51,
+    "difficulty": "bassa",
+    "distanceKm": 90.9,
+    "bestSeason": "Primavera / Estate / Autunno",
+    "description": "itinerario panoramico nell'area france-pyrenees-center, costruito su spot rider reali e pensato per offrire una guida piacevole, coerente e credibile.",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider"
+    ],
+    "start": {
+      "name": "The Molar Viewpoint",
+      "lat": 42.6443929,
+      "lng": -0.0795579
+    },
+    "end": {
+      "name": "Viewpoint",
+      "lat": 43.0074179,
+      "lng": 0.9191138999999999
+    },
+    "center": {
+      "lat": 42.82591,
+      "lng": 0.41978
+    },
+    "waypoints": [
+      {
+        "name": "The Molar Viewpoint",
+        "lat": 42.6443929,
+        "lng": -0.0795579,
+        "spotType": "viewpoint",
+        "score": 48
+      },
+      {
+        "name": "Viewpoint",
+        "lat": 43.0074179,
+        "lng": 0.9191138999999999,
+        "spotType": "viewpoint",
+        "score": 43
+      }
+    ],
+    "spots": [
+      {
+        "name": "The Molar Viewpoint",
+        "lat": 42.6443929,
+        "lng": -0.0795579,
+        "spotType": "viewpoint",
+        "score": 48
+      },
+      {
+        "name": "Viewpoint",
+        "lat": 43.0074179,
+        "lng": 0.9191138999999999,
+        "spotType": "viewpoint",
+        "score": 43
+      }
+    ],
+    "source": "rider-spots.eu",
+    "sourceScope": "from-spots"
+  },
+  {
+    "id": "fr-corsica-fugilaccia-viewpoint-lac-de-tolla-viewpoint",
+    "name": "Giro Panoramico corsica: Fugilaccia viewpoint → Lac de Tolla Viewpoint",
+    "country": "FR",
+    "region": "corsica",
+    "rideType": "scenic",
+    "score": 50,
+    "difficulty": "bassa",
+    "distanceKm": 52,
+    "bestSeason": "Primavera / Estate / Autunno",
+    "description": "itinerario panoramico nell'area corsica, costruito su spot rider reali e pensato per offrire una guida piacevole, coerente e credibile.",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "lake"
+    ],
+    "start": {
+      "name": "Fugilaccia viewpoint",
+      "lat": 42.3810819,
+      "lng": 8.6799301
+    },
+    "end": {
+      "name": "Lac de Tolla Viewpoint",
+      "lat": 41.9743247,
+      "lng": 8.9904602
+    },
+    "center": {
+      "lat": 42.1777,
+      "lng": 8.8352
+    },
+    "waypoints": [
+      {
+        "name": "Fugilaccia viewpoint",
+        "lat": 42.3810819,
+        "lng": 8.6799301,
+        "spotType": "viewpoint",
+        "score": 45
+      },
+      {
+        "name": "Lac de Tolla Viewpoint",
+        "lat": 41.9743247,
+        "lng": 8.9904602,
+        "spotType": "viewpoint",
+        "score": 45
+      }
+    ],
+    "spots": [
+      {
+        "name": "Fugilaccia viewpoint",
+        "lat": 42.3810819,
+        "lng": 8.6799301,
+        "spotType": "viewpoint",
+        "score": 45
+      },
+      {
+        "name": "Lac de Tolla Viewpoint",
+        "lat": 41.9743247,
+        "lng": 8.9904602,
+        "spotType": "viewpoint",
+        "score": 45
+      }
+    ],
+    "source": "rider-spots.eu",
+    "sourceScope": "from-spots"
+  },
+  {
+    "id": "fr-corsica-lac-de-tolla-viewpoint-fugilaccia-viewpoint-strada-panoramica",
+    "name": "Giro Panoramico corsica: Lac de Tolla Viewpoint → Fugilaccia viewpoint → Strada Panoramica",
+    "country": "FR",
+    "region": "corsica",
+    "rideType": "scenic",
+    "score": 50,
+    "difficulty": "media",
+    "distanceKm": 177.6,
+    "bestSeason": "Primavera / Estate / Autunno",
+    "description": "itinerario panoramico nell'area corsica, costruito su spot rider reali e pensato per offrire una guida piacevole, coerente e credibile.",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "lake"
+    ],
+    "start": {
+      "name": "Lac de Tolla Viewpoint",
+      "lat": 41.9743247,
+      "lng": 8.9904602
+    },
+    "end": {
+      "name": "Strada Panoramica",
+      "lat": 42.7377706,
+      "lng": 10.135033499999999
+    },
+    "center": {
+      "lat": 42.36439,
+      "lng": 9.26847
+    },
+    "waypoints": [
+      {
+        "name": "Lac de Tolla Viewpoint",
+        "lat": 41.9743247,
+        "lng": 8.9904602,
+        "spotType": "viewpoint",
+        "score": 45
+      },
+      {
+        "name": "Fugilaccia viewpoint",
+        "lat": 42.3810819,
+        "lng": 8.6799301,
+        "spotType": "viewpoint",
+        "score": 45
+      },
+      {
+        "name": "Strada Panoramica",
+        "lat": 42.7377706,
+        "lng": 10.135033499999999,
+        "spotType": "viewpoint",
+        "score": 45
+      }
+    ],
+    "spots": [
+      {
+        "name": "Lac de Tolla Viewpoint",
+        "lat": 41.9743247,
+        "lng": 8.9904602,
+        "spotType": "viewpoint",
+        "score": 45
+      },
+      {
+        "name": "Fugilaccia viewpoint",
+        "lat": 42.3810819,
+        "lng": 8.6799301,
+        "spotType": "viewpoint",
+        "score": 45
+      },
+      {
+        "name": "Strada Panoramica",
+        "lat": 42.7377706,
+        "lng": 10.135033499999999,
+        "spotType": "viewpoint",
+        "score": 45
+      }
+    ],
+    "source": "rider-spots.eu",
+    "sourceScope": "from-spots"
+  },
+  {
+    "id": "fr-corsica-lac-de-tolla-viewpoint-strada-panoramica",
+    "name": "Giro Panoramico corsica: Lac de Tolla Viewpoint → Strada Panoramica",
+    "country": "FR",
+    "region": "corsica",
+    "rideType": "scenic",
+    "score": 50,
+    "difficulty": "media",
+    "distanceKm": 126.7,
+    "bestSeason": "Primavera / Estate / Autunno",
+    "description": "itinerario panoramico nell'area corsica, costruito su spot rider reali e pensato per offrire una guida piacevole, coerente e credibile.",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "lake"
+    ],
+    "start": {
+      "name": "Lac de Tolla Viewpoint",
+      "lat": 41.9743247,
+      "lng": 8.9904602
+    },
+    "end": {
+      "name": "Strada Panoramica",
+      "lat": 42.7377706,
+      "lng": 10.135033499999999
+    },
+    "center": {
+      "lat": 42.35605,
+      "lng": 9.56275
+    },
+    "waypoints": [
+      {
+        "name": "Lac de Tolla Viewpoint",
+        "lat": 41.9743247,
+        "lng": 8.9904602,
+        "spotType": "viewpoint",
+        "score": 45
+      },
+      {
+        "name": "Strada Panoramica",
+        "lat": 42.7377706,
+        "lng": 10.135033499999999,
+        "spotType": "viewpoint",
+        "score": 45
+      }
+    ],
+    "spots": [
+      {
+        "name": "Lac de Tolla Viewpoint",
+        "lat": 41.9743247,
+        "lng": 8.9904602,
+        "spotType": "viewpoint",
+        "score": 45
+      },
+      {
+        "name": "Strada Panoramica",
+        "lat": 42.7377706,
+        "lng": 10.135033499999999,
+        "spotType": "viewpoint",
+        "score": 45
+      }
+    ],
+    "source": "rider-spots.eu",
+    "sourceScope": "from-spots"
+  },
+  {
+    "id": "fr-france-alps-north-strada-di-crinale-dellassietta-punto-panoramico-belvedere-revard-table-dorientation-du-col-de-croze",
+    "name": "Giro Panoramico france-alps-north: Strada di Crinale dell'Assietta → Punto Panoramico → Belvedere Revard → Table d'orientation du col de Crozet",
+    "country": "FR",
+    "region": "france-alps-north",
+    "rideType": "scenic",
+    "score": 50,
+    "difficulty": "media",
+    "distanceKm": 209.9,
+    "bestSeason": "Primavera / Estate / Autunno",
+    "description": "itinerario panoramico nell'area france-alps-north, costruito su spot rider reali e pensato per offrire una guida piacevole, coerente e credibile.",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "mountain",
+      "twisty",
+      "rider-spot",
+      "mountain-pass"
+    ],
+    "start": {
+      "name": "Strada di Crinale dell'Assietta",
+      "lat": 45.065370099999996,
+      "lng": 6.951582999999999
+    },
+    "end": {
+      "name": "Table d'orientation du col de Crozet",
+      "lat": 46.29441,
+      "lng": 5.9674762
+    },
+    "center": {
+      "lat": 45.62952,
+      "lng": 6.50891
+    },
+    "waypoints": [
+      {
+        "name": "Strada di Crinale dell'Assietta",
+        "lat": 45.065370099999996,
+        "lng": 6.951582999999999,
+        "spotType": "viewpoint",
+        "score": 44
+      },
+      {
+        "name": "Punto Panoramico",
+        "lat": 45.476300699999996,
+        "lng": 7.1420363,
+        "spotType": "viewpoint",
+        "score": 41
+      },
+      {
+        "name": "Belvedere Revard",
+        "lat": 45.6819887,
+        "lng": 5.9745592,
+        "spotType": "viewpoint",
+        "score": 44
+      },
+      {
+        "name": "Table d'orientation du col de Crozet",
+        "lat": 46.29441,
+        "lng": 5.9674762,
+        "spotType": "viewpoint",
+        "score": 50
+      }
+    ],
+    "spots": [
+      {
+        "name": "Strada di Crinale dell'Assietta",
+        "lat": 45.065370099999996,
+        "lng": 6.951582999999999,
+        "spotType": "viewpoint",
+        "score": 44
+      },
+      {
+        "name": "Punto Panoramico",
+        "lat": 45.476300699999996,
+        "lng": 7.1420363,
+        "spotType": "viewpoint",
+        "score": 41
+      },
+      {
+        "name": "Belvedere Revard",
+        "lat": 45.6819887,
+        "lng": 5.9745592,
+        "spotType": "viewpoint",
+        "score": 44
+      },
+      {
+        "name": "Table d'orientation du col de Crozet",
+        "lat": 46.29441,
+        "lng": 5.9674762,
+        "spotType": "viewpoint",
+        "score": 50
+      }
+    ],
+    "source": "rider-spots.eu",
+    "sourceScope": "from-spots"
+  },
+  {
+    "id": "fr-france-alps-south-strada-dei-cannoni-colle-di-sampeyre-le-rooftop-belvedere",
+    "name": "Giro Panoramico france-alps-south: Strada dei Cannoni → Colle di Sampeyre → Le Rooftop → Belvédère",
+    "country": "FR",
+    "region": "france-alps-south",
+    "rideType": "scenic",
+    "score": 50,
+    "difficulty": "media",
+    "distanceKm": 141,
+    "bestSeason": "Primavera / Estate / Autunno",
+    "description": "itinerario panoramico nell'area france-alps-south, costruito su spot rider reali e pensato per offrire una guida piacevole, coerente e credibile.",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "rider-spot",
+      "lake"
+    ],
+    "start": {
+      "name": "Strada dei Cannoni",
+      "lat": 44.5440567,
+      "lng": 7.1377565
+    },
+    "end": {
+      "name": "Belvédère",
+      "lat": 45.001101299999995,
+      "lng": 5.5537109
+    },
+    "center": {
+      "lat": 44.66191,
+      "lng": 6.57094
+    },
+    "waypoints": [
+      {
+        "name": "Strada dei Cannoni",
+        "lat": 44.5440567,
+        "lng": 7.1377565,
+        "spotType": "viewpoint",
+        "score": 50
+      },
+      {
+        "name": "Colle di Sampeyre",
+        "lat": 44.5512273,
+        "lng": 7.1190470999999995,
+        "spotType": "pass",
+        "score": 50
+      },
+      {
+        "name": "Le Rooftop",
+        "lat": 44.5512606,
+        "lng": 6.4732258,
+        "spotType": "viewpoint",
+        "score": 40
+      },
+      {
+        "name": "Belvédère",
+        "lat": 45.001101299999995,
+        "lng": 5.5537109,
+        "spotType": "viewpoint",
+        "score": 37
+      }
+    ],
+    "spots": [
+      {
+        "name": "Strada dei Cannoni",
+        "lat": 44.5440567,
+        "lng": 7.1377565,
+        "spotType": "viewpoint",
+        "score": 50
+      },
+      {
+        "name": "Colle di Sampeyre",
+        "lat": 44.5512273,
+        "lng": 7.1190470999999995,
+        "spotType": "pass",
+        "score": 50
+      },
+      {
+        "name": "Le Rooftop",
+        "lat": 44.5512606,
+        "lng": 6.4732258,
+        "spotType": "viewpoint",
+        "score": 40
+      },
+      {
+        "name": "Belvédère",
+        "lat": 45.001101299999995,
+        "lng": 5.5537109,
+        "spotType": "viewpoint",
+        "score": 37
+      }
+    ],
+    "source": "rider-spots.eu",
+    "sourceScope": "from-spots"
+  },
+  {
+    "id": "fr-france-alps-south-strada-dei-cannoni-le-rooftop",
+    "name": "Giro Panoramico france-alps-south: Strada dei Cannoni → Le Rooftop",
+    "country": "FR",
+    "region": "france-alps-south",
+    "rideType": "scenic",
+    "score": 50,
+    "difficulty": "bassa",
+    "distanceKm": 52.7,
+    "bestSeason": "Primavera / Estate / Autunno",
+    "description": "itinerario panoramico nell'area france-alps-south, costruito su spot rider reali e pensato per offrire una guida piacevole, coerente e credibile.",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "rider-spot",
+      "lake"
+    ],
+    "start": {
+      "name": "Strada dei Cannoni",
+      "lat": 44.5440567,
+      "lng": 7.1377565
+    },
+    "end": {
+      "name": "Le Rooftop",
+      "lat": 44.5512606,
+      "lng": 6.4732258
+    },
+    "center": {
+      "lat": 44.54766,
+      "lng": 6.80549
+    },
+    "waypoints": [
+      {
+        "name": "Strada dei Cannoni",
+        "lat": 44.5440567,
+        "lng": 7.1377565,
+        "spotType": "viewpoint",
+        "score": 50
+      },
+      {
+        "name": "Le Rooftop",
+        "lat": 44.5512606,
+        "lng": 6.4732258,
+        "spotType": "viewpoint",
+        "score": 40
+      }
+    ],
+    "spots": [
+      {
+        "name": "Strada dei Cannoni",
+        "lat": 44.5440567,
+        "lng": 7.1377565,
+        "spotType": "viewpoint",
+        "score": 50
+      },
+      {
+        "name": "Le Rooftop",
+        "lat": 44.5512606,
+        "lng": 6.4732258,
+        "spotType": "viewpoint",
+        "score": 40
+      }
+    ],
+    "source": "rider-spots.eu",
+    "sourceScope": "from-spots"
+  },
+  {
+    "id": "fr-france-cote-d-azur-belvedere-des-glacieres-monte-carlo-viewpoint",
+    "name": "Giro Panoramico france-cote-d-azur: Belvédère des Glacières → Monte Carlo Viewpoint",
+    "country": "FR",
+    "region": "france-cote-d-azur",
+    "rideType": "scenic",
+    "score": 50,
+    "difficulty": "bassa",
+    "distanceKm": 84,
+    "bestSeason": "Primavera / Estate / Autunno",
+    "description": "itinerario panoramico nell'area france-cote-d-azur, costruito su spot rider reali e pensato per offrire una guida piacevole, coerente e credibile.",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "lake"
+    ],
+    "start": {
+      "name": "Belvédère des Glacières",
+      "lat": 43.7476984,
+      "lng": 6.3583035
+    },
+    "end": {
+      "name": "Monte Carlo Viewpoint",
+      "lat": 43.7344884,
+      "lng": 7.403417300000001
+    },
+    "center": {
+      "lat": 43.74109,
+      "lng": 6.88086
+    },
+    "waypoints": [
+      {
+        "name": "Belvédère des Glacières",
+        "lat": 43.7476984,
+        "lng": 6.3583035,
+        "spotType": "viewpoint",
+        "score": 45
+      },
+      {
+        "name": "Monte Carlo Viewpoint",
+        "lat": 43.7344884,
+        "lng": 7.403417300000001,
+        "spotType": "viewpoint",
+        "score": 45
+      }
+    ],
+    "spots": [
+      {
+        "name": "Belvédère des Glacières",
+        "lat": 43.7476984,
+        "lng": 6.3583035,
+        "spotType": "viewpoint",
+        "score": 45
+      },
+      {
+        "name": "Monte Carlo Viewpoint",
+        "lat": 43.7344884,
+        "lng": 7.403417300000001,
+        "spotType": "viewpoint",
+        "score": 45
+      }
+    ],
+    "source": "rider-spots.eu",
+    "sourceScope": "from-spots"
+  },
+  {
+    "id": "fr-france-cote-d-azur-le-ponton-lac-de-saint-cassien-monte-carlo-viewpoint-belvedere-des-glacieres-belvedere-de-pousterl",
+    "name": "Giro Panoramico france-cote-d-azur: Le Ponton / Lac de Saint-Cassien → Monte Carlo Viewpoint → Belvédère des Glacières → Belvédère de Pousterle",
+    "country": "FR",
+    "region": "france-cote-d-azur",
+    "rideType": "scenic",
+    "score": 50,
+    "difficulty": "media",
+    "distanceKm": 217.2,
+    "bestSeason": "Primavera / Estate / Autunno",
+    "description": "itinerario panoramico nell'area france-cote-d-azur, costruito su spot rider reali e pensato per offrire una guida piacevole, coerente e credibile.",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "lake"
+    ],
+    "start": {
+      "name": "Le Ponton / Lac de Saint-Cassien",
+      "lat": 43.5687317,
+      "lng": 6.8007859999999996
+    },
+    "end": {
+      "name": "Belvédère de Pousterle",
+      "lat": 44.4635828,
+      "lng": 6.5690558
+    },
+    "center": {
+      "lat": 43.87863,
+      "lng": 6.78289
+    },
+    "waypoints": [
+      {
+        "name": "Le Ponton / Lac de Saint-Cassien",
+        "lat": 43.5687317,
+        "lng": 6.8007859999999996,
+        "spotType": "viewpoint",
+        "score": 47
+      },
+      {
+        "name": "Monte Carlo Viewpoint",
+        "lat": 43.7344884,
+        "lng": 7.403417300000001,
+        "spotType": "viewpoint",
+        "score": 45
+      },
+      {
+        "name": "Belvédère des Glacières",
+        "lat": 43.7476984,
+        "lng": 6.3583035,
+        "spotType": "viewpoint",
+        "score": 45
+      },
+      {
+        "name": "Belvédère de Pousterle",
+        "lat": 44.4635828,
+        "lng": 6.5690558,
+        "spotType": "viewpoint",
+        "score": 43
+      }
+    ],
+    "spots": [
+      {
+        "name": "Le Ponton / Lac de Saint-Cassien",
+        "lat": 43.5687317,
+        "lng": 6.8007859999999996,
+        "spotType": "viewpoint",
+        "score": 47
+      },
+      {
+        "name": "Monte Carlo Viewpoint",
+        "lat": 43.7344884,
+        "lng": 7.403417300000001,
+        "spotType": "viewpoint",
+        "score": 45
+      },
+      {
+        "name": "Belvédère des Glacières",
+        "lat": 43.7476984,
+        "lng": 6.3583035,
+        "spotType": "viewpoint",
+        "score": 45
+      },
+      {
+        "name": "Belvédère de Pousterle",
+        "lat": 44.4635828,
+        "lng": 6.5690558,
+        "spotType": "viewpoint",
+        "score": 43
+      }
+    ],
+    "source": "rider-spots.eu",
+    "sourceScope": "from-spots"
+  },
+  {
+    "id": "fr-corsica-lac-de-tolla-viewpoint-belvedere-de-corte-fugilaccia-viewpoint-strada-panoramica",
+    "name": "Giro Panoramico corsica: Lac de Tolla Viewpoint → Belvédère de Corte → Fugilaccia viewpoint → Strada Panoramica",
+    "country": "FR",
+    "region": "corsica",
+    "rideType": "scenic",
+    "score": 49,
+    "difficulty": "media",
+    "distanceKm": 204,
+    "bestSeason": "Primavera / Estate / Autunno",
+    "description": "itinerario panoramico nell'area corsica, costruito su spot rider reali e pensato per offrire una guida piacevole, coerente e credibile.",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "lake"
+    ],
+    "start": {
+      "name": "Lac de Tolla Viewpoint",
+      "lat": 41.9743247,
+      "lng": 8.9904602
+    },
+    "end": {
+      "name": "Strada Panoramica",
+      "lat": 42.7377706,
+      "lng": 10.135033499999999
+    },
+    "center": {
+      "lat": 42.34927,
+      "lng": 9.2385
+    },
+    "waypoints": [
+      {
+        "name": "Lac de Tolla Viewpoint",
+        "lat": 41.9743247,
+        "lng": 8.9904602,
+        "spotType": "viewpoint",
+        "score": 45
+      },
+      {
+        "name": "Belvédère de Corte",
+        "lat": 42.303884599999996,
+        "lng": 9.1485828,
+        "spotType": "viewpoint",
+        "score": 39
+      },
+      {
+        "name": "Fugilaccia viewpoint",
+        "lat": 42.3810819,
+        "lng": 8.6799301,
+        "spotType": "viewpoint",
+        "score": 45
+      },
+      {
+        "name": "Strada Panoramica",
+        "lat": 42.7377706,
+        "lng": 10.135033499999999,
+        "spotType": "viewpoint",
+        "score": 45
+      }
+    ],
+    "spots": [
+      {
+        "name": "Lac de Tolla Viewpoint",
+        "lat": 41.9743247,
+        "lng": 8.9904602,
+        "spotType": "viewpoint",
+        "score": 45
+      },
+      {
+        "name": "Belvédère de Corte",
+        "lat": 42.303884599999996,
+        "lng": 9.1485828,
+        "spotType": "viewpoint",
+        "score": 39
+      },
+      {
+        "name": "Fugilaccia viewpoint",
+        "lat": 42.3810819,
+        "lng": 8.6799301,
+        "spotType": "viewpoint",
+        "score": 45
+      },
+      {
+        "name": "Strada Panoramica",
+        "lat": 42.7377706,
+        "lng": 10.135033499999999,
+        "spotType": "viewpoint",
+        "score": 45
+      }
+    ],
+    "source": "rider-spots.eu",
+    "sourceScope": "from-spots"
+  },
+  {
+    "id": "fr-france-alps-north-belvedere-revard-strada-di-crinale-dellassietta",
+    "name": "Giro Panoramico france-alps-north: Belvedere Revard → Strada di Crinale dell'Assietta",
+    "country": "FR",
+    "region": "france-alps-north",
+    "rideType": "scenic",
+    "score": 49,
+    "difficulty": "media",
+    "distanceKm": 102.6,
+    "bestSeason": "Primavera / Estate / Autunno",
+    "description": "itinerario panoramico nell'area france-alps-north, costruito su spot rider reali e pensato per offrire una guida piacevole, coerente e credibile.",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider"
+    ],
+    "start": {
+      "name": "Belvedere Revard",
+      "lat": 45.6819887,
+      "lng": 5.9745592
+    },
+    "end": {
+      "name": "Strada di Crinale dell'Assietta",
+      "lat": 45.065370099999996,
+      "lng": 6.951582999999999
+    },
+    "center": {
+      "lat": 45.37368,
+      "lng": 6.46307
+    },
+    "waypoints": [
+      {
+        "name": "Belvedere Revard",
+        "lat": 45.6819887,
+        "lng": 5.9745592,
+        "spotType": "viewpoint",
+        "score": 44
+      },
+      {
+        "name": "Strada di Crinale dell'Assietta",
+        "lat": 45.065370099999996,
+        "lng": 6.951582999999999,
+        "spotType": "viewpoint",
+        "score": 44
+      }
+    ],
+    "spots": [
+      {
+        "name": "Belvedere Revard",
+        "lat": 45.6819887,
+        "lng": 5.9745592,
+        "spotType": "viewpoint",
+        "score": 44
+      },
+      {
+        "name": "Strada di Crinale dell'Assietta",
+        "lat": 45.065370099999996,
+        "lng": 6.951582999999999,
+        "spotType": "viewpoint",
+        "score": 44
+      }
+    ],
+    "source": "rider-spots.eu",
+    "sourceScope": "from-spots"
+  },
+  {
+    "id": "fr-france-cote-d-azur-monte-carlo-viewpoint-belvedere-de-pousterle",
+    "name": "Giro Panoramico france-cote-d-azur: Monte Carlo Viewpoint → Belvédère de Pousterle",
+    "country": "FR",
+    "region": "france-cote-d-azur",
+    "rideType": "scenic",
+    "score": 49,
+    "difficulty": "media",
+    "distanceKm": 104.9,
+    "bestSeason": "Primavera / Estate / Autunno",
+    "description": "itinerario panoramico nell'area france-cote-d-azur, costruito su spot rider reali e pensato per offrire una guida piacevole, coerente e credibile.",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider"
+    ],
+    "start": {
+      "name": "Monte Carlo Viewpoint",
+      "lat": 43.7344884,
+      "lng": 7.403417300000001
+    },
+    "end": {
+      "name": "Belvédère de Pousterle",
+      "lat": 44.4635828,
+      "lng": 6.5690558
+    },
+    "center": {
+      "lat": 44.09904,
+      "lng": 6.98624
+    },
+    "waypoints": [
+      {
+        "name": "Monte Carlo Viewpoint",
+        "lat": 43.7344884,
+        "lng": 7.403417300000001,
+        "spotType": "viewpoint",
+        "score": 45
+      },
+      {
+        "name": "Belvédère de Pousterle",
+        "lat": 44.4635828,
+        "lng": 6.5690558,
+        "spotType": "viewpoint",
+        "score": 43
+      }
+    ],
+    "spots": [
+      {
+        "name": "Monte Carlo Viewpoint",
+        "lat": 43.7344884,
+        "lng": 7.403417300000001,
+        "spotType": "viewpoint",
+        "score": 45
+      },
+      {
+        "name": "Belvédère de Pousterle",
+        "lat": 44.4635828,
+        "lng": 6.5690558,
+        "spotType": "viewpoint",
+        "score": 43
+      }
+    ],
+    "source": "rider-spots.eu",
+    "sourceScope": "from-spots"
+  }
+]
