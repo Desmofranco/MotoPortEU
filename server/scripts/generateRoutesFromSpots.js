@@ -253,6 +253,22 @@ function distanceSummary(spots) {
   return Math.round(total * 10) / 10;
 }
 
+function maxLegDistanceKm(spots) {
+  let maxKm = 0;
+
+  for (let i = 1; i < spots.length; i++) {
+    const km = haversineKm(
+      spots[i - 1].lat,
+      spots[i - 1].lng,
+      spots[i].lat,
+      spots[i].lng
+    );
+    if (km > maxKm) maxKm = km;
+  }
+
+  return Math.round(maxKm * 10) / 10;
+}
+
 function estimateDifficulty(rideType, totalKm, passCount) {
   if (rideType === "mountain" && (passCount >= 2 || totalKm >= 80)) return "alta";
   if (rideType === "lake" || rideType === "coastal") return "media";
@@ -270,6 +286,30 @@ function makeDescription(route) {
     }[route.rideType] || "itinerario rider";
 
   return `${rideTypeLabel} nell'area ${route.region}, costruito su spot rider reali e pensato per offrire una guida piacevole, coerente e credibile.`;
+}
+
+function routeHasCanonicalSpot(route, key) {
+  const spots = Array.isArray(route?.spots) ? route.spots : [];
+  return spots.some((s) => canonicalSpotName(s?.name || "") === key);
+}
+
+function isRouteAllowed(route) {
+  const spots = Array.isArray(route?.spots) ? route.spots : [];
+  if (spots.length < 2) return false;
+
+  const totalKm = Number(route?.distanceKm || 0);
+  const maxLegKm = maxLegDistanceKm(spots);
+
+if (routeHasCanonicalSpot(route, "stelvio")) {
+  if (totalKm > 140) return false;
+  if (maxLegKm > 85) return false;
+}
+  if (routeHasCanonicalSpot(route, "forra")) {
+    if (totalKm > 90) return false;
+    if (maxLegKm > 50) return false;
+  }
+
+  return true;
 }
 
 function dedupeRoutes(routes) {
@@ -420,13 +460,21 @@ function ensureHeroCandidates(candidates, ranked) {
   const heroSpots = ranked.filter(isHeroSpot);
 
   for (const hero of heroSpots) {
+    const heroKey = canonicalSpotName(hero.name);
+
     const neighbors = ranked
       .filter((s) => {
         if (s === hero) return false;
 
         const km = haversineKm(hero.lat, hero.lng, s.lat, s.lng);
-        if (km > 80) return false;
+
+        // stessa zona
         if (normKey(s.region) !== normKey(hero.region)) return false;
+
+        // limiti più intelligenti
+        if (heroKey === "stelvio" && km > 80) return false;
+        if (heroKey === "forra" && km > 60) return false;
+        if (km > 100) return false;
 
         return true;
       })
@@ -434,21 +482,24 @@ function ensureHeroCandidates(candidates, ranked) {
         const da = haversineKm(hero.lat, hero.lng, a.lat, a.lng);
         const db = haversineKm(hero.lat, hero.lng, b.lat, b.lng);
         return da - db;
-      })
-      .slice(0, 6);
+      });
 
-    if (neighbors.length >= 1) {
-      pushUniqueCandidate(candidates, [hero, ...neighbors.slice(0, 1)]);
-    }
+    // 🔥 FORZATURA HERO
+    if (neighbors.length === 0) continue;
+
+    // almeno 1 route sicura
+    pushUniqueCandidate(candidates, [hero, neighbors[0]]);
+
+    // se abbiamo abbastanza vicini, creiamo anche versioni più ricche
     if (neighbors.length >= 2) {
-      pushUniqueCandidate(candidates, [hero, ...neighbors.slice(0, 2)]);
+      pushUniqueCandidate(candidates, [hero, neighbors[0], neighbors[1]]);
     }
+
     if (neighbors.length >= 3) {
-      pushUniqueCandidate(candidates, [hero, ...neighbors.slice(0, 3)]);
+      pushUniqueCandidate(candidates, [hero, neighbors[0], neighbors[1], neighbors[2]]);
     }
   }
 }
-
 function hasHeroSpot(route) {
   return Array.isArray(route?.spots) && route.spots.some(isHeroSpot);
 }
@@ -580,6 +631,11 @@ async function main() {
         };
 
         route.description = makeDescription(route);
+
+        if (!isRouteAllowed(route)) {
+          continue;
+        }
+
         routes.push(route);
       }
     }

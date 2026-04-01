@@ -2910,98 +2910,6 @@
     "hero": true
   },
   {
-    "id": "it-italy-center-passo-di-cavorsella-passo-sella",
-    "name": "Giro Montagna italy-center: Passo di Cavorsella → Passo Sella",
-    "country": "IT",
-    "region": "italy-center",
-    "rideType": "mountain",
-    "score": 73,
-    "difficulty": "alta",
-    "distanceKm": 22.1,
-    "bestSeason": "Primavera / Estate / Inizio autunno",
-    "description": "itinerario di montagna nell'area italy-center, costruito su spot rider reali e pensato per offrire una guida piacevole, coerente e credibile.",
-    "tags": [
-      "mountain",
-      "scenic",
-      "rider",
-      "twisty",
-      "panoramic",
-      "rider-spot",
-      "mountain-pass"
-    ],
-    "start": {
-      "name": "Passo di Cavorsella",
-      "lat": 44.2810765,
-      "lng": 10.2844369
-    },
-    "end": {
-      "name": "Passo Sella",
-      "lat": 44.0841662,
-      "lng": 10.246948999999999
-    },
-    "center": {
-      "lat": 44.18262,
-      "lng": 10.26569
-    },
-    "waypoints": [
-      {
-        "name": "Passo di Cavorsella",
-        "lat": 44.2810765,
-        "lng": 10.2844369,
-        "spotType": "pass",
-        "score": 50
-      },
-      {
-        "name": "Passo Sella",
-        "lat": 44.0841662,
-        "lng": 10.246948999999999,
-        "spotType": "pass",
-        "score": 50
-      }
-    ],
-    "spots": [
-      {
-        "name": "Passo di Cavorsella",
-        "lat": 44.2810765,
-        "lng": 10.2844369,
-        "spotType": "pass",
-        "score": 50,
-        "region": "italy-center",
-        "rideType": "mountain",
-        "tags": [
-          "mountain",
-          "scenic",
-          "rider",
-          "twisty",
-          "panoramic",
-          "rider-spot",
-          "mountain-pass"
-        ]
-      },
-      {
-        "name": "Passo Sella",
-        "lat": 44.0841662,
-        "lng": 10.246948999999999,
-        "spotType": "pass",
-        "score": 50,
-        "region": "italy-center",
-        "rideType": "mountain",
-        "tags": [
-          "mountain",
-          "scenic",
-          "rider",
-          "twisty",
-          "panoramic",
-          "rider-spot",
-          "mountain-pass"
-        ]
-      }
-    ],
-    "source": "rider-spots.eu",
-    "sourceScope": "from-spots",
-    "hero": true
-  },
-  {
     "id": "it-italy-center-passo-sella-passo-cattivo",
     "name": "Giro Montagna italy-center: Passo Sella → Passo Cattivo",
     "country": "IT",
@@ -12318,6 +12226,138 @@
     "hero": false
   },
   {
+    "id": "it-italy-center-passo-del-vestito-passo-della-focolaccia-passo-di-annibale-passo-del-cerreto-42037-collagna-re",
+    "name": "Giro Montagna italy-center: Passo del Vestito → passo della Focolaccia → Passo di Annibale → Passo Del Cerreto 42037 Collagna Re",
+    "country": "IT",
+    "region": "italy-center",
+    "rideType": "mountain",
+    "score": 65,
+    "difficulty": "alta",
+    "distanceKm": 75.6,
+    "bestSeason": "Primavera / Estate / Inizio autunno",
+    "description": "itinerario di montagna nell'area italy-center, costruito su spot rider reali e pensato per offrire una guida piacevole, coerente e credibile.",
+    "tags": [
+      "mountain",
+      "scenic",
+      "rider",
+      "twisty",
+      "panoramic"
+    ],
+    "start": {
+      "name": "Passo del Vestito",
+      "lat": 44.065664299999995,
+      "lng": 10.2249885
+    },
+    "end": {
+      "name": "Passo Del Cerreto 42037 Collagna Re",
+      "lat": 44.304122299999996,
+      "lng": 10.2172435
+    },
+    "center": {
+      "lat": 44.15129,
+      "lng": 10.32166
+    },
+    "waypoints": [
+      {
+        "name": "Passo del Vestito",
+        "lat": 44.065664299999995,
+        "lng": 10.2249885,
+        "spotType": "pass",
+        "score": 53
+      },
+      {
+        "name": "passo della Focolaccia",
+        "lat": 44.113226,
+        "lng": 10.2212334,
+        "spotType": "pass",
+        "score": 53
+      },
+      {
+        "name": "Passo di Annibale",
+        "lat": 44.12213800000001,
+        "lng": 10.6231903,
+        "spotType": "pass",
+        "score": 54
+      },
+      {
+        "name": "Passo Del Cerreto 42037 Collagna Re",
+        "lat": 44.304122299999996,
+        "lng": 10.2172435,
+        "spotType": "pass",
+        "score": 54
+      }
+    ],
+    "spots": [
+      {
+        "name": "Passo del Vestito",
+        "lat": 44.065664299999995,
+        "lng": 10.2249885,
+        "spotType": "pass",
+        "score": 53,
+        "region": "italy-center",
+        "rideType": "mountain",
+        "tags": [
+          "mountain",
+          "scenic",
+          "rider",
+          "twisty",
+          "panoramic"
+        ]
+      },
+      {
+        "name": "passo della Focolaccia",
+        "lat": 44.113226,
+        "lng": 10.2212334,
+        "spotType": "pass",
+        "score": 53,
+        "region": "italy-center",
+        "rideType": "mountain",
+        "tags": [
+          "mountain",
+          "scenic",
+          "rider",
+          "twisty",
+          "panoramic"
+        ]
+      },
+      {
+        "name": "Passo di Annibale",
+        "lat": 44.12213800000001,
+        "lng": 10.6231903,
+        "spotType": "pass",
+        "score": 54,
+        "region": "italy-center",
+        "rideType": "mountain",
+        "tags": [
+          "mountain",
+          "scenic",
+          "rider",
+          "twisty",
+          "panoramic"
+        ]
+      },
+      {
+        "name": "Passo Del Cerreto 42037 Collagna Re",
+        "lat": 44.304122299999996,
+        "lng": 10.2172435,
+        "spotType": "pass",
+        "score": 54,
+        "region": "italy-center",
+        "rideType": "mountain",
+        "tags": [
+          "mountain",
+          "scenic",
+          "rider",
+          "twisty",
+          "panoramic"
+        ]
+      }
+    ],
+    "source": "rider-spots.eu",
+    "sourceScope": "from-spots",
+    "hero": false
+  },
+  {
     "id": "it-italy-lakes-panoramic-viewpoint-como-lake-north-belvedere-di-quarna-lake-orta-viewpoint",
     "name": "Giro Lago italy-lakes: Panoramic Viewpoint - Como Lake North → Belvedere di Quarna - Lake Orta viewpoint",
     "country": "IT",
@@ -18733,431 +18773,6 @@
     "hero": false
   },
   {
-    "id": "it-italy-nw-passo-dei-laghi-gemelli-passo-stelvio-przeecz-stelvio",
-    "name": "Giro Panoramico italy-nw: Passo dei Laghi Gemelli → Passo Stelvio → Przełęcz Stelvio",
-    "country": "IT",
-    "region": "italy-nw",
-    "rideType": "scenic",
-    "score": 67,
-    "difficulty": "bassa",
-    "distanceKm": 78.5,
-    "bestSeason": "Primavera / Estate / Autunno",
-    "description": "itinerario panoramico nell'area italy-nw, costruito su spot rider reali e pensato per offrire una guida piacevole, coerente e credibile.",
-    "tags": [
-      "scenic",
-      "panoramic",
-      "rider",
-      "mountain",
-      "twisty",
-      "rider-spot",
-      "mountain-pass"
-    ],
-    "start": {
-      "name": "Passo dei Laghi Gemelli",
-      "lat": 45.979305499999995,
-      "lng": 9.8111716
-    },
-    "end": {
-      "name": "Przełęcz Stelvio",
-      "lat": 46.5286571,
-      "lng": 10.4529105
-    },
-    "center": {
-      "lat": 46.34554,
-      "lng": 10.239
-    },
-    "waypoints": [
-      {
-        "name": "Passo dei Laghi Gemelli",
-        "lat": 45.979305499999995,
-        "lng": 9.8111716,
-        "spotType": "pass",
-        "score": 56
-      },
-      {
-        "name": "Passo Stelvio",
-        "lat": 46.5286571,
-        "lng": 10.4529105,
-        "spotType": "pass",
-        "score": 50
-      },
-      {
-        "name": "Przełęcz Stelvio",
-        "lat": 46.5286571,
-        "lng": 10.4529105,
-        "spotType": "viewpoint",
-        "score": 51
-      }
-    ],
-    "spots": [
-      {
-        "name": "Passo dei Laghi Gemelli",
-        "lat": 45.979305499999995,
-        "lng": 9.8111716,
-        "spotType": "pass",
-        "score": 56,
-        "region": "italy-nw",
-        "rideType": "scenic",
-        "tags": [
-          "scenic",
-          "panoramic",
-          "rider",
-          "mountain",
-          "twisty"
-        ]
-      },
-      {
-        "name": "Passo Stelvio",
-        "lat": 46.5286571,
-        "lng": 10.4529105,
-        "spotType": "pass",
-        "score": 50,
-        "region": "italy-nw",
-        "rideType": "scenic",
-        "tags": [
-          "scenic",
-          "panoramic",
-          "rider",
-          "mountain",
-          "twisty",
-          "rider-spot",
-          "mountain-pass"
-        ]
-      },
-      {
-        "name": "Przełęcz Stelvio",
-        "lat": 46.5286571,
-        "lng": 10.4529105,
-        "spotType": "viewpoint",
-        "score": 51,
-        "region": "italy-nw",
-        "rideType": "scenic",
-        "tags": [
-          "scenic",
-          "panoramic",
-          "rider",
-          "mountain",
-          "twisty"
-        ]
-      }
-    ],
-    "source": "rider-spots.eu",
-    "sourceScope": "from-spots",
-    "hero": true
-  },
-  {
-    "id": "it-italy-nw-passo-dei-laghi-gemelli-przeecz-stelvio-passo-stelvio",
-    "name": "Giro Panoramico italy-nw: Passo dei Laghi Gemelli → Przełęcz Stelvio → Passo Stelvio",
-    "country": "IT",
-    "region": "italy-nw",
-    "rideType": "scenic",
-    "score": 67,
-    "difficulty": "bassa",
-    "distanceKm": 78.5,
-    "bestSeason": "Primavera / Estate / Autunno",
-    "description": "itinerario panoramico nell'area italy-nw, costruito su spot rider reali e pensato per offrire una guida piacevole, coerente e credibile.",
-    "tags": [
-      "scenic",
-      "panoramic",
-      "rider",
-      "mountain",
-      "twisty",
-      "rider-spot",
-      "mountain-pass"
-    ],
-    "start": {
-      "name": "Passo dei Laghi Gemelli",
-      "lat": 45.979305499999995,
-      "lng": 9.8111716
-    },
-    "end": {
-      "name": "Passo Stelvio",
-      "lat": 46.5286571,
-      "lng": 10.4529105
-    },
-    "center": {
-      "lat": 46.34554,
-      "lng": 10.239
-    },
-    "waypoints": [
-      {
-        "name": "Passo dei Laghi Gemelli",
-        "lat": 45.979305499999995,
-        "lng": 9.8111716,
-        "spotType": "pass",
-        "score": 56
-      },
-      {
-        "name": "Przełęcz Stelvio",
-        "lat": 46.5286571,
-        "lng": 10.4529105,
-        "spotType": "viewpoint",
-        "score": 51
-      },
-      {
-        "name": "Passo Stelvio",
-        "lat": 46.5286571,
-        "lng": 10.4529105,
-        "spotType": "pass",
-        "score": 50
-      }
-    ],
-    "spots": [
-      {
-        "name": "Passo dei Laghi Gemelli",
-        "lat": 45.979305499999995,
-        "lng": 9.8111716,
-        "spotType": "pass",
-        "score": 56,
-        "region": "italy-nw",
-        "rideType": "scenic",
-        "tags": [
-          "scenic",
-          "panoramic",
-          "rider",
-          "mountain",
-          "twisty"
-        ]
-      },
-      {
-        "name": "Przełęcz Stelvio",
-        "lat": 46.5286571,
-        "lng": 10.4529105,
-        "spotType": "viewpoint",
-        "score": 51,
-        "region": "italy-nw",
-        "rideType": "scenic",
-        "tags": [
-          "scenic",
-          "panoramic",
-          "rider",
-          "mountain",
-          "twisty"
-        ]
-      },
-      {
-        "name": "Passo Stelvio",
-        "lat": 46.5286571,
-        "lng": 10.4529105,
-        "spotType": "pass",
-        "score": 50,
-        "region": "italy-nw",
-        "rideType": "scenic",
-        "tags": [
-          "scenic",
-          "panoramic",
-          "rider",
-          "mountain",
-          "twisty",
-          "rider-spot",
-          "mountain-pass"
-        ]
-      }
-    ],
-    "source": "rider-spots.eu",
-    "sourceScope": "from-spots",
-    "hero": true
-  },
-  {
-    "id": "it-italy-nw-passo-stelvio-viewpoint-moosfluh",
-    "name": "Giro Panoramico italy-nw: Passo Stelvio → Viewpoint Moosfluh",
-    "country": "IT",
-    "region": "italy-nw",
-    "rideType": "scenic",
-    "score": 67,
-    "difficulty": "media",
-    "distanceKm": 184.8,
-    "bestSeason": "Primavera / Estate / Autunno",
-    "description": "itinerario panoramico nell'area italy-nw, costruito su spot rider reali e pensato per offrire una guida piacevole, coerente e credibile.",
-    "tags": [
-      "scenic",
-      "panoramic",
-      "rider",
-      "mountain",
-      "twisty",
-      "rider-spot",
-      "mountain-pass"
-    ],
-    "start": {
-      "name": "Passo Stelvio",
-      "lat": 46.5286571,
-      "lng": 10.4529105
-    },
-    "end": {
-      "name": "Viewpoint Moosfluh",
-      "lat": 46.3960359,
-      "lng": 8.048129099999999
-    },
-    "center": {
-      "lat": 46.46235,
-      "lng": 9.25052
-    },
-    "waypoints": [
-      {
-        "name": "Passo Stelvio",
-        "lat": 46.5286571,
-        "lng": 10.4529105,
-        "spotType": "pass",
-        "score": 50
-      },
-      {
-        "name": "Viewpoint Moosfluh",
-        "lat": 46.3960359,
-        "lng": 8.048129099999999,
-        "spotType": "viewpoint",
-        "score": 58
-      }
-    ],
-    "spots": [
-      {
-        "name": "Passo Stelvio",
-        "lat": 46.5286571,
-        "lng": 10.4529105,
-        "spotType": "pass",
-        "score": 50,
-        "region": "italy-nw",
-        "rideType": "scenic",
-        "tags": [
-          "scenic",
-          "panoramic",
-          "rider",
-          "mountain",
-          "twisty",
-          "rider-spot",
-          "mountain-pass"
-        ]
-      },
-      {
-        "name": "Viewpoint Moosfluh",
-        "lat": 46.3960359,
-        "lng": 8.048129099999999,
-        "spotType": "viewpoint",
-        "score": 58,
-        "region": "italy-nw",
-        "rideType": "scenic",
-        "tags": [
-          "scenic",
-          "panoramic",
-          "rider"
-        ]
-      }
-    ],
-    "source": "rider-spots.eu",
-    "sourceScope": "from-spots",
-    "hero": true
-  },
-  {
-    "id": "it-italy-nw-viewpoint-moosfluh-przeecz-stelvio-passo-stelvio",
-    "name": "Giro Panoramico italy-nw: Viewpoint Moosfluh → Przełęcz Stelvio → Passo Stelvio",
-    "country": "IT",
-    "region": "italy-nw",
-    "rideType": "scenic",
-    "score": 67,
-    "difficulty": "media",
-    "distanceKm": 184.8,
-    "bestSeason": "Primavera / Estate / Autunno",
-    "description": "itinerario panoramico nell'area italy-nw, costruito su spot rider reali e pensato per offrire una guida piacevole, coerente e credibile.",
-    "tags": [
-      "scenic",
-      "panoramic",
-      "rider",
-      "mountain",
-      "twisty",
-      "rider-spot",
-      "mountain-pass"
-    ],
-    "start": {
-      "name": "Viewpoint Moosfluh",
-      "lat": 46.3960359,
-      "lng": 8.048129099999999
-    },
-    "end": {
-      "name": "Passo Stelvio",
-      "lat": 46.5286571,
-      "lng": 10.4529105
-    },
-    "center": {
-      "lat": 46.48445,
-      "lng": 9.65132
-    },
-    "waypoints": [
-      {
-        "name": "Viewpoint Moosfluh",
-        "lat": 46.3960359,
-        "lng": 8.048129099999999,
-        "spotType": "viewpoint",
-        "score": 58
-      },
-      {
-        "name": "Przełęcz Stelvio",
-        "lat": 46.5286571,
-        "lng": 10.4529105,
-        "spotType": "viewpoint",
-        "score": 51
-      },
-      {
-        "name": "Passo Stelvio",
-        "lat": 46.5286571,
-        "lng": 10.4529105,
-        "spotType": "pass",
-        "score": 50
-      }
-    ],
-    "spots": [
-      {
-        "name": "Viewpoint Moosfluh",
-        "lat": 46.3960359,
-        "lng": 8.048129099999999,
-        "spotType": "viewpoint",
-        "score": 58,
-        "region": "italy-nw",
-        "rideType": "scenic",
-        "tags": [
-          "scenic",
-          "panoramic",
-          "rider"
-        ]
-      },
-      {
-        "name": "Przełęcz Stelvio",
-        "lat": 46.5286571,
-        "lng": 10.4529105,
-        "spotType": "viewpoint",
-        "score": 51,
-        "region": "italy-nw",
-        "rideType": "scenic",
-        "tags": [
-          "scenic",
-          "panoramic",
-          "rider",
-          "mountain",
-          "twisty"
-        ]
-      },
-      {
-        "name": "Passo Stelvio",
-        "lat": 46.5286571,
-        "lng": 10.4529105,
-        "spotType": "pass",
-        "score": 50,
-        "region": "italy-nw",
-        "rideType": "scenic",
-        "tags": [
-          "scenic",
-          "panoramic",
-          "rider",
-          "mountain",
-          "twisty",
-          "rider-spot",
-          "mountain-pass"
-        ]
-      }
-    ],
-    "source": "rider-spots.eu",
-    "sourceScope": "from-spots",
-    "hero": true
-  },
-  {
     "id": "it-italy-coastal-sella-derbi-manarola-viewpoint",
     "name": "Giro Panoramico italy-coastal: Sella Derbi → Manarola viewpoint",
     "country": "IT",
@@ -19232,6 +18847,92 @@
           "scenic",
           "panoramic",
           "rider"
+        ]
+      }
+    ],
+    "source": "rider-spots.eu",
+    "sourceScope": "from-spots",
+    "hero": true
+  },
+  {
+    "id": "it-italy-nw-przeecz-stelvio-passo-dei-laghi-gemelli",
+    "name": "Giro Panoramico italy-nw: Przełęcz Stelvio → Passo dei Laghi Gemelli",
+    "country": "IT",
+    "region": "italy-nw",
+    "rideType": "scenic",
+    "score": 66,
+    "difficulty": "bassa",
+    "distanceKm": 78.5,
+    "bestSeason": "Primavera / Estate / Autunno",
+    "description": "itinerario panoramico nell'area italy-nw, costruito su spot rider reali e pensato per offrire una guida piacevole, coerente e credibile.",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "mountain",
+      "twisty"
+    ],
+    "start": {
+      "name": "Przełęcz Stelvio",
+      "lat": 46.5286571,
+      "lng": 10.4529105
+    },
+    "end": {
+      "name": "Passo dei Laghi Gemelli",
+      "lat": 45.979305499999995,
+      "lng": 9.8111716
+    },
+    "center": {
+      "lat": 46.25398,
+      "lng": 10.13204
+    },
+    "waypoints": [
+      {
+        "name": "Przełęcz Stelvio",
+        "lat": 46.5286571,
+        "lng": 10.4529105,
+        "spotType": "viewpoint",
+        "score": 51
+      },
+      {
+        "name": "Passo dei Laghi Gemelli",
+        "lat": 45.979305499999995,
+        "lng": 9.8111716,
+        "spotType": "pass",
+        "score": 56
+      }
+    ],
+    "spots": [
+      {
+        "name": "Przełęcz Stelvio",
+        "lat": 46.5286571,
+        "lng": 10.4529105,
+        "spotType": "viewpoint",
+        "score": 51,
+        "region": "italy-nw",
+        "rideType": "scenic",
+        "tags": [
+          "scenic",
+          "panoramic",
+          "rider",
+          "mountain",
+          "twisty"
+        ]
+      },
+      {
+        "name": "Passo dei Laghi Gemelli",
+        "lat": 45.979305499999995,
+        "lng": 9.8111716,
+        "spotType": "pass",
+        "score": 56,
+        "region": "italy-nw",
+        "rideType": "scenic",
+        "tags": [
+          "scenic",
+          "panoramic",
+          "rider",
+          "mountain",
+          "twisty"
         ]
       }
     ],
@@ -19469,88 +19170,6 @@
           "rider",
           "mountain",
           "twisty"
-        ]
-      }
-    ],
-    "source": "rider-spots.eu",
-    "sourceScope": "from-spots",
-    "hero": true
-  },
-  {
-    "id": "it-italy-ne-belvedere-strada-della-forra-punto-panoramico-dolomiti",
-    "name": "Giro Panoramico italy-ne: Belvedere Strada della Forra → Punto Panoramico Dolomiti",
-    "country": "IT",
-    "region": "italy-ne",
-    "rideType": "scenic",
-    "score": 63,
-    "difficulty": "media",
-    "distanceKm": 149.4,
-    "bestSeason": "Primavera / Estate / Autunno",
-    "description": "itinerario panoramico nell'area italy-ne, costruito su spot rider reali e pensato per offrire una guida piacevole, coerente e credibile.",
-    "tags": [
-      "scenic",
-      "panoramic",
-      "rider",
-      "rider-spot"
-    ],
-    "start": {
-      "name": "Belvedere Strada della Forra",
-      "lat": 45.7739421,
-      "lng": 10.7664423
-    },
-    "end": {
-      "name": "Punto Panoramico Dolomiti",
-      "lat": 46.600899999999996,
-      "lng": 12.295422
-    },
-    "center": {
-      "lat": 46.18742,
-      "lng": 11.53093
-    },
-    "waypoints": [
-      {
-        "name": "Belvedere Strada della Forra",
-        "lat": 45.7739421,
-        "lng": 10.7664423,
-        "spotType": "viewpoint",
-        "score": 50
-      },
-      {
-        "name": "Punto Panoramico Dolomiti",
-        "lat": 46.600899999999996,
-        "lng": 12.295422,
-        "spotType": "viewpoint",
-        "score": 41
-      }
-    ],
-    "spots": [
-      {
-        "name": "Belvedere Strada della Forra",
-        "lat": 45.7739421,
-        "lng": 10.7664423,
-        "spotType": "viewpoint",
-        "score": 50,
-        "region": "italy-ne",
-        "rideType": "scenic",
-        "tags": [
-          "scenic",
-          "panoramic",
-          "rider",
-          "rider-spot"
-        ]
-      },
-      {
-        "name": "Punto Panoramico Dolomiti",
-        "lat": 46.600899999999996,
-        "lng": 12.295422,
-        "spotType": "viewpoint",
-        "score": 41,
-        "region": "italy-ne",
-        "rideType": "scenic",
-        "tags": [
-          "scenic",
-          "panoramic",
-          "rider"
         ]
       }
     ],
@@ -19862,134 +19481,6 @@
         "lng": 10.8719171,
         "spotType": "viewpoint",
         "score": 52,
-        "region": "italy-ne",
-        "rideType": "scenic",
-        "tags": [
-          "scenic",
-          "panoramic",
-          "rider"
-        ]
-      }
-    ],
-    "source": "rider-spots.eu",
-    "sourceScope": "from-spots",
-    "hero": true
-  },
-  {
-    "id": "it-italy-ne-belvedere-strada-della-forra-strada-dolomites-passo-della-forcella-pas-de-forcjute-punto-panoramico-dolomiti",
-    "name": "Giro Panoramico italy-ne: Belvedere Strada della Forra → Strada Dolomites → Passo della Forcella / Pas de Forcjute → Punto Panoramico Dolomiti",
-    "country": "IT",
-    "region": "italy-ne",
-    "rideType": "scenic",
-    "score": 60,
-    "difficulty": "media",
-    "distanceKm": 231,
-    "bestSeason": "Primavera / Estate / Autunno",
-    "description": "itinerario panoramico nell'area italy-ne, costruito su spot rider reali e pensato per offrire una guida piacevole, coerente e credibile.",
-    "tags": [
-      "scenic",
-      "panoramic",
-      "rider",
-      "rider-spot",
-      "mountain",
-      "twisty"
-    ],
-    "start": {
-      "name": "Belvedere Strada della Forra",
-      "lat": 45.7739421,
-      "lng": 10.7664423
-    },
-    "end": {
-      "name": "Punto Panoramico Dolomiti",
-      "lat": 46.600899999999996,
-      "lng": 12.295422
-    },
-    "center": {
-      "lat": 46.3356,
-      "lng": 11.91322
-    },
-    "waypoints": [
-      {
-        "name": "Belvedere Strada della Forra",
-        "lat": 45.7739421,
-        "lng": 10.7664423,
-        "spotType": "viewpoint",
-        "score": 50
-      },
-      {
-        "name": "Strada Dolomites",
-        "lat": 46.480035199999996,
-        "lng": 11.7806003,
-        "spotType": "viewpoint",
-        "score": 28
-      },
-      {
-        "name": "Passo della Forcella / Pas de Forcjute",
-        "lat": 46.487530799999995,
-        "lng": 12.810401400000002,
-        "spotType": "pass",
-        "score": 62
-      },
-      {
-        "name": "Punto Panoramico Dolomiti",
-        "lat": 46.600899999999996,
-        "lng": 12.295422,
-        "spotType": "viewpoint",
-        "score": 41
-      }
-    ],
-    "spots": [
-      {
-        "name": "Belvedere Strada della Forra",
-        "lat": 45.7739421,
-        "lng": 10.7664423,
-        "spotType": "viewpoint",
-        "score": 50,
-        "region": "italy-ne",
-        "rideType": "scenic",
-        "tags": [
-          "scenic",
-          "panoramic",
-          "rider",
-          "rider-spot"
-        ]
-      },
-      {
-        "name": "Strada Dolomites",
-        "lat": 46.480035199999996,
-        "lng": 11.7806003,
-        "spotType": "viewpoint",
-        "score": 28,
-        "region": "italy-ne",
-        "rideType": "scenic",
-        "tags": [
-          "scenic",
-          "panoramic",
-          "rider"
-        ]
-      },
-      {
-        "name": "Passo della Forcella / Pas de Forcjute",
-        "lat": 46.487530799999995,
-        "lng": 12.810401400000002,
-        "spotType": "pass",
-        "score": 62,
-        "region": "italy-ne",
-        "rideType": "scenic",
-        "tags": [
-          "scenic",
-          "panoramic",
-          "rider",
-          "mountain",
-          "twisty"
-        ]
-      },
-      {
-        "name": "Punto Panoramico Dolomiti",
-        "lat": 46.600899999999996,
-        "lng": 12.295422,
-        "spotType": "viewpoint",
-        "score": 41,
         "region": "italy-ne",
         "rideType": "scenic",
         "tags": [
@@ -20764,109 +20255,6 @@
           "rider",
           "mountain",
           "twisty"
-        ]
-      },
-      {
-        "name": "Punto Panoramico Dolomiti",
-        "lat": 46.600899999999996,
-        "lng": 12.295422,
-        "spotType": "viewpoint",
-        "score": 41,
-        "region": "italy-ne",
-        "rideType": "scenic",
-        "tags": [
-          "scenic",
-          "panoramic",
-          "rider"
-        ]
-      }
-    ],
-    "source": "rider-spots.eu",
-    "sourceScope": "from-spots",
-    "hero": true
-  },
-  {
-    "id": "it-italy-ne-belvedere-strada-della-forra-strada-dolomites-punto-panoramico-dolomiti",
-    "name": "Giro Panoramico italy-ne: Belvedere Strada della Forra → Strada Dolomites → Punto Panoramico Dolomiti",
-    "country": "IT",
-    "region": "italy-ne",
-    "rideType": "scenic",
-    "score": 57,
-    "difficulty": "media",
-    "distanceKm": 152.4,
-    "bestSeason": "Primavera / Estate / Autunno",
-    "description": "itinerario panoramico nell'area italy-ne, costruito su spot rider reali e pensato per offrire una guida piacevole, coerente e credibile.",
-    "tags": [
-      "scenic",
-      "panoramic",
-      "rider",
-      "rider-spot"
-    ],
-    "start": {
-      "name": "Belvedere Strada della Forra",
-      "lat": 45.7739421,
-      "lng": 10.7664423
-    },
-    "end": {
-      "name": "Punto Panoramico Dolomiti",
-      "lat": 46.600899999999996,
-      "lng": 12.295422
-    },
-    "center": {
-      "lat": 46.28496,
-      "lng": 11.61415
-    },
-    "waypoints": [
-      {
-        "name": "Belvedere Strada della Forra",
-        "lat": 45.7739421,
-        "lng": 10.7664423,
-        "spotType": "viewpoint",
-        "score": 50
-      },
-      {
-        "name": "Strada Dolomites",
-        "lat": 46.480035199999996,
-        "lng": 11.7806003,
-        "spotType": "viewpoint",
-        "score": 28
-      },
-      {
-        "name": "Punto Panoramico Dolomiti",
-        "lat": 46.600899999999996,
-        "lng": 12.295422,
-        "spotType": "viewpoint",
-        "score": 41
-      }
-    ],
-    "spots": [
-      {
-        "name": "Belvedere Strada della Forra",
-        "lat": 45.7739421,
-        "lng": 10.7664423,
-        "spotType": "viewpoint",
-        "score": 50,
-        "region": "italy-ne",
-        "rideType": "scenic",
-        "tags": [
-          "scenic",
-          "panoramic",
-          "rider",
-          "rider-spot"
-        ]
-      },
-      {
-        "name": "Strada Dolomites",
-        "lat": 46.480035199999996,
-        "lng": 11.7806003,
-        "spotType": "viewpoint",
-        "score": 28,
-        "region": "italy-ne",
-        "rideType": "scenic",
-        "tags": [
-          "scenic",
-          "panoramic",
-          "rider"
         ]
       },
       {
@@ -22864,6 +22252,628 @@
           "rider",
           "mountain",
           "twisty"
+        ]
+      }
+    ],
+    "source": "rider-spots.eu",
+    "sourceScope": "from-spots",
+    "hero": false
+  },
+  {
+    "id": "it-italy-lakes-la-conca-dei-rododendri-santuario-della-madonna-del-sasso-passo-folungo",
+    "name": "Giro Panoramico italy-lakes: La Conca Dei Rododendri → Santuario della Madonna del Sasso → Passo Folungo",
+    "country": "IT",
+    "region": "italy-lakes",
+    "rideType": "scenic",
+    "score": 61,
+    "difficulty": "bassa",
+    "distanceKm": 53.6,
+    "bestSeason": "Primavera / Estate / Autunno",
+    "description": "itinerario panoramico nell'area italy-lakes, costruito su spot rider reali e pensato per offrire una guida piacevole, coerente e credibile.",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "mountain",
+      "twisty"
+    ],
+    "start": {
+      "name": "La Conca Dei Rododendri",
+      "lat": 45.6746316,
+      "lng": 8.1542953
+    },
+    "end": {
+      "name": "Passo Folungo",
+      "lat": 46.040771199999995,
+      "lng": 8.5828603
+    },
+    "center": {
+      "lat": 45.83457,
+      "lng": 8.37047
+    },
+    "waypoints": [
+      {
+        "name": "La Conca Dei Rododendri",
+        "lat": 45.6746316,
+        "lng": 8.1542953,
+        "spotType": "viewpoint",
+        "score": 55
+      },
+      {
+        "name": "Santuario della Madonna del Sasso",
+        "lat": 45.7882927,
+        "lng": 8.3742451,
+        "spotType": "viewpoint",
+        "score": 52
+      },
+      {
+        "name": "Passo Folungo",
+        "lat": 46.040771199999995,
+        "lng": 8.5828603,
+        "spotType": "pass",
+        "score": 57
+      }
+    ],
+    "spots": [
+      {
+        "name": "La Conca Dei Rododendri",
+        "lat": 45.6746316,
+        "lng": 8.1542953,
+        "spotType": "viewpoint",
+        "score": 55,
+        "region": "italy-lakes",
+        "rideType": "scenic",
+        "tags": [
+          "scenic",
+          "panoramic",
+          "rider"
+        ]
+      },
+      {
+        "name": "Santuario della Madonna del Sasso",
+        "lat": 45.7882927,
+        "lng": 8.3742451,
+        "spotType": "viewpoint",
+        "score": 52,
+        "region": "italy-lakes",
+        "rideType": "scenic",
+        "tags": [
+          "scenic",
+          "panoramic",
+          "rider"
+        ]
+      },
+      {
+        "name": "Passo Folungo",
+        "lat": 46.040771199999995,
+        "lng": 8.5828603,
+        "spotType": "pass",
+        "score": 57,
+        "region": "italy-lakes",
+        "rideType": "scenic",
+        "tags": [
+          "scenic",
+          "panoramic",
+          "rider",
+          "mountain",
+          "twisty"
+        ]
+      }
+    ],
+    "source": "rider-spots.eu",
+    "sourceScope": "from-spots",
+    "hero": false
+  },
+  {
+    "id": "it-italy-ne-punto-panoramico-sul-lago-di-santa-giustina-belvedere-di-canazei-forcella-del-col-de-mezzo",
+    "name": "Giro Panoramico italy-ne: Punto Panoramico sul Lago di Santa Giustina → Belvedere di Canazei → Forcella del Col de Mezzo",
+    "country": "IT",
+    "region": "italy-ne",
+    "rideType": "scenic",
+    "score": 60,
+    "difficulty": "media",
+    "distanceKm": 100.4,
+    "bestSeason": "Primavera / Estate / Autunno",
+    "description": "itinerario panoramico nell'area italy-ne, costruito su spot rider reali e pensato per offrire una guida piacevole, coerente e credibile.",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "lake",
+      "mountain",
+      "twisty"
+    ],
+    "start": {
+      "name": "Punto Panoramico sul Lago di Santa Giustina",
+      "lat": 46.392226,
+      "lng": 11.0254015
+    },
+    "end": {
+      "name": "Forcella del Col de Mezzo",
+      "lat": 46.617399899999995,
+      "lng": 12.2845301
+    },
+    "center": {
+      "lat": 46.49476,
+      "lng": 11.7043
+    },
+    "waypoints": [
+      {
+        "name": "Punto Panoramico sul Lago di Santa Giustina",
+        "lat": 46.392226,
+        "lng": 11.0254015,
+        "spotType": "viewpoint",
+        "score": 55
+      },
+      {
+        "name": "Belvedere di Canazei",
+        "lat": 46.474660899999996,
+        "lng": 11.8029824,
+        "spotType": "viewpoint",
+        "score": 53
+      },
+      {
+        "name": "Forcella del Col de Mezzo",
+        "lat": 46.617399899999995,
+        "lng": 12.2845301,
+        "spotType": "viewpoint",
+        "score": 58
+      }
+    ],
+    "spots": [
+      {
+        "name": "Punto Panoramico sul Lago di Santa Giustina",
+        "lat": 46.392226,
+        "lng": 11.0254015,
+        "spotType": "viewpoint",
+        "score": 55,
+        "region": "italy-ne",
+        "rideType": "scenic",
+        "tags": [
+          "scenic",
+          "panoramic",
+          "rider",
+          "lake"
+        ]
+      },
+      {
+        "name": "Belvedere di Canazei",
+        "lat": 46.474660899999996,
+        "lng": 11.8029824,
+        "spotType": "viewpoint",
+        "score": 53,
+        "region": "italy-ne",
+        "rideType": "scenic",
+        "tags": [
+          "scenic",
+          "panoramic",
+          "rider"
+        ]
+      },
+      {
+        "name": "Forcella del Col de Mezzo",
+        "lat": 46.617399899999995,
+        "lng": 12.2845301,
+        "spotType": "viewpoint",
+        "score": 58,
+        "region": "italy-ne",
+        "rideType": "scenic",
+        "tags": [
+          "scenic",
+          "panoramic",
+          "rider",
+          "mountain",
+          "twisty"
+        ]
+      }
+    ],
+    "source": "rider-spots.eu",
+    "sourceScope": "from-spots",
+    "hero": false
+  },
+  {
+    "id": "it-italy-ne-punto-panoramico-sul-lago-di-santa-giustina-belvedere-di-canazei-viewpoint-lago-di-sorapis-forcella-del-col-",
+    "name": "Giro Panoramico italy-ne: Punto Panoramico sul Lago di Santa Giustina → Belvedere di Canazei → Viewpoint Lago di Sorapis → Forcella del Col de Mezzo",
+    "country": "IT",
+    "region": "italy-ne",
+    "rideType": "scenic",
+    "score": 60,
+    "difficulty": "media",
+    "distanceKm": 104.7,
+    "bestSeason": "Primavera / Estate / Autunno",
+    "description": "itinerario panoramico nell'area italy-ne, costruito su spot rider reali e pensato per offrire una guida piacevole, coerente e credibile.",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "lake",
+      "mountain",
+      "twisty"
+    ],
+    "start": {
+      "name": "Punto Panoramico sul Lago di Santa Giustina",
+      "lat": 46.392226,
+      "lng": 11.0254015
+    },
+    "end": {
+      "name": "Forcella del Col de Mezzo",
+      "lat": 46.617399899999995,
+      "lng": 12.2845301
+    },
+    "center": {
+      "lat": 46.50113,
+      "lng": 11.83468
+    },
+    "waypoints": [
+      {
+        "name": "Punto Panoramico sul Lago di Santa Giustina",
+        "lat": 46.392226,
+        "lng": 11.0254015,
+        "spotType": "viewpoint",
+        "score": 55
+      },
+      {
+        "name": "Belvedere di Canazei",
+        "lat": 46.474660899999996,
+        "lng": 11.8029824,
+        "spotType": "viewpoint",
+        "score": 53
+      },
+      {
+        "name": "Viewpoint Lago di Sorapis",
+        "lat": 46.520251099999996,
+        "lng": 12.2258192,
+        "spotType": "viewpoint",
+        "score": 53
+      },
+      {
+        "name": "Forcella del Col de Mezzo",
+        "lat": 46.617399899999995,
+        "lng": 12.2845301,
+        "spotType": "viewpoint",
+        "score": 58
+      }
+    ],
+    "spots": [
+      {
+        "name": "Punto Panoramico sul Lago di Santa Giustina",
+        "lat": 46.392226,
+        "lng": 11.0254015,
+        "spotType": "viewpoint",
+        "score": 55,
+        "region": "italy-ne",
+        "rideType": "scenic",
+        "tags": [
+          "scenic",
+          "panoramic",
+          "rider",
+          "lake"
+        ]
+      },
+      {
+        "name": "Belvedere di Canazei",
+        "lat": 46.474660899999996,
+        "lng": 11.8029824,
+        "spotType": "viewpoint",
+        "score": 53,
+        "region": "italy-ne",
+        "rideType": "scenic",
+        "tags": [
+          "scenic",
+          "panoramic",
+          "rider"
+        ]
+      },
+      {
+        "name": "Viewpoint Lago di Sorapis",
+        "lat": 46.520251099999996,
+        "lng": 12.2258192,
+        "spotType": "viewpoint",
+        "score": 53,
+        "region": "italy-ne",
+        "rideType": "scenic",
+        "tags": [
+          "scenic",
+          "panoramic",
+          "rider",
+          "lake"
+        ]
+      },
+      {
+        "name": "Forcella del Col de Mezzo",
+        "lat": 46.617399899999995,
+        "lng": 12.2845301,
+        "spotType": "viewpoint",
+        "score": 58,
+        "region": "italy-ne",
+        "rideType": "scenic",
+        "tags": [
+          "scenic",
+          "panoramic",
+          "rider",
+          "mountain",
+          "twisty"
+        ]
+      }
+    ],
+    "source": "rider-spots.eu",
+    "sourceScope": "from-spots",
+    "hero": false
+  },
+  {
+    "id": "it-italy-nw-passo-dei-laghi-gemelli-punto-panoramico-col-del-lys",
+    "name": "Giro Panoramico italy-nw: Passo dei Laghi Gemelli → Punto panoramico Col del Lys",
+    "country": "IT",
+    "region": "italy-nw",
+    "rideType": "scenic",
+    "score": 60,
+    "difficulty": "media",
+    "distanceKm": 208.9,
+    "bestSeason": "Primavera / Estate / Autunno",
+    "description": "itinerario panoramico nell'area italy-nw, costruito su spot rider reali e pensato per offrire una guida piacevole, coerente e credibile.",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "mountain",
+      "twisty"
+    ],
+    "start": {
+      "name": "Passo dei Laghi Gemelli",
+      "lat": 45.979305499999995,
+      "lng": 9.8111716
+    },
+    "end": {
+      "name": "Punto panoramico Col del Lys",
+      "lat": 45.1786725,
+      "lng": 7.383136599999999
+    },
+    "center": {
+      "lat": 45.57899,
+      "lng": 8.59715
+    },
+    "waypoints": [
+      {
+        "name": "Passo dei Laghi Gemelli",
+        "lat": 45.979305499999995,
+        "lng": 9.8111716,
+        "spotType": "pass",
+        "score": 56
+      },
+      {
+        "name": "Punto panoramico Col del Lys",
+        "lat": 45.1786725,
+        "lng": 7.383136599999999,
+        "spotType": "viewpoint",
+        "score": 51
+      }
+    ],
+    "spots": [
+      {
+        "name": "Passo dei Laghi Gemelli",
+        "lat": 45.979305499999995,
+        "lng": 9.8111716,
+        "spotType": "pass",
+        "score": 56,
+        "region": "italy-nw",
+        "rideType": "scenic",
+        "tags": [
+          "scenic",
+          "panoramic",
+          "rider",
+          "mountain",
+          "twisty"
+        ]
+      },
+      {
+        "name": "Punto panoramico Col del Lys",
+        "lat": 45.1786725,
+        "lng": 7.383136599999999,
+        "spotType": "viewpoint",
+        "score": 51,
+        "region": "italy-nw",
+        "rideType": "scenic",
+        "tags": [
+          "scenic",
+          "panoramic",
+          "rider",
+          "mountain",
+          "twisty"
+        ]
+      }
+    ],
+    "source": "rider-spots.eu",
+    "sourceScope": "from-spots",
+    "hero": false
+  },
+  {
+    "id": "it-italy-nw-passo-scolettas-punto-panoramico-col-del-lys-passo-dei-laghi-gemelli",
+    "name": "Giro Panoramico italy-nw: Passo Scolettas → Punto panoramico Col del Lys → Passo dei Laghi Gemelli",
+    "country": "IT",
+    "region": "italy-nw",
+    "rideType": "scenic",
+    "score": 60,
+    "difficulty": "media",
+    "distanceKm": 310.5,
+    "bestSeason": "Primavera / Estate / Autunno",
+    "description": "itinerario panoramico nell'area italy-nw, costruito su spot rider reali e pensato per offrire una guida piacevole, coerente e credibile.",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "mountain",
+      "twisty"
+    ],
+    "start": {
+      "name": "Passo Scolettas",
+      "lat": 44.307790999999995,
+      "lng": 6.993347
+    },
+    "end": {
+      "name": "Passo dei Laghi Gemelli",
+      "lat": 45.979305499999995,
+      "lng": 9.8111716
+    },
+    "center": {
+      "lat": 45.15526,
+      "lng": 8.06255
+    },
+    "waypoints": [
+      {
+        "name": "Passo Scolettas",
+        "lat": 44.307790999999995,
+        "lng": 6.993347,
+        "spotType": "pass",
+        "score": 51
+      },
+      {
+        "name": "Punto panoramico Col del Lys",
+        "lat": 45.1786725,
+        "lng": 7.383136599999999,
+        "spotType": "viewpoint",
+        "score": 51
+      },
+      {
+        "name": "Passo dei Laghi Gemelli",
+        "lat": 45.979305499999995,
+        "lng": 9.8111716,
+        "spotType": "pass",
+        "score": 56
+      }
+    ],
+    "spots": [
+      {
+        "name": "Passo Scolettas",
+        "lat": 44.307790999999995,
+        "lng": 6.993347,
+        "spotType": "pass",
+        "score": 51,
+        "region": "italy-nw",
+        "rideType": "scenic",
+        "tags": [
+          "scenic",
+          "panoramic",
+          "rider",
+          "mountain",
+          "twisty"
+        ]
+      },
+      {
+        "name": "Punto panoramico Col del Lys",
+        "lat": 45.1786725,
+        "lng": 7.383136599999999,
+        "spotType": "viewpoint",
+        "score": 51,
+        "region": "italy-nw",
+        "rideType": "scenic",
+        "tags": [
+          "scenic",
+          "panoramic",
+          "rider",
+          "mountain",
+          "twisty"
+        ]
+      },
+      {
+        "name": "Passo dei Laghi Gemelli",
+        "lat": 45.979305499999995,
+        "lng": 9.8111716,
+        "spotType": "pass",
+        "score": 56,
+        "region": "italy-nw",
+        "rideType": "scenic",
+        "tags": [
+          "scenic",
+          "panoramic",
+          "rider",
+          "mountain",
+          "twisty"
+        ]
+      }
+    ],
+    "source": "rider-spots.eu",
+    "sourceScope": "from-spots",
+    "hero": false
+  },
+  {
+    "id": "it-sicily-passo-dei-dammusi-capo-milazzo",
+    "name": "Giro Panoramico sicily: Passo dei Dammusi → Capo Milazzo",
+    "country": "IT",
+    "region": "sicily",
+    "rideType": "scenic",
+    "score": 60,
+    "difficulty": "bassa",
+    "distanceKm": 53.4,
+    "bestSeason": "Primavera / Estate / Autunno",
+    "description": "itinerario panoramico nell'area sicily, costruito su spot rider reali e pensato per offrire una guida piacevole, coerente e credibile.",
+    "tags": [
+      "scenic",
+      "panoramic",
+      "rider",
+      "mountain",
+      "twisty",
+      "rider-spot"
+    ],
+    "start": {
+      "name": "Passo dei Dammusi",
+      "lat": 37.8203661,
+      "lng": 15.011501999999998
+    },
+    "end": {
+      "name": "Capo Milazzo",
+      "lat": 38.2695247,
+      "lng": 15.227588800000001
+    },
+    "center": {
+      "lat": 38.04495,
+      "lng": 15.11955
+    },
+    "waypoints": [
+      {
+        "name": "Passo dei Dammusi",
+        "lat": 37.8203661,
+        "lng": 15.011501999999998,
+        "spotType": "pass",
+        "score": 57
+      },
+      {
+        "name": "Capo Milazzo",
+        "lat": 38.2695247,
+        "lng": 15.227588800000001,
+        "spotType": "viewpoint",
+        "score": 50
+      }
+    ],
+    "spots": [
+      {
+        "name": "Passo dei Dammusi",
+        "lat": 37.8203661,
+        "lng": 15.011501999999998,
+        "spotType": "pass",
+        "score": 57,
+        "region": "sicily",
+        "rideType": "scenic",
+        "tags": [
+          "scenic",
+          "panoramic",
+          "rider",
+          "mountain",
+          "twisty"
+        ]
+      },
+      {
+        "name": "Capo Milazzo",
+        "lat": 38.2695247,
+        "lng": 15.227588800000001,
+        "spotType": "viewpoint",
+        "score": 50,
+        "region": "sicily",
+        "rideType": "scenic",
+        "tags": [
+          "scenic",
+          "panoramic",
+          "rider",
+          "rider-spot"
         ]
       }
     ],
