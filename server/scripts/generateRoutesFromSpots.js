@@ -75,7 +75,6 @@ const HERO_PATTERNS = [
   /mortirolo/i,
   /vivione/i,
   /mendola/i,
-  /falzarego/i,
   /costalunga/i,
   /karerpass/i,
   /sanicol[oò]/i,
@@ -158,8 +157,57 @@ function chunkCandidates(sorted, size, step = 1) {
   return out;
 }
 
+function canonicalSpotName(name) {
+  const n = normKey(name)
+    .replace(/przełęcz/g, "passo")
+    .replace(/pass col de /g, "")
+    .replace(/passo dello /g, "passo ")
+    .replace(/passo del /g, "passo ")
+    .replace(/passo dei /g, "passo ")
+    .replace(/strada della /g, "")
+    .replace(/punto di partenza/g, "")
+    .replace(/belvedere /g, "")
+    .replace(/viewpoint /g, "")
+    .replace(/parking /g, "")
+    .replace(/parkplatz/g, "")
+    .replace(/[•"'`]/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+
+  if (n.includes("stelvio")) return "stelvio";
+  if (n.includes("forra") || n.includes("tremosine")) return "forra";
+  if (n.includes("gavia")) return "gavia";
+  if (n.includes("pordoi")) return "pordoi";
+  if (n.includes("sella")) return "sella";
+  if (n.includes("giau")) return "giau";
+  if (n.includes("falzarego")) return "falzarego";
+  if (n.includes("gardena")) return "gardena";
+  if (n.includes("fedaia")) return "fedaia";
+  if (n.includes("rolle")) return "rolle";
+  if (n.includes("bernina")) return "bernina";
+  if (n.includes("spluga")) return "spluga";
+  if (n.includes("mortirolo")) return "mortirolo";
+  if (n.includes("manghen")) return "manghen";
+
+  return n;
+}
+
+function canonicalSpotSignature(s) {
+  const name = canonicalSpotName(s?.name || "");
+  const lat = Number.isFinite(Number(s?.lat)) ? Number(s.lat).toFixed(3) : "x";
+  const lng = Number.isFinite(Number(s?.lng)) ? Number(s.lng).toFixed(3) : "y";
+  return `${name}@${lat},${lng}`;
+}
+
+function canonicalRouteSignature(route) {
+  const spots = Array.isArray(route?.spots) ? route.spots : [];
+  const sig = spots.map(canonicalSpotSignature).join("|");
+  const rev = [...spots].reverse().map(canonicalSpotSignature).join("|");
+  return [sig, rev].sort()[0];
+}
+
 function isRouteDiverseEnough(spots) {
-  const names = new Set(spots.map((s) => normKey(s.name)));
+  const names = new Set(spots.map((s) => canonicalSpotName(s.name)));
   return names.size >= Math.min(2, spots.length);
 }
 
@@ -225,24 +273,48 @@ function makeDescription(route) {
 }
 
 function dedupeRoutes(routes) {
-  const seen = new Set();
-  const out = [];
+  const map = new Map();
 
   for (const r of routes) {
     const key = [
       normKey(r.country),
       normKey(r.region),
-      normKey(r.name),
       normKey(r.rideType),
-      Math.round(Number(r.distanceKm || 0)),
+      canonicalRouteSignature(r),
     ].join("|");
 
-    if (seen.has(key)) continue;
-    seen.add(key);
-    out.push(r);
+    const prev = map.get(key);
+
+    if (!prev) {
+      map.set(key, r);
+      continue;
+    }
+
+    const prevHero = Number(Boolean(prev.hero));
+    const currHero = Number(Boolean(r.hero));
+
+    if (currHero > prevHero) {
+      map.set(key, r);
+      continue;
+    }
+
+    if ((r.score || 0) > (prev.score || 0)) {
+      map.set(key, r);
+      continue;
+    }
+
+    if ((r.spots?.length || 0) > (prev.spots?.length || 0)) {
+      map.set(key, r);
+      continue;
+    }
+
+    if ((r.distanceKm || 0) > (prev.distanceKm || 0)) {
+      map.set(key, r);
+      continue;
+    }
   }
 
-  return out;
+  return [...map.values()];
 }
 
 function sortSpotsForRoute(spots) {
@@ -321,7 +393,7 @@ function buildHeroAwareRankedSpots(bucketSpots, limit = 24) {
   const seen = new Set();
 
   for (const s of sorted) {
-    const key = `${normKey(s.name)}|${Number(s.lat).toFixed(4)}|${Number(s.lng).toFixed(4)}`;
+    const key = `${canonicalSpotName(s.name)}|${Number(s.lat).toFixed(3)}|${Number(s.lng).toFixed(3)}`;
     if (seen.has(key)) continue;
     seen.add(key);
     merged.push(s);
@@ -334,7 +406,7 @@ function buildHeroAwareRankedSpots(bucketSpots, limit = 24) {
 function pushUniqueCandidate(target, candidate) {
   const ordered = sortSpotsForRoute(candidate);
   const key = ordered
-    .map((s) => `${normKey(s.name)}@${Number(s.lat).toFixed(4)},${Number(s.lng).toFixed(4)}`)
+    .map((s) => canonicalSpotSignature(s))
     .join(" -> ");
 
   if (!target._keys) target._keys = new Set();
@@ -349,7 +421,15 @@ function ensureHeroCandidates(candidates, ranked) {
 
   for (const hero of heroSpots) {
     const neighbors = ranked
-      .filter((s) => s !== hero)
+      .filter((s) => {
+        if (s === hero) return false;
+
+        const km = haversineKm(hero.lat, hero.lng, s.lat, s.lng);
+        if (km > 80) return false;
+        if (normKey(s.region) !== normKey(hero.region)) return false;
+
+        return true;
+      })
       .sort((a, b) => {
         const da = haversineKm(hero.lat, hero.lng, a.lat, a.lng);
         const db = haversineKm(hero.lat, hero.lng, b.lat, b.lng);
