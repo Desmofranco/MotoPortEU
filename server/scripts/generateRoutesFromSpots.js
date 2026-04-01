@@ -56,6 +56,33 @@ const COUNTRY_FILTER = new Set(
   (args.country || []).map((x) => String(x).toUpperCase())
 );
 
+const HERO_PATTERNS = [
+  /stelvio/i,
+  /forra/i,
+  /gavia/i,
+  /pordoi/i,
+  /sella/i,
+  /giau/i,
+  /falzarego/i,
+  /gardena/i,
+  /fedaia/i,
+  /rolle/i,
+  /bernina/i,
+  /spluga/i,
+  /tremosine/i,
+  /manghen/i,
+  /tonale/i,
+  /mortirolo/i,
+  /vivione/i,
+  /mendola/i,
+  /falzarego/i,
+  /costalunga/i,
+  /karerpass/i,
+  /sanicol[oò]/i,
+  /tre cime/i,
+  /dolomit/i,
+];
+
 function normalizeText(v) {
   return String(v || "")
     .normalize("NFKC")
@@ -145,6 +172,7 @@ function scoreRoute(spots) {
     if (s.spotType === "pass") score += 8;
     if (s.spotType === "viewpoint") score += 5;
     if (s.rideType === "mountain") score += 3;
+    if (isHeroSpot(s)) score += 12;
   }
 
   return Math.round(score / Math.max(1, spots.length));
@@ -266,6 +294,85 @@ function sanitizeSpot(raw) {
   };
 }
 
+function isHeroSpot(spot) {
+  const text = [
+    spot?.name || "",
+    spot?.region || "",
+    ...(Array.isArray(spot?.tags) ? spot.tags : []),
+  ].join(" ");
+
+  return HERO_PATTERNS.some((rx) => rx.test(text));
+}
+
+function buildHeroAwareRankedSpots(bucketSpots, limit = 24) {
+  const sorted = [...bucketSpots].sort((a, b) => {
+    const heroDelta = Number(isHeroSpot(b)) - Number(isHeroSpot(a));
+    if (heroDelta !== 0) return heroDelta;
+
+    if ((b.score || 0) !== (a.score || 0)) return (b.score || 0) - (a.score || 0);
+
+    if (b.spotType === "pass" && a.spotType !== "pass") return -1;
+    if (a.spotType === "pass" && b.spotType !== "pass") return 1;
+
+    return String(a.name || "").localeCompare(String(b.name || ""));
+  });
+
+  const merged = [];
+  const seen = new Set();
+
+  for (const s of sorted) {
+    const key = `${normKey(s.name)}|${Number(s.lat).toFixed(4)}|${Number(s.lng).toFixed(4)}`;
+    if (seen.has(key)) continue;
+    seen.add(key);
+    merged.push(s);
+    if (merged.length >= limit) break;
+  }
+
+  return merged;
+}
+
+function pushUniqueCandidate(target, candidate) {
+  const ordered = sortSpotsForRoute(candidate);
+  const key = ordered
+    .map((s) => `${normKey(s.name)}@${Number(s.lat).toFixed(4)},${Number(s.lng).toFixed(4)}`)
+    .join(" -> ");
+
+  if (!target._keys) target._keys = new Set();
+  if (target._keys.has(key)) return;
+
+  target._keys.add(key);
+  target.push(ordered);
+}
+
+function ensureHeroCandidates(candidates, ranked) {
+  const heroSpots = ranked.filter(isHeroSpot);
+
+  for (const hero of heroSpots) {
+    const neighbors = ranked
+      .filter((s) => s !== hero)
+      .sort((a, b) => {
+        const da = haversineKm(hero.lat, hero.lng, a.lat, a.lng);
+        const db = haversineKm(hero.lat, hero.lng, b.lat, b.lng);
+        return da - db;
+      })
+      .slice(0, 6);
+
+    if (neighbors.length >= 1) {
+      pushUniqueCandidate(candidates, [hero, ...neighbors.slice(0, 1)]);
+    }
+    if (neighbors.length >= 2) {
+      pushUniqueCandidate(candidates, [hero, ...neighbors.slice(0, 2)]);
+    }
+    if (neighbors.length >= 3) {
+      pushUniqueCandidate(candidates, [hero, ...neighbors.slice(0, 3)]);
+    }
+  }
+}
+
+function hasHeroSpot(route) {
+  return Array.isArray(route?.spots) && route.spots.some(isHeroSpot);
+}
+
 async function main() {
   console.log("====================================");
   console.log("MotoPortEU — Generate Routes From Spots");
@@ -314,16 +421,15 @@ async function main() {
 
     for (const [, bucketSpots] of buckets.entries()) {
       const regionName = bucketSpots[0]?.region || "Area Rider";
-
-      const ranked = [...bucketSpots]
-        .sort((a, b) => (b.score || 0) - (a.score || 0))
-        .slice(0, 24);
+      const ranked = buildHeroAwareRankedSpots(bucketSpots, 24);
 
       const candidates = [
         ...chunkCandidates(ranked, 2, 1),
         ...chunkCandidates(ranked, 3, 1),
         ...chunkCandidates(ranked, 4, 1),
       ];
+
+      ensureHeroCandidates(candidates, ranked);
 
       for (const candidate of candidates) {
         const ordered = sortSpotsForRoute(candidate);
@@ -384,9 +490,13 @@ async function main() {
             lng: s.lng,
             spotType: s.spotType,
             score: s.score,
+            region: s.region,
+            rideType: s.rideType,
+            tags: Array.isArray(s.tags) ? s.tags : [],
           })),
           source: "rider-spots.eu",
           sourceScope: "from-spots",
+          hero: ordered.some(isHeroSpot),
         };
 
         route.description = makeDescription(route);
@@ -394,46 +504,50 @@ async function main() {
       }
     }
 
-const dedupedRoutes = dedupeRoutes(routes).sort((a, b) => {
-  if (b.score !== a.score) return b.score - a.score;
-  if (a.region !== b.region) return a.region.localeCompare(b.region);
-  return a.name.localeCompare(b.name);
-});
+    const dedupedRoutes = dedupeRoutes(routes).sort((a, b) => {
+      const heroDelta = Number(hasHeroSpot(b)) - Number(hasHeroSpot(a));
+      if (heroDelta !== 0) return heroDelta;
 
-const caps =
-  country === "IT"
-    ? { mountain: 110, lake: 60, scenic: 40, coastal: 10, forest: 5 }
-    : { mountain: 35, lake: 20, scenic: 15, coastal: 5, forest: 5 };
+      if (b.score !== a.score) return b.score - a.score;
+      if (a.region !== b.region) return a.region.localeCompare(b.region);
+      return a.name.localeCompare(b.name);
+    });
 
-const grouped = {
-  mountain: [],
-  lake: [],
-  scenic: [],
-  coastal: [],
-  forest: [],
-  other: [],
-};
+    const caps =
+      country === "IT"
+        ? { mountain: 110, lake: 60, scenic: 40, coastal: 10, forest: 5 }
+        : { mountain: 35, lake: 20, scenic: 15, coastal: 5, forest: 5 };
 
-for (const r of dedupedRoutes) {
-  if (grouped[r.rideType]) grouped[r.rideType].push(r);
-  else grouped.other.push(r);
-}
+    const grouped = {
+      mountain: [],
+      lake: [],
+      scenic: [],
+      coastal: [],
+      forest: [],
+      other: [],
+    };
 
-let finalRoutes = [
-  ...grouped.mountain.slice(0, caps.mountain || 0),
-  ...grouped.lake.slice(0, caps.lake || 0),
-  ...grouped.scenic.slice(0, caps.scenic || 0),
-  ...grouped.coastal.slice(0, caps.coastal || 0),
-  ...grouped.forest.slice(0, caps.forest || 0),
-];
+    for (const r of dedupedRoutes) {
+      if (grouped[r.rideType]) grouped[r.rideType].push(r);
+      else grouped.other.push(r);
+    }
 
-const hardCap = country === "IT" ? 220 : 80;
+    let finalRoutes = [
+      ...grouped.mountain.slice(0, caps.mountain || 0),
+      ...grouped.lake.slice(0, caps.lake || 0),
+      ...grouped.scenic.slice(0, caps.scenic || 0),
+      ...grouped.coastal.slice(0, caps.coastal || 0),
+      ...grouped.forest.slice(0, caps.forest || 0),
+    ];
 
-if (finalRoutes.length < hardCap) {
-  const used = new Set(finalRoutes.map((r) => r.id));
-  const leftovers = dedupedRoutes.filter((r) => !used.has(r.id));
-  finalRoutes = [...finalRoutes, ...leftovers].slice(0, hardCap);
-}
+    const hardCap = country === "IT" ? 225 : 80;
+
+    if (finalRoutes.length < hardCap) {
+      const used = new Set(finalRoutes.map((r) => r.id));
+      const leftovers = dedupedRoutes.filter((r) => !used.has(r.id));
+      finalRoutes = [...finalRoutes, ...leftovers].slice(0, hardCap);
+    }
+
     const outFile = path.resolve(
       DATA_DIR,
       `routes.generated.fromspots.${country}.json`
@@ -446,8 +560,11 @@ if (finalRoutes.length < hardCap) {
       byRideType[r.rideType] = (byRideType[r.rideType] || 0) + 1;
     }
 
+    const heroCount = finalRoutes.filter((r) => r.hero).length;
+
     console.log(`🛣️ Routes generated: ${finalRoutes.length}`);
     console.log("Distribuzione rideType:", byRideType);
+    console.log(`⭐ Hero routes: ${heroCount}`);
     console.log(`💾 Output: ${outFile}`);
   }
 
