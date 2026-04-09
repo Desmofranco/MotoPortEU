@@ -1,0 +1,486 @@
+import fs from "fs/promises";
+import path from "path";
+import process from "process";
+import {
+  parseCliArgs,
+  getScopeConfig,
+  getScopeSuffix,
+} from "./lib/routeScopes.js";
+
+// =======================================================
+// server/scripts/buildEuropeanScopeSeed.js
+// MotoPortEU — Build Local Seed Dataset by Country / Scope
+// Output:
+// client/public/data/rider-spots.seed.{scopeSuffix}.json
+// =======================================================
+
+const args = parseCliArgs();
+const country = String(args.country || "CH").toUpperCase();
+const scope = args.scope ? String(args.scope) : null;
+const mode = String(args.mode || "overwrite").toLowerCase(); // overwrite | append
+
+const scopeCfg = getScopeConfig({ country, scope });
+const scopeSuffix = getScopeSuffix({ country, scope });
+
+const OUT_PATH = path.resolve(
+  `client/public/data/rider-spots.seed.${scopeSuffix}.json`
+);
+
+function slugify(str = "") {
+  return String(str)
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/(^-|-$)/g, "");
+}
+
+function norm(str = "") {
+  return String(str)
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .trim();
+}
+
+function normalizeText(str = "") {
+  return norm(str).replace(/[^a-z0-9]+/g, " ").replace(/\s+/g, " ").trim();
+}
+
+function uniq(arr = []) {
+  return [...new Set(arr.filter(Boolean))];
+}
+
+function inferSpotType(areaName = "", scopeName = "", forcedRideType = "") {
+  if (forcedRideType === "mountain") return "mountain_pass";
+  if (forcedRideType === "lake") return "lake_view";
+  if (forcedRideType === "coastal") return "coastal_view";
+  if (forcedRideType === "forest") return "forest_road";
+
+  const text = normalizeText(`${areaName} ${scopeName}`);
+
+  if (
+    /\b(pass|passo|col|joch|furka|grimsel|susten|nufenen|gotthard|oberalp|bernina|san bernardino|simplon|stelvio|gavia|grossglockner|timmelsjoch|galibier|izoard|bonette|tourmalet)\b/.test(
+      text
+    )
+  ) {
+    return "mountain_pass";
+  }
+
+  if (/\b(lake|lago|lac|see)\b/.test(text)) {
+    return "lake_view";
+  }
+
+  if (/\b(coast|coastal|riviera|sea|mare|fjord|fiordo)\b/.test(text)) {
+    return "coastal_view";
+  }
+
+  if (/\b(forest|foresta|bosco|highland)\b/.test(text)) {
+    return "forest_road";
+  }
+
+  return "scenic_road";
+}
+
+function inferRideType(type = "", areaName = "", scopeName = "", forcedRideType = "") {
+  if (forcedRideType) return forcedRideType;
+  if (type === "mountain_pass") return "mountain";
+  if (type === "lake_view") return "lake";
+  if (type === "coastal_view") return "coastal";
+  if (type === "forest_road") return "forest";
+
+  const text = normalizeText(`${areaName} ${scopeName}`);
+  if (/\b(lake|lago|lac|see)\b/.test(text)) return "lake";
+  if (/\b(coast|coastal|riviera|sea|mare|fjord|fiordo)\b/.test(text))
+    return "coastal";
+  if (/\b(forest|foresta|bosco|highland)\b/.test(text)) return "forest";
+  if (
+    /\b(pass|passo|col|joch|alps|alp|mountain|grimsel|furka|bernina|gotthard|oberalp|san bernardino|simplon)\b/.test(
+      text
+    )
+  ) {
+    return "mountain";
+  }
+
+  return "scenic";
+}
+
+function inferTags(areaName = "", scopeName = "", rideType = "") {
+  const text = normalizeText(`${areaName} ${scopeName}`);
+  const tags = ["rider", "seed", "local-scope"];
+
+  if (rideType) tags.push(rideType);
+
+  if (/\b(panorama|panoramic|view|belvedere|lookout|scenic)\b/.test(text)) {
+    tags.push("panoramic", "scenic");
+  }
+
+  if (/\b(pass|passo|col|joch)\b/.test(text)) {
+    tags.push("pass");
+  }
+
+  if (/\b(lake|lago|lac|see)\b/.test(text)) {
+    tags.push("lake");
+  }
+
+  if (/\b(coast|coastal|riviera|sea|mare|fjord|fiordo)\b/.test(text)) {
+    tags.push("coast");
+  }
+
+  if (/\b(forest|foresta|bosco)\b/.test(text)) {
+    tags.push("forest");
+  }
+
+  if (
+    /\b(furka|grimsel|susten|bernina|gotthard|oberalp|san bernardino|simplon|nufenen)\b/.test(
+      text
+    )
+  ) {
+    tags.push("iconic");
+  }
+
+  return uniq(tags);
+}
+
+function buildSeedRegion(areaName = "", fallbackRegions = []) {
+  const name = String(areaName || "").trim();
+  if (!name) return fallbackRegions?.[0] || null;
+
+  const pieces = name.split("/").map((x) => x.trim()).filter(Boolean);
+  if (pieces.length > 1) return pieces[0];
+
+  return fallbackRegions?.[0] || name;
+}
+
+function buildSeedAddress(areaName = "", scopeCfg) {
+  const scopeName = scopeCfg?.scopeName || scopeCfg?.countryName || "";
+  return `${areaName}, ${scopeName}`;
+}
+
+// -------------------------------------------------------
+// MANUAL SEEDS
+// -------------------------------------------------------
+
+const MANUAL_SCOPE_SEEDS = {
+  CH: {
+    "switzerland-west": [
+      { name: "Lac Léman / Lavaux", lat: 46.48, lng: 6.78, rideType: "scenic" },
+      { name: "Montreux", lat: 46.4312, lng: 6.9107, rideType: "scenic" },
+      { name: "Aigle", lat: 46.3176, lng: 6.9692, rideType: "scenic" },
+      { name: "Col des Mosses", lat: 46.402, lng: 7.102, rideType: "mountain" },
+      { name: "Col du Pillon", lat: 46.3509, lng: 7.2051, rideType: "mountain" },
+      { name: "Sion", lat: 46.2331, lng: 7.3606, rideType: "scenic" },
+      { name: "Crans-Montana", lat: 46.3099, lng: 7.4786, rideType: "mountain" },
+      { name: "Verbier", lat: 46.0964, lng: 7.2286, rideType: "mountain" },
+      { name: "Martigny", lat: 46.103, lng: 7.0724, rideType: "scenic" },
+      { name: "Great St Bernard Approach", lat: 45.8689, lng: 7.1661, rideType: "mountain" },
+      { name: "Neuchâtel", lat: 46.9896, lng: 6.9293, rideType: "lake" },
+      { name: "Jura Sud / Vue des Alpes", lat: 47.0721, lng: 6.8643, rideType: "mountain" },
+    ],
+
+    "switzerland-central": [
+      { name: "Interlaken", lat: 46.6863, lng: 7.8632, rideType: "scenic" },
+      { name: "Grindelwald", lat: 46.6242, lng: 8.0414, rideType: "mountain" },
+      { name: "Meiringen", lat: 46.7285, lng: 8.1872, rideType: "mountain" },
+      { name: "Grimsel Pass", lat: 46.5624, lng: 8.3367, rideType: "mountain" },
+      { name: "Susten Pass", lat: 46.7179, lng: 8.4376, rideType: "mountain" },
+      { name: "Furka Pass", lat: 46.5722, lng: 8.4158, rideType: "mountain" },
+      { name: "Andermatt", lat: 46.6356, lng: 8.5944, rideType: "mountain" },
+      { name: "Gotthard Pass", lat: 46.5602, lng: 8.561, rideType: "mountain" },
+      { name: "Oberalp Pass", lat: 46.6593, lng: 8.6719, rideType: "mountain" },
+      { name: "Lucerne", lat: 47.0502, lng: 8.3093, rideType: "lake" },
+      { name: "Vierwaldstättersee Panorama", lat: 46.9976, lng: 8.4823, rideType: "lake" },
+      { name: "Brünig Pass", lat: 46.7574, lng: 8.1326, rideType: "mountain" },
+    ],
+
+    "switzerland-east": [
+      { name: "Davos", lat: 46.8027, lng: 9.836, rideType: "mountain" },
+      { name: "Flüela Pass", lat: 46.7495, lng: 9.9499, rideType: "mountain" },
+      { name: "Albula Pass", lat: 46.5838, lng: 9.8396, rideType: "mountain" },
+      { name: "Julier Pass", lat: 46.4687, lng: 9.7236, rideType: "mountain" },
+      { name: "St. Moritz", lat: 46.497, lng: 9.838, rideType: "mountain" },
+      { name: "Bernina Pass", lat: 46.4105, lng: 10.0207, rideType: "mountain" },
+      { name: "Chur", lat: 46.8508, lng: 9.5329, rideType: "scenic" },
+      { name: "Oberalp East Approach", lat: 46.7047, lng: 8.9158, rideType: "mountain" },
+      { name: "Splügen Pass", lat: 46.5079, lng: 9.3237, rideType: "mountain" },
+      { name: "San Bernardino North Approach", lat: 46.4633, lng: 9.1908, rideType: "mountain" },
+      { name: "Walensee Panorama", lat: 47.1188, lng: 9.2873, rideType: "lake" },
+      { name: "Glarus Alps Gateway", lat: 47.0411, lng: 9.0681, rideType: "mountain" },
+    ],
+
+    ticino: [
+      { name: "Bellinzona", lat: 46.1946, lng: 9.0244, rideType: "scenic" },
+      { name: "Monte Ceneri", lat: 46.1219, lng: 8.9096, rideType: "scenic" },
+      { name: "Lugano", lat: 46.0037, lng: 8.9511, rideType: "lake" },
+      { name: "Monte Generoso", lat: 45.9308, lng: 9.0219, rideType: "mountain" },
+      { name: "Locarno", lat: 46.1696, lng: 8.7995, rideType: "lake" },
+      { name: "Centovalli", lat: 46.1786, lng: 8.6573, rideType: "scenic" },
+      { name: "Val Verzasca", lat: 46.2614, lng: 8.8402, rideType: "scenic" },
+      { name: "Biasca", lat: 46.3596, lng: 8.9699, rideType: "scenic" },
+      { name: "Airolo", lat: 46.5276, lng: 8.6118, rideType: "mountain" },
+      { name: "Nufenen South Approach", lat: 46.4721, lng: 8.4002, rideType: "mountain" },
+      { name: "San Bernardino Pass", lat: 46.4628, lng: 9.1936, rideType: "mountain" },
+      { name: "Maggia Valley", lat: 46.2471, lng: 8.7083, rideType: "scenic" },
+    ],
+    AT: {
+    tyrol: [
+      { name: "Innsbruck", lat: 47.2692, lng: 11.4041, rideType: "scenic" },
+      { name: "Kühtai", lat: 47.2146, lng: 11.0215, rideType: "mountain" },
+      { name: "Timmelsjoch", lat: 46.9052, lng: 11.0855, rideType: "mountain" },
+      { name: "Ötztal", lat: 46.9597, lng: 10.9337, rideType: "mountain" },
+      { name: "Silvretta Hochalpenstraße", lat: 46.9146, lng: 10.0918, rideType: "mountain" },
+      { name: "Montafon", lat: 47.0804, lng: 9.9726, rideType: "scenic" },
+      { name: "Arlberg Pass", lat: 47.1286, lng: 10.2014, rideType: "mountain" },
+      { name: "Lech am Arlberg", lat: 47.2109, lng: 10.1424, rideType: "mountain" },
+      { name: "Kaunertal Glacier Road", lat: 46.9168, lng: 10.7386, rideType: "mountain" },
+      { name: "Reschenpass East Approach", lat: 46.8345, lng: 10.5072, rideType: "mountain" },
+      { name: "Zillertal High Road", lat: 47.2729, lng: 11.8751, rideType: "mountain" },
+      { name: "Achensee Panorama", lat: 47.4411, lng: 11.7042, rideType: "lake" },
+    ],
+
+    salzburg: [
+      { name: "Grossglockner High Alpine Road", lat: 47.1232, lng: 12.815, rideType: "mountain" },
+      { name: "Fusch an der Großglocknerstraße", lat: 47.2239, lng: 12.8214, rideType: "mountain" },
+      { name: "Zell am See", lat: 47.3235, lng: 12.7969, rideType: "lake" },
+      { name: "Kaprun", lat: 47.2711, lng: 12.7587, rideType: "mountain" },
+      { name: "Saalbach", lat: 47.3914, lng: 12.6364, rideType: "mountain" },
+      { name: "Tennengebirge", lat: 47.4754, lng: 13.2904, rideType: "mountain" },
+      { name: "Dachstein South Access", lat: 47.4668, lng: 13.6111, rideType: "mountain" },
+      { name: "Salzkammergut Panorama", lat: 47.7313, lng: 13.4472, rideType: "lake" },
+      { name: "Wolfgangsee", lat: 47.7397, lng: 13.4489, rideType: "lake" },
+      { name: "Obertauern", lat: 47.2525, lng: 13.5507, rideType: "mountain" },
+      { name: "Nockalm North Link", lat: 47.0362, lng: 13.7346, rideType: "mountain" },
+      { name: "Gerlos Alpine Link", lat: 47.2339, lng: 12.0447, rideType: "mountain" },
+    ],
+
+    carinthia: [
+      { name: "Nockalmstraße", lat: 46.9449, lng: 13.7708, rideType: "mountain" },
+      { name: "Bad Kleinkirchheim", lat: 46.8137, lng: 13.7813, rideType: "mountain" },
+      { name: "Villach", lat: 46.6103, lng: 13.8558, rideType: "scenic" },
+      { name: "Wurzenpass", lat: 46.5145, lng: 13.7487, rideType: "mountain" },
+      { name: "Nassfeld Pass", lat: 46.5615, lng: 13.2762, rideType: "mountain" },
+      { name: "Klagenfurt", lat: 46.6365, lng: 14.3122, rideType: "scenic" },
+      { name: "Wörthersee", lat: 46.6383, lng: 14.1406, rideType: "lake" },
+      { name: "Millstätter See", lat: 46.8074, lng: 13.5802, rideType: "lake" },
+      { name: "Malta Hochalmstraße", lat: 46.9675, lng: 13.5094, rideType: "mountain" },
+      { name: "Katschberg Pass", lat: 47.0624, lng: 13.6163, rideType: "mountain" },
+      { name: "Villacher Alpenstraße", lat: 46.5627, lng: 13.6643, rideType: "mountain" },
+      { name: "Turracher Höhe", lat: 46.9155, lng: 13.8747, rideType: "mountain" },
+    ],
+
+    "austria-west": [
+      { name: "Bregenzerwald", lat: 47.3607, lng: 9.9347, rideType: "scenic" },
+      { name: "Hochtannberg Pass", lat: 47.2582, lng: 10.1085, rideType: "mountain" },
+      { name: "Faschinajoch", lat: 47.2496, lng: 9.8923, rideType: "mountain" },
+      { name: "Lechtal", lat: 47.2945, lng: 10.6206, rideType: "scenic" },
+      { name: "Hahntennjoch", lat: 47.2416, lng: 10.7574, rideType: "mountain" },
+      { name: "Kaunertal", lat: 46.9159, lng: 10.7464, rideType: "mountain" },
+      { name: "Pitztal", lat: 47.0862, lng: 10.8887, rideType: "mountain" },
+      { name: "Tannheimer Tal", lat: 47.4977, lng: 10.5323, rideType: "scenic" },
+      { name: "Reschenpass", lat: 46.8345, lng: 10.5072, rideType: "mountain" },
+      { name: "Silvretta West Link", lat: 46.9605, lng: 10.0186, rideType: "mountain" },
+      { name: "Bielerhöhe", lat: 46.9141, lng: 10.0911, rideType: "mountain" },
+      { name: "Fernpass Approach", lat: 47.3658, lng: 10.8166, rideType: "mountain" },
+    ],
+  },
+},
+};
+
+function buildManualSeeds(country, scope) {
+  const scoped = MANUAL_SCOPE_SEEDS?.[country]?.[scope] || [];
+  return scoped.map((seed, index) => {
+    const type = inferSpotType(seed.name, scopeCfg.scopeName || "", seed.rideType);
+    const rideType = inferRideType(type, seed.name, scopeCfg.scopeName || "", seed.rideType);
+    const slug = slugify(seed.name);
+
+    return {
+      id: `seed-${scopeSuffix.toLowerCase()}-manual-${slug || index + 1}`,
+      sourceId: `seed-${scopeSuffix.toLowerCase()}-manual-${slug || index + 1}`,
+      googlePlaceId: null,
+      name: seed.name,
+      slug,
+      type,
+      rideType,
+      country,
+      scope,
+      scopeName: scopeCfg.scopeName,
+      lat: Number(seed.lat),
+      lng: Number(seed.lng),
+      region: seed.region || buildSeedRegion(seed.name, scopeCfg.regions || []),
+      regionHint: (scopeCfg.regions || []).join(" / ") || null,
+      address: seed.address || buildSeedAddress(seed.name, scopeCfg),
+      rating: Number(seed.rating || 4.7),
+      userRatingCount: Number(seed.userRatingCount || 120),
+      rawTypes: ["point_of_interest", "natural_feature", "route"],
+      types: ["point_of_interest", "natural_feature", "route"],
+      source: "local_scope_manual_seed",
+      tags: inferTags(seed.name, scopeCfg.scopeName || "", rideType),
+      aliases: uniq([
+        seed.name,
+        `${seed.name} Ride`,
+        `${seed.name} Route`,
+        rideType === "mountain" ? `${seed.name} Pass` : null,
+      ]),
+      seedMeta: {
+        generatedFrom: "manual_scope_seed",
+      },
+    };
+  });
+}
+
+function buildAreaSeedItem(area, index) {
+  const areaName = String(area?.name || `Area ${index + 1}`).trim();
+  const type = inferSpotType(areaName, scopeCfg.scopeName || "");
+  const rideType = inferRideType(type, areaName, scopeCfg.scopeName || "");
+  const tags = inferTags(areaName, scopeCfg.scopeName || "", rideType);
+  const slug = slugify(areaName);
+
+  return {
+    id: `seed-${scopeSuffix.toLowerCase()}-${slug || index + 1}`,
+    sourceId: `seed-${scopeSuffix.toLowerCase()}-${slug || index + 1}`,
+    googlePlaceId: null,
+    name: areaName,
+    slug,
+    type,
+    rideType,
+    country,
+    scope,
+    scopeName: scopeCfg.scopeName,
+    lat: Number(area.lat),
+    lng: Number(area.lng),
+    region: buildSeedRegion(areaName, scopeCfg.regions || []),
+    regionHint: (scopeCfg.regions || []).join(" / ") || null,
+    address: buildSeedAddress(areaName, scopeCfg),
+    rating: 4.6,
+    userRatingCount: 80,
+    rawTypes: ["point_of_interest", "natural_feature", "route"],
+    types: ["point_of_interest", "natural_feature", "route"],
+    source: "local_scope_seed",
+    tags,
+    aliases: uniq([
+      areaName,
+      `${areaName} Ride`,
+      `${areaName} Route`,
+      rideType === "mountain" ? `${areaName} Pass` : null,
+    ]),
+    seedMeta: {
+      areaRadiusMeters: Number(area.radius || 0),
+      generatedFrom: "routeScopes.js",
+    },
+  };
+}
+
+async function readExistingIfAny(filePath) {
+  try {
+    const raw = await fs.readFile(filePath, "utf8");
+    const parsed = JSON.parse(raw);
+    return Array.isArray(parsed) ? parsed : [];
+  } catch {
+    return [];
+  }
+}
+
+function dedupeByIdOrName(items = []) {
+  const map = new Map();
+
+  for (const item of items) {
+    const keyByNameCoords = `${country}|${scope}|${normalizeText(item.name)}|${Number(
+      item.lat
+    ).toFixed(4)}|${Number(item.lng).toFixed(4)}`;
+
+    const key = item.id || keyByNameCoords;
+    const prev = map.get(key);
+
+    if (!prev) {
+      map.set(key, item);
+      continue;
+    }
+
+    const prevScore =
+      Number(prev.userRatingCount || 0) + Number(prev.rating || 0) * 10;
+    const currScore =
+      Number(item.userRatingCount || 0) + Number(item.rating || 0) * 10;
+
+    if (currScore >= prevScore) {
+      map.set(key, item);
+    }
+  }
+
+  const secondPass = [];
+  for (const item of map.values()) {
+    const existing = secondPass.find((ex) => {
+      const sameName = normalizeText(ex.name) === normalizeText(item.name);
+      const closeLat = Math.abs(Number(ex.lat) - Number(item.lat)) < 0.01;
+      const closeLng = Math.abs(Number(ex.lng) - Number(item.lng)) < 0.01;
+      return sameName && closeLat && closeLng;
+    });
+
+    if (!existing) {
+      secondPass.push(item);
+      continue;
+    }
+
+    const exScore =
+      Number(existing.userRatingCount || 0) + Number(existing.rating || 0) * 10;
+    const itScore =
+      Number(item.userRatingCount || 0) + Number(item.rating || 0) * 10;
+
+    if (itScore > exScore) {
+      Object.assign(existing, item);
+    } else {
+      existing.aliases = uniq([...(existing.aliases || []), ...(item.aliases || [])]);
+      existing.tags = uniq([...(existing.tags || []), ...(item.tags || [])]);
+    }
+  }
+
+  return secondPass;
+}
+
+async function main() {
+  console.log("====================================");
+  console.log("MotoPortEU — Build European Scope Seed");
+  console.log("====================================");
+  console.log(`🌍 Country: ${scopeCfg.countryName} (${country})`);
+  console.log(`🧭 Scope: ${scopeCfg.scopeName}`);
+  console.log(`🗂️ Areas: ${(scopeCfg.areas || []).length}`);
+  console.log(`💾 Output: ${OUT_PATH}`);
+  console.log(`⚙️ Mode: ${mode}`);
+
+  const areaSeeds = (scopeCfg.areas || [])
+    .filter(
+      (area) =>
+        Number.isFinite(Number(area?.lat)) && Number.isFinite(Number(area?.lng))
+    )
+    .map((area, index) => buildAreaSeedItem(area, index));
+
+  const manualSeeds = buildManualSeeds(country, scope);
+  const seeds = dedupeByIdOrName([...areaSeeds, ...manualSeeds]);
+
+  let finalItems = seeds;
+
+  if (mode === "append") {
+    const existing = await readExistingIfAny(OUT_PATH);
+    finalItems = dedupeByIdOrName([...existing, ...seeds]);
+    console.log(`📥 Existing: ${existing.length}`);
+  }
+
+  finalItems.sort((a, b) =>
+    String(a.name || "").localeCompare(String(b.name || ""), "it")
+  );
+
+  await fs.mkdir(path.dirname(OUT_PATH), { recursive: true });
+  await fs.writeFile(OUT_PATH, JSON.stringify(finalItems, null, 2), "utf8");
+
+  console.log("------------------------------------");
+  console.log(`✅ Area seeds:      ${areaSeeds.length}`);
+  console.log(`✅ Manual seeds:    ${manualSeeds.length}`);
+  console.log(`✅ Output items:    ${finalItems.length}`);
+  console.log("------------------------------------");
+  console.log(`📁 Salvato in: ${OUT_PATH}`);
+  console.log("====================================");
+}
+
+main().catch((err) => {
+  console.error("❌ Errore buildEuropeanScopeSeed:", err);
+  process.exit(1);
+});

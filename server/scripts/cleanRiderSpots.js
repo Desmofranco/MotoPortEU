@@ -19,14 +19,19 @@ const scope = args.scope ? String(args.scope) : null;
 const scopeCfg = getScopeConfig({ country, scope });
 const scopeSuffix = getScopeSuffix({ country, scope });
 
-const GOOGLE_INPUT_PATH = path.resolve(
+const SCOPED_LOCAL_INPUT_PATH = path.resolve(
+  `client/public/data/rider-spots.seed.${scopeSuffix}.json`
+);
+const SCOPED_RAW_INPUT_PATH = path.resolve(
+  `client/public/data/rider-spots.raw.${scopeSuffix}.json`
+);
+const SCOPED_GOOGLE_NAMED_INPUT_PATH = path.resolve(
   `client/public/data/rider-spots.cleaned.google.${scopeSuffix}.json`
 );
 const LEGACY_INPUT_PATH = path.resolve("client/public/data/rider-spots.json");
 const OUT_PATH = path.resolve(
   `client/public/data/rider-spots.cleaned.${scopeSuffix}.json`
 );
-
 const lakeScopes = new Set(["como", "garda", "maggiore"]);
 const scopeLower = String(scope || "").toLowerCase();
 const scopeNameLower = String(scopeCfg?.scopeName || "").toLowerCase();
@@ -34,6 +39,18 @@ const isLakeScope =
   lakeScopes.has(scopeLower) ||
   /\blago\b|\blake\b/.test(scopeNameLower) ||
   /\bcomo\b|\bgarda\b|\bmaggiore\b/.test(scopeNameLower);
+
+// -------------------------------------------------------
+// BASIC UTILS
+// -------------------------------------------------------
+
+function safeJsonParse(raw, label = "json") {
+  try {
+    return JSON.parse(String(raw).replace(/^\uFEFF/, "").trim());
+  } catch (err) {
+    throw new Error(`Errore parsing ${label}: ${err.message}`);
+  }
+}
 
 function slugify(str = "") {
   return String(str)
@@ -71,6 +88,27 @@ function toNum(v) {
   return Number.isFinite(n) ? n : null;
 }
 
+function pickLat(spot) {
+  return (
+    toNum(spot?.lat) ??
+    toNum(spot?.latitude) ??
+    toNum(spot?.coords?.lat) ??
+    toNum(spot?.center?.lat)
+  );
+}
+
+function pickLng(spot) {
+  return (
+    toNum(spot?.lng) ??
+    toNum(spot?.lon) ??
+    toNum(spot?.longitude) ??
+    toNum(spot?.coords?.lng) ??
+    toNum(spot?.coords?.lon) ??
+    toNum(spot?.center?.lng) ??
+    toNum(spot?.center?.lon)
+  );
+}
+
 function haversineKm(aLat, aLng, bLat, bLng) {
   const R = 6371;
   const toRad = (d) => (d * Math.PI) / 180;
@@ -84,47 +122,181 @@ function haversineKm(aLat, aLng, bLat, bLng) {
   return 2 * R * Math.atan2(Math.sqrt(s1), Math.sqrt(1 - s1));
 }
 
+function normalizeCountryCode(value = "") {
+  return String(value || "").trim().toUpperCase();
+}
+
+// -------------------------------------------------------
+// EUROPEAN SIGNALS
+// -------------------------------------------------------
+
+const EURO_MOUNTAIN_SIGNALS = [
+  "passo",
+  "pass",
+  "mountain pass",
+  "alp pass",
+  "alpine pass",
+  "col ",
+  "col de",
+  "col du",
+  "puerto",
+  "puerto de",
+  "port de",
+  "joch",
+  "jochpass",
+  "passhohe",
+  "passhöhe",
+  "bergpas",
+  "berg pass",
+  "transfagarasan",
+  "transalpina",
+  "furka",
+  "grimsel",
+  "susten",
+  "nufenen",
+  "gottardo",
+  "gotthard",
+  "oberalp",
+  "fluela",
+  "fluela",
+  "san bernardino",
+  "simplon",
+  "great st bernard",
+  "gran san bernardo",
+  "stelvio",
+  "gavia",
+  "mortirolo",
+  "spluga",
+  "bernina",
+  "mendola",
+  "tonale",
+  "pordoi",
+  "giau",
+  "falzarego",
+  "gardena",
+  "campolongo",
+  "fedaia",
+  "sella",
+  "croce dominii",
+  "cereda",
+  "rolle",
+  "manghen",
+  "grossglockner",
+  "gerlos",
+  "timmelsjoch",
+  "katschberg",
+  "nockalm",
+  "galibier",
+  "izoard",
+  "lautaret",
+  "bonette",
+  "vars",
+  "cayolle",
+  "turini",
+  "aubisque",
+  "tourmalet",
+  "aspin",
+  "peyresourde",
+  "portalet",
+  "somport",
+  "ordino",
+  "envalira",
+  "tatra",
+  "durmitor",
+  "velebit",
+  "carpath",
+  "carpazi",
+];
+
+const EURO_LAKE_SIGNALS = [
+  "lake",
+  "lago",
+  "lac",
+  "see",
+  "como",
+  "garda",
+  "maggiore",
+  "leman",
+  "geneva lake",
+  "lac leman",
+  "thun",
+  "brienz",
+  "lungern",
+  "hallstatt",
+  "worthersee",
+  "bled",
+  "bohinj",
+];
+
+const EURO_COASTAL_SIGNALS = [
+  "coast",
+  "coastal",
+  "costiera",
+  "sea",
+  "mare",
+  "costa",
+  "riviera",
+  "fjord",
+  "fiordo",
+  "adriatic",
+  "mediterranean",
+  "cote d azur",
+  "costa brava",
+  "amalfi",
+  "liguria",
+  "corniche",
+  "makarska",
+  "dalmatia",
+];
+
+const EURO_FOREST_SIGNALS = [
+  "forest",
+  "foresta",
+  "bosco",
+  "black forest",
+  "foresta nera",
+  "bohemian forest",
+  "bavarian forest",
+  "woodland",
+  "highland",
+  "highlands",
+];
+
+const ICONIC_EURO_SIGNALS = [
+  ...EURO_MOUNTAIN_SIGNALS,
+  ...EURO_LAKE_SIGNALS,
+  ...EURO_COASTAL_SIGNALS,
+  ...EURO_FOREST_SIGNALS,
+];
+
+// -------------------------------------------------------
+// COUNTRY / SCOPE HELPERS
+// -------------------------------------------------------
+
 function inferCountry(address = "", region = "", explicitCountry = null) {
-  if (explicitCountry) return String(explicitCountry).toUpperCase();
+  if (explicitCountry) return normalizeCountryCode(explicitCountry);
 
   const text = `${address} ${region}`.toLowerCase();
 
   if (text.includes("italy") || text.includes("italia") || text.includes("it-")) return "IT";
-  if (text.includes("switzerland") || text.includes("svizzera") || /\bch\b/.test(text)) return "CH";
-  if (text.includes("austria") || text.includes("österreich") || /\bat\b/.test(text)) return "AT";
+  if (text.includes("switzerland") || text.includes("svizzera") || text.includes("suisse") || /\bch\b/.test(text)) return "CH";
+  if (text.includes("austria") || text.includes("österreich") || text.includes("osterreich") || /\bat\b/.test(text)) return "AT";
   if (text.includes("france") || text.includes("francia") || text.includes("fr-")) return "FR";
   if (text.includes("germany") || text.includes("germania") || text.includes("de-")) return "DE";
   if (text.includes("spain") || text.includes("spagna") || text.includes("es-")) return "ES";
   if (text.includes("slovenia") || text.includes("si-")) return "SI";
   if (text.includes("croatia") || text.includes("croazia") || text.includes("hr-")) return "HR";
+  if (text.includes("bosnia") || text.includes("ba-")) return "BA";
+  if (text.includes("montenegro") || text.includes("me-")) return "ME";
+  if (text.includes("albania") || text.includes("albania") || text.includes("al-")) return "AL";
+  if (text.includes("romania") || text.includes("romania") || text.includes("ro-")) return "RO";
+  if (text.includes("slovakia") || text.includes("slovacchia") || text.includes("sk-")) return "SK";
+  if (text.includes("czech") || text.includes("cechia") || text.includes("cz-")) return "CZ";
+  if (text.includes("poland") || text.includes("polonia") || text.includes("pl-")) return "PL";
+  if (text.includes("norway") || text.includes("norvegia") || text.includes("no-")) return "NO";
+  if (text.includes("united kingdom") || text.includes("scotland") || text.includes("uk-") || text.includes("gb-")) return "UK";
 
   return null;
-}
-
-function normalizeSpotName(name = "") {
-  let n = String(name || "").trim();
-  if (!n) return n;
-
-  const normalizedRaw = normalizeText(n);
-
-  const forcedNames = new Map([
-    ["przelecz stelvio", "Passo dello Stelvio"],
-    ["przelecz dello stelvio", "Passo dello Stelvio"],
-    ["stelvio pass", "Passo dello Stelvio"],
-    ["stilfser joch", "Passo dello Stelvio"],
-    ["passo stelvio", "Passo dello Stelvio"],
-    ["passo dello stelvio", "Passo dello Stelvio"],
-  ]);
-
-  if (forcedNames.has(normalizedRaw)) {
-    return forcedNames.get(normalizedRaw);
-  }
-
-  if (/\bstelvio\b/i.test(n)) {
-    return "Passo dello Stelvio";
-  }
-
-  return n;
 }
 
 function buildScopeMatchers(scopeCfg, countryCode) {
@@ -134,204 +306,59 @@ function buildScopeMatchers(scopeCfg, countryCode) {
     .filter(Boolean);
 
   const italyTermsCommon = [
-    "italy",
-    "italia",
-
-    "valle d aosta",
-    "valle d'aosta",
-    "aosta valley",
-    "aosta",
-    "piemonte",
-    "lombardia",
-    "liguria",
-    "trentino",
-    "alto adige",
-    "sudtirol",
-    "veneto",
-    "friuli venezia giulia",
-    "emilia romagna",
-    "toscana",
-    "umbria",
-    "marche",
-    "lazio",
-    "abruzzo",
-    "molise",
-    "campania",
-    "basilicata",
-    "puglia",
-    "calabria",
-    "sicilia",
-    "sardegna",
-
-    "dolomiti",
-    "appennino",
-    "monte bianco",
-    "gran paradiso",
-    "stelvio",
-    "gavia",
-    "mortirolo",
-    "tonale",
-    "spluga",
-    "bernina",
-    "mendola",
-    "resia",
-    "forra",
-    "valvestino",
-    "gardesana",
-    "chianti",
-    "val d orcia",
-    "crete senesi",
-    "gran sasso",
-    "majella",
-    "etna",
-    "costiera amalfitana",
-    "amalfitana",
-    "gargano",
-    "pollino",
-    "sila",
-    "aspromonte",
-    "supramonte",
-    "ogliastra",
-    "barbagia",
-    "nebrodi",
-    "madonie",
-    "lago di como",
-    "lake como",
-    "como",
-    "bellagio",
-    "menaggio",
-    "varenna",
-    "lecco",
-    "lago maggiore",
-    "lake maggiore",
-    "maggiore",
-    "stresa",
-    "verbania",
-    "arona",
-    "lago di garda",
-    "lake garda",
-    "garda",
-    "riva del garda",
-    "limone sul garda",
-    "malcesine",
-    "gardone",
-    "salò",
-    "salo",
+    "italy", "italia",
+    "valle d aosta", "valle d'aosta", "aosta valley", "aosta",
+    "piemonte", "lombardia", "liguria", "trentino", "alto adige", "sudtirol",
+    "veneto", "friuli venezia giulia", "emilia romagna", "toscana", "umbria",
+    "marche", "lazio", "abruzzo", "molise", "campania", "basilicata", "puglia",
+    "calabria", "sicilia", "sardegna",
+    "dolomiti", "appennino", "monte bianco", "gran paradiso", "stelvio",
+    "gavia", "mortirolo", "tonale", "spluga", "bernina", "mendola", "resia",
+    "forra", "valvestino", "gardesana", "chianti", "val d orcia", "crete senesi",
+    "gran sasso", "majella", "etna", "costiera amalfitana", "amalfitana",
+    "gargano", "pollino", "sila", "aspromonte", "supramonte", "ogliastra",
+    "barbagia", "nebrodi", "madonie", "lago di como", "lake como", "como",
+    "bellagio", "menaggio", "varenna", "lecco", "lago maggiore", "lake maggiore",
+    "maggiore", "stresa", "verbania", "arona", "lago di garda", "lake garda",
+    "garda", "riva del garda", "limone sul garda", "malcesine", "gardone",
+    "salò", "salo",
   ].map(normalizeText);
 
   const nwTerms = [
-    "lago di como",
-    "lake como",
-    "como",
-    "bellagio",
-    "menaggio",
-    "varenna",
-    "lecco",
-    "lago maggiore",
-    "lake maggiore",
-    "maggiore",
-    "stresa",
-    "verbania",
-    "arona",
-    "lago di garda",
-    "lake garda",
-    "garda",
-    "riva del garda",
-    "limone sul garda",
-    "malcesine",
-    "gardone",
-    "salo",
-    "salò",
-    "bormio",
-    "livigno",
-    "tirano",
-    "sestriere",
-    "cuneo",
-    "imperia",
-    "savona",
-    "genova",
-    "la spezia",
-    "canavese",
-    "appennino ligure",
-    "alpi marittime",
-    "gran paradiso",
-    "monte bianco",
-    "aosta",
-    "saint-vincent",
-    "col de joux",
+    "lago di como", "lake como", "como", "bellagio", "menaggio", "varenna", "lecco",
+    "lago maggiore", "lake maggiore", "maggiore", "stresa", "verbania", "arona",
+    "lago di garda", "lake garda", "garda", "riva del garda", "limone sul garda",
+    "malcesine", "gardone", "salo", "salò", "bormio", "livigno", "tirano",
+    "sestriere", "cuneo", "imperia", "savona", "genova", "la spezia", "canavese",
+    "appennino ligure", "alpi marittime", "gran paradiso", "monte bianco", "aosta",
+    "saint-vincent", "col de joux",
   ].map(normalizeText);
 
   const neTerms = [
-    "sellaronda",
-    "cortina",
-    "pordoi",
-    "giau",
-    "falzarego",
-    "gardena",
-    "campolongo",
-    "fedaia",
-    "carnia",
-    "lessinia",
-    "monte baldo",
-    "trentino laghi",
-    "appennino tosco emiliano",
+    "sellaronda", "cortina", "pordoi", "giau", "falzarego", "gardena",
+    "campolongo", "fedaia", "carnia", "lessinia", "monte baldo",
+    "trentino laghi", "appennino tosco emiliano",
   ].map(normalizeText);
 
   const centerTerms = [
-    "chianti",
-    "crete senesi",
-    "garfagnana",
-    "apuane",
-    "casentino",
-    "val d orcia",
-    "amiata",
-    "umbria",
-    "sibillini",
-    "gran sasso",
-    "majella",
-    "terminillo",
+    "chianti", "crete senesi", "garfagnana", "apuane", "casentino",
+    "val d orcia", "amiata", "umbria", "sibillini", "gran sasso",
+    "majella", "terminillo",
   ].map(normalizeText);
 
   const southTerms = [
-    "costiera amalfitana",
-    "cilento",
-    "irpinia",
-    "sannio",
-    "pollino",
-    "dolomiti lucane",
-    "gargano",
-    "murge",
-    "valle d itria",
-    "sila",
-    "aspromonte",
+    "costiera amalfitana", "cilento", "irpinia", "sannio", "pollino",
+    "dolomiti lucane", "gargano", "murge", "valle d itria", "sila", "aspromonte",
   ].map(normalizeText);
 
   const sicilyTerms = [
-    "sicilia",
-    "sicily",
-    "etna",
-    "nebrodi",
-    "madonie",
-    "palermo",
-    "trapani",
-    "ragusa",
-    "val di noto",
-    "messina",
-    "peloritani",
+    "sicilia", "sicily", "etna", "nebrodi", "madonie", "palermo", "trapani",
+    "ragusa", "val di noto", "messina", "peloritani",
   ].map(normalizeText);
 
   const sardiniaTerms = [
-    "sardegna",
-    "sardinia",
-    "costa smeralda",
-    "gallura",
-    "supramonte",
-    "ogliastra",
-    "sulcis",
-    "iglesiente",
-    "alghero",
-    "bosa",
-    "barbagia",
+    "sardegna", "sardinia", "costa smeralda", "gallura", "supramonte",
+    "ogliastra", "sulcis", "iglesiente", "alghero", "bosa", "barbagia",
   ].map(normalizeText);
 
   let extraCountryTerms = [];
@@ -344,78 +371,29 @@ function buildScopeMatchers(scopeCfg, countryCode) {
     else if (scope === "sardinia") extraCountryTerms = sardiniaTerms;
     else if (scope === "como") {
       extraCountryTerms = [
-        "lago di como",
-        "lake como",
-        "como",
-        "bellagio",
-        "menaggio",
-        "varenna",
-        "lecco",
+        "lago di como", "lake como", "como", "bellagio", "menaggio", "varenna", "lecco",
       ].map(normalizeText);
     } else if (scope === "maggiore") {
       extraCountryTerms = [
-        "lago maggiore",
-        "lake maggiore",
-        "maggiore",
-        "stresa",
-        "verbania",
-        "arona",
+        "lago maggiore", "lake maggiore", "maggiore", "stresa", "verbania", "arona",
       ].map(normalizeText);
     } else if (scope === "garda") {
       extraCountryTerms = [
-        "lago di garda",
-        "lake garda",
-        "garda",
-        "riva del garda",
-        "limone sul garda",
-        "malcesine",
-        "gardone",
-        "salo",
-        "salò",
+        "lago di garda", "lake garda", "garda", "riva del garda",
+        "limone sul garda", "malcesine", "gardone", "salo", "salò",
       ].map(normalizeText);
     }
   }
 
   const foreignTerms = [
-    "france",
-    "francia",
-    "switzerland",
-    "svizzera",
-    "austria",
-    "osterreich",
-    "österreich",
-    "slovenia",
-    "croatia",
-    "croazia",
-    "germany",
-    "germania",
-    "provence",
-    "provenza",
-    "haute savoie",
-    "savoie",
-    "nice",
-    "menton",
-    "eze",
-    "chamonix mont blanc",
-    "chamonix-mont-blanc",
-    "trient",
-    "orsieres",
-    "evolene",
-    "ollon",
-    "morzine",
-    "bonneval sur arc",
-    "bonneval-sur-arc",
-    "saint dalmas le selvage",
-    "saint-dalmas-le-selvage",
-    "saint etienne de tinee",
-    "saint-etienne-de-tinee",
-    "luceram",
-    "gorbio",
-    "peille",
-    "uvernet fours",
-    "uvernet-fours",
-    "molines en queyras",
-    "molines-en-queyras",
+    "france", "francia", "switzerland", "svizzera", "austria", "osterreich",
+    "österreich", "slovenia", "croatia", "croazia", "germany", "germania",
+    "provence", "provenza", "haute savoie", "savoie", "nice", "menton", "eze",
+    "chamonix mont blanc", "chamonix-mont-blanc", "trient", "orsieres", "evolene",
+    "ollon", "morzine", "bonneval sur arc", "bonneval-sur-arc", "saint dalmas le selvage",
+    "saint-dalmas-le-selvage", "saint etienne de tinee", "saint-etienne-de-tinee",
+    "luceram", "gorbio", "peille", "uvernet fours", "uvernet-fours",
+    "molines en queyras", "molines-en-queyras",
   ].map(normalizeText);
 
   return {
@@ -429,6 +407,10 @@ function buildScopeMatchers(scopeCfg, countryCode) {
 
 const scopeMatchers = buildScopeMatchers(scopeCfg, country);
 
+// -------------------------------------------------------
+// FILTERS
+// -------------------------------------------------------
+
 function isSpotAllowedForItalianScope(spot, matchers) {
   const blob = normalizeText([
     spot.name,
@@ -440,9 +422,11 @@ function isSpotAllowedForItalianScope(spot, matchers) {
     spot.address?.countryCode,
     spot.scopeName,
     ...(spot.tags || []),
-  ].filter(Boolean).join(" | "));
+  ]
+    .filter(Boolean)
+    .join(" | "));
 
-  const explicitCountry = String(spot.country || "").toUpperCase();
+  const explicitCountry = normalizeCountryCode(spot.country || "");
   if (explicitCountry && explicitCountry !== "IT") return false;
 
   const inferred = inferCountry(
@@ -464,8 +448,8 @@ function isSpotAllowedForItalianScope(spot, matchers) {
 
   if (hasItalianSignal) return true;
 
-  const lat = toNum(spot.lat);
-  const lng = toNum(spot.lng);
+  const lat = pickLat(spot);
+  const lng = pickLng(spot);
   if (lat == null || lng == null) return false;
 
   const nearCoreArea = (scopeCfg?.areas || []).some((area) => {
@@ -477,7 +461,7 @@ function isSpotAllowedForItalianScope(spot, matchers) {
 }
 
 function isMatchingCountry(spot, countryCode) {
-  const explicit = String(spot.country || "").toUpperCase();
+  const explicit = normalizeCountryCode(spot.country || "");
   if (explicit && explicit === countryCode) return true;
 
   const text = normalizeText(
@@ -514,13 +498,19 @@ function isMatchingCountry(spot, countryCode) {
     );
   }
 
-  return explicit === countryCode;
+  const inferred = inferCountry(
+    typeof spot.address === "string" ? spot.address : "",
+    `${spot.region || ""} ${spot.regionHint || ""}`,
+    explicit || null
+  );
+
+  return inferred === countryCode;
 }
 
 function withinScopeRadius(spot, areas) {
   if (!areas?.length) return true;
-  const lat = toNum(spot.lat);
-  const lng = toNum(spot.lng);
+  const lat = pickLat(spot);
+  const lng = pickLng(spot);
   if (lat == null || lng == null) return false;
 
   return areas.some((area) => {
@@ -536,46 +526,12 @@ function hasPassSignal(name = "", address = "", rawTypes = [], spot = {}) {
   const types = rawTypes.map((t) => norm(t));
 
   const textSignals = [
-    "passo",
-    " pass ",
-    "pass ",
-    " col ",
-    "col ",
-    "joch",
-    "passhohe",
-    "mountain pass",
-    "alp pass",
+    ...ICONIC_EURO_SIGNALS,
     "strada panoramica",
     "scenic road",
     "coastal road",
     "lake road",
     "mountain road",
-    "costiera",
-    "stelvio",
-    "gavia",
-    "spluga",
-    "bernina",
-    "mendola",
-    "tonale",
-    "san marco",
-    "forra",
-    "valvestino",
-    "gardesana",
-    "monte baldo",
-    "lago di garda",
-    "lago di como",
-    "lago maggiore",
-    "lake como",
-    "lake garda",
-    "lake maggiore",
-    "como",
-    "bellagio",
-    "menaggio",
-    "varenna",
-    "lecco",
-    "stresa",
-    "verbania",
-    "arona",
     "twisty",
   ];
 
@@ -587,7 +543,7 @@ function hasPassSignal(name = "", address = "", rawTypes = [], spot = {}) {
     "road",
   ];
 
-  const tagSignals = ["mountain", "scenic", "panoramic", "lake", "coast", "forest", "twisty"];
+  const tagSignals = ["mountain", "scenic", "panoramic", "lake", "coast", "forest", "twisty", "fjord"];
 
   return (
     textSignals.some((k) => text.includes(k)) ||
@@ -738,32 +694,9 @@ function isTouristOnlySpot(spot) {
   ];
 
   const strongRoadWords = [
-    "passo",
-    "pass",
+    ...ICONIC_EURO_SIGNALS,
     "strada",
     "road",
-    "forra",
-    "valvestino",
-    "stelvio",
-    "gavia",
-    "spluga",
-    "bernina",
-    "gardesana",
-    "mendola",
-    "tonale",
-    "san marco",
-    "lago",
-    "lake",
-    "como",
-    "garda",
-    "maggiore",
-    "bellagio",
-    "menaggio",
-    "varenna",
-    "lecco",
-    "stresa",
-    "verbania",
-    "arona",
   ];
 
   const hasWeak = weakSpotWords.some((w) => name.includes(w) || address.includes(w));
@@ -783,6 +716,36 @@ function isTouristOnlySpot(spot) {
   }
 
   return false;
+}
+
+// -------------------------------------------------------
+// NAME / TYPE / SCORE
+// -------------------------------------------------------
+
+function normalizeSpotName(name = "") {
+  let n = String(name || "").trim();
+  if (!n) return n;
+
+  const normalizedRaw = normalizeText(n);
+
+  const forcedNames = new Map([
+    ["przelecz stelvio", "Passo dello Stelvio"],
+    ["przelecz dello stelvio", "Passo dello Stelvio"],
+    ["stelvio pass", "Passo dello Stelvio"],
+    ["stilfser joch", "Passo dello Stelvio"],
+    ["passo stelvio", "Passo dello Stelvio"],
+    ["passo dello stelvio", "Passo dello Stelvio"],
+  ]);
+
+  if (forcedNames.has(normalizedRaw)) {
+    return forcedNames.get(normalizedRaw);
+  }
+
+  if (/\bstelvio\b/i.test(n)) {
+    return "Passo dello Stelvio";
+  }
+
+  return n;
 }
 
 function normalizeForeignPassName(name = "") {
@@ -810,51 +773,28 @@ function inferSpotType(spot) {
   const types = rawTypesOf(spot);
 
   if (
-    text.includes("passo") ||
-    text.includes("mountain pass") ||
-    text.includes(" col ") ||
-    text.startsWith("col ") ||
-    text.includes("joch") ||
-    text.includes("passhohe") ||
-    text.includes("stelvio") ||
-    text.includes("gavia") ||
-    text.includes("spluga") ||
-    text.includes("bernina") ||
-    text.includes("mortirolo") ||
-    text.includes("tonale") ||
-    text.includes("mendola") ||
-    text.includes("resia") ||
+    EURO_MOUNTAIN_SIGNALS.some((s) => text.includes(s)) ||
     tags.includes("mountain")
   ) {
     return "mountain_pass";
   }
 
   if (
-    text.includes("coast") ||
-    text.includes("costiera") ||
-    text.includes("mare") ||
-    text.includes("sea") ||
-    text.includes("forra") ||
+    EURO_COASTAL_SIGNALS.some((s) => text.includes(s)) ||
     tags.includes("coast")
   ) {
     return "coastal_view";
   }
 
   if (
-    text.includes("lake") ||
-    text.includes("lago") ||
-    text.includes("como") ||
-    text.includes("garda") ||
-    text.includes("maggiore") ||
+    EURO_LAKE_SIGNALS.some((s) => text.includes(s)) ||
     tags.includes("lake")
   ) {
     return "lake_view";
   }
 
   if (
-    text.includes("forest") ||
-    text.includes("bosco") ||
-    text.includes("foresta") ||
+    EURO_FOREST_SIGNALS.some((s) => text.includes(s)) ||
     tags.includes("forest")
   ) {
     return "forest_road";
@@ -894,6 +834,7 @@ function inferRideType(spot) {
   if (tags.includes("lake")) return "lake";
   if (tags.includes("coast")) return "coastal";
   if (tags.includes("forest")) return "forest";
+  if (tags.includes("fjord")) return "fjord";
   return "scenic";
 }
 
@@ -903,40 +844,13 @@ function buildScore(spot) {
 
   let score = 0;
 
-  if (text.includes("passo")) score += 35;
-  if (text.includes(" col ")) score += 30;
-  if (text.startsWith("col ")) score += 30;
-  if (text.includes("joch")) score += 30;
-  if (text.includes("passhohe")) score += 30;
-  if (text.includes("mountain pass")) score += 35;
-
-  if (text.includes("stelvio")) score += 30;
-  if (text.includes("gavia")) score += 26;
-  if (text.includes("spluga")) score += 24;
-  if (text.includes("bernina")) score += 22;
-  if (text.includes("mendola")) score += 18;
-  if (text.includes("tonale")) score += 18;
-  if (text.includes("san marco")) score += 18;
-  if (text.includes("forra")) score += 22;
-  if (text.includes("valvestino")) score += 20;
-  if (text.includes("gardesana")) score += 18;
+  if (EURO_MOUNTAIN_SIGNALS.some((s) => text.includes(s))) score += 28;
+  if (EURO_LAKE_SIGNALS.some((s) => text.includes(s))) score += 12;
+  if (EURO_COASTAL_SIGNALS.some((s) => text.includes(s))) score += 12;
+  if (EURO_FOREST_SIGNALS.some((s) => text.includes(s))) score += 8;
 
   if (text.includes("panoramic")) score += 8;
   if (text.includes("scenic")) score += 8;
-  if (text.includes("costiera")) score += 12;
-  if (text.includes("coast")) score += 10;
-  if (text.includes("lake")) score += 6;
-  if (text.includes("lago")) score += 6;
-  if (text.includes("como")) score += 10;
-  if (text.includes("garda")) score += 10;
-  if (text.includes("maggiore")) score += 10;
-  if (text.includes("bellagio")) score += 8;
-  if (text.includes("menaggio")) score += 8;
-  if (text.includes("varenna")) score += 8;
-  if (text.includes("lecco")) score += 8;
-  if (text.includes("stresa")) score += 8;
-  if (text.includes("verbania")) score += 8;
-  if (text.includes("arona")) score += 8;
   if (text.includes("strada")) score += 8;
   if (text.includes("road")) score += 8;
 
@@ -964,6 +878,7 @@ function buildScore(spot) {
   if (tags.includes("lake")) score += 10;
   if (tags.includes("forest")) score += 5;
   if (tags.includes("twisty")) score += 8;
+  if (tags.includes("fjord")) score += 6;
 
   if (isLakeScope) score += 25;
 
@@ -999,7 +914,8 @@ function dedupe(spots) {
         String(s.googlePlaceId) === String(ex.googlePlaceId);
 
       const close =
-        haversineKm(Number(s.lat), Number(s.lng), Number(ex.lat), Number(ex.lng)) <= (isLakeScope ? 10 : 8);
+        haversineKm(Number(s.lat), Number(s.lng), Number(ex.lat), Number(ex.lng)) <=
+        (isLakeScope ? 10 : 8);
 
       const sameName = sKey && sKey === canonicalNameKey(ex.name);
 
@@ -1050,17 +966,44 @@ function dedupe(spots) {
   return out;
 }
 
-async function readInput() {
+// -------------------------------------------------------
+// IO
+// -------------------------------------------------------
+
+async function tryReadJson(filePath) {
   try {
-    const raw = await fs.readFile(GOOGLE_INPUT_PATH, "utf8");
-    console.log(`📥 Input trovato: ${GOOGLE_INPUT_PATH}`);
-    return JSON.parse(raw);
+    const raw = await fs.readFile(filePath, "utf8");
+    const parsed = safeJsonParse(raw, filePath);
+    if (Array.isArray(parsed)) {
+      console.log(`📥 Input trovato: ${filePath}`);
+      return parsed;
+    }
+    return null;
   } catch {
-    const raw = await fs.readFile(LEGACY_INPUT_PATH, "utf8");
-    console.log(`📥 Fallback input legacy: ${LEGACY_INPUT_PATH}`);
-    return JSON.parse(raw);
+    return null;
   }
 }
+
+async function readInput() {
+  const candidates = [
+    SCOPED_LOCAL_INPUT_PATH,
+    SCOPED_RAW_INPUT_PATH,
+    SCOPED_GOOGLE_NAMED_INPUT_PATH,
+    LEGACY_INPUT_PATH,
+  ];
+
+  for (const filePath of candidates) {
+    const parsed = await tryReadJson(filePath);
+    if (parsed) return parsed;
+  }
+
+  throw new Error(
+    `Nessun file input trovato per ${scopeSuffix}. Cercati: ${candidates.join(" | ")}`
+  );
+}
+// -------------------------------------------------------
+// MAIN
+// -------------------------------------------------------
 
 async function main() {
   console.log("====================================");
@@ -1072,7 +1015,15 @@ async function main() {
 
   const raw = await readInput();
 
-  const baseValid = raw.filter((spot) => spot && spot.name && spot.lat != null && spot.lng != null);
+  const baseValid = Array.isArray(raw)
+    ? raw
+        .map((spot) => ({
+          ...spot,
+          lat: pickLat(spot),
+          lng: pickLng(spot),
+        }))
+        .filter((spot) => spot && spot.name && spot.lat != null && spot.lng != null)
+    : [];
 
   const countryFiltered = baseValid.filter((spot) => isMatchingCountry(spot, country));
 
@@ -1115,11 +1066,15 @@ async function main() {
     return true;
   });
 
-  const minScore = isLakeScope ? 24 : 38;
+  const minScore = isLakeScope ? 20 : 24;
 
   const filtered = scopeCountryStrictFiltered
     .map((spot, index) => {
-      const countryCode = inferCountry(spot.address, spot.region || spot.regionHint, spot.country);
+      const countryCode = inferCountry(
+        typeof spot.address === "string" ? spot.address : "",
+        spot.region || spot.regionHint,
+        spot.country
+      );
       const cleanedName = normalizeForeignPassName(spot.name || "");
       const type = inferSpotType({ ...spot, name: cleanedName });
 
@@ -1164,6 +1119,7 @@ async function main() {
       normalized.riderScore = buildScore(normalized);
       return normalized;
     })
+    .filter((spot) => normalizeCountryCode(spot.country) === country)
     .filter((spot) => spot.riderScore >= minScore);
 
   const unique = dedupe(filtered).sort((a, b) => {
@@ -1176,7 +1132,7 @@ async function main() {
   await fs.mkdir(path.dirname(OUT_PATH), { recursive: true });
   await fs.writeFile(OUT_PATH, JSON.stringify(unique, null, 2), "utf8");
 
-  console.log(`✅ Input: ${raw.length}`);
+  console.log(`✅ Input: ${Array.isArray(raw) ? raw.length : 0}`);
   console.log(`✅ Base validi: ${baseValid.length}`);
   console.log(`✅ Dopo country: ${countryFiltered.length}`);
   console.log(`✅ Dopo radius scope: ${scopeRadiusFiltered.length}`);
