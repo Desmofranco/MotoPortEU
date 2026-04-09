@@ -294,6 +294,53 @@ const MANUAL_SCOPE_SEEDS = {
       { name: "Fernpass Approach", lat: 47.3658, lng: 10.8166, rideType: "mountain" },
     ],
   },
+
+    DE: {
+    "germany-alps-bavaria": [
+      { name: "Berchtesgaden", lat: 47.6306, lng: 13.0006, rideType: "mountain" },
+      { name: "Rossfeld Panoramastraße", lat: 47.6646, lng: 13.0484, rideType: "mountain" },
+      { name: "Königssee", lat: 47.5937, lng: 12.9898, rideType: "lake" },
+      { name: "Ramsau", lat: 47.6063, lng: 12.8998, rideType: "scenic" },
+      { name: "Garmisch-Partenkirchen", lat: 47.4921, lng: 11.0955, rideType: "mountain" },
+      { name: "Zugspitze South Approach", lat: 47.4211, lng: 10.9858, rideType: "mountain" },
+      { name: "Mittenwald", lat: 47.4415, lng: 11.2612, rideType: "scenic" },
+      { name: "Walchensee", lat: 47.5933, lng: 11.3513, rideType: "lake" },
+      { name: "Kochel am See", lat: 47.657, lng: 11.3649, rideType: "lake" },
+      { name: "Sudelfeld Pass", lat: 47.6674, lng: 12.0607, rideType: "mountain" },
+      { name: "Tatzelwurmstraße", lat: 47.7049, lng: 12.0135, rideType: "mountain" },
+      { name: "Allgäu Alpine Link", lat: 47.5712, lng: 10.2797, rideType: "mountain" },
+    ],
+
+    "germany-black-forest": [
+      { name: "Freudenstadt", lat: 48.466, lng: 8.411, rideType: "scenic" },
+      { name: "Schwarzwaldhochstraße", lat: 48.6728, lng: 8.2157, rideType: "mountain" },
+      { name: "Mummelsee", lat: 48.6169, lng: 8.2004, rideType: "lake" },
+      { name: "Baden-Baden Hinterland", lat: 48.7606, lng: 8.2398, rideType: "scenic" },
+      { name: "Titisee", lat: 47.9002, lng: 8.1537, rideType: "lake" },
+      { name: "Schluchsee", lat: 47.8214, lng: 8.1766, rideType: "lake" },
+      { name: "Feldberg Pass", lat: 47.8738, lng: 8.0035, rideType: "mountain" },
+      { name: "Todtnau", lat: 47.829, lng: 7.9445, rideType: "mountain" },
+      { name: "Hexenloch", lat: 48.0958, lng: 8.1776, rideType: "scenic" },
+      { name: "Wutach Gorge Ridge Road", lat: 47.8465, lng: 8.3423, rideType: "scenic" },
+      { name: "Triberg Waterfall Road", lat: 48.1316, lng: 8.2338, rideType: "scenic" },
+      { name: "Black Forest South Crest", lat: 47.7194, lng: 7.9515, rideType: "mountain" },
+    ],
+
+    "germany-eifel-mosel": [
+      { name: "Eifel", lat: 50.332, lng: 6.623, rideType: "scenic" },
+      { name: "Nürburgring Hinterland", lat: 50.3356, lng: 6.9475, rideType: "mountain" },
+      { name: "Adenau", lat: 50.3816, lng: 6.9327, rideType: "scenic" },
+      { name: "Monschau", lat: 50.5549, lng: 6.2406, rideType: "scenic" },
+      { name: "Mosel Valley", lat: 49.9101, lng: 7.0744, rideType: "scenic" },
+      { name: "Cochem", lat: 50.1451, lng: 7.1669, rideType: "scenic" },
+      { name: "Bernkastel-Kues", lat: 49.9167, lng: 7.0667, rideType: "scenic" },
+      { name: "Zell Mosel", lat: 50.0296, lng: 7.1824, rideType: "scenic" },
+      { name: "Vulkaneifel Ridge", lat: 50.2146, lng: 6.8391, rideType: "mountain" },
+      { name: "Laacher See", lat: 50.4178, lng: 7.2739, rideType: "lake" },
+      { name: "Ahr Valley Twisties", lat: 50.5446, lng: 7.1159, rideType: "scenic" },
+      { name: "Eifel High Road", lat: 50.4474, lng: 6.4815, rideType: "mountain" },
+    ],
+  },
 };
 
 function buildManualSeeds(country, scope) {
