@@ -82,7 +82,12 @@ function inferSpotType(areaName = "", scopeName = "", forcedRideType = "") {
   return "scenic_road";
 }
 
-function inferRideType(type = "", areaName = "", scopeName = "", forcedRideType = "") {
+function inferRideType(
+  type = "",
+  areaName = "",
+  scopeName = "",
+  forcedRideType = ""
+) {
   if (forcedRideType) return forcedRideType;
   if (type === "mountain_pass") return "mountain";
   if (type === "lake_view") return "lake";
@@ -91,8 +96,9 @@ function inferRideType(type = "", areaName = "", scopeName = "", forcedRideType 
 
   const text = normalizeText(`${areaName} ${scopeName}`);
   if (/\b(lake|lago|lac|see)\b/.test(text)) return "lake";
-  if (/\b(coast|coastal|riviera|sea|mare|fjord|fiordo)\b/.test(text))
+  if (/\b(coast|coastal|riviera|sea|mare|fjord|fiordo)\b/.test(text)) {
     return "coastal";
+  }
   if (/\b(forest|foresta|bosco|highland)\b/.test(text)) return "forest";
   if (
     /\b(pass|passo|col|joch|alps|alp|mountain|grimsel|furka|bernina|gotthard|oberalp|san bernardino|simplon)\b/.test(
@@ -146,7 +152,10 @@ function buildSeedRegion(areaName = "", fallbackRegions = []) {
   const name = String(areaName || "").trim();
   if (!name) return fallbackRegions?.[0] || null;
 
-  const pieces = name.split("/").map((x) => x.trim()).filter(Boolean);
+  const pieces = name
+    .split("/")
+    .map((x) => x.trim())
+    .filter(Boolean);
   if (pieces.length > 1) return pieces[0];
 
   return fallbackRegions?.[0] || name;
@@ -222,7 +231,9 @@ const MANUAL_SCOPE_SEEDS = {
       { name: "San Bernardino Pass", lat: 46.4628, lng: 9.1936, rideType: "mountain" },
       { name: "Maggia Valley", lat: 46.2471, lng: 8.7083, rideType: "scenic" },
     ],
-    AT: {
+  },
+
+  AT: {
     tyrol: [
       { name: "Innsbruck", lat: 47.2692, lng: 11.4041, rideType: "scenic" },
       { name: "Kühtai", lat: 47.2146, lng: 11.0215, rideType: "mountain" },
@@ -283,14 +294,19 @@ const MANUAL_SCOPE_SEEDS = {
       { name: "Fernpass Approach", lat: 47.3658, lng: 10.8166, rideType: "mountain" },
     ],
   },
-},
 };
 
 function buildManualSeeds(country, scope) {
   const scoped = MANUAL_SCOPE_SEEDS?.[country]?.[scope] || [];
+
   return scoped.map((seed, index) => {
     const type = inferSpotType(seed.name, scopeCfg.scopeName || "", seed.rideType);
-    const rideType = inferRideType(type, seed.name, scopeCfg.scopeName || "", seed.rideType);
+    const rideType = inferRideType(
+      type,
+      seed.name,
+      scopeCfg.scopeName || "",
+      seed.rideType
+    );
     const slug = slugify(seed.name);
 
     return {
