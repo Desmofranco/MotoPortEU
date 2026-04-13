@@ -586,6 +586,41 @@ RO: {
     { name: "Carpathian Crest Bucegi", lat: 45.46, lng: 25.42, rideType: "mountain" },
   ],
 },
+SK: {
+  "slovakia-tatras": [
+    { name: "Podbanské", lat: 49.148, lng: 19.923, rideType: "scenic" },
+    { name: "Štrbské Pleso", lat: 49.1186, lng: 20.0581, rideType: "lake" },
+    { name: "Jamské Pleso Link", lat: 49.135, lng: 20.04, rideType: "scenic" },
+    { name: "Vyšné Hágy", lat: 49.103, lng: 20.121, rideType: "scenic" },
+    { name: "Tatranská Polianka", lat: 49.092, lng: 20.17, rideType: "scenic" },
+    { name: "Starý Smokovec", lat: 49.14, lng: 20.221, rideType: "scenic" },
+    { name: "Hrebienok Access Road", lat: 49.146, lng: 20.223, rideType: "mountain" },
+    { name: "Tatranská Lesná", lat: 49.16, lng: 20.276, rideType: "scenic" },
+    { name: "Tatranská Lomnica", lat: 49.164, lng: 20.282, rideType: "mountain" },
+    { name: "Lomnický štít Viewpoint", lat: 49.166, lng: 20.29, rideType: "mountain" },
+    { name: "Kežmarské Žľaby", lat: 49.181, lng: 20.308, rideType: "scenic" },
+    { name: "Tatranská Kotlina", lat: 49.225, lng: 20.321, rideType: "scenic" },
+    { name: "Ždiar", lat: 49.271, lng: 20.262, rideType: "mountain" },
+    { name: "Belianske Tatry Panorama", lat: 49.245, lng: 20.29, rideType: "mountain" },
+  ],
+
+  "slovakia-central": [
+    { name: "Donovaly", lat: 48.8778, lng: 19.2283, rideType: "mountain" },
+    { name: "Donovaly Pass", lat: 48.88, lng: 19.23, rideType: "mountain" },
+    { name: "Staré Hory", lat: 48.858, lng: 19.149, rideType: "scenic" },
+    { name: "Banská Bystrica North", lat: 48.758, lng: 19.145, rideType: "scenic" },
+    { name: "Harmanec Twisties", lat: 48.81, lng: 19.03, rideType: "scenic" },
+    { name: "Turecká Ridge Road", lat: 48.842, lng: 19.06, rideType: "mountain" },
+    { name: "Brezno", lat: 48.804, lng: 19.636, rideType: "scenic" },
+    { name: "Mýto pod Ďumbierom", lat: 48.852, lng: 19.62, rideType: "mountain" },
+    { name: "Čertovica", lat: 48.9078, lng: 19.7386, rideType: "mountain" },
+    { name: "Čertovica Pass", lat: 48.91, lng: 19.74, rideType: "mountain" },
+    { name: "Low Tatras Crest Road", lat: 48.895, lng: 19.69, rideType: "mountain" },
+    { name: "Liptovská Osada Link", lat: 48.95, lng: 19.26, rideType: "scenic" },
+    { name: "Telgárt Approach", lat: 48.847, lng: 20.189, rideType: "scenic" },
+    { name: "Horehronie Scenic Link", lat: 48.88, lng: 19.92, rideType: "scenic" },
+  ],
+},
 };
 
 function buildManualSeeds(country, scope) {
