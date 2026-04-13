@@ -925,7 +925,33 @@ PL: {
       }
     }
   },
+RS: {
+  country: "RS",
+  name: "Serbia",
+  scopes: {
+    "serbia-tara-zlatibor": {
+      name: "Serbia Tara / Zlatibor",
+      regions: ["Zlatibor", "Moravica"],
+      areas: [
+        { name: "Bajina Bašta", lat: 43.971, lng: 19.567, radius: 50000 },
+        { name: "Zaovine / Tara", lat: 43.866, lng: 19.436, radius: 50000 },
+        { name: "Zlatibor", lat: 43.729, lng: 19.699, radius: 50000 },
+        { name: "Mokra Gora", lat: 43.792, lng: 19.515, radius: 50000 }
+      ]
+    },
 
+    "serbia-djerdap-east": {
+      name: "Serbia Đerdap / East",
+      regions: ["Bor", "Braničevo"],
+      areas: [
+        { name: "Kladovo", lat: 44.607, lng: 22.607, radius: 50000 },
+        { name: "Donji Milanovac", lat: 44.465, lng: 22.151, radius: 50000 },
+        { name: "Golubac", lat: 44.652, lng: 21.632, radius: 50000 },
+        { name: "Negotin", lat: 44.226, lng: 22.531, radius: 50000 }
+      ]
+    }
+  }
+},
   LU: {
     country: "LU",
     name: "Luxembourg",

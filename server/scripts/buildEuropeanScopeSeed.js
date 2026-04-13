@@ -711,6 +711,37 @@ PL: {
     { name: "Tarnica Approach", lat: 49.08, lng: 22.73, rideType: "mountain" }
   ]
 },
+RS: {
+  "serbia-tara-zlatibor": [
+    { name: "Bajina Bašta", lat: 43.971, lng: 19.567, rideType: "scenic" },
+    { name: "Perućac Lake", lat: 43.95, lng: 19.42, rideType: "lake" },
+    { name: "Perućac Dam Road", lat: 43.96, lng: 19.44, rideType: "scenic" },
+    { name: "Zaovine Lake", lat: 43.892, lng: 19.431, rideType: "lake" },
+    { name: "Mitrovac na Tari", lat: 43.899, lng: 19.39, rideType: "mountain" },
+    { name: "Tara Panorama Road", lat: 43.91, lng: 19.47, rideType: "mountain" },
+    { name: "Mokra Gora", lat: 43.792, lng: 19.515, rideType: "scenic" },
+    { name: "Šargan Pass Road", lat: 43.79, lng: 19.54, rideType: "mountain" },
+    { name: "Kremna", lat: 43.851, lng: 19.572, rideType: "scenic" },
+    { name: "Zlatibor", lat: 43.729, lng: 19.699, rideType: "scenic" },
+    { name: "Tornik", lat: 43.689, lng: 19.638, rideType: "mountain" },
+    { name: "Zlatibor Ridge Road", lat: 43.72, lng: 19.66, rideType: "mountain" }
+  ],
+
+  "serbia-djerdap-east": [
+    { name: "Kladovo", lat: 44.607, lng: 22.607, rideType: "scenic" },
+    { name: "Iron Gate Dam Road", lat: 44.655, lng: 22.525, rideType: "scenic" },
+    { name: "Miroč Ridge", lat: 44.55, lng: 22.25, rideType: "mountain" },
+    { name: "Donji Milanovac", lat: 44.465, lng: 22.151, rideType: "scenic" },
+    { name: "Veliki Štrbac View", lat: 44.55, lng: 22.15, rideType: "mountain" },
+    { name: "Golubac", lat: 44.652, lng: 21.632, rideType: "scenic" },
+    { name: "Golubac Fortress Road", lat: 44.655, lng: 21.63, rideType: "scenic" },
+    { name: "Brza Palanka", lat: 44.37, lng: 22.47, rideType: "scenic" },
+    { name: "Tekija Gorge Road", lat: 44.69, lng: 22.42, rideType: "mountain" },
+    { name: "Lepenski Vir Link", lat: 44.556, lng: 22.024, rideType: "scenic" },
+    { name: "Đerdap Scenic Drive", lat: 44.58, lng: 22.18, rideType: "mountain" },
+    { name: "Negotin Hills Link", lat: 44.226, lng: 22.531, rideType: "scenic" }
+  ]
+},
 };
 
 function buildManualSeeds(country, scope) {
