@@ -447,6 +447,37 @@ const MANUAL_SCOPE_SEEDS = {
       { name: "Central Istria Twisties", lat: 45.2085, lng: 13.9772, rideType: "scenic" },
     ],
   },
+  ME: {
+  durmitor: [
+    { name: "Žabljak", lat: 43.154, lng: 19.123, rideType: "mountain" },
+    { name: "Durmitor Ring Road", lat: 43.1, lng: 19.05, rideType: "mountain" },
+    { name: "Sedlo Pass", lat: 43.051, lng: 18.998, rideType: "mountain" },
+    { name: "Piva Canyon", lat: 43.156, lng: 18.833, rideType: "scenic" },
+    { name: "Tara Canyon", lat: 43.13, lng: 19.3, rideType: "scenic" },
+    { name: "Đurđevića Tara Bridge", lat: 43.146, lng: 19.293, rideType: "scenic" },
+    { name: "Plužine", lat: 43.155, lng: 18.84, rideType: "scenic" },
+    { name: "Šavnik", lat: 42.956, lng: 19.095, rideType: "mountain" },
+    { name: "Nikšić Hinterland", lat: 42.78, lng: 18.95, rideType: "scenic" },
+    { name: "Durmitor South Approach", lat: 43.02, lng: 19.08, rideType: "mountain" },
+    { name: "Piva Lake Road", lat: 43.14, lng: 18.85, rideType: "lake" },
+    { name: "Durmitor Ridge Line", lat: 43.08, lng: 19.02, rideType: "mountain" },
+  ],
+
+  "montenegro-coastal": [
+    { name: "Kotor Bay", lat: 42.4247, lng: 18.7712, rideType: "coastal" },
+    { name: "Kotor Serpentine Road", lat: 42.39, lng: 18.77, rideType: "mountain" },
+    { name: "Lovćen National Park", lat: 42.398, lng: 18.836, rideType: "mountain" },
+    { name: "Cetinje", lat: 42.39, lng: 18.92, rideType: "scenic" },
+    { name: "Budva Riviera", lat: 42.286, lng: 18.84, rideType: "coastal" },
+    { name: "Petrovac Coast", lat: 42.205, lng: 18.94, rideType: "coastal" },
+    { name: "Bar Coastal Road", lat: 42.1, lng: 19.1, rideType: "coastal" },
+    { name: "Ulcinj South Coast", lat: 41.92, lng: 19.21, rideType: "coastal" },
+    { name: "Skadar Lake North", lat: 42.2, lng: 19.1, rideType: "lake" },
+    { name: "Skadar Lake Panorama", lat: 42.25, lng: 19.05, rideType: "scenic" },
+    { name: "Lovćen Serpentine", lat: 42.38, lng: 18.79, rideType: "mountain" },
+    { name: "Adriatic Coastal Ridge", lat: 42.3, lng: 18.9, rideType: "coastal" },
+  ],
+},
 };
 
 function buildManualSeeds(country, scope) {
