@@ -742,6 +742,37 @@ RS: {
     { name: "Negotin Hills Link", lat: 44.226, lng: 22.531, rideType: "scenic" }
   ]
 },
+BG: {
+  "bulgaria-rhodope-west": [
+    { name: "Batak", lat: 41.95, lng: 24.22, rideType: "scenic" },
+    { name: "Batak Reservoir Road", lat: 41.93, lng: 24.17, rideType: "lake" },
+    { name: "Shiroka Polyana", lat: 41.73, lng: 24.16, rideType: "lake" },
+    { name: "Shiroka Polyana Forest Road", lat: 41.74, lng: 24.17, rideType: "forest" },
+    { name: "Dospat", lat: 41.64, lng: 24.16, rideType: "lake" },
+    { name: "Dospat Dam Road", lat: 41.66, lng: 24.12, rideType: "scenic" },
+    { name: "Devin", lat: 41.74, lng: 24.4, rideType: "scenic" },
+    { name: "Trigrad Link", lat: 41.6, lng: 24.38, rideType: "mountain" },
+    { name: "Shiroka Laka", lat: 41.67, lng: 24.58, rideType: "scenic" },
+    { name: "Pamporovo", lat: 41.66, lng: 24.69, rideType: "mountain" },
+    { name: "Rozhen Pass", lat: 41.63, lng: 24.7, rideType: "mountain" },
+    { name: "Smolyan Lakes Road", lat: 41.62, lng: 24.71, rideType: "scenic" }
+  ],
+
+  "bulgaria-balkan-central": [
+    { name: "Gabrovo", lat: 42.874, lng: 25.318, rideType: "scenic" },
+    { name: "Shipka Pass", lat: 42.748, lng: 25.324, rideType: "mountain" },
+    { name: "Buzludzha Link", lat: 42.735, lng: 25.393, rideType: "mountain" },
+    { name: "Shipka South Descent", lat: 42.69, lng: 25.33, rideType: "scenic" },
+    { name: "Kazanlak", lat: 42.62, lng: 25.4, rideType: "scenic" },
+    { name: "Troyan", lat: 42.89, lng: 24.72, rideType: "scenic" },
+    { name: "Beklemeto Pass", lat: 42.786, lng: 24.618, rideType: "mountain" },
+    { name: "Beklemeto Ridge Road", lat: 42.8, lng: 24.64, rideType: "mountain" },
+    { name: "Karnare South Link", lat: 42.73, lng: 24.76, rideType: "scenic" },
+    { name: "Karlovo", lat: 42.63, lng: 24.8, rideType: "scenic" },
+    { name: "Stara Planina Crest Link", lat: 42.79, lng: 24.95, rideType: "mountain" },
+    { name: "Via Trayana Twisties", lat: 42.81, lng: 24.66, rideType: "mountain" }
+  ]
+},
 };
 
 function buildManualSeeds(country, scope) {

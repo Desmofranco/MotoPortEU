@@ -952,6 +952,33 @@ RS: {
     }
   }
 },
+BG: {
+  country: "BG",
+  name: "Bulgaria",
+  scopes: {
+    "bulgaria-rhodope-west": {
+      name: "Bulgaria Rhodope West",
+      regions: ["Smolyan", "Pazardzhik"],
+      areas: [
+        { name: "Batak", lat: 41.95, lng: 24.22, radius: 50000 },
+        { name: "Dospat", lat: 41.64, lng: 24.16, radius: 50000 },
+        { name: "Pamporovo", lat: 41.66, lng: 24.69, radius: 50000 },
+        { name: "Smolyan / Rozhen", lat: 41.58, lng: 24.7, radius: 50000 }
+      ]
+    },
+
+    "bulgaria-balkan-central": {
+      name: "Bulgaria Balkan Central",
+      regions: ["Gabrovo", "Stara Zagora", "Lovech", "Plovdiv"],
+      areas: [
+        { name: "Shipka", lat: 42.73, lng: 25.32, radius: 50000 },
+        { name: "Kazanlak", lat: 42.62, lng: 25.4, radius: 50000 },
+        { name: "Troyan / Beklemeto", lat: 42.88, lng: 24.72, radius: 50000 },
+        { name: "Karlovo", lat: 42.63, lng: 24.8, radius: 50000 }
+      ]
+    }
+  }
+},
   LU: {
     country: "LU",
     name: "Luxembourg",
