@@ -621,6 +621,50 @@ SK: {
     { name: "Horehronie Scenic Link", lat: 48.88, lng: 19.92, rideType: "scenic" },
   ],
 },
+CZ: {
+  "czech-bohemian-forest": [
+    { name: "Železná Ruda", lat: 49.137, lng: 13.235, rideType: "mountain" },
+    { name: "Špičák Pass", lat: 49.18, lng: 13.21, rideType: "mountain" },
+    { name: "Modrava", lat: 49.02, lng: 13.5, rideType: "scenic" },
+    { name: "Kvilda", lat: 49.02, lng: 13.58, rideType: "scenic" },
+    { name: "Bučina Border Road", lat: 48.98, lng: 13.62, rideType: "scenic" },
+    { name: "Srní", lat: 49.09, lng: 13.48, rideType: "scenic" },
+    { name: "Kašperské Hory", lat: 49.14, lng: 13.56, rideType: "scenic" },
+    { name: "Prášily", lat: 49.11, lng: 13.38, rideType: "scenic" },
+    { name: "Šumava Ridge Road", lat: 49.05, lng: 13.5, rideType: "scenic" },
+    { name: "Bavarian Forest Link", lat: 49.0, lng: 13.3, rideType: "mountain" },
+  ],
+
+  "czech-krkonose": [
+    { name: "Harrachov", lat: 50.77, lng: 15.43, rideType: "mountain" },
+    { name: "Špindlerův Mlýn", lat: 50.73, lng: 15.61, rideType: "mountain" },
+    { name: "Pec pod Sněžkou", lat: 50.69, lng: 15.73, rideType: "mountain" },
+    { name: "Sněžka Viewpoint", lat: 50.73, lng: 15.74, rideType: "mountain" },
+    { name: "Janské Lázně", lat: 50.63, lng: 15.78, rideType: "scenic" },
+    { name: "Trutnov", lat: 50.56, lng: 15.91, rideType: "scenic" },
+    { name: "Krkonoše Scenic Loop", lat: 50.7, lng: 15.6, rideType: "scenic" },
+  ],
+
+  "czech-beskydy": [
+    { name: "Čeladná", lat: 49.55, lng: 18.34, rideType: "scenic" },
+    { name: "Pustevny", lat: 49.51, lng: 18.26, rideType: "mountain" },
+    { name: "Radhošť Ridge", lat: 49.5, lng: 18.23, rideType: "mountain" },
+    { name: "Bílá", lat: 49.45, lng: 18.45, rideType: "scenic" },
+    { name: "Velké Karlovice", lat: 49.36, lng: 18.28, rideType: "scenic" },
+    { name: "Javorníky Ridge Road", lat: 49.34, lng: 18.2, rideType: "mountain" },
+    { name: "Rožnov pod Radhoštěm", lat: 49.46, lng: 18.14, rideType: "scenic" },
+  ],
+
+  "czech-south": [
+    { name: "Český Krumlov", lat: 48.812, lng: 14.315, rideType: "scenic" },
+    { name: "Lipno Lake", lat: 48.7, lng: 14.1, rideType: "lake" },
+    { name: "Lipno Dam Road", lat: 48.72, lng: 14.11, rideType: "scenic" },
+    { name: "Vyšší Brod", lat: 48.62, lng: 14.31, rideType: "scenic" },
+    { name: "Moravian Karst Road", lat: 49.37, lng: 16.74, rideType: "scenic" },
+    { name: "Macocha Gorge", lat: 49.37, lng: 16.73, rideType: "scenic" },
+    { name: "Znojmo", lat: 48.86, lng: 16.05, rideType: "scenic" },
+  ],
+},
 };
 
 function buildManualSeeds(country, scope) {

@@ -478,6 +478,16 @@ maggiore: {
         ]
       },
 
+      "slovenia-north": {
+        name: "Slovenia Nord",
+        regions: ["Carinthia", "Styria", "Upper Carniola", "Savinja"],
+        areas: [
+          { name: "Maribor Hinterland", lat: 46.55, lng: 15.65, radius: 50000 },
+          { name: "Logar Valley / Solčava", lat: 46.38, lng: 14.64, radius: 50000 },
+          { name: "Celje / Savinja", lat: 46.24, lng: 15.27, radius: 50000 }
+        ]
+      },
+
       "slovenia-karst-coast": {
         name: "Slovenia Carso / Costa",
         regions: ["Littoral", "Inner Carniola"],
@@ -486,10 +496,19 @@ maggiore: {
           { name: "Koper / Coast", lat: 45.55, lng: 13.73, radius: 40000 },
           { name: "Vipava Valley", lat: 45.84, lng: 13.96, radius: 50000 }
         ]
+      },
+
+      "slovenia-east-south": {
+        name: "Slovenia Est / Sud",
+        regions: ["Lower Carniola", "Southeast Slovenia", "Drava", "Mura"],
+        areas: [
+          { name: "Novo Mesto / Dolenjska", lat: 45.8, lng: 15.17, radius: 50000 },
+          { name: "Kočevje Forest Roads", lat: 45.64, lng: 14.86, radius: 50000 },
+          { name: "Ptuj / Haloze / Jeruzalem", lat: 46.42, lng: 15.87, radius: 50000 }
+        ]
       }
     }
   },
-
   HR: {
     country: "HR",
     name: "Croatia",
@@ -666,32 +685,53 @@ maggiore: {
     }
   },
 
-  CZ: {
-    country: "CZ",
-    name: "Czech Republic",
-    scopes: {
-      "czech-beskydy": {
-        name: "Cechia Beskydy",
-        regions: ["Moravian-Silesian", "Zlín"],
-        areas: [
-          { name: "Beskydy", lat: 49.49, lng: 18.43, radius: 50000 },
-          { name: "Javorníky", lat: 49.33, lng: 18.19, radius: 50000 },
-          { name: "Hostýnské vrchy", lat: 49.39, lng: 17.73, radius: 50000 }
-        ]
-      },
+CZ: {
+  country: "CZ",
+  name: "Czech Republic",
+  scopes: {
 
-      "czech-south": {
-        name: "Cechia Sud",
-        regions: ["South Bohemia", "South Moravia"],
-        areas: [
-          { name: "Šumava", lat: 48.97, lng: 13.62, radius: 50000 },
-          { name: "Moravian Karst", lat: 49.37, lng: 16.74, radius: 50000 },
-          { name: "Podyjí", lat: 48.83, lng: 15.9, radius: 50000 }
-        ]
-      }
+    "czech-bohemian-forest": {
+      name: "Bohemian Forest / Šumava",
+      regions: ["South Bohemia"],
+      areas: [
+        { name: "Šumava West", lat: 49.08, lng: 13.35, radius: 50000 },
+        { name: "Šumava Central", lat: 49.02, lng: 13.55, radius: 50000 },
+        { name: "Šumava East", lat: 48.98, lng: 13.75, radius: 50000 }
+      ]
+    },
+
+    "czech-krkonose": {
+      name: "Krkonoše",
+      regions: ["Hradec Králové", "Liberec"],
+      areas: [
+        { name: "Harrachov", lat: 50.77, lng: 15.43, radius: 40000 },
+        { name: "Špindlerův Mlýn", lat: 50.73, lng: 15.61, radius: 40000 },
+        { name: "Pec pod Sněžkou", lat: 50.69, lng: 15.73, radius: 40000 }
+      ]
+    },
+
+    "czech-beskydy": {
+      name: "Cechia Beskydy",
+      regions: ["Moravian-Silesian", "Zlín"],
+      areas: [
+        { name: "Beskydy", lat: 49.49, lng: 18.43, radius: 50000 },
+        { name: "Javorníky", lat: 49.33, lng: 18.19, radius: 50000 },
+        { name: "Hostýnské vrchy", lat: 49.39, lng: 17.73, radius: 50000 }
+      ]
+    },
+
+    "czech-south": {
+      name: "Cechia Sud",
+      regions: ["South Bohemia", "South Moravia"],
+      areas: [
+        { name: "Šumava South", lat: 48.97, lng: 13.62, radius: 50000 },
+        { name: "Moravian Karst", lat: 49.37, lng: 16.74, radius: 50000 },
+        { name: "Podyjí", lat: 48.83, lng: 15.9, radius: 50000 }
+      ]
     }
-  },
 
+  }
+},
   PL: {
     country: "PL",
     name: "Poland",
