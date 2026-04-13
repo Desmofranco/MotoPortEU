@@ -1060,6 +1060,33 @@ HU: {
     }
   }
 },
+PT: {
+  country: "PT",
+  name: "Portugal",
+  scopes: {
+    "portugal-douro-north": {
+      name: "Portugal Douro North",
+      regions: ["Porto", "Vila Real", "Bragança"],
+      areas: [
+        { name: "Peso da Régua", lat: 41.161, lng: -7.787, radius: 50000 },
+        { name: "Pinhão", lat: 41.19, lng: -7.545, radius: 50000 },
+        { name: "Vila Real", lat: 41.3, lng: -7.74, radius: 50000 },
+        { name: "Bragança Hills", lat: 41.8, lng: -6.75, radius: 50000 }
+      ]
+    },
+
+    "portugal-algarve-west": {
+      name: "Portugal Algarve West",
+      regions: ["Algarve"],
+      areas: [
+        { name: "Sagres", lat: 37.008, lng: -8.943, radius: 50000 },
+        { name: "Lagos", lat: 37.102, lng: -8.674, radius: 50000 },
+        { name: "Aljezur", lat: 37.319, lng: -8.803, radius: 50000 },
+        { name: "Monchique", lat: 37.315, lng: -8.555, radius: 50000 }
+      ]
+    }
+  }
+},
   LU: {
     country: "LU",
     name: "Luxembourg",

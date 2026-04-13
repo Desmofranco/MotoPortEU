@@ -862,6 +862,33 @@ HU: {
     { name: "Balaton North Coastal Drive", lat: 46.89, lng: 17.76, rideType: "coastal" }
   ]
 },
+PT: {
+  "portugal-douro-north": [
+    { name: "Peso da Régua", lat: 41.161, lng: -7.787, rideType: "scenic" },
+    { name: "Douro Riverside Road", lat: 41.17, lng: -7.75, rideType: "scenic" },
+    { name: "Pinhão", lat: 41.19, lng: -7.545, rideType: "scenic" },
+    { name: "N222 Douro Route", lat: 41.18, lng: -7.6, rideType: "scenic" },
+    { name: "Sabrosa Hills", lat: 41.27, lng: -7.58, rideType: "mountain" },
+    { name: "Vila Real", lat: 41.3, lng: -7.74, rideType: "scenic" },
+    { name: "Alvão Natural Park Road", lat: 41.32, lng: -7.9, rideType: "mountain" },
+    { name: "Bragança Scenic Link", lat: 41.8, lng: -6.75, rideType: "scenic" },
+    { name: "Trás-os-Montes Ridge", lat: 41.6, lng: -7.2, rideType: "mountain" },
+    { name: "Douro Valley Panorama", lat: 41.2, lng: -7.65, rideType: "scenic" }
+  ],
+
+  "portugal-algarve-west": [
+    { name: "Sagres", lat: 37.008, lng: -8.943, rideType: "coastal" },
+    { name: "Cape St Vincent Road", lat: 37.02, lng: -8.99, rideType: "coastal" },
+    { name: "Lagos", lat: 37.102, lng: -8.674, rideType: "scenic" },
+    { name: "Ponta da Piedade Road", lat: 37.08, lng: -8.67, rideType: "coastal" },
+    { name: "Aljezur", lat: 37.319, lng: -8.803, rideType: "scenic" },
+    { name: "Costa Vicentina Route", lat: 37.25, lng: -8.85, rideType: "coastal" },
+    { name: "Monchique", lat: 37.315, lng: -8.555, rideType: "mountain" },
+    { name: "Foia Peak Road", lat: 37.31, lng: -8.59, rideType: "mountain" },
+    { name: "Serra de Monchique Twisties", lat: 37.33, lng: -8.55, rideType: "mountain" },
+    { name: "Algarve West Scenic Drive", lat: 37.2, lng: -8.7, rideType: "scenic" }
+  ]
+},
 };
 
 function buildManualSeeds(country, scope) {
