@@ -732,31 +732,43 @@ CZ: {
 
   }
 },
-  PL: {
-    country: "PL",
-    name: "Poland",
-    scopes: {
-      "poland-tatras": {
-        name: "Polonia Tatras",
-        regions: ["Lesser Poland"],
-        areas: [
-          { name: "Zakopane", lat: 49.3, lng: 19.95, radius: 50000 },
-          { name: "Nowy Targ", lat: 49.48, lng: 20.03, radius: 50000 },
-          { name: "Pieniny", lat: 49.41, lng: 20.44, radius: 50000 }
-        ]
-      },
+PL: {
+  country: "PL",
+  name: "Poland",
+  scopes: {
+    "poland-tatras": {
+      name: "Polonia Tatras",
+      regions: ["Lesser Poland"],
+      areas: [
+        { name: "Zakopane", lat: 49.3, lng: 19.95, radius: 50000 },
+        { name: "Nowy Targ", lat: 49.48, lng: 20.03, radius: 50000 },
+        { name: "Pieniny", lat: 49.41, lng: 20.44, radius: 50000 },
+        { name: "Bukowina Tatrzańska", lat: 49.3431, lng: 20.1081, radius: 45000 },
+        { name: "Białka Tatrzańska", lat: 49.389, lng: 20.105, radius: 45000 }
+      ]
+    },
 
-      "poland-beskids": {
-        name: "Polonia Beskidy",
-        regions: ["Silesian", "Lesser Poland"],
-        areas: [
-          { name: "Żywiec / Beskid Żywiecki", lat: 49.69, lng: 19.2, radius: 50000 },
-          { name: "Szczyrk / Beskid Śląski", lat: 49.72, lng: 19.03, radius: 50000 },
-          { name: "Beskid Sądecki", lat: 49.42, lng: 20.89, radius: 50000 }
-        ]
-      }
+    "poland-beskids": {
+      name: "Polonia Beskidy",
+      regions: ["Silesian", "Lesser Poland"],
+      areas: [
+        { name: "Żywiec / Beskid Żywiecki", lat: 49.69, lng: 19.2, radius: 50000 },
+        { name: "Szczyrk / Beskid Śląski", lat: 49.72, lng: 19.03, radius: 50000 },
+        { name: "Beskid Sądecki", lat: 49.42, lng: 20.89, radius: 50000 }
+      ]
+    },
+
+    "poland-bieszczady": {
+      name: "Polonia Bieszczady",
+      regions: ["Subcarpathian"],
+      areas: [
+        { name: "Lesko", lat: 49.4706, lng: 22.3304, radius: 50000 },
+        { name: "Cisna", lat: 49.211, lng: 22.327, radius: 50000 },
+        { name: "Ustrzyki Górne", lat: 49.106, lng: 22.617, radius: 50000 }
+      ]
     }
-  },
+  }
+},  
 
   NO: {
     country: "NO",

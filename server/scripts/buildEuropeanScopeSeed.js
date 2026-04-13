@@ -665,6 +665,52 @@ CZ: {
     { name: "Znojmo", lat: 48.86, lng: 16.05, rideType: "scenic" },
   ],
 },
+PL: {
+  "poland-tatras": [
+    { name: "Zakopane", lat: 49.2992, lng: 19.9496, rideType: "scenic" },
+    { name: "Jaszczurówka Road", lat: 49.309, lng: 20.001, rideType: "scenic" },
+    { name: "Toporowa Cyrhla", lat: 49.312, lng: 20.028, rideType: "mountain" },
+    { name: "Brzeziny Tatra Link", lat: 49.317, lng: 20.06, rideType: "scenic" },
+    { name: "Wierchporoniec", lat: 49.339, lng: 20.103, rideType: "mountain" },
+    { name: "Bukowina Tatrzańska", lat: 49.3431, lng: 20.1081, rideType: "mountain" },
+    { name: "Głodówka Panorama", lat: 49.352, lng: 20.12, rideType: "mountain" },
+    { name: "Białka Tatrzańska", lat: 49.389, lng: 20.105, rideType: "scenic" },
+    { name: "Jurgów", lat: 49.345, lng: 20.141, rideType: "scenic" },
+    { name: "Oswald Balzer Road", lat: 49.29, lng: 20.08, rideType: "mountain" },
+    { name: "Morskie Oko Access", lat: 49.228, lng: 20.07, rideType: "mountain" },
+    { name: "Chochołów Link", lat: 49.367, lng: 19.82, rideType: "scenic" }
+  ],
+
+  "poland-beskids": [
+    { name: "Żywiec", lat: 49.685, lng: 19.192, rideType: "scenic" },
+    { name: "Zwardoń", lat: 49.503, lng: 18.96, rideType: "mountain" },
+    { name: "Korbielów", lat: 49.568, lng: 19.349, rideType: "mountain" },
+    { name: "Szczyrk", lat: 49.718, lng: 19.031, rideType: "mountain" },
+    { name: "Wisła", lat: 49.656, lng: 18.859, rideType: "scenic" },
+    { name: "Istebna", lat: 49.564, lng: 18.906, rideType: "scenic" },
+    { name: "Koniaków Ridge", lat: 49.55, lng: 18.95, rideType: "mountain" },
+    { name: "Węgierska Górka", lat: 49.607, lng: 19.116, rideType: "scenic" },
+    { name: "Krynica-Zdrój", lat: 49.421, lng: 20.959, rideType: "mountain" },
+    { name: "Tylicz", lat: 49.395, lng: 21.027, rideType: "scenic" },
+    { name: "Muszyna", lat: 49.356, lng: 20.897, rideType: "scenic" },
+    { name: "Beskid Sądecki Loop", lat: 49.41, lng: 20.91, rideType: "mountain" }
+  ],
+
+  "poland-bieszczady": [
+    { name: "Lesko", lat: 49.4706, lng: 22.3304, rideType: "scenic" },
+    { name: "Hoczew", lat: 49.386, lng: 22.32, rideType: "scenic" },
+    { name: "Baligród", lat: 49.33, lng: 22.285, rideType: "scenic" },
+    { name: "Cisna", lat: 49.211, lng: 22.327, rideType: "mountain" },
+    { name: "Wetlina", lat: 49.156, lng: 22.468, rideType: "mountain" },
+    { name: "Ustrzyki Górne", lat: 49.106, lng: 22.617, rideType: "mountain" },
+    { name: "Wołosate", lat: 49.074, lng: 22.687, rideType: "mountain" },
+    { name: "Smolnik", lat: 49.204, lng: 22.684, rideType: "scenic" },
+    { name: "Czarna", lat: 49.327, lng: 22.663, rideType: "scenic" },
+    { name: "Ustrzyki Dolne", lat: 49.43, lng: 22.593, rideType: "scenic" },
+    { name: "Bieszczady Loop Road", lat: 49.23, lng: 22.49, rideType: "mountain" },
+    { name: "Tarnica Approach", lat: 49.08, lng: 22.73, rideType: "mountain" }
+  ]
+},
 };
 
 function buildManualSeeds(country, scope) {
