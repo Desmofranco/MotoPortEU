@@ -540,6 +540,52 @@ AL: {
     { name: "Riviera Twisties Albania", lat: 40.12, lng: 19.7, rideType: "coastal" },
   ],
 },
+RO: {
+  "romania-transfagarasan": [
+    { name: "Curtea de Argeș", lat: 45.1417, lng: 24.6742, rideType: "scenic" },
+    { name: "Vidraru Lake", lat: 45.3894, lng: 24.6406, rideType: "lake" },
+    { name: "Vidraru Dam Road", lat: 45.3744, lng: 24.6289, rideType: "mountain" },
+    { name: "Transfăgărășan South Climb", lat: 45.46, lng: 24.62, rideType: "mountain" },
+    { name: "Bâlea Lake", lat: 45.6111, lng: 24.6178, rideType: "lake" },
+    { name: "Bâlea Pass", lat: 45.6042, lng: 24.6167, rideType: "mountain" },
+    { name: "Transfăgărășan Summit", lat: 45.6, lng: 24.61, rideType: "mountain" },
+    { name: "Cârțișoara North Approach", lat: 45.72, lng: 24.57, rideType: "scenic" },
+    { name: "Făgăraș Ridge Road", lat: 45.58, lng: 24.68, rideType: "mountain" },
+    { name: "Sibiu South", lat: 45.67, lng: 24.15, rideType: "scenic" },
+    { name: "Argeș Mountain Link", lat: 45.29, lng: 24.66, rideType: "mountain" },
+    { name: "Făgăraș Scenic Loop", lat: 45.55, lng: 24.55, rideType: "scenic" },
+  ],
+
+  "romania-transalpina": [
+    { name: "Rânca", lat: 45.3086, lng: 23.6861, rideType: "mountain" },
+    { name: "Transalpina High Point", lat: 45.3569, lng: 23.6719, rideType: "mountain" },
+    { name: "Urdele Pass", lat: 45.3553, lng: 23.6758, rideType: "mountain" },
+    { name: "Novaci", lat: 45.18, lng: 23.67, rideType: "scenic" },
+    { name: "Obârșia Lotrului", lat: 45.3722, lng: 23.6314, rideType: "mountain" },
+    { name: "Sebeș North Access", lat: 45.96, lng: 23.57, rideType: "scenic" },
+    { name: "Șugag", lat: 45.77, lng: 23.63, rideType: "scenic" },
+    { name: "Parâng Ridge Road", lat: 45.35, lng: 23.66, rideType: "mountain" },
+    { name: "Lotru Mountains", lat: 45.42, lng: 23.7, rideType: "mountain" },
+    { name: "Transalpina Panoramic Crest", lat: 45.34, lng: 23.69, rideType: "mountain" },
+    { name: "Alba Backroads", lat: 45.83, lng: 23.58, rideType: "scenic" },
+    { name: "South Carpathian Link", lat: 45.28, lng: 23.74, rideType: "scenic" },
+  ],
+
+  "romania-bucegi": [
+    { name: "Brașov", lat: 45.6579, lng: 25.6012, rideType: "scenic" },
+    { name: "Sinaia", lat: 45.35, lng: 25.55, rideType: "mountain" },
+    { name: "Bucegi Plateau Road", lat: 45.41, lng: 25.47, rideType: "mountain" },
+    { name: "Bran", lat: 45.5156, lng: 25.3675, rideType: "scenic" },
+    { name: "Rucăr Pass", lat: 45.39, lng: 25.18, rideType: "mountain" },
+    { name: "Fundata Ridge", lat: 45.44, lng: 25.3, rideType: "mountain" },
+    { name: "Predeal", lat: 45.5, lng: 25.57, rideType: "mountain" },
+    { name: "Prahova Valley Twisties", lat: 45.42, lng: 25.55, rideType: "scenic" },
+    { name: "Moieciu Backroads", lat: 45.48, lng: 25.32, rideType: "scenic" },
+    { name: "Bucegi Scenic Loop", lat: 45.47, lng: 25.45, rideType: "scenic" },
+    { name: "Bran to Râșnov Link", lat: 45.54, lng: 25.39, rideType: "scenic" },
+    { name: "Carpathian Crest Bucegi", lat: 45.46, lng: 25.42, rideType: "mountain" },
+  ],
+},
 };
 
 function buildManualSeeds(country, scope) {
