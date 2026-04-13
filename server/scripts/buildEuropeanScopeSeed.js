@@ -773,6 +773,37 @@ BG: {
     { name: "Via Trayana Twisties", lat: 42.81, lng: 24.66, rideType: "mountain" }
   ]
 },
+GR: {
+  "greece-epirus-pindus": [
+    { name: "Ioannina", lat: 39.665, lng: 20.853, rideType: "scenic" },
+    { name: "Lake Pamvotida Road", lat: 39.67, lng: 20.87, rideType: "lake" },
+    { name: "Metsovo", lat: 39.769, lng: 21.183, rideType: "mountain" },
+    { name: "Katara Link", lat: 39.79, lng: 21.16, rideType: "mountain" },
+    { name: "Anilio Ridge Road", lat: 39.8, lng: 21.12, rideType: "mountain" },
+    { name: "Konitsa", lat: 40.048, lng: 20.748, rideType: "scenic" },
+    { name: "Vikos Link", lat: 39.96, lng: 20.71, rideType: "mountain" },
+    { name: "Tsepelovo", lat: 39.908, lng: 20.758, rideType: "scenic" },
+    { name: "Tzoumerka North", lat: 39.56, lng: 21.0, rideType: "mountain" },
+    { name: "Pramanta", lat: 39.52, lng: 21.12, rideType: "scenic" },
+    { name: "Arachthos Gorge Road", lat: 39.5, lng: 21.08, rideType: "mountain" },
+    { name: "Pindus Scenic Crest", lat: 39.74, lng: 20.98, rideType: "mountain" }
+  ],
+
+  "greece-pelion-olympus": [
+    { name: "Volos", lat: 39.361, lng: 22.943, rideType: "scenic" },
+    { name: "Portaria", lat: 39.385, lng: 22.995, rideType: "mountain" },
+    { name: "Makrinitsa Road", lat: 39.4, lng: 23.0, rideType: "scenic" },
+    { name: "Milies", lat: 39.326, lng: 23.157, rideType: "scenic" },
+    { name: "Tsagarada", lat: 39.387, lng: 23.173, rideType: "mountain" },
+    { name: "Pelion Coastal Link", lat: 39.42, lng: 23.18, rideType: "coastal" },
+    { name: "Zagora", lat: 39.443, lng: 23.1, rideType: "scenic" },
+    { name: "Litochoro", lat: 40.1, lng: 22.5, rideType: "mountain" },
+    { name: "Olympus Access Road", lat: 40.08, lng: 22.46, rideType: "mountain" },
+    { name: "Prionia Link", lat: 40.09, lng: 22.41, rideType: "mountain" },
+    { name: "Elassona", lat: 39.894, lng: 22.188, rideType: "scenic" },
+    { name: "Olympus West Panorama", lat: 39.96, lng: 22.23, rideType: "mountain" }
+  ]
+},
 };
 
 function buildManualSeeds(country, scope) {

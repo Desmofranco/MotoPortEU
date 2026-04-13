@@ -268,6 +268,7 @@ function countryLabel(code) {
     BE: "Belgio",
     NL: "Olanda",
     LU: "Lussemburgo",
+    BG: "Bulgaria",
   };
   return map[code] || code;
 }

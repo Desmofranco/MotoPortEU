@@ -979,6 +979,33 @@ BG: {
     }
   }
 },
+GR: {
+  country: "GR",
+  name: "Greece",
+  scopes: {
+    "greece-epirus-pindus": {
+      name: "Grecia Epirus / Pindus",
+      regions: ["Epirus", "Western Macedonia", "Thessaly"],
+      areas: [
+        { name: "Ioannina", lat: 39.665, lng: 20.853, radius: 50000 },
+        { name: "Metsovo", lat: 39.769, lng: 21.183, radius: 50000 },
+        { name: "Konitsa", lat: 40.048, lng: 20.748, radius: 50000 },
+        { name: "Tzoumerka", lat: 39.53, lng: 21.1, radius: 50000 }
+      ]
+    },
+
+    "greece-pelion-olympus": {
+      name: "Grecia Pelion / Olympus",
+      regions: ["Thessaly", "Central Macedonia"],
+      areas: [
+        { name: "Volos / Pelion", lat: 39.361, lng: 22.943, radius: 50000 },
+        { name: "Tsagarada", lat: 39.387, lng: 23.173, radius: 50000 },
+        { name: "Litochoro / Olympus", lat: 40.1, lng: 22.5, radius: 50000 },
+        { name: "Elassona Olympus West", lat: 39.894, lng: 22.188, radius: 50000 }
+      ]
+    }
+  }
+},
   LU: {
     country: "LU",
     name: "Luxembourg",
