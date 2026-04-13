@@ -1033,6 +1033,33 @@ MK: {
     }
   }
 },
+HU: {
+  country: "HU",
+  name: "Hungary",
+  scopes: {
+    "hungary-matra-bukk": {
+      name: "Hungary Mátra / Bükk",
+      regions: ["Heves", "Borsod-Abaúj-Zemplén"],
+      areas: [
+        { name: "Gyöngyös / Mátra", lat: 47.783, lng: 19.928, radius: 50000 },
+        { name: "Kékestető", lat: 47.872, lng: 20.011, radius: 50000 },
+        { name: "Lillafüred", lat: 48.102, lng: 20.63, radius: 50000 },
+        { name: "Szilvásvárad", lat: 48.104, lng: 20.389, radius: 50000 }
+      ]
+    },
+
+    "hungary-balaton-north": {
+      name: "Hungary Balaton North",
+      regions: ["Veszprém", "Zala"],
+      areas: [
+        { name: "Balatonfüred", lat: 46.961, lng: 17.886, radius: 50000 },
+        { name: "Tihany", lat: 46.913, lng: 17.889, radius: 50000 },
+        { name: "Badacsony", lat: 46.79, lng: 17.5, radius: 50000 },
+        { name: "Keszthely", lat: 46.768, lng: 17.247, radius: 50000 }
+      ]
+    }
+  }
+},
   LU: {
     country: "LU",
     name: "Luxembourg",

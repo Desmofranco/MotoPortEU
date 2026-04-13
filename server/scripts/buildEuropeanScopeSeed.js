@@ -831,6 +831,37 @@ MK: {
     { name: "Central Macedonia Loop", lat: 41.7, lng: 21.6, rideType: "scenic" }
   ]
 },
+HU: {
+  "hungary-matra-bukk": [
+    { name: "Gyöngyös", lat: 47.783, lng: 19.928, rideType: "scenic" },
+    { name: "Mátraháza", lat: 47.87, lng: 19.98, rideType: "mountain" },
+    { name: "Kékestető", lat: 47.872, lng: 20.011, rideType: "mountain" },
+    { name: "Galya-tető Link", lat: 47.917, lng: 19.93, rideType: "mountain" },
+    { name: "Parád Scenic Road", lat: 47.923, lng: 20.058, rideType: "scenic" },
+    { name: "Eger North Link", lat: 47.94, lng: 20.37, rideType: "scenic" },
+    { name: "Szilvásvárad", lat: 48.104, lng: 20.389, rideType: "scenic" },
+    { name: "Bükk Plateau Road", lat: 48.08, lng: 20.47, rideType: "mountain" },
+    { name: "Lillafüred", lat: 48.102, lng: 20.63, rideType: "scenic" },
+    { name: "Lake Hámori Road", lat: 48.096, lng: 20.624, rideType: "lake" },
+    { name: "Bánkút Ridge Link", lat: 48.053, lng: 20.498, rideType: "mountain" },
+    { name: "Bükk Scenic Crest", lat: 48.07, lng: 20.55, rideType: "mountain" }
+  ],
+
+  "hungary-balaton-north": [
+    { name: "Balatonfüred", lat: 46.961, lng: 17.886, rideType: "scenic" },
+    { name: "Tihany Peninsula Road", lat: 46.913, lng: 17.889, rideType: "lake" },
+    { name: "Tihany Panorama", lat: 46.91, lng: 17.89, rideType: "scenic" },
+    { name: "Aszófő Link", lat: 46.93, lng: 17.83, rideType: "scenic" },
+    { name: "Badacsony", lat: 46.79, lng: 17.5, rideType: "mountain" },
+    { name: "Badacsony Hill Road", lat: 46.8, lng: 17.49, rideType: "mountain" },
+    { name: "Szigliget", lat: 46.8, lng: 17.43, rideType: "scenic" },
+    { name: "Káli Basin Road", lat: 46.89, lng: 17.55, rideType: "scenic" },
+    { name: "Révfülöp North Shore Link", lat: 46.83, lng: 17.63, rideType: "lake" },
+    { name: "Keszthely", lat: 46.768, lng: 17.247, rideType: "scenic" },
+    { name: "Balaton Uplands Scenic", lat: 46.87, lng: 17.68, rideType: "scenic" },
+    { name: "Balaton North Coastal Drive", lat: 46.89, lng: 17.76, rideType: "coastal" }
+  ]
+},
 };
 
 function buildManualSeeds(country, scope) {
