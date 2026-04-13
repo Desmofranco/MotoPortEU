@@ -1006,6 +1006,33 @@ GR: {
     }
   }
 },
+MK: {
+  country: "MK",
+  name: "North Macedonia",
+  scopes: {
+    "macedonia-west": {
+      name: "Macedonia West",
+      regions: ["Ohrid", "Debar", "Mavrovo"],
+      areas: [
+        { name: "Ohrid", lat: 41.123, lng: 20.801, radius: 50000 },
+        { name: "Struga", lat: 41.177, lng: 20.678, radius: 50000 },
+        { name: "Mavrovo", lat: 41.655, lng: 20.732, radius: 50000 },
+        { name: "Debar", lat: 41.525, lng: 20.524, radius: 50000 }
+      ]
+    },
+
+    "macedonia-central": {
+      name: "Macedonia Central",
+      regions: ["Skopje", "Veles", "Prilep"],
+      areas: [
+        { name: "Skopje", lat: 41.998, lng: 21.425, radius: 50000 },
+        { name: "Veles", lat: 41.716, lng: 21.775, radius: 50000 },
+        { name: "Prilep", lat: 41.346, lng: 21.554, radius: 50000 },
+        { name: "Kruševo", lat: 41.368, lng: 21.249, radius: 50000 }
+      ]
+    }
+  }
+},
   LU: {
     country: "LU",
     name: "Luxembourg",

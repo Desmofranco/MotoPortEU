@@ -244,32 +244,61 @@ function categoryLabel(category) {
 }
 
 function countryLabel(code) {
-  const map = {
-    IT: "Italia",
-    FR: "Francia",
-    CH: "Svizzera",
-    AT: "Austria",
-    DE: "Germania",
-    ES: "Spagna",
-    PT: "Portogallo",
-    SI: "Slovenia",
-    HR: "Croazia",
-    BA: "Bosnia",
-    ME: "Montenegro",
-    AL: "Albania",
-    RO: "Romania",
-    SK: "Slovacchia",
-    CZ: "Cechia",
-    PL: "Polonia",
-    NO: "Norvegia",
-    SE: "Svezia",
-    UK: "Regno Unito",
-    IE: "Irlanda",
-    BE: "Belgio",
-    NL: "Olanda",
-    LU: "Lussemburgo",
-    BG: "Bulgaria",
-  };
+const countryNames = {
+  // Europa centrale / base
+  IT: "Italia",
+  FR: "Francia",
+  DE: "Germania",
+  AT: "Austria",
+  CH: "Svizzera",
+
+  // Balcani / sud-est
+  SI: "Slovenia",
+  HR: "Croazia",
+  BA: "Bosnia-Erzegovina",
+  RS: "Serbia",
+  ME: "Montenegro",
+  AL: "Albania",
+  MK: "Macedonia del Nord",
+  XK: "Kosovo",
+  BG: "Bulgaria",
+  RO: "Romania",
+  GR: "Grecia",
+
+  // Est / centro-est
+  PL: "Polonia",
+  CZ: "Cechia",
+  SK: "Slovacchia",
+  HU: "Ungheria",
+  UA: "Ucraina",
+
+  // Nord Europa
+  NO: "Norvegia",
+  SE: "Svezia",
+  FI: "Finlandia",
+  DK: "Danimarca",
+  IS: "Islanda",
+
+  // Ovest Europa
+  ES: "Spagna",
+  PT: "Portogallo",
+  GB: "Regno Unito",
+  IE: "Irlanda",
+  NL: "Paesi Bassi",
+  BE: "Belgio",
+  LU: "Lussemburgo",
+
+  // Microstati (opzionali ma puliti)
+  AD: "Andorra",
+  MC: "Monaco",
+  SM: "San Marino",
+  VA: "Vaticano",
+  LI: "Liechtenstein",
+  MT: "Malta",
+
+  // Extra sicurezza (se mai usato)
+  TR: "Turchia"
+};
   return map[code] || code;
 }
 

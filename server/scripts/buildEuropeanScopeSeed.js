@@ -804,6 +804,33 @@ GR: {
     { name: "Olympus West Panorama", lat: 39.96, lng: 22.23, rideType: "mountain" }
   ]
 },
+MK: {
+  "macedonia-west": [
+    { name: "Ohrid", lat: 41.123, lng: 20.801, rideType: "scenic" },
+    { name: "Lake Ohrid Road", lat: 41.12, lng: 20.75, rideType: "lake" },
+    { name: "Struga", lat: 41.177, lng: 20.678, rideType: "scenic" },
+    { name: "Debar Lake", lat: 41.53, lng: 20.52, rideType: "lake" },
+    { name: "Debar", lat: 41.525, lng: 20.524, rideType: "scenic" },
+    { name: "Mavrovo Lake", lat: 41.65, lng: 20.73, rideType: "lake" },
+    { name: "Mavrovo National Park Road", lat: 41.66, lng: 20.74, rideType: "mountain" },
+    { name: "Galicnik Road", lat: 41.59, lng: 20.74, rideType: "mountain" },
+    { name: "Radika Canyon", lat: 41.6, lng: 20.72, rideType: "mountain" },
+    { name: "Struga-Ohrid Twisties", lat: 41.14, lng: 20.72, rideType: "scenic" }
+  ],
+
+  "macedonia-central": [
+    { name: "Skopje", lat: 41.998, lng: 21.425, rideType: "scenic" },
+    { name: "Matka Canyon", lat: 41.95, lng: 21.3, rideType: "mountain" },
+    { name: "Veles", lat: 41.716, lng: 21.775, rideType: "scenic" },
+    { name: "Babuna Mountain Road", lat: 41.68, lng: 21.6, rideType: "mountain" },
+    { name: "Prilep", lat: 41.346, lng: 21.554, rideType: "scenic" },
+    { name: "Treskavec Monastery Road", lat: 41.38, lng: 21.58, rideType: "mountain" },
+    { name: "Kruševo", lat: 41.368, lng: 21.249, rideType: "mountain" },
+    { name: "Kruševo Ridge", lat: 41.37, lng: 21.26, rideType: "mountain" },
+    { name: "Pelagonia Scenic Link", lat: 41.4, lng: 21.5, rideType: "scenic" },
+    { name: "Central Macedonia Loop", lat: 41.7, lng: 21.6, rideType: "scenic" }
+  ]
+},
 };
 
 function buildManualSeeds(country, scope) {
