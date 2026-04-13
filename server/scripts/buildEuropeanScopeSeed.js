@@ -401,6 +401,52 @@ const MANUAL_SCOPE_SEEDS = {
       { name: "Sotla Border Twisties", lat: 46.0845, lng: 15.7003, rideType: "scenic" },
     ],
   },
+    HR: {
+    "croatia-velebit": [
+      { name: "Karlobag", lat: 44.5275, lng: 15.0733, rideType: "coastal" },
+      { name: "Velebit South Ridge", lat: 44.4918, lng: 15.2394, rideType: "mountain" },
+      { name: "Baške Oštarije", lat: 44.5611, lng: 15.2068, rideType: "mountain" },
+      { name: "Gospić", lat: 44.5469, lng: 15.3746, rideType: "scenic" },
+      { name: "Paklenica", lat: 44.3046, lng: 15.4386, rideType: "mountain" },
+      { name: "Starigrad Paklenica", lat: 44.2965, lng: 15.438, rideType: "coastal" },
+      { name: "Velebit Panoramic Road", lat: 44.6102, lng: 15.2245, rideType: "mountain" },
+      { name: "Ličko Lešće Backroads", lat: 44.7284, lng: 15.2216, rideType: "forest" },
+      { name: "Obrovac Canyon Link", lat: 44.2008, lng: 15.6817, rideType: "scenic" },
+      { name: "Maslenica Bridge Approach", lat: 44.2214, lng: 15.5392, rideType: "coastal" },
+      { name: "Sveti Rok Pass", lat: 44.3381, lng: 15.6519, rideType: "mountain" },
+      { name: "Tulove Grede", lat: 44.2684, lng: 15.6298, rideType: "mountain" },
+    ],
+
+    "croatia-adriatic": [
+      { name: "Rijeka Hinterland", lat: 45.3271, lng: 14.4422, rideType: "scenic" },
+      { name: "Opatija Riviera", lat: 45.3376, lng: 14.3052, rideType: "coastal" },
+      { name: "Senj Coast Road", lat: 44.9892, lng: 14.9058, rideType: "coastal" },
+      { name: "Jadranska Magistrala North", lat: 44.95, lng: 14.93, rideType: "coastal" },
+      { name: "Zadar Coastal Link", lat: 44.1194, lng: 15.2314, rideType: "coastal" },
+      { name: "Šibenik Riviera", lat: 43.735, lng: 15.889, rideType: "coastal" },
+      { name: "Split Coast Road", lat: 43.5081, lng: 16.4402, rideType: "coastal" },
+      { name: "Makarska Riviera", lat: 43.2969, lng: 17.0183, rideType: "coastal" },
+      { name: "Biokovo Skyroad", lat: 43.3403, lng: 17.0552, rideType: "mountain" },
+      { name: "Pelješac Peninsula", lat: 42.9195, lng: 17.4313, rideType: "coastal" },
+      { name: "Dubrovnik Coast", lat: 42.6507, lng: 18.0944, rideType: "coastal" },
+      { name: "Dubrovnik Hinterland", lat: 42.6708, lng: 18.1608, rideType: "scenic" },
+    ],
+
+    "croatia-istria": [
+      { name: "Pazin", lat: 45.2394, lng: 13.9367, rideType: "scenic" },
+      { name: "Motovun", lat: 45.3366, lng: 13.8286, rideType: "scenic" },
+      { name: "Buzet Backroads", lat: 45.4078, lng: 13.9661, rideType: "scenic" },
+      { name: "Učka Mountain Road", lat: 45.2949, lng: 14.2011, rideType: "mountain" },
+      { name: "Rovinj", lat: 45.0812, lng: 13.6387, rideType: "coastal" },
+      { name: "Lim Fjord", lat: 45.1283, lng: 13.6995, rideType: "coastal" },
+      { name: "Poreč Coast", lat: 45.227, lng: 13.5956, rideType: "coastal" },
+      { name: "Novigrad Coast", lat: 45.315, lng: 13.5581, rideType: "coastal" },
+      { name: "Pula", lat: 44.8666, lng: 13.8496, rideType: "coastal" },
+      { name: "Cape Kamenjak", lat: 44.7679, lng: 13.9122, rideType: "coastal" },
+      { name: "Labin / Rabac Ridge", lat: 45.0954, lng: 14.1226, rideType: "scenic" },
+      { name: "Central Istria Twisties", lat: 45.2085, lng: 13.9772, rideType: "scenic" },
+    ],
+  },
 };
 
 function buildManualSeeds(country, scope) {

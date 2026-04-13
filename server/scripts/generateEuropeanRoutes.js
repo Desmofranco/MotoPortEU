@@ -45,6 +45,16 @@ const isLakeScope =
   /\bcomo\b|\bgarda\b|\bmaggiore\b/.test(scopeNameLower);
 
 // -------------------------------------------------------
+// BASIC UTILS
+// -------------------------------------------------------
+
+function safeJsonParse(raw, label = "json") {
+  try {
+    return JSON.parse(String(raw).replace(/^\uFEFF/, "").trim());
+  } catch (err) {
+    throw new Error(`Errore parsing ${label}: ${err.message}`);
+  }
+}
 
 function slugify(input) {
   return String(input || "")
@@ -56,9 +66,51 @@ function slugify(input) {
     .slice(0, 100);
 }
 
+function normalizeText(str = "") {
+  return String(str)
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/[^a-z0-9]+/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+function normalizeRegionHint(s) {
+  return String(s || "")
+    .replace(/^[A-Z]{2}-/i, "")
+    .replace(/[-_]+/g, " ")
+    .trim();
+}
+
 function toNum(v) {
   const n = Number(v);
   return Number.isFinite(n) ? n : null;
+}
+
+function pickLat(spot) {
+  return (
+    toNum(spot?.lat) ??
+    toNum(spot?.latitude) ??
+    toNum(spot?.coords?.lat) ??
+    toNum(spot?.center?.lat)
+  );
+}
+
+function pickLng(spot) {
+  return (
+    toNum(spot?.lng) ??
+    toNum(spot?.lon) ??
+    toNum(spot?.longitude) ??
+    toNum(spot?.coords?.lng) ??
+    toNum(spot?.coords?.lon) ??
+    toNum(spot?.center?.lng) ??
+    toNum(spot?.center?.lon)
+  );
+}
+
+function normalizeCountryCode(value = "") {
+  return String(value || "").trim().toUpperCase();
 }
 
 function roundCoord(n) {
@@ -78,27 +130,199 @@ function haversineKm(aLat, aLng, bLat, bLng) {
 
 function averageLatLng(items) {
   if (!items.length) return { lat: 0, lng: 0 };
-  const lat = items.reduce((s, x) => s + Number(x.lat || 0), 0) / items.length;
-  const lng = items.reduce((s, x) => s + Number(x.lng || 0), 0) / items.length;
+  const lat =
+    items.reduce((s, x) => s + Number(pickLat(x) || 0), 0) / items.length;
+  const lng =
+    items.reduce((s, x) => s + Number(pickLng(x) || 0), 0) / items.length;
   return { lat, lng };
 }
 
-function normalizeText(str = "") {
-  return String(str)
-    .toLowerCase()
-    .normalize("NFD")
-    .replace(/[\u0300-\u036f]/g, "")
-    .replace(/[^a-z0-9]+/g, " ")
-    .replace(/\s+/g, " ")
-    .trim();
+function getRawScore(spot) {
+  return Number(spot?.riderScore || spot?.score || 0);
 }
 
-function normalizeRegionHint(s) {
-  return String(s || "")
-    .replace(/^[A-Z]{2}-/i, "")
-    .replace(/[-_]+/g, " ")
-    .trim();
+function getSpotText(spot) {
+  return normalizeText(
+    [
+      spot?.name,
+      spot?.address,
+      spot?.region,
+      spot?.regionHint,
+      spot?.scopeName,
+      ...(Array.isArray(spot?.tags) ? spot.tags : []),
+    ]
+      .filter(Boolean)
+      .join(" ")
+  );
 }
+
+function getRideType(spot) {
+  return String(spot?.rideType || "scenic").toLowerCase();
+}
+
+function getSpotType(spot) {
+  return String(spot?.type || "").toLowerCase();
+}
+
+// -------------------------------------------------------
+// EUROPEAN SIGNALS
+// -------------------------------------------------------
+
+const EURO_MOUNTAIN_SIGNALS = [
+  "passo",
+  "pass",
+  "mountain pass",
+  "alp pass",
+  "alpine pass",
+  "col ",
+  "col de",
+  "col du",
+  "puerto",
+  "puerto de",
+  "port de",
+  "joch",
+  "jochpass",
+  "passhohe",
+  "passhöhe",
+  "bergpas",
+  "berg pass",
+  "transfagarasan",
+  "transalpina",
+  "furka",
+  "grimsel",
+  "susten",
+  "nufenen",
+  "gottardo",
+  "gotthard",
+  "oberalp",
+  "fluela",
+  "fluela",
+  "san bernardino",
+  "simplon",
+  "great st bernard",
+  "gran san bernardo",
+  "stelvio",
+  "gavia",
+  "mortirolo",
+  "spluga",
+  "bernina",
+  "mendola",
+  "tonale",
+  "pordoi",
+  "giau",
+  "falzarego",
+  "gardena",
+  "campolongo",
+  "fedaia",
+  "sella",
+  "croce dominii",
+  "cereda",
+  "rolle",
+  "manghen",
+  "furka pass",
+  "grimsel pass",
+  "susten pass",
+  "albulapass",
+  "julier",
+  "julierpass",
+  "umbrail",
+  "splugen",
+  "maloja",
+  "reschen",
+  "passo resia",
+  "grossglockner",
+  "gerlos",
+  "timmelsjoch",
+  "katschberg",
+  "nockalm",
+  "col d izoard",
+  "col du galibier",
+  "col du lautaret",
+  "col de la bonette",
+  "col de vars",
+  "col de la cayolle",
+  "col de turini",
+  "col d allos",
+  "aubisque",
+  "tourmalet",
+  "aspin",
+  "peyresourde",
+  "portalet",
+  "somport",
+  "ordino",
+  "envalira",
+  "transalp",
+  "tatra",
+  "tatra",
+  "durmitor",
+  "velebit",
+  "carpazi",
+  "carpath",
+];
+
+const EURO_LAKE_SIGNALS = [
+  "lake",
+  "lago",
+  "lac",
+  "see",
+  "como",
+  "garda",
+  "maggiore",
+  "leman",
+  "leman",
+  "geneva lake",
+  "lac leman",
+  "thun",
+  "brienz",
+  "lungern",
+  "hallstatt",
+  "worthersee",
+  "worthersee",
+  "bled",
+  "bohinj",
+];
+
+const EURO_COASTAL_SIGNALS = [
+  "coast",
+  "coastal",
+  "costiera",
+  "sea",
+  "mare",
+  "costa",
+  "riviera",
+  "fjord",
+  "fiordo",
+  "adriatic",
+  "mediterranean",
+  "cote d azur",
+  "costa brava",
+  "amalfi",
+  "liguria",
+  "corniche",
+  "baska",
+  "makarska",
+  "dalmatia",
+];
+
+const EURO_FOREST_SIGNALS = [
+  "forest",
+  "foresta",
+  "bosco",
+  "black forest",
+  "foresta nera",
+  "bohemian forest",
+  "bavarian forest",
+  "woodland",
+  "highland",
+  "highlands",
+];
+
+const ICONIC_EURO_SIGNALS = [
+  ...EURO_MOUNTAIN_SIGNALS,
+  ...EURO_LAKE_SIGNALS,
+  ...EURO_COASTAL_SIGNALS,
+  ...EURO_FOREST_SIGNALS,
+];
 
 // -------------------------------------------------------
 // QUALITY FILTERS
@@ -124,6 +348,7 @@ function isWeakGenericName(name = "") {
     "panoramic spot",
     "scenic view",
     "terrazza panoramica",
+    "panoramic viewpoint",
   ]);
 
   if (exactWeak.has(text)) return true;
@@ -149,122 +374,108 @@ function isWeakGenericName(name = "") {
   return weakPatterns.some((rx) => rx.test(text));
 }
 
-function isStrongRiderSpot(spot) {
-  const text = normalizeText(`${spot.name || ""} ${spot.address || ""}`);
-  const tags = Array.isArray(spot.tags) ? spot.tags.map(normalizeText) : [];
-  const rawScore = Number(spot.riderScore || spot.score || 0);
-  const rideType = String(spot.rideType || "");
+function isStrongSignalText(text = "") {
+  return ICONIC_EURO_SIGNALS.some((s) => text.includes(s));
+}
 
-  const strongSignals = [
-    "passo",
-    "stelvio",
-    "gavia",
-    "spluga",
-    "bernina",
-    "mendola",
-    "tonale",
-    "san marco",
-    "forra",
-    "valvestino",
-    "gardesana",
-    "monte baldo",
-    "strada della forra",
-    "lago di garda",
-    "lago di como",
-    "lago maggiore",
-    "lake como",
-    "lake garda",
-    "lake maggiore",
-    "como",
-    "bellagio",
-    "menaggio",
-    "varenna",
-    "lecco",
-    "stresa",
-    "verbania",
-    "arona",
-    "costiera",
-    "twisty",
-    "mountain pass",
-    "joch",
-    "col ",
-  ];
+function isStrongRiderSpot(spot) {
+  const text = getSpotText(spot);
+  const tags = Array.isArray(spot.tags) ? spot.tags.map(normalizeText) : [];
+  const rawScore = getRawScore(spot);
+  const rideType = getRideType(spot);
+  const type = getSpotType(spot);
 
   const hasStrongSignal =
-    strongSignals.some((s) => text.includes(s)) ||
+    isStrongSignalText(text) ||
     tags.includes("mountain") ||
     tags.includes("twisty") ||
     tags.includes("lake") ||
+    tags.includes("coast") ||
+    tags.includes("forest") ||
+    type === "mountain_pass" ||
     rideType === "mountain" ||
-    rideType === "lake";
+    rideType === "lake" ||
+    rideType === "coastal";
 
   if (isWeakGenericName(spot.name || "")) return false;
+
   if (rawScore >= 70) return true;
   if (rawScore >= 55 && hasStrongSignal) return true;
-  if (rideType === "mountain" && rawScore >= 48) return true;
-  if ((rideType === "lake" || rideType === "coastal") && rawScore >= 48 && hasStrongSignal) return true;
+  if (rideType === "mountain" && rawScore >= 42) return true;
+  if (rideType === "lake" && rawScore >= 38) return true;
+  if (rideType === "coastal" && rawScore >= 38) return true;
+  if (rideType === "scenic" && rawScore >= 46 && hasStrongSignal) return true;
+  if (type === "mountain_pass" && rawScore >= 36) return true;
+  if (hasStrongSignal && rawScore >= 34) return true;
 
   return false;
 }
 
 function isAllowedNeighborSpot(spot) {
-  const text = normalizeText(`${spot.name || ""} ${spot.address || ""}`);
-  const rawScore = Number(spot.riderScore || spot.score || 0);
+  const text = getSpotText(spot);
+  const rawScore = getRawScore(spot);
+  const rideType = getRideType(spot);
+  const type = getSpotType(spot);
+  const spotCountry = normalizeCountryCode(spot.country);
+  const source = String(spot.source || "");
 
   if (isWeakGenericName(spot.name || "")) return false;
   if (text.includes("monaco")) return false;
-  if (rawScore < (isLakeScope ? 24 : 38)) return false;
 
-  return true;
+  // ✅ Per la pipeline locale, i seed del paese corrente sono validi di default
+  if (
+    spotCountry === country &&
+    (source === "local_scope_manual_seed" || source === "local_scope_seed")
+  ) {
+    return ["mountain", "scenic", "lake", "coastal", "forest", "fjord"].includes(
+      rideType
+    );
+  }
+
+  const minScore = isLakeScope ? 20 : 28;
+
+  if (
+    rawScore >= minScore &&
+    ["mountain", "scenic", "lake", "coastal", "forest", "fjord"].includes(
+      rideType
+    )
+  ) {
+    return true;
+  }
+
+  if (type === "mountain_pass" && rawScore >= 24) return true;
+  if (isStrongSignalText(text) && rawScore >= 24) return true;
+
+  return false;
 }
-
 function routeQualityScore(points, rideType, region) {
   let score = 0;
   const names = points.map((p) => normalizeText(p.name));
   const allText = names.join(" | ");
+  const regionText = normalizeText(region);
 
-  const iconicSignals = [
-    "stelvio",
-    "gavia",
-    "spluga",
-    "bernina",
-    "mendola",
-    "tonale",
-    "san marco",
-    "forra",
-    "valvestino",
-    "gardesana",
-    "monte baldo",
-    "lago di garda",
-    "lago di como",
-    "lago maggiore",
-    "como",
-    "bellagio",
-    "menaggio",
-    "varenna",
-    "lecco",
-    "stresa",
-    "verbania",
-    "arona",
-  ];
-
-  for (const s of iconicSignals) {
-    if (allText.includes(s)) score += 10;
+  for (const s of ICONIC_EURO_SIGNALS) {
+    if (allText.includes(s)) score += 8;
   }
 
-  if (rideType === "mountain") score += 12;
+  if (rideType === "mountain") score += 14;
   if (rideType === "lake") score += 12;
-  if (rideType === "coastal") score += 8;
+  if (rideType === "coastal") score += 10;
+  if (rideType === "fjord") score += 10;
 
   const uniqueNames = new Set(names);
   score += uniqueNames.size * 4;
 
   for (const p of points) {
-    score += Math.min(Number(p.riderScore || p.score || 0), 100) / 8;
+    score += Math.min(getRawScore(p), 100) / 8;
   }
 
-  if (normalizeText(region).includes("lago di como")) {
-    if (allText.includes("stelvio") || allText.includes("gavia") || allText.includes("spluga")) {
+  if (regionText.includes("lago di como") || regionText.includes("lake como")) {
+    if (
+      allText.includes("stelvio") ||
+      allText.includes("gavia") ||
+      allText.includes("spluga")
+    ) {
       score -= 20;
     }
     if (
@@ -278,16 +489,34 @@ function routeQualityScore(points, rideType, region) {
     }
   }
 
+  if (
+    regionText.includes("svizzera ovest") ||
+    regionText.includes("switzerland west")
+  ) {
+    if (
+      allText.includes("leman") ||
+      allText.includes("geneva") ||
+      allText.includes("thun") ||
+      allText.includes("brienz") ||
+      allText.includes("susten") ||
+      allText.includes("grimsel") ||
+      allText.includes("furka")
+    ) {
+      score += 10;
+    }
+  }
+
   return score;
 }
 
 // -------------------------------------------------------
-// REGION GUESS
+// REGION GUESS — EUROPEAN
 // -------------------------------------------------------
 
 function guessMacroRegion(spot) {
   const s = `${spot.regionHint || ""} ${spot.address || ""} ${spot.name || ""} ${spot.scopeName || ""}`.toLowerCase();
 
+  // Italia
   if (s.includes("stelvio") || s.includes("gavia") || s.includes("spluga") || s.includes("bernina")) {
     return "Alpi Lombarde";
   }
@@ -303,25 +532,88 @@ function guessMacroRegion(spot) {
   if (s.includes("liguria")) return "Liguria";
   if (s.includes("monte bianco") || s.includes("aosta")) return "Valle d'Aosta";
   if (s.includes("dolom")) return "Dolomiti";
-  if (s.includes("alpi") || s.includes("alp")) return "Alpi";
   if (s.includes("appenn")) return "Appennino";
-  if (s.includes("pyren")) return "Pirenei";
-  if (s.includes("carp")) return "Carpazi";
-  if (s.includes("highland")) return "Highlands";
-  if (s.includes("fjord") || s.includes("fiordo")) return "Fiordi";
   if (s.includes("amalfi")) return "Costiera Amalfitana";
-  if (s.includes("cote azur")) return "Costa Azzurra";
-  if (s.includes("costa brava")) return "Costa Brava";
-  if (s.includes("corsica")) return "Corsica";
-  if (s.includes("tatra")) return "Tatra";
-  if (s.includes("velebit")) return "Velebit";
-  if (s.includes("foresta nera")) return "Foresta Nera";
-  if (s.includes("vosges")) return "Vosgi";
   if (s.includes("sicilia")) return "Sicilia";
   if (s.includes("sardegna")) return "Sardegna";
   if (s.includes("etna")) return "Etna";
   if (s.includes("supramonte")) return "Supramonte";
 
+  // Svizzera
+  if (s.includes("furka") || s.includes("grimsel") || s.includes("susten")) {
+    return "Alpi Svizzere Centrali";
+  }
+  if (s.includes("nufenen") || s.includes("gottardo") || s.includes("gotthard") || s.includes("oberalp")) {
+    return "Passi Svizzeri";
+  }
+  if (s.includes("thun") || s.includes("brienz") || s.includes("interlaken") || s.includes("jungfrau")) {
+    return "Laghi Bernesi";
+  }
+  if (s.includes("leman") || s.includes("geneva") || s.includes("lavaux") || s.includes("lausanne")) {
+    return "Lemano e Lavaux";
+  }
+  if (s.includes("neuchatel") || s.includes("jura")) {
+    return "Giura Svizzero";
+  }
+  if (s.includes("fluela") || s.includes("davos") || s.includes("albula") || s.includes("julier")) {
+    return "Grigioni";
+  }
+  if (s.includes("ticino") || s.includes("lugano") || s.includes("locarno") || s.includes("san bernardino")) {
+    return "Ticino";
+  }
+
+  // Austria
+  if (s.includes("grossglockner") || s.includes("gerlos") || s.includes("timmelsjoch")) {
+    return "Alpi Austriache";
+  }
+  if (s.includes("tirol") || s.includes("tyrol")) return "Tirolo";
+  if (s.includes("salzburg")) return "Salisburghese";
+  if (s.includes("karnten") || s.includes("carinthia")) return "Carinzia";
+
+  // Francia
+  if (s.includes("galibier") || s.includes("izoard") || s.includes("lautaret")) {
+    return "Alpi Francesi";
+  }
+  if (s.includes("bonette") || s.includes("vars") || s.includes("cayolle") || s.includes("turini")) {
+    return "Alpi del Sud";
+  }
+  if (s.includes("pyren") || s.includes("tourmalet") || s.includes("aubisque") || s.includes("aspin")) {
+    return "Pirenei";
+  }
+  if (s.includes("cote azur") || s.includes("nice") || s.includes("menton") || s.includes("corniche")) {
+    return "Costa Azzurra";
+  }
+  if (s.includes("corsica")) return "Corsica";
+  if (s.includes("vosges")) return "Vosgi";
+
+  // Germania
+  if (s.includes("black forest") || s.includes("foresta nera")) return "Foresta Nera";
+  if (s.includes("bavaria") || s.includes("bayern")) return "Baviera Alpina";
+
+  // Spagna / Andorra
+  if (s.includes("costa brava")) return "Costa Brava";
+  if (s.includes("sierra nevada")) return "Sierra Nevada";
+  if (s.includes("picos")) return "Picos de Europa";
+  if (s.includes("pyren")) return "Pirenei";
+  if (s.includes("andorra") || s.includes("envalira") || s.includes("ordino")) return "Pirenei Andorrani";
+
+  // Balcani
+  if (s.includes("velebit")) return "Velebit";
+  if (s.includes("durmitor")) return "Durmitor";
+  if (s.includes("dinar")) return "Alpi Dinariche";
+  if (s.includes("alban")) return "Alpi Albanesi";
+
+  // Carpazi
+  if (s.includes("transfagarasan") || s.includes("transalpina")) return "Carpazi Rumeni";
+  if (s.includes("carpath") || s.includes("carpazi")) return "Carpazi";
+  if (s.includes("tatra")) return "Tatra";
+
+  // Nord Europa
+  if (s.includes("fjord") || s.includes("fiordo") || s.includes("trollstigen")) return "Fiordi Norvegesi";
+  if (s.includes("highland")) return "Highlands";
+  if (s.includes("north coast")) return "Costa Nord";
+
+  if (s.includes("alpi") || s.includes("alp")) return "Alpi";
   return normalizeRegionHint(spot.regionHint) || spot.scopeName || spot.country || "Europa";
 }
 
@@ -340,16 +632,16 @@ function rideTypePriority(rideType) {
 function byScoreThenName(a, b) {
   return (
     (b.score || b.riderScore || 0) - (a.score || a.riderScore || 0) ||
-    rideTypePriority(b.rideType) - rideTypePriority(a.rideType) ||
+    rideTypePriority(getRideType(b)) - rideTypePriority(getRideType(a)) ||
     String(a.name || "").localeCompare(String(b.name || ""))
   );
 }
 
 function buildClusterKey(spot) {
-  const countryCode = spot.country || country || "XX";
+  const countryCode = normalizeCountryCode(spot.country || country || "XX");
   const scopeKey = spot.scope || scope || "all";
   const region = guessMacroRegion(spot);
-  const rideType = spot.rideType || "scenic";
+  const rideType = getRideType(spot) || "scenic";
   return `${countryCode}__${scopeKey}__${region}__${rideType}`;
 }
 
@@ -468,7 +760,7 @@ function buildPointSentence(names) {
   return `Si sviluppa su punti reali selezionati per dare continuità, senso geografico e piacere di guida.`;
 }
 
-function buildClosingSentence(rideType, distanceKm, mode, pointsCount) {
+function buildClosingSentence(rideType, distanceKm, mode) {
   const kmText = formatKm(distanceKm);
   const modeText = modePhrase(mode);
 
@@ -525,13 +817,17 @@ function buildDescription(points, region, countryCode, rideType, mode, distanceK
   const names = uniqueNames(points, 4);
   const intro = buildIntroSentence(region, rideType, countryCode);
   const middle = buildPointSentence(names);
-  const closing = buildClosingSentence(rideType, distanceKm, mode, points?.length || 0);
+  const closing = buildClosingSentence(rideType, distanceKm, mode);
 
   return `${intro} ${middle} ${closing}`;
 }
 
+// -------------------------------------------------------
+// ROUTING
+// -------------------------------------------------------
+
 async function getOsrmRoute(points) {
-  const coords = points.map((p) => `${p.lng},${p.lat}`).join(";");
+  const coords = points.map((p) => `${pickLng(p)},${pickLat(p)}`).join(";");
   const url = `${OSRM_BASE}/${coords}?overview=full&geometries=geojson&steps=false`;
 
   const res = await fetch(url);
@@ -554,15 +850,18 @@ async function getOsrmRoute(points) {
 }
 
 function buildFallbackGeometry(points) {
-  const coordsLngLat = points.map((p) => [roundCoord(p.lng), roundCoord(p.lat)]);
+  const coordsLngLat = points.map((p) => [
+    roundCoord(pickLng(p)),
+    roundCoord(pickLat(p)),
+  ]);
   let distanceKm = 0;
 
   for (let i = 1; i < points.length; i += 1) {
     distanceKm += haversineKm(
-      Number(points[i - 1].lat),
-      Number(points[i - 1].lng),
-      Number(points[i].lat),
-      Number(points[i].lng)
+      Number(pickLat(points[i - 1])),
+      Number(pickLng(points[i - 1])),
+      Number(pickLat(points[i])),
+      Number(pickLng(points[i]))
     );
   }
 
@@ -587,7 +886,7 @@ function buildShapeFields(points, routeShape) {
     ? routeShape.geometry
     : {
         type: "LineString",
-        coordinates: points.map((p) => [roundCoord(p.lng), roundCoord(p.lat)]),
+        coordinates: points.map((p) => [roundCoord(pickLng(p)), roundCoord(pickLat(p))]),
       };
 
   const sampledCoordsLatLng = geometry.coordinates
@@ -602,20 +901,20 @@ function buildShapeFields(points, routeShape) {
   return {
     start: {
       name: start.name,
-      lat: roundCoord(start.lat),
-      lng: roundCoord(start.lng),
+      lat: roundCoord(pickLat(start)),
+      lng: roundCoord(pickLng(start)),
     },
     end: {
       name: end.name,
-      lat: roundCoord(end.lat),
-      lng: roundCoord(end.lng),
+      lat: roundCoord(pickLat(end)),
+      lng: roundCoord(pickLng(end)),
     },
     waypoints: points.slice(1, -1).map((p) => ({
       name: p.name,
-      lat: roundCoord(p.lat),
-      lng: roundCoord(p.lng),
+      lat: roundCoord(pickLat(p)),
+      lng: roundCoord(pickLng(p)),
       type: p.type || "scenic_road",
-      rideType: p.rideType || "scenic",
+      rideType: getRideType(p),
     })),
     coords: sampledCoordsLatLng,
     polyline,
@@ -627,7 +926,7 @@ function dedupePointList(points) {
   const seen = new Set();
   const out = [];
   for (const p of points) {
-    const key = p.id || `${p.name}-${p.lat}-${p.lng}`;
+    const key = p.id || `${p.name}-${pickLat(p)}-${pickLng(p)}`;
     if (seen.has(key)) continue;
     seen.add(key);
     out.push(p);
@@ -641,7 +940,7 @@ function chooseNeighbors(seed, list, max = 5) {
     .filter(isAllowedNeighborSpot)
     .map((p) => ({
       ...p,
-      _d: haversineKm(seed.lat, seed.lng, p.lat, p.lng),
+      _d: haversineKm(pickLat(seed), pickLng(seed), pickLat(p), pickLng(p)),
     }))
     .filter((p) => p._d <= MAX_NEIGHBOR_KM)
     .sort((a, b) => a._d - b._d || byScoreThenName(a, b))
@@ -747,6 +1046,19 @@ function buildRouteId(routeCounter, countryCode, scopeKey, routeName) {
   return `route-${String(countryCode || "xx").toLowerCase()}-${String(scopeKey || "all").toLowerCase()}-${String(routeCounter).padStart(5, "0")}-${slugify(routeName).slice(0, 40)}`;
 }
 
+function summarizeCounts(items, keyFn) {
+  const out = {};
+  for (const item of items) {
+    const key = keyFn(item) || "unknown";
+    out[key] = (out[key] || 0) + 1;
+  }
+  return out;
+}
+
+// -------------------------------------------------------
+// MAIN
+// -------------------------------------------------------
+
 async function main() {
   console.log("====================================");
   console.log("MotoPortEU — Generate Routes PRO");
@@ -756,17 +1068,55 @@ async function main() {
   console.log(`📥 Spots: ${SPOTS_FILE}`);
   console.log(`💾 Output: ${OUT_FILE}`);
 
-  const raw = JSON.parse(await fs.readFile(SPOTS_FILE, "utf8"));
-  const spots = Array.isArray(raw)
-    ? raw.filter((s) => toNum(s.lat) != null && toNum(s.lng) != null)
-    : [];
+  const rawText = await fs.readFile(SPOTS_FILE, "utf8");
+  const raw = safeJsonParse(rawText, SPOTS_FILE);
+
+  const rawArray = Array.isArray(raw) ? raw : [];
+  const spots = rawArray
+    .map((s) => {
+      const lat = pickLat(s);
+      const lng = pickLng(s);
+      return {
+        ...s,
+        lat,
+        lng,
+        country: normalizeCountryCode(s.country || country),
+        rideType: getRideType(s),
+        type: s.type || "scenic_road",
+        riderScore: getRawScore(s),
+      };
+    })
+    .filter((s) => s && s.name && toNum(s.lat) != null && toNum(s.lng) != null);
+
+  console.log(`📊 Raw items:        ${rawArray.length}`);
+  console.log(`📊 Valid lat/lng:    ${spots.length}`);
+  console.log("📊 Country dist:", summarizeCounts(spots, (s) => s.country));
+  console.log("📊 RideType dist:", summarizeCounts(spots, (s) => s.rideType));
 
   if (!spots.length) {
     console.error("❌ Nessun rider spot valido trovato");
     process.exit(1);
   }
 
-  const filteredSpots = spots.filter(isAllowedNeighborSpot);
+  const sameCountrySpots = spots.filter(
+    (s) => normalizeCountryCode(s.country) === country
+  );
+
+  console.log(`📊 Same country:     ${sameCountrySpots.length}`);
+
+  const basePool = sameCountrySpots.length ? sameCountrySpots : spots;
+  const filteredSpots = basePool.filter(isAllowedNeighborSpot);
+
+  console.log(`📊 Neighbor allowed: ${filteredSpots.length}`);
+  console.log(
+    "📊 Allowed by rideType:",
+    summarizeCounts(filteredSpots, (s) => s.rideType)
+  );
+
+  if (!filteredSpots.length) {
+    console.error("❌ Nessun rider spot utilizzabile dopo i filtri");
+    process.exit(1);
+  }
 
   const clusters = new Map();
   for (const spot of filteredSpots) {
@@ -852,12 +1202,12 @@ async function main() {
             name: p.name,
             slug: p.slug,
             type: p.type || "scenic_road",
-            rideType: p.rideType || "scenic",
-            lat: roundCoord(p.lat),
-            lng: roundCoord(p.lng),
+            rideType: getRideType(p),
+            lat: roundCoord(pickLat(p)),
+            lng: roundCoord(pickLng(p)),
             country: p.country || null,
             scope: p.scope || scopeKey,
-            riderScore: p.riderScore || p.score || 0,
+            riderScore: getRawScore(p),
           })),
           ...shape,
         });
