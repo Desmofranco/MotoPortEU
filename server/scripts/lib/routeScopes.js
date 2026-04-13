@@ -1087,6 +1087,33 @@ PT: {
     }
   }
 },
+BE: {
+  country: "BE",
+  name: "Belgium",
+  scopes: {
+    "belgium-ardennes-south": {
+      name: "Belgium Ardennes South",
+      regions: ["Luxembourg", "Namur", "Liège"],
+      areas: [
+        { name: "La Roche-en-Ardenne", lat: 50.183, lng: 5.576, radius: 50000 },
+        { name: "Bouillon", lat: 49.794, lng: 5.067, radius: 50000 },
+        { name: "Bastogne", lat: 50.0, lng: 5.718, radius: 50000 },
+        { name: "Dinant", lat: 50.26, lng: 4.912, radius: 50000 }
+      ]
+    },
+
+    "belgium-high-fens-east": {
+      name: "Belgium High Fens East",
+      regions: ["Liège"],
+      areas: [
+        { name: "Spa", lat: 50.492, lng: 5.864, radius: 50000 },
+        { name: "Malmedy", lat: 50.426, lng: 6.027, radius: 50000 },
+        { name: "Signal de Botrange", lat: 50.501, lng: 6.093, radius: 50000 },
+        { name: "Stavelot", lat: 50.395, lng: 5.931, radius: 50000 }
+      ]
+    }
+  }
+},
   LU: {
     country: "LU",
     name: "Luxembourg",

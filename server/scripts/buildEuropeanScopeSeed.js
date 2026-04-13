@@ -889,6 +889,35 @@ PT: {
     { name: "Algarve West Scenic Drive", lat: 37.2, lng: -8.7, rideType: "scenic" }
   ]
 },
+BE: {
+  "belgium-ardennes-south": [
+    { name: "La Roche-en-Ardenne", lat: 50.183, lng: 5.576, rideType: "scenic" },
+    { name: "Ourthe Valley Road", lat: 50.19, lng: 5.6, rideType: "scenic" },
+    { name: "Houffalize", lat: 50.133, lng: 5.789, rideType: "scenic" },
+    { name: "Bastogne", lat: 50.0, lng: 5.718, rideType: "scenic" },
+    { name: "Bastogne Ridge Link", lat: 50.03, lng: 5.76, rideType: "forest" },
+    { name: "Bouillon", lat: 49.794, lng: 5.067, rideType: "scenic" },
+    { name: "Semois Valley Road", lat: 49.82, lng: 5.09, rideType: "scenic" },
+    { name: "Rochehaut Panorama", lat: 49.84, lng: 5.01, rideType: "mountain" },
+    { name: "Dinant", lat: 50.26, lng: 4.912, rideType: "scenic" },
+    { name: "Meuse Cliff Road", lat: 50.28, lng: 4.9, rideType: "mountain" },
+    { name: "Ardennes Crest Link", lat: 50.08, lng: 5.38, rideType: "forest" },
+    { name: "Vresse-sur-Semois", lat: 49.872, lng: 4.934, rideType: "scenic" }
+  ],
+
+  "belgium-high-fens-east": [
+    { name: "Spa", lat: 50.492, lng: 5.864, rideType: "scenic" },
+    { name: "Spa Forest Road", lat: 50.5, lng: 5.9, rideType: "forest" },
+    { name: "Stavelot", lat: 50.395, lng: 5.931, rideType: "scenic" },
+    { name: "Malmedy", lat: 50.426, lng: 6.027, rideType: "scenic" },
+    { name: "Signal de Botrange", lat: 50.501, lng: 6.093, rideType: "mountain" },
+    { name: "High Fens Ridge", lat: 50.53, lng: 6.11, rideType: "forest" },
+    { name: "Eupen Scenic Link", lat: 50.63, lng: 6.03, rideType: "scenic" },
+    { name: "Warche Valley Road", lat: 50.44, lng: 6.05, rideType: "scenic" },
+    { name: "Botrange Loop", lat: 50.5, lng: 6.08, rideType: "mountain" },
+    { name: "Ardennes East Twisties", lat: 50.46, lng: 5.98, rideType: "scenic" }
+  ]
+},
 };
 
 function buildManualSeeds(country, scope) {
