@@ -1228,6 +1228,35 @@ SE: {
 
   }
 },
+ES: {
+  country: "ES",
+  name: "Spain",
+  scopes: {
+
+    "spain-andalusia-coast": {
+      name: "Spain Andalusia Coast",
+      regions: ["Málaga", "Granada", "Almería", "Cádiz"],
+      areas: [
+        { name: "Costa del Sol", lat: 36.55, lng: -4.62, radius: 50000 },
+        { name: "Nerja / Granada Coast", lat: 36.75, lng: -3.88, radius: 50000 },
+        { name: "Cabo de Gata", lat: 36.76, lng: -2.19, radius: 50000 },
+        { name: "Tarifa / Cádiz Coast", lat: 36.01, lng: -5.61, radius: 50000 }
+      ]
+    },
+
+    "spain-andalusia-inland": {
+      name: "Spain Andalusia Inland",
+      regions: ["Málaga", "Granada", "Córdoba", "Jaén"],
+      areas: [
+        { name: "Ronda", lat: 36.74, lng: -5.17, radius: 50000 },
+        { name: "Sierra de Grazalema", lat: 36.76, lng: -5.37, radius: 50000 },
+        { name: "Granada Inland", lat: 37.18, lng: -3.6, radius: 50000 },
+        { name: "Cazorla / Jaén", lat: 37.91, lng: -3.0, radius: 50000 }
+      ]
+    }
+
+  }
+},
   LU: {
     country: "LU",
     name: "Luxembourg",
