@@ -1084,6 +1084,33 @@ FI: {
     { name: "Scandinavian Forest Route", lat: 62.3, lng: 25.6, rideType: "forest" }
   ]
 },
+DK: {
+  "denmark-north-jutland": [
+    { name: "Skagen Coastal Ride", lat: 57.72, lng: 10.58, rideType: "coastal" },
+    { name: "Hirtshals Sea Road", lat: 57.59, lng: 9.96, rideType: "coastal" },
+    { name: "North Jutland Panorama", lat: 57.3, lng: 10.1, rideType: "scenic" },
+    { name: "Aalborg Coastal Link", lat: 57.05, lng: 9.92, rideType: "coastal" },
+    { name: "Limfjord Scenic Route", lat: 56.95, lng: 9.25, rideType: "scenic" },
+    { name: "Jutland Sea Wind Ride", lat: 57.2, lng: 9.8, rideType: "coastal" },
+    { name: "North Denmark Ridge", lat: 57.1, lng: 10.0, rideType: "scenic" },
+    { name: "Skagerrak Coast Drive", lat: 57.5, lng: 10.4, rideType: "coastal" },
+    { name: "Jutland Dune Road", lat: 57.35, lng: 9.9, rideType: "scenic" },
+    { name: "Northern Sea View", lat: 57.4, lng: 10.15, rideType: "coastal" }
+  ],
+
+  "denmark-south-funen": [
+    { name: "Odense Scenic Ride", lat: 55.4, lng: 10.39, rideType: "scenic" },
+    { name: "Svendborg Coastal Loop", lat: 55.06, lng: 10.61, rideType: "coastal" },
+    { name: "South Funen Panorama", lat: 55.0, lng: 10.5, rideType: "scenic" },
+    { name: "Funen Island Ride", lat: 55.2, lng: 10.4, rideType: "scenic" },
+    { name: "Little Belt Coastal Route", lat: 55.5, lng: 9.75, rideType: "coastal" },
+    { name: "Danish Archipelago Link", lat: 55.1, lng: 10.7, rideType: "coastal" },
+    { name: "South Denmark Scenic Drive", lat: 55.25, lng: 10.15, rideType: "scenic" },
+    { name: "Funen Sea Breeze Route", lat: 55.08, lng: 10.55, rideType: "coastal" },
+    { name: "Danish Countryside Scenic", lat: 55.35, lng: 10.2, rideType: "scenic" },
+    { name: "Island Coast Connector", lat: 55.15, lng: 10.45, rideType: "coastal" }
+  ]
+},
 };
 
 function buildManualSeeds(country, scope) {

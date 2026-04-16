@@ -1286,6 +1286,35 @@ FI: {
 
   }
 },
+DK: {
+  country: "DK",
+  name: "Denmark",
+  scopes: {
+
+    "denmark-north-jutland": {
+      name: "Denmark North Jutland",
+      regions: ["Nordjylland"],
+      areas: [
+        { name: "Skagen", lat: 57.72, lng: 10.58, radius: 50000 },
+        { name: "Hirtshals", lat: 57.59, lng: 9.96, radius: 50000 },
+        { name: "Aalborg Coast", lat: 57.05, lng: 9.92, radius: 50000 },
+        { name: "Limfjord", lat: 56.95, lng: 9.25, radius: 50000 }
+      ]
+    },
+
+    "denmark-south-funen": {
+      name: "Denmark South Funen",
+      regions: ["Syddanmark"],
+      areas: [
+        { name: "Odense", lat: 55.4, lng: 10.39, radius: 50000 },
+        { name: "Svendborg", lat: 55.06, lng: 10.61, radius: 50000 },
+        { name: "Funen South Coast", lat: 55.0, lng: 10.5, radius: 50000 },
+        { name: "Little Belt", lat: 55.5, lng: 9.75, radius: 50000 }
+      ]
+    }
+
+  }
+},
   LU: {
     country: "LU",
     name: "Luxembourg",
