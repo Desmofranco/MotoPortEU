@@ -1030,6 +1030,33 @@ SE: {
     { name: "Scandinavian Coast Route", lat: 58.5, lng: 11.4, rideType: "coastal" }
   ]
 },
+ES: {
+  "spain-andalusia-coast": [
+    { name: "Costa del Sol Ride", lat: 36.55, lng: -4.62, rideType: "coastal" },
+    { name: "Marbella Coastal Drive", lat: 36.51, lng: -4.89, rideType: "coastal" },
+    { name: "Málaga to Nerja Coast", lat: 36.75, lng: -3.88, rideType: "coastal" },
+    { name: "Nerja Cliff Road", lat: 36.75, lng: -3.88, rideType: "scenic" },
+    { name: "Granada Costa Scenic", lat: 36.75, lng: -3.55, rideType: "scenic" },
+    { name: "Cabo de Gata Coastal Loop", lat: 36.76, lng: -2.19, rideType: "coastal" },
+    { name: "Almería Coast Ride", lat: 36.84, lng: -2.46, rideType: "coastal" },
+    { name: "Tarifa Wind Coast", lat: 36.01, lng: -5.61, rideType: "coastal" },
+    { name: "Cádiz Atlantic Scenic", lat: 36.53, lng: -6.29, rideType: "scenic" },
+    { name: "Andalusia Sea View Route", lat: 36.4, lng: -4.3, rideType: "scenic" }
+  ],
+
+  "spain-andalusia-inland": [
+    { name: "Ronda Mountain Road", lat: 36.74, lng: -5.17, rideType: "mountain" },
+    { name: "Grazalema Scenic Pass", lat: 36.76, lng: -5.37, rideType: "mountain" },
+    { name: "White Villages Route", lat: 36.8, lng: -5.3, rideType: "scenic" },
+    { name: "Antequera Twisties", lat: 37.02, lng: -4.56, rideType: "scenic" },
+    { name: "Granada Sierra Link", lat: 37.18, lng: -3.6, rideType: "mountain" },
+    { name: "Sierra Nevada Foothills", lat: 37.1, lng: -3.5, rideType: "mountain" },
+    { name: "Córdoba Inland Scenic", lat: 37.88, lng: -4.77, rideType: "scenic" },
+    { name: "Jaén Olive Road", lat: 37.77, lng: -3.79, rideType: "scenic" },
+    { name: "Cazorla Natural Route", lat: 37.91, lng: -3.0, rideType: "forest" },
+    { name: "Andalusia Ridge Drive", lat: 37.3, lng: -4.0, rideType: "mountain" }
+  ]
+},
 };
 
 function buildManualSeeds(country, scope) {
