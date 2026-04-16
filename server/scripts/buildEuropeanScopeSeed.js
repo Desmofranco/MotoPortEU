@@ -1057,6 +1057,33 @@ ES: {
     { name: "Andalusia Ridge Drive", lat: 37.3, lng: -4.0, rideType: "mountain" }
   ]
 },
+FI: {
+  "finland-south-lakes": [
+    { name: "Helsinki Scenic Inland", lat: 60.2, lng: 25.0, rideType: "scenic" },
+    { name: "Lahti Lake Ride", lat: 60.98, lng: 25.66, rideType: "lake" },
+    { name: "Saimaa Lake Loop", lat: 61.3, lng: 28.5, rideType: "lake" },
+    { name: "Lappeenranta Scenic", lat: 61.06, lng: 28.18, rideType: "scenic" },
+    { name: "South Finland Lake District", lat: 61.2, lng: 27.8, rideType: "lake" },
+    { name: "Kymenlaakso Scenic Route", lat: 60.8, lng: 26.5, rideType: "scenic" },
+    { name: "Finnish Lake Panorama", lat: 61.1, lng: 27.5, rideType: "lake" },
+    { name: "Eastern Finland Ridge", lat: 61.3, lng: 27.0, rideType: "scenic" },
+    { name: "Saimaa Forest Link", lat: 61.4, lng: 28.0, rideType: "forest" },
+    { name: "South Finland Scenic Drive", lat: 60.9, lng: 26.8, rideType: "scenic" }
+  ],
+
+  "finland-central-forest": [
+    { name: "Jyväskylä Scenic Ride", lat: 62.24, lng: 25.75, rideType: "scenic" },
+    { name: "Tampere Lake Route", lat: 61.5, lng: 23.76, rideType: "lake" },
+    { name: "Lake Päijänne Loop", lat: 61.7, lng: 25.5, rideType: "lake" },
+    { name: "Central Finland Forest Ride", lat: 62.0, lng: 25.0, rideType: "forest" },
+    { name: "Pirkanmaa Scenic Drive", lat: 61.6, lng: 24.5, rideType: "scenic" },
+    { name: "Finnish Forest Twisties", lat: 62.1, lng: 25.2, rideType: "forest" },
+    { name: "Nordic Inland Route", lat: 62.0, lng: 24.8, rideType: "scenic" },
+    { name: "Lake District Finland Link", lat: 61.9, lng: 25.3, rideType: "lake" },
+    { name: "Central Finland Ridge", lat: 62.2, lng: 25.0, rideType: "scenic" },
+    { name: "Scandinavian Forest Route", lat: 62.3, lng: 25.6, rideType: "forest" }
+  ]
+},
 };
 
 function buildManualSeeds(country, scope) {

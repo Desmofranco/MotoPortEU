@@ -1257,6 +1257,35 @@ ES: {
 
   }
 },
+FI: {
+  country: "FI",
+  name: "Finland",
+  scopes: {
+
+    "finland-south-lakes": {
+      name: "Finland South Lakes",
+      regions: ["Uusimaa", "Kymenlaakso", "South Karelia"],
+      areas: [
+        { name: "Helsinki Inland", lat: 60.2, lng: 25.0, radius: 50000 },
+        { name: "Lahti", lat: 60.98, lng: 25.66, radius: 50000 },
+        { name: "Lappeenranta", lat: 61.06, lng: 28.18, radius: 50000 },
+        { name: "Saimaa Lake", lat: 61.3, lng: 28.5, radius: 50000 }
+      ]
+    },
+
+    "finland-central-forest": {
+      name: "Finland Central Forest",
+      regions: ["Central Finland", "Pirkanmaa"],
+      areas: [
+        { name: "Jyväskylä", lat: 62.24, lng: 25.75, radius: 50000 },
+        { name: "Tampere", lat: 61.5, lng: 23.76, radius: 50000 },
+        { name: "Lake Päijänne", lat: 61.7, lng: 25.5, radius: 50000 },
+        { name: "Central Finland Forest", lat: 62.0, lng: 25.0, radius: 50000 }
+      ]
+    }
+
+  }
+},
   LU: {
     country: "LU",
     name: "Luxembourg",
