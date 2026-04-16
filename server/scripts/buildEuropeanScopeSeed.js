@@ -918,6 +918,37 @@ BE: {
     { name: "Ardennes East Twisties", lat: 50.46, lng: 5.98, rideType: "scenic" }
   ]
 },
+GB: {
+  "uk-scotland-west-highlands": [
+    { name: "Loch Lomond West Road", lat: 56.08, lng: -4.64, rideType: "lake" },
+    { name: "Tarbet", lat: 56.204, lng: -4.716, rideType: "scenic" },
+    { name: "Arrochar Alps Link", lat: 56.203, lng: -4.746, rideType: "mountain" },
+    { name: "Crianlarich", lat: 56.394, lng: -4.619, rideType: "scenic" },
+    { name: "Tyndrum", lat: 56.434, lng: -4.715, rideType: "scenic" },
+    { name: "Rannoch Moor Road", lat: 56.63, lng: -4.9, rideType: "mountain" },
+    { name: "Glencoe", lat: 56.682, lng: -5.102, rideType: "mountain" },
+    { name: "Glencoe Scenic Drive", lat: 56.69, lng: -5.04, rideType: "scenic" },
+    { name: "Ballachulish", lat: 56.681, lng: -5.127, rideType: "scenic" },
+    { name: "Fort William", lat: 56.819, lng: -5.105, rideType: "scenic" },
+    { name: "Loch Leven Twisties", lat: 56.71, lng: -5.24, rideType: "lake" },
+    { name: "Trossachs Ridge Link", lat: 56.3, lng: -4.55, rideType: "mountain" }
+  ],
+
+  "uk-wales-cambrian": [
+    { name: "Llandudno", lat: 53.324, lng: -3.827, rideType: "coastal" },
+    { name: "Conwy Valley Road", lat: 53.15, lng: -3.8, rideType: "scenic" },
+    { name: "Betws-y-Coed", lat: 53.093, lng: -3.801, rideType: "mountain" },
+    { name: "Eryri Mountain Link", lat: 53.07, lng: -3.9, rideType: "mountain" },
+    { name: "Blaenau Ffestiniog Road", lat: 52.995, lng: -3.939, rideType: "scenic" },
+    { name: "Machynlleth", lat: 52.589, lng: -3.852, rideType: "scenic" },
+    { name: "Dyfi Forest Link", lat: 52.68, lng: -3.74, rideType: "forest" },
+    { name: "Cader Idris Approach", lat: 52.699, lng: -3.907, rideType: "mountain" },
+    { name: "Builth Wells", lat: 52.149, lng: -3.405, rideType: "scenic" },
+    { name: "Elan Valley Road", lat: 52.27, lng: -3.6, rideType: "lake" },
+    { name: "Cambrian Spine Scenic", lat: 52.65, lng: -3.65, rideType: "scenic" },
+    { name: "Mid Wales Ridge Drive", lat: 52.4, lng: -3.55, rideType: "mountain" }
+  ]
+},
 };
 
 function buildManualSeeds(country, scope) {

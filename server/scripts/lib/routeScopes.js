@@ -1113,6 +1113,33 @@ BE: {
       ]
     }
   }
+  },
+  GB: {
+  country: "GB",
+  name: "United Kingdom",
+  scopes: {
+    "uk-scotland-west-highlands": {
+      name: "UK Scotland West Highlands",
+      regions: ["Highland", "Argyll and Bute", "Stirling"],
+      areas: [
+        { name: "Glencoe", lat: 56.682, lng: -5.102, radius: 50000 },
+        { name: "Fort William", lat: 56.819, lng: -5.105, radius: 50000 },
+        { name: "Loch Lomond", lat: 56.083, lng: -4.583, radius: 50000 },
+        { name: "Crianlarich / Trossachs", lat: 56.394, lng: -4.619, radius: 50000 }
+      ]
+    },
+
+    "uk-wales-cambrian": {
+      name: "UK Wales Cambrian",
+      regions: ["Gwynedd", "Powys", "Ceredigion", "Conwy"],
+      areas: [
+        { name: "Llandudno", lat: 53.324, lng: -3.827, radius: 50000 },
+        { name: "Betws-y-Coed / Eryri", lat: 53.093, lng: -3.801, radius: 50000 },
+        { name: "Machynlleth", lat: 52.589, lng: -3.852, radius: 50000 },
+        { name: "Builth Wells / Mid Wales", lat: 52.149, lng: -3.405, radius: 50000 }
+      ]
+    }
+  }
 },
   LU: {
     country: "LU",
