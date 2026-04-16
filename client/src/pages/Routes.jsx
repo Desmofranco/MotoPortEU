@@ -4,6 +4,8 @@
 // UI: split-view su desktop (lista + dettaglio)
 // Mobile: lista -> dettaglio (full screen) con back
 // Dati LIVE: /public/data/routes.json
+//
+// OPTIMIZATION PACK:
 // ✅ Loading skeleton
 // ✅ Meteo + Google Maps
 // ✅ FIX mobile: no aperture accidentali durante scroll
@@ -17,6 +19,11 @@
 // ✅ Filtri: Paese / Regione / Categoria
 // ✅ Categorie commerciali: Montagna / Laghi / Mare
 // ✅ Supporto completo nuovo dataset routes.json
+// ✅ Render limitato iniziale (mobile/desktop)
+// ✅ Pulsante "Carica altri"
+// ✅ Ricerca con debounce
+// ✅ Selezione coerente anche con lista parziale
+// ✅ Fetch con cache più favorevole su mobile
 // =======================================================
 
 import React, { useEffect, useMemo, useRef, useState } from "react";
@@ -28,9 +35,33 @@ const FALLBACK_PHOTO =
 
 const TAP_MOVE_THRESHOLD = 12;
 
+const MOBILE_INITIAL_COUNT = 24;
+const DESKTOP_INITIAL_COUNT = 48;
+const LOAD_MORE_STEP_MOBILE = 24;
+const LOAD_MORE_STEP_DESKTOP = 48;
+
 function isMobileNow() {
   if (typeof window === "undefined" || !window.matchMedia) return false;
   return window.matchMedia("(max-width: 767px), (pointer: coarse)").matches;
+}
+
+function getInitialVisibleCount() {
+  return isMobileNow() ? MOBILE_INITIAL_COUNT : DESKTOP_INITIAL_COUNT;
+}
+
+function getLoadMoreStep() {
+  return isMobileNow() ? LOAD_MORE_STEP_MOBILE : LOAD_MORE_STEP_DESKTOP;
+}
+
+function useDebouncedValue(value, delay = 220) {
+  const [debounced, setDebounced] = useState(value);
+
+  useEffect(() => {
+    const id = setTimeout(() => setDebounced(value), delay);
+    return () => clearTimeout(id);
+  }, [value, delay]);
+
+  return debounced;
 }
 
 function openGoogleMapsSmart(url) {
@@ -265,6 +296,7 @@ function countryLabel(code) {
     SE: "Svezia",
     UK: "Regno Unito",
     IE: "Irlanda",
+    GB: "Regno Unito",
     BE: "Belgio",
     NL: "Olanda",
     LU: "Lussemburgo",
@@ -277,6 +309,7 @@ function countryLabel(code) {
     FI: "Finlandia",
     IS: "Islanda",
     HU: "Ungheria",
+    DK: "Danimarca",
   };
   return map[code] || code;
 }
@@ -322,6 +355,7 @@ function SkeletonLoading() {
     </div>
   );
 }
+
 function formatRouteKm(km) {
   const n = Number(km || 0);
   if (!Number.isFinite(n) || n <= 0) return "—";
@@ -348,7 +382,10 @@ function getRoutePointNames(route, max = 4) {
 
   if (!out.length) {
     if (route?.start?.name) out.push(route.start.name);
-    if (route?.end?.name && normalizeText(route.end.name) !== normalizeText(route.start?.name || "")) {
+    if (
+      route?.end?.name &&
+      normalizeText(route.end.name) !== normalizeText(route.start?.name || "")
+    ) {
       out.push(route.end.name);
     }
   }
@@ -380,15 +417,16 @@ function buildPrettyRouteDescription(route) {
   const c = names[2] || null;
   const d = names[3] || null;
 
-  const pointsSentence = a && b && c && d
-    ? `Tocca ${a}, ${b}, ${c} e ${d}, costruendo una progressione credibile e piacevole da seguire anche in sella.`
-    : a && b && c
-    ? `Unisce ${a}, ${b} e ${c}, mantenendo una linea coerente tra guida, paesaggio e ritmo.`
-    : a && b
-    ? `Collega ${a} e ${b} con un percorso che ha senso da vivere in moto, senza l’effetto artificiale da traccia casuale.`
-    : a
-    ? `Si sviluppa attorno a ${a}, usandolo come riferimento principale del giro.`
-    : `Si sviluppa su una sequenza di punti reali selezionati per dare continuità, lettura del territorio e piacere di guida.`;
+  const pointsSentence =
+    a && b && c && d
+      ? `Tocca ${a}, ${b}, ${c} e ${d}, costruendo una progressione credibile e piacevole da seguire anche in sella.`
+      : a && b && c
+      ? `Unisce ${a}, ${b} e ${c}, mantenendo una linea coerente tra guida, paesaggio e ritmo.`
+      : a && b
+      ? `Collega ${a} e ${b} con un percorso che ha senso da vivere in moto, senza l’effetto artificiale da traccia casuale.`
+      : a
+      ? `Si sviluppa attorno a ${a}, usandolo come riferimento principale del giro.`
+      : `Si sviluppa su una sequenza di punti reali selezionati per dare continuità, lettura del territorio e piacere di guida.`;
 
   if (rideType === "mountain") {
     return `Un itinerario di montagna rider-oriented nella zona ${region}, pensato per chi cerca quota, curve e carattere. ${pointsSentence} Nel complesso è un giro da circa ${km}, con tratti panoramici, ritmo variabile e una guida che sa farsi ricordare.`;
@@ -404,6 +442,7 @@ function buildPrettyRouteDescription(route) {
 
   return `Un itinerario panoramico rider nella zona ${region}, costruito attorno a strade e punti che possono davvero generare un giro credibile. ${pointsSentence} Nel complesso è un percorso da circa ${km}, con un buon equilibrio tra guida, paesaggio e piacere generale del viaggio.`;
 }
+
 export default function Routes() {
   const [routes, setRoutes] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -418,7 +457,9 @@ export default function Routes() {
   const [selected, setSelected] = useState(null);
 
   const [mobileView, setMobileView] = useState("list");
+  const [visibleCount, setVisibleCount] = useState(getInitialVisibleCount());
 
+  const debouncedQ = useDebouncedValue(q, 220);
   const isMobile = isMobileNow();
   const showDetailMobile = isMobile && mobileView === "detail" && selected;
 
@@ -431,7 +472,7 @@ export default function Routes() {
 
       try {
         const data = await fetch("/data/routes.json", {
-          cache: "no-store",
+          cache: "force-cache",
         })
           .then((r) => (r.ok ? r.json() : []))
           .catch(() => []);
@@ -501,7 +542,7 @@ export default function Routes() {
   }, [country]);
 
   const filtered = useMemo(() => {
-    const query = normalizeText(q.trim());
+    const query = normalizeText(debouncedQ.trim());
     let out = [...routes];
 
     if (country !== "ALL") {
@@ -539,7 +580,21 @@ export default function Routes() {
     });
 
     return out;
-  }, [routes, q, country, region, category]);
+  }, [routes, debouncedQ, country, region, category]);
+
+  useEffect(() => {
+    setVisibleCount(getInitialVisibleCount());
+  }, [country, region, category, debouncedQ]);
+
+  const visibleRoutes = useMemo(() => {
+    return filtered.slice(0, visibleCount);
+  }, [filtered, visibleCount]);
+
+  const hasMoreRoutes = visibleCount < filtered.length;
+
+  const loadMoreRoutes = () => {
+    setVisibleCount((prev) => Math.min(prev + getLoadMoreStep(), filtered.length));
+  };
 
   useEffect(() => {
     if (!filtered.length) {
@@ -776,10 +831,16 @@ export default function Routes() {
               <div className="routes-list">
                 <div style={{ fontSize: 12, opacity: 0.7, marginBottom: 8 }}>
                   Itinerari trovati: <strong>{filtered.length}</strong>
+                  {filtered.length !== visibleRoutes.length ? (
+                    <>
+                      {" "}
+                      · mostrati: <strong>{visibleRoutes.length}</strong>
+                    </>
+                  ) : null}
                 </div>
 
                 <div style={{ display: "grid", gap: 10 }}>
-                  {filtered.map((r) => {
+                  {visibleRoutes.map((r) => {
                     const key = buildRouteKey(r);
                     const isActive = key === activeKey;
                     return (
@@ -792,6 +853,31 @@ export default function Routes() {
                     );
                   })}
                 </div>
+
+                {hasMoreRoutes ? (
+                  <div
+                    style={{
+                      marginTop: 12,
+                      display: "flex",
+                      justifyContent: "center",
+                    }}
+                  >
+                    <button
+                      type="button"
+                      onClick={loadMoreRoutes}
+                      style={{
+                        padding: "10px 14px",
+                        borderRadius: 12,
+                        border: "1px solid rgba(0,0,0,0.15)",
+                        background: "white",
+                        cursor: "pointer",
+                        fontWeight: 900,
+                      }}
+                    >
+                      Carica altri ({filtered.length - visibleRoutes.length} rimasti)
+                    </button>
+                  </div>
+                ) : null}
               </div>
 
               <div className="routes-detail">
@@ -1043,10 +1129,11 @@ function RouteDetail({ route }) {
   const [wxBusy, setWxBusy] = useState(false);
 
   const routeKey = buildRouteKey(route);
-const rawDescription = String(route?.description || "").trim();
-const displayDescription = isMechanicalDescription(rawDescription)
-  ? buildPrettyRouteDescription(route)
-  : rawDescription || "Descrizione non disponibile.";
+  const rawDescription = String(route?.description || "").trim();
+  const displayDescription = isMechanicalDescription(rawDescription)
+    ? buildPrettyRouteDescription(route)
+    : rawDescription || "Descrizione non disponibile.";
+
   useEffect(() => {
     let alive = true;
 
