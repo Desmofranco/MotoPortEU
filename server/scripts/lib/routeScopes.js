@@ -1170,6 +1170,35 @@ IE: {
 
   }
 },
+NO: {
+  country: "NO",
+  name: "Norway",
+  scopes: {
+
+    "norway-west-fjords": {
+      name: "Norway West Fjords",
+      regions: ["Vestland", "Møre og Romsdal"],
+      areas: [
+        { name: "Bergen", lat: 60.39, lng: 5.32, radius: 50000 },
+        { name: "Sognefjord", lat: 61.1, lng: 6.8, radius: 50000 },
+        { name: "Geirangerfjord", lat: 62.1, lng: 7.2, radius: 50000 },
+        { name: "Ålesund", lat: 62.47, lng: 6.15, radius: 50000 }
+      ]
+    },
+
+    "norway-south-telemark": {
+      name: "Norway South Telemark",
+      regions: ["Telemark", "Agder"],
+      areas: [
+        { name: "Rjukan", lat: 59.88, lng: 8.59, radius: 50000 },
+        { name: "Gaustatoppen", lat: 59.85, lng: 8.65, radius: 50000 },
+        { name: "Setesdal Valley", lat: 59.35, lng: 7.55, radius: 50000 },
+        { name: "Kristiansand Inland", lat: 58.15, lng: 7.9, radius: 50000 }
+      ]
+    }
+
+  }
+},
   LU: {
     country: "LU",
     name: "Luxembourg",

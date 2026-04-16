@@ -976,6 +976,33 @@ IE: {
     { name: "Mizen Head Route", lat: 51.45, lng: -9.82, rideType: "coastal" }
   ]
 },
+NO: {
+  "norway-west-fjords": [
+    { name: "Bergen Coastal Road", lat: 60.39, lng: 5.32, rideType: "coastal" },
+    { name: "Hardangerfjord Route", lat: 60.37, lng: 6.15, rideType: "scenic" },
+    { name: "Sognefjord Scenic Drive", lat: 61.1, lng: 6.8, rideType: "scenic" },
+    { name: "Aurlandsfjellet Road", lat: 60.9, lng: 7.2, rideType: "mountain" },
+    { name: "Lærdal Mountain Pass", lat: 61.1, lng: 7.5, rideType: "mountain" },
+    { name: "Geiranger Trollstigen Link", lat: 62.3, lng: 7.4, rideType: "mountain" },
+    { name: "Trollstigen Road", lat: 62.45, lng: 7.66, rideType: "mountain" },
+    { name: "Atlantic Ocean Road", lat: 63.02, lng: 7.35, rideType: "coastal" },
+    { name: "Ålesund Coastal Drive", lat: 62.47, lng: 6.15, rideType: "coastal" },
+    { name: "Fjord Panorama Route", lat: 61.5, lng: 6.9, rideType: "scenic" }
+  ],
+
+  "norway-south-telemark": [
+    { name: "Rjukan Mountain Route", lat: 59.88, lng: 8.59, rideType: "mountain" },
+    { name: "Gaustatoppen Scenic Climb", lat: 59.85, lng: 8.65, rideType: "mountain" },
+    { name: "Telemark Scenic Road", lat: 59.5, lng: 8.5, rideType: "scenic" },
+    { name: "Setesdal Valley Ride", lat: 59.35, lng: 7.55, rideType: "scenic" },
+    { name: "Setesdal Twisties", lat: 59.2, lng: 7.7, rideType: "mountain" },
+    { name: "Agder Inland Road", lat: 58.4, lng: 7.9, rideType: "scenic" },
+    { name: "Southern Norway Ridge", lat: 58.9, lng: 8.2, rideType: "mountain" },
+    { name: "Kristiansand Inland Loop", lat: 58.15, lng: 7.9, rideType: "scenic" },
+    { name: "Telemark Forest Ride", lat: 59.3, lng: 8.0, rideType: "forest" },
+    { name: "South Norway Scenic Link", lat: 59.0, lng: 8.3, rideType: "scenic" }
+  ]
+},
 };
 
 function buildManualSeeds(country, scope) {
