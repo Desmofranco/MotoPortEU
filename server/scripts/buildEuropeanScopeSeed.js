@@ -1003,6 +1003,33 @@ NO: {
     { name: "South Norway Scenic Link", lat: 59.0, lng: 8.3, rideType: "scenic" }
   ]
 },
+SE: {
+  "sweden-south-lakes": [
+    { name: "Lake Vänern Loop", lat: 58.9, lng: 13.3, rideType: "lake" },
+    { name: "Vänern Scenic Drive", lat: 58.7, lng: 13.0, rideType: "scenic" },
+    { name: "Lake Vättern East Road", lat: 58.4, lng: 14.6, rideType: "lake" },
+    { name: "Vättern Panorama Route", lat: 58.2, lng: 14.7, rideType: "scenic" },
+    { name: "Jönköping Forest Ride", lat: 57.78, lng: 14.16, rideType: "forest" },
+    { name: "Småland Scenic Route", lat: 57.5, lng: 14.5, rideType: "scenic" },
+    { name: "South Sweden Twisties", lat: 57.9, lng: 13.8, rideType: "scenic" },
+    { name: "Halland Inland Road", lat: 56.9, lng: 13.0, rideType: "scenic" },
+    { name: "Lake District Sweden Link", lat: 58.1, lng: 13.5, rideType: "lake" },
+    { name: "Southern Sweden Ridge", lat: 57.7, lng: 13.6, rideType: "scenic" }
+  ],
+
+  "sweden-west-coast": [
+    { name: "Gothenburg Coastal Ride", lat: 57.7, lng: 11.97, rideType: "coastal" },
+    { name: "Varberg Coastal Road", lat: 57.1, lng: 12.25, rideType: "coastal" },
+    { name: "Bohuslän Scenic Coast", lat: 58.8, lng: 11.2, rideType: "coastal" },
+    { name: "Fjällbacka Coastal Drive", lat: 58.6, lng: 11.28, rideType: "coastal" },
+    { name: "West Sweden Archipelago", lat: 57.9, lng: 11.5, rideType: "coastal" },
+    { name: "Swedish Coastal Panorama", lat: 58.2, lng: 11.6, rideType: "scenic" },
+    { name: "North Bohuslän Ride", lat: 58.9, lng: 11.3, rideType: "coastal" },
+    { name: "West Coast Twisties", lat: 57.8, lng: 11.9, rideType: "scenic" },
+    { name: "Göteborg Inland Link", lat: 57.7, lng: 12.2, rideType: "scenic" },
+    { name: "Scandinavian Coast Route", lat: 58.5, lng: 11.4, rideType: "coastal" }
+  ]
+},
 };
 
 function buildManualSeeds(country, scope) {

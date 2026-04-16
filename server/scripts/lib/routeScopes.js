@@ -1199,6 +1199,35 @@ NO: {
 
   }
 },
+SE: {
+  country: "SE",
+  name: "Sweden",
+  scopes: {
+
+    "sweden-south-lakes": {
+      name: "Sweden South Lakes",
+      regions: ["Västra Götaland", "Jönköping", "Halland"],
+      areas: [
+        { name: "Lake Vänern", lat: 58.9, lng: 13.3, radius: 50000 },
+        { name: "Lake Vättern", lat: 58.4, lng: 14.6, radius: 50000 },
+        { name: "Jönköping Area", lat: 57.78, lng: 14.16, radius: 50000 },
+        { name: "Halmstad Inland", lat: 56.67, lng: 12.86, radius: 50000 }
+      ]
+    },
+
+    "sweden-west-coast": {
+      name: "Sweden West Coast",
+      regions: ["Halland", "Västra Götaland"],
+      areas: [
+        { name: "Gothenburg", lat: 57.7, lng: 11.97, radius: 50000 },
+        { name: "Varberg Coast", lat: 57.1, lng: 12.25, radius: 50000 },
+        { name: "Fjällbacka", lat: 58.6, lng: 11.28, radius: 50000 },
+        { name: "Bohuslän Coast", lat: 58.8, lng: 11.2, radius: 50000 }
+      ]
+    }
+
+  }
+},
   LU: {
     country: "LU",
     name: "Luxembourg",
