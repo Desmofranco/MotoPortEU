@@ -1141,6 +1141,35 @@ BE: {
     }
   }
 },
+IE: {
+  country: "IE",
+  name: "Ireland",
+  scopes: {
+
+    "ireland-west-wild-atlantic": {
+      name: "Ireland West Wild Atlantic Way",
+      regions: ["Donegal", "Mayo", "Galway", "Clare"],
+      areas: [
+        { name: "Donegal Coast", lat: 55.03, lng: -8.34, radius: 50000 },
+        { name: "Westport / Mayo Coast", lat: 53.8, lng: -9.52, radius: 50000 },
+        { name: "Connemara", lat: 53.5, lng: -9.8, radius: 50000 },
+        { name: "Cliffs of Moher", lat: 52.97, lng: -9.43, radius: 50000 }
+      ]
+    },
+
+    "ireland-south-kerry-cork": {
+      name: "Ireland South Kerry & Cork",
+      regions: ["Kerry", "Cork"],
+      areas: [
+        { name: "Killarney", lat: 52.06, lng: -9.5, radius: 50000 },
+        { name: "Ring of Kerry", lat: 51.9, lng: -10.1, radius: 50000 },
+        { name: "Dingle Peninsula", lat: 52.14, lng: -10.27, radius: 50000 },
+        { name: "West Cork Coast", lat: 51.6, lng: -9.5, radius: 50000 }
+      ]
+    }
+
+  }
+},
   LU: {
     country: "LU",
     name: "Luxembourg",

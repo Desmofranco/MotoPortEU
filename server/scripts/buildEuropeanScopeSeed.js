@@ -949,6 +949,33 @@ GB: {
     { name: "Mid Wales Ridge Drive", lat: 52.4, lng: -3.55, rideType: "mountain" }
   ]
 },
+IE: {
+  "ireland-west-wild-atlantic": [
+    { name: "Donegal Coastal Drive", lat: 55.03, lng: -8.34, rideType: "coastal" },
+    { name: "Slieve League Cliffs Road", lat: 54.63, lng: -8.68, rideType: "scenic" },
+    { name: "Wild Atlantic Way North", lat: 54.5, lng: -9.2, rideType: "scenic" },
+    { name: "Westport to Louisburgh", lat: 53.8, lng: -9.66, rideType: "coastal" },
+    { name: "Connemara Loop", lat: 53.5, lng: -9.9, rideType: "scenic" },
+    { name: "Sky Road Clifden", lat: 53.49, lng: -10.02, rideType: "coastal" },
+    { name: "Leenane Mountain Pass", lat: 53.6, lng: -9.7, rideType: "mountain" },
+    { name: "Galway Bay Coastal", lat: 53.2, lng: -9.3, rideType: "coastal" },
+    { name: "Burren Scenic Drive", lat: 53.0, lng: -9.1, rideType: "scenic" },
+    { name: "Cliffs of Moher Route", lat: 52.97, lng: -9.43, rideType: "coastal" }
+  ],
+
+  "ireland-south-kerry-cork": [
+    { name: "Ring of Kerry Full Loop", lat: 51.9, lng: -10.1, rideType: "scenic" },
+    { name: "Killarney National Park Drive", lat: 52.06, lng: -9.5, rideType: "scenic" },
+    { name: "Gap of Dunloe", lat: 52.0, lng: -9.65, rideType: "mountain" },
+    { name: "Dingle Peninsula Loop", lat: 52.14, lng: -10.27, rideType: "coastal" },
+    { name: "Slea Head Drive", lat: 52.1, lng: -10.45, rideType: "coastal" },
+    { name: "Connor Pass", lat: 52.23, lng: -10.25, rideType: "mountain" },
+    { name: "Kenmare to Glengarriff", lat: 51.75, lng: -9.55, rideType: "scenic" },
+    { name: "Beara Peninsula Route", lat: 51.7, lng: -9.9, rideType: "coastal" },
+    { name: "West Cork Coastal Drive", lat: 51.6, lng: -9.5, rideType: "coastal" },
+    { name: "Mizen Head Route", lat: 51.45, lng: -9.82, rideType: "coastal" }
+  ]
+},
 };
 
 function buildManualSeeds(country, scope) {
