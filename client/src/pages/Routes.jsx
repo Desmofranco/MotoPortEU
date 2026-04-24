@@ -9,21 +9,20 @@
 // ✅ Loading skeleton
 // ✅ Meteo + Google Maps
 // ✅ FIX mobile: no aperture accidentali durante scroll
-// ✅ Ricerca intelligente su:
-//    - name
-//    - description
-//    - aliases
-//    - searchText
-//    - tags
-//    - waypoints[].name
+// ✅ Ricerca intelligente
 // ✅ Filtri: Paese / Regione / Categoria
 // ✅ Categorie commerciali: Montagna / Laghi / Mare
-// ✅ Supporto completo nuovo dataset routes.json
-// ✅ Render limitato iniziale (mobile/desktop)
+// ✅ Render limitato iniziale
 // ✅ Pulsante "Carica altri"
 // ✅ Ricerca con debounce
-// ✅ Selezione coerente anche con lista parziale
 // ✅ Fetch con cache più favorevole su mobile
+//
+// RIDER ANALYSIS:
+// ✅ computeDistanceKm
+// ✅ analyzeCurves
+// ✅ complexity badge
+// ✅ rider diagnosis
+// ✅ stats UI percorso
 // =======================================================
 
 import React, { useEffect, useMemo, useRef, useState } from "react";
@@ -314,6 +313,357 @@ function countryLabel(code) {
   return map[code] || code;
 }
 
+function degToRad(deg) {
+  return (deg * Math.PI) / 180;
+}
+
+function computeDistanceKm(a, b) {
+  if (!a || !b) return 0;
+
+  const lat1 = toNum(a[0]);
+  const lon1 = toNum(a[1]);
+  const lat2 = toNum(b[0]);
+  const lon2 = toNum(b[1]);
+
+  if (
+    !Number.isFinite(lat1) ||
+    !Number.isFinite(lon1) ||
+    !Number.isFinite(lat2) ||
+    !Number.isFinite(lon2)
+  ) {
+    return 0;
+  }
+
+  const R = 6371;
+  const dLat = degToRad(lat2 - lat1);
+  const dLon = degToRad(lon2 - lon1);
+
+  const x =
+    Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+    Math.cos(degToRad(lat1)) *
+      Math.cos(degToRad(lat2)) *
+      Math.sin(dLon / 2) *
+      Math.sin(dLon / 2);
+
+  return R * 2 * Math.atan2(Math.sqrt(x), Math.sqrt(1 - x));
+}
+
+function bearingDeg(a, b) {
+  if (!a || !b) return null;
+
+  const lat1 = degToRad(Number(a[0]));
+  const lat2 = degToRad(Number(b[0]));
+  const dLon = degToRad(Number(b[1]) - Number(a[1]));
+
+  if (![lat1, lat2, dLon].every(Number.isFinite)) return null;
+
+  const y = Math.sin(dLon) * Math.cos(lat2);
+  const x =
+    Math.cos(lat1) * Math.sin(lat2) -
+    Math.sin(lat1) * Math.cos(lat2) * Math.cos(dLon);
+
+  return ((Math.atan2(y, x) * 180) / Math.PI + 360) % 360;
+}
+
+function angleDiff(a, b) {
+  if (a == null || b == null) return 0;
+  let d = Math.abs(a - b) % 360;
+  if (d > 180) d = 360 - d;
+  return d;
+}
+
+function extractRouteCoords(route) {
+  const out = [];
+
+  const pushPoint = (p) => {
+    let pair = null;
+
+    if (Array.isArray(p) && p.length >= 2) {
+      pair = pairFrom(p[0], p[1]);
+    } else if (p && typeof p === "object") {
+      pair = pointFromObject(p);
+    }
+
+    if (!pair) return;
+
+    const last = out[out.length - 1];
+    if (
+      last &&
+      Number(last[0]).toFixed(5) === Number(pair[0]).toFixed(5) &&
+      Number(last[1]).toFixed(5) === Number(pair[1]).toFixed(5)
+    ) {
+      return;
+    }
+
+    out.push(pair);
+  };
+
+  if (Array.isArray(route?.coords)) {
+    route.coords.forEach(pushPoint);
+  }
+
+  if (out.length < 2 && Array.isArray(route?.geometry)) {
+    route.geometry.forEach(pushPoint);
+  }
+
+  if (out.length < 2 && Array.isArray(route?.waypoints)) {
+    route.waypoints.forEach(pushPoint);
+  }
+
+  if (out.length < 2 && Array.isArray(route?.spots)) {
+    route.spots.forEach(pushPoint);
+  }
+
+  if (out.length < 2) {
+    pushPoint(route?.start);
+    pushPoint(route?.center);
+    pushPoint(route?.end);
+  }
+
+  return out;
+}
+
+function getRouteDistanceKm(route) {
+  const declared = toNum(route?.distanceKm);
+  if (declared && declared > 0) return declared;
+
+  const coords = extractRouteCoords(route);
+  if (coords.length < 2) return 0;
+
+  let total = 0;
+  for (let i = 1; i < coords.length; i += 1) {
+    total += computeDistanceKm(coords[i - 1], coords[i]);
+  }
+
+  return total;
+}
+
+function analyzeCurves(route) {
+  const coords = extractRouteCoords(route);
+  const declaredScore = toNum(route?.curvesScore);
+
+  if (coords.length < 3) {
+    const estimated =
+      declaredScore != null
+        ? Math.max(0, Math.min(100, declaredScore))
+        : normalizeCategory(route) === "mountain"
+        ? 72
+        : normalizeCategory(route) === "coastal"
+        ? 48
+        : 42;
+
+    return {
+      available: false,
+      points: coords.length,
+      curves: null,
+      technicalTurns: null,
+      directionChanges: null,
+      curveDensity: null,
+      score: Math.round(estimated),
+      label:
+        estimated >= 75
+          ? "Molto guidato"
+          : estimated >= 55
+          ? "Guidato"
+          : estimated >= 35
+          ? "Scorrevole"
+          : "Facile",
+    };
+  }
+
+  let curves = 0;
+  let technicalTurns = 0;
+  let directionChanges = 0;
+  let lastBearing = bearingDeg(coords[0], coords[1]);
+
+  for (let i = 2; i < coords.length; i += 1) {
+    const b = bearingDeg(coords[i - 1], coords[i]);
+    const diff = angleDiff(lastBearing, b);
+
+    if (diff >= 12) directionChanges += 1;
+    if (diff >= 22) curves += 1;
+    if (diff >= 45) technicalTurns += 1;
+
+    lastBearing = b;
+  }
+
+  const distanceKm = Math.max(1, getRouteDistanceKm(route));
+  const curveDensity = curves / distanceKm;
+  const technicalDensity = technicalTurns / distanceKm;
+
+  let score = Math.round(
+    Math.min(
+      100,
+      curveDensity * 42 + technicalDensity * 65 + Math.min(coords.length, 80) * 0.18
+    )
+  );
+
+  if (declaredScore != null) {
+    score = Math.round(score * 0.65 + declaredScore * 0.35);
+  }
+
+  const label =
+    score >= 78
+      ? "Molto guidato"
+      : score >= 58
+      ? "Guidato"
+      : score >= 38
+      ? "Scorrevole"
+      : "Facile";
+
+  return {
+    available: true,
+    points: coords.length,
+    curves,
+    technicalTurns,
+    directionChanges,
+    curveDensity,
+    score,
+    label,
+  };
+}
+
+function buildRiderAnalysis(route) {
+  const category = normalizeCategory(route);
+  const distanceKm = getRouteDistanceKm(route);
+  const curves = analyzeCurves(route);
+  const asphaltScore = toNum(route?.asphaltScore);
+  const difficultyText = normalizeText(route?.difficulty);
+  const blob = routeSearchBlob(route);
+
+  let complexityScore = 0;
+
+  complexityScore += Math.min(38, curves.score * 0.38);
+
+  if (distanceKm >= 250) complexityScore += 28;
+  else if (distanceKm >= 180) complexityScore += 22;
+  else if (distanceKm >= 120) complexityScore += 16;
+  else if (distanceKm >= 70) complexityScore += 10;
+  else complexityScore += 5;
+
+  if (category === "mountain") complexityScore += 18;
+  if (category === "coastal") complexityScore += 8;
+  if (category === "lake") complexityScore += 6;
+
+  if (
+    difficultyText.includes("hard") ||
+    difficultyText.includes("difficile") ||
+    difficultyText.includes("expert") ||
+    difficultyText.includes("avanz")
+  ) {
+    complexityScore += 16;
+  } else if (
+    difficultyText.includes("medium") ||
+    difficultyText.includes("intermedio") ||
+    difficultyText.includes("medio")
+  ) {
+    complexityScore += 9;
+  }
+
+  if (
+    blob.includes("passo") ||
+    blob.includes("pass") ||
+    blob.includes("alps") ||
+    blob.includes("alp") ||
+    blob.includes("dolom") ||
+    blob.includes("mountain")
+  ) {
+    complexityScore += 8;
+  }
+
+  if (asphaltScore != null && asphaltScore < 55) complexityScore += 8;
+
+  complexityScore = Math.max(1, Math.min(100, Math.round(complexityScore)));
+
+  let complexity = "Easy";
+  let tone = "green";
+  let icon = "🟢";
+
+  if (complexityScore >= 78) {
+    complexity = "Expert";
+    tone = "red";
+    icon = "🔴";
+  } else if (complexityScore >= 58) {
+    complexity = "Sport";
+    tone = "orange";
+    icon = "🟠";
+  } else if (complexityScore >= 38) {
+    complexity = "Touring";
+    tone = "blue";
+    icon = "🔵";
+  }
+
+  let diagnosis = "";
+
+  if (complexity === "Expert") {
+    diagnosis =
+      "Percorso impegnativo: tante curve, ritmo fisico e possibile alternanza di tratti tecnici. Ideale per rider esperti e guida concentrata.";
+  } else if (complexity === "Sport") {
+    diagnosis =
+      "Percorso molto interessante per chi ama guidare: curve presenti, buon ritmo e tratti da affrontare con attenzione.";
+  } else if (complexity === "Touring") {
+    diagnosis =
+      "Percorso equilibrato: adatto al turismo in moto, con guida piacevole e complessità gestibile.";
+  } else {
+    diagnosis =
+      "Percorso facile e scorrevole: buono per una gita rilassata, anche con passeggero o ritmo tranquillo.";
+  }
+
+  const highlights = [];
+
+  if (curves.score >= 70) highlights.push("Alta densità di curve");
+  else if (curves.score >= 50) highlights.push("Buona guidabilità");
+  else highlights.push("Andatura scorrevole");
+
+  if (distanceKm >= 180) highlights.push("Giro lungo");
+  else if (distanceKm >= 90) highlights.push("Mezza giornata piena");
+  else highlights.push("Giro compatto");
+
+  if (category === "mountain") highlights.push("Terreno montano");
+  if (category === "lake") highlights.push("Panorama lago");
+  if (category === "coastal") highlights.push("Strada costiera");
+
+  return {
+    distanceKm,
+    curves,
+    complexity,
+    complexityScore,
+    tone,
+    icon,
+    diagnosis,
+    highlights,
+  };
+}
+
+function complexityBadgeStyle(tone, dark = false) {
+  if (dark) return pill("dark");
+
+  const colors = {
+    green: {
+      background: "rgba(0,140,80,0.10)",
+      border: "1px solid rgba(0,140,80,0.20)",
+    },
+    blue: {
+      background: "rgba(0,100,220,0.10)",
+      border: "1px solid rgba(0,100,220,0.20)",
+    },
+    orange: {
+      background: "rgba(255,150,0,0.14)",
+      border: "1px solid rgba(255,150,0,0.25)",
+    },
+    red: {
+      background: "rgba(255,0,0,0.10)",
+      border: "1px solid rgba(255,0,0,0.20)",
+    },
+  };
+
+  return {
+    ...pill("light"),
+    ...(colors[tone] || colors.blue),
+    fontWeight: 900,
+  };
+}
+
 function SkeletonLoading() {
   return (
     <div
@@ -327,33 +677,21 @@ function SkeletonLoading() {
     >
       <div style={{ fontSize: 16, fontWeight: 900 }}>Carico itinerari…</div>
       <div style={{ marginTop: 10, display: "grid", gap: 8 }}>
-        <div
-          style={{
-            height: 12,
-            background: "rgba(0,0,0,0.08)",
-            borderRadius: 8,
-            width: "70%",
-          }}
-        />
-        <div
-          style={{
-            height: 12,
-            background: "rgba(0,0,0,0.08)",
-            borderRadius: 8,
-            width: "55%",
-          }}
-        />
-        <div
-          style={{
-            height: 12,
-            background: "rgba(0,0,0,0.08)",
-            borderRadius: 8,
-            width: "80%",
-          }}
-        />
+        <div style={skeletonLine("70%")} />
+        <div style={skeletonLine("55%")} />
+        <div style={skeletonLine("80%")} />
       </div>
     </div>
   );
+}
+
+function skeletonLine(width) {
+  return {
+    height: 12,
+    background: "rgba(0,0,0,0.08)",
+    borderRadius: 8,
+    width,
+  };
 }
 
 function formatRouteKm(km) {
@@ -409,7 +747,7 @@ function isMechanicalDescription(text = "") {
 function buildPrettyRouteDescription(route) {
   const region = route?.region || "questa zona";
   const rideType = normalizeCategory(route);
-  const km = formatRouteKm(route?.distanceKm);
+  const km = formatRouteKm(getRouteDistanceKm(route));
   const names = getRoutePointNames(route, 4);
 
   const a = names[0] || null;
@@ -576,7 +914,7 @@ export default function Routes() {
       const rb = String(b.region || "");
       if (ra !== rb) return ra.localeCompare(rb, "it");
 
-      return Number(b.distanceKm || 0) - Number(a.distanceKm || 0);
+      return Number(getRouteDistanceKm(b) || 0) - Number(getRouteDistanceKm(a) || 0);
     });
 
     return out;
@@ -661,7 +999,7 @@ export default function Routes() {
                 className="routes-subtitle"
                 style={{ opacity: 0.75, marginTop: 6 }}
               >
-                Touring emozionale: mappa e meteo lungo il percorso.
+                Touring emozionale: mappa, meteo e Rider Analysis.
               </div>
             </div>
 
@@ -697,11 +1035,7 @@ export default function Routes() {
               <select
                 value={country}
                 onChange={(e) => setCountry(e.target.value)}
-                style={{
-                  padding: "10px 12px",
-                  borderRadius: 12,
-                  border: "1px solid rgba(0,0,0,0.15)",
-                }}
+                style={selectStyle()}
               >
                 {countries.map((c) => (
                   <option key={c} value={c}>
@@ -716,11 +1050,7 @@ export default function Routes() {
               <select
                 value={region}
                 onChange={(e) => setRegion(e.target.value)}
-                style={{
-                  padding: "10px 12px",
-                  borderRadius: 12,
-                  border: "1px solid rgba(0,0,0,0.15)",
-                }}
+                style={selectStyle()}
               >
                 {regions.map((r) => (
                   <option key={r} value={r}>
@@ -735,11 +1065,7 @@ export default function Routes() {
               <select
                 value={category}
                 onChange={(e) => setCategory(e.target.value)}
-                style={{
-                  padding: "10px 12px",
-                  borderRadius: 12,
-                  border: "1px solid rgba(0,0,0,0.15)",
-                }}
+                style={selectStyle()}
               >
                 <option value="ALL">Tutte</option>
                 <option value="mountain">Montagna</option>
@@ -789,14 +1115,7 @@ export default function Routes() {
                     setMobileView("list");
                     window.scrollTo({ top: 0, behavior: "auto" });
                   }}
-                  style={{
-                    padding: "9px 10px",
-                    borderRadius: 12,
-                    border: "1px solid rgba(0,0,0,0.15)",
-                    background: "white",
-                    cursor: "pointer",
-                    fontWeight: 900,
-                  }}
+                  style={backButtonStyle()}
                 >
                   ← Indietro
                 </button>
@@ -865,14 +1184,7 @@ export default function Routes() {
                     <button
                       type="button"
                       onClick={loadMoreRoutes}
-                      style={{
-                        padding: "10px 14px",
-                        borderRadius: 12,
-                        border: "1px solid rgba(0,0,0,0.15)",
-                        background: "white",
-                        cursor: "pointer",
-                        fontWeight: 900,
-                      }}
+                      style={loadMoreButtonStyle()}
                     >
                       Carica altri ({filtered.length - visibleRoutes.length} rimasti)
                     </button>
@@ -936,6 +1248,7 @@ export default function Routes() {
 function RouteCard({ route, active, onSelect }) {
   const photo = route.photo || FALLBACK_PHOTO;
   const category = normalizeCategory(route);
+  const analysis = buildRiderAnalysis(route);
 
   const touchRef = useRef({
     startX: 0,
@@ -1046,7 +1359,7 @@ function RouteCard({ route, active, onSelect }) {
               {route.name}
             </div>
             <div style={{ fontSize: 11, opacity: 0.75, whiteSpace: "nowrap" }}>
-              {route.distanceKm ? `${route.distanceKm} km` : "—"}
+              {formatRouteKm(analysis.distanceKm)}
             </div>
           </div>
 
@@ -1064,6 +1377,10 @@ function RouteCard({ route, active, onSelect }) {
             <span>{route.region || "—"}</span>
             <span>·</span>
             <span>{categoryLabel(category)}</span>
+            <span>·</span>
+            <span>
+              {analysis.icon} {analysis.complexity}
+            </span>
           </div>
         </div>
       </div>
@@ -1086,7 +1403,7 @@ function RouteCard({ route, active, onSelect }) {
               {route.name}
             </div>
             <div style={{ fontSize: 12, opacity: 0.75, whiteSpace: "nowrap" }}>
-              {route.distanceKm ? `${route.distanceKm} km` : "—"}
+              {formatRouteKm(analysis.distanceKm)}
             </div>
           </div>
 
@@ -1100,6 +1417,9 @@ function RouteCard({ route, active, onSelect }) {
             }}
           >
             <span style={pill("light")}>{categoryLabel(category)}</span>
+            <span style={complexityBadgeStyle(analysis.tone)}>
+              {analysis.icon} {analysis.complexity}
+            </span>
             <span style={{ fontSize: 12, opacity: 0.75 }}>
               {route.region || "—"}
             </span>
@@ -1124,6 +1444,7 @@ function RouteDetail({ route }) {
     ? buildNavigateUrl(latLonStr(navPoint), "driving")
     : null;
   const category = normalizeCategory(route);
+  const analysis = buildRiderAnalysis(route);
 
   const [wx, setWx] = useState(null);
   const [wxBusy, setWxBusy] = useState(false);
@@ -1195,16 +1516,15 @@ function RouteDetail({ route }) {
           </div>
 
           <div style={{ marginTop: 8, display: "flex", gap: 8, flexWrap: "wrap" }}>
-            <span style={pill("dark")}>
-              📏 {route.distanceKm ? `${route.distanceKm} km` : "—"}
-            </span>
+            <span style={pill("dark")}>📏 {formatRouteKm(analysis.distanceKm)}</span>
             {route.durationMin != null ? (
               <span style={pill("dark")}>⏱ {route.durationMin} min</span>
             ) : null}
             <span style={pill("dark")}>🏍️ {categoryLabel(category)}</span>
-            {route.difficulty ? (
-              <span style={pill("dark")}>⚡ {route.difficulty}</span>
-            ) : null}
+            <span style={pill("dark")}>
+              {analysis.icon} {analysis.complexity}
+            </span>
+            <span style={pill("dark")}>🌀 Curve {analysis.curves.score}/100</span>
           </div>
         </div>
       </div>
@@ -1227,12 +1547,14 @@ function RouteDetail({ route }) {
           }}
           title={
             startNavUrl
-              ? "Avvia navigazione verso l'inizio (usa la tua posizione automaticamente)"
+              ? "Avvia navigazione verso l'inizio usando la tua posizione"
               : "Coordinate itinerario non disponibili"
           }
         >
           🧭 Avvia verso START
         </button>
+
+        <RiderAnalysisPanel analysis={analysis} route={route} />
 
         <div
           style={{
@@ -1286,102 +1608,7 @@ function RouteDetail({ route }) {
           </div>
         </div>
 
-        <div
-          style={{
-            marginTop: 12,
-            borderTop: "1px solid rgba(0,0,0,0.08)",
-            paddingTop: 12,
-          }}
-        >
-          <strong>🌤 Meteo</strong>
-
-          {wxBusy ? (
-            <div
-              style={{
-                marginTop: 10,
-                padding: 12,
-                borderRadius: 16,
-                background: "rgba(0,0,0,0.04)",
-              }}
-            >
-              Carico meteo…
-            </div>
-          ) : !wx || !wx.ok ? (
-            <div
-              style={{
-                marginTop: 10,
-                padding: 12,
-                borderRadius: 16,
-                background: "rgba(0,0,0,0.04)",
-              }}
-            >
-              {wx?.note || "Meteo non disponibile."}
-            </div>
-          ) : (
-            <div style={{ marginTop: 10, display: "grid", gap: 10 }}>
-              <div
-                style={{
-                  display: "flex",
-                  gap: 10,
-                  flexWrap: "wrap",
-                  alignItems: "center",
-                }}
-              >
-                <span style={pill("light")}>
-                  Condizione: <strong>{wx.worst}</strong>
-                </span>
-
-                {wx.temp != null ? (
-                  <span style={pill("light")}>
-                    🌡 {wx.temp}°{" "}
-                    {wx.tempMin != null && wx.tempMax != null
-                      ? `(min ${wx.tempMin}° / max ${wx.tempMax}°)`
-                      : ""}
-                  </span>
-                ) : null}
-
-                {wx.windKmh != null ? (
-                  <span style={pill("light")}>
-                    💨 vento {wx.windKmh} km/h
-                  </span>
-                ) : null}
-              </div>
-
-              {wx.ride ? (
-                <div
-                  style={{
-                    padding: 12,
-                    borderRadius: 14,
-                    background:
-                      wx.ride.level === "danger"
-                        ? "rgba(255,0,0,0.08)"
-                        : wx.ride.level === "warn"
-                        ? "rgba(255,180,0,0.12)"
-                        : "rgba(0,140,80,0.10)",
-                    border:
-                      wx.ride.level === "danger"
-                        ? "1px solid rgba(255,0,0,0.16)"
-                        : wx.ride.level === "warn"
-                        ? "1px solid rgba(255,180,0,0.22)"
-                        : "1px solid rgba(0,140,80,0.18)",
-                  }}
-                >
-                  <div style={{ fontWeight: 900, fontSize: 13 }}>
-                    🏍 {wx.ride.label}
-                  </div>
-                  <div style={{ marginTop: 4, fontSize: 13, opacity: 0.85 }}>
-                    {wx.ride.advice}
-                  </div>
-                </div>
-              ) : null}
-
-              <div style={{ fontSize: 12, opacity: 0.7 }}>
-                Aggiornato:{" "}
-                {String(wx.updatedAt || "").slice(0, 16).replace("T", " ")}
-              </div>
-            </div>
-          )}
-        </div>
+        <WeatherPanel wx={wx} wxBusy={wxBusy} />
 
         {!navPoint ? (
           <div style={{ marginTop: 10, fontSize: 12, opacity: 0.65 }}>
@@ -1391,6 +1618,232 @@ function RouteDetail({ route }) {
       </div>
     </>
   );
+}
+
+function RiderAnalysisPanel({ analysis, route }) {
+  return (
+    <div
+      style={{
+        marginTop: 12,
+        borderTop: "1px solid rgba(0,0,0,0.08)",
+        paddingTop: 12,
+      }}
+    >
+      <strong>🏍️ Rider Analysis</strong>
+
+      <div
+        style={{
+          marginTop: 10,
+          display: "grid",
+          gridTemplateColumns: "repeat(auto-fit, minmax(130px, 1fr))",
+          gap: 8,
+        }}
+      >
+        <StatBox label="Distanza" value={formatRouteKm(analysis.distanceKm)} />
+        <StatBox label="Curve" value={`${analysis.curves.score}/100`} />
+        <StatBox label="Feeling" value={analysis.curves.label} />
+        <StatBox
+          label="Complessità"
+          value={`${analysis.icon} ${analysis.complexity}`}
+        />
+      </div>
+
+      <div
+        style={{
+          marginTop: 10,
+          padding: 12,
+          borderRadius: 14,
+          background:
+            analysis.tone === "red"
+              ? "rgba(255,0,0,0.08)"
+              : analysis.tone === "orange"
+              ? "rgba(255,180,0,0.12)"
+              : analysis.tone === "green"
+              ? "rgba(0,140,80,0.10)"
+              : "rgba(0,100,220,0.10)",
+          border:
+            analysis.tone === "red"
+              ? "1px solid rgba(255,0,0,0.16)"
+              : analysis.tone === "orange"
+              ? "1px solid rgba(255,180,0,0.22)"
+              : analysis.tone === "green"
+              ? "1px solid rgba(0,140,80,0.18)"
+              : "1px solid rgba(0,100,220,0.18)",
+        }}
+      >
+        <div style={{ fontWeight: 900, fontSize: 13 }}>
+          {analysis.icon} Diagnosi rider · {analysis.complexityScore}/100
+        </div>
+        <div style={{ marginTop: 4, fontSize: 13, opacity: 0.85, lineHeight: 1.35 }}>
+          {analysis.diagnosis}
+        </div>
+      </div>
+
+      <div style={{ marginTop: 10, display: "flex", gap: 8, flexWrap: "wrap" }}>
+        {analysis.highlights.map((h) => (
+          <span key={h} style={pill("light")}>
+            {h}
+          </span>
+        ))}
+
+        {analysis.curves.available && analysis.curves.curves != null ? (
+          <span style={pill("light")}>🌀 Curve stimate: {analysis.curves.curves}</span>
+        ) : null}
+
+        {analysis.curves.technicalTurns != null ? (
+          <span style={pill("light")}>
+            ⚡ Tornanti/tratti tecnici: {analysis.curves.technicalTurns}
+          </span>
+        ) : null}
+
+        {route?.asphaltScore != null ? (
+          <span style={pill("light")}>🛣️ Asfalto {route.asphaltScore}/100</span>
+        ) : null}
+      </div>
+    </div>
+  );
+}
+
+function StatBox({ label, value }) {
+  return (
+    <div
+      style={{
+        padding: 10,
+        borderRadius: 14,
+        background: "rgba(0,0,0,0.035)",
+        border: "1px solid rgba(0,0,0,0.08)",
+      }}
+    >
+      <div style={{ fontSize: 11, opacity: 0.65 }}>{label}</div>
+      <div style={{ marginTop: 3, fontSize: 15, fontWeight: 950 }}>{value}</div>
+    </div>
+  );
+}
+
+function WeatherPanel({ wx, wxBusy }) {
+  return (
+    <div
+      style={{
+        marginTop: 12,
+        borderTop: "1px solid rgba(0,0,0,0.08)",
+        paddingTop: 12,
+      }}
+    >
+      <strong>🌤 Meteo</strong>
+
+      {wxBusy ? (
+        <div
+          style={{
+            marginTop: 10,
+            padding: 12,
+            borderRadius: 16,
+            background: "rgba(0,0,0,0.04)",
+          }}
+        >
+          Carico meteo…
+        </div>
+      ) : !wx || !wx.ok ? (
+        <div
+          style={{
+            marginTop: 10,
+            padding: 12,
+            borderRadius: 16,
+            background: "rgba(0,0,0,0.04)",
+          }}
+        >
+          {wx?.note || "Meteo non disponibile."}
+        </div>
+      ) : (
+        <div style={{ marginTop: 10, display: "grid", gap: 10 }}>
+          <div
+            style={{
+              display: "flex",
+              gap: 10,
+              flexWrap: "wrap",
+              alignItems: "center",
+            }}
+          >
+            <span style={pill("light")}>
+              Condizione: <strong>{wx.worst}</strong>
+            </span>
+
+            {wx.temp != null ? (
+              <span style={pill("light")}>
+                🌡 {wx.temp}°{" "}
+                {wx.tempMin != null && wx.tempMax != null
+                  ? `(min ${wx.tempMin}° / max ${wx.tempMax}°)`
+                  : ""}
+              </span>
+            ) : null}
+
+            {wx.windKmh != null ? (
+              <span style={pill("light")}>💨 vento {wx.windKmh} km/h</span>
+            ) : null}
+          </div>
+
+          {wx.ride ? (
+            <div
+              style={{
+                padding: 12,
+                borderRadius: 14,
+                background:
+                  wx.ride.level === "danger"
+                    ? "rgba(255,0,0,0.08)"
+                    : wx.ride.level === "warn"
+                    ? "rgba(255,180,0,0.12)"
+                    : "rgba(0,140,80,0.10)",
+                border:
+                  wx.ride.level === "danger"
+                    ? "1px solid rgba(255,0,0,0.16)"
+                    : wx.ride.level === "warn"
+                    ? "1px solid rgba(255,180,0,0.22)"
+                    : "1px solid rgba(0,140,80,0.18)",
+              }}
+            >
+              <div style={{ fontWeight: 900, fontSize: 13 }}>🏍 {wx.ride.label}</div>
+              <div style={{ marginTop: 4, fontSize: 13, opacity: 0.85 }}>
+                {wx.ride.advice}
+              </div>
+            </div>
+          ) : null}
+
+          <div style={{ fontSize: 12, opacity: 0.7 }}>
+            Aggiornato: {String(wx.updatedAt || "").slice(0, 16).replace("T", " ")}
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
+function selectStyle() {
+  return {
+    padding: "10px 12px",
+    borderRadius: 12,
+    border: "1px solid rgba(0,0,0,0.15)",
+  };
+}
+
+function backButtonStyle() {
+  return {
+    padding: "9px 10px",
+    borderRadius: 12,
+    border: "1px solid rgba(0,0,0,0.15)",
+    background: "white",
+    cursor: "pointer",
+    fontWeight: 900,
+  };
+}
+
+function loadMoreButtonStyle() {
+  return {
+    padding: "10px 14px",
+    borderRadius: 12,
+    border: "1px solid rgba(0,0,0,0.15)",
+    background: "white",
+    cursor: "pointer",
+    fontWeight: 900,
+  };
 }
 
 function pill(kind) {
