@@ -1344,23 +1344,34 @@ NL: {
 
   }
 },
-  LU: {
-    country: "LU",
-    name: "Luxembourg",
-    scopes: {
-      luxembourg: {
-        name: "Lussemburgo",
-        regions: ["Luxembourg"],
-        areas: [
-          { name: "Mullerthal", lat: 49.79, lng: 6.31, radius: 50000 },
-          { name: "Ardennes North", lat: 50.05, lng: 6.03, radius: 50000 },
-          { name: "Moselle Valley", lat: 49.6, lng: 6.34, radius: 50000 }
-        ]
-      }
+
+LU: {
+  country: "LU",
+  name: "Luxembourg",
+  scopes: {
+    luxembourg: {
+      name: "Lussemburgo",
+      regions: ["Luxembourg"],
+      areas: [
+        { name: "Mullerthal", lat: 49.79, lng: 6.31, radius: 50000 },
+        { name: "Ardennes North", lat: 50.05, lng: 6.03, radius: 50000 },
+        { name: "Moselle Valley", lat: 49.6, lng: 6.34, radius: 50000 },
+      ]
+    },
+
+    "luxembourg-ardennes": {
+      name: "Luxembourg Ardennes",
+      regions: ["Luxembourg"],
+      areas: [
+        { name: "Vianden", lat: 49.93, lng: 6.20, radius: 50000 },
+        { name: "Clervaux", lat: 50.05, lng: 6.03, radius: 50000 },
+        { name: "Esch-sur-Sûre", lat: 49.91, lng: 5.94, radius: 50000 },
+        { name: "Müllerthal", lat: 49.79, lng: 6.30, radius: 50000 }
+      ]
     }
   }
+}
 };
-
 export function parseCliArgs(argv = process.argv.slice(2)) {
   const out = {};
   for (const arg of argv) {

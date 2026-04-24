@@ -1138,6 +1138,24 @@ NL: {
     { name: "Lowlands Scenic Connector", lat: 51.65, lng: 3.95, rideType: "scenic" }
   ]
 },
+LU: {
+  "luxembourg-ardennes": [
+    { name: "Vianden Castle Ride", lat: 49.93, lng: 6.20, rideType: "scenic" },
+    { name: "Clervaux Forest Route", lat: 50.05, lng: 6.03, rideType: "forest" },
+    { name: "Esch-sur-Sûre Lake Road", lat: 49.91, lng: 5.94, rideType: "lake" },
+    { name: "Müllerthal Scenic Ride", lat: 49.79, lng: 6.30, rideType: "scenic" },
+    { name: "Luxembourg Ardennes Loop", lat: 49.95, lng: 6.10, rideType: "scenic" },
+    { name: "Northern Forest Panorama", lat: 50.00, lng: 6.08, rideType: "forest" },
+    { name: "Our Valley Ride", lat: 49.97, lng: 6.18, rideType: "scenic" },
+    { name: "Sûre Valley Connector", lat: 49.90, lng: 5.98, rideType: "scenic" },
+    { name: "Little Switzerland Road", lat: 49.80, lng: 6.28, rideType: "scenic" },
+    { name: "Luxembourg Highlands Ride", lat: 49.92, lng: 6.05, rideType: "forest" },
+    { name: "Wiltz Scenic Link", lat: 49.97, lng: 5.93, rideType: "scenic" },
+    { name: "Ardennes Border Ride", lat: 50.02, lng: 6.15, rideType: "scenic" },
+    { name: "Bourscheid Castle Road", lat: 49.91, lng: 6.08, rideType: "scenic" },
+    { name: "Upper Sûre Nature Ride", lat: 49.88, lng: 5.90, rideType: "lake" }
+  ]
+},
 };
 
 function buildManualSeeds(country, scope) {
