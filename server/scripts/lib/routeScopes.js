@@ -1344,7 +1344,24 @@ NL: {
 
   }
 },
+EE: {
+  country: "EE",
+  name: "Estonia",
+  scopes: {
 
+    "estonia-coast": {
+      name: "Estonia Coast",
+      regions: ["Harju", "Pärnu", "Saare"],
+      areas: [
+        { name: "Tallinn Coast", lat: 59.44, lng: 24.75, radius: 50000 },
+        { name: "Pärnu Coast", lat: 58.38, lng: 24.5, radius: 50000 },
+        { name: "Saaremaa Island", lat: 58.48, lng: 22.61, radius: 50000 },
+        { name: "Hiiumaa Island", lat: 58.93, lng: 22.59, radius: 50000 }
+      ]
+    }
+
+  }
+},
 LU: {
   country: "LU",
   name: "Luxembourg",

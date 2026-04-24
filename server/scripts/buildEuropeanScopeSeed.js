@@ -1156,6 +1156,22 @@ LU: {
     { name: "Upper Sûre Nature Ride", lat: 49.88, lng: 5.90, rideType: "lake" }
   ]
 },
+EE: {
+  "estonia-coast": [
+    { name: "Tallinn Coastal Ride", lat: 59.44, lng: 24.75, rideType: "coastal" },
+    { name: "Pärnu Sea Road", lat: 58.38, lng: 24.5, rideType: "coastal" },
+    { name: "Saaremaa Island Loop", lat: 58.48, lng: 22.61, rideType: "coastal" },
+    { name: "Hiiumaa Scenic Ride", lat: 58.93, lng: 22.59, rideType: "scenic" },
+    { name: "Baltic Sea Breeze Route", lat: 58.9, lng: 23.5, rideType: "coastal" },
+    { name: "Estonian Coast Panorama", lat: 59.0, lng: 24.0, rideType: "scenic" },
+    { name: "West Estonia Coastal Drive", lat: 58.7, lng: 23.2, rideType: "coastal" },
+    { name: "Island Connector Ride", lat: 58.6, lng: 23.0, rideType: "coastal" },
+    { name: "Northern Baltic Scenic", lat: 59.2, lng: 25.0, rideType: "scenic" },
+    { name: "Estonia Sea Horizon", lat: 58.8, lng: 24.2, rideType: "coastal" },
+    { name: "Baltic Islands Explorer", lat: 58.5, lng: 22.9, rideType: "coastal" },
+    { name: "Coastal Forest Route", lat: 58.85, lng: 23.8, rideType: "scenic" }
+  ]
+},
 };
 
 function buildManualSeeds(country, scope) {
