@@ -1111,6 +1111,33 @@ DK: {
     { name: "Island Coast Connector", lat: 55.15, lng: 10.45, rideType: "coastal" }
   ]
 },
+NL: {
+  "netherlands-north-coast": [
+    { name: "Den Helder Sea Ride", lat: 52.96, lng: 4.76, rideType: "coastal" },
+    { name: "Texel Coastal Loop", lat: 53.1, lng: 4.8, rideType: "coastal" },
+    { name: "North Holland Dune Ride", lat: 52.85, lng: 4.7, rideType: "scenic" },
+    { name: "Wadden Sea Panorama", lat: 53.15, lng: 5.2, rideType: "coastal" },
+    { name: "Harlingen Scenic Link", lat: 53.17, lng: 5.42, rideType: "scenic" },
+    { name: "Friesland Sea Breeze Route", lat: 53.05, lng: 5.6, rideType: "coastal" },
+    { name: "Groningen Coast Ride", lat: 53.32, lng: 6.92, rideType: "coastal" },
+    { name: "Northern Dikes Scenic", lat: 53.25, lng: 6.2, rideType: "scenic" },
+    { name: "Dutch North Sea Drive", lat: 52.9, lng: 4.9, rideType: "coastal" },
+    { name: "Wadden Horizon Route", lat: 53.2, lng: 5.8, rideType: "scenic" }
+  ],
+
+  "netherlands-south-zeeland": [
+    { name: "Middelburg Scenic Ride", lat: 51.5, lng: 3.61, rideType: "scenic" },
+    { name: "Vlissingen Coastal Route", lat: 51.44, lng: 3.57, rideType: "coastal" },
+    { name: "Zeeland Sea Wind Ride", lat: 51.55, lng: 3.75, rideType: "coastal" },
+    { name: "Renesse Dune Loop", lat: 51.73, lng: 3.77, rideType: "coastal" },
+    { name: "South Holland Delta Scenic", lat: 51.7, lng: 4.0, rideType: "scenic" },
+    { name: "Haringvliet Coastal Link", lat: 51.75, lng: 4.15, rideType: "coastal" },
+    { name: "Zeeland Bridge Panorama", lat: 51.62, lng: 3.9, rideType: "scenic" },
+    { name: "Dutch Delta Explorer", lat: 51.58, lng: 3.85, rideType: "coastal" },
+    { name: "Southern Sea View Ride", lat: 51.48, lng: 3.7, rideType: "coastal" },
+    { name: "Lowlands Scenic Connector", lat: 51.65, lng: 3.95, rideType: "scenic" }
+  ]
+},
 };
 
 function buildManualSeeds(country, scope) {

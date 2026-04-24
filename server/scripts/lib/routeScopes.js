@@ -1315,6 +1315,35 @@ DK: {
 
   }
 },
+NL: {
+  country: "NL",
+  name: "Netherlands",
+  scopes: {
+
+    "netherlands-north-coast": {
+      name: "Netherlands North Coast",
+      regions: ["Noord-Holland", "Friesland", "Groningen"],
+      areas: [
+        { name: "Den Helder", lat: 52.96, lng: 4.76, radius: 50000 },
+        { name: "Texel Coast", lat: 53.1, lng: 4.8, radius: 50000 },
+        { name: "Harlingen", lat: 53.17, lng: 5.42, radius: 50000 },
+        { name: "Groningen Coast", lat: 53.32, lng: 6.92, radius: 50000 }
+      ]
+    },
+
+    "netherlands-south-zeeland": {
+      name: "Netherlands South Zeeland",
+      regions: ["Zeeland", "Zuid-Holland"],
+      areas: [
+        { name: "Middelburg", lat: 51.5, lng: 3.61, radius: 50000 },
+        { name: "Vlissingen", lat: 51.44, lng: 3.57, radius: 50000 },
+        { name: "Renesse", lat: 51.73, lng: 3.77, radius: 50000 },
+        { name: "Haringvliet", lat: 51.75, lng: 4.15, radius: 50000 }
+      ]
+    }
+
+  }
+},
   LU: {
     country: "LU",
     name: "Luxembourg",
