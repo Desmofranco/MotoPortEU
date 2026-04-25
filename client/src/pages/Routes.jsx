@@ -897,10 +897,20 @@ export default function Routes() {
       out = out.filter((r) => normalizeCategory(r) === category);
     }
 
-    if (query) {
-      out = out.filter((r) => routeSearchBlob(r).includes(query));
-    }
+if (query) {
+  const queryTokens = query
+    .split(" ")
+    .map((x) => normalizeText(x))
+    .filter((x) => x.length >= 2);
 
+  out = out.filter((r) => {
+    const blob = routeSearchBlob(r);
+
+    if (blob.includes(query)) return true;
+
+    return queryTokens.every((token) => blob.includes(token));
+  });
+}
     out.sort((a, b) => {
       const ca = normalizeCategory(a);
       const cb = normalizeCategory(b);
