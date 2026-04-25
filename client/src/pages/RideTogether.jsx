@@ -1,4 +1,7 @@
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
+
+const API_BASE =
+  import.meta.env.VITE_API_URL || "https://motoporteu.onrender.com";
 
 const REGIONS = [
   "Tutte",
@@ -30,6 +33,17 @@ const CATEGORIES = [
   { key: "passenger-biker", label: "Zavorrina cerca biker", icon: "💫" },
   { key: "event", label: "Uscite organizzate", icon: "📅" },
 ];
+
+const EMPTY_FORM = {
+  type: "ride-buddy",
+  name: "",
+  region: "Lombardia",
+  city: "Lecco",
+  bike: "",
+  style: "",
+  availability: "",
+  text: "",
+};
 
 const SAMPLE_PROFILES = [
   {
@@ -88,12 +102,54 @@ export default function RideTogether() {
   const [city, setCity] = useState("Tutte");
   const [query, setQuery] = useState("");
 
-  const availableCities = region !== "Tutte" ? CITIES[region] || ["Tutte"] : ["Tutte"];
+  const [profiles, setProfiles] = useState(SAMPLE_PROFILES);
+  const [loading, setLoading] = useState(false);
+  const [publishing, setPublishing] = useState(false);
+  const [error, setError] = useState("");
+  const [showForm, setShowForm] = useState(false);
+  const [form, setForm] = useState(EMPTY_FORM);
+
+  const availableCities =
+    region !== "Tutte" ? CITIES[region] || ["Tutte"] : ["Tutte"];
+
+  useEffect(() => {
+    let alive = true;
+
+    async function loadCommunity() {
+      try {
+        setLoading(true);
+        setError("");
+
+        const res = await fetch(`${API_BASE}/api/community`);
+        const data = await res.json();
+
+        if (!alive) return;
+
+        if (data?.ok && Array.isArray(data.posts) && data.posts.length) {
+          setProfiles(data.posts);
+        } else {
+          setProfiles(SAMPLE_PROFILES);
+        }
+      } catch (err) {
+        if (!alive) return;
+        setError("Community in caricamento. Mostriamo alcuni esempi.");
+        setProfiles(SAMPLE_PROFILES);
+      } finally {
+        if (alive) setLoading(false);
+      }
+    }
+
+    loadCommunity();
+
+    return () => {
+      alive = false;
+    };
+  }, []);
 
   const filtered = useMemo(() => {
     const q = query.toLowerCase().trim();
 
-    return SAMPLE_PROFILES.filter((p) => {
+    return profiles.filter((p) => {
       if (category !== "all" && p.type !== category) return false;
       if (region !== "Tutte" && p.region !== region) return false;
       if (city !== "Tutte" && p.city !== city) return false;
@@ -101,11 +157,48 @@ export default function RideTogether() {
       if (!q) return true;
 
       return [p.name, p.region, p.city, p.bike, p.style, p.text]
+        .filter(Boolean)
         .join(" ")
         .toLowerCase()
         .includes(q);
     });
-  }, [category, region, city, query]);
+  }, [profiles, category, region, city, query]);
+
+  const submitPost = async () => {
+    try {
+      if (!form.name || !form.region || !form.city || !form.text) {
+        alert("Compila nome, regione, città e descrizione.");
+        return;
+      }
+
+      setPublishing(true);
+
+      const res = await fetch(`${API_BASE}/api/community`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      });
+
+      const data = await res.json();
+
+      if (!data?.ok) {
+        alert(data?.message || "Errore creazione annuncio");
+        return;
+      }
+
+      setProfiles((prev) => {
+        const withoutDemo = prev.filter((p) => !p.id);
+        return [data.post, ...withoutDemo];
+      });
+
+      setShowForm(false);
+      setForm(EMPTY_FORM);
+    } catch (err) {
+      alert("Errore collegamento server.");
+    } finally {
+      setPublishing(false);
+    }
+  };
 
   return (
     <div style={styles.page}>
@@ -114,18 +207,34 @@ export default function RideTogether() {
         <div style={styles.heroContent}>
           <div style={styles.kicker}>MotoPortEU Community</div>
           <h1 style={styles.title}>Ride Together</h1>
+
           <p style={styles.subtitle}>
-            Trova biker nella tua zona, organizza giri veri e incontra compagni di strada
-            divisi per regione e città.
+            Trova biker nella tua zona, organizza giri veri e incontra compagni
+            di strada divisi per regione e città.
           </p>
-<div style={styles.earlyAccess}>
-  🚧 <strong>Community in Early Access</strong><br />
-  Stiamo completando le funzionalità social.<br />
-  Presto potrai creare il tuo profilo e contattare altri rider.
-</div>
+
+          <div style={styles.earlyAccess}>
+            🚧 <strong>Community in Early Access</strong>
+            <br />
+            Stiamo completando le funzionalità social.
+            <br />
+            Puoi già pubblicare un annuncio e provare la community.
+          </div>
+
           <div style={styles.heroActions}>
-            <button style={styles.primaryBtn}>+ Crea annuncio</button>
-            <button style={styles.secondaryBtn}>Scopri biker vicini</button>
+            <button style={styles.primaryBtn} onClick={() => setShowForm(true)}>
+              + Crea annuncio
+            </button>
+            <button
+              style={styles.secondaryBtn}
+              onClick={() => {
+                setRegion("Tutte");
+                setCity("Tutte");
+                setCategory("all");
+              }}
+            >
+              Scopri biker vicini
+            </button>
           </div>
         </div>
       </section>
@@ -151,12 +260,107 @@ export default function RideTogether() {
           ))}
         </select>
 
-        <select value={city} onChange={(e) => setCity(e.target.value)} style={styles.select}>
+        <select
+          value={city}
+          onChange={(e) => setCity(e.target.value)}
+          style={styles.select}
+        >
           {availableCities.map((c) => (
             <option key={c}>{c}</option>
           ))}
         </select>
       </section>
+
+      {error ? <div style={styles.notice}>{error}</div> : null}
+      {loading ? <div style={styles.notice}>Carico annunci Community…</div> : null}
+
+      {showForm ? (
+        <section style={styles.formBox}>
+          <div style={styles.formHeader}>
+            <h2 style={{ margin: 0 }}>Crea annuncio Community</h2>
+            <button style={styles.closeBtn} onClick={() => setShowForm(false)}>
+              ✕
+            </button>
+          </div>
+
+          <div style={styles.formGrid}>
+            <select
+              value={form.type}
+              onChange={(e) => setForm({ ...form, type: e.target.value })}
+              style={styles.select}
+            >
+              <option value="ride-buddy">Compagni di giro</option>
+              <option value="biker-passenger">Biker cerca zavorrina</option>
+              <option value="passenger-biker">Zavorrina cerca biker</option>
+              <option value="event">Uscita organizzata</option>
+            </select>
+
+            <input
+              value={form.name}
+              onChange={(e) => setForm({ ...form, name: e.target.value })}
+              placeholder="Nome / nickname"
+              style={styles.input}
+            />
+
+            <input
+              value={form.region}
+              onChange={(e) => setForm({ ...form, region: e.target.value })}
+              placeholder="Regione"
+              style={styles.input}
+            />
+
+            <input
+              value={form.city}
+              onChange={(e) => setForm({ ...form, city: e.target.value })}
+              placeholder="Città"
+              style={styles.input}
+            />
+
+            <input
+              value={form.bike}
+              onChange={(e) => setForm({ ...form, bike: e.target.value })}
+              placeholder="Moto / ruolo"
+              style={styles.input}
+            />
+
+            <input
+              value={form.style}
+              onChange={(e) => setForm({ ...form, style: e.target.value })}
+              placeholder="Stile guida"
+              style={styles.input}
+            />
+
+            <input
+              value={form.availability}
+              onChange={(e) =>
+                setForm({ ...form, availability: e.target.value })
+              }
+              placeholder="Disponibilità"
+              style={styles.input}
+            />
+          </div>
+
+          <textarea
+            value={form.text}
+            onChange={(e) => setForm({ ...form, text: e.target.value })}
+            placeholder="Scrivi il tuo annuncio..."
+            style={styles.textarea}
+            rows={4}
+          />
+
+          <button
+            style={{
+              ...styles.primaryBtn,
+              opacity: publishing ? 0.65 : 1,
+              cursor: publishing ? "not-allowed" : "pointer",
+            }}
+            onClick={submitPost}
+            disabled={publishing}
+          >
+            {publishing ? "Pubblico…" : "Pubblica annuncio"}
+          </button>
+        </section>
+      ) : null}
 
       <section style={styles.tabs}>
         {CATEGORIES.map((c) => (
@@ -176,37 +380,50 @@ export default function RideTogether() {
 
       <section style={styles.grid}>
         {filtered.map((profile) => (
-          <article key={profile.id} style={styles.card}>
+          <article key={profile._id || profile.id} style={styles.card}>
             <div style={styles.cardTop}>
-              <div style={styles.avatar}>{profile.name.slice(0, 1)}</div>
+              <div style={styles.avatar}>
+                {String(profile.name || "?").slice(0, 1).toUpperCase()}
+              </div>
+
               <div>
                 <h3 style={styles.cardTitle}>{profile.name}</h3>
                 <div style={styles.location}>
                   📍 {profile.city}, {profile.region}
                 </div>
               </div>
-              <span style={styles.badge}>{profile.badge}</span>
+
+              <span style={styles.badge}>{profile.badge || "Community"}</span>
             </div>
 
             <div style={styles.infoGrid}>
               <div>
                 <small>Moto</small>
-                <strong>{profile.bike}</strong>
+                <strong>{profile.bike || "—"}</strong>
               </div>
               <div>
                 <small>Stile</small>
-                <strong>{profile.style}</strong>
+                <strong>{profile.style || "—"}</strong>
               </div>
               <div>
                 <small>Disponibilità</small>
-                <strong>{profile.availability}</strong>
+                <strong>{profile.availability || "—"}</strong>
               </div>
             </div>
 
             <p style={styles.text}>{profile.text}</p>
 
             <div style={styles.cardActions}>
-              <button style={styles.contactBtn}>Contatta</button>
+              <button
+                style={styles.contactBtn}
+                onClick={() =>
+                  alert(
+                    "Funzione contatto in arrivo. Per ora la Community è in Early Access."
+                  )
+                }
+              >
+                Contatta
+              </button>
               <button style={styles.saveBtn}>Salva</button>
             </div>
           </article>
@@ -283,6 +500,18 @@ const styles = {
     color: "rgba(255,255,255,0.82)",
   },
 
+  earlyAccess: {
+    marginTop: 16,
+    padding: "12px 14px",
+    borderRadius: 16,
+    background: "rgba(255,106,0,0.12)",
+    border: "1px solid rgba(255,106,0,0.28)",
+    color: "#ffd3b0",
+    fontSize: 14,
+    lineHeight: 1.45,
+    maxWidth: 520,
+  },
+
   heroActions: {
     marginTop: 22,
     display: "flex",
@@ -333,6 +562,61 @@ const styles = {
     background: "#1b1b1b",
     color: "white",
     outline: "none",
+  },
+
+  notice: {
+    marginTop: 12,
+    padding: "12px 14px",
+    borderRadius: 16,
+    background: "rgba(255,106,0,0.12)",
+    border: "1px solid rgba(255,106,0,0.28)",
+    color: "#ffd3b0",
+    fontSize: 14,
+  },
+
+  formBox: {
+    marginTop: 14,
+    padding: 16,
+    borderRadius: 24,
+    background: "rgba(255,255,255,0.08)",
+    border: "1px solid rgba(255,255,255,0.14)",
+  },
+
+  formHeader: {
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center",
+    gap: 12,
+    marginBottom: 12,
+  },
+
+  closeBtn: {
+    border: "1px solid rgba(255,255,255,0.18)",
+    background: "rgba(255,255,255,0.08)",
+    color: "white",
+    borderRadius: 12,
+    padding: "8px 10px",
+    cursor: "pointer",
+    fontWeight: 900,
+  },
+
+  formGrid: {
+    display: "grid",
+    gridTemplateColumns: "repeat(auto-fit, minmax(180px, 1fr))",
+    gap: 10,
+  },
+
+  textarea: {
+    marginTop: 10,
+    width: "100%",
+    padding: "13px 14px",
+    borderRadius: 16,
+    border: "1px solid rgba(255,255,255,0.14)",
+    background: "rgba(255,255,255,0.08)",
+    color: "white",
+    outline: "none",
+    resize: "vertical",
+    boxSizing: "border-box",
   },
 
   tabs: {
@@ -395,6 +679,7 @@ const styles = {
     placeItems: "center",
     fontWeight: 950,
     fontSize: 24,
+    flex: "0 0 auto",
   },
 
   cardTitle: {
@@ -459,17 +744,7 @@ const styles = {
     fontWeight: 900,
     cursor: "pointer",
   },
-earlyAccess: {
-  marginTop: 16,
-  padding: "12px 14px",
-  borderRadius: 16,
-  background: "rgba(255,106,0,0.12)",
-  border: "1px solid rgba(255,106,0,0.28)",
-  color: "#ffd3b0",
-  fontSize: 14,
-  lineHeight: 1.45,
-  maxWidth: 520,
-},
+
   empty: {
     marginTop: 18,
     padding: 18,
