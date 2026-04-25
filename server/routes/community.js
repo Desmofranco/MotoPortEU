@@ -1,30 +1,37 @@
 import express from "express";
 import multer from "multer";
-import path from "path";
-import fs from "fs";
 import jwt from "jsonwebtoken";
+import cloudinary from "../utils/cloudinary.js";
 import CommunityPost from "../models/CommunityPost.js";
 
 const router = express.Router();
 
-const uploadDir = "uploads/community";
-
-if (!fs.existsSync(uploadDir)) {
-  fs.mkdirSync(uploadDir, { recursive: true });
-}
-
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => cb(null, uploadDir),
-  filename: (req, file, cb) => {
-    const ext = path.extname(file.originalname || ".jpg");
-    cb(null, `community-${Date.now()}-${Math.round(Math.random() * 1e9)}${ext}`);
-  },
-});
-
 const upload = multer({
-  storage,
+  storage: multer.memoryStorage(),
   limits: { fileSize: 5 * 1024 * 1024 },
 });
+
+function uploadToCloudinary(fileBuffer) {
+  return new Promise((resolve, reject) => {
+    const stream = cloudinary.uploader.upload_stream(
+      {
+        folder: "motoporteu/community",
+        resource_type: "image",
+        transformation: [
+          { width: 1200, crop: "limit" },
+          { quality: "auto" },
+          { fetch_format: "auto" },
+        ],
+      },
+      (error, result) => {
+        if (error) reject(error);
+        else resolve(result);
+      }
+    );
+
+    stream.end(fileBuffer);
+  });
+}
 
 function authOptional(req, res, next) {
   try {
@@ -101,7 +108,12 @@ router.post("/", authRequired, upload.single("image"), async (req, res) => {
       return res.status(400).json({ ok: false, message: "Dati obbligatori mancanti" });
     }
 
-    const imageUrl = req.file ? `/uploads/community/${req.file.filename}` : "";
+    let imageUrl = "";
+
+    if (req.file?.buffer) {
+      const uploaded = await uploadToCloudinary(req.file.buffer);
+      imageUrl = uploaded.secure_url || "";
+    }
 
     const post = await CommunityPost.create({
       userId: req.user.id,
@@ -138,9 +150,12 @@ router.put("/:id", authRequired, upload.single("image"), async (req, res) => {
       return res.status(403).json({ ok: false, message: "Non puoi modificare questo annuncio" });
     }
 
-    const imageUrl = req.file
-      ? `/uploads/community/${req.file.filename}`
-      : post.imageUrl || "";
+    let imageUrl = post.imageUrl || "";
+
+    if (req.file?.buffer) {
+      const uploaded = await uploadToCloudinary(req.file.buffer);
+      imageUrl = uploaded.secure_url || imageUrl;
+    }
 
     const updated = await CommunityPost.findByIdAndUpdate(
       req.params.id,
