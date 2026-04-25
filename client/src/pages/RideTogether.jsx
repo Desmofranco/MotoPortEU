@@ -77,15 +77,6 @@ function normalizeImageUrl(url) {
   return `${API_BASE}${url}`;
 }
 
-function isOwner(profile, currentUser) {
-  const ownerId =
-    typeof profile.userId === "object" ? profile.userId?._id : profile.userId;
-
-  const currentId = currentUser?._id || currentUser?.id;
-
-  return ownerId && currentId && String(ownerId) === String(currentId);
-}
-
 function openContact(contact) {
   if (!contact) {
     alert("Questo annuncio non ha ancora un contatto pubblico.");
