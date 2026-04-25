@@ -3,6 +3,7 @@ import CommunityPost from "../models/CommunityPost.js";
 
 const router = express.Router();
 
+// GET annunci community
 router.get("/", async (req, res) => {
   try {
     const { type, region, city, q } = req.query;
@@ -20,6 +21,8 @@ router.get("/", async (req, res) => {
         { city: { $regex: q, $options: "i" } },
         { bike: { $regex: q, $options: "i" } },
         { style: { $regex: q, $options: "i" } },
+        { availability: { $regex: q, $options: "i" } },
+        { contact: { $regex: q, $options: "i" } },
         { text: { $regex: q, $options: "i" } },
       ];
     }
@@ -35,6 +38,7 @@ router.get("/", async (req, res) => {
   }
 });
 
+// CREA annuncio
 router.post("/", async (req, res) => {
   try {
     const {
@@ -45,6 +49,8 @@ router.post("/", async (req, res) => {
       bike,
       style,
       availability,
+      contact,
+      imageUrl,
       text,
       userId,
     } = req.body;
@@ -62,11 +68,14 @@ router.post("/", async (req, res) => {
       name,
       region,
       city,
-      bike,
-      style,
-      availability,
+      bike: bike || "",
+      style: style || "",
+      availability: availability || "",
+      contact: contact || "",
+      imageUrl: imageUrl || "",
       text,
       badge: type === "event" ? "Uscita" : "Community",
+      active: true,
     });
 
     res.status(201).json({ ok: true, post });
@@ -76,6 +85,62 @@ router.post("/", async (req, res) => {
   }
 });
 
+// MODIFICA annuncio
+router.put("/:id", async (req, res) => {
+  try {
+    const {
+      type,
+      name,
+      region,
+      city,
+      bike,
+      style,
+      availability,
+      contact,
+      imageUrl,
+      text,
+    } = req.body;
+
+    if (!type || !name || !region || !city || !text) {
+      return res.status(400).json({
+        ok: false,
+        message: "Dati obbligatori mancanti",
+      });
+    }
+
+    const post = await CommunityPost.findByIdAndUpdate(
+      req.params.id,
+      {
+        type,
+        name,
+        region,
+        city,
+        bike: bike || "",
+        style: style || "",
+        availability: availability || "",
+        contact: contact || "",
+        imageUrl: imageUrl || "",
+        text,
+        badge: type === "event" ? "Uscita" : "Community",
+      },
+      { new: true, runValidators: true }
+    );
+
+    if (!post) {
+      return res.status(404).json({
+        ok: false,
+        message: "Annuncio non trovato",
+      });
+    }
+
+    res.json({ ok: true, post });
+  } catch (err) {
+    console.error("Community PUT error:", err);
+    res.status(500).json({ ok: false, message: "Errore modifica annuncio" });
+  }
+});
+
+// ELIMINA annuncio soft delete
 router.delete("/:id", async (req, res) => {
   try {
     const post = await CommunityPost.findByIdAndUpdate(
@@ -85,10 +150,13 @@ router.delete("/:id", async (req, res) => {
     );
 
     if (!post) {
-      return res.status(404).json({ ok: false, message: "Annuncio non trovato" });
+      return res.status(404).json({
+        ok: false,
+        message: "Annuncio non trovato",
+      });
     }
 
-    res.json({ ok: true, message: "Annuncio disattivato" });
+    res.json({ ok: true, message: "Annuncio eliminato" });
   } catch (err) {
     console.error("Community DELETE error:", err);
     res.status(500).json({ ok: false, message: "Errore eliminazione annuncio" });

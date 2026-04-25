@@ -42,59 +42,10 @@ const EMPTY_FORM = {
   bike: "",
   style: "",
   availability: "",
+  contact: "",
+  imageUrl: "",
   text: "",
 };
-
-const SAMPLE_PROFILES = [
-  {
-    id: 1,
-    type: "ride-buddy",
-    name: "MarcoRider87",
-    region: "Lombardia",
-    city: "Lecco",
-    bike: "BMW GS 1250",
-    style: "Touring / Passi Alpini",
-    availability: "Weekend",
-    text: "Cerco compagni per giri veri tra lago, Valtellina e passi alpini. Ritmo allegro ma testa accesa.",
-    badge: "Rider verificato",
-  },
-  {
-    id: 2,
-    type: "biker-passenger",
-    name: "DucaMonster",
-    region: "Lombardia",
-    city: "Milano",
-    bike: "Ducati Monster",
-    style: "Sportivo soft",
-    availability: "Sabato pomeriggio",
-    text: "Biker cerca zavorrina per giri tranquilli, aperitivo rider e qualche curva fatta bene.",
-    badge: "Nuovo",
-  },
-  {
-    id: 3,
-    type: "passenger-biker",
-    name: "ZavorrinaSmile",
-    region: "Piemonte",
-    city: "Torino",
-    bike: "Zavorrina",
-    style: "Panoramico / Relax",
-    availability: "Domenica",
-    text: "Cerco biker affidabile per uscite panoramiche, lago, montagna e zero guida da fenomeni.",
-    badge: "Community",
-  },
-  {
-    id: 4,
-    type: "event",
-    name: "Giro Lago di Como",
-    region: "Lombardia",
-    city: "Como",
-    bike: "Evento aperto",
-    style: "Touring panoramico",
-    availability: "Domenica ore 9:30",
-    text: "Ritrovo a Como, giro lago, pausa caffè e rientro soft. Ideale per conoscere altri rider.",
-    badge: "Uscita",
-  },
-];
 
 export default function RideTogether() {
   const [category, setCategory] = useState("all");
@@ -102,48 +53,46 @@ export default function RideTogether() {
   const [city, setCity] = useState("Tutte");
   const [query, setQuery] = useState("");
 
-  const [profiles, setProfiles] = useState(SAMPLE_PROFILES);
+  const [profiles, setProfiles] = useState([]);
   const [loading, setLoading] = useState(false);
   const [publishing, setPublishing] = useState(false);
+  const [deletingId, setDeletingId] = useState("");
   const [error, setError] = useState("");
+
   const [showForm, setShowForm] = useState(false);
+  const [editingPostId, setEditingPostId] = useState("");
   const [form, setForm] = useState(EMPTY_FORM);
+
+  const isEditing = Boolean(editingPostId);
 
   const availableCities =
     region !== "Tutte" ? CITIES[region] || ["Tutte"] : ["Tutte"];
 
-  useEffect(() => {
-    let alive = true;
+  const loadCommunity = async () => {
+    try {
+      setLoading(true);
+      setError("");
 
-    async function loadCommunity() {
-      try {
-        setLoading(true);
-        setError("");
+      const res = await fetch(`${API_BASE}/api/community`);
+      const data = await res.json();
 
-        const res = await fetch(`${API_BASE}/api/community`);
-        const data = await res.json();
-
-        if (!alive) return;
-
-        if (data?.ok && Array.isArray(data.posts) && data.posts.length) {
-          setProfiles(data.posts);
-        } else {
-          setProfiles(SAMPLE_PROFILES);
-        }
-      } catch (err) {
-        if (!alive) return;
-        setError("Community in caricamento. Mostriamo alcuni esempi.");
-        setProfiles(SAMPLE_PROFILES);
-      } finally {
-        if (alive) setLoading(false);
+      if (data?.ok && Array.isArray(data.posts)) {
+        setProfiles(data.posts);
+      } else {
+        setProfiles([]);
+        setError(data?.message || "Errore caricamento community.");
       }
+    } catch (err) {
+      console.error("Community load error:", err);
+      setProfiles([]);
+      setError("Errore collegamento server.");
+    } finally {
+      setLoading(false);
     }
+  };
 
+  useEffect(() => {
     loadCommunity();
-
-    return () => {
-      alive = false;
-    };
   }, []);
 
   const filtered = useMemo(() => {
@@ -156,13 +105,56 @@ export default function RideTogether() {
 
       if (!q) return true;
 
-      return [p.name, p.region, p.city, p.bike, p.style, p.text]
+      return [
+        p.name,
+        p.region,
+        p.city,
+        p.bike,
+        p.style,
+        p.availability,
+        p.contact,
+        p.text,
+      ]
         .filter(Boolean)
         .join(" ")
         .toLowerCase()
         .includes(q);
     });
   }, [profiles, category, region, city, query]);
+
+  const openCreateForm = () => {
+    setEditingPostId("");
+    setForm(EMPTY_FORM);
+    setShowForm(true);
+  };
+
+  const openEditForm = (post) => {
+    setEditingPostId(post._id);
+    setForm({
+      type: post.type || "ride-buddy",
+      name: post.name || "",
+      region: post.region || "Lombardia",
+      city: post.city || "Lecco",
+      bike: post.bike || "",
+      style: post.style || "",
+      availability: post.availability || "",
+      contact: post.contact || "",
+      imageUrl: post.imageUrl || "",
+      text: post.text || "",
+    });
+    setShowForm(true);
+
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
+
+  const closeForm = () => {
+    setShowForm(false);
+    setEditingPostId("");
+    setForm(EMPTY_FORM);
+  };
 
   const submitPost = async () => {
     try {
@@ -173,8 +165,14 @@ export default function RideTogether() {
 
       setPublishing(true);
 
-      const res = await fetch(`${API_BASE}/api/community`, {
-        method: "POST",
+      const url = isEditing
+        ? `${API_BASE}/api/community/${editingPostId}`
+        : `${API_BASE}/api/community`;
+
+      const method = isEditing ? "PUT" : "POST";
+
+      const res = await fetch(url, {
+        method,
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(form),
       });
@@ -182,22 +180,66 @@ export default function RideTogether() {
       const data = await res.json();
 
       if (!data?.ok) {
-        alert(data?.message || "Errore creazione annuncio");
+        alert(data?.message || "Errore salvataggio annuncio");
         return;
       }
 
-      setProfiles((prev) => {
-        const withoutDemo = prev.filter((p) => !p.id);
-        return [data.post, ...withoutDemo];
-      });
+      if (isEditing) {
+        setProfiles((prev) =>
+          prev.map((p) => (p._id === editingPostId ? data.post : p))
+        );
+      } else {
+        setProfiles((prev) => [data.post, ...prev]);
+      }
 
-      setShowForm(false);
-      setForm(EMPTY_FORM);
+      closeForm();
     } catch (err) {
+      console.error("Community submit error:", err);
       alert("Errore collegamento server.");
     } finally {
       setPublishing(false);
     }
+  };
+
+  const deletePost = async (post) => {
+    if (!post?._id) return;
+
+    const ok = window.confirm(
+      `Vuoi eliminare l'annuncio "${post.name}" dalla Community?`
+    );
+
+    if (!ok) return;
+
+    try {
+      setDeletingId(post._id);
+
+      const res = await fetch(`${API_BASE}/api/community/${post._id}`, {
+        method: "DELETE",
+      });
+
+      const data = await res.json();
+
+      if (!data?.ok) {
+        alert(data?.message || "Errore eliminazione annuncio");
+        return;
+      }
+
+      setProfiles((prev) => prev.filter((p) => p._id !== post._id));
+    } catch (err) {
+      console.error("Community delete error:", err);
+      alert("Errore collegamento server.");
+    } finally {
+      setDeletingId("");
+    }
+  };
+
+  const contactPost = (profile) => {
+    if (profile.contact) {
+      alert(`Contatto indicato dall'utente:\n\n${profile.contact}`);
+      return;
+    }
+
+    alert("Questo annuncio non ha ancora un contatto pubblico.");
   };
 
   return (
@@ -213,24 +255,18 @@ export default function RideTogether() {
             di strada divisi per regione e città.
           </p>
 
-          <div style={styles.earlyAccess}>
-            🚧 <strong>Community in Early Access</strong>
-            <br />
-            Stiamo completando le funzionalità social.
-            <br />
-            Puoi già pubblicare un annuncio e provare la community.
-          </div>
-
           <div style={styles.heroActions}>
-            <button style={styles.primaryBtn} onClick={() => setShowForm(true)}>
+            <button style={styles.primaryBtn} onClick={openCreateForm}>
               + Crea annuncio
             </button>
+
             <button
               style={styles.secondaryBtn}
               onClick={() => {
                 setRegion("Tutte");
                 setCity("Tutte");
                 setCategory("all");
+                setQuery("");
               }}
             >
               Scopri biker vicini
@@ -277,8 +313,11 @@ export default function RideTogether() {
       {showForm ? (
         <section style={styles.formBox}>
           <div style={styles.formHeader}>
-            <h2 style={{ margin: 0 }}>Crea annuncio Community</h2>
-            <button style={styles.closeBtn} onClick={() => setShowForm(false)}>
+            <h2 style={{ margin: 0 }}>
+              {isEditing ? "Modifica annuncio" : "Crea annuncio Community"}
+            </h2>
+
+            <button style={styles.closeBtn} onClick={closeForm}>
               ✕
             </button>
           </div>
@@ -338,6 +377,20 @@ export default function RideTogether() {
               placeholder="Disponibilità"
               style={styles.input}
             />
+
+            <input
+              value={form.contact}
+              onChange={(e) => setForm({ ...form, contact: e.target.value })}
+              placeholder="Contatto pubblico: email, Instagram o telefono"
+              style={styles.input}
+            />
+
+            <input
+              value={form.imageUrl}
+              onChange={(e) => setForm({ ...form, imageUrl: e.target.value })}
+              placeholder="URL foto annuncio"
+              style={styles.input}
+            />
           </div>
 
           <textarea
@@ -346,19 +399,32 @@ export default function RideTogether() {
             placeholder="Scrivi il tuo annuncio..."
             style={styles.textarea}
             rows={4}
+            maxLength={800}
           />
 
-          <button
-            style={{
-              ...styles.primaryBtn,
-              opacity: publishing ? 0.65 : 1,
-              cursor: publishing ? "not-allowed" : "pointer",
-            }}
-            onClick={submitPost}
-            disabled={publishing}
-          >
-            {publishing ? "Pubblico…" : "Pubblica annuncio"}
-          </button>
+          <div style={styles.formFooter}>
+            <button
+              style={{
+                ...styles.primaryBtn,
+                opacity: publishing ? 0.65 : 1,
+                cursor: publishing ? "not-allowed" : "pointer",
+              }}
+              onClick={submitPost}
+              disabled={publishing}
+            >
+              {publishing
+                ? "Salvataggio…"
+                : isEditing
+                ? "Salva modifiche"
+                : "Pubblica annuncio"}
+            </button>
+
+            {isEditing ? (
+              <button style={styles.secondaryBtn} onClick={closeForm}>
+                Annulla modifica
+              </button>
+            ) : null}
+          </div>
         </section>
       ) : null}
 
@@ -380,7 +446,16 @@ export default function RideTogether() {
 
       <section style={styles.grid}>
         {filtered.map((profile) => (
-          <article key={profile._id || profile.id} style={styles.card}>
+          <article key={profile._id} style={styles.card}>
+            {profile.imageUrl ? (
+              <div
+                style={{
+                  ...styles.cardImage,
+                  backgroundImage: `url('${profile.imageUrl}')`,
+                }}
+              />
+            ) : null}
+
             <div style={styles.cardTop}>
               <div style={styles.avatar}>
                 {String(profile.name || "?").slice(0, 1).toUpperCase()}
@@ -413,26 +488,46 @@ export default function RideTogether() {
 
             <p style={styles.text}>{profile.text}</p>
 
+            {profile.contact ? (
+              <div style={styles.contactBox}>
+                <small>Contatto</small>
+                <strong>{profile.contact}</strong>
+              </div>
+            ) : null}
+
             <div style={styles.cardActions}>
               <button
                 style={styles.contactBtn}
-                onClick={() =>
-                  alert(
-                    "Funzione contatto in arrivo. Per ora la Community è in Early Access."
-                  )
-                }
+                onClick={() => contactPost(profile)}
               >
                 Contatta
               </button>
-              <button style={styles.saveBtn}>Salva</button>
+
+              <button style={styles.saveBtn} onClick={() => openEditForm(profile)}>
+                Modifica
+              </button>
+
+              <button
+                style={{
+                  ...styles.deleteBtn,
+                  opacity: deletingId === profile._id ? 0.6 : 1,
+                  cursor:
+                    deletingId === profile._id ? "not-allowed" : "pointer",
+                }}
+                onClick={() => deletePost(profile)}
+                disabled={deletingId === profile._id}
+              >
+                {deletingId === profile._id ? "..." : "Elimina"}
+              </button>
             </div>
           </article>
         ))}
       </section>
 
-      {!filtered.length && (
+      {!loading && !filtered.length && (
         <div style={styles.empty}>
-          Nessun biker trovato. Prova a cambiare regione, città o categoria.
+          Nessun annuncio trovato. Crea il primo annuncio oppure cambia regione,
+          città o categoria.
         </div>
       )}
     </div>
@@ -498,18 +593,6 @@ const styles = {
     fontSize: 17,
     lineHeight: 1.45,
     color: "rgba(255,255,255,0.82)",
-  },
-
-  earlyAccess: {
-    marginTop: 16,
-    padding: "12px 14px",
-    borderRadius: 16,
-    background: "rgba(255,106,0,0.12)",
-    border: "1px solid rgba(255,106,0,0.28)",
-    color: "#ffd3b0",
-    fontSize: 14,
-    lineHeight: 1.45,
-    maxWidth: 520,
   },
 
   heroActions: {
@@ -619,6 +702,13 @@ const styles = {
     boxSizing: "border-box",
   },
 
+  formFooter: {
+    marginTop: 12,
+    display: "flex",
+    gap: 10,
+    flexWrap: "wrap",
+  },
+
   tabs: {
     marginTop: 14,
     display: "flex",
@@ -661,6 +751,15 @@ const styles = {
       "linear-gradient(180deg, rgba(255,255,255,0.10), rgba(255,255,255,0.055))",
     border: "1px solid rgba(255,255,255,0.12)",
     boxShadow: "0 16px 36px rgba(0,0,0,0.28)",
+    overflow: "hidden",
+  },
+
+  cardImage: {
+    height: 170,
+    margin: "-16px -16px 14px",
+    backgroundSize: "cover",
+    backgroundPosition: "center",
+    borderBottom: "1px solid rgba(255,255,255,0.12)",
   },
 
   cardTop: {
@@ -718,10 +817,21 @@ const styles = {
     fontSize: 14,
   },
 
+  contactBox: {
+    marginTop: 12,
+    padding: "10px 12px",
+    borderRadius: 14,
+    background: "rgba(255,106,0,0.10)",
+    border: "1px solid rgba(255,106,0,0.22)",
+    display: "grid",
+    gap: 4,
+  },
+
   cardActions: {
     marginTop: 14,
     display: "flex",
     gap: 10,
+    flexWrap: "wrap",
   },
 
   contactBtn: {
@@ -741,6 +851,16 @@ const styles = {
     border: "1px solid rgba(255,255,255,0.14)",
     background: "rgba(255,255,255,0.08)",
     color: "white",
+    fontWeight: 900,
+    cursor: "pointer",
+  },
+
+  deleteBtn: {
+    padding: "11px 12px",
+    borderRadius: 14,
+    border: "1px solid rgba(255,80,80,0.35)",
+    background: "rgba(255,80,80,0.12)",
+    color: "#ffb0b0",
     fontWeight: 900,
     cursor: "pointer",
   },

@@ -50,6 +50,18 @@ const communityPostSchema = new mongoose.Schema(
       default: "",
     },
 
+    contact: {
+      type: String,
+      trim: true,
+      default: "",
+    },
+
+    imageUrl: {
+      type: String,
+      trim: true,
+      default: "",
+    },
+
     text: {
       type: String,
       required: true,
