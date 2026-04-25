@@ -14,6 +14,7 @@ export default function BottomNav() {
     { to: "/routes", label: "Itinerari", icon: "📍" },
     { to: "/tracks", label: "Circuiti", icon: "🏁" },
     { to: "/garage", label: "Garage", icon: "🛠️" },
+     { to: "/community", label: "Community", icon: "👥" },
     { to: "/my-tracks", label: "Storico", icon: "📡" },
   ];
 
