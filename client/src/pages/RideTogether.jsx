@@ -50,12 +50,25 @@ function getToken() {
   return localStorage.getItem("token") || "";
 }
 
-function getCurrentUser() {
+function getCurrentUserId() {
   try {
-    return JSON.parse(localStorage.getItem("user") || "null");
+    const token = localStorage.getItem("token") || "";
+    if (!token) return "";
+
+    const payload = JSON.parse(atob(token.split(".")[1]));
+    return payload?.id || "";
   } catch {
-    return null;
+    return "";
   }
+}
+
+function isOwner(profile) {
+  const ownerId =
+    typeof profile.userId === "object" ? profile.userId?._id : profile.userId;
+
+  const currentUserId = getCurrentUserId();
+
+  return Boolean(ownerId && currentUserId && String(ownerId) === String(currentUserId));
 }
 
 function normalizeImageUrl(url) {
@@ -112,7 +125,6 @@ export default function RideTogether() {
   const [query, setQuery] = useState("");
 
   const [profiles, setProfiles] = useState([]);
-  const [currentUser, setCurrentUser] = useState(getCurrentUser());
 
   const [loading, setLoading] = useState(false);
   const [publishing, setPublishing] = useState(false);
@@ -158,7 +170,7 @@ export default function RideTogether() {
   };
 
   useEffect(() => {
-    setCurrentUser(getCurrentUser());
+   
     loadCommunity();
   }, []);
 
@@ -536,8 +548,7 @@ export default function RideTogether() {
 
       <section style={styles.grid}>
         {filtered.map((profile) => {
-          const owner = isOwner(profile, currentUser);
-
+        const owner = isOwner(profile);
           return (
             <article key={profile._id} style={styles.card}>
               {profile.imageUrl ? (
