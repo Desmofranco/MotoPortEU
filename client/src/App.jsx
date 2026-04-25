@@ -50,7 +50,16 @@ export default function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/community" element={<RideTogether />} />
+      <Route
+  path="/community"
+  element={
+    <RequireAuth>
+      <InnerLayout>
+        <RideTogether />
+      </InnerLayout>
+    </RequireAuth>
+  }
+/>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
