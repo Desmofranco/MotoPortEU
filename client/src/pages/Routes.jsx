@@ -3,7 +3,11 @@
 // Itinerari Touring
 // UI: split-view su desktop (lista + dettaglio)
 // Mobile: lista -> dettaglio (full screen) con back
-// Dati LIVE: /public/data/routes.json
+//
+// DATI LIVE SPLIT:
+// ✅ Prima prova /data/routes-index.json
+// ✅ Poi carica /data/routes/IT.json, FR.json, ecc.
+// ✅ Fallback sicuro su /data/routes.json
 //
 // OPTIMIZATION PACK:
 // ✅ Loading skeleton
@@ -23,6 +27,9 @@
 // ✅ complexity badge
 // ✅ rider diagnosis
 // ✅ stats UI percorso
+//
+// GPX:
+// ✅ Export GPX integrato
 // =======================================================
 
 import React, { useEffect, useMemo, useRef, useState } from "react";
@@ -63,6 +70,82 @@ function useDebouncedValue(value, delay = 220) {
   return debounced;
 }
 
+async function fetchJsonSafe(url, fallback = null) {
+  try {
+    const res = await fetch(url, { cache: "force-cache" });
+    if (!res.ok) return fallback;
+    return await res.json();
+  } catch {
+    return fallback;
+  }
+}
+
+function normalizeCountryCode(value) {
+  return String(value || "")
+    .trim()
+    .toUpperCase();
+}
+
+function extractCountriesFromIndex(indexData) {
+  if (!indexData) return [];
+
+  if (Array.isArray(indexData)) {
+    return indexData
+      .map((x) => {
+        if (typeof x === "string") return normalizeCountryCode(x);
+        return normalizeCountryCode(x?.country || x?.code || x?.id);
+      })
+      .filter(Boolean);
+  }
+
+  if (Array.isArray(indexData.countries)) {
+    return indexData.countries
+      .map((x) => {
+        if (typeof x === "string") return normalizeCountryCode(x);
+        return normalizeCountryCode(x?.country || x?.code || x?.id);
+      })
+      .filter(Boolean);
+  }
+
+  if (Array.isArray(indexData.files)) {
+    return indexData.files
+      .map((x) => {
+        if (typeof x === "string") {
+          return normalizeCountryCode(
+            x.replace("/data/routes/", "").replace("routes/", "").replace(".json", "")
+          );
+        }
+        return normalizeCountryCode(x?.country || x?.code || x?.id);
+      })
+      .filter(Boolean);
+  }
+
+  return [];
+}
+
+async function loadRoutesDataset() {
+  const indexData = await fetchJsonSafe("/data/routes-index.json", null);
+  const countries = Array.from(new Set(extractCountriesFromIndex(indexData)));
+
+  if (countries.length) {
+    const chunks = await Promise.all(
+      countries.map(async (code) => {
+        const data = await fetchJsonSafe(`/data/routes/${code}.json`, []);
+        return Array.isArray(data) ? data : [];
+      })
+    );
+
+    const splitRoutes = chunks.flat();
+
+    if (splitRoutes.length) {
+      return splitRoutes;
+    }
+  }
+
+  const legacy = await fetchJsonSafe("/data/routes.json", []);
+  return Array.isArray(legacy) ? legacy : [];
+}
+
 function openGoogleMapsSmart(url) {
   if (!url) return;
   if (isMobileNow()) window.location.href = url;
@@ -96,6 +179,7 @@ function latLonStr(p) {
   if (!Number.isFinite(lat) || !Number.isFinite(lon)) return null;
   return `${lat},${lon}`;
 }
+
 function escapeXml(value = "") {
   return String(value)
     .replaceAll("&", "&amp;")
@@ -229,6 +313,7 @@ ${trkpts}
 
   URL.revokeObjectURL(url);
 }
+
 function buildNavigateUrl(destination, travelmode = "driving") {
   if (!destination) return null;
   return (
@@ -265,6 +350,7 @@ function buildRouteKey(r) {
 function normalizeRoute(route) {
   return {
     ...route,
+    country: normalizeCountryCode(route?.country || route?.countryCode || route?.countryName),
     aliases: Array.isArray(route?.aliases) ? route.aliases : [],
     tags: Array.isArray(route?.tags) ? route.tags : [],
     searchTags: Array.isArray(route?.searchTags) ? route.searchTags : [],
@@ -941,12 +1027,7 @@ export default function Routes() {
       setErr("");
 
       try {
-        const data = await fetch("/data/routes.json", {
-          cache: "force-cache",
-        })
-          .then((r) => (r.ok ? r.json() : []))
-          .catch(() => []);
-
+        const data = await loadRoutesDataset();
         const arr = Array.isArray(data) ? data.map(normalizeRoute) : [];
 
         const seen = new Set();
@@ -987,7 +1068,7 @@ export default function Routes() {
   const countries = useMemo(() => {
     const set = new Set(
       routes
-        .map((r) => String(r.country || r.countryName || "").toUpperCase())
+        .map((r) => normalizeCountryCode(r.country || r.countryName))
         .filter(Boolean)
     );
     return ["ALL", ...Array.from(set).sort()];
@@ -997,7 +1078,7 @@ export default function Routes() {
     const set = new Set();
 
     routes.forEach((r) => {
-      const rc = String(r.country || r.countryName || "").toUpperCase();
+      const rc = normalizeCountryCode(r.country || r.countryName);
       if (country !== "ALL" && rc !== country) return;
 
       const rg = String(r.region || "").trim();
@@ -1016,9 +1097,7 @@ export default function Routes() {
     let out = [...routes];
 
     if (country !== "ALL") {
-      out = out.filter(
-        (r) => String(r.country || r.countryName || "").toUpperCase() === country
-      );
+      out = out.filter((r) => normalizeCountryCode(r.country || r.countryName) === country);
     }
 
     if (region !== "ALL") {
@@ -1029,20 +1108,21 @@ export default function Routes() {
       out = out.filter((r) => normalizeCategory(r) === category);
     }
 
-if (query) {
-  const queryTokens = query
-    .split(" ")
-    .map((x) => normalizeText(x))
-    .filter((x) => x.length >= 2);
+    if (query) {
+      const queryTokens = query
+        .split(" ")
+        .map((x) => normalizeText(x))
+        .filter((x) => x.length >= 2);
 
-  out = out.filter((r) => {
-    const blob = routeSearchBlob(r);
+      out = out.filter((r) => {
+        const blob = routeSearchBlob(r);
 
-    if (blob.includes(query)) return true;
+        if (blob.includes(query)) return true;
 
-    return queryTokens.every((token) => blob.includes(token));
-  });
-}
+        return queryTokens.every((token) => blob.includes(token));
+      });
+    }
+
     out.sort((a, b) => {
       const ca = normalizeCategory(a);
       const cb = normalizeCategory(b);
@@ -1672,49 +1752,50 @@ function RouteDetail({ route }) {
       </div>
 
       <div style={{ padding: 12 }}>
-<div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
-  <button
-    type="button"
-    onClick={() => openGoogleMapsSmart(startNavUrl)}
-    disabled={!startNavUrl}
-    style={{
-      display: "inline-block",
-      padding: "10px 12px",
-      borderRadius: 12,
-      border: "1px solid rgba(0,0,0,0.15)",
-      background: "white",
-      fontSize: 13,
-      cursor: startNavUrl ? "pointer" : "not-allowed",
-      fontWeight: 900,
-      opacity: startNavUrl ? 1 : 0.55,
-    }}
-    title={
-      startNavUrl
-        ? "Avvia navigazione verso l'inizio usando la tua posizione"
-        : "Coordinate itinerario non disponibili"
-    }
-  >
-    🧭 Avvia verso START
-  </button>
+        <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
+          <button
+            type="button"
+            onClick={() => openGoogleMapsSmart(startNavUrl)}
+            disabled={!startNavUrl}
+            style={{
+              display: "inline-block",
+              padding: "10px 12px",
+              borderRadius: 12,
+              border: "1px solid rgba(0,0,0,0.15)",
+              background: "white",
+              fontSize: 13,
+              cursor: startNavUrl ? "pointer" : "not-allowed",
+              fontWeight: 900,
+              opacity: startNavUrl ? 1 : 0.55,
+            }}
+            title={
+              startNavUrl
+                ? "Avvia navigazione verso l'inizio usando la tua posizione"
+                : "Coordinate itinerario non disponibili"
+            }
+          >
+            🧭 Avvia verso START
+          </button>
 
-  <button
-    type="button"
-    onClick={() => exportRouteToGpx(route)}
-    style={{
-      display: "inline-block",
-      padding: "10px 12px",
-      borderRadius: 12,
-      border: "1px solid rgba(0,0,0,0.15)",
-      background: "white",
-      fontSize: 13,
-      cursor: "pointer",
-      fontWeight: 900,
-    }}
-    title="Scarica questo itinerario in formato GPX"
-  >
-    📤 Esporta GPX
-  </button>
-</div>
+          <button
+            type="button"
+            onClick={() => exportRouteToGpx(route)}
+            style={{
+              display: "inline-block",
+              padding: "10px 12px",
+              borderRadius: 12,
+              border: "1px solid rgba(0,0,0,0.15)",
+              background: "white",
+              fontSize: 13,
+              cursor: "pointer",
+              fontWeight: 900,
+            }}
+            title="Scarica questo itinerario in formato GPX"
+          >
+            📤 Esporta GPX
+          </button>
+        </div>
+
         <RiderAnalysisPanel analysis={analysis} route={route} />
 
         <div
