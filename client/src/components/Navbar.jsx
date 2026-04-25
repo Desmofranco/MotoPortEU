@@ -62,6 +62,7 @@ export default function Navbar() {
         <NavLink to="/tracks" style={tabStyle}>🏁 Circuiti</NavLink>
         <NavLink to="/map" style={tabStyle}>🧭 Rotte</NavLink>
         <NavLink to="/garage" style={tabStyle}>🛠️ Garage</NavLink>
+        <NavLink to="/community" style={tabStyle}>👥 Community</NavLink>
       </div>
 
       {/* ROW 3 — nascosta per ora (business pronto) */}

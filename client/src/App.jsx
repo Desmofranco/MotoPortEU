@@ -13,7 +13,7 @@ import Faq from "./pages/Faq";
 import Terms from "./pages/Terms";
 import Premium from "./pages/Premium";
 import PremiumSuccess from "./pages/PremiumSuccess";
-
+import RideTogether from "./pages/RideTogether";
 import AppShell from "./components/AppShell";
 import RequireAuth from "./components/RequireAuth";
 import Privacy from "./pages/Privacy";
@@ -50,6 +50,7 @@ export default function App() {
   return (
     <BrowserRouter>
       <Routes>
+        <Route path="/community" element={<RideTogether />} />
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
