@@ -6,11 +6,11 @@ import mongoose from "mongoose";
 import authRoutes from "./routes/auth.js";
 import stripeRoutes from "./routes/stripe.js";
 import stripeWebhookRoutes from "./routes/stripeWebhook.js";
-
+import communityRoutes from "./routes/community.js";
 dotenv.config();
 
 const app = express();
-
+app.use("/api/community", communityRoutes);
 // CORS
 app.use(cors());
 
