@@ -50,25 +50,41 @@ function getToken() {
   return localStorage.getItem("token") || "";
 }
 
-function getCurrentUserId() {
+function getUserIdFromToken() {
   try {
-    const token = localStorage.getItem("token") || "";
-    if (!token) return "";
+    const token = getToken();
+    if (!token || !token.includes(".")) return "";
 
     const payload = JSON.parse(atob(token.split(".")[1]));
-    return payload?.id || "";
+    return payload?.id || payload?._id || payload?.userId || "";
   } catch {
     return "";
   }
 }
 
-function isOwner(profile) {
-  const ownerId =
-    typeof profile.userId === "object" ? profile.userId?._id : profile.userId;
+function getOwnerId(profile) {
+  if (!profile) return "";
 
-  const currentUserId = getCurrentUserId();
+  const raw =
+    profile.userId ||
+    profile.user ||
+    profile.owner ||
+    profile.createdBy ||
+    profile.authorId ||
+    "";
 
-  return Boolean(ownerId && currentUserId && String(ownerId) === String(currentUserId));
+  if (typeof raw === "object") {
+    return raw._id || raw.id || "";
+  }
+
+  return raw || "";
+}
+
+function isOwner(profile, currentUserId) {
+  const ownerId = getOwnerId(profile);
+  return Boolean(
+    ownerId && currentUserId && String(ownerId) === String(currentUserId)
+  );
 }
 
 function normalizeImageUrl(url) {
@@ -145,13 +161,21 @@ export default function RideTogether() {
 
       const data = await res.json();
 
-if (data?.ok && Array.isArray(data.posts)) {
-  setProfiles(data.posts);
-  setCurrentUserId(data.currentUserId || "");
-}
+      if (data?.ok && Array.isArray(data.posts)) {
+        setProfiles(data.posts);
+
+        const backendUserId = data.currentUserId || "";
+        const tokenUserId = getUserIdFromToken();
+
+        setCurrentUserId(backendUserId || tokenUserId || "");
+      } else {
+        setProfiles([]);
+        setCurrentUserId(getUserIdFromToken());
+      }
     } catch (err) {
       console.error("Community load error:", err);
       setProfiles([]);
+      setCurrentUserId(getUserIdFromToken());
       setError("Errore collegamento server.");
     } finally {
       setLoading(false);
@@ -159,7 +183,6 @@ if (data?.ok && Array.isArray(data.posts)) {
   };
 
   useEffect(() => {
-   
     loadCommunity();
   }, []);
 
@@ -203,6 +226,11 @@ if (data?.ok && Array.isArray(data.posts)) {
   };
 
   const openEditForm = (post) => {
+    if (!isOwner(post, currentUserId)) {
+      alert("Puoi modificare solo i tuoi annunci.");
+      return;
+    }
+
     setEditingPostId(post._id);
     setForm({
       type: post.type || "ride-buddy",
@@ -280,7 +308,11 @@ if (data?.ok && Array.isArray(data.posts)) {
         setProfiles((prev) => [data.post, ...prev]);
       }
 
+      const backendUserId = data.currentUserId || "";
+      if (backendUserId) setCurrentUserId(backendUserId);
+
       closeForm();
+      loadCommunity();
     } catch (err) {
       console.error("Community submit error:", err);
       alert("Errore collegamento server.");
@@ -291,6 +323,11 @@ if (data?.ok && Array.isArray(data.posts)) {
 
   const deletePost = async (post) => {
     if (!post?._id) return;
+
+    if (!isOwner(post, currentUserId)) {
+      alert("Puoi eliminare solo i tuoi annunci.");
+      return;
+    }
 
     const ok = window.confirm(
       `Vuoi eliminare l'annuncio "${post.name}" dalla Community?`
@@ -537,7 +574,8 @@ if (data?.ok && Array.isArray(data.posts)) {
 
       <section style={styles.grid}>
         {filtered.map((profile) => {
-        const owner = isOwner(profile, currentUserId);
+          const owner = isOwner(profile, currentUserId);
+
           return (
             <article key={profile._id} style={styles.card}>
               {profile.imageUrl ? (
