@@ -118,7 +118,11 @@ export default function RideTogether() {
             Trova biker nella tua zona, organizza giri veri e incontra compagni di strada
             divisi per regione e città.
           </p>
-
+<div style={styles.earlyAccess}>
+  🚧 <strong>Community in Early Access</strong><br />
+  Stiamo completando le funzionalità social.<br />
+  Presto potrai creare il tuo profilo e contattare altri rider.
+</div>
           <div style={styles.heroActions}>
             <button style={styles.primaryBtn}>+ Crea annuncio</button>
             <button style={styles.secondaryBtn}>Scopri biker vicini</button>
@@ -455,7 +459,17 @@ const styles = {
     fontWeight: 900,
     cursor: "pointer",
   },
-
+earlyAccess: {
+  marginTop: 16,
+  padding: "12px 14px",
+  borderRadius: 16,
+  background: "rgba(255,106,0,0.12)",
+  border: "1px solid rgba(255,106,0,0.28)",
+  color: "#ffd3b0",
+  fontSize: 14,
+  lineHeight: 1.45,
+  maxWidth: 520,
+},
   empty: {
     marginTop: 18,
     padding: 18,
