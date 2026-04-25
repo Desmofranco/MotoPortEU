@@ -136,9 +136,14 @@ function asRoutesArray(data) {
 
   return [];
 }
-
 async function loadRoutesDataset() {
   const indexData = await fetchJsonSafe("/data/routes-index.json", null);
+
+  const indexRoutes = asRoutesArray(indexData);
+  if (indexRoutes.length) {
+    return indexRoutes;
+  }
+
   const countries = Array.from(new Set(extractCountriesFromIndex(indexData)));
 
   if (countries.length) {
