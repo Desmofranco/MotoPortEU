@@ -53,7 +53,7 @@ app.use("/api/stripe", stripeRoutes);
 
 // Community
 app.use("/api/community", communityRoutes);
-
+app.use("/uploads", express.static("uploads"));
 const PORT = process.env.PORT || 10000;
 
 console.log("🔎 Tentativo connessione Mongo...");

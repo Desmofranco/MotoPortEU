@@ -43,9 +43,67 @@ const EMPTY_FORM = {
   style: "",
   availability: "",
   contact: "",
-  imageUrl: "",
   text: "",
 };
+
+function getToken() {
+  return localStorage.getItem("token") || "";
+}
+
+function getCurrentUser() {
+  try {
+    return JSON.parse(localStorage.getItem("user") || "null");
+  } catch {
+    return null;
+  }
+}
+
+function normalizeImageUrl(url) {
+  if (!url) return "";
+  if (url.startsWith("http")) return url;
+  return `${API_BASE}${url}`;
+}
+
+function isOwner(profile, currentUser) {
+  const ownerId =
+    typeof profile.userId === "object" ? profile.userId?._id : profile.userId;
+
+  const currentId = currentUser?._id || currentUser?.id;
+
+  return ownerId && currentId && String(ownerId) === String(currentId);
+}
+
+function openContact(contact) {
+  if (!contact) {
+    alert("Questo annuncio non ha ancora un contatto pubblico.");
+    return;
+  }
+
+  const value = contact.trim();
+
+  if (value.includes("@") && !value.startsWith("@")) {
+    window.location.href = `mailto:${value}`;
+    return;
+  }
+
+  const onlyNumbers = value.replace(/[^\d+]/g, "");
+  if (onlyNumbers.length >= 8) {
+    window.open(`https://wa.me/${onlyNumbers.replace("+", "")}`, "_blank");
+    return;
+  }
+
+  if (value.startsWith("@")) {
+    window.open(`https://instagram.com/${value.replace("@", "")}`, "_blank");
+    return;
+  }
+
+  if (value.includes("instagram.com") || value.startsWith("http")) {
+    window.open(value.startsWith("http") ? value : `https://${value}`, "_blank");
+    return;
+  }
+
+  alert(`Contatto indicato:\n\n${value}`);
+}
 
 export default function RideTogether() {
   const [category, setCategory] = useState("all");
@@ -54,6 +112,8 @@ export default function RideTogether() {
   const [query, setQuery] = useState("");
 
   const [profiles, setProfiles] = useState([]);
+  const [currentUser, setCurrentUser] = useState(getCurrentUser());
+
   const [loading, setLoading] = useState(false);
   const [publishing, setPublishing] = useState(false);
   const [deletingId, setDeletingId] = useState("");
@@ -62,6 +122,7 @@ export default function RideTogether() {
   const [showForm, setShowForm] = useState(false);
   const [editingPostId, setEditingPostId] = useState("");
   const [form, setForm] = useState(EMPTY_FORM);
+  const [imageFile, setImageFile] = useState(null);
 
   const isEditing = Boolean(editingPostId);
 
@@ -73,7 +134,12 @@ export default function RideTogether() {
       setLoading(true);
       setError("");
 
-      const res = await fetch(`${API_BASE}/api/community`);
+      const token = getToken();
+
+      const res = await fetch(`${API_BASE}/api/community`, {
+        headers: token ? { Authorization: `Bearer ${token}` } : {},
+      });
+
       const data = await res.json();
 
       if (data?.ok && Array.isArray(data.posts)) {
@@ -92,6 +158,7 @@ export default function RideTogether() {
   };
 
   useEffect(() => {
+    setCurrentUser(getCurrentUser());
     loadCommunity();
   }, []);
 
@@ -123,8 +190,14 @@ export default function RideTogether() {
   }, [profiles, category, region, city, query]);
 
   const openCreateForm = () => {
+    if (!getToken()) {
+      alert("Devi effettuare il login per creare un annuncio.");
+      return;
+    }
+
     setEditingPostId("");
     setForm(EMPTY_FORM);
+    setImageFile(null);
     setShowForm(true);
   };
 
@@ -139,21 +212,18 @@ export default function RideTogether() {
       style: post.style || "",
       availability: post.availability || "",
       contact: post.contact || "",
-      imageUrl: post.imageUrl || "",
       text: post.text || "",
     });
+    setImageFile(null);
     setShowForm(true);
-
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth",
-    });
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   const closeForm = () => {
     setShowForm(false);
     setEditingPostId("");
     setForm(EMPTY_FORM);
+    setImageFile(null);
   };
 
   const submitPost = async () => {
@@ -163,7 +233,22 @@ export default function RideTogether() {
         return;
       }
 
+      const token = getToken();
+      if (!token) {
+        alert("Login richiesto.");
+        return;
+      }
+
       setPublishing(true);
+
+      const body = new FormData();
+      Object.entries(form).forEach(([key, value]) => {
+        body.append(key, value || "");
+      });
+
+      if (imageFile) {
+        body.append("image", imageFile);
+      }
 
       const url = isEditing
         ? `${API_BASE}/api/community/${editingPostId}`
@@ -173,8 +258,10 @@ export default function RideTogether() {
 
       const res = await fetch(url, {
         method,
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(form),
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+        body,
       });
 
       const data = await res.json();
@@ -211,10 +298,19 @@ export default function RideTogether() {
     if (!ok) return;
 
     try {
+      const token = getToken();
+      if (!token) {
+        alert("Login richiesto.");
+        return;
+      }
+
       setDeletingId(post._id);
 
       const res = await fetch(`${API_BASE}/api/community/${post._id}`, {
         method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
       });
 
       const data = await res.json();
@@ -231,15 +327,6 @@ export default function RideTogether() {
     } finally {
       setDeletingId("");
     }
-  };
-
-  const contactPost = (profile) => {
-    if (profile.contact) {
-      alert(`Contatto indicato dall'utente:\n\n${profile.contact}`);
-      return;
-    }
-
-    alert("Questo annuncio non ha ancora un contatto pubblico.");
   };
 
   return (
@@ -381,16 +468,19 @@ export default function RideTogether() {
             <input
               value={form.contact}
               onChange={(e) => setForm({ ...form, contact: e.target.value })}
-              placeholder="Contatto pubblico: email, Instagram o telefono"
+              placeholder="Email, telefono, WhatsApp o Instagram"
               style={styles.input}
             />
 
-            <input
-              value={form.imageUrl}
-              onChange={(e) => setForm({ ...form, imageUrl: e.target.value })}
-              placeholder="URL foto annuncio"
-              style={styles.input}
-            />
+            <label style={styles.fileBox}>
+              <span>{imageFile ? imageFile.name : "Carica foto dal telefono"}</span>
+              <input
+                type="file"
+                accept="image/*"
+                style={{ display: "none" }}
+                onChange={(e) => setImageFile(e.target.files?.[0] || null)}
+              />
+            </label>
           </div>
 
           <textarea
@@ -445,83 +535,98 @@ export default function RideTogether() {
       </section>
 
       <section style={styles.grid}>
-        {filtered.map((profile) => (
-          <article key={profile._id} style={styles.card}>
-            {profile.imageUrl ? (
-              <div
-                style={{
-                  ...styles.cardImage,
-                  backgroundImage: `url('${profile.imageUrl}')`,
-                }}
-              />
-            ) : null}
+        {filtered.map((profile) => {
+          const owner = isOwner(profile, currentUser);
 
-            <div style={styles.cardTop}>
-              <div style={styles.avatar}>
-                {String(profile.name || "?").slice(0, 1).toUpperCase()}
+          return (
+            <article key={profile._id} style={styles.card}>
+              {profile.imageUrl ? (
+                <div
+                  style={{
+                    ...styles.cardImage,
+                    backgroundImage: `url('${normalizeImageUrl(
+                      profile.imageUrl
+                    )}')`,
+                  }}
+                />
+              ) : null}
+
+              <div style={styles.cardTop}>
+                <div style={styles.avatar}>
+                  {String(profile.name || "?").slice(0, 1).toUpperCase()}
+                </div>
+
+                <div>
+                  <h3 style={styles.cardTitle}>{profile.name}</h3>
+                  <div style={styles.location}>
+                    📍 {profile.city}, {profile.region}
+                  </div>
+                </div>
+
+                <span style={styles.badge}>{profile.badge || "Community"}</span>
               </div>
 
-              <div>
-                <h3 style={styles.cardTitle}>{profile.name}</h3>
-                <div style={styles.location}>
-                  📍 {profile.city}, {profile.region}
+              <div style={styles.infoGrid}>
+                <div>
+                  <small>Moto</small>
+                  <strong>{profile.bike || "—"}</strong>
+                </div>
+                <div>
+                  <small>Stile</small>
+                  <strong>{profile.style || "—"}</strong>
+                </div>
+                <div>
+                  <small>Disponibilità</small>
+                  <strong>{profile.availability || "—"}</strong>
                 </div>
               </div>
 
-              <span style={styles.badge}>{profile.badge || "Community"}</span>
-            </div>
+              <p style={styles.text}>{profile.text}</p>
 
-            <div style={styles.infoGrid}>
-              <div>
-                <small>Moto</small>
-                <strong>{profile.bike || "—"}</strong>
+              {profile.contact ? (
+                <div style={styles.contactBox}>
+                  <small>Contatto</small>
+                  <strong>{profile.contact}</strong>
+                </div>
+              ) : null}
+
+              <div style={styles.cardActions}>
+                <button
+                  style={styles.contactBtn}
+                  onClick={() => openContact(profile.contact)}
+                >
+                  Contatta
+                </button>
+
+                {owner ? (
+                  <>
+                    <button
+                      style={styles.saveBtn}
+                      onClick={() => openEditForm(profile)}
+                    >
+                      Modifica
+                    </button>
+
+                    <button
+                      style={{
+                        ...styles.deleteBtn,
+                        opacity: deletingId === profile._id ? 0.6 : 1,
+                        cursor:
+                          deletingId === profile._id
+                            ? "not-allowed"
+                            : "pointer",
+                      }}
+                      onClick={() => deletePost(profile)}
+                      disabled={deletingId === profile._id}
+                    >
+                      {deletingId === profile._id ? "..." : "Elimina"}
+                    </button>
+                  </>
+                ) : null}
               </div>
-              <div>
-                <small>Stile</small>
-                <strong>{profile.style || "—"}</strong>
-              </div>
-              <div>
-                <small>Disponibilità</small>
-                <strong>{profile.availability || "—"}</strong>
-              </div>
-            </div>
-
-            <p style={styles.text}>{profile.text}</p>
-
-            {profile.contact ? (
-              <div style={styles.contactBox}>
-                <small>Contatto</small>
-                <strong>{profile.contact}</strong>
-              </div>
-            ) : null}
-
-            <div style={styles.cardActions}>
-              <button
-                style={styles.contactBtn}
-                onClick={() => contactPost(profile)}
-              >
-                Contatta
-              </button>
-
-              <button style={styles.saveBtn} onClick={() => openEditForm(profile)}>
-                Modifica
-              </button>
-
-              <button
-                style={{
-                  ...styles.deleteBtn,
-                  opacity: deletingId === profile._id ? 0.6 : 1,
-                  cursor:
-                    deletingId === profile._id ? "not-allowed" : "pointer",
-                }}
-                onClick={() => deletePost(profile)}
-                disabled={deletingId === profile._id}
-              >
-                {deletingId === profile._id ? "..." : "Elimina"}
-              </button>
-            </div>
-          </article>
-        ))}
+            </article>
+          );
+        })}
       </section>
 
       {!loading && !filtered.length && (
@@ -636,6 +741,17 @@ const styles = {
     background: "rgba(255,255,255,0.08)",
     color: "white",
     outline: "none",
+  },
+
+  fileBox: {
+    padding: "13px 14px",
+    borderRadius: 16,
+    border: "1px dashed rgba(255,106,0,0.45)",
+    background: "rgba(255,106,0,0.08)",
+    color: "#ffd3b0",
+    outline: "none",
+    cursor: "pointer",
+    fontWeight: 850,
   },
 
   select: {
