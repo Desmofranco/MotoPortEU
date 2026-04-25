@@ -96,7 +96,139 @@ function latLonStr(p) {
   if (!Number.isFinite(lat) || !Number.isFinite(lon)) return null;
   return `${lat},${lon}`;
 }
+function escapeXml(value = "") {
+  return String(value)
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&apos;");
+}
 
+function safeFileName(value = "motoporteu-itinerario") {
+  return String(value || "motoporteu-itinerario")
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/[^a-z0-9]+/gi, "-")
+    .replace(/^-+|-+$/g, "")
+    .slice(0, 80);
+}
+
+function getGpxRoutePoints(route) {
+  const coords = extractRouteCoords(route);
+
+  if (coords.length >= 2) {
+    return coords.map((p, index) => ({
+      lat: Number(p[0]),
+      lon: Number(p[1]),
+      name:
+        index === 0
+          ? route?.start?.name || "Start"
+          : index === coords.length - 1
+          ? route?.end?.name || "Arrivo"
+          : "",
+    }));
+  }
+
+  const points = [];
+
+  const push = (p, fallbackName = "") => {
+    const pair = Array.isArray(p) ? pairFrom(p[0], p[1]) : pointFromObject(p);
+    if (!pair) return;
+
+    const last = points[points.length - 1];
+    if (
+      last &&
+      Number(last.lat).toFixed(5) === Number(pair[0]).toFixed(5) &&
+      Number(last.lon).toFixed(5) === Number(pair[1]).toFixed(5)
+    ) {
+      return;
+    }
+
+    points.push({
+      lat: Number(pair[0]),
+      lon: Number(pair[1]),
+      name: p?.name || fallbackName || "",
+    });
+  };
+
+  push(route?.start, "Start");
+
+  if (Array.isArray(route?.waypoints)) {
+    route.waypoints.forEach((w) => push(w, w?.name || "Waypoint"));
+  }
+
+  if (Array.isArray(route?.spots)) {
+    route.spots.forEach((s) => push(s, s?.name || "Punto"));
+  }
+
+  push(route?.end, "Arrivo");
+
+  return points;
+}
+
+function exportRouteToGpx(route) {
+  const points = getGpxRoutePoints(route);
+
+  if (!points.length) {
+    alert("Questo itinerario non contiene coordinate esportabili in GPX.");
+    return;
+  }
+
+  if (points.length < 2) {
+    alert("Servono almeno due punti per esportare un GPX valido.");
+    return;
+  }
+
+  const routeName = route?.name || "MotoPortEU Itinerario";
+
+  const trkpts = points
+    .map((p) => {
+      const name = p.name ? `<name>${escapeXml(p.name)}</name>` : "";
+      return `      <trkpt lat="${Number(p.lat)}" lon="${Number(p.lon)}">${name}</trkpt>`;
+    })
+    .join("\n");
+
+  const rtepts = points
+    .map((p) => {
+      const name = p.name ? `<name>${escapeXml(p.name)}</name>` : "";
+      return `    <rtept lat="${Number(p.lat)}" lon="${Number(p.lon)}">${name}</rtept>`;
+    })
+    .join("\n");
+
+  const gpx = `<?xml version="1.0" encoding="UTF-8"?>
+<gpx version="1.1" creator="MotoPortEU" xmlns="http://www.topografix.com/GPX/1/1">
+  <metadata>
+    <name>${escapeXml(routeName)}</name>
+  </metadata>
+  <rte>
+    <name>${escapeXml(routeName)}</name>
+${rtepts}
+  </rte>
+  <trk>
+    <name>${escapeXml(routeName)}</name>
+    <trkseg>
+${trkpts}
+    </trkseg>
+  </trk>
+</gpx>`;
+
+  const blob = new Blob([gpx], {
+    type: "application/gpx+xml;charset=utf-8",
+  });
+
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+
+  a.href = url;
+  a.download = `${safeFileName(routeName)}.gpx`;
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+
+  URL.revokeObjectURL(url);
+}
 function buildNavigateUrl(destination, travelmode = "driving") {
   if (!destination) return null;
   return (
@@ -1540,30 +1672,49 @@ function RouteDetail({ route }) {
       </div>
 
       <div style={{ padding: 12 }}>
-        <button
-          type="button"
-          onClick={() => openGoogleMapsSmart(startNavUrl)}
-          disabled={!startNavUrl}
-          style={{
-            display: "inline-block",
-            padding: "10px 12px",
-            borderRadius: 12,
-            border: "1px solid rgba(0,0,0,0.15)",
-            background: "white",
-            fontSize: 13,
-            cursor: startNavUrl ? "pointer" : "not-allowed",
-            fontWeight: 900,
-            opacity: startNavUrl ? 1 : 0.55,
-          }}
-          title={
-            startNavUrl
-              ? "Avvia navigazione verso l'inizio usando la tua posizione"
-              : "Coordinate itinerario non disponibili"
-          }
-        >
-          🧭 Avvia verso START
-        </button>
+<div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
+  <button
+    type="button"
+    onClick={() => openGoogleMapsSmart(startNavUrl)}
+    disabled={!startNavUrl}
+    style={{
+      display: "inline-block",
+      padding: "10px 12px",
+      borderRadius: 12,
+      border: "1px solid rgba(0,0,0,0.15)",
+      background: "white",
+      fontSize: 13,
+      cursor: startNavUrl ? "pointer" : "not-allowed",
+      fontWeight: 900,
+      opacity: startNavUrl ? 1 : 0.55,
+    }}
+    title={
+      startNavUrl
+        ? "Avvia navigazione verso l'inizio usando la tua posizione"
+        : "Coordinate itinerario non disponibili"
+    }
+  >
+    🧭 Avvia verso START
+  </button>
 
+  <button
+    type="button"
+    onClick={() => exportRouteToGpx(route)}
+    style={{
+      display: "inline-block",
+      padding: "10px 12px",
+      borderRadius: 12,
+      border: "1px solid rgba(0,0,0,0.15)",
+      background: "white",
+      fontSize: 13,
+      cursor: "pointer",
+      fontWeight: 900,
+    }}
+    title="Scarica questo itinerario in formato GPX"
+  >
+    📤 Esporta GPX
+  </button>
+</div>
         <RiderAnalysisPanel analysis={analysis} route={route} />
 
         <div
