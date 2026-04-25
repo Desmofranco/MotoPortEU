@@ -7,6 +7,7 @@ const nav = [
   { path: "/tracks", label: "Circuiti", icon: "🏁" },
   { path: "/map", label: "Navigatore", icon: "🧭" },
   { path: "/garage", label: "Garage", icon: "🔧" },
+  { path: "/community", label: "Community", icon: "👥" },
   { path: "/premium", label: "Premium", icon: "⭐" },
 ];
 
