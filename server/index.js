@@ -2,6 +2,8 @@ import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
 import mongoose from "mongoose";
+import path from "path";
+import { fileURLToPath } from "url";
 
 import authRoutes from "./routes/auth.js";
 import stripeRoutes from "./routes/stripe.js";
@@ -11,6 +13,9 @@ import communityRoutes from "./routes/community.js";
 dotenv.config();
 
 const app = express();
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const allowedOrigins = [
   "https://motoporteu.app",
@@ -34,6 +39,9 @@ app.use(
   })
 );
 
+// Cartella upload pubblica
+app.use("/uploads", express.static(path.join(__dirname, "uploads")));
+
 // Stripe webhook PRIMA del parser JSON
 app.use("/api/stripe", stripeWebhookRoutes);
 
@@ -53,7 +61,7 @@ app.use("/api/stripe", stripeRoutes);
 
 // Community
 app.use("/api/community", communityRoutes);
-app.use("/uploads", express.static("uploads"));
+
 const PORT = process.env.PORT || 10000;
 
 console.log("🔎 Tentativo connessione Mongo...");
