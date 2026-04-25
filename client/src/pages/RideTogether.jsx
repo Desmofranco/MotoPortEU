@@ -116,7 +116,7 @@ export default function RideTogether() {
   const [query, setQuery] = useState("");
 
   const [profiles, setProfiles] = useState([]);
-
+  const [currentUserId, setCurrentUserId] = useState("");
   const [loading, setLoading] = useState(false);
   const [publishing, setPublishing] = useState(false);
   const [deletingId, setDeletingId] = useState("");
@@ -145,12 +145,10 @@ export default function RideTogether() {
 
       const data = await res.json();
 
-      if (data?.ok && Array.isArray(data.posts)) {
-        setProfiles(data.posts);
-      } else {
-        setProfiles([]);
-        setError(data?.message || "Errore caricamento community.");
-      }
+if (data?.ok && Array.isArray(data.posts)) {
+  setProfiles(data.posts);
+  setCurrentUserId(data.currentUserId || "");
+}
     } catch (err) {
       console.error("Community load error:", err);
       setProfiles([]);
@@ -539,7 +537,7 @@ export default function RideTogether() {
 
       <section style={styles.grid}>
         {filtered.map((profile) => {
-        const owner = isOwner(profile);
+        const owner = isOwner(profile, currentUserId);
           return (
             <article key={profile._id} style={styles.card}>
               {profile.imageUrl ? (
