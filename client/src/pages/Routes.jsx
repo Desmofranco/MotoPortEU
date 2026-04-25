@@ -123,6 +123,20 @@ function extractCountriesFromIndex(indexData) {
   return [];
 }
 
+function asRoutesArray(data) {
+  if (Array.isArray(data)) return data;
+
+  if (Array.isArray(data?.routes)) return data.routes;
+  if (Array.isArray(data?.items)) return data.items;
+  if (Array.isArray(data?.data)) return data.data;
+
+  if (data && typeof data === "object" && data.id && data.name) {
+    return [data];
+  }
+
+  return [];
+}
+
 async function loadRoutesDataset() {
   const indexData = await fetchJsonSafe("/data/routes-index.json", null);
   const countries = Array.from(new Set(extractCountriesFromIndex(indexData)));
@@ -131,7 +145,7 @@ async function loadRoutesDataset() {
     const chunks = await Promise.all(
       countries.map(async (code) => {
         const data = await fetchJsonSafe(`/data/routes/${code}.json`, []);
-        return Array.isArray(data) ? data : [];
+        return asRoutesArray(data);
       })
     );
 
@@ -143,9 +157,8 @@ async function loadRoutesDataset() {
   }
 
   const legacy = await fetchJsonSafe("/data/routes.json", []);
-  return Array.isArray(legacy) ? legacy : [];
+  return asRoutesArray(legacy);
 }
-
 function openGoogleMapsSmart(url) {
   if (!url) return;
   if (isMobileNow()) window.location.href = url;
