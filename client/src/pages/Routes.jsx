@@ -679,29 +679,25 @@ function analyzeCurves(route) {
   const declaredScore = toNum(route?.curvesScore);
 
   if (coords.length < 3) {
-    const estimated =
-      declaredScore != null
+    const fallbackScore =
+      declaredScore != null && declaredScore > 0
         ? Math.max(0, Math.min(100, declaredScore))
-        : normalizeCategory(route) === "mountain"
-        ? 72
-        : normalizeCategory(route) === "coastal"
-        ? 48
-        : 42;
+        : 0;
 
     return {
       available: false,
       points: coords.length,
-      curves: null,
-      technicalTurns: null,
-      directionChanges: null,
-      curveDensity: null,
-      score: Math.round(estimated),
+      curves: 0,
+      technicalTurns: 0,
+      directionChanges: 0,
+      curveDensity: 0,
+      score: Math.round(fallbackScore),
       label:
-        estimated >= 75
+        fallbackScore >= 75
           ? "Molto guidato"
-          : estimated >= 55
+          : fallbackScore >= 55
           ? "Guidato"
-          : estimated >= 35
+          : fallbackScore >= 35
           ? "Scorrevole"
           : "Facile",
     };
@@ -716,9 +712,9 @@ function analyzeCurves(route) {
     const b = bearingDeg(coords[i - 1], coords[i]);
     const diff = angleDiff(lastBearing, b);
 
-    if (diff >= 12) directionChanges += 1;
-    if (diff >= 22) curves += 1;
-    if (diff >= 45) technicalTurns += 1;
+    if (diff >= 10) directionChanges += 1;
+    if (diff >= 18) curves += 1;
+    if (diff >= 38) technicalTurns += 1;
 
     lastBearing = b;
   }
@@ -730,12 +726,14 @@ function analyzeCurves(route) {
   let score = Math.round(
     Math.min(
       100,
-      curveDensity * 42 + technicalDensity * 65 + Math.min(coords.length, 80) * 0.18
+      curveDensity * 55 +
+        technicalDensity * 80 +
+        Math.min(coords.length, 120) * 0.12
     )
   );
 
-  if (declaredScore != null) {
-    score = Math.round(score * 0.65 + declaredScore * 0.35);
+  if (declaredScore != null && declaredScore > 0) {
+    score = Math.round(score * 0.75 + declaredScore * 0.25);
   }
 
   const label =
@@ -758,7 +756,6 @@ function analyzeCurves(route) {
     label,
   };
 }
-
 function buildRiderAnalysis(route) {
   const category = normalizeCategory(route);
   const distanceKm = getRouteDistanceKm(route);
@@ -935,7 +932,11 @@ function formatRouteKm(km) {
   if (!Number.isFinite(n) || n <= 0) return "—";
   return `${Math.round(n)} km`;
 }
-
+function formatCurveCount(value) {
+  const n = Number(value || 0);
+  if (!Number.isFinite(n) || n <= 0) return "0";
+  return String(Math.round(n));
+}
 function getRoutePointNames(route, max = 4) {
   const out = [];
   const seen = new Set();
@@ -1764,7 +1765,9 @@ function RouteDetail({ route }) {
             <span style={pill("dark")}>
               {analysis.icon} {analysis.complexity}
             </span>
-            <span style={pill("dark")}>🌀 Curve {analysis.curves.score}/100</span>
+            <span style={pill("dark")}>
+  🌀 Curve {formatCurveCount(analysis.curves.curves)} · Score {analysis.curves.score}/100
+</span>
           </div>
         </div>
       </div>
@@ -1881,6 +1884,10 @@ function RouteDetail({ route }) {
 }
 
 function RiderAnalysisPanel({ analysis, route }) {
+  const realCurves = formatCurveCount(analysis.curves.curves);
+  const directionChanges = formatCurveCount(analysis.curves.directionChanges);
+  const technicalTurns = formatCurveCount(analysis.curves.technicalTurns);
+
   return (
     <div
       style={{
@@ -1900,7 +1907,8 @@ function RiderAnalysisPanel({ analysis, route }) {
         }}
       >
         <StatBox label="Distanza" value={formatRouteKm(analysis.distanceKm)} />
-        <StatBox label="Curve" value={`${analysis.curves.score}/100`} />
+        <StatBox label="Curve reali" value={realCurves} />
+        <StatBox label="Curve score" value={`${analysis.curves.score}/100`} />
         <StatBox label="Feeling" value={analysis.curves.label} />
         <StatBox
           label="Complessità"
@@ -1940,21 +1948,15 @@ function RiderAnalysisPanel({ analysis, route }) {
       </div>
 
       <div style={{ marginTop: 10, display: "flex", gap: 8, flexWrap: "wrap" }}>
+        <span style={pill("light")}>🌀 Curve reali: {realCurves}</span>
+        <span style={pill("light")}>↔️ Cambi direzione: {directionChanges}</span>
+        <span style={pill("light")}>⚡ Tratti tecnici: {technicalTurns}</span>
+
         {analysis.highlights.map((h) => (
           <span key={h} style={pill("light")}>
             {h}
           </span>
         ))}
-
-        {analysis.curves.available && analysis.curves.curves != null ? (
-          <span style={pill("light")}>🌀 Curve stimate: {analysis.curves.curves}</span>
-        ) : null}
-
-        {analysis.curves.technicalTurns != null ? (
-          <span style={pill("light")}>
-            ⚡ Tornanti/tratti tecnici: {analysis.curves.technicalTurns}
-          </span>
-        ) : null}
 
         {route?.asphaltScore != null ? (
           <span style={pill("light")}>🛣️ Asfalto {route.asphaltScore}/100</span>
@@ -1963,7 +1965,6 @@ function RiderAnalysisPanel({ analysis, route }) {
     </div>
   );
 }
-
 function StatBox({ label, value }) {
   return (
     <div
