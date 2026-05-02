@@ -1090,11 +1090,14 @@ function buildInlineRiderTravelPanel(route, analysis) {
 
   const durationMin = distanceKm > 0 ? Math.round((distanceKm / avgSpeed) * 60) : 0;
 
-  const softTurns = Math.max(0, Math.round(curveScore * 15 + coords.length * 1.2));
-  const mediumTurns = Math.max(0, Math.round(curveScore * 4.2));
-  const hardTurns = Math.max(0, Math.round(curveScore * 1.1));
-  const totalTurns = softTurns + mediumTurns + hardTurns;
+const realCurves = curves?.curves ?? null;
+const realTechnicalTurns = curves?.technicalTurns ?? null;
+const realDirectionChanges = curves?.directionChanges ?? null;
 
+const totalTurns = realCurves ?? Math.round(curveScore * 2.4);
+const softTurns = realDirectionChanges ?? totalTurns;
+const mediumTurns = realCurves ?? totalTurns;
+const hardTurns = realTechnicalTurns ?? 0;
   const roadStyle =
     curveScore >= 75
       ? "Tecnica"
@@ -2142,7 +2145,6 @@ function RouteDetail({ route }) {
         </div>
 
         <InlineRiderTravelPanel route={route} analysis={analysis} />
-        <RiderAnalysisPanel analysis={analysis} route={route} />
 
         <div
           style={{
@@ -2310,13 +2312,12 @@ function InlineRiderTravelPanel({ route, analysis }) {
         </div>
 
         <div style={boxStyle}>
-          <div style={labelStyle}>Curve rilevate</div>
-          <div style={valueStyle}>{panel.totalTurns}</div>
-          <div style={{ fontSize: 13, opacity: 0.68, marginTop: 6 }}>
-            Soft {panel.softTurns} • Medie {panel.mediumTurns} • Hard {panel.hardTurns}
-          </div>
-        </div>
-
+  <div style={labelStyle}>Curve rilevate</div>
+  <div style={valueStyle}>{panel.totalTurns}</div>
+  <div style={{ fontSize: 13, opacity: 0.68, marginTop: 6 }}>
+    Cambi direzione {panel.softTurns} • Curve {panel.mediumTurns} • Tecniche {panel.hardTurns}
+  </div>
+</div>
         <div style={boxStyle}>
           <div style={labelStyle}>Complessità rotta</div>
           <div style={{ ...valueStyle, color: panel.complexityColor }}>
