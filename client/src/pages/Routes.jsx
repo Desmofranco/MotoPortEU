@@ -28,6 +28,14 @@
 // ✅ rider diagnosis
 // ✅ stats UI percorso
 //
+// AUTO RIDER ENGINE:
+// ✅ Profilo rider automatico
+// ✅ Feeling percorso
+// ✅ Warning intelligenti
+// ✅ Consiglio guida
+// ✅ Target rider
+// ✅ Best time suggerito
+//
 // GPX:
 // ✅ Export GPX integrato
 // =======================================================
@@ -136,6 +144,7 @@ function asRoutesArray(data) {
 
   return [];
 }
+
 async function loadRoutesDataset() {
   const indexData = await fetchJsonSafe("/data/routes-index.json", null);
 
@@ -164,6 +173,7 @@ async function loadRoutesDataset() {
   const legacy = await fetchJsonSafe("/data/routes.json", []);
   return asRoutesArray(legacy);
 }
+
 function openGoogleMapsSmart(url) {
   if (!url) return;
   if (isMobileNow()) window.location.href = url;
@@ -676,9 +686,9 @@ function getRouteDistanceKm(route) {
 
 function analyzeCurves(route) {
   const coords = extractRouteCoords(route);
- const rawDeclaredScore = toNum(route?.curvesScore);
-const declaredScore =
-  rawDeclaredScore != null && rawDeclaredScore > 0 ? rawDeclaredScore : null;
+  const rawDeclaredScore = toNum(route?.curvesScore);
+  const declaredScore =
+    rawDeclaredScore != null && rawDeclaredScore > 0 ? rawDeclaredScore : null;
 
   if (coords.length < 3) {
     const estimated =
@@ -870,6 +880,169 @@ function buildRiderAnalysis(route) {
     icon,
     diagnosis,
     highlights,
+  };
+}
+
+function clampScore(n) {
+  const x = Number(n);
+  if (!Number.isFinite(x)) return 0;
+  return Math.max(0, Math.min(100, Math.round(x)));
+}
+
+function buildAutoRiderEngine(route, analysis) {
+  const category = normalizeCategory(route);
+  const blob = routeSearchBlob(route);
+  const distanceKm = Number(analysis?.distanceKm || getRouteDistanceKm(route) || 0);
+  const curvesScore = Number(analysis?.curves?.score || 0);
+  const asphaltScore = toNum(route?.asphaltScore);
+  const complexityScore = Number(analysis?.complexityScore || 0);
+
+  const hasMountainWords =
+    blob.includes("passo") ||
+    blob.includes("pass ") ||
+    blob.includes("alps") ||
+    blob.includes("alp") ||
+    blob.includes("dolom") ||
+    blob.includes("montagna") ||
+    blob.includes("mountain");
+
+  const hasCoastWords =
+    category === "coastal" ||
+    blob.includes("costiera") ||
+    blob.includes("coast") ||
+    blob.includes("riviera") ||
+    blob.includes("mare");
+
+  const hasLakeWords =
+    category === "lake" ||
+    blob.includes("lago") ||
+    blob.includes("lake");
+
+  let sportScore = 0;
+  sportScore += curvesScore * 0.45;
+  sportScore += complexityScore * 0.35;
+  sportScore += category === "mountain" ? 12 : 0;
+  sportScore += hasMountainWords ? 8 : 0;
+  sportScore += asphaltScore != null && asphaltScore >= 70 ? 5 : 0;
+
+  let touringScore = 0;
+  touringScore += distanceKm >= 80 && distanceKm <= 230 ? 24 : 12;
+  touringScore += complexityScore >= 35 && complexityScore <= 72 ? 24 : 10;
+  touringScore += curvesScore >= 35 && curvesScore <= 78 ? 20 : 8;
+  touringScore += hasLakeWords || hasCoastWords ? 12 : 6;
+
+  let scenicScore = 0;
+  scenicScore += hasCoastWords ? 28 : 0;
+  scenicScore += hasLakeWords ? 24 : 0;
+  scenicScore += category === "mountain" ? 14 : 0;
+  scenicScore += distanceKm <= 160 ? 14 : 8;
+  scenicScore += curvesScore < 65 ? 12 : 6;
+
+  let adventureScore = 0;
+  adventureScore += distanceKm >= 180 ? 22 : 8;
+  adventureScore += complexityScore >= 65 ? 22 : 8;
+  adventureScore += asphaltScore != null && asphaltScore < 60 ? 18 : 0;
+  adventureScore += blob.includes("forest") || blob.includes("gravel") || blob.includes("offroad") ? 18 : 0;
+
+  sportScore = clampScore(sportScore);
+  touringScore = clampScore(touringScore);
+  scenicScore = clampScore(scenicScore);
+  adventureScore = clampScore(adventureScore);
+
+  const profileScores = [
+    { key: "sport", label: "Sport Rider", score: sportScore, icon: "⚡" },
+    { key: "touring", label: "Touring Rider", score: touringScore, icon: "🏍️" },
+    { key: "scenic", label: "Scenic Rider", score: scenicScore, icon: "🌄" },
+    { key: "adventure", label: "Adventure Rider", score: adventureScore, icon: "🧭" },
+  ].sort((a, b) => b.score - a.score);
+
+  const mainProfile = profileScores[0];
+
+  let feeling = "Equilibrato";
+  if (curvesScore >= 78 && complexityScore >= 70) feeling = "Adrenalinico e tecnico";
+  else if (curvesScore >= 62) feeling = "Guidato e divertente";
+  else if (hasCoastWords || hasLakeWords) feeling = "Panoramico e fluido";
+  else if (distanceKm >= 190) feeling = "Lungo e appagante";
+  else if (complexityScore < 38) feeling = "Facile e rilassato";
+
+  let rhythm = "Medio";
+  if (complexityScore >= 78 || curvesScore >= 78) rhythm = "Attento";
+  else if (curvesScore >= 58) rhythm = "Brillante";
+  else if (complexityScore < 38) rhythm = "Rilassato";
+
+  let bestFor = "Rider che vogliono un giro completo senza estremizzare.";
+  if (mainProfile.key === "sport") {
+    bestFor = "Rider che amano curve, ritmo e guida precisa.";
+  } else if (mainProfile.key === "touring") {
+    bestFor = "Rider touring, coppie e uscite di mezza giornata o giornata piena.";
+  } else if (mainProfile.key === "scenic") {
+    bestFor = "Rider che cercano panorama, ritmo pulito e viaggio piacevole.";
+  } else if (mainProfile.key === "adventure") {
+    bestFor = "Rider esperti che accettano percorrenze lunghe e tratti più impegnativi.";
+  }
+
+  const warnings = [];
+
+  if (complexityScore >= 78) {
+    warnings.push("Percorso intenso: evita di affrontarlo stanco o con meteo incerto.");
+  }
+
+  if (curvesScore >= 75) {
+    warnings.push("Curve frequenti: mantieni margine e attenzione sui cambi di ritmo.");
+  }
+
+  if (distanceKm >= 220) {
+    warnings.push("Giro lungo: pianifica benzina, pause e rientro con luce sufficiente.");
+  }
+
+  if (asphaltScore != null && asphaltScore < 55) {
+    warnings.push("Asfalto potenzialmente variabile: meglio guida morbida e prudente.");
+  }
+
+  if (hasMountainWords) {
+    warnings.push("Zona montana/passistica: attenzione a temperatura, ombra e fondo sporco.");
+  }
+
+  if (!warnings.length) {
+    warnings.push("Nessun warning forte: resta comunque prudente su traffico, fondo e visibilità.");
+  }
+
+  let advice = "Mantieni un ritmo progressivo: primi chilometri per leggere strada e grip, poi aumenta solo dove il percorso lo permette.";
+
+  if (mainProfile.key === "sport") {
+    advice = "Guida rotonda e pulita: entra largo, guarda lontano e non forzare nei tratti ciechi. Questo giro premia precisione più che velocità.";
+  } else if (mainProfile.key === "touring") {
+    advice = "Perfetto con ritmo costante: tieni pause brevi ma regolari e goditi il percorso senza trasformarlo in una prova di resistenza.";
+  } else if (mainProfile.key === "scenic") {
+    advice = "Ritmo fluido, soste fotografiche e attenzione ai punti panoramici: qui il valore è il viaggio, non il cronometro.";
+  } else if (mainProfile.key === "adventure") {
+    advice = "Parti con margine: controlla meteo, autonomia, fondo e orari. Meglio una guida conservativa nei tratti isolati o variabili.";
+  }
+
+  let bestTime = "Mattina o primo pomeriggio";
+  if (hasMountainWords) bestTime = "Mattina, evitando freddo/ombra serale sui passi";
+  else if (hasCoastWords) bestTime = "Mattina presto o tardo pomeriggio, evitando traffico turistico";
+  else if (hasLakeWords) bestTime = "Mattina o tramonto, ideale per panorama e traffico più leggero";
+  else if (distanceKm >= 200) bestTime = "Partenza mattutina, con rientro prima del buio";
+
+  const confidence = clampScore(
+    42 +
+      (extractRouteCoords(route).length >= 3 ? 24 : 8) +
+      (distanceKm > 0 ? 14 : 0) +
+      (route?.rideType || route?.routeFamily ? 10 : 0) +
+      (route?.asphaltScore != null ? 10 : 0)
+  );
+
+  return {
+    profileScores,
+    mainProfile,
+    feeling,
+    rhythm,
+    bestFor,
+    warnings: warnings.slice(0, 4),
+    advice,
+    bestTime,
+    confidence,
   };
 }
 
@@ -1241,7 +1414,7 @@ export default function Routes() {
                 className="routes-subtitle"
                 style={{ opacity: 0.75, marginTop: 6 }}
               >
-                Touring emozionale: mappa, meteo e Rider Analysis.
+                Touring emozionale: mappa, meteo e Auto Rider Engine.
               </div>
             </div>
 
@@ -1491,6 +1664,7 @@ function RouteCard({ route, active, onSelect }) {
   const photo = route.photo || FALLBACK_PHOTO;
   const category = normalizeCategory(route);
   const analysis = buildRiderAnalysis(route);
+  const autoEngine = buildAutoRiderEngine(route, analysis);
 
   const touchRef = useRef({
     startX: 0,
@@ -1621,7 +1795,7 @@ function RouteCard({ route, active, onSelect }) {
             <span>{categoryLabel(category)}</span>
             <span>·</span>
             <span>
-              {analysis.icon} {analysis.complexity}
+              {autoEngine.mainProfile.icon} {autoEngine.mainProfile.label}
             </span>
           </div>
         </div>
@@ -1662,6 +1836,9 @@ function RouteCard({ route, active, onSelect }) {
             <span style={complexityBadgeStyle(analysis.tone)}>
               {analysis.icon} {analysis.complexity}
             </span>
+            <span style={pill("light")}>
+              {autoEngine.mainProfile.icon} {autoEngine.mainProfile.label}
+            </span>
             <span style={{ fontSize: 12, opacity: 0.75 }}>
               {route.region || "—"}
             </span>
@@ -1687,6 +1864,7 @@ function RouteDetail({ route }) {
     : null;
   const category = normalizeCategory(route);
   const analysis = buildRiderAnalysis(route);
+  const autoEngine = buildAutoRiderEngine(route, analysis);
 
   const [wx, setWx] = useState(null);
   const [wxBusy, setWxBusy] = useState(false);
@@ -1767,6 +1945,9 @@ function RouteDetail({ route }) {
               {analysis.icon} {analysis.complexity}
             </span>
             <span style={pill("dark")}>🌀 Curve {analysis.curves.score}/100</span>
+            <span style={pill("dark")}>
+              {autoEngine.mainProfile.icon} {autoEngine.mainProfile.label}
+            </span>
           </div>
         </div>
       </div>
@@ -1816,6 +1997,7 @@ function RouteDetail({ route }) {
           </button>
         </div>
 
+        <AutoRiderEnginePanel engine={autoEngine} />
         <RiderAnalysisPanel analysis={analysis} route={route} />
 
         <div
@@ -1879,6 +2061,162 @@ function RouteDetail({ route }) {
         ) : null}
       </div>
     </>
+  );
+}
+
+function AutoRiderEnginePanel({ engine }) {
+  if (!engine) return null;
+
+  return (
+    <div
+      style={{
+        marginTop: 12,
+        padding: 12,
+        borderRadius: 18,
+        background: "linear-gradient(135deg, rgba(12,18,30,0.96), rgba(28,37,54,0.94))",
+        color: "white",
+        border: "1px solid rgba(255,255,255,0.12)",
+        boxShadow: "0 10px 30px rgba(0,0,0,0.10)",
+      }}
+    >
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+          gap: 10,
+          alignItems: "start",
+          flexWrap: "wrap",
+        }}
+      >
+        <div>
+          <div style={{ fontSize: 12, opacity: 0.78, fontWeight: 800 }}>
+            🤖 Auto Rider Engine
+          </div>
+          <div style={{ marginTop: 2, fontSize: 20, fontWeight: 950, lineHeight: 1.1 }}>
+            {engine.mainProfile.icon} {engine.mainProfile.label}
+          </div>
+          <div style={{ marginTop: 4, fontSize: 13, opacity: 0.82 }}>
+            Feeling: <strong>{engine.feeling}</strong> · Ritmo consigliato: <strong>{engine.rhythm}</strong>
+          </div>
+        </div>
+
+        <span style={pill("dark")}>Affidabilità {engine.confidence}/100</span>
+      </div>
+
+      <div
+        style={{
+          marginTop: 12,
+          display: "grid",
+          gridTemplateColumns: "repeat(auto-fit, minmax(130px, 1fr))",
+          gap: 8,
+        }}
+      >
+        {engine.profileScores.map((p) => (
+          <div
+            key={p.key}
+            style={{
+              padding: 10,
+              borderRadius: 14,
+              background: "rgba(255,255,255,0.08)",
+              border: "1px solid rgba(255,255,255,0.10)",
+            }}
+          >
+            <div style={{ fontSize: 11, opacity: 0.72 }}>{p.icon} {p.label}</div>
+            <div style={{ marginTop: 5, display: "flex", alignItems: "center", gap: 8 }}>
+              <div
+                style={{
+                  height: 7,
+                  borderRadius: 999,
+                  overflow: "hidden",
+                  background: "rgba(255,255,255,0.16)",
+                  flex: 1,
+                }}
+              >
+                <div
+                  style={{
+                    width: `${p.score}%`,
+                    height: "100%",
+                    borderRadius: 999,
+                    background: "rgba(255,255,255,0.82)",
+                  }}
+                />
+              </div>
+              <strong style={{ fontSize: 12 }}>{p.score}</strong>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <div
+        style={{
+          marginTop: 12,
+          padding: 12,
+          borderRadius: 14,
+          background: "rgba(255,255,255,0.08)",
+          border: "1px solid rgba(255,255,255,0.10)",
+        }}
+      >
+        <div style={{ fontWeight: 900, fontSize: 13 }}>🎯 Per chi è ideale</div>
+        <div style={{ marginTop: 4, fontSize: 13, opacity: 0.86, lineHeight: 1.38 }}>
+          {engine.bestFor}
+        </div>
+      </div>
+
+      <div
+        style={{
+          marginTop: 10,
+          display: "grid",
+          gridTemplateColumns: "repeat(auto-fit, minmax(190px, 1fr))",
+          gap: 8,
+        }}
+      >
+        <div
+          style={{
+            padding: 10,
+            borderRadius: 14,
+            background: "rgba(255,255,255,0.08)",
+            border: "1px solid rgba(255,255,255,0.10)",
+            fontSize: 13,
+            lineHeight: 1.35,
+          }}
+        >
+          <strong>🕒 Quando farlo</strong>
+          <div style={{ marginTop: 3, opacity: 0.84 }}>{engine.bestTime}</div>
+        </div>
+
+        <div
+          style={{
+            padding: 10,
+            borderRadius: 14,
+            background: "rgba(255,255,255,0.08)",
+            border: "1px solid rgba(255,255,255,0.10)",
+            fontSize: 13,
+            lineHeight: 1.35,
+          }}
+        >
+          <strong>🧠 Consiglio AI</strong>
+          <div style={{ marginTop: 3, opacity: 0.84 }}>{engine.advice}</div>
+        </div>
+      </div>
+
+      <div style={{ marginTop: 10, display: "grid", gap: 6 }}>
+        {engine.warnings.map((w) => (
+          <div
+            key={w}
+            style={{
+              padding: "8px 10px",
+              borderRadius: 12,
+              background: "rgba(255,210,80,0.12)",
+              border: "1px solid rgba(255,210,80,0.22)",
+              fontSize: 12,
+              lineHeight: 1.3,
+            }}
+          >
+            ⚠️ {w}
+          </div>
+        ))}
+      </div>
+    </div>
   );
 }
 
