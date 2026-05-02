@@ -351,7 +351,33 @@ function buildNavigateUrl(destination, travelmode = "driving") {
     `&dir_action=navigate`
   );
 }
+function buildGoogleMapsRouteUrl(route) {
+  const points = getGpxRoutePoints(route);
 
+  if (!points || points.length < 2) return null;
+
+  const start = points[0];
+  const end = points[points.length - 1];
+
+  const origin = `${start.lat},${start.lon}`;
+  const destination = `${end.lat},${end.lon}`;
+
+  const waypoints = points
+    .slice(1, -1)
+    .slice(0, 8)
+    .map((p) => `${p.lat},${p.lon}`);
+
+  return (
+    `https://www.google.com/maps/dir/?api=1` +
+    `&travelmode=driving` +
+    `&origin=${encodeURIComponent(origin)}` +
+    `&destination=${encodeURIComponent(destination)}` +
+    (waypoints.length
+      ? `&waypoints=${encodeURIComponent(waypoints.join("|"))}`
+      : "") +
+    `&dir_action=navigate`
+  );
+}
 function sendRouteToRiderMap(route) {
   try {
     const coords = extractRouteCoords(route);
@@ -1887,6 +1913,7 @@ function RouteDetail({ route }) {
   const startNavUrl = navPoint
     ? buildNavigateUrl(latLonStr(navPoint), "driving")
     : null;
+    const routeNavUrl = buildGoogleMapsRouteUrl(route);
   const category = normalizeCategory(route);
   const analysis = buildRiderAnalysis(route);
   const autoEngine = buildAutoRiderEngine(route, analysis);
@@ -1979,30 +2006,29 @@ function RouteDetail({ route }) {
 
       <div style={{ padding: 12 }}>
         <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
-          <button
-            type="button"
-            onClick={() => openGoogleMapsSmart(startNavUrl)}
-            disabled={!startNavUrl}
-            style={{
-              display: "inline-block",
-              padding: "10px 12px",
-              borderRadius: 12,
-              border: "1px solid rgba(0,0,0,0.15)",
-              background: "white",
-              fontSize: 13,
-              cursor: startNavUrl ? "pointer" : "not-allowed",
-              fontWeight: 900,
-              opacity: startNavUrl ? 1 : 0.55,
-            }}
-            title={
-              startNavUrl
-                ? "Avvia navigazione verso l'inizio usando la tua posizione"
-                : "Coordinate itinerario non disponibili"
-            }
-          >
-            🧭 Avvia verso START
-          </button>
-
+<button
+  type="button"
+  onClick={() => openGoogleMapsSmart(routeNavUrl)}
+  disabled={!routeNavUrl}
+  style={{
+    display: "inline-block",
+    padding: "10px 12px",
+    borderRadius: 12,
+    border: "1px solid rgba(0,0,0,0.15)",
+    background: "white",
+    fontSize: 13,
+    cursor: routeNavUrl ? "pointer" : "not-allowed",
+    fontWeight: 900,
+    opacity: routeNavUrl ? 1 : 0.55,
+  }}
+  title={
+    routeNavUrl
+      ? "Apri l’intero itinerario in Google Maps"
+      : "Coordinate itinerario non disponibili"
+  }
+>
+  🧭 Naviga percorso
+</button>
           <button
             type="button"
             onClick={() => exportRouteToGpx(route)}
