@@ -35,7 +35,8 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import RouteMap from "../components/RouteMap";
 import { getRouteWeatherSummary } from "../utils/routeWeather";
-
+import { analyzeRouteGeometry } from "../utils/routeAnalysis";
+import { scoreRouteForRider } from "../utils/routeScoring";
 const FALLBACK_PHOTO =
   "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1600&q=80";
 
@@ -757,117 +758,88 @@ function analyzeCurves(route) {
   };
 }
 function buildRiderAnalysis(route) {
-  const category = normalizeCategory(route);
-  const distanceKm = getRouteDistanceKm(route);
-  const curves = analyzeCurves(route);
-  const asphaltScore = toNum(route?.asphaltScore);
-  const difficultyText = normalizeText(route?.difficulty);
-  const blob = routeSearchBlob(route);
+  const geometry = extractRouteCoords(route).map(([lat, lng]) => ({
+    lat: Number(lat),
+    lng: Number(lng),
+  }));
 
-  let complexityScore = 0;
+  const engineAnalysis = analyzeRouteGeometry(geometry, {
+    durationMin: route?.durationMin,
+  });
 
-  complexityScore += Math.min(38, curves.score * 0.38);
+  const riderScore = scoreRouteForRider(
+    engineAnalysis,
+    route?.rideProfile || "touring",
+    null
+  );
 
-  if (distanceKm >= 250) complexityScore += 28;
-  else if (distanceKm >= 180) complexityScore += 22;
-  else if (distanceKm >= 120) complexityScore += 16;
-  else if (distanceKm >= 70) complexityScore += 10;
-  else complexityScore += 5;
+  const distanceKm =
+    toNum(route?.distanceKm) ||
+    toNum(engineAnalysis?.distanceKm) ||
+    getRouteDistanceKm(route);
 
-  if (category === "mountain") complexityScore += 18;
-  if (category === "coastal") complexityScore += 8;
-  if (category === "lake") complexityScore += 6;
-
-  if (
-    difficultyText.includes("hard") ||
-    difficultyText.includes("difficile") ||
-    difficultyText.includes("expert") ||
-    difficultyText.includes("avanz")
-  ) {
-    complexityScore += 16;
-  } else if (
-    difficultyText.includes("medium") ||
-    difficultyText.includes("intermedio") ||
-    difficultyText.includes("medio")
-  ) {
-    complexityScore += 9;
-  }
-
-  if (
-    blob.includes("passo") ||
-    blob.includes("pass") ||
-    blob.includes("alps") ||
-    blob.includes("alp") ||
-    blob.includes("dolom") ||
-    blob.includes("mountain")
-  ) {
-    complexityScore += 8;
-  }
-
-  if (asphaltScore != null && asphaltScore < 55) complexityScore += 8;
-
-  complexityScore = Math.max(1, Math.min(100, Math.round(complexityScore)));
+  const technicality = Number(engineAnalysis?.technicality || 0);
+  const totalTurns = Number(engineAnalysis?.totalTurns || 0);
+  const mediumTurns = Number(engineAnalysis?.mediumTurns || 0);
+  const sharpTurns = Number(engineAnalysis?.sharpTurns || 0);
 
   let complexity = "Easy";
   let tone = "green";
   let icon = "🟢";
 
-  if (complexityScore >= 78) {
+  if (technicality >= 70 || riderScore.riderScore >= 86) {
     complexity = "Expert";
     tone = "red";
     icon = "🔴";
-  } else if (complexityScore >= 58) {
+  } else if (technicality >= 45 || riderScore.riderScore >= 75) {
     complexity = "Sport";
     tone = "orange";
     icon = "🟠";
-  } else if (complexityScore >= 38) {
+  } else if (riderScore.riderScore >= 62) {
     complexity = "Touring";
     tone = "blue";
     icon = "🔵";
   }
 
-  let diagnosis = "";
+  const curveLabel =
+    technicality >= 70
+      ? "Molto guidato"
+      : technicality >= 45
+      ? "Guidato"
+      : technicality >= 25
+      ? "Scorrevole"
+      : "Facile";
 
-  if (complexity === "Expert") {
-    diagnosis =
-      "Percorso impegnativo: tante curve, ritmo fisico e possibile alternanza di tratti tecnici. Ideale per rider esperti e guida concentrata.";
-  } else if (complexity === "Sport") {
-    diagnosis =
-      "Percorso molto interessante per chi ama guidare: curve presenti, buon ritmo e tratti da affrontare con attenzione.";
-  } else if (complexity === "Touring") {
-    diagnosis =
-      "Percorso equilibrato: adatto al turismo in moto, con guida piacevole e complessità gestibile.";
-  } else {
-    diagnosis =
-      "Percorso facile e scorrevole: buono per una gita rilassata, anche con passeggero o ritmo tranquillo.";
-  }
-
-  const highlights = [];
-
-  if (curves.score >= 70) highlights.push("Alta densità di curve");
-  else if (curves.score >= 50) highlights.push("Buona guidabilità");
-  else highlights.push("Andatura scorrevole");
-
-  if (distanceKm >= 180) highlights.push("Giro lungo");
-  else if (distanceKm >= 90) highlights.push("Mezza giornata piena");
-  else highlights.push("Giro compatto");
-
-  if (category === "mountain") highlights.push("Terreno montano");
-  if (category === "lake") highlights.push("Panorama lago");
-  if (category === "coastal") highlights.push("Strada costiera");
+  const diagnosis =
+    riderScore.summary +
+    (riderScore.warnings?.length
+      ? `. Attenzione: ${riderScore.warnings.join(", ")}.`
+      : ".");
 
   return {
     distanceKm,
-    curves,
+    curves: {
+      available: engineAnalysis.valid,
+      points: geometry.length,
+      curves: totalTurns,
+      technicalTurns: sharpTurns,
+      directionChanges: mediumTurns,
+      curveDensity: engineAnalysis.turnDensity || 0,
+      score: technicality,
+      label: curveLabel,
+    },
     complexity,
-    complexityScore,
+    complexityScore: riderScore.riderScore,
     tone,
     icon,
     diagnosis,
-    highlights,
+    highlights: riderScore.highlights?.length
+      ? riderScore.highlights
+      : ["Analisi Rider Engine", "Rotta elaborata dal motore reale"],
+    engineAnalysis,
+    riderScore,
   };
 }
-
 function complexityBadgeStyle(tone, dark = false) {
   if (dark) return pill("dark");
 
@@ -1765,8 +1737,8 @@ function RouteDetail({ route }) {
             <span style={pill("dark")}>
               {analysis.icon} {analysis.complexity}
             </span>
-            <span style={pill("dark")}>
-  🌀 Curve {formatCurveCount(analysis.curves.curves)} · Score {analysis.curves.score}/100
+<span style={pill("dark")}>
+  🌀 Curve {analysis.curves.curves} · Score {analysis.curves.score}/100
 </span>
           </div>
         </div>
@@ -1907,7 +1879,7 @@ function RiderAnalysisPanel({ analysis, route }) {
         }}
       >
         <StatBox label="Distanza" value={formatRouteKm(analysis.distanceKm)} />
-        <StatBox label="Curve reali" value={realCurves} />
+        <StatBox label="Curve reali" value={analysis.curves.curves} />
         <StatBox label="Curve score" value={`${analysis.curves.score}/100`} />
         <StatBox label="Feeling" value={analysis.curves.label} />
         <StatBox
@@ -1948,7 +1920,7 @@ function RiderAnalysisPanel({ analysis, route }) {
       </div>
 
       <div style={{ marginTop: 10, display: "flex", gap: 8, flexWrap: "wrap" }}>
-        <span style={pill("light")}>🌀 Curve reali: {realCurves}</span>
+        <span style={pill("light")}>🌀 Curve Rider Engine: {analysis.curves.curves}</span>
         <span style={pill("light")}>↔️ Cambi direzione: {directionChanges}</span>
         <span style={pill("light")}>⚡ Tratti tecnici: {technicalTurns}</span>
 
