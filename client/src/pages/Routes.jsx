@@ -676,7 +676,9 @@ function getRouteDistanceKm(route) {
 
 function analyzeCurves(route) {
   const coords = extractRouteCoords(route);
-  const declaredScore = toNum(route?.curvesScore);
+ const rawDeclaredScore = toNum(route?.curvesScore);
+const declaredScore =
+  rawDeclaredScore != null && rawDeclaredScore > 0 ? rawDeclaredScore : null;
 
   if (coords.length < 3) {
     const estimated =
