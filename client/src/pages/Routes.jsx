@@ -21,20 +21,12 @@
 // ✅ Ricerca con debounce
 // ✅ Fetch con cache più favorevole su mobile
 //
-// RIDER ANALYSIS:
-// ✅ computeDistanceKm
-// ✅ analyzeCurves
-// ✅ complexity badge
-// ✅ rider diagnosis
-// ✅ stats UI percorso
-//
-// AUTO RIDER ENGINE:
-// ✅ Profilo rider automatico
-// ✅ Feeling percorso
-// ✅ Warning intelligenti
-// ✅ Consiglio guida
-// ✅ Target rider
-// ✅ Best time suggerito
+// RIDER PANEL INLINE REALE:
+// ✅ Un solo pannello automatico nel dettaglio itinerario
+// ✅ Dati coerenti con “Analizza con Rider”
+// ✅ Payload arricchito verso Map.jsx
+// ✅ Hero pulita: distanza, categoria, profilo rider
+// ✅ Rimossi doppioni visivi
 //
 // GPX:
 // ✅ Export GPX integrato
@@ -227,6 +219,65 @@ function safeFileName(value = "motoporteu-itinerario") {
     .slice(0, 80);
 }
 
+function pointFromObject(obj) {
+  if (!obj) return null;
+  return pairFrom(
+    obj?.lat ?? obj?.latitude,
+    obj?.lng ?? obj?.lon ?? obj?.longitude
+  );
+}
+
+function extractRouteCoords(route) {
+  const out = [];
+
+  const pushPoint = (p) => {
+    let pair = null;
+
+    if (Array.isArray(p) && p.length >= 2) {
+      pair = pairFrom(p[0], p[1]);
+    } else if (p && typeof p === "object") {
+      pair = pointFromObject(p);
+    }
+
+    if (!pair) return;
+
+    const last = out[out.length - 1];
+    if (
+      last &&
+      Number(last[0]).toFixed(5) === Number(pair[0]).toFixed(5) &&
+      Number(last[1]).toFixed(5) === Number(pair[1]).toFixed(5)
+    ) {
+      return;
+    }
+
+    out.push(pair);
+  };
+
+  if (Array.isArray(route?.coords)) {
+    route.coords.forEach(pushPoint);
+  }
+
+  if (out.length < 2 && Array.isArray(route?.geometry)) {
+    route.geometry.forEach(pushPoint);
+  }
+
+  if (out.length < 2 && Array.isArray(route?.waypoints)) {
+    route.waypoints.forEach(pushPoint);
+  }
+
+  if (out.length < 2 && Array.isArray(route?.spots)) {
+    route.spots.forEach(pushPoint);
+  }
+
+  if (out.length < 2) {
+    pushPoint(route?.start);
+    pushPoint(route?.center);
+    pushPoint(route?.end);
+  }
+
+  return out;
+}
+
 function getGpxRoutePoints(route) {
   const coords = extractRouteCoords(route);
 
@@ -349,39 +400,6 @@ function buildNavigateUrl(destination, travelmode = "driving") {
     `&destination=${encodeURIComponent(destination)}` +
     `&travelmode=${encodeURIComponent(travelmode)}` +
     `&dir_action=navigate`
-  );
-}
-
-function sendRouteToRiderMap(route) {
-  try {
-    const coords = extractRouteCoords(route);
-    const payload = {
-      source: "routes",
-      action: "analyze_with_rider_engine",
-      createdAt: new Date().toISOString(),
-      route: {
-        ...route,
-        coords,
-        distanceKm: getRouteDistanceKm(route),
-        category: normalizeCategory(route),
-      },
-    };
-
-    localStorage.setItem("motoporteu:riderRouteToAnalyze", JSON.stringify(payload));
-    localStorage.setItem("motoporteu:navigatorImport", JSON.stringify(payload));
-    localStorage.setItem("motoporteu:selectedRouteForMap", JSON.stringify(payload.route));
-  } catch (e) {
-    console.warn("Impossibile preparare itinerario per Rider Engine", e);
-  }
-
-  window.location.href = "/map?from=routes&analyze=rider";
-}
-
-function pointFromObject(obj) {
-  if (!obj) return null;
-  return pairFrom(
-    obj?.lat ?? obj?.latitude,
-    obj?.lng ?? obj?.lon ?? obj?.longitude
   );
 }
 
@@ -643,57 +661,6 @@ function angleDiff(a, b) {
   return d;
 }
 
-function extractRouteCoords(route) {
-  const out = [];
-
-  const pushPoint = (p) => {
-    let pair = null;
-
-    if (Array.isArray(p) && p.length >= 2) {
-      pair = pairFrom(p[0], p[1]);
-    } else if (p && typeof p === "object") {
-      pair = pointFromObject(p);
-    }
-
-    if (!pair) return;
-
-    const last = out[out.length - 1];
-    if (
-      last &&
-      Number(last[0]).toFixed(5) === Number(pair[0]).toFixed(5) &&
-      Number(last[1]).toFixed(5) === Number(pair[1]).toFixed(5)
-    ) {
-      return;
-    }
-
-    out.push(pair);
-  };
-
-  if (Array.isArray(route?.coords)) {
-    route.coords.forEach(pushPoint);
-  }
-
-  if (out.length < 2 && Array.isArray(route?.geometry)) {
-    route.geometry.forEach(pushPoint);
-  }
-
-  if (out.length < 2 && Array.isArray(route?.waypoints)) {
-    route.waypoints.forEach(pushPoint);
-  }
-
-  if (out.length < 2 && Array.isArray(route?.spots)) {
-    route.spots.forEach(pushPoint);
-  }
-
-  if (out.length < 2) {
-    pushPoint(route?.start);
-    pushPoint(route?.center);
-    pushPoint(route?.end);
-  }
-
-  return out;
-}
-
 function getRouteDistanceKm(route) {
   const declared = toNum(route?.distanceKm);
   if (declared && declared > 0) return declared;
@@ -795,7 +762,6 @@ function analyzeCurves(route) {
     label,
   };
 }
-
 function buildRiderAnalysis(route) {
   const category = normalizeCategory(route);
   const distanceKm = getRouteDistanceKm(route);
@@ -870,31 +836,17 @@ function buildRiderAnalysis(route) {
 
   if (complexity === "Expert") {
     diagnosis =
-      "Percorso impegnativo: tante curve, ritmo fisico e possibile alternanza di tratti tecnici. Ideale per rider esperti e guida concentrata.";
+      "Percorso impegnativo: tante curve, ritmo fisico e possibile alternanza di tratti tecnici.";
   } else if (complexity === "Sport") {
     diagnosis =
-      "Percorso molto interessante per chi ama guidare: curve presenti, buon ritmo e tratti da affrontare con attenzione.";
+      "Percorso molto interessante per chi ama guidare: curve presenti e buon ritmo.";
   } else if (complexity === "Touring") {
     diagnosis =
-      "Percorso equilibrato: adatto al turismo in moto, con guida piacevole e complessità gestibile.";
+      "Percorso equilibrato: adatto al turismo in moto, con guida piacevole.";
   } else {
     diagnosis =
-      "Percorso facile e scorrevole: buono per una gita rilassata, anche con passeggero o ritmo tranquillo.";
+      "Percorso facile e scorrevole: ideale per una gita rilassata.";
   }
-
-  const highlights = [];
-
-  if (curves.score >= 70) highlights.push("Alta densità di curve");
-  else if (curves.score >= 50) highlights.push("Buona guidabilità");
-  else highlights.push("Andatura scorrevole");
-
-  if (distanceKm >= 180) highlights.push("Giro lungo");
-  else if (distanceKm >= 90) highlights.push("Mezza giornata piena");
-  else highlights.push("Giro compatto");
-
-  if (category === "mountain") highlights.push("Terreno montano");
-  if (category === "lake") highlights.push("Panorama lago");
-  if (category === "coastal") highlights.push("Strada costiera");
 
   return {
     distanceKm,
@@ -904,7 +856,6 @@ function buildRiderAnalysis(route) {
     tone,
     icon,
     diagnosis,
-    highlights,
   };
 }
 
@@ -924,24 +875,18 @@ function buildAutoRiderEngine(route, analysis) {
 
   const hasMountainWords =
     blob.includes("passo") ||
-    blob.includes("pass ") ||
     blob.includes("alps") ||
-    blob.includes("alp") ||
     blob.includes("dolom") ||
-    blob.includes("montagna") ||
-    blob.includes("mountain");
+    blob.includes("montagna");
 
   const hasCoastWords =
     category === "coastal" ||
     blob.includes("costiera") ||
-    blob.includes("coast") ||
-    blob.includes("riviera") ||
     blob.includes("mare");
 
   const hasLakeWords =
     category === "lake" ||
-    blob.includes("lago") ||
-    blob.includes("lake");
+    blob.includes("lago");
 
   let sportScore = 0;
   sportScore += curvesScore * 0.45;
@@ -960,184 +905,54 @@ function buildAutoRiderEngine(route, analysis) {
   scenicScore += hasCoastWords ? 28 : 0;
   scenicScore += hasLakeWords ? 24 : 0;
   scenicScore += category === "mountain" ? 14 : 0;
-  scenicScore += distanceKm <= 160 ? 14 : 8;
-  scenicScore += curvesScore < 65 ? 12 : 6;
-
-  let adventureScore = 0;
-  adventureScore += distanceKm >= 180 ? 22 : 8;
-  adventureScore += complexityScore >= 65 ? 22 : 8;
-  adventureScore += asphaltScore != null && asphaltScore < 60 ? 18 : 0;
-  adventureScore += blob.includes("forest") || blob.includes("gravel") || blob.includes("offroad") ? 18 : 0;
 
   sportScore = clampScore(sportScore);
   touringScore = clampScore(touringScore);
   scenicScore = clampScore(scenicScore);
-  adventureScore = clampScore(adventureScore);
 
   const profileScores = [
     { key: "sport", label: "Sport Rider", score: sportScore, icon: "⚡" },
     { key: "touring", label: "Touring Rider", score: touringScore, icon: "🏍️" },
     { key: "scenic", label: "Scenic Rider", score: scenicScore, icon: "🌄" },
-    { key: "adventure", label: "Adventure Rider", score: adventureScore, icon: "🧭" },
   ].sort((a, b) => b.score - a.score);
 
   const mainProfile = profileScores[0];
 
-  let feeling = "Equilibrato";
-  if (curvesScore >= 78 && complexityScore >= 70) feeling = "Adrenalinico e tecnico";
-  else if (curvesScore >= 62) feeling = "Guidato e divertente";
-  else if (hasCoastWords || hasLakeWords) feeling = "Panoramico e fluido";
-  else if (distanceKm >= 190) feeling = "Lungo e appagante";
-  else if (complexityScore < 38) feeling = "Facile e rilassato";
-
-  let rhythm = "Medio";
-  if (complexityScore >= 78 || curvesScore >= 78) rhythm = "Attento";
-  else if (curvesScore >= 58) rhythm = "Brillante";
-  else if (complexityScore < 38) rhythm = "Rilassato";
-
-  let bestFor = "Rider che vogliono un giro completo senza estremizzare.";
-  if (mainProfile.key === "sport") {
-    bestFor = "Rider che amano curve, ritmo e guida precisa.";
-  } else if (mainProfile.key === "touring") {
-    bestFor = "Rider touring, coppie e uscite di mezza giornata o giornata piena.";
-  } else if (mainProfile.key === "scenic") {
-    bestFor = "Rider che cercano panorama, ritmo pulito e viaggio piacevole.";
-  } else if (mainProfile.key === "adventure") {
-    bestFor = "Rider esperti che accettano percorrenze lunghe e tratti più impegnativi.";
-  }
-
-  const warnings = [];
-
-  if (complexityScore >= 78) {
-    warnings.push("Percorso intenso: evita di affrontarlo stanco o con meteo incerto.");
-  }
-
-  if (curvesScore >= 75) {
-    warnings.push("Curve frequenti: mantieni margine e attenzione sui cambi di ritmo.");
-  }
-
-  if (distanceKm >= 220) {
-    warnings.push("Giro lungo: pianifica benzina, pause e rientro con luce sufficiente.");
-  }
-
-  if (asphaltScore != null && asphaltScore < 55) {
-    warnings.push("Asfalto potenzialmente variabile: meglio guida morbida e prudente.");
-  }
-
-  if (hasMountainWords) {
-    warnings.push("Zona montana/passistica: attenzione a temperatura, ombra e fondo sporco.");
-  }
-
-  if (!warnings.length) {
-    warnings.push("Nessun warning forte: resta comunque prudente su traffico, fondo e visibilità.");
-  }
-
-  let advice = "Mantieni un ritmo progressivo: primi chilometri per leggere strada e grip, poi aumenta solo dove il percorso lo permette.";
+  let advice =
+    "Mantieni un ritmo progressivo: primi km per leggere strada e grip.";
 
   if (mainProfile.key === "sport") {
-    advice = "Guida rotonda e pulita: entra largo, guarda lontano e non forzare nei tratti ciechi. Questo giro premia precisione più che velocità.";
+    advice =
+      "Guida rotonda e pulita: questo giro premia precisione più che velocità.";
   } else if (mainProfile.key === "touring") {
-    advice = "Perfetto con ritmo costante: tieni pause brevi ma regolari e goditi il percorso senza trasformarlo in una prova di resistenza.";
+    advice =
+      "Perfetto con ritmo costante: ideale per una guida fluida e sostenibile.";
   } else if (mainProfile.key === "scenic") {
-    advice = "Ritmo fluido, soste fotografiche e attenzione ai punti panoramici: qui il valore è il viaggio, non il cronometro.";
-  } else if (mainProfile.key === "adventure") {
-    advice = "Parti con margine: controlla meteo, autonomia, fondo e orari. Meglio una guida conservativa nei tratti isolati o variabili.";
+    advice =
+      "Goditi il panorama e mantieni una guida rilassata.";
   }
-
-  let bestTime = "Mattina o primo pomeriggio";
-  if (hasMountainWords) bestTime = "Mattina, evitando freddo/ombra serale sui passi";
-  else if (hasCoastWords) bestTime = "Mattina presto o tardo pomeriggio, evitando traffico turistico";
-  else if (hasLakeWords) bestTime = "Mattina o tramonto, ideale per panorama e traffico più leggero";
-  else if (distanceKm >= 200) bestTime = "Partenza mattutina, con rientro prima del buio";
-
-  const confidence = clampScore(
-    42 +
-      (extractRouteCoords(route).length >= 3 ? 24 : 8) +
-      (distanceKm > 0 ? 14 : 0) +
-      (route?.rideType || route?.routeFamily ? 10 : 0) +
-      (route?.asphaltScore != null ? 10 : 0)
-  );
 
   return {
     profileScores,
     mainProfile,
-    feeling,
-    rhythm,
-    bestFor,
-    warnings: warnings.slice(0, 4),
     advice,
-    bestTime,
-    confidence,
   };
 }
 
 function buildInlineRiderTravelPanel(route, analysis) {
   const engine = buildAutoRiderEngine(route, analysis);
   const distanceKm = Number(analysis?.distanceKm || getRouteDistanceKm(route) || 0);
-  const category = normalizeCategory(route);
   const curves = analysis?.curves || analyzeCurves(route);
-  const curveScore = Number(curves?.score || 0);
-  const coords = extractRouteCoords(route);
 
   const avgSpeed =
     engine.mainProfile.key === "sport"
       ? 62
-      : engine.mainProfile.key === "adventure"
-      ? 54
       : engine.mainProfile.key === "scenic"
       ? 58
       : 60;
 
-  const durationMin = distanceKm > 0 ? Math.round((distanceKm / avgSpeed) * 60) : 0;
-
-const realCurves = curves?.curves ?? null;
-const realTechnicalTurns = curves?.technicalTurns ?? null;
-const realDirectionChanges = curves?.directionChanges ?? null;
-
-const totalTurns = realCurves ?? Math.round(curveScore * 2.4);
-const softTurns = realDirectionChanges ?? totalTurns;
-const mediumTurns = realCurves ?? totalTurns;
-const hardTurns = realTechnicalTurns ?? 0;
-  const roadStyle =
-    curveScore >= 75
-      ? "Tecnica"
-      : curveScore >= 55
-      ? "Mista"
-      : curveScore >= 35
-      ? "Scorrevole / mista"
-      : category === "mountain"
-      ? "Montana scorrevole"
-      : "Scorrevole";
-
-  const curveLabel =
-    curveScore >= 75
-      ? "Molto guidata"
-      : curveScore >= 55
-      ? "Bella mista"
-      : curveScore >= 35
-      ? "Scorrevole con tratti guidati"
-      : "Tracciato semplice";
-
-  const complexityLabel =
-    analysis.complexityScore >= 78
-      ? "Alta"
-      : analysis.complexityScore >= 50
-      ? "Media"
-      : "Bassa";
-
-  const complexityColor =
-    complexityLabel === "Alta"
-      ? "#dc2626"
-      : complexityLabel === "Media"
-      ? "#ca8a04"
-      : "#15803d";
-
-  const stops = distanceKm >= 450 ? 4 : distanceKm >= 300 ? 3 : distanceKm >= 170 ? 2 : distanceKm >= 90 ? 1 : 0;
-  const legCount = Math.max(0, coords.length - 1);
-  const avgLeg = legCount > 0 ? distanceKm / legCount : 0;
-
-  const weatherLabel = "Da verificare prima della partenza";
-  const weatherScore = "—";
+  const durationMin =
+    distanceKm > 0 ? Math.round((distanceKm / avgSpeed) * 60) : 0;
 
   return {
     engine,
@@ -1145,22 +960,161 @@ const hardTurns = realTechnicalTurns ?? 0;
     durationMin,
     avgSpeed,
     profile: engine.mainProfile.label.replace(" Rider", ""),
-    weatherScore,
-    weatherLabel,
-    curveScore,
-    curveLabel,
-    roadStyle,
-    intensity: curveScore >= 75 ? "Alta" : curveScore >= 45 ? "Media" : "Bassa",
-    totalTurns,
-    softTurns,
-    mediumTurns,
-    hardTurns,
-    complexityLabel,
-    complexityColor,
-    stops,
-    legCount,
-    avgLeg,
+    curveScore: curves.score,
+    totalTurns: curves.curves ?? Math.round(curves.score * 2.4),
+    technicalTurns: curves.technicalTurns ?? 0,
+    directionChanges: curves.directionChanges ?? 0,
+    complexityLabel:
+      analysis.complexityScore >= 78
+        ? "Alta"
+        : analysis.complexityScore >= 50
+        ? "Media"
+        : "Bassa",
+    complexityColor:
+      analysis.complexityScore >= 78
+        ? "#dc2626"
+        : analysis.complexityScore >= 50
+        ? "#ca8a04"
+        : "#15803d",
   };
+}
+
+function sendRouteToRiderMap(route) {
+  try {
+    const analysis = buildRiderAnalysis(route);
+    const autoRiderEngine = buildAutoRiderEngine(route, analysis);
+    const riderPanel = buildInlineRiderTravelPanel(route, analysis);
+
+    const payload = {
+      source: "routes",
+      action: "analyze_with_rider_engine",
+      createdAt: new Date().toISOString(),
+      route: {
+        ...route,
+        coords: extractRouteCoords(route),
+        distanceKm: analysis.distanceKm,
+        category: normalizeCategory(route),
+        riderAnalysis: analysis,
+        autoRiderEngine,
+        riderPanel,
+      },
+    };
+
+    localStorage.setItem(
+      "motoporteu:riderRouteToAnalyze",
+      JSON.stringify(payload)
+    );
+    localStorage.setItem(
+      "motoporteu:navigatorImport",
+      JSON.stringify(payload)
+    );
+    localStorage.setItem(
+      "motoporteu:selectedRouteForMap",
+      JSON.stringify(payload.route)
+    );
+  } catch (e) {
+    console.warn("Impossibile preparare Rider Engine", e);
+  }
+
+  window.location.href = "/map?from=routes&analyze=rider";
+}
+
+function formatRouteKm(km) {
+  const n = Number(km || 0);
+  if (!Number.isFinite(n) || n <= 0) return "—";
+  return `${Math.round(n)} km`;
+}
+
+function formatRouteDuration(min) {
+  const n = Math.max(0, Math.round(Number(min || 0)));
+  if (!n) return "—";
+
+  const h = Math.floor(n / 60);
+  const m = n % 60;
+
+  if (!h) return `${m} min`;
+  if (!m) return `${h}h`;
+  return `${h}h ${String(m).padStart(2, "0")}m`;
+}
+function isMechanicalDescription(text = "") {
+  const t = String(text || "").trim().toLowerCase();
+  if (!t) return true;
+
+  return (
+    t.includes("generato da rider spots reali") ||
+    t.includes("scope ") ||
+    t.includes("modalità ") ||
+    t.includes("modalita ") ||
+    t.includes("focus su guida motociclistica")
+  );
+}
+
+function getRoutePointNames(route, max = 4) {
+  const out = [];
+  const seen = new Set();
+
+  const pool = [
+    ...(Array.isArray(route?.spots) ? route.spots : []),
+    ...(Array.isArray(route?.waypoints) ? route.waypoints : []),
+  ];
+
+  for (const p of pool) {
+    const name = String(p?.name || "").trim();
+    const key = normalizeText(name);
+    if (!name || seen.has(key)) continue;
+    seen.add(key);
+    out.push(name);
+    if (out.length >= max) break;
+  }
+
+  if (!out.length) {
+    if (route?.start?.name) out.push(route.start.name);
+    if (
+      route?.end?.name &&
+      normalizeText(route.end.name) !== normalizeText(route.start?.name || "")
+    ) {
+      out.push(route.end.name);
+    }
+  }
+
+  return out;
+}
+
+function buildPrettyRouteDescription(route) {
+  const region = route?.region || "questa zona";
+  const rideType = normalizeCategory(route);
+  const km = formatRouteKm(getRouteDistanceKm(route));
+  const names = getRoutePointNames(route, 4);
+
+  const a = names[0] || null;
+  const b = names[1] || null;
+  const c = names[2] || null;
+  const d = names[3] || null;
+
+  const pointsSentence =
+    a && b && c && d
+      ? `Tocca ${a}, ${b}, ${c} e ${d}, costruendo una progressione credibile e piacevole da seguire anche in sella.`
+      : a && b && c
+      ? `Unisce ${a}, ${b} e ${c}, mantenendo una linea coerente tra guida, paesaggio e ritmo.`
+      : a && b
+      ? `Collega ${a} e ${b} con un percorso che ha senso da vivere in moto.`
+      : a
+      ? `Si sviluppa attorno a ${a}, usandolo come riferimento principale del giro.`
+      : `Si sviluppa su una sequenza di punti reali selezionati per dare continuità e piacere di guida.`;
+
+  if (rideType === "mountain") {
+    return `Un itinerario di montagna rider-oriented nella zona ${region}, pensato per chi cerca quota, curve e carattere. ${pointsSentence} Nel complesso è un giro da circa ${km}, con ritmo variabile e una guida che sa farsi ricordare.`;
+  }
+
+  if (rideType === "lake") {
+    return `Un itinerario lago panoramico nella zona ${region}, costruito per valorizzare sponde, salite e collegamenti interessanti in moto. ${pointsSentence} Nel complesso è un giro da circa ${km}, ideale per alternare guida pulita e vista aperta.`;
+  }
+
+  if (rideType === "coastal") {
+    return `Un itinerario costiero nella zona ${region}, pensato per sfruttare mare, strada aperta e passaggi dal forte impatto visivo. ${pointsSentence} Nel complesso è un giro da circa ${km}, scorrevole ma non banale.`;
+  }
+
+  return `Un itinerario panoramico rider nella zona ${region}, costruito attorno a strade e punti che possono generare un giro credibile. ${pointsSentence} Nel complesso è un percorso da circa ${km}, con buon equilibrio tra guida, paesaggio e viaggio.`;
 }
 
 function complexityBadgeStyle(tone, dark = false) {
@@ -1220,103 +1174,6 @@ function skeletonLine(width) {
     borderRadius: 8,
     width,
   };
-}
-
-function formatRouteKm(km) {
-  const n = Number(km || 0);
-  if (!Number.isFinite(n) || n <= 0) return "—";
-  return `${Math.round(n)} km`;
-}
-
-function formatRouteDuration(min) {
-  const n = Math.max(0, Math.round(Number(min || 0)));
-  if (!n) return "—";
-  const h = Math.floor(n / 60);
-  const m = n % 60;
-  if (!h) return `${m} min`;
-  if (!m) return `${h}h`;
-  return `${h}h ${String(m).padStart(2, "0")}m`;
-}
-
-function getRoutePointNames(route, max = 4) {
-  const out = [];
-  const seen = new Set();
-
-  const pool = [
-    ...(Array.isArray(route?.spots) ? route.spots : []),
-    ...(Array.isArray(route?.waypoints) ? route.waypoints : []),
-  ];
-
-  for (const p of pool) {
-    const name = String(p?.name || "").trim();
-    const key = normalizeText(name);
-    if (!name || seen.has(key)) continue;
-    seen.add(key);
-    out.push(name);
-    if (out.length >= max) break;
-  }
-
-  if (!out.length) {
-    if (route?.start?.name) out.push(route.start.name);
-    if (
-      route?.end?.name &&
-      normalizeText(route.end.name) !== normalizeText(route.start?.name || "")
-    ) {
-      out.push(route.end.name);
-    }
-  }
-
-  return out;
-}
-
-function isMechanicalDescription(text = "") {
-  const t = String(text || "").trim().toLowerCase();
-  if (!t) return true;
-
-  return (
-    t.includes("generato da rider spots reali") ||
-    t.includes("scope ") ||
-    t.includes("modalità ") ||
-    t.includes("modalita ") ||
-    t.includes("focus su guida motociclistica")
-  );
-}
-
-function buildPrettyRouteDescription(route) {
-  const region = route?.region || "questa zona";
-  const rideType = normalizeCategory(route);
-  const km = formatRouteKm(getRouteDistanceKm(route));
-  const names = getRoutePointNames(route, 4);
-
-  const a = names[0] || null;
-  const b = names[1] || null;
-  const c = names[2] || null;
-  const d = names[3] || null;
-
-  const pointsSentence =
-    a && b && c && d
-      ? `Tocca ${a}, ${b}, ${c} e ${d}, costruendo una progressione credibile e piacevole da seguire anche in sella.`
-      : a && b && c
-      ? `Unisce ${a}, ${b} e ${c}, mantenendo una linea coerente tra guida, paesaggio e ritmo.`
-      : a && b
-      ? `Collega ${a} e ${b} con un percorso che ha senso da vivere in moto, senza l’effetto artificiale da traccia casuale.`
-      : a
-      ? `Si sviluppa attorno a ${a}, usandolo come riferimento principale del giro.`
-      : `Si sviluppa su una sequenza di punti reali selezionati per dare continuità, lettura del territorio e piacere di guida.`;
-
-  if (rideType === "mountain") {
-    return `Un itinerario di montagna rider-oriented nella zona ${region}, pensato per chi cerca quota, curve e carattere. ${pointsSentence} Nel complesso è un giro da circa ${km}, con tratti panoramici, ritmo variabile e una guida che sa farsi ricordare.`;
-  }
-
-  if (rideType === "lake") {
-    return `Un itinerario lago panoramico nella zona ${region}, costruito per valorizzare sponde, salite e collegamenti davvero interessanti in moto. ${pointsSentence} Nel complesso è un giro da circa ${km}, ideale per chi vuole alternare guida pulita, vista aperta e sostanza.`;
-  }
-
-  if (rideType === "coastal") {
-    return `Un itinerario costiero nella zona ${region}, pensato per sfruttare al meglio mare, strada aperta e passaggi dal forte impatto visivo. ${pointsSentence} Nel complesso è un giro da circa ${km}, scorrevole ma non banale, perfetto per una giornata di moto con panorama vero.`;
-  }
-
-  return `Un itinerario panoramico rider nella zona ${region}, costruito attorno a strade e punti che possono davvero generare un giro credibile. ${pointsSentence} Nel complesso è un percorso da circa ${km}, con un buon equilibrio tra guida, paesaggio e piacere generale del viaggio.`;
 }
 
 export default function Routes() {
@@ -1436,9 +1293,7 @@ export default function Routes() {
 
       out = out.filter((r) => {
         const blob = routeSearchBlob(r);
-
         if (blob.includes(query)) return true;
-
         return queryTokens.every((token) => blob.includes(token));
       });
     }
@@ -1466,10 +1321,7 @@ export default function Routes() {
     setVisibleCount(getInitialVisibleCount());
   }, [country, region, category, debouncedQ]);
 
-  const visibleRoutes = useMemo(() => {
-    return filtered.slice(0, visibleCount);
-  }, [filtered, visibleCount]);
-
+  const visibleRoutes = useMemo(() => filtered.slice(0, visibleCount), [filtered, visibleCount]);
   const hasMoreRoutes = visibleCount < filtered.length;
 
   const loadMoreRoutes = () => {
@@ -1518,10 +1370,7 @@ export default function Routes() {
   };
 
   return (
-    <div
-      className="routes-root"
-      style={{ padding: 12, maxWidth: 1250, margin: "0 auto" }}
-    >
+    <div className="routes-root" style={{ padding: 12, maxWidth: 1250, margin: "0 auto" }}>
       {!showDetailMobile && (
         <>
           <div
@@ -1537,10 +1386,7 @@ export default function Routes() {
               <h1 style={{ margin: 0, fontSize: 34, letterSpacing: -0.5 }}>
                 Itinerari 📍
               </h1>
-              <div
-                className="routes-subtitle"
-                style={{ opacity: 0.75, marginTop: 6 }}
-              >
+              <div className="routes-subtitle" style={{ opacity: 0.75, marginTop: 6 }}>
                 Touring emozionale: mappa, meteo e Auto Rider Engine.
               </div>
             </div>
@@ -1574,11 +1420,7 @@ export default function Routes() {
           >
             <label style={{ display: "grid", gap: 6 }}>
               <span style={{ fontSize: 12, opacity: 0.75 }}>Paese</span>
-              <select
-                value={country}
-                onChange={(e) => setCountry(e.target.value)}
-                style={selectStyle()}
-              >
+              <select value={country} onChange={(e) => setCountry(e.target.value)} style={selectStyle()}>
                 {countries.map((c) => (
                   <option key={c} value={c}>
                     {c === "ALL" ? "Tutti" : countryLabel(c)}
@@ -1589,11 +1431,7 @@ export default function Routes() {
 
             <label style={{ display: "grid", gap: 6 }}>
               <span style={{ fontSize: 12, opacity: 0.75 }}>Regione</span>
-              <select
-                value={region}
-                onChange={(e) => setRegion(e.target.value)}
-                style={selectStyle()}
-              >
+              <select value={region} onChange={(e) => setRegion(e.target.value)} style={selectStyle()}>
                 {regions.map((r) => (
                   <option key={r} value={r}>
                     {r === "ALL" ? "Tutte" : r}
@@ -1604,11 +1442,7 @@ export default function Routes() {
 
             <label style={{ display: "grid", gap: 6 }}>
               <span style={{ fontSize: 12, opacity: 0.75 }}>Categoria</span>
-              <select
-                value={category}
-                onChange={(e) => setCategory(e.target.value)}
-                style={selectStyle()}
-              >
+              <select value={category} onChange={(e) => setCategory(e.target.value)} style={selectStyle()}>
                 <option value="ALL">Tutte</option>
                 <option value="mountain">Montagna</option>
                 <option value="lake">Laghi</option>
@@ -1622,137 +1456,110 @@ export default function Routes() {
       {loading ? (
         <SkeletonLoading />
       ) : err ? (
-        <div
-          style={{
-            marginTop: 12,
-            padding: 12,
-            borderRadius: 16,
-            background: "rgba(255,0,0,0.08)",
-          }}
-        >
+        <div style={{ marginTop: 12, padding: 12, borderRadius: 16, background: "rgba(255,0,0,0.08)" }}>
           {err}
         </div>
+      ) : showDetailMobile ? (
+        <div style={{ marginTop: 10 }}>
+          <div
+            style={{
+              position: "sticky",
+              top: 0,
+              zIndex: 20,
+              background: "rgba(255,255,255,0.96)",
+              backdropFilter: "blur(10px)",
+              borderBottom: "1px solid rgba(0,0,0,0.10)",
+              padding: 10,
+              borderRadius: 16,
+              display: "flex",
+              alignItems: "center",
+              gap: 10,
+            }}
+          >
+            <button
+              type="button"
+              onClick={() => {
+                setMobileView("list");
+                window.scrollTo({ top: 0, behavior: "auto" });
+              }}
+              style={backButtonStyle()}
+            >
+              ← Indietro
+            </button>
+
+            <div
+              style={{
+                fontWeight: 950,
+                fontSize: 15,
+                whiteSpace: "nowrap",
+                overflow: "hidden",
+                textOverflow: "ellipsis",
+              }}
+            >
+              {selected?.name}
+            </div>
+          </div>
+
+          <div
+            style={{
+              marginTop: 10,
+              borderRadius: 18,
+              overflow: "hidden",
+              border: "1px solid rgba(0,0,0,0.10)",
+              background: "white",
+            }}
+          >
+            <RouteDetail route={selected} />
+          </div>
+        </div>
       ) : (
-        <>
-          {showDetailMobile ? (
-            <div style={{ marginTop: 10 }}>
-              <div
-                style={{
-                  position: "sticky",
-                  top: 0,
-                  zIndex: 20,
-                  background: "rgba(255,255,255,0.96)",
-                  backdropFilter: "blur(10px)",
-                  borderBottom: "1px solid rgba(0,0,0,0.10)",
-                  padding: 10,
-                  borderRadius: 16,
-                  display: "flex",
-                  alignItems: "center",
-                  gap: 10,
-                }}
-              >
-                <button
-                  type="button"
-                  onClick={() => {
-                    setMobileView("list");
-                    window.scrollTo({ top: 0, behavior: "auto" });
-                  }}
-                  style={backButtonStyle()}
-                >
-                  ← Indietro
+        <div style={{ marginTop: 12 }} className="routes-split">
+          <div className="routes-list">
+            <div style={{ fontSize: 12, opacity: 0.7, marginBottom: 8 }}>
+              Itinerari trovati: <strong>{filtered.length}</strong>
+              {filtered.length !== visibleRoutes.length ? (
+                <>
+                  {" "}· mostrati: <strong>{visibleRoutes.length}</strong>
+                </>
+              ) : null}
+            </div>
+
+            <div style={{ display: "grid", gap: 10 }}>
+              {visibleRoutes.map((r) => {
+                const key = buildRouteKey(r);
+                return (
+                  <RouteCard
+                    key={key}
+                    route={r}
+                    active={key === activeKey}
+                    onSelect={() => selectRoute(r)}
+                  />
+                );
+              })}
+            </div>
+
+            {hasMoreRoutes ? (
+              <div style={{ marginTop: 12, display: "flex", justifyContent: "center" }}>
+                <button type="button" onClick={loadMoreRoutes} style={loadMoreButtonStyle()}>
+                  Carica altri ({filtered.length - visibleRoutes.length} rimasti)
                 </button>
-
-                <div
-                  style={{
-                    fontWeight: 950,
-                    fontSize: 15,
-                    whiteSpace: "nowrap",
-                    overflow: "hidden",
-                    textOverflow: "ellipsis",
-                  }}
-                >
-                  {selected?.name}
-                </div>
               </div>
+            ) : null}
+          </div>
 
-              <div
-                style={{
-                  marginTop: 10,
-                  borderRadius: 18,
-                  overflow: "hidden",
-                  border: "1px solid rgba(0,0,0,0.10)",
-                  background: "white",
-                }}
-              >
-                <RouteDetail route={selected} />
-              </div>
+          <div className="routes-detail">
+            <div
+              style={{
+                borderRadius: 22,
+                overflow: "hidden",
+                border: "1px solid rgba(0,0,0,0.12)",
+                background: "white",
+              }}
+            >
+              {!active ? <div style={{ padding: 14 }}>Seleziona un itinerario.</div> : <RouteDetail route={active} />}
             </div>
-          ) : (
-            <div style={{ marginTop: 12 }} className="routes-split">
-              <div className="routes-list">
-                <div style={{ fontSize: 12, opacity: 0.7, marginBottom: 8 }}>
-                  Itinerari trovati: <strong>{filtered.length}</strong>
-                  {filtered.length !== visibleRoutes.length ? (
-                    <>
-                      {" "}
-                      · mostrati: <strong>{visibleRoutes.length}</strong>
-                    </>
-                  ) : null}
-                </div>
-
-                <div style={{ display: "grid", gap: 10 }}>
-                  {visibleRoutes.map((r) => {
-                    const key = buildRouteKey(r);
-                    const isActive = key === activeKey;
-                    return (
-                      <RouteCard
-                        key={key}
-                        route={r}
-                        active={isActive}
-                        onSelect={() => selectRoute(r)}
-                      />
-                    );
-                  })}
-                </div>
-
-                {hasMoreRoutes ? (
-                  <div
-                    style={{
-                      marginTop: 12,
-                      display: "flex",
-                      justifyContent: "center",
-                    }}
-                  >
-                    <button
-                      type="button"
-                      onClick={loadMoreRoutes}
-                      style={loadMoreButtonStyle()}
-                    >
-                      Carica altri ({filtered.length - visibleRoutes.length} rimasti)
-                    </button>
-                  </div>
-                ) : null}
-              </div>
-
-              <div className="routes-detail">
-                <div
-                  style={{
-                    borderRadius: 22,
-                    overflow: "hidden",
-                    border: "1px solid rgba(0,0,0,0.12)",
-                    background: "white",
-                  }}
-                >
-                  {!active ? (
-                    <div style={{ padding: 14 }}>Seleziona un itinerario.</div>
-                  ) : (
-                    <RouteDetail route={active} />
-                  )}
-                </div>
-              </div>
-            </div>
-          )}
-        </>
+          </div>
+        </div>
       )}
 
       <style>{`
@@ -1793,11 +1600,7 @@ function RouteCard({ route, active, onSelect }) {
   const analysis = buildRiderAnalysis(route);
   const autoEngine = buildAutoRiderEngine(route, analysis);
 
-  const touchRef = useRef({
-    startX: 0,
-    startY: 0,
-    moved: false,
-  });
+  const touchRef = useRef({ startX: 0, startY: 0, moved: false });
 
   const handleClick = (e) => {
     e?.preventDefault?.();
@@ -1808,11 +1611,7 @@ function RouteCard({ route, active, onSelect }) {
   const handleTouchStart = (e) => {
     const t = e.touches?.[0];
     if (!t) return;
-    touchRef.current = {
-      startX: t.clientX,
-      startY: t.clientY,
-      moved: false,
-    };
+    touchRef.current = { startX: t.clientX, startY: t.clientY, moved: false };
   };
 
   const handleTouchMove = (e) => {
@@ -1840,16 +1639,12 @@ function RouteCard({ route, active, onSelect }) {
       onTouchStart={handleTouchStart}
       onTouchMove={handleTouchMove}
       onTouchEnd={handleTouchEnd}
-      onKeyDown={(e) =>
-        e.key === "Enter" || e.key === " " ? handleClick(e) : null
-      }
+      onKeyDown={(e) => (e.key === "Enter" || e.key === " " ? handleClick(e) : null)}
       style={{
         borderRadius: 16,
         overflow: "hidden",
         width: "100%",
-        border: active
-          ? "2px solid rgba(0,0,0,0.30)"
-          : "1px solid rgba(0,0,0,0.10)",
+        border: active ? "2px solid rgba(0,0,0,0.30)" : "1px solid rgba(0,0,0,0.10)",
         background: "white",
         cursor: "pointer",
         WebkitTapHighlightColor: "transparent",
@@ -1857,47 +1652,14 @@ function RouteCard({ route, active, onSelect }) {
         userSelect: "none",
       }}
     >
-      <div
-        className="route-card-mobile"
-        style={{ display: "none", padding: 6, gap: 10, alignItems: "center" }}
-      >
-        <div
-          style={{
-            width: 46,
-            height: 46,
-            borderRadius: 12,
-            overflow: "hidden",
-            background: "rgba(0,0,0,0.05)",
-            flex: "0 0 auto",
-          }}
-        >
-          <img
-            src={photo}
-            alt=""
-            style={{ width: "100%", height: "100%", objectFit: "cover" }}
-            loading="lazy"
-          />
+      <div className="route-card-mobile" style={{ display: "none", padding: 6, gap: 10, alignItems: "center" }}>
+        <div style={{ width: 46, height: 46, borderRadius: 12, overflow: "hidden", background: "rgba(0,0,0,0.05)", flex: "0 0 auto" }}>
+          <img src={photo} alt="" style={{ width: "100%", height: "100%", objectFit: "cover" }} loading="lazy" />
         </div>
 
         <div style={{ minWidth: 0, flex: "1 1 auto" }}>
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "space-between",
-              gap: 8,
-              alignItems: "start",
-            }}
-          >
-            <div
-              style={{
-                fontWeight: 950,
-                fontSize: 14,
-                lineHeight: 1.15,
-                overflow: "hidden",
-                textOverflow: "ellipsis",
-                whiteSpace: "nowrap",
-              }}
-            >
+          <div style={{ display: "flex", justifyContent: "space-between", gap: 8, alignItems: "start" }}>
+            <div style={{ fontWeight: 950, fontSize: 14, lineHeight: 1.15, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
               {route.country ? `${route.country} ` : ""}
               {route.name}
             </div>
@@ -1906,41 +1668,20 @@ function RouteCard({ route, active, onSelect }) {
             </div>
           </div>
 
-          <div
-            style={{
-              marginTop: 2,
-              display: "flex",
-              gap: 6,
-              alignItems: "center",
-              flexWrap: "wrap",
-              fontSize: 11,
-              opacity: 0.82,
-            }}
-          >
+          <div style={{ marginTop: 2, display: "flex", gap: 6, alignItems: "center", flexWrap: "wrap", fontSize: 11, opacity: 0.82 }}>
             <span>{route.region || "—"}</span>
             <span>·</span>
             <span>{categoryLabel(category)}</span>
             <span>·</span>
-            <span>
-              {autoEngine.mainProfile.icon} {autoEngine.mainProfile.label}
-            </span>
+            <span>{autoEngine.mainProfile.icon} {autoEngine.mainProfile.label}</span>
           </div>
         </div>
       </div>
 
       <div className="route-card-desktop" style={{ display: "block" }}>
-        <div
-          style={{
-            height: 130,
-            backgroundImage: `url(${photo})`,
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-          }}
-        />
+        <div style={{ height: 130, backgroundImage: `url(${photo})`, backgroundSize: "cover", backgroundPosition: "center" }} />
         <div style={{ padding: 12 }}>
-          <div
-            style={{ display: "flex", justifyContent: "space-between", gap: 10 }}
-          >
+          <div style={{ display: "flex", justifyContent: "space-between", gap: 10 }}>
             <div style={{ fontWeight: 900, lineHeight: 1.15 }}>
               {route.country ? `${route.country} ` : ""}
               {route.name}
@@ -1950,15 +1691,7 @@ function RouteCard({ route, active, onSelect }) {
             </div>
           </div>
 
-          <div
-            style={{
-              marginTop: 6,
-              display: "flex",
-              gap: 8,
-              flexWrap: "wrap",
-              alignItems: "center",
-            }}
-          >
+          <div style={{ marginTop: 6, display: "flex", gap: 8, flexWrap: "wrap", alignItems: "center" }}>
             <span style={pill("light")}>{categoryLabel(category)}</span>
             <span style={complexityBadgeStyle(analysis.tone)}>
               {analysis.icon} {analysis.complexity}
@@ -1966,9 +1699,7 @@ function RouteCard({ route, active, onSelect }) {
             <span style={pill("light")}>
               {autoEngine.mainProfile.icon} {autoEngine.mainProfile.label}
             </span>
-            <span style={{ fontSize: 12, opacity: 0.75 }}>
-              {route.region || "—"}
-            </span>
+            <span style={{ fontSize: 12, opacity: 0.75 }}>{route.region || "—"}</span>
           </div>
         </div>
       </div>
@@ -1986,9 +1717,8 @@ function RouteCard({ route, active, onSelect }) {
 function RouteDetail({ route }) {
   const photo = route.photo || FALLBACK_PHOTO;
   const navPoint = pickRoutePoint(route);
-  const startNavUrl = navPoint
-    ? buildNavigateUrl(latLonStr(navPoint), "driving")
-    : null;
+  const startNavUrl = navPoint ? buildNavigateUrl(latLonStr(navPoint), "driving") : null;
+
   const category = normalizeCategory(route);
   const analysis = buildRiderAnalysis(route);
   const autoEngine = buildAutoRiderEngine(route, analysis);
@@ -2041,37 +1771,22 @@ function RouteDetail({ route }) {
           style={{
             position: "absolute",
             inset: 0,
-            background:
-              "linear-gradient(180deg, rgba(0,0,0,0.10), rgba(0,0,0,0.76))",
+            background: "linear-gradient(180deg, rgba(0,0,0,0.10), rgba(0,0,0,0.76))",
           }}
         />
-        <div
-          style={{
-            position: "absolute",
-            left: 12,
-            right: 12,
-            bottom: 10,
-            color: "white",
-          }}
-        >
+
+        <div style={{ position: "absolute", left: 12, right: 12, bottom: 10, color: "white" }}>
           <div style={{ fontSize: 12, opacity: 0.92 }}>
-            {route.country || "—"} · {route.region || "—"} ·{" "}
-            {categoryLabel(category)}
+            {route.country || "—"} · {route.region || "—"}
           </div>
+
           <div style={{ fontSize: 26, fontWeight: 950, lineHeight: 1.05 }}>
             {route.name}
           </div>
 
           <div style={{ marginTop: 8, display: "flex", gap: 8, flexWrap: "wrap" }}>
             <span style={pill("dark")}>📏 {formatRouteKm(analysis.distanceKm)}</span>
-            {route.durationMin != null ? (
-              <span style={pill("dark")}>⏱ {route.durationMin} min</span>
-            ) : null}
             <span style={pill("dark")}>🏍️ {categoryLabel(category)}</span>
-            <span style={pill("dark")}>
-              {analysis.icon} {analysis.complexity}
-            </span>
-            <span style={pill("dark")}>🌀 Curve {analysis.curves.score}/100</span>
             <span style={pill("dark")}>
               {autoEngine.mainProfile.icon} {autoEngine.mainProfile.label}
             </span>
@@ -2096,11 +1811,6 @@ function RouteDetail({ route }) {
               fontWeight: 900,
               opacity: startNavUrl ? 1 : 0.55,
             }}
-            title={
-              startNavUrl
-                ? "Avvia navigazione verso l'inizio usando la tua posizione"
-                : "Coordinate itinerario non disponibili"
-            }
           >
             🧭 Avvia verso START
           </button>
@@ -2118,7 +1828,6 @@ function RouteDetail({ route }) {
               cursor: "pointer",
               fontWeight: 900,
             }}
-            title="Scarica questo itinerario in formato GPX"
           >
             📤 Esporta GPX
           </button>
@@ -2138,7 +1847,6 @@ function RouteDetail({ route }) {
               fontWeight: 950,
               boxShadow: "0 8px 18px rgba(0,0,0,0.12)",
             }}
-            title="Apri questo itinerario nel Navigatore Rider per analisi avanzata"
           >
             🧠 Analizza con Rider
           </button>
@@ -2146,52 +1854,25 @@ function RouteDetail({ route }) {
 
         <InlineRiderTravelPanel route={route} analysis={analysis} />
 
-        <div
-          style={{
-            marginTop: 12,
-            borderTop: "1px solid rgba(0,0,0,0.08)",
-            paddingTop: 12,
-          }}
-        >
+        <div style={{ marginTop: 12, borderTop: "1px solid rgba(0,0,0,0.08)", paddingTop: 12 }}>
           <strong>📌 Descrizione</strong>
-          <div
-            style={{
-              marginTop: 8,
-              fontSize: 14,
-              opacity: 0.9,
-              lineHeight: 1.4,
-            }}
-          >
+          <div style={{ marginTop: 8, fontSize: 14, opacity: 0.9, lineHeight: 1.4 }}>
             {displayDescription}
           </div>
         </div>
 
         {Array.isArray(route?.aliases) && route.aliases.length ? (
-          <div
-            style={{
-              marginTop: 12,
-              borderTop: "1px solid rgba(0,0,0,0.08)",
-              paddingTop: 12,
-            }}
-          >
+          <div style={{ marginTop: 12, borderTop: "1px solid rgba(0,0,0,0.08)", paddingTop: 12 }}>
             <strong>🏷️ Nomi collegati</strong>
             <div style={{ marginTop: 10, display: "flex", gap: 8, flexWrap: "wrap" }}>
               {route.aliases.slice(0, 12).map((a) => (
-                <span key={a} style={pill("light")}>
-                  {a}
-                </span>
+                <span key={a} style={pill("light")}>{a}</span>
               ))}
             </div>
           </div>
         ) : null}
 
-        <div
-          style={{
-            marginTop: 12,
-            borderTop: "1px solid rgba(0,0,0,0.08)",
-            paddingTop: 12,
-          }}
-        >
+        <div style={{ marginTop: 12, borderTop: "1px solid rgba(0,0,0,0.08)", paddingTop: 12 }}>
           <strong>🗺️ Mappa</strong>
           <div style={{ marginTop: 10 }}>
             <RouteMap route={route} />
@@ -2218,7 +1899,7 @@ function InlineRiderTravelPanel({ route, analysis }) {
     borderRadius: 18,
     background: "rgba(255,255,255,0.72)",
     border: "1px solid rgba(0,0,0,0.08)",
-    minHeight: 90,
+    minHeight: 86,
   };
 
   const labelStyle = {
@@ -2228,7 +1909,7 @@ function InlineRiderTravelPanel({ route, analysis }) {
   };
 
   const valueStyle = {
-    fontSize: 26,
+    fontSize: 24,
     fontWeight: 950,
     lineHeight: 1.05,
     color: "#111827",
@@ -2245,15 +1926,7 @@ function InlineRiderTravelPanel({ route, analysis }) {
         boxShadow: "0 18px 45px rgba(15,23,42,0.08)",
       }}
     >
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "space-between",
-          gap: 10,
-          alignItems: "baseline",
-          flexWrap: "wrap",
-        }}
-      >
+      <div style={{ display: "flex", justifyContent: "space-between", gap: 10, alignItems: "baseline", flexWrap: "wrap" }}>
         <div style={{ fontSize: 22, fontWeight: 950, color: "#111827" }}>
           🧠 Rider Travel Panel
         </div>
@@ -2262,14 +1935,11 @@ function InlineRiderTravelPanel({ route, analysis }) {
         </span>
       </div>
 
-      <div
-        style={{
-          marginTop: 14,
-          display: "grid",
-          gridTemplateColumns: "repeat(auto-fit, minmax(180px, 1fr))",
-          gap: 10,
-        }}
-      >
+      <div style={{ marginTop: 8, fontSize: 13, opacity: 0.76, lineHeight: 1.4 }}>
+        {analysis.diagnosis}
+      </div>
+
+      <div style={{ marginTop: 14, display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(170px, 1fr))", gap: 10 }}>
         <div style={boxStyle}>
           <div style={labelStyle}>Distanza</div>
           <div style={valueStyle}>{panel.distanceKm.toFixed(1)} km</div>
@@ -2281,7 +1951,7 @@ function InlineRiderTravelPanel({ route, analysis }) {
         </div>
 
         <div style={boxStyle}>
-          <div style={labelStyle}>Velocità media stimata</div>
+          <div style={labelStyle}>Media stimata</div>
           <div style={valueStyle}>{panel.avgSpeed} km/h</div>
         </div>
 
@@ -2291,53 +1961,22 @@ function InlineRiderTravelPanel({ route, analysis }) {
         </div>
 
         <div style={boxStyle}>
-          <div style={labelStyle}>Meteo rotta</div>
-          <div style={{ ...valueStyle, fontSize: 22, color: "#64748b" }}>
-            {panel.weatherScore} {panel.weatherLabel}
-          </div>
-        </div>
-
-        <div style={boxStyle}>
           <div style={labelStyle}>Curve score</div>
           <div style={valueStyle}>{panel.curveScore}/100</div>
-          <div style={{ fontSize: 13, opacity: 0.68, marginTop: 6 }}>{panel.curveLabel}</div>
         </div>
 
         <div style={boxStyle}>
-          <div style={labelStyle}>Stile strada</div>
-          <div style={valueStyle}>{panel.roadStyle}</div>
+          <div style={labelStyle}>Curve rilevate</div>
+          <div style={valueStyle}>{panel.totalTurns}</div>
           <div style={{ fontSize: 13, opacity: 0.68, marginTop: 6 }}>
-            Intensità: {panel.intensity}
+            Cambi direzione {panel.directionChanges} · Tecniche {panel.technicalTurns}
           </div>
         </div>
 
         <div style={boxStyle}>
-  <div style={labelStyle}>Curve rilevate</div>
-  <div style={valueStyle}>{panel.totalTurns}</div>
-  <div style={{ fontSize: 13, opacity: 0.68, marginTop: 6 }}>
-    Cambi direzione {panel.softTurns} • Curve {panel.mediumTurns} • Tecniche {panel.hardTurns}
-  </div>
-</div>
-        <div style={boxStyle}>
-          <div style={labelStyle}>Complessità rotta</div>
+          <div style={labelStyle}>Complessità</div>
           <div style={{ ...valueStyle, color: panel.complexityColor }}>
             {panel.complexityLabel}
-          </div>
-        </div>
-
-        <div style={boxStyle}>
-          <div style={labelStyle}>Soste consigliate</div>
-          <div style={valueStyle}>{panel.stops}</div>
-          <div style={{ fontSize: 13, opacity: 0.68, marginTop: 6 }}>
-            {panel.stops === 1 ? "1 sosta consigliata" : `${panel.stops} soste consigliate`}
-          </div>
-        </div>
-
-        <div style={boxStyle}>
-          <div style={labelStyle}>Tratte</div>
-          <div style={valueStyle}>{panel.legCount}</div>
-          <div style={{ fontSize: 13, opacity: 0.68, marginTop: 6 }}>
-            Media {panel.avgLeg ? `${panel.avgLeg.toFixed(1)} km` : "—"}
           </div>
         </div>
       </div>
@@ -2355,156 +1994,30 @@ function InlineRiderTravelPanel({ route, analysis }) {
       >
         <strong>🛞 Lettura rapida rotta</strong>
         <div style={{ marginTop: 5, opacity: 0.84 }}>
-          {panel.engine.advice} • Strada: <strong>{panel.roadStyle}</strong> • Complessità: <strong style={{ color: panel.complexityColor }}>{panel.complexityLabel}</strong>
+          {panel.engine.advice} · Complessità:{" "}
+          <strong style={{ color: panel.complexityColor }}>{panel.complexityLabel}</strong>
         </div>
       </div>
-    </div>
-  );
-}
-
-function RiderAnalysisPanel({ analysis, route }) {
-  return (
-    <div
-      style={{
-        marginTop: 12,
-        borderTop: "1px solid rgba(0,0,0,0.08)",
-        paddingTop: 12,
-      }}
-    >
-      <strong>🏍️ Rider Analysis</strong>
-
-      <div
-        style={{
-          marginTop: 10,
-          display: "grid",
-          gridTemplateColumns: "repeat(auto-fit, minmax(130px, 1fr))",
-          gap: 8,
-        }}
-      >
-        <StatBox label="Distanza" value={formatRouteKm(analysis.distanceKm)} />
-        <StatBox label="Curve" value={`${analysis.curves.score}/100`} />
-        <StatBox label="Feeling" value={analysis.curves.label} />
-        <StatBox
-          label="Complessità"
-          value={`${analysis.icon} ${analysis.complexity}`}
-        />
-      </div>
-
-      <div
-        style={{
-          marginTop: 10,
-          padding: 12,
-          borderRadius: 14,
-          background:
-            analysis.tone === "red"
-              ? "rgba(255,0,0,0.08)"
-              : analysis.tone === "orange"
-              ? "rgba(255,180,0,0.12)"
-              : analysis.tone === "green"
-              ? "rgba(0,140,80,0.10)"
-              : "rgba(0,100,220,0.10)",
-          border:
-            analysis.tone === "red"
-              ? "1px solid rgba(255,0,0,0.16)"
-              : analysis.tone === "orange"
-              ? "1px solid rgba(255,180,0,0.22)"
-              : analysis.tone === "green"
-              ? "1px solid rgba(0,140,80,0.18)"
-              : "1px solid rgba(0,100,220,0.18)",
-        }}
-      >
-        <div style={{ fontWeight: 900, fontSize: 13 }}>
-          {analysis.icon} Diagnosi rider · {analysis.complexityScore}/100
-        </div>
-        <div style={{ marginTop: 4, fontSize: 13, opacity: 0.85, lineHeight: 1.35 }}>
-          {analysis.diagnosis}
-        </div>
-      </div>
-
-      <div style={{ marginTop: 10, display: "flex", gap: 8, flexWrap: "wrap" }}>
-        {analysis.highlights.map((h) => (
-          <span key={h} style={pill("light")}>
-            {h}
-          </span>
-        ))}
-
-        {analysis.curves.available && analysis.curves.curves != null ? (
-          <span style={pill("light")}>🌀 Curve stimate: {analysis.curves.curves}</span>
-        ) : null}
-
-        {analysis.curves.technicalTurns != null ? (
-          <span style={pill("light")}>
-            ⚡ Tornanti/tratti tecnici: {analysis.curves.technicalTurns}
-          </span>
-        ) : null}
-
-        {route?.asphaltScore != null ? (
-          <span style={pill("light")}>🛣️ Asfalto {route.asphaltScore}/100</span>
-        ) : null}
-      </div>
-    </div>
-  );
-}
-
-function StatBox({ label, value }) {
-  return (
-    <div
-      style={{
-        padding: 10,
-        borderRadius: 14,
-        background: "rgba(0,0,0,0.035)",
-        border: "1px solid rgba(0,0,0,0.08)",
-      }}
-    >
-      <div style={{ fontSize: 11, opacity: 0.65 }}>{label}</div>
-      <div style={{ marginTop: 3, fontSize: 15, fontWeight: 950 }}>{value}</div>
     </div>
   );
 }
 
 function WeatherPanel({ wx, wxBusy }) {
   return (
-    <div
-      style={{
-        marginTop: 12,
-        borderTop: "1px solid rgba(0,0,0,0.08)",
-        paddingTop: 12,
-      }}
-    >
+    <div style={{ marginTop: 12, borderTop: "1px solid rgba(0,0,0,0.08)", paddingTop: 12 }}>
       <strong>🌤 Meteo</strong>
 
       {wxBusy ? (
-        <div
-          style={{
-            marginTop: 10,
-            padding: 12,
-            borderRadius: 16,
-            background: "rgba(0,0,0,0.04)",
-          }}
-        >
+        <div style={{ marginTop: 10, padding: 12, borderRadius: 16, background: "rgba(0,0,0,0.04)" }}>
           Carico meteo…
         </div>
       ) : !wx || !wx.ok ? (
-        <div
-          style={{
-            marginTop: 10,
-            padding: 12,
-            borderRadius: 16,
-            background: "rgba(0,0,0,0.04)",
-          }}
-        >
+        <div style={{ marginTop: 10, padding: 12, borderRadius: 16, background: "rgba(0,0,0,0.04)" }}>
           {wx?.note || "Meteo non disponibile."}
         </div>
       ) : (
         <div style={{ marginTop: 10, display: "grid", gap: 10 }}>
-          <div
-            style={{
-              display: "flex",
-              gap: 10,
-              flexWrap: "wrap",
-              alignItems: "center",
-            }}
-          >
+          <div style={{ display: "flex", gap: 10, flexWrap: "wrap", alignItems: "center" }}>
             <span style={pill("light")}>
               Condizione: <strong>{wx.worst}</strong>
             </span>
