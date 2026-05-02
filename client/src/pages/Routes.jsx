@@ -351,33 +351,7 @@ function buildNavigateUrl(destination, travelmode = "driving") {
     `&dir_action=navigate`
   );
 }
-function buildGoogleMapsRouteUrl(route) {
-  const points = getGpxRoutePoints(route);
 
-  if (!points || points.length < 2) return null;
-
-  const start = points[0];
-  const end = points[points.length - 1];
-
-  const origin = `${start.lat},${start.lon}`;
-  const destination = `${end.lat},${end.lon}`;
-
-  const waypoints = points
-    .slice(1, -1)
-    .slice(0, 8)
-    .map((p) => `${p.lat},${p.lon}`);
-
-  return (
-    `https://www.google.com/maps/dir/?api=1` +
-    `&travelmode=driving` +
-    `&origin=${encodeURIComponent(origin)}` +
-    `&destination=${encodeURIComponent(destination)}` +
-    (waypoints.length
-      ? `&waypoints=${encodeURIComponent(waypoints.join("|"))}`
-      : "") +
-    `&dir_action=navigate`
-  );
-}
 function sendRouteToRiderMap(route) {
   try {
     const coords = extractRouteCoords(route);
@@ -1097,6 +1071,95 @@ function buildAutoRiderEngine(route, analysis) {
   };
 }
 
+function buildInlineRiderTravelPanel(route, analysis) {
+  const engine = buildAutoRiderEngine(route, analysis);
+  const distanceKm = Number(analysis?.distanceKm || getRouteDistanceKm(route) || 0);
+  const category = normalizeCategory(route);
+  const curves = analysis?.curves || analyzeCurves(route);
+  const curveScore = Number(curves?.score || 0);
+  const coords = extractRouteCoords(route);
+
+  const avgSpeed =
+    engine.mainProfile.key === "sport"
+      ? 62
+      : engine.mainProfile.key === "adventure"
+      ? 54
+      : engine.mainProfile.key === "scenic"
+      ? 58
+      : 60;
+
+  const durationMin = distanceKm > 0 ? Math.round((distanceKm / avgSpeed) * 60) : 0;
+
+  const softTurns = Math.max(0, Math.round(curveScore * 15 + coords.length * 1.2));
+  const mediumTurns = Math.max(0, Math.round(curveScore * 4.2));
+  const hardTurns = Math.max(0, Math.round(curveScore * 1.1));
+  const totalTurns = softTurns + mediumTurns + hardTurns;
+
+  const roadStyle =
+    curveScore >= 75
+      ? "Tecnica"
+      : curveScore >= 55
+      ? "Mista"
+      : curveScore >= 35
+      ? "Scorrevole / mista"
+      : category === "mountain"
+      ? "Montana scorrevole"
+      : "Scorrevole";
+
+  const curveLabel =
+    curveScore >= 75
+      ? "Molto guidata"
+      : curveScore >= 55
+      ? "Bella mista"
+      : curveScore >= 35
+      ? "Scorrevole con tratti guidati"
+      : "Tracciato semplice";
+
+  const complexityLabel =
+    analysis.complexityScore >= 78
+      ? "Alta"
+      : analysis.complexityScore >= 50
+      ? "Media"
+      : "Bassa";
+
+  const complexityColor =
+    complexityLabel === "Alta"
+      ? "#dc2626"
+      : complexityLabel === "Media"
+      ? "#ca8a04"
+      : "#15803d";
+
+  const stops = distanceKm >= 450 ? 4 : distanceKm >= 300 ? 3 : distanceKm >= 170 ? 2 : distanceKm >= 90 ? 1 : 0;
+  const legCount = Math.max(0, coords.length - 1);
+  const avgLeg = legCount > 0 ? distanceKm / legCount : 0;
+
+  const weatherLabel = "Da verificare prima della partenza";
+  const weatherScore = "—";
+
+  return {
+    engine,
+    distanceKm,
+    durationMin,
+    avgSpeed,
+    profile: engine.mainProfile.label.replace(" Rider", ""),
+    weatherScore,
+    weatherLabel,
+    curveScore,
+    curveLabel,
+    roadStyle,
+    intensity: curveScore >= 75 ? "Alta" : curveScore >= 45 ? "Media" : "Bassa",
+    totalTurns,
+    softTurns,
+    mediumTurns,
+    hardTurns,
+    complexityLabel,
+    complexityColor,
+    stops,
+    legCount,
+    avgLeg,
+  };
+}
+
 function complexityBadgeStyle(tone, dark = false) {
   if (dark) return pill("dark");
 
@@ -1160,6 +1223,16 @@ function formatRouteKm(km) {
   const n = Number(km || 0);
   if (!Number.isFinite(n) || n <= 0) return "—";
   return `${Math.round(n)} km`;
+}
+
+function formatRouteDuration(min) {
+  const n = Math.max(0, Math.round(Number(min || 0)));
+  if (!n) return "—";
+  const h = Math.floor(n / 60);
+  const m = n % 60;
+  if (!h) return `${m} min`;
+  if (!m) return `${h}h`;
+  return `${h}h ${String(m).padStart(2, "0")}m`;
 }
 
 function getRoutePointNames(route, max = 4) {
@@ -1913,7 +1986,6 @@ function RouteDetail({ route }) {
   const startNavUrl = navPoint
     ? buildNavigateUrl(latLonStr(navPoint), "driving")
     : null;
-    const routeNavUrl = buildGoogleMapsRouteUrl(route);
   const category = normalizeCategory(route);
   const analysis = buildRiderAnalysis(route);
   const autoEngine = buildAutoRiderEngine(route, analysis);
@@ -2069,6 +2141,7 @@ function RouteDetail({ route }) {
           </button>
         </div>
 
+        <InlineRiderTravelPanel route={route} analysis={analysis} />
         <RiderAnalysisPanel analysis={analysis} route={route} />
 
         <div
@@ -2135,19 +2208,39 @@ function RouteDetail({ route }) {
   );
 }
 
-function AutoRiderEnginePanel({ engine }) {
-  if (!engine) return null;
+function InlineRiderTravelPanel({ route, analysis }) {
+  const panel = buildInlineRiderTravelPanel(route, analysis);
+
+  const boxStyle = {
+    padding: 14,
+    borderRadius: 18,
+    background: "rgba(255,255,255,0.72)",
+    border: "1px solid rgba(0,0,0,0.08)",
+    minHeight: 90,
+  };
+
+  const labelStyle = {
+    fontSize: 13,
+    opacity: 0.65,
+    marginBottom: 7,
+  };
+
+  const valueStyle = {
+    fontSize: 26,
+    fontWeight: 950,
+    lineHeight: 1.05,
+    color: "#111827",
+  };
 
   return (
     <div
       style={{
-        marginTop: 12,
-        padding: 12,
-        borderRadius: 18,
-        background: "linear-gradient(135deg, rgba(12,18,30,0.96), rgba(28,37,54,0.94))",
-        color: "white",
-        border: "1px solid rgba(255,255,255,0.12)",
-        boxShadow: "0 10px 30px rgba(0,0,0,0.10)",
+        marginTop: 14,
+        padding: 16,
+        borderRadius: 24,
+        background: "linear-gradient(180deg, rgba(248,250,252,0.98), rgba(255,255,255,0.94))",
+        border: "1px solid rgba(0,0,0,0.08)",
+        boxShadow: "0 18px 45px rgba(15,23,42,0.08)",
       }}
     >
       <div
@@ -2155,137 +2248,114 @@ function AutoRiderEnginePanel({ engine }) {
           display: "flex",
           justifyContent: "space-between",
           gap: 10,
-          alignItems: "start",
+          alignItems: "baseline",
           flexWrap: "wrap",
         }}
       >
-        <div>
-          <div style={{ fontSize: 12, opacity: 0.78, fontWeight: 800 }}>
-            🤖 Auto Rider Engine
-          </div>
-          <div style={{ marginTop: 2, fontSize: 20, fontWeight: 950, lineHeight: 1.1 }}>
-            {engine.mainProfile.icon} {engine.mainProfile.label}
-          </div>
-          <div style={{ marginTop: 4, fontSize: 13, opacity: 0.82 }}>
-            Feeling: <strong>{engine.feeling}</strong> · Ritmo consigliato: <strong>{engine.rhythm}</strong>
-          </div>
+        <div style={{ fontSize: 22, fontWeight: 950, color: "#111827" }}>
+          🧠 Rider Travel Panel
         </div>
-
-        <span style={pill("dark")}>Affidabilità {engine.confidence}/100</span>
+        <span style={pill("light")}>
+          {panel.engine.mainProfile.icon} {panel.engine.mainProfile.label}
+        </span>
       </div>
 
       <div
         style={{
-          marginTop: 12,
+          marginTop: 14,
           display: "grid",
-          gridTemplateColumns: "repeat(auto-fit, minmax(130px, 1fr))",
-          gap: 8,
+          gridTemplateColumns: "repeat(auto-fit, minmax(180px, 1fr))",
+          gap: 10,
         }}
       >
-        {engine.profileScores.map((p) => (
-          <div
-            key={p.key}
-            style={{
-              padding: 10,
-              borderRadius: 14,
-              background: "rgba(255,255,255,0.08)",
-              border: "1px solid rgba(255,255,255,0.10)",
-            }}
-          >
-            <div style={{ fontSize: 11, opacity: 0.72 }}>{p.icon} {p.label}</div>
-            <div style={{ marginTop: 5, display: "flex", alignItems: "center", gap: 8 }}>
-              <div
-                style={{
-                  height: 7,
-                  borderRadius: 999,
-                  overflow: "hidden",
-                  background: "rgba(255,255,255,0.16)",
-                  flex: 1,
-                }}
-              >
-                <div
-                  style={{
-                    width: `${p.score}%`,
-                    height: "100%",
-                    borderRadius: 999,
-                    background: "rgba(255,255,255,0.82)",
-                  }}
-                />
-              </div>
-              <strong style={{ fontSize: 12 }}>{p.score}</strong>
-            </div>
+        <div style={boxStyle}>
+          <div style={labelStyle}>Distanza</div>
+          <div style={valueStyle}>{panel.distanceKm.toFixed(1)} km</div>
+        </div>
+
+        <div style={boxStyle}>
+          <div style={labelStyle}>Tempo stimato</div>
+          <div style={valueStyle}>{formatRouteDuration(panel.durationMin)}</div>
+        </div>
+
+        <div style={boxStyle}>
+          <div style={labelStyle}>Velocità media stimata</div>
+          <div style={valueStyle}>{panel.avgSpeed} km/h</div>
+        </div>
+
+        <div style={boxStyle}>
+          <div style={labelStyle}>Profilo</div>
+          <div style={valueStyle}>{panel.profile}</div>
+        </div>
+
+        <div style={boxStyle}>
+          <div style={labelStyle}>Meteo rotta</div>
+          <div style={{ ...valueStyle, fontSize: 22, color: "#64748b" }}>
+            {panel.weatherScore} {panel.weatherLabel}
           </div>
-        ))}
+        </div>
+
+        <div style={boxStyle}>
+          <div style={labelStyle}>Curve score</div>
+          <div style={valueStyle}>{panel.curveScore}/100</div>
+          <div style={{ fontSize: 13, opacity: 0.68, marginTop: 6 }}>{panel.curveLabel}</div>
+        </div>
+
+        <div style={boxStyle}>
+          <div style={labelStyle}>Stile strada</div>
+          <div style={valueStyle}>{panel.roadStyle}</div>
+          <div style={{ fontSize: 13, opacity: 0.68, marginTop: 6 }}>
+            Intensità: {panel.intensity}
+          </div>
+        </div>
+
+        <div style={boxStyle}>
+          <div style={labelStyle}>Curve rilevate</div>
+          <div style={valueStyle}>{panel.totalTurns}</div>
+          <div style={{ fontSize: 13, opacity: 0.68, marginTop: 6 }}>
+            Soft {panel.softTurns} • Medie {panel.mediumTurns} • Hard {panel.hardTurns}
+          </div>
+        </div>
+
+        <div style={boxStyle}>
+          <div style={labelStyle}>Complessità rotta</div>
+          <div style={{ ...valueStyle, color: panel.complexityColor }}>
+            {panel.complexityLabel}
+          </div>
+        </div>
+
+        <div style={boxStyle}>
+          <div style={labelStyle}>Soste consigliate</div>
+          <div style={valueStyle}>{panel.stops}</div>
+          <div style={{ fontSize: 13, opacity: 0.68, marginTop: 6 }}>
+            {panel.stops === 1 ? "1 sosta consigliata" : `${panel.stops} soste consigliate`}
+          </div>
+        </div>
+
+        <div style={boxStyle}>
+          <div style={labelStyle}>Tratte</div>
+          <div style={valueStyle}>{panel.legCount}</div>
+          <div style={{ fontSize: 13, opacity: 0.68, marginTop: 6 }}>
+            Media {panel.avgLeg ? `${panel.avgLeg.toFixed(1)} km` : "—"}
+          </div>
+        </div>
       </div>
 
       <div
         style={{
           marginTop: 12,
           padding: 12,
-          borderRadius: 14,
-          background: "rgba(255,255,255,0.08)",
-          border: "1px solid rgba(255,255,255,0.10)",
+          borderRadius: 16,
+          background: "rgba(22,163,74,0.06)",
+          border: "1px solid rgba(22,163,74,0.14)",
+          fontSize: 13,
+          lineHeight: 1.4,
         }}
       >
-        <div style={{ fontWeight: 900, fontSize: 13 }}>🎯 Per chi è ideale</div>
-        <div style={{ marginTop: 4, fontSize: 13, opacity: 0.86, lineHeight: 1.38 }}>
-          {engine.bestFor}
+        <strong>🛞 Lettura rapida rotta</strong>
+        <div style={{ marginTop: 5, opacity: 0.84 }}>
+          {panel.engine.advice} • Strada: <strong>{panel.roadStyle}</strong> • Complessità: <strong style={{ color: panel.complexityColor }}>{panel.complexityLabel}</strong>
         </div>
-      </div>
-
-      <div
-        style={{
-          marginTop: 10,
-          display: "grid",
-          gridTemplateColumns: "repeat(auto-fit, minmax(190px, 1fr))",
-          gap: 8,
-        }}
-      >
-        <div
-          style={{
-            padding: 10,
-            borderRadius: 14,
-            background: "rgba(255,255,255,0.08)",
-            border: "1px solid rgba(255,255,255,0.10)",
-            fontSize: 13,
-            lineHeight: 1.35,
-          }}
-        >
-          <strong>🕒 Quando farlo</strong>
-          <div style={{ marginTop: 3, opacity: 0.84 }}>{engine.bestTime}</div>
-        </div>
-
-        <div
-          style={{
-            padding: 10,
-            borderRadius: 14,
-            background: "rgba(255,255,255,0.08)",
-            border: "1px solid rgba(255,255,255,0.10)",
-            fontSize: 13,
-            lineHeight: 1.35,
-          }}
-        >
-          <strong>🧠 Consiglio AI</strong>
-          <div style={{ marginTop: 3, opacity: 0.84 }}>{engine.advice}</div>
-        </div>
-      </div>
-
-      <div style={{ marginTop: 10, display: "grid", gap: 6 }}>
-        {engine.warnings.map((w) => (
-          <div
-            key={w}
-            style={{
-              padding: "8px 10px",
-              borderRadius: 12,
-              background: "rgba(255,210,80,0.12)",
-              border: "1px solid rgba(255,210,80,0.22)",
-              fontSize: 12,
-              lineHeight: 1.3,
-            }}
-          >
-            ⚠️ {w}
-          </div>
-        ))}
       </div>
     </div>
   );
