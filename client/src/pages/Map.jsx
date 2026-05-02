@@ -861,7 +861,53 @@ const S = {
 const TRAIL_MIN_STEP_M = 12;
 const TRAIL_MAX_PTS = 2500;
 const kmToM = (km) => km * 1000;
+function importPointFromObject(obj) {
+  if (!obj) return null;
+  const lat = Number(obj.lat ?? obj.latitude);
+  const lon = Number(obj.lng ?? obj.lon ?? obj.longitude);
+  if (!Number.isFinite(lat) || !Number.isFinite(lon)) return null;
+  return [lat, lon];
+}
 
+function extractImportedRoutePoints(payload) {
+  const route = payload?.route || payload || {};
+  const source =
+    route.coords ||
+    route.points ||
+    route.geometry ||
+    route.waypoints ||
+    route.spots ||
+    [];
+
+  const out = [];
+
+  const push = (p) => {
+    let pair = null;
+    if (Array.isArray(p)) pair = [Number(p[0]), Number(p[1])];
+    else pair = importPointFromObject(p);
+
+    if (!pair || !Number.isFinite(pair[0]) || !Number.isFinite(pair[1])) return;
+
+    const last = out[out.length - 1];
+    if (
+      last &&
+      last[0].toFixed(5) === pair[0].toFixed(5) &&
+      last[1].toFixed(5) === pair[1].toFixed(5)
+    ) return;
+
+    out.push(pair);
+  };
+
+  if (Array.isArray(source)) source.forEach(push);
+
+  if (out.length < 2) {
+    push(route.start);
+    push(route.center);
+    push(route.end);
+  }
+
+  return out;
+}
 export default function Map() {
   const initialRoutes = useMemo(() => loadRoutes(), []);
   const [routes, setRoutes] = useState(initialRoutes);
@@ -924,6 +970,8 @@ export default function Map() {
   const [riderSpots, setRiderSpots] = useState([]);
   const [riderSpotsLoading, setRiderSpotsLoading] = useState(false);
   const [riderSpotsError, setRiderSpotsError] = useState("");
+  const [importedRouteNotice, setImportedRouteNotice] = useState("");
+const importHandledRef = useRef(false);
   const {
     route: engineRoute,
     weather: engineWeather,
@@ -1812,7 +1860,94 @@ const addFromSearch = (s) => {
       }
     }
   };
+useEffect(() => {
+  if (importHandledRef.current) return;
+  importHandledRef.current = true;
 
+  const raw =
+    localStorage.getItem("motoporteu:riderRouteToAnalyze") ||
+    localStorage.getItem("motoporteu:navigatorImport") ||
+    localStorage.getItem("motoporteu:selectedRouteForMap");
+
+  if (!raw) return;
+
+  let payload = null;
+
+  try {
+    payload = JSON.parse(raw);
+  } catch {
+    return;
+  }
+
+  const route = payload?.route || payload;
+  const importedPoints = extractImportedRoutePoints(payload);
+
+  localStorage.removeItem("motoporteu:riderRouteToAnalyze");
+  localStorage.removeItem("motoporteu:navigatorImport");
+  localStorage.removeItem("motoporteu:selectedRouteForMap");
+
+  if (!importedPoints || importedPoints.length < 2) {
+    setImportedRouteNotice("Itinerario importato, ma non contiene abbastanza punti per l’analisi Rider.");
+    return;
+  }
+
+  setActiveId("");
+  setName(route?.name || "Itinerario da analizzare");
+  setNote(route?.description || route?.note || "Importato da Itinerari");
+  setRideProfile(route?.category === "mountain" ? "sport" : "touring");
+  setPoints(importedPoints);
+  setSnappedLine(null);
+  setRouteMeta({ distanceKm: 0, durationMin: 0, steps: [] });
+  setSnapEnabled(true);
+  resetEngine();
+
+  setImportedRouteNotice(
+    `Itinerario importato da Itinerari: ${route?.name || "rotta selezionata"}`
+  );
+
+  const autoAnalyze = async () => {
+    try {
+      const built = await buildRiderRoute(toLatLngObjects(importedPoints), {
+        meta: {
+          source: "Routes.jsx",
+          importedRouteName: route?.name || "",
+          rideProfile: route?.category === "mountain" ? "sport" : "touring",
+        },
+      });
+
+      const builtRoute = built?.route;
+      const line = toPointPairsFromEngineGeometry(builtRoute?.geometry || []);
+      const firstLeg = builtRoute?.legs?.[0];
+
+      const steps =
+        (firstLeg?.steps || []).map((s) => ({
+          distanceKm: Number((s.distanceMeters || 0) / 1000),
+          durationMin: Number((s.durationSeconds || 0) / 60),
+          name: s.name || "",
+          instruction:
+            s?.maneuver?.modifier
+              ? `${s.maneuver.type || "Procedi"} ${s.maneuver.modifier || ""}`.trim()
+              : s?.maneuver?.type || "Procedi",
+        })) || [];
+
+      if (line?.length >= 2) {
+        setSnappedLine(line);
+        setRouteMeta({
+          distanceKm: Number(builtRoute?.distanceKm || 0),
+          durationMin: Number(builtRoute?.durationMin || 0),
+          steps: steps.slice(0, 8),
+        });
+      }
+    } catch (err) {
+      console.error("Auto Rider import error:", err);
+      setImportedRouteNotice(
+        "Itinerario caricato. Premi Analizza con Rider Engine per riprovare l’analisi."
+      );
+    }
+  };
+
+  autoAnalyze();
+}, [buildRiderRoute, resetEngine]);
   const exportGpx = () => {
     const base = snapEnabled && snappedLine?.length >= 2 ? snappedLine : points;
     if (!base || base.length < 2) return alert("Nessun percorso da esportare.");
@@ -2068,7 +2203,21 @@ const refreshRiderSpots = async () => {
             </button>
           </div>
         </div>
-
+{importedRouteNotice ? (
+  <div
+    style={{
+      ...S.card,
+      marginTop: 12,
+      background: "rgba(29,78,216,0.08)",
+      border: "1px solid rgba(29,78,216,0.18)",
+    }}
+  >
+    <b>🧠 Analizza con Rider</b>
+    <div style={{ marginTop: 4, fontSize: 13, opacity: 0.82 }}>
+      {importedRouteNotice}
+    </div>
+  </div>
+) : null}
         <div style={isLg ? S.gridLg : S.grid}>
           <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
             <div style={S.card}>

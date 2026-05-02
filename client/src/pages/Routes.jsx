@@ -352,6 +352,31 @@ function buildNavigateUrl(destination, travelmode = "driving") {
   );
 }
 
+function sendRouteToRiderMap(route) {
+  try {
+    const coords = extractRouteCoords(route);
+    const payload = {
+      source: "routes",
+      action: "analyze_with_rider_engine",
+      createdAt: new Date().toISOString(),
+      route: {
+        ...route,
+        coords,
+        distanceKm: getRouteDistanceKm(route),
+        category: normalizeCategory(route),
+      },
+    };
+
+    localStorage.setItem("motoporteu:riderRouteToAnalyze", JSON.stringify(payload));
+    localStorage.setItem("motoporteu:navigatorImport", JSON.stringify(payload));
+    localStorage.setItem("motoporteu:selectedRouteForMap", JSON.stringify(payload.route));
+  } catch (e) {
+    console.warn("Impossibile preparare itinerario per Rider Engine", e);
+  }
+
+  window.location.href = "/map?from=routes&analyze=rider";
+}
+
 function pointFromObject(obj) {
   if (!obj) return null;
   return pairFrom(
@@ -1995,9 +2020,28 @@ function RouteDetail({ route }) {
           >
             📤 Esporta GPX
           </button>
+
+          <button
+            type="button"
+            onClick={() => sendRouteToRiderMap(route)}
+            style={{
+              display: "inline-block",
+              padding: "10px 12px",
+              borderRadius: 12,
+              border: "1px solid rgba(0,0,0,0.15)",
+              background: "linear-gradient(135deg, #111827, #374151)",
+              color: "white",
+              fontSize: 13,
+              cursor: "pointer",
+              fontWeight: 950,
+              boxShadow: "0 8px 18px rgba(0,0,0,0.12)",
+            }}
+            title="Apri questo itinerario nel Navigatore Rider per analisi avanzata"
+          >
+            🧠 Analizza con Rider
+          </button>
         </div>
 
-        <AutoRiderEnginePanel engine={autoEngine} />
         <RiderAnalysisPanel analysis={analysis} route={route} />
 
         <div
