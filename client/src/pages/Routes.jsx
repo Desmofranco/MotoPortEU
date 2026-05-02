@@ -2006,29 +2006,30 @@ function RouteDetail({ route }) {
 
       <div style={{ padding: 12 }}>
         <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
-<button
-  type="button"
-  onClick={() => openGoogleMapsSmart(routeNavUrl)}
-  disabled={!routeNavUrl}
-  style={{
-    display: "inline-block",
-    padding: "10px 12px",
-    borderRadius: 12,
-    border: "1px solid rgba(0,0,0,0.15)",
-    background: "white",
-    fontSize: 13,
-    cursor: routeNavUrl ? "pointer" : "not-allowed",
-    fontWeight: 900,
-    opacity: routeNavUrl ? 1 : 0.55,
-  }}
-  title={
-    routeNavUrl
-      ? "Apri l’intero itinerario in Google Maps"
-      : "Coordinate itinerario non disponibili"
-  }
->
-  🧭 Naviga percorso
-</button>
+          <button
+            type="button"
+            onClick={() => openGoogleMapsSmart(startNavUrl)}
+            disabled={!startNavUrl}
+            style={{
+              display: "inline-block",
+              padding: "10px 12px",
+              borderRadius: 12,
+              border: "1px solid rgba(0,0,0,0.15)",
+              background: "white",
+              fontSize: 13,
+              cursor: startNavUrl ? "pointer" : "not-allowed",
+              fontWeight: 900,
+              opacity: startNavUrl ? 1 : 0.55,
+            }}
+            title={
+              startNavUrl
+                ? "Avvia navigazione verso l'inizio usando la tua posizione"
+                : "Coordinate itinerario non disponibili"
+            }
+          >
+            🧭 Avvia verso START
+          </button>
+
           <button
             type="button"
             onClick={() => exportRouteToGpx(route)}
