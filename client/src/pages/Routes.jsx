@@ -9,24 +9,12 @@
 // ✅ Poi carica /data/routes/IT.json, FR.json, ecc.
 // ✅ Fallback sicuro su /data/routes.json
 //
-// OPTIMIZATION PACK:
-// ✅ Loading skeleton
-// ✅ Meteo + Google Maps
-// ✅ FIX mobile: no aperture accidentali durante scroll
-// ✅ Ricerca intelligente
-// ✅ Filtri: Paese / Regione / Categoria
-// ✅ Categorie commerciali: Montagna / Laghi / Mare
-// ✅ Render limitato iniziale
-// ✅ Pulsante "Carica altri"
-// ✅ Ricerca con debounce
-// ✅ Fetch con cache più favorevole su mobile
-//
-// RIDER ANALYSIS:
-// ✅ computeDistanceKm
-// ✅ analyzeCurves
-// ✅ complexity badge
-// ✅ rider diagnosis
-// ✅ stats UI percorso
+// RIDER ENGINE OSRM REALE:
+// ✅ Rider Panel automatico nel dettaglio
+// ✅ OSRM reale su start/waypoints/end
+// ✅ Fallback sicuro su geometria dataset
+// ✅ Stessi dati usati nel pulsante "Analizza con Rider"
+// ✅ Hero pulita senza duplicazioni
 //
 // GPX:
 // ✅ Export GPX integrato
@@ -37,6 +25,7 @@ import RouteMap from "../components/RouteMap";
 import { getRouteWeatherSummary } from "../utils/routeWeather";
 import { analyzeRouteGeometry } from "../utils/routeAnalysis";
 import { scoreRouteForRider } from "../utils/routeScoring";
+
 const FALLBACK_PHOTO =
   "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1600&q=80";
 
@@ -46,6 +35,8 @@ const MOBILE_INITIAL_COUNT = 24;
 const DESKTOP_INITIAL_COUNT = 48;
 const LOAD_MORE_STEP_MOBILE = 24;
 const LOAD_MORE_STEP_DESKTOP = 48;
+
+const OSRM_BASE = "https://router.project-osrm.org/route/v1/driving";
 
 function isMobileNow() {
   if (typeof window === "undefined" || !window.matchMedia) return false;
@@ -82,9 +73,7 @@ async function fetchJsonSafe(url, fallback = null) {
 }
 
 function normalizeCountryCode(value) {
-  return String(value || "")
-    .trim()
-    .toUpperCase();
+  return String(value || "").trim().toUpperCase();
 }
 
 function extractCountriesFromIndex(indexData) {
@@ -126,24 +115,18 @@ function extractCountriesFromIndex(indexData) {
 
 function asRoutesArray(data) {
   if (Array.isArray(data)) return data;
-
   if (Array.isArray(data?.routes)) return data.routes;
   if (Array.isArray(data?.items)) return data.items;
   if (Array.isArray(data?.data)) return data.data;
-
-  if (data && typeof data === "object" && data.id && data.name) {
-    return [data];
-  }
-
+  if (data && typeof data === "object" && data.id && data.name) return [data];
   return [];
 }
+
 async function loadRoutesDataset() {
   const indexData = await fetchJsonSafe("/data/routes-index.json", null);
 
   const indexRoutes = asRoutesArray(indexData);
-  if (indexRoutes.length) {
-    return indexRoutes;
-  }
+  if (indexRoutes.length) return indexRoutes;
 
   const countries = Array.from(new Set(extractCountriesFromIndex(indexData)));
 
@@ -156,15 +139,13 @@ async function loadRoutesDataset() {
     );
 
     const splitRoutes = chunks.flat();
-
-    if (splitRoutes.length) {
-      return splitRoutes;
-    }
+    if (splitRoutes.length) return splitRoutes;
   }
 
   const legacy = await fetchJsonSafe("/data/routes.json", []);
   return asRoutesArray(legacy);
 }
+
 function openGoogleMapsSmart(url) {
   if (!url) return;
   if (isMobileNow()) window.location.href = url;
@@ -189,6 +170,11 @@ function pairFrom(a, b) {
   const lat = toNum(a);
   const lon = toNum(b);
   return Number.isFinite(lat) && Number.isFinite(lon) ? [lat, lon] : null;
+}
+
+function pointFromObject(obj) {
+  if (!obj) return null;
+  return pairFrom(obj?.lat ?? obj?.latitude, obj?.lng ?? obj?.lon ?? obj?.longitude);
 }
 
 function latLonStr(p) {
@@ -218,121 +204,6 @@ function safeFileName(value = "motoporteu-itinerario") {
     .slice(0, 80);
 }
 
-function getGpxRoutePoints(route) {
-  const coords = extractRouteCoords(route);
-
-  if (coords.length >= 2) {
-    return coords.map((p, index) => ({
-      lat: Number(p[0]),
-      lon: Number(p[1]),
-      name:
-        index === 0
-          ? route?.start?.name || "Start"
-          : index === coords.length - 1
-          ? route?.end?.name || "Arrivo"
-          : "",
-    }));
-  }
-
-  const points = [];
-
-  const push = (p, fallbackName = "") => {
-    const pair = Array.isArray(p) ? pairFrom(p[0], p[1]) : pointFromObject(p);
-    if (!pair) return;
-
-    const last = points[points.length - 1];
-    if (
-      last &&
-      Number(last.lat).toFixed(5) === Number(pair[0]).toFixed(5) &&
-      Number(last.lon).toFixed(5) === Number(pair[1]).toFixed(5)
-    ) {
-      return;
-    }
-
-    points.push({
-      lat: Number(pair[0]),
-      lon: Number(pair[1]),
-      name: p?.name || fallbackName || "",
-    });
-  };
-
-  push(route?.start, "Start");
-
-  if (Array.isArray(route?.waypoints)) {
-    route.waypoints.forEach((w) => push(w, w?.name || "Waypoint"));
-  }
-
-  if (Array.isArray(route?.spots)) {
-    route.spots.forEach((s) => push(s, s?.name || "Punto"));
-  }
-
-  push(route?.end, "Arrivo");
-
-  return points;
-}
-
-function exportRouteToGpx(route) {
-  const points = getGpxRoutePoints(route);
-
-  if (!points.length) {
-    alert("Questo itinerario non contiene coordinate esportabili in GPX.");
-    return;
-  }
-
-  if (points.length < 2) {
-    alert("Servono almeno due punti per esportare un GPX valido.");
-    return;
-  }
-
-  const routeName = route?.name || "MotoPortEU Itinerario";
-
-  const trkpts = points
-    .map((p) => {
-      const name = p.name ? `<name>${escapeXml(p.name)}</name>` : "";
-      return `      <trkpt lat="${Number(p.lat)}" lon="${Number(p.lon)}">${name}</trkpt>`;
-    })
-    .join("\n");
-
-  const rtepts = points
-    .map((p) => {
-      const name = p.name ? `<name>${escapeXml(p.name)}</name>` : "";
-      return `    <rtept lat="${Number(p.lat)}" lon="${Number(p.lon)}">${name}</rtept>`;
-    })
-    .join("\n");
-
-  const gpx = `<?xml version="1.0" encoding="UTF-8"?>
-<gpx version="1.1" creator="MotoPortEU" xmlns="http://www.topografix.com/GPX/1/1">
-  <metadata>
-    <name>${escapeXml(routeName)}</name>
-  </metadata>
-  <rte>
-    <name>${escapeXml(routeName)}</name>
-${rtepts}
-  </rte>
-  <trk>
-    <name>${escapeXml(routeName)}</name>
-    <trkseg>
-${trkpts}
-    </trkseg>
-  </trk>
-</gpx>`;
-
-  const blob = new Blob([gpx], {
-    type: "application/gpx+xml;charset=utf-8",
-  });
-
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement("a");
-
-  a.href = url;
-  a.download = `${safeFileName(routeName)}.gpx`;
-  document.body.appendChild(a);
-  a.click();
-  a.remove();
-
-  URL.revokeObjectURL(url);
-}
-
 function buildNavigateUrl(destination, travelmode = "driving") {
   if (!destination) return null;
   return (
@@ -343,20 +214,11 @@ function buildNavigateUrl(destination, travelmode = "driving") {
   );
 }
 
-function pointFromObject(obj) {
-  if (!obj) return null;
-  return pairFrom(
-    obj?.lat ?? obj?.latitude,
-    obj?.lng ?? obj?.lon ?? obj?.longitude
-  );
-}
-
 function buildRouteKey(r) {
   const id = String(r?.id || "").trim();
   if (id) return `id:${id}`;
 
   const name = String(r?.name || "").trim().toLowerCase();
-
   const sp = pointFromObject(r?.start);
   const ep = pointFromObject(r?.end);
 
@@ -413,20 +275,14 @@ function routeSearchBlob(route) {
 }
 
 function pickRoutePoint(route) {
-  {
-    const p = pointFromObject(route?.start);
-    if (p) return p;
-  }
+  const start = pointFromObject(route?.start);
+  if (start) return start;
 
-  {
-    const p = pointFromObject(route?.end);
-    if (p) return p;
-  }
+  const end = pointFromObject(route?.end);
+  if (end) return end;
 
-  {
-    const p = pointFromObject(route?.center);
-    if (p) return p;
-  }
+  const centerObj = pointFromObject(route?.center);
+  if (centerObj) return centerObj;
 
   if (Array.isArray(route?.center) && route.center.length >= 2) {
     const p = pairFrom(route.center[0], route.center[1]);
@@ -585,30 +441,6 @@ function computeDistanceKm(a, b) {
   return R * 2 * Math.atan2(Math.sqrt(x), Math.sqrt(1 - x));
 }
 
-function bearingDeg(a, b) {
-  if (!a || !b) return null;
-
-  const lat1 = degToRad(Number(a[0]));
-  const lat2 = degToRad(Number(b[0]));
-  const dLon = degToRad(Number(b[1]) - Number(a[1]));
-
-  if (![lat1, lat2, dLon].every(Number.isFinite)) return null;
-
-  const y = Math.sin(dLon) * Math.cos(lat2);
-  const x =
-    Math.cos(lat1) * Math.sin(lat2) -
-    Math.sin(lat1) * Math.cos(lat2) * Math.cos(dLon);
-
-  return ((Math.atan2(y, x) * 180) / Math.PI + 360) % 360;
-}
-
-function angleDiff(a, b) {
-  if (a == null || b == null) return 0;
-  let d = Math.abs(a - b) % 360;
-  if (d > 180) d = 360 - d;
-  return d;
-}
-
 function extractRouteCoords(route) {
   const out = [];
 
@@ -635,21 +467,10 @@ function extractRouteCoords(route) {
     out.push(pair);
   };
 
-  if (Array.isArray(route?.coords)) {
-    route.coords.forEach(pushPoint);
-  }
-
-  if (out.length < 2 && Array.isArray(route?.geometry)) {
-    route.geometry.forEach(pushPoint);
-  }
-
-  if (out.length < 2 && Array.isArray(route?.waypoints)) {
-    route.waypoints.forEach(pushPoint);
-  }
-
-  if (out.length < 2 && Array.isArray(route?.spots)) {
-    route.spots.forEach(pushPoint);
-  }
+  if (Array.isArray(route?.coords)) route.coords.forEach(pushPoint);
+  if (out.length < 2 && Array.isArray(route?.geometry)) route.geometry.forEach(pushPoint);
+  if (out.length < 2 && Array.isArray(route?.waypoints)) route.waypoints.forEach(pushPoint);
+  if (out.length < 2 && Array.isArray(route?.spots)) route.spots.forEach(pushPoint);
 
   if (out.length < 2) {
     pushPoint(route?.start);
@@ -658,6 +479,98 @@ function extractRouteCoords(route) {
   }
 
   return out;
+}
+
+function getOsrmInputPoints(route) {
+  const out = [];
+  const push = (p) => {
+    const pair = Array.isArray(p) ? pairFrom(p[0], p[1]) : pointFromObject(p);
+    if (!pair) return;
+
+    const last = out[out.length - 1];
+    if (
+      last &&
+      Number(last[0]).toFixed(5) === Number(pair[0]).toFixed(5) &&
+      Number(last[1]).toFixed(5) === Number(pair[1]).toFixed(5)
+    ) {
+      return;
+    }
+
+    out.push(pair);
+  };
+
+  push(route?.start);
+
+  const mids = Array.isArray(route?.waypoints) && route.waypoints.length
+    ? route.waypoints
+    : Array.isArray(route?.spots)
+    ? route.spots
+    : [];
+
+  mids.slice(0, 20).forEach(push);
+  push(route?.end);
+
+  if (out.length < 2) {
+    extractRouteCoords(route).slice(0, 20).forEach(push);
+  }
+
+  return out;
+}
+
+async function fetchOsrmRoute(route) {
+  const points = getOsrmInputPoints(route);
+
+  if (points.length < 2) {
+    return {
+      ok: false,
+      source: "dataset",
+      coords: extractRouteCoords(route),
+      distanceKm: getRouteDistanceKm(route),
+      durationMin: route?.durationMin || null,
+      note: "Coordinate insufficienti per OSRM.",
+    };
+  }
+
+  const limited = points.slice(0, 25);
+  const coords = limited.map(([lat, lng]) => `${lng},${lat}`).join(";");
+
+  const url =
+    `${OSRM_BASE}/${coords}` +
+    `?overview=full&geometries=geojson&steps=false&alternatives=false`;
+
+  try {
+    const res = await fetch(url);
+    if (!res.ok) throw new Error("OSRM non disponibile");
+
+    const data = await res.json();
+    const first = data?.routes?.[0];
+
+    const osrmCoords = Array.isArray(first?.geometry?.coordinates)
+      ? first.geometry.coordinates
+          .map(([lng, lat]) => pairFrom(lat, lng))
+          .filter(Boolean)
+      : [];
+
+    if (osrmCoords.length < 2) throw new Error("Geometria OSRM vuota");
+
+    return {
+      ok: true,
+      source: "osrm",
+      coords: osrmCoords,
+      distanceKm: Number(first.distance || 0) / 1000,
+      durationMin: Math.round(Number(first.duration || 0) / 60),
+      note: "Analisi calcolata su rotta stradale reale OSRM.",
+    };
+  } catch (e) {
+    return {
+      ok: false,
+      source: "dataset",
+      coords: extractRouteCoords(route),
+      distanceKm: getRouteDistanceKm(route),
+      durationMin: route?.durationMin || null,
+      note: "OSRM non raggiungibile: uso geometria dataset.",
+    };
+  }
 }
 
 function getRouteDistanceKm(route) {
@@ -675,96 +588,17 @@ function getRouteDistanceKm(route) {
   return total;
 }
 
-function analyzeCurves(route) {
-  const coords = extractRouteCoords(route);
-  const declaredScore = toNum(route?.curvesScore);
+function buildRiderAnalysis(route, osrmData = null) {
+  const sourceCoords =
+    osrmData?.coords?.length >= 2 ? osrmData.coords : extractRouteCoords(route);
 
-  if (coords.length < 3) {
-    const fallbackScore =
-      declaredScore != null && declaredScore > 0
-        ? Math.max(0, Math.min(100, declaredScore))
-        : 0;
-
-    return {
-      available: false,
-      points: coords.length,
-      curves: 0,
-      technicalTurns: 0,
-      directionChanges: 0,
-      curveDensity: 0,
-      score: Math.round(fallbackScore),
-      label:
-        fallbackScore >= 75
-          ? "Molto guidato"
-          : fallbackScore >= 55
-          ? "Guidato"
-          : fallbackScore >= 35
-          ? "Scorrevole"
-          : "Facile",
-    };
-  }
-
-  let curves = 0;
-  let technicalTurns = 0;
-  let directionChanges = 0;
-  let lastBearing = bearingDeg(coords[0], coords[1]);
-
-  for (let i = 2; i < coords.length; i += 1) {
-    const b = bearingDeg(coords[i - 1], coords[i]);
-    const diff = angleDiff(lastBearing, b);
-
-    if (diff >= 10) directionChanges += 1;
-    if (diff >= 18) curves += 1;
-    if (diff >= 38) technicalTurns += 1;
-
-    lastBearing = b;
-  }
-
-  const distanceKm = Math.max(1, getRouteDistanceKm(route));
-  const curveDensity = curves / distanceKm;
-  const technicalDensity = technicalTurns / distanceKm;
-
-  let score = Math.round(
-    Math.min(
-      100,
-      curveDensity * 55 +
-        technicalDensity * 80 +
-        Math.min(coords.length, 120) * 0.12
-    )
-  );
-
-  if (declaredScore != null && declaredScore > 0) {
-    score = Math.round(score * 0.75 + declaredScore * 0.25);
-  }
-
-  const label =
-    score >= 78
-      ? "Molto guidato"
-      : score >= 58
-      ? "Guidato"
-      : score >= 38
-      ? "Scorrevole"
-      : "Facile";
-
-  return {
-    available: true,
-    points: coords.length,
-    curves,
-    technicalTurns,
-    directionChanges,
-    curveDensity,
-    score,
-    label,
-  };
-}
-function buildRiderAnalysis(route) {
-  const geometry = extractRouteCoords(route).map(([lat, lng]) => ({
+  const geometry = sourceCoords.map(([lat, lng]) => ({
     lat: Number(lat),
     lng: Number(lng),
   }));
 
   const engineAnalysis = analyzeRouteGeometry(geometry, {
-    durationMin: route?.durationMin,
+    durationMin: osrmData?.durationMin || route?.durationMin,
   });
 
   const riderScore = scoreRouteForRider(
@@ -774,6 +608,7 @@ function buildRiderAnalysis(route) {
   );
 
   const distanceKm =
+    toNum(osrmData?.distanceKm) ||
     toNum(route?.distanceKm) ||
     toNum(engineAnalysis?.distanceKm) ||
     getRouteDistanceKm(route);
@@ -817,7 +652,11 @@ function buildRiderAnalysis(route) {
       : ".");
 
   return {
+    source: osrmData?.source || "dataset",
+    sourceOk: Boolean(osrmData?.ok),
+    sourceNote: osrmData?.note || "Analisi calcolata sul dataset.",
     distanceKm,
+    durationMin: osrmData?.durationMin || route?.durationMin || null,
     curves: {
       available: engineAnalysis.valid,
       points: geometry.length,
@@ -840,75 +679,134 @@ function buildRiderAnalysis(route) {
     riderScore,
   };
 }
-function complexityBadgeStyle(tone, dark = false) {
-  if (dark) return pill("dark");
-
-  const colors = {
-    green: {
-      background: "rgba(0,140,80,0.10)",
-      border: "1px solid rgba(0,140,80,0.20)",
-    },
-    blue: {
-      background: "rgba(0,100,220,0.10)",
-      border: "1px solid rgba(0,100,220,0.20)",
-    },
-    orange: {
-      background: "rgba(255,150,0,0.14)",
-      border: "1px solid rgba(255,150,0,0.25)",
-    },
-    red: {
-      background: "rgba(255,0,0,0.10)",
-      border: "1px solid rgba(255,0,0,0.20)",
-    },
-  };
-
-  return {
-    ...pill("light"),
-    ...(colors[tone] || colors.blue),
-    fontWeight: 900,
-  };
-}
-
-function SkeletonLoading() {
-  return (
-    <div
-      style={{
-        marginTop: 12,
-        padding: 14,
-        borderRadius: 16,
-        border: "1px solid rgba(0,0,0,0.10)",
-        background: "rgba(0,0,0,0.03)",
-      }}
-    >
-      <div style={{ fontSize: 16, fontWeight: 900 }}>Carico itinerari…</div>
-      <div style={{ marginTop: 10, display: "grid", gap: 8 }}>
-        <div style={skeletonLine("70%")} />
-        <div style={skeletonLine("55%")} />
-        <div style={skeletonLine("80%")} />
-      </div>
-    </div>
-  );
-}
-
-function skeletonLine(width) {
-  return {
-    height: 12,
-    background: "rgba(0,0,0,0.08)",
-    borderRadius: 8,
-    width,
-  };
-}
 
 function formatRouteKm(km) {
   const n = Number(km || 0);
   if (!Number.isFinite(n) || n <= 0) return "—";
   return `${Math.round(n)} km`;
 }
+
 function formatCurveCount(value) {
   const n = Number(value || 0);
   if (!Number.isFinite(n) || n <= 0) return "0";
   return String(Math.round(n));
 }
+
+function getGpxRoutePoints(route) {
+  const coords = extractRouteCoords(route);
+
+  if (coords.length >= 2) {
+    return coords.map((p, index) => ({
+      lat: Number(p[0]),
+      lon: Number(p[1]),
+      name:
+        index === 0
+          ? route?.start?.name || "Start"
+          : index === coords.length - 1
+          ? route?.end?.name || "Arrivo"
+          : "",
+    }));
+  }
+
+  const points = [];
+
+  const push = (p, fallbackName = "") => {
+    const pair = Array.isArray(p) ? pairFrom(p[0], p[1]) : pointFromObject(p);
+    if (!pair) return;
+
+    const last = points[points.length - 1];
+    if (
+      last &&
+      Number(last.lat).toFixed(5) === Number(pair[0]).toFixed(5) &&
+      Number(last.lon).toFixed(5) === Number(pair[1]).toFixed(5)
+    ) {
+      return;
+    }
+
+    points.push({
+      lat: Number(pair[0]),
+      lon: Number(pair[1]),
+      name: p?.name || fallbackName || "",
+    });
+  };
+
+  push(route?.start, "Start");
+
+  if (Array.isArray(route?.waypoints)) {
+    route.waypoints.forEach((w) => push(w, w?.name || "Waypoint"));
+  }
+
+  if (Array.isArray(route?.spots)) {
+    route.spots.forEach((s) => push(s, s?.name || "Punto"));
+  }
+
+  push(route?.end, "Arrivo");
+
+  return points;
+}
+
+function exportRouteToGpx(route) {
+  const points = getGpxRoutePoints(route);
+
+  if (!points.length) {
+    alert("Questo itinerario non contiene coordinate esportabili in GPX.");
+    return;
+  }
+
+  if (points.length < 2) {
+    alert("Servono almeno due punti per esportare un GPX valido.");
+    return;
+  }
+
+  const routeName = route?.name || "MotoPortEU Itinerario";
+
+  const trkpts = points
+    .map((p) => {
+      const name = p.name ? `<name>${escapeXml(p.name)}</name>` : "";
+      return `      <trkpt lat="${Number(p.lat)}" lon="${Number(p.lon)}">${name}</trkpt>`;
+    })
+    .join("\n");
+
+  const rtepts = points
+    .map((p) => {
+      const name = p.name ? `<name>${escapeXml(p.name)}</name>` : "";
+      return `    <rtept lat="${Number(p.lat)}" lon="${Number(p.lon)}">${name}</rtept>`;
+    })
+    .join("\n");
+
+  const gpx = `<?xml version="1.0" encoding="UTF-8"?>
+<gpx version="1.1" creator="MotoPortEU" xmlns="http://www.topografix.com/GPX/1/1">
+  <metadata>
+    <name>${escapeXml(routeName)}</name>
+  </metadata>
+  <rte>
+    <name>${escapeXml(routeName)}</name>
+${rtepts}
+  </rte>
+  <trk>
+    <name>${escapeXml(routeName)}</name>
+    <trkseg>
+${trkpts}
+    </trkseg>
+  </trk>
+</gpx>`;
+
+  const blob = new Blob([gpx], {
+    type: "application/gpx+xml;charset=utf-8",
+  });
+
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+
+  a.href = url;
+  a.download = `${safeFileName(routeName)}.gpx`;
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+
+  URL.revokeObjectURL(url);
+}
+
 function getRoutePointNames(route, max = 4) {
   const out = [];
   const seen = new Set();
@@ -1058,9 +956,7 @@ export default function Routes() {
 
   const countries = useMemo(() => {
     const set = new Set(
-      routes
-        .map((r) => normalizeCountryCode(r.country || r.countryName))
-        .filter(Boolean)
+      routes.map((r) => normalizeCountryCode(r.country || r.countryName)).filter(Boolean)
     );
     return ["ALL", ...Array.from(set).sort()];
   }, [routes]);
@@ -1107,9 +1003,7 @@ export default function Routes() {
 
       out = out.filter((r) => {
         const blob = routeSearchBlob(r);
-
         if (blob.includes(query)) return true;
-
         return queryTokens.every((token) => blob.includes(token));
       });
     }
@@ -1137,10 +1031,7 @@ export default function Routes() {
     setVisibleCount(getInitialVisibleCount());
   }, [country, region, category, debouncedQ]);
 
-  const visibleRoutes = useMemo(() => {
-    return filtered.slice(0, visibleCount);
-  }, [filtered, visibleCount]);
-
+  const visibleRoutes = useMemo(() => filtered.slice(0, visibleCount), [filtered, visibleCount]);
   const hasMoreRoutes = visibleCount < filtered.length;
 
   const loadMoreRoutes = () => {
@@ -1189,10 +1080,7 @@ export default function Routes() {
   };
 
   return (
-    <div
-      className="routes-root"
-      style={{ padding: 12, maxWidth: 1250, margin: "0 auto" }}
-    >
+    <div className="routes-root" style={{ padding: 12, maxWidth: 1250, margin: "0 auto" }}>
       {!showDetailMobile && (
         <>
           <div
@@ -1208,11 +1096,8 @@ export default function Routes() {
               <h1 style={{ margin: 0, fontSize: 34, letterSpacing: -0.5 }}>
                 Itinerari 📍
               </h1>
-              <div
-                className="routes-subtitle"
-                style={{ opacity: 0.75, marginTop: 6 }}
-              >
-                Touring emozionale: mappa, meteo e Rider Analysis.
+              <div className="routes-subtitle" style={{ opacity: 0.75, marginTop: 6 }}>
+                Touring emozionale: mappa, meteo e Rider Engine reale.
               </div>
             </div>
 
@@ -1245,11 +1130,7 @@ export default function Routes() {
           >
             <label style={{ display: "grid", gap: 6 }}>
               <span style={{ fontSize: 12, opacity: 0.75 }}>Paese</span>
-              <select
-                value={country}
-                onChange={(e) => setCountry(e.target.value)}
-                style={selectStyle()}
-              >
+              <select value={country} onChange={(e) => setCountry(e.target.value)} style={selectStyle()}>
                 {countries.map((c) => (
                   <option key={c} value={c}>
                     {c === "ALL" ? "Tutti" : countryLabel(c)}
@@ -1260,11 +1141,7 @@ export default function Routes() {
 
             <label style={{ display: "grid", gap: 6 }}>
               <span style={{ fontSize: 12, opacity: 0.75 }}>Regione</span>
-              <select
-                value={region}
-                onChange={(e) => setRegion(e.target.value)}
-                style={selectStyle()}
-              >
+              <select value={region} onChange={(e) => setRegion(e.target.value)} style={selectStyle()}>
                 {regions.map((r) => (
                   <option key={r} value={r}>
                     {r === "ALL" ? "Tutte" : r}
@@ -1275,11 +1152,7 @@ export default function Routes() {
 
             <label style={{ display: "grid", gap: 6 }}>
               <span style={{ fontSize: 12, opacity: 0.75 }}>Categoria</span>
-              <select
-                value={category}
-                onChange={(e) => setCategory(e.target.value)}
-                style={selectStyle()}
-              >
+              <select value={category} onChange={(e) => setCategory(e.target.value)} style={selectStyle()}>
                 <option value="ALL">Tutte</option>
                 <option value="mountain">Montagna</option>
                 <option value="lake">Laghi</option>
@@ -1303,127 +1176,109 @@ export default function Routes() {
         >
           {err}
         </div>
+      ) : showDetailMobile ? (
+        <div style={{ marginTop: 10 }}>
+          <div
+            style={{
+              position: "sticky",
+              top: 0,
+              zIndex: 20,
+              background: "rgba(255,255,255,0.96)",
+              backdropFilter: "blur(10px)",
+              borderBottom: "1px solid rgba(0,0,0,0.10)",
+              padding: 10,
+              borderRadius: 16,
+              display: "flex",
+              alignItems: "center",
+              gap: 10,
+            }}
+          >
+            <button
+              type="button"
+              onClick={() => {
+                setMobileView("list");
+                window.scrollTo({ top: 0, behavior: "auto" });
+              }}
+              style={backButtonStyle()}
+            >
+              ← Indietro
+            </button>
+
+            <div
+              style={{
+                fontWeight: 950,
+                fontSize: 15,
+                whiteSpace: "nowrap",
+                overflow: "hidden",
+                textOverflow: "ellipsis",
+              }}
+            >
+              {selected?.name}
+            </div>
+          </div>
+
+          <div
+            style={{
+              marginTop: 10,
+              borderRadius: 18,
+              overflow: "hidden",
+              border: "1px solid rgba(0,0,0,0.10)",
+              background: "white",
+            }}
+          >
+            <RouteDetail route={selected} />
+          </div>
+        </div>
       ) : (
-        <>
-          {showDetailMobile ? (
-            <div style={{ marginTop: 10 }}>
-              <div
-                style={{
-                  position: "sticky",
-                  top: 0,
-                  zIndex: 20,
-                  background: "rgba(255,255,255,0.96)",
-                  backdropFilter: "blur(10px)",
-                  borderBottom: "1px solid rgba(0,0,0,0.10)",
-                  padding: 10,
-                  borderRadius: 16,
-                  display: "flex",
-                  alignItems: "center",
-                  gap: 10,
-                }}
-              >
-                <button
-                  type="button"
-                  onClick={() => {
-                    setMobileView("list");
-                    window.scrollTo({ top: 0, behavior: "auto" });
-                  }}
-                  style={backButtonStyle()}
-                >
-                  ← Indietro
+        <div style={{ marginTop: 12 }} className="routes-split">
+          <div className="routes-list">
+            <div style={{ fontSize: 12, opacity: 0.7, marginBottom: 8 }}>
+              Itinerari trovati: <strong>{filtered.length}</strong>
+              {filtered.length !== visibleRoutes.length ? (
+                <>
+                  {" "}
+                  · mostrati: <strong>{visibleRoutes.length}</strong>
+                </>
+              ) : null}
+            </div>
+
+            <div style={{ display: "grid", gap: 10 }}>
+              {visibleRoutes.map((r) => {
+                const key = buildRouteKey(r);
+                const isActive = key === activeKey;
+                return (
+                  <RouteCard
+                    key={key}
+                    route={r}
+                    active={isActive}
+                    onSelect={() => selectRoute(r)}
+                  />
+                );
+              })}
+            </div>
+
+            {hasMoreRoutes ? (
+              <div style={{ marginTop: 12, display: "flex", justifyContent: "center" }}>
+                <button type="button" onClick={loadMoreRoutes} style={loadMoreButtonStyle()}>
+                  Carica altri ({filtered.length - visibleRoutes.length} rimasti)
                 </button>
-
-                <div
-                  style={{
-                    fontWeight: 950,
-                    fontSize: 15,
-                    whiteSpace: "nowrap",
-                    overflow: "hidden",
-                    textOverflow: "ellipsis",
-                  }}
-                >
-                  {selected?.name}
-                </div>
               </div>
+            ) : null}
+          </div>
 
-              <div
-                style={{
-                  marginTop: 10,
-                  borderRadius: 18,
-                  overflow: "hidden",
-                  border: "1px solid rgba(0,0,0,0.10)",
-                  background: "white",
-                }}
-              >
-                <RouteDetail route={selected} />
-              </div>
+          <div className="routes-detail">
+            <div
+              style={{
+                borderRadius: 22,
+                overflow: "hidden",
+                border: "1px solid rgba(0,0,0,0.12)",
+                background: "white",
+              }}
+            >
+              {!active ? <div style={{ padding: 14 }}>Seleziona un itinerario.</div> : <RouteDetail route={active} />}
             </div>
-          ) : (
-            <div style={{ marginTop: 12 }} className="routes-split">
-              <div className="routes-list">
-                <div style={{ fontSize: 12, opacity: 0.7, marginBottom: 8 }}>
-                  Itinerari trovati: <strong>{filtered.length}</strong>
-                  {filtered.length !== visibleRoutes.length ? (
-                    <>
-                      {" "}
-                      · mostrati: <strong>{visibleRoutes.length}</strong>
-                    </>
-                  ) : null}
-                </div>
-
-                <div style={{ display: "grid", gap: 10 }}>
-                  {visibleRoutes.map((r) => {
-                    const key = buildRouteKey(r);
-                    const isActive = key === activeKey;
-                    return (
-                      <RouteCard
-                        key={key}
-                        route={r}
-                        active={isActive}
-                        onSelect={() => selectRoute(r)}
-                      />
-                    );
-                  })}
-                </div>
-
-                {hasMoreRoutes ? (
-                  <div
-                    style={{
-                      marginTop: 12,
-                      display: "flex",
-                      justifyContent: "center",
-                    }}
-                  >
-                    <button
-                      type="button"
-                      onClick={loadMoreRoutes}
-                      style={loadMoreButtonStyle()}
-                    >
-                      Carica altri ({filtered.length - visibleRoutes.length} rimasti)
-                    </button>
-                  </div>
-                ) : null}
-              </div>
-
-              <div className="routes-detail">
-                <div
-                  style={{
-                    borderRadius: 22,
-                    overflow: "hidden",
-                    border: "1px solid rgba(0,0,0,0.12)",
-                    background: "white",
-                  }}
-                >
-                  {!active ? (
-                    <div style={{ padding: 14 }}>Seleziona un itinerario.</div>
-                  ) : (
-                    <RouteDetail route={active} />
-                  )}
-                </div>
-              </div>
-            </div>
-          )}
-        </>
+          </div>
+        </div>
       )}
 
       <style>{`
@@ -1510,16 +1365,12 @@ function RouteCard({ route, active, onSelect }) {
       onTouchStart={handleTouchStart}
       onTouchMove={handleTouchMove}
       onTouchEnd={handleTouchEnd}
-      onKeyDown={(e) =>
-        e.key === "Enter" || e.key === " " ? handleClick(e) : null
-      }
+      onKeyDown={(e) => (e.key === "Enter" || e.key === " " ? handleClick(e) : null)}
       style={{
         borderRadius: 16,
         overflow: "hidden",
         width: "100%",
-        border: active
-          ? "2px solid rgba(0,0,0,0.30)"
-          : "1px solid rgba(0,0,0,0.10)",
+        border: active ? "2px solid rgba(0,0,0,0.30)" : "1px solid rgba(0,0,0,0.10)",
         background: "white",
         cursor: "pointer",
         WebkitTapHighlightColor: "transparent",
@@ -1527,10 +1378,7 @@ function RouteCard({ route, active, onSelect }) {
         userSelect: "none",
       }}
     >
-      <div
-        className="route-card-mobile"
-        style={{ display: "none", padding: 6, gap: 10, alignItems: "center" }}
-      >
+      <div className="route-card-mobile" style={{ display: "none", padding: 6, gap: 10, alignItems: "center" }}>
         <div
           style={{
             width: 46,
@@ -1541,23 +1389,11 @@ function RouteCard({ route, active, onSelect }) {
             flex: "0 0 auto",
           }}
         >
-          <img
-            src={photo}
-            alt=""
-            style={{ width: "100%", height: "100%", objectFit: "cover" }}
-            loading="lazy"
-          />
+          <img src={photo} alt="" style={{ width: "100%", height: "100%", objectFit: "cover" }} loading="lazy" />
         </div>
 
         <div style={{ minWidth: 0, flex: "1 1 auto" }}>
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "space-between",
-              gap: 8,
-              alignItems: "start",
-            }}
-          >
+          <div style={{ display: "flex", justifyContent: "space-between", gap: 8, alignItems: "start" }}>
             <div
               style={{
                 fontWeight: 950,
@@ -1608,9 +1444,7 @@ function RouteCard({ route, active, onSelect }) {
           }}
         />
         <div style={{ padding: 12 }}>
-          <div
-            style={{ display: "flex", justifyContent: "space-between", gap: 10 }}
-          >
+          <div style={{ display: "flex", justifyContent: "space-between", gap: 10 }}>
             <div style={{ fontWeight: 900, lineHeight: 1.15 }}>
               {route.country ? `${route.country} ` : ""}
               {route.name}
@@ -1620,22 +1454,12 @@ function RouteCard({ route, active, onSelect }) {
             </div>
           </div>
 
-          <div
-            style={{
-              marginTop: 6,
-              display: "flex",
-              gap: 8,
-              flexWrap: "wrap",
-              alignItems: "center",
-            }}
-          >
+          <div style={{ marginTop: 6, display: "flex", gap: 8, flexWrap: "wrap", alignItems: "center" }}>
             <span style={pill("light")}>{categoryLabel(category)}</span>
             <span style={complexityBadgeStyle(analysis.tone)}>
               {analysis.icon} {analysis.complexity}
             </span>
-            <span style={{ fontSize: 12, opacity: 0.75 }}>
-              {route.region || "—"}
-            </span>
+            <span style={{ fontSize: 12, opacity: 0.75 }}>{route.region || "—"}</span>
           </div>
         </div>
       </div>
@@ -1653,20 +1477,45 @@ function RouteCard({ route, active, onSelect }) {
 function RouteDetail({ route }) {
   const photo = route.photo || FALLBACK_PHOTO;
   const navPoint = pickRoutePoint(route);
-  const startNavUrl = navPoint
-    ? buildNavigateUrl(latLonStr(navPoint), "driving")
-    : null;
+  const startNavUrl = navPoint ? buildNavigateUrl(latLonStr(navPoint), "driving") : null;
   const category = normalizeCategory(route);
-  const analysis = buildRiderAnalysis(route);
 
   const [wx, setWx] = useState(null);
   const [wxBusy, setWxBusy] = useState(false);
 
+  const [osrmData, setOsrmData] = useState(null);
+  const [osrmBusy, setOsrmBusy] = useState(false);
+
   const routeKey = buildRouteKey(route);
+  const analysis = useMemo(() => buildRiderAnalysis(route, osrmData), [route, osrmData]);
+
   const rawDescription = String(route?.description || "").trim();
   const displayDescription = isMechanicalDescription(rawDescription)
     ? buildPrettyRouteDescription(route)
     : rawDescription || "Descrizione non disponibile.";
+
+  useEffect(() => {
+    let alive = true;
+
+    async function run() {
+      setOsrmBusy(true);
+      setOsrmData(null);
+
+      try {
+        const res = await fetchOsrmRoute(route);
+        if (!alive) return;
+        setOsrmData(res);
+      } finally {
+        if (alive) setOsrmBusy(false);
+      }
+    }
+
+    run();
+
+    return () => {
+      alive = false;
+    };
+  }, [routeKey, route]);
 
   useEffect(() => {
     let alive = true;
@@ -1707,10 +1556,10 @@ function RouteDetail({ route }) {
           style={{
             position: "absolute",
             inset: 0,
-            background:
-              "linear-gradient(180deg, rgba(0,0,0,0.10), rgba(0,0,0,0.76))",
+            background: "linear-gradient(180deg, rgba(0,0,0,0.10), rgba(0,0,0,0.76))",
           }}
         />
+
         <div
           style={{
             position: "absolute",
@@ -1721,25 +1570,19 @@ function RouteDetail({ route }) {
           }}
         >
           <div style={{ fontSize: 12, opacity: 0.92 }}>
-            {route.country || "—"} · {route.region || "—"} ·{" "}
-            {categoryLabel(category)}
+            {route.country || "—"} · {route.region || "—"} · {categoryLabel(category)}
           </div>
+
           <div style={{ fontSize: 26, fontWeight: 950, lineHeight: 1.05 }}>
             {route.name}
           </div>
 
           <div style={{ marginTop: 8, display: "flex", gap: 8, flexWrap: "wrap" }}>
             <span style={pill("dark")}>📏 {formatRouteKm(analysis.distanceKm)}</span>
-            {route.durationMin != null ? (
-              <span style={pill("dark")}>⏱ {route.durationMin} min</span>
-            ) : null}
             <span style={pill("dark")}>🏍️ {categoryLabel(category)}</span>
             <span style={pill("dark")}>
               {analysis.icon} {analysis.complexity}
             </span>
-<span style={pill("dark")}>
-  🌀 Curve {analysis.curves.curves} · Score {analysis.curves.score}/100
-</span>
           </div>
         </div>
       </div>
@@ -1750,17 +1593,7 @@ function RouteDetail({ route }) {
             type="button"
             onClick={() => openGoogleMapsSmart(startNavUrl)}
             disabled={!startNavUrl}
-            style={{
-              display: "inline-block",
-              padding: "10px 12px",
-              borderRadius: 12,
-              border: "1px solid rgba(0,0,0,0.15)",
-              background: "white",
-              fontSize: 13,
-              cursor: startNavUrl ? "pointer" : "not-allowed",
-              fontWeight: 900,
-              opacity: startNavUrl ? 1 : 0.55,
-            }}
+            style={buttonStyle(startNavUrl)}
             title={
               startNavUrl
                 ? "Avvia navigazione verso l'inizio usando la tua posizione"
@@ -1773,23 +1606,14 @@ function RouteDetail({ route }) {
           <button
             type="button"
             onClick={() => exportRouteToGpx(route)}
-            style={{
-              display: "inline-block",
-              padding: "10px 12px",
-              borderRadius: 12,
-              border: "1px solid rgba(0,0,0,0.15)",
-              background: "white",
-              fontSize: 13,
-              cursor: "pointer",
-              fontWeight: 900,
-            }}
+            style={buttonStyle(true)}
             title="Scarica questo itinerario in formato GPX"
           >
             📤 Esporta GPX
           </button>
         </div>
 
-        <RiderAnalysisPanel analysis={analysis} route={route} />
+        <RiderAnalysisPanel analysis={analysis} route={route} busy={osrmBusy} />
 
         <div
           style={{
@@ -1799,14 +1623,7 @@ function RouteDetail({ route }) {
           }}
         >
           <strong>📌 Descrizione</strong>
-          <div
-            style={{
-              marginTop: 8,
-              fontSize: 14,
-              opacity: 0.9,
-              lineHeight: 1.4,
-            }}
-          >
+          <div style={{ marginTop: 8, fontSize: 14, opacity: 0.9, lineHeight: 1.4 }}>
             {displayDescription}
           </div>
         </div>
@@ -1855,8 +1672,7 @@ function RouteDetail({ route }) {
   );
 }
 
-function RiderAnalysisPanel({ analysis, route }) {
-  const realCurves = formatCurveCount(analysis.curves.curves);
+function RiderAnalysisPanel({ analysis, route, busy }) {
   const directionChanges = formatCurveCount(analysis.curves.directionChanges);
   const technicalTurns = formatCurveCount(analysis.curves.technicalTurns);
 
@@ -1864,79 +1680,116 @@ function RiderAnalysisPanel({ analysis, route }) {
     <div
       style={{
         marginTop: 12,
-        borderTop: "1px solid rgba(0,0,0,0.08)",
-        paddingTop: 12,
+        padding: 14,
+        borderRadius: 18,
+        background:
+          "linear-gradient(135deg, rgba(15,23,42,0.98), rgba(30,41,59,0.96))",
+        color: "white",
+        boxShadow: "0 12px 28px rgba(0,0,0,0.18)",
+        border: "1px solid rgba(255,255,255,0.12)",
       }}
     >
-      <strong>🏍️ Rider Analysis</strong>
+      <div style={{ display: "flex", justifyContent: "space-between", gap: 10, flexWrap: "wrap" }}>
+        <div>
+          <div style={{ fontSize: 12, opacity: 0.75 }}>
+            {busy
+              ? "Calcolo rotta reale OSRM…"
+              : analysis.source === "osrm"
+              ? "Rider Engine · OSRM reale"
+              : "Rider Engine · fallback dataset"}
+          </div>
+          <div style={{ fontSize: 22, fontWeight: 950, lineHeight: 1.05, marginTop: 3 }}>
+            {analysis.icon} {analysis.complexity} · {analysis.complexityScore}/100
+          </div>
+        </div>
 
-      <div
-        style={{
-          marginTop: 10,
-          display: "grid",
-          gridTemplateColumns: "repeat(auto-fit, minmax(130px, 1fr))",
-          gap: 8,
-        }}
-      >
-        <StatBox label="Distanza" value={formatRouteKm(analysis.distanceKm)} />
-        <StatBox label="Curve reali" value={analysis.curves.curves} />
-        <StatBox label="Curve score" value={`${analysis.curves.score}/100`} />
-        <StatBox label="Feeling" value={analysis.curves.label} />
-        <StatBox
-          label="Complessità"
-          value={`${analysis.icon} ${analysis.complexity}`}
-        />
+        <div
+          style={{
+            padding: "8px 10px",
+            borderRadius: 999,
+            background: analysis.source === "osrm" ? "rgba(34,197,94,0.18)" : "rgba(251,191,36,0.18)",
+            border:
+              analysis.source === "osrm"
+                ? "1px solid rgba(34,197,94,0.35)"
+                : "1px solid rgba(251,191,36,0.35)",
+            fontSize: 12,
+            fontWeight: 900,
+            height: "fit-content",
+          }}
+        >
+          {analysis.source === "osrm" ? "✅ OSRM Reale" : "⚠️ Dataset"}
+        </div>
       </div>
 
       <div
         style={{
-          marginTop: 10,
-          padding: 12,
-          borderRadius: 14,
-          background:
-            analysis.tone === "red"
-              ? "rgba(255,0,0,0.08)"
-              : analysis.tone === "orange"
-              ? "rgba(255,180,0,0.12)"
-              : analysis.tone === "green"
-              ? "rgba(0,140,80,0.10)"
-              : "rgba(0,100,220,0.10)",
-          border:
-            analysis.tone === "red"
-              ? "1px solid rgba(255,0,0,0.16)"
-              : analysis.tone === "orange"
-              ? "1px solid rgba(255,180,0,0.22)"
-              : analysis.tone === "green"
-              ? "1px solid rgba(0,140,80,0.18)"
-              : "1px solid rgba(0,100,220,0.18)",
+          marginTop: 12,
+          display: "grid",
+          gridTemplateColumns: "repeat(auto-fit, minmax(120px, 1fr))",
+          gap: 8,
         }}
       >
-        <div style={{ fontWeight: 900, fontSize: 13 }}>
-          {analysis.icon} Diagnosi rider · {analysis.complexityScore}/100
-        </div>
-        <div style={{ marginTop: 4, fontSize: 13, opacity: 0.85, lineHeight: 1.35 }}>
+        <DarkStatBox label="Distanza" value={formatRouteKm(analysis.distanceKm)} />
+        <DarkStatBox label="Tempo stimato" value={analysis.durationMin ? `${analysis.durationMin} min` : "—"} />
+        <DarkStatBox label="Curve reali" value={formatCurveCount(analysis.curves.curves)} />
+        <DarkStatBox label="Score curve" value={`${Math.round(analysis.curves.score || 0)}/100`} />
+        <DarkStatBox label="Feeling" value={analysis.curves.label} />
+      </div>
+
+      <div
+        style={{
+          marginTop: 12,
+          padding: 12,
+          borderRadius: 14,
+          background: "rgba(255,255,255,0.08)",
+          border: "1px solid rgba(255,255,255,0.12)",
+        }}
+      >
+        <div style={{ fontWeight: 950, fontSize: 13 }}>Diagnosi rider</div>
+        <div style={{ marginTop: 5, fontSize: 13, opacity: 0.86, lineHeight: 1.38 }}>
           {analysis.diagnosis}
         </div>
       </div>
 
       <div style={{ marginTop: 10, display: "flex", gap: 8, flexWrap: "wrap" }}>
-        <span style={pill("light")}>🌀 Curve Rider Engine: {analysis.curves.curves}</span>
-        <span style={pill("light")}>↔️ Cambi direzione: {directionChanges}</span>
-        <span style={pill("light")}>⚡ Tratti tecnici: {technicalTurns}</span>
+        <span style={pill("dark")}>↔️ Cambi direzione: {directionChanges}</span>
+        <span style={pill("dark")}>⚡ Tratti tecnici: {technicalTurns}</span>
+        <span style={pill("dark")}>📍 Punti analizzati: {formatCurveCount(analysis.curves.points)}</span>
 
         {analysis.highlights.map((h) => (
-          <span key={h} style={pill("light")}>
+          <span key={h} style={pill("dark")}>
             {h}
           </span>
         ))}
 
         {route?.asphaltScore != null ? (
-          <span style={pill("light")}>🛣️ Asfalto {route.asphaltScore}/100</span>
+          <span style={pill("dark")}>🛣️ Asfalto {route.asphaltScore}/100</span>
         ) : null}
+      </div>
+
+      <div style={{ marginTop: 9, fontSize: 11, opacity: 0.68 }}>
+        {analysis.sourceNote}
       </div>
     </div>
   );
 }
+
+function DarkStatBox({ label, value }) {
+  return (
+    <div
+      style={{
+        padding: 10,
+        borderRadius: 14,
+        background: "rgba(255,255,255,0.08)",
+        border: "1px solid rgba(255,255,255,0.12)",
+      }}
+    >
+      <div style={{ fontSize: 11, opacity: 0.66 }}>{label}</div>
+      <div style={{ marginTop: 3, fontSize: 15, fontWeight: 950 }}>{value}</div>
+    </div>
+  );
+}
+
 function StatBox({ label, value }) {
   return (
     <div
@@ -1965,37 +1818,16 @@ function WeatherPanel({ wx, wxBusy }) {
       <strong>🌤 Meteo</strong>
 
       {wxBusy ? (
-        <div
-          style={{
-            marginTop: 10,
-            padding: 12,
-            borderRadius: 16,
-            background: "rgba(0,0,0,0.04)",
-          }}
-        >
+        <div style={{ marginTop: 10, padding: 12, borderRadius: 16, background: "rgba(0,0,0,0.04)" }}>
           Carico meteo…
         </div>
       ) : !wx || !wx.ok ? (
-        <div
-          style={{
-            marginTop: 10,
-            padding: 12,
-            borderRadius: 16,
-            background: "rgba(0,0,0,0.04)",
-          }}
-        >
+        <div style={{ marginTop: 10, padding: 12, borderRadius: 16, background: "rgba(0,0,0,0.04)" }}>
           {wx?.note || "Meteo non disponibile."}
         </div>
       ) : (
         <div style={{ marginTop: 10, display: "grid", gap: 10 }}>
-          <div
-            style={{
-              display: "flex",
-              gap: 10,
-              flexWrap: "wrap",
-              alignItems: "center",
-            }}
-          >
+          <div style={{ display: "flex", gap: 10, flexWrap: "wrap", alignItems: "center" }}>
             <span style={pill("light")}>
               Condizione: <strong>{wx.worst}</strong>
             </span>
@@ -2049,6 +1881,36 @@ function WeatherPanel({ wx, wxBusy }) {
   );
 }
 
+function SkeletonLoading() {
+  return (
+    <div
+      style={{
+        marginTop: 12,
+        padding: 14,
+        borderRadius: 16,
+        border: "1px solid rgba(0,0,0,0.10)",
+        background: "rgba(0,0,0,0.03)",
+      }}
+    >
+      <div style={{ fontSize: 16, fontWeight: 900 }}>Carico itinerari…</div>
+      <div style={{ marginTop: 10, display: "grid", gap: 8 }}>
+        <div style={skeletonLine("70%")} />
+        <div style={skeletonLine("55%")} />
+        <div style={skeletonLine("80%")} />
+      </div>
+    </div>
+  );
+}
+
+function skeletonLine(width) {
+  return {
+    height: 12,
+    background: "rgba(0,0,0,0.08)",
+    borderRadius: 8,
+    width,
+  };
+}
+
 function selectStyle() {
   return {
     padding: "10px 12px",
@@ -2075,6 +1937,49 @@ function loadMoreButtonStyle() {
     border: "1px solid rgba(0,0,0,0.15)",
     background: "white",
     cursor: "pointer",
+    fontWeight: 900,
+  };
+}
+
+function buttonStyle(enabled = true) {
+  return {
+    display: "inline-block",
+    padding: "10px 12px",
+    borderRadius: 12,
+    border: "1px solid rgba(0,0,0,0.15)",
+    background: "white",
+    fontSize: 13,
+    cursor: enabled ? "pointer" : "not-allowed",
+    fontWeight: 900,
+    opacity: enabled ? 1 : 0.55,
+  };
+}
+
+function complexityBadgeStyle(tone, dark = false) {
+  if (dark) return pill("dark");
+
+  const colors = {
+    green: {
+      background: "rgba(0,140,80,0.10)",
+      border: "1px solid rgba(0,140,80,0.20)",
+    },
+    blue: {
+      background: "rgba(0,100,220,0.10)",
+      border: "1px solid rgba(0,100,220,0.20)",
+    },
+    orange: {
+      background: "rgba(255,150,0,0.14)",
+      border: "1px solid rgba(255,150,0,0.25)",
+    },
+    red: {
+      background: "rgba(255,0,0,0.10)",
+      border: "1px solid rgba(255,0,0,0.20)",
+    },
+  };
+
+  return {
+    ...pill("light"),
+    ...(colors[tone] || colors.blue),
     fontWeight: 900,
   };
 }
