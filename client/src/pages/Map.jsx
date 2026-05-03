@@ -2100,30 +2100,160 @@ const refreshRiderSpots = async () => {
     return <span style={S.pill}>🛑 Tappa {idx}</span>;
   };
 
-  const WeatherCard = ({ title, wx, analysis }) => (
-    <div style={{ ...S.stat, minWidth: 0 }}>
-      <div style={{ fontWeight: 900, fontSize: 13 }}>{title}</div>
+const WeatherCard = ({ title, wx, analysis }) => {
+  const score = analysis?.score || "—";
+  const label = analysis?.label || "Valutazione";
+  const color = analysis?.color || "#0f172a";
+
+  return (
+    <div
+      style={{
+        flex: "1 1 180px",
+        minWidth: 0,
+        borderRadius: 18,
+        padding: 14,
+        background:
+          "linear-gradient(135deg, rgba(255,255,255,0.96), rgba(239,246,255,0.92))",
+        border: "1px solid rgba(148,163,184,0.22)",
+        boxShadow: "0 10px 24px rgba(15,23,42,0.08)",
+      }}
+    >
+      <div style={{ display: "flex", justifyContent: "space-between", gap: 8 }}>
+        <div style={{ fontWeight: 950, fontSize: 14, color: "#0f172a" }}>
+          {title}
+        </div>
+
+        <div
+          style={{
+            padding: "4px 9px",
+            borderRadius: 999,
+            fontSize: 11,
+            fontWeight: 950,
+            color,
+            background: "rgba(255,255,255,0.75)",
+            border: `1px solid ${color}33`,
+            whiteSpace: "nowrap",
+          }}
+        >
+          {score}
+        </div>
+      </div>
+
       {!wx ? (
-        <div style={{ marginTop: 6, fontSize: 12, opacity: 0.72 }}>
+        <div
+          style={{
+            marginTop: 12,
+            fontSize: 12,
+            color: "#64748b",
+            lineHeight: 1.45,
+          }}
+        >
           {OWM_KEY ? "Meteo non disponibile" : "Imposta VITE_OWM_KEY"}
         </div>
       ) : (
         <>
-          <div style={{ marginTop: 8, fontSize: 22, fontWeight: 900 }}>
-            {Number.isFinite(wx.temp) ? `${Math.round(wx.temp)}°` : "—"}
+          <div
+            style={{
+              marginTop: 14,
+              display: "flex",
+              alignItems: "flex-end",
+              justifyContent: "space-between",
+              gap: 10,
+            }}
+          >
+            <div>
+              <div style={{ fontSize: 30, fontWeight: 950, color: "#0f172a" }}>
+                {Number.isFinite(wx.temp) ? `${Math.round(wx.temp)}°` : "—"}
+              </div>
+              <div
+                style={{
+                  marginTop: 2,
+                  fontSize: 12,
+                  color: "#475569",
+                  textTransform: "capitalize",
+                }}
+              >
+                {wx.desc || "—"}
+              </div>
+            </div>
+
+            <div
+              style={{
+                width: 44,
+                height: 44,
+                borderRadius: 16,
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                background:
+                  "linear-gradient(135deg, rgba(14,165,233,0.14), rgba(16,185,129,0.14))",
+                fontSize: 22,
+              }}
+            >
+              🌤️
+            </div>
           </div>
-          <div style={{ fontSize: 12, opacity: 0.8 }}>{wx.desc || "—"}</div>
-          <div style={{ fontSize: 12, marginTop: 6 }}>
-            🌬 {Math.round(wx.windKmh || 0)} km/h • 🌧 {wx.rainMm || 0} mm
+
+          <div
+            style={{
+              marginTop: 14,
+              display: "grid",
+              gridTemplateColumns: "1fr 1fr",
+              gap: 8,
+            }}
+          >
+            <div
+              style={{
+                borderRadius: 14,
+                padding: "9px 10px",
+                background: "rgba(248,250,252,0.9)",
+                border: "1px solid rgba(226,232,240,0.9)",
+              }}
+            >
+              <div style={{ fontSize: 11, color: "#64748b", fontWeight: 800 }}>
+                Vento
+              </div>
+              <div style={{ marginTop: 3, fontSize: 13, fontWeight: 950 }}>
+                🌬 {Math.round(wx.windKmh || 0)} km/h
+              </div>
+            </div>
+
+            <div
+              style={{
+                borderRadius: 14,
+                padding: "9px 10px",
+                background: "rgba(248,250,252,0.9)",
+                border: "1px solid rgba(226,232,240,0.9)",
+              }}
+            >
+              <div style={{ fontSize: 11, color: "#64748b", fontWeight: 800 }}>
+                Pioggia
+              </div>
+              <div style={{ marginTop: 3, fontSize: 13, fontWeight: 950 }}>
+                🌧 {wx.rainMm || 0} mm
+              </div>
+            </div>
           </div>
-          <div style={{ marginTop: 8, fontWeight: 900, color: analysis?.color || "#111" }}>
-            {analysis?.score || "—"} — {analysis?.label || "—"}
+
+          <div
+            style={{
+              marginTop: 12,
+              borderRadius: 15,
+              padding: "10px 11px",
+              background: `${color}14`,
+              border: `1px solid ${color}30`,
+              color: "#0f172a",
+            }}
+          >
+            <div style={{ fontSize: 12, fontWeight: 950, color }}>
+              🏍️ {label}
+            </div>
           </div>
         </>
       )}
     </div>
   );
-
+};
   const combinedMapPois = useMemo(() => {
     const riderMarkers = (riderSpots || []).map((spot) => ({
       id: spot.id,

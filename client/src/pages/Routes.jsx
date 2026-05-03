@@ -1805,82 +1805,188 @@ function StatBox({ label, value }) {
     </div>
   );
 }
+const weatherMiniBox = {
+  borderRadius: 16,
+  padding: "11px 12px",
+  background: "rgba(255,255,255,0.84)",
+  border: "1px solid rgba(226,232,240,0.95)",
+  boxShadow: "0 8px 18px rgba(15,23,42,0.05)",
+};
 
+const weatherMiniLabel = {
+  fontSize: 11,
+  color: "#64748b",
+  fontWeight: 900,
+};
+
+const weatherMiniValue = {
+  marginTop: 4,
+  fontSize: 14,
+  color: "#0f172a",
+  fontWeight: 950,
+};
+
+const weatherMiniSub = {
+  marginTop: 3,
+  fontSize: 11,
+  color: "#64748b",
+  fontWeight: 700,
+};
 function WeatherPanel({ wx, wxBusy }) {
+  const level = wx?.ride?.level || "ok";
+
+  const accent =
+    level === "danger"
+      ? "#dc2626"
+      : level === "warn"
+      ? "#ca8a04"
+      : "#16a34a";
+
   return (
     <div
       style={{
-        marginTop: 12,
-        borderTop: "1px solid rgba(0,0,0,0.08)",
-        paddingTop: 12,
+        marginTop: 14,
+        borderRadius: 22,
+        padding: 14,
+        background:
+          "linear-gradient(135deg, rgba(239,246,255,0.96), rgba(255,255,255,0.98), rgba(236,253,245,0.92))",
+        border: "1px solid rgba(148,163,184,0.22)",
+        boxShadow: "0 12px 28px rgba(15,23,42,0.08)",
       }}
     >
-      <strong>🌤 Meteo</strong>
+      <div style={{ display: "flex", justifyContent: "space-between", gap: 10 }}>
+        <div>
+          <div style={{ fontWeight: 950, fontSize: 16, color: "#0f172a" }}>
+            🌤 Meteo Rider
+          </div>
+          <div style={{ marginTop: 3, fontSize: 12, color: "#64748b" }}>
+            Condizioni lungo itinerario
+          </div>
+        </div>
+
+        {wx?.ride ? (
+          <div
+            style={{
+              alignSelf: "flex-start",
+              padding: "5px 10px",
+              borderRadius: 999,
+              fontSize: 11,
+              fontWeight: 950,
+              color: accent,
+              background: `${accent}14`,
+              border: `1px solid ${accent}30`,
+              whiteSpace: "nowrap",
+            }}
+          >
+            {wx.ride.level === "danger"
+              ? "ATTENZIONE"
+              : wx.ride.level === "warn"
+              ? "DA VALUTARE"
+              : "OK RIDER"}
+          </div>
+        ) : null}
+      </div>
 
       {wxBusy ? (
-        <div style={{ marginTop: 10, padding: 12, borderRadius: 16, background: "rgba(0,0,0,0.04)" }}>
+        <div
+          style={{
+            marginTop: 12,
+            padding: 13,
+            borderRadius: 16,
+            background: "rgba(255,255,255,0.78)",
+            border: "1px solid rgba(226,232,240,0.9)",
+            fontSize: 13,
+            color: "#64748b",
+            fontWeight: 800,
+          }}
+        >
           Carico meteo…
         </div>
       ) : !wx || !wx.ok ? (
-        <div style={{ marginTop: 10, padding: 12, borderRadius: 16, background: "rgba(0,0,0,0.04)" }}>
+        <div
+          style={{
+            marginTop: 12,
+            padding: 13,
+            borderRadius: 16,
+            background: "rgba(255,255,255,0.78)",
+            border: "1px solid rgba(226,232,240,0.9)",
+            fontSize: 13,
+            color: "#64748b",
+            fontWeight: 800,
+          }}
+        >
           {wx?.note || "Meteo non disponibile."}
         </div>
       ) : (
-        <div style={{ marginTop: 10, display: "grid", gap: 10 }}>
-          <div style={{ display: "flex", gap: 10, flexWrap: "wrap", alignItems: "center" }}>
-            <span style={pill("light")}>
-              Condizione: <strong>{wx.worst}</strong>
-            </span>
+        <>
+          <div
+            style={{
+              marginTop: 14,
+              display: "grid",
+              gridTemplateColumns: "repeat(auto-fit, minmax(120px, 1fr))",
+              gap: 9,
+            }}
+          >
+            <div style={weatherMiniBox}>
+              <div style={weatherMiniLabel}>Condizione</div>
+              <div style={weatherMiniValue}>{wx.worst || "—"}</div>
+            </div>
 
             {wx.temp != null ? (
-              <span style={pill("light")}>
-                🌡 {wx.temp}°{" "}
-                {wx.tempMin != null && wx.tempMax != null
-                  ? `(min ${wx.tempMin}° / max ${wx.tempMax}°)`
-                  : ""}
-              </span>
+              <div style={weatherMiniBox}>
+                <div style={weatherMiniLabel}>Temperatura</div>
+                <div style={weatherMiniValue}>🌡 {wx.temp}°</div>
+                {wx.tempMin != null && wx.tempMax != null ? (
+                  <div style={weatherMiniSub}>
+                    min {wx.tempMin}° / max {wx.tempMax}°
+                  </div>
+                ) : null}
+              </div>
             ) : null}
 
             {wx.windKmh != null ? (
-              <span style={pill("light")}>💨 vento {wx.windKmh} km/h</span>
+              <div style={weatherMiniBox}>
+                <div style={weatherMiniLabel}>Vento</div>
+                <div style={weatherMiniValue}>💨 {wx.windKmh} km/h</div>
+              </div>
             ) : null}
           </div>
 
           {wx.ride ? (
             <div
               style={{
-                padding: 12,
-                borderRadius: 14,
-                background:
-                  wx.ride.level === "danger"
-                    ? "rgba(255,0,0,0.08)"
-                    : wx.ride.level === "warn"
-                    ? "rgba(255,180,0,0.12)"
-                    : "rgba(0,140,80,0.10)",
-                border:
-                  wx.ride.level === "danger"
-                    ? "1px solid rgba(255,0,0,0.16)"
-                    : wx.ride.level === "warn"
-                    ? "1px solid rgba(255,180,0,0.22)"
-                    : "1px solid rgba(0,140,80,0.18)",
+                marginTop: 12,
+                padding: 13,
+                borderRadius: 17,
+                background: `${accent}12`,
+                border: `1px solid ${accent}30`,
               }}
             >
-              <div style={{ fontWeight: 900, fontSize: 13 }}>🏍 {wx.ride.label}</div>
-              <div style={{ marginTop: 4, fontSize: 13, opacity: 0.85 }}>
+              <div style={{ fontWeight: 950, fontSize: 13, color: accent }}>
+                🏍 {wx.ride.label}
+              </div>
+              <div
+                style={{
+                  marginTop: 5,
+                  fontSize: 13,
+                  lineHeight: 1.45,
+                  color: "#334155",
+                }}
+              >
                 {wx.ride.advice}
               </div>
             </div>
           ) : null}
 
-          <div style={{ fontSize: 12, opacity: 0.7 }}>
-            Aggiornato: {String(wx.updatedAt || "").slice(0, 16).replace("T", " ")}
+          <div style={{ marginTop: 10, fontSize: 11, color: "#64748b" }}>
+            Aggiornato:{" "}
+            {String(wx.updatedAt || "").slice(0, 16).replace("T", " ")}
           </div>
-        </div>
+        </>
       )}
     </div>
   );
 }
-
 function SkeletonLoading() {
   return (
     <div
