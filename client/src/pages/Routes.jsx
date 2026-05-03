@@ -1832,6 +1832,18 @@ const weatherMiniSub = {
   color: "#64748b",
   fontWeight: 700,
 };
+function getWeatherEmoji(desc = "") {
+  const d = String(desc).toLowerCase();
+
+  if (d.includes("tempor")) return "⛈️";
+  if (d.includes("piogg") || d.includes("rain")) return "🌧️";
+  if (d.includes("neve") || d.includes("snow")) return "❄️";
+  if (d.includes("coperto")) return "☁️";
+  if (d.includes("nuvol")) return "⛅";
+  if (d.includes("sereno") || d.includes("clear")) return "☀️";
+
+  return "🌤️";
+}
 function WeatherPanel({ wx, wxBusy }) {
   const level = wx?.ride?.level || "ok";
 
@@ -1927,11 +1939,26 @@ function WeatherPanel({ wx, wxBusy }) {
               gap: 9,
             }}
           >
-            <div style={weatherMiniBox}>
-              <div style={weatherMiniLabel}>Condizione</div>
-              <div style={weatherMiniValue}>{wx.worst || "—"}</div>
-            </div>
+             <div style={weatherMiniBox}>
+  <div style={weatherMiniLabel}>Condizione</div>
 
+  <div
+    style={{
+      marginTop: 4,
+      display: "flex",
+      alignItems: "center",
+      gap: 8,
+    }}
+  >
+    <span style={{ fontSize: 20 }}>
+      {getWeatherEmoji(wx.worst)}
+    </span>
+
+    <span style={weatherMiniValue}>
+      {wx.worst || "—"}
+    </span>
+  </div>
+</div>
             {wx.temp != null ? (
               <div style={weatherMiniBox}>
                 <div style={weatherMiniLabel}>Temperatura</div>
