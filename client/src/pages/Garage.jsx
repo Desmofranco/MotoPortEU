@@ -1019,7 +1019,7 @@ export default function Garage() {
         <div className="garage-head">
           <div>
             <div className="premium-badge">🏍️ MotoPortEU Premium Garage</div>
-            <h1 className="garage-title">Garage V2 LIVE</h1>
+            <h1 className="garage-title">Garage</h1>
             <p className="garage-sub">
               Libretto digitale offline, manutenzione, scadenze e storico
               interventi. Tutto salvato sul dispositivo.
@@ -1554,9 +1554,10 @@ function MotoHealthSilhouette({ computed }) {
         <div>
           <strong>Stato moto</strong>
           <div className="small-muted">
-            Bollini dinamici su olio, catena e gomme
+            Vista manutenzione premium con alert dinamici
           </div>
         </div>
+
         <span style={pillStyle(overall)}>
           {overall === "bad"
             ? "ATTENZIONE"
@@ -1568,24 +1569,133 @@ function MotoHealthSilhouette({ computed }) {
         </span>
       </div>
 
-      <div className="moto-silhouette">
-        <div className="moto-shape">
-          <div className="moto-wheel rear" />
-          <div className="moto-wheel front" />
-          <div className="moto-body" />
-          <div className="moto-seat" />
-          <div className="moto-handle" />
+      <div
+        style={{
+          marginTop: 12,
+          borderRadius: 22,
+          padding: 16,
+          background:
+            "linear-gradient(135deg, rgba(15,23,42,0.92), rgba(51,65,85,0.70))",
+          border: "1px solid rgba(255,255,255,0.14)",
+          overflow: "hidden",
+          position: "relative",
+        }}
+      >
+        <svg
+          viewBox="0 0 900 320"
+          role="img"
+          aria-label="Stato manutenzione moto"
+          style={{
+            width: "100%",
+            display: "block",
+            filter: "drop-shadow(0 18px 24px rgba(0,0,0,0.28))",
+          }}
+        >
+          <defs>
+            <linearGradient id="bikeBody" x1="0" x2="1">
+              <stop offset="0%" stopColor="#f8fafc" stopOpacity="0.92" />
+              <stop offset="55%" stopColor="#cbd5e1" stopOpacity="0.88" />
+              <stop offset="100%" stopColor="#94a3b8" stopOpacity="0.82" />
+            </linearGradient>
 
-          <div className="moto-dot oil" style={dotStyle(computed.oil.level)}>
-            🛢️
-          </div>
-          <div className="moto-dot chain" style={dotStyle(computed.chain.level)}>
-            ⛓️
-          </div>
-          <div className="moto-dot tires" style={dotStyle(computed.tires.level)}>
-            🛞
-          </div>
-        </div>
+            <linearGradient id="bikeDark" x1="0" x2="1">
+              <stop offset="0%" stopColor="#111827" />
+              <stop offset="100%" stopColor="#334155" />
+            </linearGradient>
+
+            <radialGradient id="wheelGlow">
+              <stop offset="0%" stopColor="#f8fafc" stopOpacity="0.28" />
+              <stop offset="100%" stopColor="#f8fafc" stopOpacity="0" />
+            </radialGradient>
+          </defs>
+
+          <ellipse cx="205" cy="245" rx="120" ry="36" fill="rgba(0,0,0,0.22)" />
+          <ellipse cx="690" cy="245" rx="120" ry="36" fill="rgba(0,0,0,0.22)" />
+
+          <circle cx="205" cy="215" r="78" fill="url(#wheelGlow)" />
+          <circle cx="690" cy="215" r="78" fill="url(#wheelGlow)" />
+
+          <circle cx="205" cy="215" r="66" fill="none" stroke="#e5e7eb" strokeWidth="18" opacity="0.88" />
+          <circle cx="205" cy="215" r="34" fill="none" stroke="#94a3b8" strokeWidth="10" opacity="0.82" />
+
+          <circle cx="690" cy="215" r="66" fill="none" stroke="#e5e7eb" strokeWidth="18" opacity="0.88" />
+          <circle cx="690" cy="215" r="34" fill="none" stroke="#94a3b8" strokeWidth="10" opacity="0.82" />
+
+          <path
+            d="M260 205 C300 132, 350 118, 440 135 C510 148, 575 139, 634 168 C660 181, 674 198, 680 220 L618 220 C604 188, 577 174, 535 174 L376 174 C332 174, 300 187, 282 220 L226 220 C232 213, 244 209, 260 205Z"
+            fill="url(#bikeBody)"
+          />
+
+          <path
+            d="M358 125 L475 105 C513 99, 529 113, 518 136 C512 148, 500 155, 480 156 L344 160 C328 160, 319 150, 326 139 C332 131, 342 127, 358 125Z"
+            fill="#e5e7eb"
+            opacity="0.9"
+          />
+
+          <path
+            d="M475 112 C515 88, 552 90, 586 120"
+            fill="none"
+            stroke="#cbd5e1"
+            strokeWidth="14"
+            strokeLinecap="round"
+            opacity="0.9"
+          />
+
+          <path
+            d="M600 128 L665 88"
+            fill="none"
+            stroke="#e5e7eb"
+            strokeWidth="12"
+            strokeLinecap="round"
+            opacity="0.9"
+          />
+
+          <path
+            d="M650 88 L710 74"
+            fill="none"
+            stroke="#e5e7eb"
+            strokeWidth="10"
+            strokeLinecap="round"
+            opacity="0.85"
+          />
+
+          <path
+            d="M313 174 L205 215 M535 174 L690 215 M438 174 L205 215 M438 174 L690 215"
+            fill="none"
+            stroke="#111827"
+            strokeWidth="8"
+            strokeLinecap="round"
+            opacity="0.45"
+          />
+
+          <path
+            d="M345 172 L285 206"
+            fill="none"
+            stroke="#f59e0b"
+            strokeWidth="10"
+            strokeLinecap="round"
+            opacity="0.80"
+          />
+        </svg>
+
+        <StatusDot
+          label="Olio"
+          icon="🛢️"
+          level={computed.oil.level}
+          style={{ left: "50%", top: "50%" }}
+        />
+        <StatusDot
+          label="Catena"
+          icon="⛓️"
+          level={computed.chain.level}
+          style={{ left: "28%", top: "68%" }}
+        />
+        <StatusDot
+          label="Gomme"
+          icon="🛞"
+          level={computed.tires.level}
+          style={{ left: "76%", top: "67%" }}
+        />
       </div>
 
       <div className="legend-grid">
@@ -1604,6 +1714,7 @@ function MotoHealthSilhouette({ computed }) {
               </strong>
               <span style={pillStyle(x.item.level)}>{x.item.label}</span>
             </div>
+
             <div className="small-muted" style={{ marginTop: 6 }}>
               Mancano: <strong>{x.item.left.toLocaleString()} km</strong>
             </div>
@@ -1614,6 +1725,31 @@ function MotoHealthSilhouette({ computed }) {
   );
 }
 
+function StatusDot({ icon, label, level, style }) {
+  return (
+    <div
+      title={label}
+      style={{
+        position: "absolute",
+        transform: "translate(-50%, -50%)",
+        width: 46,
+        height: 46,
+        borderRadius: 999,
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        border: "4px solid rgba(255,255,255,0.92)",
+        boxShadow: "0 14px 26px rgba(0,0,0,0.30)",
+        fontSize: 19,
+        fontWeight: 950,
+        ...dotStyle(level),
+        ...style,
+      }}
+    >
+      {icon}
+    </div>
+  );
+}
 function MaintenanceAlertRow({ alert }) {
   const item = alert.item;
 
