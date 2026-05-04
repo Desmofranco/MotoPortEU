@@ -1,6 +1,8 @@
 // =======================================================
 // src/pages/Garage.jsx
-// ✅ Garage Premium UI – File Completo
+// ✅ Garage Premium UI – v2 Completo
+// ✅ Alert documenti + alert manutenzione reali
+// ✅ Sagoma moto con bollini stato olio/catena/gomme
 // ✅ FIX: puoi salvare documenti anche SENZA file
 // ✅ Storico Tagliandi / Interventi offline per ogni moto
 // ✅ MOBILE: layout mobile-first, premium cards, bottoni full width
@@ -140,6 +142,20 @@ function buildMaintenanceItem({
   };
 }
 
+function levelRank(level) {
+  if (level === "bad") return 4;
+  if (level === "warn") return 3;
+  if (level === "soon") return 2;
+  return 1;
+}
+
+function worstLevel(items = []) {
+  const sorted = [...items].sort(
+    (a, b) => levelRank(b?.level) - levelRank(a?.level)
+  );
+  return sorted[0]?.level || "ok";
+}
+
 export default function Garage() {
   const [bikes, setBikes] = useState(() => loadBikes());
   const [activeId, setActiveId] = useState(() => {
@@ -209,7 +225,7 @@ export default function Garage() {
         currentKm,
         interval: oilInterval,
         lastEntry: getLastServiceKm(log, "oil"),
-        categoryLabel: "Olio / Tagliando",
+        categoryLabel: "Olio",
       }),
       chain: buildMaintenanceItem({
         currentKm,
@@ -225,6 +241,16 @@ export default function Garage() {
       }),
     };
   }, [activeBike]);
+
+  const maintenanceAlerts = useMemo(() => {
+    if (!computed) return [];
+
+    return [
+      { key: "oil", label: "Olio", icon: "🛢️", item: computed.oil },
+      { key: "chain", label: "Catena", icon: "⛓️", item: computed.chain },
+      { key: "tires", label: "Gomme", icon: "🛞", item: computed.tires },
+    ].filter((x) => ["bad", "warn", "soon"].includes(x.item.level));
+  }, [computed]);
 
   const setBikesAndPersist = (next) => {
     setBikes(next);
@@ -513,9 +539,13 @@ export default function Garage() {
     const svcCount = activeBike?.serviceLog?.length || 0;
     const expired = expiryLists.expired.length;
     const due = expiryLists.dueSoon.length;
+    const maintenance = maintenanceAlerts.length;
 
-    return { docsCount, svcCount, expired, due };
-  }, [activeBike, expiryLists]);
+    return { docsCount, svcCount, expired, due, maintenance };
+  }, [activeBike, expiryLists, maintenanceAlerts]);
+
+  const totalAlerts =
+    garageStats.expired + garageStats.due + garageStats.maintenance;
 
   return (
     <div className="garage-page">
@@ -827,16 +857,161 @@ export default function Garage() {
           background: white;
         }
 
-        .soft-card-dark {
-          border: 1px solid rgba(255,255,255,0.14);
-          border-radius: 18px;
-          padding: 12px;
-          background: rgba(255,255,255,0.09);
-        }
-
         .small-muted {
           font-size: 12px;
           opacity: 0.72;
+        }
+
+        .moto-health-box {
+          margin-top: 14px;
+          border-radius: 22px;
+          padding: 14px;
+          background: rgba(255,255,255,0.08);
+          border: 1px solid rgba(255,255,255,0.14);
+        }
+
+        .moto-health-top {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          gap: 10px;
+          flex-wrap: wrap;
+          margin-bottom: 10px;
+        }
+
+        .moto-silhouette {
+          position: relative;
+          min-height: 170px;
+          border-radius: 20px;
+          overflow: hidden;
+          background:
+            radial-gradient(circle at 22% 72%, rgba(255,255,255,0.18) 0 15%, transparent 16%),
+            radial-gradient(circle at 78% 72%, rgba(255,255,255,0.18) 0 15%, transparent 16%),
+            linear-gradient(135deg, rgba(255,255,255,0.08), rgba(255,255,255,0.02));
+          border: 1px solid rgba(255,255,255,0.12);
+        }
+
+        .moto-shape {
+          position: absolute;
+          left: 50%;
+          top: 50%;
+          width: min(520px, 92%);
+          height: 120px;
+          transform: translate(-50%, -45%);
+        }
+
+        .moto-wheel {
+          position: absolute;
+          bottom: 6px;
+          width: 76px;
+          height: 76px;
+          border-radius: 999px;
+          border: 10px solid rgba(255,255,255,0.55);
+          box-shadow: inset 0 0 0 8px rgba(255,255,255,0.10);
+        }
+
+        .moto-wheel.front { right: 34px; }
+        .moto-wheel.rear { left: 34px; }
+
+        .moto-body {
+          position: absolute;
+          left: 108px;
+          right: 108px;
+          top: 34px;
+          height: 42px;
+          border-radius: 999px 999px 24px 24px;
+          background: rgba(255,255,255,0.62);
+          transform: skewX(-12deg);
+        }
+
+        .moto-seat {
+          position: absolute;
+          left: 190px;
+          top: 14px;
+          width: 120px;
+          height: 26px;
+          border-radius: 999px;
+          background: rgba(255,255,255,0.45);
+          transform: rotate(-4deg);
+        }
+
+        .moto-handle {
+          position: absolute;
+          right: 92px;
+          top: 10px;
+          width: 66px;
+          height: 8px;
+          border-radius: 999px;
+          background: rgba(255,255,255,0.62);
+          transform: rotate(-24deg);
+        }
+
+        .moto-dot {
+          position: absolute;
+          z-index: 4;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          width: 34px;
+          height: 34px;
+          border-radius: 999px;
+          border: 3px solid rgba(255,255,255,0.92);
+          box-shadow: 0 10px 22px rgba(0,0,0,0.25);
+          font-size: 15px;
+          font-weight: 950;
+        }
+
+        .moto-dot.oil { left: 49%; top: 46%; }
+        .moto-dot.chain { left: 22%; top: 65%; }
+        .moto-dot.tires { right: 18%; top: 66%; }
+
+        .legend-grid {
+          margin-top: 10px;
+          display: grid;
+          grid-template-columns: repeat(3, minmax(0, 1fr));
+          gap: 8px;
+        }
+
+        @media (max-width: 620px) {
+          .legend-grid {
+            grid-template-columns: 1fr;
+          }
+
+          .moto-silhouette {
+            min-height: 145px;
+          }
+
+          .moto-wheel {
+            width: 56px;
+            height: 56px;
+            border-width: 8px;
+          }
+
+          .moto-wheel.front { right: 18px; }
+          .moto-wheel.rear { left: 18px; }
+
+          .moto-body {
+            left: 78px;
+            right: 76px;
+            top: 42px;
+            height: 34px;
+          }
+
+          .moto-seat {
+            left: 138px;
+            top: 24px;
+            width: 88px;
+            height: 22px;
+          }
+
+          .moto-handle {
+            right: 48px;
+            top: 20px;
+          }
+
+          .moto-dot.oil { left: 48%; top: 46%; }
+          .moto-dot.chain { left: 20%; top: 66%; }
+          .moto-dot.tires { right: 14%; top: 67%; }
         }
       `}</style>
 
@@ -846,8 +1021,8 @@ export default function Garage() {
             <div className="premium-badge">🏍️ MotoPortEU Premium Garage</div>
             <h1 className="garage-title">Garage</h1>
             <p className="garage-sub">
-              Libretto digitale offline, manutenzione, scadenze e storico interventi.
-              Tutto salvato sul dispositivo.
+              Libretto digitale offline, manutenzione, scadenze e storico
+              interventi. Tutto salvato sul dispositivo.
             </p>
           </div>
         </div>
@@ -856,10 +1031,7 @@ export default function Garage() {
           <HeroStat value={bikes.length} label="Moto salvate" />
           <HeroStat value={garageStats.docsCount} label="Documenti moto" />
           <HeroStat value={garageStats.svcCount} label="Interventi" />
-          <HeroStat
-            value={garageStats.expired + garageStats.due}
-            label="Alert scadenze"
-          />
+          <HeroStat value={totalAlerts} label="Alert totali" />
         </div>
       </div>
 
@@ -994,25 +1166,35 @@ export default function Garage() {
                 <div className="mini-grid">
                   <MiniStat label="Documenti" value={garageStats.docsCount} />
                   <MiniStat label="Interventi" value={garageStats.svcCount} />
-                  <MiniStat label="Scaduti" value={garageStats.expired} />
-                  <MiniStat label="In arrivo" value={garageStats.due} />
+                  <MiniStat label="Doc. scaduti" value={garageStats.expired} />
+                  <MiniStat label="Alert manut." value={garageStats.maintenance} />
                 </div>
+
+                {computed && <MotoHealthSilhouette computed={computed} />}
               </div>
 
               <div className="premium-panel">
                 <div className="section-title">
-                  <strong>📅 Scadenze in arrivo</strong>
-                  <span className="small-muted">Controllo automatico 45 giorni</span>
+                  <strong>🚨 Alert Garage</strong>
+                  <span className="small-muted">
+                    Documenti + manutenzione automatica
+                  </span>
                 </div>
 
                 {expiryLists.expired.length === 0 &&
-                expiryLists.dueSoon.length === 0 ? (
-                  <div className="mutedBox">Nessuna scadenza imminente. 🔥</div>
+                expiryLists.dueSoon.length === 0 &&
+                maintenanceAlerts.length === 0 ? (
+                  <div className="mutedBox">Nessun alert attivo. 🔥</div>
                 ) : (
                   <div style={{ display: "grid", gap: 8 }}>
+                    {maintenanceAlerts.map((a) => (
+                      <MaintenanceAlertRow key={a.key} alert={a} />
+                    ))}
+
                     {expiryLists.expired.map((d) => (
                       <ExpiryRow key={d.id} doc={d} />
                     ))}
+
                     {expiryLists.dueSoon.map((d) => (
                       <ExpiryRow key={d.id} doc={d} />
                     ))}
@@ -1049,7 +1231,9 @@ export default function Garage() {
               <div className="premium-panel">
                 <div className="section-title">
                   <strong>⚙️ Intervalli manutenzione</strong>
-                  <span className="small-muted">Personalizzabili per ogni moto</span>
+                  <span className="small-muted">
+                    Personalizzabili per ogni moto
+                  </span>
                 </div>
 
                 <div className="form-grid">
@@ -1095,7 +1279,9 @@ export default function Garage() {
               <div className="premium-panel">
                 <div className="section-title">
                   <strong>📒 Storico Tagliandi / Interventi</strong>
-                  <span className="small-muted">Base reale per le prossime scadenze</span>
+                  <span className="small-muted">
+                    Base reale per le prossime scadenze
+                  </span>
                 </div>
 
                 <div className="soft-card">
@@ -1353,6 +1539,110 @@ function MiniStat({ value, label }) {
   );
 }
 
+function MotoHealthSilhouette({ computed }) {
+  const items = [
+    { key: "oil", label: "Olio", icon: "🛢️", item: computed.oil },
+    { key: "chain", label: "Catena", icon: "⛓️", item: computed.chain },
+    { key: "tires", label: "Gomme", icon: "🛞", item: computed.tires },
+  ];
+
+  const overall = worstLevel(items.map((x) => x.item));
+
+  return (
+    <div className="moto-health-box">
+      <div className="moto-health-top">
+        <div>
+          <strong>Stato moto</strong>
+          <div className="small-muted">
+            Bollini dinamici su olio, catena e gomme
+          </div>
+        </div>
+        <span style={pillStyle(overall)}>
+          {overall === "bad"
+            ? "ATTENZIONE"
+            : overall === "warn"
+            ? "URGENTE"
+            : overall === "soon"
+            ? "DA CONTROLLARE"
+            : "TUTTO OK"}
+        </span>
+      </div>
+
+      <div className="moto-silhouette">
+        <div className="moto-shape">
+          <div className="moto-wheel rear" />
+          <div className="moto-wheel front" />
+          <div className="moto-body" />
+          <div className="moto-seat" />
+          <div className="moto-handle" />
+
+          <div className="moto-dot oil" style={dotStyle(computed.oil.level)}>
+            🛢️
+          </div>
+          <div className="moto-dot chain" style={dotStyle(computed.chain.level)}>
+            ⛓️
+          </div>
+          <div className="moto-dot tires" style={dotStyle(computed.tires.level)}>
+            🛞
+          </div>
+        </div>
+      </div>
+
+      <div className="legend-grid">
+        {items.map((x) => (
+          <div key={x.key} className="soft-card" style={{ color: "#111827" }}>
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "space-between",
+                gap: 8,
+                alignItems: "center",
+              }}
+            >
+              <strong>
+                {x.icon} {x.label}
+              </strong>
+              <span style={pillStyle(x.item.level)}>{x.item.label}</span>
+            </div>
+            <div className="small-muted" style={{ marginTop: 6 }}>
+              Mancano: <strong>{x.item.left.toLocaleString()} km</strong>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function MaintenanceAlertRow({ alert }) {
+  const item = alert.item;
+
+  return (
+    <div className="soft-card">
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+          gap: 10,
+          flexWrap: "wrap",
+          alignItems: "center",
+        }}
+      >
+        <div style={{ fontSize: 13 }}>
+          <strong>
+            {alert.icon} {alert.label}
+          </strong>{" "}
+          <span style={{ opacity: 0.75 }}>
+            · prossima a {item.next.toLocaleString()} km · mancano{" "}
+            {item.left.toLocaleString()} km
+          </span>
+        </div>
+        <span style={pillStyle(item.level)}>{item.label}</span>
+      </div>
+    </div>
+  );
+}
+
 function ExpiryRow({ doc }) {
   const days = doc.days;
   const st = doc.st || { label: "OK", level: "ok" };
@@ -1369,7 +1659,7 @@ function ExpiryRow({ doc }) {
         }}
       >
         <div style={{ fontSize: 13 }}>
-          <strong>{doc.label}</strong>{" "}
+          <strong>📄 {doc.label}</strong>{" "}
           <span style={{ opacity: 0.75 }}>
             · {doc.expiry} · {days < 0 ? "scaduto" : `${days} giorni`}
           </span>
@@ -1569,6 +1859,34 @@ function heroPillStyle() {
     fontWeight: 900,
     border: "1px solid rgba(255,255,255,0.18)",
     background: "rgba(255,255,255,0.12)",
+  };
+}
+
+function dotStyle(level) {
+  if (level === "bad") {
+    return {
+      background: "#ef4444",
+      color: "white",
+    };
+  }
+
+  if (level === "warn") {
+    return {
+      background: "#f97316",
+      color: "white",
+    };
+  }
+
+  if (level === "soon") {
+    return {
+      background: "#facc15",
+      color: "#422006",
+    };
+  }
+
+  return {
+    background: "#22c55e",
+    color: "white",
   };
 }
 
