@@ -1618,31 +1618,53 @@ function MotoHealthSilhouette({ computed }) {
 }
 
 function StatusDot({ icon, label, level, style }) {
+  const isMobile =
+    typeof window !== "undefined" && window.innerWidth < 640;
+
+  const size = isMobile ? 34 : 46;
+  const fontSize = isMobile ? 15 : 19;
+  const border = isMobile ? 3 : 4;
+
+  const mobileAdjustments = {
+    ...(label === "Catena" && isMobile
+      ? { left: "27%", top: "72%" }
+      : {}),
+    ...(label === "Gomma posteriore" && isMobile
+      ? { left: "20%", top: "67%" }
+      : {}),
+    ...(label === "Olio" && isMobile
+      ? { left: "50%", top: "58%" }
+      : {}),
+    ...(label === "Gomma anteriore" && isMobile
+      ? { left: "74%", top: "66%" }
+      : {}),
+  };
+
   return (
     <div
       title={label}
       style={{
         position: "absolute",
         transform: "translate(-50%, -50%)",
-        width: 46,
-        height: 46,
+        width: size,
+        height: size,
         borderRadius: 999,
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        border: "4px solid rgba(255,255,255,0.92)",
+        border: `${border}px solid rgba(255,255,255,0.92)`,
         boxShadow: "0 14px 26px rgba(0,0,0,0.30)",
-        fontSize: 19,
+        fontSize,
         fontWeight: 950,
         ...dotStyle(level),
         ...style,
+        ...mobileAdjustments,
       }}
     >
       {icon}
     </div>
   );
 }
-
 function MaintenanceAlertRow({ alert }) {
   const item = alert.item;
 
