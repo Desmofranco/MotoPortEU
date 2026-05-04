@@ -1,8 +1,9 @@
 // =======================================================
 // src/pages/Garage.jsx
-// ✅ Garage Premium UI – v2 Completo
+// ✅ Garage 3D Premium – Gomme Anteriore/Posteriore
 // ✅ Alert documenti + alert manutenzione reali
-// ✅ Sagoma moto con bollini stato olio/catena/gomme
+// ✅ Moto premium effetto 3D con bollini dinamici
+// ✅ Gomme separate: anteriore + posteriore
 // ✅ FIX: puoi salvare documenti anche SENZA file
 // ✅ Storico Tagliandi / Interventi offline per ogni moto
 // ✅ MOBILE: layout mobile-first, premium cards, bottoni full width
@@ -17,7 +18,8 @@ const uid = () => `bike-${Math.random().toString(16).slice(2)}-${Date.now()}`;
 const DEFAULTS = {
   oilEveryKm: 6000,
   chainEveryKm: 800,
-  tiresEveryKm: 9000,
+  frontTireEveryKm: 9000,
+  rearTireEveryKm: 9000,
 };
 
 const DOC_TYPES = [
@@ -88,6 +90,22 @@ function inferServiceCategory(type) {
     t.includes("tire") ||
     t.includes("tyre")
   ) {
+    if (
+      t.includes("anteriore") ||
+      t.includes("front") ||
+      t.includes("davanti")
+    ) {
+      return "frontTire";
+    }
+
+    if (
+      t.includes("posteriore") ||
+      t.includes("rear") ||
+      t.includes("dietro")
+    ) {
+      return "rearTire";
+    }
+
     return "tires";
   }
 
@@ -98,7 +116,19 @@ function getLastServiceKm(serviceLog = [], category) {
   const arr = Array.isArray(serviceLog) ? serviceLog : [];
 
   const matches = arr
-    .filter((x) => inferServiceCategory(x?.type) === category)
+    .filter((x) => {
+      const inferred = inferServiceCategory(x?.type);
+
+      if (category === "frontTire") {
+        return inferred === "frontTire" || inferred === "tires";
+      }
+
+      if (category === "rearTire") {
+        return inferred === "rearTire" || inferred === "tires";
+      }
+
+      return inferred === category;
+    })
     .map((x) => ({
       km: parseKm(x?.km, 0),
       date: String(x?.date || ""),
@@ -201,20 +231,33 @@ export default function Garage() {
     if (!activeBike) return null;
 
     const currentKm = parseKm(activeBike.km, 0);
+    const maintenance = activeBike.maintenance || {};
 
     const oilInterval = parseKm(
-      activeBike.maintenance?.oilEveryKm ?? DEFAULTS.oilEveryKm,
+      maintenance.oilEveryKm ?? DEFAULTS.oilEveryKm,
       DEFAULTS.oilEveryKm
     );
 
     const chainInterval = parseKm(
-      activeBike.maintenance?.chainEveryKm ?? DEFAULTS.chainEveryKm,
+      maintenance.chainEveryKm ?? DEFAULTS.chainEveryKm,
       DEFAULTS.chainEveryKm
     );
 
-    const tiresInterval = parseKm(
-      activeBike.maintenance?.tiresEveryKm ?? DEFAULTS.tiresEveryKm,
-      DEFAULTS.tiresEveryKm
+    const legacyTires =
+      maintenance.tiresEveryKm ??
+      maintenance.frontTireEveryKm ??
+      DEFAULTS.frontTireEveryKm;
+
+    const frontTireInterval = parseKm(
+      maintenance.frontTireEveryKm ?? legacyTires,
+      DEFAULTS.frontTireEveryKm
+    );
+
+    const rearTireInterval = parseKm(
+      maintenance.rearTireEveryKm ??
+        maintenance.tiresEveryKm ??
+        DEFAULTS.rearTireEveryKm,
+      DEFAULTS.rearTireEveryKm
     );
 
     const log = Array.isArray(activeBike.serviceLog) ? activeBike.serviceLog : [];
@@ -233,11 +276,17 @@ export default function Garage() {
         lastEntry: getLastServiceKm(log, "chain"),
         categoryLabel: "Catena",
       }),
-      tires: buildMaintenanceItem({
+      frontTire: buildMaintenanceItem({
         currentKm,
-        interval: tiresInterval,
-        lastEntry: getLastServiceKm(log, "tires"),
-        categoryLabel: "Gomme",
+        interval: frontTireInterval,
+        lastEntry: getLastServiceKm(log, "frontTire"),
+        categoryLabel: "Gomma anteriore",
+      }),
+      rearTire: buildMaintenanceItem({
+        currentKm,
+        interval: rearTireInterval,
+        lastEntry: getLastServiceKm(log, "rearTire"),
+        categoryLabel: "Gomma posteriore",
       }),
     };
   }, [activeBike]);
@@ -248,7 +297,18 @@ export default function Garage() {
     return [
       { key: "oil", label: "Olio", icon: "🛢️", item: computed.oil },
       { key: "chain", label: "Catena", icon: "⛓️", item: computed.chain },
-      { key: "tires", label: "Gomme", icon: "🛞", item: computed.tires },
+      {
+        key: "frontTire",
+        label: "Gomma anteriore",
+        icon: "🛞",
+        item: computed.frontTire,
+      },
+      {
+        key: "rearTire",
+        label: "Gomma posteriore",
+        icon: "🛞",
+        item: computed.rearTire,
+      },
     ].filter((x) => ["bad", "warn", "soon"].includes(x.item.level));
   }, [computed]);
 
@@ -879,139 +939,23 @@ export default function Garage() {
           margin-bottom: 10px;
         }
 
-        .moto-silhouette {
-          position: relative;
-          min-height: 170px;
-          border-radius: 20px;
-          overflow: hidden;
-          background:
-            radial-gradient(circle at 22% 72%, rgba(255,255,255,0.18) 0 15%, transparent 16%),
-            radial-gradient(circle at 78% 72%, rgba(255,255,255,0.18) 0 15%, transparent 16%),
-            linear-gradient(135deg, rgba(255,255,255,0.08), rgba(255,255,255,0.02));
-          border: 1px solid rgba(255,255,255,0.12);
-        }
-
-        .moto-shape {
-          position: absolute;
-          left: 50%;
-          top: 50%;
-          width: min(520px, 92%);
-          height: 120px;
-          transform: translate(-50%, -45%);
-        }
-
-        .moto-wheel {
-          position: absolute;
-          bottom: 6px;
-          width: 76px;
-          height: 76px;
-          border-radius: 999px;
-          border: 10px solid rgba(255,255,255,0.55);
-          box-shadow: inset 0 0 0 8px rgba(255,255,255,0.10);
-        }
-
-        .moto-wheel.front { right: 34px; }
-        .moto-wheel.rear { left: 34px; }
-
-        .moto-body {
-          position: absolute;
-          left: 108px;
-          right: 108px;
-          top: 34px;
-          height: 42px;
-          border-radius: 999px 999px 24px 24px;
-          background: rgba(255,255,255,0.62);
-          transform: skewX(-12deg);
-        }
-
-        .moto-seat {
-          position: absolute;
-          left: 190px;
-          top: 14px;
-          width: 120px;
-          height: 26px;
-          border-radius: 999px;
-          background: rgba(255,255,255,0.45);
-          transform: rotate(-4deg);
-        }
-
-        .moto-handle {
-          position: absolute;
-          right: 92px;
-          top: 10px;
-          width: 66px;
-          height: 8px;
-          border-radius: 999px;
-          background: rgba(255,255,255,0.62);
-          transform: rotate(-24deg);
-        }
-
-        .moto-dot {
-          position: absolute;
-          z-index: 4;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          width: 34px;
-          height: 34px;
-          border-radius: 999px;
-          border: 3px solid rgba(255,255,255,0.92);
-          box-shadow: 0 10px 22px rgba(0,0,0,0.25);
-          font-size: 15px;
-          font-weight: 950;
-        }
-
-        .moto-dot.oil { left: 49%; top: 46%; }
-        .moto-dot.chain { left: 22%; top: 65%; }
-        .moto-dot.tires { right: 18%; top: 66%; }
-
         .legend-grid {
           margin-top: 10px;
           display: grid;
-          grid-template-columns: repeat(3, minmax(0, 1fr));
+          grid-template-columns: repeat(2, minmax(0, 1fr));
           gap: 8px;
+        }
+
+        @media (min-width: 760px) {
+          .legend-grid {
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+          }
         }
 
         @media (max-width: 620px) {
           .legend-grid {
             grid-template-columns: 1fr;
           }
-
-          .moto-silhouette {
-            min-height: 145px;
-          }
-
-          .moto-wheel {
-            width: 56px;
-            height: 56px;
-            border-width: 8px;
-          }
-
-          .moto-wheel.front { right: 18px; }
-          .moto-wheel.rear { left: 18px; }
-
-          .moto-body {
-            left: 78px;
-            right: 76px;
-            top: 42px;
-            height: 34px;
-          }
-
-          .moto-seat {
-            left: 138px;
-            top: 24px;
-            width: 88px;
-            height: 22px;
-          }
-
-          .moto-handle {
-            right: 48px;
-            top: 20px;
-          }
-
-          .moto-dot.oil { left: 48%; top: 46%; }
-          .moto-dot.chain { left: 20%; top: 66%; }
-          .moto-dot.tires { right: 14%; top: 67%; }
         }
       `}</style>
 
@@ -1224,7 +1168,8 @@ export default function Garage() {
                 <div style={{ marginTop: 14, display: "grid", gap: 10 }}>
                   <HealthRow title="🛢️ Olio" item={computed.oil} />
                   <HealthRow title="⛓️ Catena" item={computed.chain} />
-                  <HealthRow title="🛞 Gomme" item={computed.tires} />
+                  <HealthRow title="🛞 Gomma anteriore" item={computed.frontTire} />
+                  <HealthRow title="🛞 Gomma posteriore" item={computed.rearTire} />
                 </div>
               )}
 
@@ -1259,20 +1204,33 @@ export default function Garage() {
                   />
 
                   <IntervalInput
-                    label="Gomme ogni"
+                    label="Gomma anteriore ogni"
                     value={String(
-                      activeBike.maintenance?.tiresEveryKm ??
-                        DEFAULTS.tiresEveryKm
+                      activeBike.maintenance?.frontTireEveryKm ??
+                        activeBike.maintenance?.tiresEveryKm ??
+                        DEFAULTS.frontTireEveryKm
                     )}
                     min={1000}
                     max={50000}
-                    onCommit={(v) => updateIntervals({ tiresEveryKm: v })}
+                    onCommit={(v) => updateIntervals({ frontTireEveryKm: v })}
+                  />
+
+                  <IntervalInput
+                    label="Gomma posteriore ogni"
+                    value={String(
+                      activeBike.maintenance?.rearTireEveryKm ??
+                        activeBike.maintenance?.tiresEveryKm ??
+                        DEFAULTS.rearTireEveryKm
+                    )}
+                    min={1000}
+                    max={50000}
+                    onCommit={(v) => updateIntervals({ rearTireEveryKm: v })}
                   />
                 </div>
 
                 <div style={{ marginTop: 10 }} className="small-muted">
-                  Registra un intervento nello storico per avere calcoli più
-                  precisi su olio, catena e gomme.
+                  Per distinguere le gomme nello storico usa testi tipo:
+                  “Gomma anteriore”, “Gomma posteriore” oppure “Cambio gomme”.
                 </div>
               </div>
 
@@ -1312,7 +1270,7 @@ export default function Garage() {
                       <input
                         value={svcType}
                         onChange={(e) => setSvcType(e.target.value)}
-                        placeholder="Tagliando / Olio / Gomme..."
+                        placeholder="Tagliando / Olio / Gomma anteriore..."
                         className="in"
                       />
                     </label>
@@ -1339,7 +1297,7 @@ export default function Garage() {
                       <input
                         value={svcNote}
                         onChange={(e) => setSvcNote(e.target.value)}
-                        placeholder="es. Olio Motul 7100, filtro…"
+                        placeholder="es. Olio Motul 7100, gomma posteriore..."
                         className="in"
                       />
                     </label>
@@ -1543,7 +1501,18 @@ function MotoHealthSilhouette({ computed }) {
   const items = [
     { key: "oil", label: "Olio", icon: "🛢️", item: computed.oil },
     { key: "chain", label: "Catena", icon: "⛓️", item: computed.chain },
-    { key: "tires", label: "Gomme", icon: "🛞", item: computed.tires },
+    {
+      key: "frontTire",
+      label: "Gomma anteriore",
+      icon: "🛞",
+      item: computed.frontTire,
+    },
+    {
+      key: "rearTire",
+      label: "Gomma posteriore",
+      icon: "🛞",
+      item: computed.rearTire,
+    },
   ];
 
   const overall = worstLevel(items.map((x) => x.item));
@@ -1552,9 +1521,9 @@ function MotoHealthSilhouette({ computed }) {
     <div className="moto-health-box">
       <div className="moto-health-top">
         <div>
-          <strong>Stato moto</strong>
+          <strong>Stato moto 3D</strong>
           <div className="small-muted">
-            Vista manutenzione premium con alert dinamici
+            Olio, catena, gomma anteriore e gomma posteriore
           </div>
         </div>
 
@@ -1572,129 +1541,176 @@ function MotoHealthSilhouette({ computed }) {
       <div
         style={{
           marginTop: 12,
-          borderRadius: 22,
+          borderRadius: 26,
           padding: 16,
           background:
-            "linear-gradient(135deg, rgba(15,23,42,0.92), rgba(51,65,85,0.70))",
-          border: "1px solid rgba(255,255,255,0.14)",
+            "radial-gradient(circle at 50% 12%, rgba(245,158,11,0.22), transparent 32%), linear-gradient(145deg, rgba(2,6,23,0.98), rgba(30,41,59,0.92) 62%, rgba(120,53,15,0.72))",
+          border: "1px solid rgba(255,255,255,0.16)",
           overflow: "hidden",
           position: "relative",
         }}
       >
         <svg
-          viewBox="0 0 900 320"
+          viewBox="0 0 980 360"
           role="img"
-          aria-label="Stato manutenzione moto"
+          aria-label="Stato manutenzione moto 3D"
           style={{
             width: "100%",
             display: "block",
-            filter: "drop-shadow(0 18px 24px rgba(0,0,0,0.28))",
+            filter: "drop-shadow(0 24px 28px rgba(0,0,0,0.34))",
           }}
         >
           <defs>
-            <linearGradient id="bikeBody" x1="0" x2="1">
-              <stop offset="0%" stopColor="#f8fafc" stopOpacity="0.92" />
-              <stop offset="55%" stopColor="#cbd5e1" stopOpacity="0.88" />
-              <stop offset="100%" stopColor="#94a3b8" stopOpacity="0.82" />
+            <linearGradient id="body3d" x1="0" x2="1" y1="0" y2="1">
+              <stop offset="0%" stopColor="#fff7ed" />
+              <stop offset="34%" stopColor="#f59e0b" />
+              <stop offset="72%" stopColor="#7c2d12" />
+              <stop offset="100%" stopColor="#111827" />
             </linearGradient>
 
-            <linearGradient id="bikeDark" x1="0" x2="1">
-              <stop offset="0%" stopColor="#111827" />
-              <stop offset="100%" stopColor="#334155" />
+            <linearGradient id="metal3d" x1="0" x2="1">
+              <stop offset="0%" stopColor="#f8fafc" stopOpacity="0.95" />
+              <stop offset="50%" stopColor="#94a3b8" stopOpacity="0.88" />
+              <stop offset="100%" stopColor="#334155" stopOpacity="0.9" />
             </linearGradient>
 
-            <radialGradient id="wheelGlow">
-              <stop offset="0%" stopColor="#f8fafc" stopOpacity="0.28" />
-              <stop offset="100%" stopColor="#f8fafc" stopOpacity="0" />
+            <linearGradient id="tire3d" x1="0" x2="1">
+              <stop offset="0%" stopColor="#020617" />
+              <stop offset="55%" stopColor="#1e293b" />
+              <stop offset="100%" stopColor="#020617" />
+            </linearGradient>
+
+            <radialGradient id="rimGlow">
+              <stop offset="0%" stopColor="#f8fafc" stopOpacity="0.9" />
+              <stop offset="60%" stopColor="#64748b" stopOpacity="0.6" />
+              <stop offset="100%" stopColor="#0f172a" stopOpacity="0.9" />
             </radialGradient>
+
+            <filter id="softGlow">
+              <feGaussianBlur stdDeviation="4" result="blur" />
+              <feMerge>
+                <feMergeNode in="blur" />
+                <feMergeNode in="SourceGraphic" />
+              </feMerge>
+            </filter>
           </defs>
 
-          <ellipse cx="205" cy="245" rx="120" ry="36" fill="rgba(0,0,0,0.22)" />
-          <ellipse cx="690" cy="245" rx="120" ry="36" fill="rgba(0,0,0,0.22)" />
+          <ellipse cx="235" cy="292" rx="150" ry="34" fill="rgba(0,0,0,0.34)" />
+          <ellipse cx="745" cy="292" rx="150" ry="34" fill="rgba(0,0,0,0.34)" />
 
-          <circle cx="205" cy="215" r="78" fill="url(#wheelGlow)" />
-          <circle cx="690" cy="215" r="78" fill="url(#wheelGlow)" />
+          <circle cx="235" cy="245" r="84" fill="url(#tire3d)" />
+          <circle cx="745" cy="245" r="84" fill="url(#tire3d)" />
 
-          <circle cx="205" cy="215" r="66" fill="none" stroke="#e5e7eb" strokeWidth="18" opacity="0.88" />
-          <circle cx="205" cy="215" r="34" fill="none" stroke="#94a3b8" strokeWidth="10" opacity="0.82" />
+          <circle cx="235" cy="245" r="57" fill="none" stroke="#e5e7eb" strokeWidth="13" opacity="0.86" />
+          <circle cx="745" cy="245" r="57" fill="none" stroke="#e5e7eb" strokeWidth="13" opacity="0.86" />
 
-          <circle cx="690" cy="215" r="66" fill="none" stroke="#e5e7eb" strokeWidth="18" opacity="0.88" />
-          <circle cx="690" cy="215" r="34" fill="none" stroke="#94a3b8" strokeWidth="10" opacity="0.82" />
+          <circle cx="235" cy="245" r="30" fill="url(#rimGlow)" />
+          <circle cx="745" cy="245" r="30" fill="url(#rimGlow)" />
 
           <path
-            d="M260 205 C300 132, 350 118, 440 135 C510 148, 575 139, 634 168 C660 181, 674 198, 680 220 L618 220 C604 188, 577 174, 535 174 L376 174 C332 174, 300 187, 282 220 L226 220 C232 213, 244 209, 260 205Z"
-            fill="url(#bikeBody)"
+            d="M285 230 C327 145, 387 117, 480 132 C548 143, 600 131, 663 165 C706 188, 728 212, 740 246 L670 246 C653 206, 613 184, 554 183 L402 183 C349 185, 313 207, 292 246 L225 246 C238 237, 258 232, 285 230Z"
+            fill="url(#body3d)"
           />
 
           <path
-            d="M358 125 L475 105 C513 99, 529 113, 518 136 C512 148, 500 155, 480 156 L344 160 C328 160, 319 150, 326 139 C332 131, 342 127, 358 125Z"
-            fill="#e5e7eb"
-            opacity="0.9"
-          />
-
-          <path
-            d="M475 112 C515 88, 552 90, 586 120"
+            d="M322 205 C374 165, 434 151, 510 155 C585 159, 640 174, 683 212"
             fill="none"
-            stroke="#cbd5e1"
-            strokeWidth="14"
-            strokeLinecap="round"
-            opacity="0.9"
-          />
-
-          <path
-            d="M600 128 L665 88"
-            fill="none"
-            stroke="#e5e7eb"
-            strokeWidth="12"
-            strokeLinecap="round"
-            opacity="0.9"
-          />
-
-          <path
-            d="M650 88 L710 74"
-            fill="none"
-            stroke="#e5e7eb"
-            strokeWidth="10"
-            strokeLinecap="round"
-            opacity="0.85"
-          />
-
-          <path
-            d="M313 174 L205 215 M535 174 L690 215 M438 174 L205 215 M438 174 L690 215"
-            fill="none"
-            stroke="#111827"
-            strokeWidth="8"
+            stroke="#fef3c7"
+            strokeWidth="16"
             strokeLinecap="round"
             opacity="0.45"
           />
 
           <path
-            d="M345 172 L285 206"
+            d="M405 128 L522 103 C560 95, 587 110, 579 136 C574 154, 555 164, 525 164 L386 166 C364 166, 351 154, 361 141 C370 133, 382 130, 405 128Z"
+            fill="url(#metal3d)"
+          />
+
+          <path
+            d="M515 116 C560 82, 618 87, 657 127"
             fill="none"
-            stroke="#f59e0b"
+            stroke="#e5e7eb"
+            strokeWidth="15"
+            strokeLinecap="round"
+            opacity="0.9"
+          />
+
+          <path
+            d="M662 130 L722 86"
+            fill="none"
+            stroke="#f8fafc"
+            strokeWidth="13"
+            strokeLinecap="round"
+            opacity="0.92"
+          />
+
+          <path
+            d="M710 87 L785 74"
+            fill="none"
+            stroke="#f8fafc"
             strokeWidth="10"
             strokeLinecap="round"
-            opacity="0.80"
+            opacity="0.88"
           />
+
+          <path
+            d="M360 184 L235 245 M555 184 L745 245 M480 184 L235 245 M480 184 L745 245"
+            fill="none"
+            stroke="#020617"
+            strokeWidth="8"
+            strokeLinecap="round"
+            opacity="0.48"
+          />
+
+          <path
+            d="M370 180 L305 225"
+            fill="none"
+            stroke="#fde68a"
+            strokeWidth="10"
+            strokeLinecap="round"
+            opacity="0.88"
+            filter="url(#softGlow)"
+          />
+
+          <path
+            d="M442 181 L495 245"
+            fill="none"
+            stroke="#111827"
+            strokeWidth="18"
+            strokeLinecap="round"
+            opacity="0.45"
+          />
+
+          <circle cx="495" cy="235" r="28" fill="#111827" opacity="0.75" />
+          <circle cx="495" cy="235" r="13" fill="#f59e0b" opacity="0.82" />
         </svg>
 
         <StatusDot
           label="Olio"
           icon="🛢️"
           level={computed.oil.level}
-          style={{ left: "50%", top: "50%" }}
+          style={{ left: "51%", top: "62%" }}
         />
+
         <StatusDot
           label="Catena"
           icon="⛓️"
           level={computed.chain.level}
-          style={{ left: "28%", top: "68%" }}
+          style={{ left: "31%", top: "72%" }}
         />
+
         <StatusDot
-          label="Gomme"
+          label="Gomma posteriore"
           icon="🛞"
-          level={computed.tires.level}
-          style={{ left: "76%", top: "67%" }}
+          level={computed.rearTire.level}
+          style={{ left: "24%", top: "69%" }}
+        />
+
+        <StatusDot
+          label="Gomma anteriore"
+          icon="🛞"
+          level={computed.frontTire.level}
+          style={{ left: "76%", top: "69%" }}
         />
       </div>
 
@@ -1750,6 +1766,7 @@ function StatusDot({ icon, label, level, style }) {
     </div>
   );
 }
+
 function MaintenanceAlertRow({ alert }) {
   const item = alert.item;
 
