@@ -1019,7 +1019,7 @@ export default function Garage() {
         <div className="garage-head">
           <div>
             <div className="premium-badge">🏍️ MotoPortEU Premium Garage</div>
-            <h1 className="garage-title">Garage</h1>
+            <h1 className="garage-title">Garage V2 LIVE</h1>
             <p className="garage-sub">
               Libretto digitale offline, manutenzione, scadenze e storico
               interventi. Tutto salvato sul dispositivo.
