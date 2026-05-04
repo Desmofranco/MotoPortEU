@@ -1934,5 +1934,4 @@ function pillStyle(level) {
     background: "rgba(34,197,94,0.11)",
     borderColor: "rgba(34,197,94,0.22)",
   };
-}/ /   d e p l o y   t r i g g e r  
- 
+}
