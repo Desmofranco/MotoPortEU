@@ -12,7 +12,7 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { loadBikes, saveBikes, fileToDataUrl } from "../utils/storage";
-
+import garageBike3d from "../assets/garage-bike-3d.png";
 const uid = () => `bike-${Math.random().toString(16).slice(2)}-${Date.now()}`;
 
 const DEFAULTS = {
@@ -1550,141 +1550,17 @@ function MotoHealthSilhouette({ computed }) {
           position: "relative",
         }}
       >
-        <svg
-          viewBox="0 0 980 360"
-          role="img"
-          aria-label="Stato manutenzione moto 3D"
-          style={{
-            width: "100%",
-            display: "block",
-            filter: "drop-shadow(0 24px 28px rgba(0,0,0,0.34))",
-          }}
-        >
-          <defs>
-            <linearGradient id="body3d" x1="0" x2="1" y1="0" y2="1">
-              <stop offset="0%" stopColor="#fff7ed" />
-              <stop offset="34%" stopColor="#f59e0b" />
-              <stop offset="72%" stopColor="#7c2d12" />
-              <stop offset="100%" stopColor="#111827" />
-            </linearGradient>
-
-            <linearGradient id="metal3d" x1="0" x2="1">
-              <stop offset="0%" stopColor="#f8fafc" stopOpacity="0.95" />
-              <stop offset="50%" stopColor="#94a3b8" stopOpacity="0.88" />
-              <stop offset="100%" stopColor="#334155" stopOpacity="0.9" />
-            </linearGradient>
-
-            <linearGradient id="tire3d" x1="0" x2="1">
-              <stop offset="0%" stopColor="#020617" />
-              <stop offset="55%" stopColor="#1e293b" />
-              <stop offset="100%" stopColor="#020617" />
-            </linearGradient>
-
-            <radialGradient id="rimGlow">
-              <stop offset="0%" stopColor="#f8fafc" stopOpacity="0.9" />
-              <stop offset="60%" stopColor="#64748b" stopOpacity="0.6" />
-              <stop offset="100%" stopColor="#0f172a" stopOpacity="0.9" />
-            </radialGradient>
-
-            <filter id="softGlow">
-              <feGaussianBlur stdDeviation="4" result="blur" />
-              <feMerge>
-                <feMergeNode in="blur" />
-                <feMergeNode in="SourceGraphic" />
-              </feMerge>
-            </filter>
-          </defs>
-
-          <ellipse cx="235" cy="292" rx="150" ry="34" fill="rgba(0,0,0,0.34)" />
-          <ellipse cx="745" cy="292" rx="150" ry="34" fill="rgba(0,0,0,0.34)" />
-
-          <circle cx="235" cy="245" r="84" fill="url(#tire3d)" />
-          <circle cx="745" cy="245" r="84" fill="url(#tire3d)" />
-
-          <circle cx="235" cy="245" r="57" fill="none" stroke="#e5e7eb" strokeWidth="13" opacity="0.86" />
-          <circle cx="745" cy="245" r="57" fill="none" stroke="#e5e7eb" strokeWidth="13" opacity="0.86" />
-
-          <circle cx="235" cy="245" r="30" fill="url(#rimGlow)" />
-          <circle cx="745" cy="245" r="30" fill="url(#rimGlow)" />
-
-          <path
-            d="M285 230 C327 145, 387 117, 480 132 C548 143, 600 131, 663 165 C706 188, 728 212, 740 246 L670 246 C653 206, 613 184, 554 183 L402 183 C349 185, 313 207, 292 246 L225 246 C238 237, 258 232, 285 230Z"
-            fill="url(#body3d)"
-          />
-
-          <path
-            d="M322 205 C374 165, 434 151, 510 155 C585 159, 640 174, 683 212"
-            fill="none"
-            stroke="#fef3c7"
-            strokeWidth="16"
-            strokeLinecap="round"
-            opacity="0.45"
-          />
-
-          <path
-            d="M405 128 L522 103 C560 95, 587 110, 579 136 C574 154, 555 164, 525 164 L386 166 C364 166, 351 154, 361 141 C370 133, 382 130, 405 128Z"
-            fill="url(#metal3d)"
-          />
-
-          <path
-            d="M515 116 C560 82, 618 87, 657 127"
-            fill="none"
-            stroke="#e5e7eb"
-            strokeWidth="15"
-            strokeLinecap="round"
-            opacity="0.9"
-          />
-
-          <path
-            d="M662 130 L722 86"
-            fill="none"
-            stroke="#f8fafc"
-            strokeWidth="13"
-            strokeLinecap="round"
-            opacity="0.92"
-          />
-
-          <path
-            d="M710 87 L785 74"
-            fill="none"
-            stroke="#f8fafc"
-            strokeWidth="10"
-            strokeLinecap="round"
-            opacity="0.88"
-          />
-
-          <path
-            d="M360 184 L235 245 M555 184 L745 245 M480 184 L235 245 M480 184 L745 245"
-            fill="none"
-            stroke="#020617"
-            strokeWidth="8"
-            strokeLinecap="round"
-            opacity="0.48"
-          />
-
-          <path
-            d="M370 180 L305 225"
-            fill="none"
-            stroke="#fde68a"
-            strokeWidth="10"
-            strokeLinecap="round"
-            opacity="0.88"
-            filter="url(#softGlow)"
-          />
-
-          <path
-            d="M442 181 L495 245"
-            fill="none"
-            stroke="#111827"
-            strokeWidth="18"
-            strokeLinecap="round"
-            opacity="0.45"
-          />
-
-          <circle cx="495" cy="235" r="28" fill="#111827" opacity="0.75" />
-          <circle cx="495" cy="235" r="13" fill="#f59e0b" opacity="0.82" />
-        </svg>
-
+<img
+  src={garageBike3d}
+  alt="Moto 3D Garage"
+  style={{
+    width: "100%",
+    maxHeight: 360,
+    objectFit: "contain",
+    display: "block",
+    filter: "drop-shadow(0 28px 35px rgba(0,0,0,0.45))",
+  }}
+/>
         <StatusDot
           label="Olio"
           icon="🛢️"
