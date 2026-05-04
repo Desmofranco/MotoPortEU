@@ -1,13 +1,12 @@
 // =======================================================
 // src/pages/Garage.jsx
-// ✅ FIX: puoi salvare documenti anche SENZA file (solo tipo+scadenza+note)
-// ✅ NEW: Storico Tagliandi / Interventi (offline) per ogni moto
-// ✅ MOBILE: layout mobile-first (titoli, griglie, bottoni full width)
+// ✅ Garage Premium UI – File Completo
+// ✅ FIX: puoi salvare documenti anche SENZA file
+// ✅ Storico Tagliandi / Interventi offline per ogni moto
+// ✅ MOBILE: layout mobile-first, premium cards, bottoni full width
 // ✅ FIX: logica km manutenzione corretta
-//    - usa ultimo intervento compatibile se presente
-//    - fallback: km attuali + intervallo
-//    - niente multipli incoerenti
 // =======================================================
+
 import { useEffect, useMemo, useState } from "react";
 import { loadBikes, saveBikes, fileToDataUrl } from "../utils/storage";
 
@@ -72,11 +71,7 @@ function normalizeType(str) {
 function inferServiceCategory(type) {
   const t = normalizeType(type);
 
-  if (
-    t.includes("olio") ||
-    t.includes("tagliando") ||
-    t.includes("service")
-  ) {
+  if (t.includes("olio") || t.includes("tagliando") || t.includes("service")) {
     return "oil";
   }
 
@@ -85,7 +80,7 @@ function inferServiceCategory(type) {
   }
 
   if (
-    t.includes("gomme") ||
+    t.includes("gomma") ||
     t.includes("gomme") ||
     t.includes("pneumatic") ||
     t.includes("tire") ||
@@ -99,6 +94,7 @@ function inferServiceCategory(type) {
 
 function getLastServiceKm(serviceLog = [], category) {
   const arr = Array.isArray(serviceLog) ? serviceLog : [];
+
   const matches = arr
     .filter((x) => inferServiceCategory(x?.type) === category)
     .map((x) => ({
@@ -124,11 +120,8 @@ function buildMaintenanceItem({
 }) {
   const safeCurrent = parseKm(currentKm, 0);
   const safeInterval = Math.max(1, parseKm(interval, 1));
-
   const lastKm = lastEntry ? parseKm(lastEntry.km, 0) : null;
 
-  // Se c'è uno storico valido, usiamo quello come base.
-  // Altrimenti baseline semplice e chiara: km attuali + intervallo.
   const nextDueKm =
     lastKm !== null ? lastKm + safeInterval : safeCurrent + safeInterval;
 
@@ -154,23 +147,19 @@ export default function Garage() {
     return initial?.[0]?.id || null;
   });
 
-  // form nuova moto
   const [brand, setBrand] = useState("");
   const [model, setModel] = useState("");
   const [year, setYear] = useState("");
   const [km, setKm] = useState("");
 
-  // km update moto attiva
   const [kmUpdate, setKmUpdate] = useState("");
 
-  // Documenti form
   const [docType, setDocType] = useState("insurance");
   const [docExpiry, setDocExpiry] = useState("");
   const [docNote, setDocNote] = useState("");
   const [docFile, setDocFile] = useState(null);
   const [docBusy, setDocBusy] = useState(false);
 
-  // Storico tagliandi/interventi
   const [svcDate, setSvcDate] = useState("");
   const [svcKm, setSvcKm] = useState("");
   const [svcType, setSvcType] = useState("Tagliando");
@@ -182,6 +171,7 @@ export default function Garage() {
       if (activeId !== null) setActiveId(null);
       return;
     }
+
     const exists = bikes.some((b) => b.id === activeId);
     if (!exists) setActiveId(bikes[0].id);
   }, [bikes, activeId]);
@@ -195,14 +185,17 @@ export default function Garage() {
     if (!activeBike) return null;
 
     const currentKm = parseKm(activeBike.km, 0);
+
     const oilInterval = parseKm(
       activeBike.maintenance?.oilEveryKm ?? DEFAULTS.oilEveryKm,
       DEFAULTS.oilEveryKm
     );
+
     const chainInterval = parseKm(
       activeBike.maintenance?.chainEveryKm ?? DEFAULTS.chainEveryKm,
       DEFAULTS.chainEveryKm
     );
+
     const tiresInterval = parseKm(
       activeBike.maintenance?.tiresEveryKm ?? DEFAULTS.tiresEveryKm,
       DEFAULTS.tiresEveryKm
@@ -210,28 +203,24 @@ export default function Garage() {
 
     const log = Array.isArray(activeBike.serviceLog) ? activeBike.serviceLog : [];
 
-    const oilLast = getLastServiceKm(log, "oil");
-    const chainLast = getLastServiceKm(log, "chain");
-    const tiresLast = getLastServiceKm(log, "tires");
-
     return {
       currentKm,
       oil: buildMaintenanceItem({
         currentKm,
         interval: oilInterval,
-        lastEntry: oilLast,
+        lastEntry: getLastServiceKm(log, "oil"),
         categoryLabel: "Olio / Tagliando",
       }),
       chain: buildMaintenanceItem({
         currentKm,
         interval: chainInterval,
-        lastEntry: chainLast,
+        lastEntry: getLastServiceKm(log, "chain"),
         categoryLabel: "Catena",
       }),
       tires: buildMaintenanceItem({
         currentKm,
         interval: tiresInterval,
-        lastEntry: tiresLast,
+        lastEntry: getLastServiceKm(log, "tires"),
         categoryLabel: "Gomme",
       }),
     };
@@ -245,6 +234,7 @@ export default function Garage() {
   const addBike = () => {
     const b = brand.trim();
     const m = model.trim();
+
     if (!b || !m) {
       alert("Inserisci almeno Marca e Modello.");
       return;
@@ -329,6 +319,7 @@ export default function Garage() {
     }
 
     setDocBusy(true);
+
     try {
       const typeMeta = DOC_TYPES.find((d) => d.key === docType);
 
@@ -355,10 +346,7 @@ export default function Garage() {
         b.id === activeBike.id
           ? {
               ...b,
-              documents: [
-                doc,
-                ...(Array.isArray(b.documents) ? b.documents : []),
-              ],
+              documents: [doc, ...(Array.isArray(b.documents) ? b.documents : [])],
               updatedAt: new Date().toISOString(),
             }
           : b
@@ -410,6 +398,7 @@ export default function Garage() {
       alert("Inserisci la data dell'intervento.");
       return;
     }
+
     if (!kmRaw) {
       alert("Inserisci i km dell'intervento.");
       return;
@@ -435,10 +424,7 @@ export default function Garage() {
       b.id === activeBike.id
         ? {
             ...b,
-            serviceLog: [
-              entry,
-              ...(Array.isArray(b.serviceLog) ? b.serviceLog : []),
-            ],
+            serviceLog: [entry, ...(Array.isArray(b.serviceLog) ? b.serviceLog : [])],
             updatedAt: new Date().toISOString(),
           }
         : b
@@ -483,19 +469,23 @@ export default function Garage() {
   const serviceSorted = useMemo(() => {
     if (!activeBike) return [];
     const arr = Array.isArray(activeBike.serviceLog) ? activeBike.serviceLog : [];
+
     return [...arr].sort((a, b) => {
       const ak = parseKm(a.km, 0);
       const bk = parseKm(b.km, 0);
       if (ak !== bk) return bk - ak;
+
       const ad = String(a.date || "");
       const bd = String(b.date || "");
       if (ad !== bd) return bd.localeCompare(ad);
+
       return String(b.createdAt || "").localeCompare(String(a.createdAt || ""));
     });
   }, [activeBike]);
 
   const expiryLists = useMemo(() => {
     if (!activeBike) return { dueSoon: [], expired: [] };
+
     const docs = Array.isArray(activeBike.documents) ? activeBike.documents : [];
 
     const enriched = docs
@@ -510,6 +500,7 @@ export default function Garage() {
     const expired = enriched
       .filter((d) => d.days < 0)
       .sort((a, b) => a.days - b.days);
+
     const dueSoon = enriched
       .filter((d) => d.days >= 0 && d.days <= 45)
       .sort((a, b) => a.days - b.days);
@@ -517,45 +508,367 @@ export default function Garage() {
     return { dueSoon, expired };
   }, [activeBike]);
 
+  const garageStats = useMemo(() => {
+    const docsCount = activeBike?.documents?.length || 0;
+    const svcCount = activeBike?.serviceLog?.length || 0;
+    const expired = expiryLists.expired.length;
+    const due = expiryLists.dueSoon.length;
+
+    return { docsCount, svcCount, expired, due };
+  }, [activeBike, expiryLists]);
+
   return (
-    <div className="garage-wrap">
+    <div className="garage-page">
       <style>{`
-        .garage-wrap { padding: 14px; padding-bottom: 88px; max-width: 1100px; margin: 0 auto; }
-        .garage-head { display:flex; align-items:flex-end; justify-content:space-between; gap:12px; flex-wrap:wrap; }
-        .garage-title { margin:0; font-weight:900; letter-spacing:-0.02em; font-size: clamp(28px, 7vw, 44px); line-height: 1.0; }
-        .garage-sub { margin:0; opacity:0.78; font-size: 13px; }
+        .garage-page {
+          min-height: 100vh;
+          padding: 14px;
+          padding-bottom: 96px;
+          max-width: 1180px;
+          margin: 0 auto;
+          color: #111827;
+          background:
+            radial-gradient(circle at top left, rgba(245, 158, 11, 0.16), transparent 28%),
+            radial-gradient(circle at top right, rgba(30, 64, 175, 0.12), transparent 30%);
+        }
 
-        .card { margin-top: 12px; border: 1px solid rgba(0,0,0,0.12); border-radius: 16px; padding: 14px; background: #fff; }
-        .mutedBox { padding: 10px; border-radius: 12px; background: rgba(0,0,0,0.04); }
+        .garage-hero {
+          border-radius: 28px;
+          padding: 18px;
+          background: linear-gradient(135deg, #111827, #1f2937 55%, #92400e);
+          color: white;
+          box-shadow: 0 18px 40px rgba(17, 24, 39, 0.20);
+          overflow: hidden;
+          position: relative;
+        }
 
-        .bike-form { margin-top:10px; display:grid; gap:10px; grid-template-columns: 1fr; }
-        @media (min-width: 520px) { .bike-form { grid-template-columns: 1fr 1fr; } }
-        .bike-form .full { grid-column: 1 / -1; }
+        .garage-hero::after {
+          content: "";
+          position: absolute;
+          width: 220px;
+          height: 220px;
+          border-radius: 999px;
+          right: -80px;
+          top: -80px;
+          background: rgba(245, 158, 11, 0.20);
+        }
 
-        .in { width:100%; padding: 10px 12px; border-radius: 12px; border: 1px solid rgba(0,0,0,0.15); box-sizing:border-box; }
-        .btn { width:100%; padding: 10px 12px; border-radius: 12px; border: 1px solid rgba(0,0,0,0.15); background: rgba(0,0,0,0.06); cursor:pointer; font-weight:800; }
-        .btnWhite { background:#fff; }
-        .btn:disabled { opacity:0.65; cursor:not-allowed; }
+        .garage-head {
+          position: relative;
+          z-index: 1;
+          display: flex;
+          align-items: flex-end;
+          justify-content: space-between;
+          gap: 12px;
+          flex-wrap: wrap;
+        }
 
-        .garage-grid { margin-top: 14px; display: grid; gap: 14px; grid-template-columns: 1fr; }
-        @media (min-width: 900px) { .garage-grid { grid-template-columns: 320px 1fr; } }
+        .garage-title {
+          margin: 0;
+          font-weight: 950;
+          letter-spacing: -0.04em;
+          font-size: clamp(32px, 8vw, 54px);
+          line-height: 0.95;
+        }
 
-        .listItem { padding: 10px; border-radius: 14px; border: 1px solid rgba(0,0,0,0.12); cursor: pointer; background: #fff; }
-        .listItemActive { background: rgba(0,0,0,0.05); }
+        .garage-sub {
+          margin: 8px 0 0;
+          opacity: 0.82;
+          font-size: 14px;
+          max-width: 680px;
+        }
 
-        .row { display:flex; gap:10px; flex-wrap:wrap; align-items:center; }
-        .row > input { flex: 1; min-width: 180px; }
+        .premium-badge {
+          display: inline-flex;
+          align-items: center;
+          gap: 8px;
+          padding: 8px 12px;
+          border-radius: 999px;
+          background: rgba(255, 255, 255, 0.13);
+          border: 1px solid rgba(255, 255, 255, 0.20);
+          font-size: 12px;
+          font-weight: 900;
+          backdrop-filter: blur(8px);
+        }
+
+        .garage-stats {
+          position: relative;
+          z-index: 1;
+          margin-top: 16px;
+          display: grid;
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+          gap: 10px;
+        }
+
+        @media (min-width: 720px) {
+          .garage-stats {
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+          }
+        }
+
+        .stat-card {
+          padding: 12px;
+          border-radius: 18px;
+          background: rgba(255, 255, 255, 0.11);
+          border: 1px solid rgba(255, 255, 255, 0.18);
+          backdrop-filter: blur(8px);
+        }
+
+        .stat-num {
+          font-size: 22px;
+          font-weight: 950;
+          line-height: 1;
+        }
+
+        .stat-label {
+          margin-top: 4px;
+          font-size: 12px;
+          opacity: 0.78;
+        }
+
+        .card {
+          margin-top: 14px;
+          border: 1px solid rgba(17, 24, 39, 0.10);
+          border-radius: 24px;
+          padding: 16px;
+          background: rgba(255, 255, 255, 0.92);
+          box-shadow: 0 12px 32px rgba(17, 24, 39, 0.08);
+          backdrop-filter: blur(10px);
+        }
+
+        .section-title {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          gap: 10px;
+          flex-wrap: wrap;
+          margin-bottom: 10px;
+        }
+
+        .section-title strong {
+          font-size: 16px;
+        }
+
+        .mutedBox {
+          padding: 12px;
+          border-radius: 16px;
+          background: rgba(17, 24, 39, 0.05);
+          font-size: 13px;
+          color: rgba(17, 24, 39, 0.78);
+        }
+
+        .bike-form {
+          margin-top: 10px;
+          display: grid;
+          gap: 10px;
+          grid-template-columns: 1fr;
+        }
+
+        @media (min-width: 560px) {
+          .bike-form {
+            grid-template-columns: 1fr 1fr;
+          }
+        }
+
+        .bike-form .full {
+          grid-column: 1 / -1;
+        }
+
+        .in {
+          width: 100%;
+          padding: 12px 13px;
+          border-radius: 15px;
+          border: 1px solid rgba(17, 24, 39, 0.14);
+          box-sizing: border-box;
+          outline: none;
+          background: #fff;
+          font-size: 14px;
+        }
+
+        .in:focus {
+          border-color: rgba(245, 158, 11, 0.75);
+          box-shadow: 0 0 0 4px rgba(245, 158, 11, 0.13);
+        }
+
+        .btn {
+          width: 100%;
+          padding: 12px 14px;
+          border-radius: 15px;
+          border: 1px solid rgba(17, 24, 39, 0.12);
+          background: linear-gradient(135deg, #111827, #374151);
+          color: white;
+          cursor: pointer;
+          font-weight: 900;
+          box-shadow: 0 10px 22px rgba(17, 24, 39, 0.12);
+        }
+
+        .btnWhite {
+          background: white;
+          color: #111827;
+          box-shadow: none;
+        }
+
+        .btnGold {
+          background: linear-gradient(135deg, #f59e0b, #b45309);
+          color: white;
+        }
+
+        .btnDanger {
+          background: white;
+          color: #991b1b;
+          border-color: rgba(153, 27, 27, 0.22);
+          box-shadow: none;
+        }
+
+        .btn:disabled {
+          opacity: 0.65;
+          cursor: not-allowed;
+        }
+
+        .garage-grid {
+          margin-top: 14px;
+          display: grid;
+          gap: 14px;
+          grid-template-columns: 1fr;
+        }
+
+        @media (min-width: 940px) {
+          .garage-grid {
+            grid-template-columns: 330px 1fr;
+          }
+        }
+
+        .listItem {
+          padding: 12px;
+          border-radius: 18px;
+          border: 1px solid rgba(17, 24, 39, 0.10);
+          cursor: pointer;
+          background: #fff;
+          transition: transform .15s ease, border-color .15s ease, background .15s ease;
+        }
+
+        .listItem:hover {
+          transform: translateY(-1px);
+          border-color: rgba(245, 158, 11, 0.35);
+        }
+
+        .listItemActive {
+          background: linear-gradient(135deg, rgba(245, 158, 11, 0.14), rgba(255,255,255,1));
+          border-color: rgba(245, 158, 11, 0.46);
+        }
+
+        .row {
+          display: flex;
+          gap: 10px;
+          flex-wrap: wrap;
+          align-items: center;
+        }
+
+        .row > input {
+          flex: 1;
+          min-width: 180px;
+        }
+
+        @media (max-width: 560px) {
+          .row .btn,
+          .section-action,
+          .inline-btn {
+            width: 100% !important;
+          }
+        }
+
+        .active-bike-hero {
+          margin-top: 14px;
+          padding: 16px;
+          border-radius: 24px;
+          background: linear-gradient(135deg, rgba(17,24,39,0.97), rgba(55,65,81,0.96));
+          color: white;
+          box-shadow: 0 14px 34px rgba(17,24,39,0.16);
+        }
+
+        .mini-grid {
+          margin-top: 12px;
+          display: grid;
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+          gap: 10px;
+        }
+
+        @media (min-width: 700px) {
+          .mini-grid {
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+          }
+        }
+
+        .mini-card {
+          padding: 10px;
+          border-radius: 16px;
+          background: rgba(255, 255, 255, 0.10);
+          border: 1px solid rgba(255, 255, 255, 0.14);
+        }
+
+        .premium-panel {
+          margin-top: 14px;
+          padding: 14px;
+          border-radius: 20px;
+          border: 1px solid rgba(17,24,39,0.10);
+          background: rgba(17, 24, 39, 0.025);
+        }
+
+        .form-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+          gap: 10px;
+        }
+
+        .soft-card {
+          border: 1px solid rgba(17,24,39,0.10);
+          border-radius: 18px;
+          padding: 12px;
+          background: white;
+        }
+
+        .soft-card-dark {
+          border: 1px solid rgba(255,255,255,0.14);
+          border-radius: 18px;
+          padding: 12px;
+          background: rgba(255,255,255,0.09);
+        }
+
+        .small-muted {
+          font-size: 12px;
+          opacity: 0.72;
+        }
       `}</style>
 
-      <div className="garage-head">
-        <div>
-          <h1 className="garage-title">Garage 🧰</h1>
-          <p className="garage-sub">Libretto digitale offline (foto + scadenze). Niente login.</p>
+      <div className="garage-hero">
+        <div className="garage-head">
+          <div>
+            <div className="premium-badge">🏍️ MotoPortEU Premium Garage</div>
+            <h1 className="garage-title">Garage</h1>
+            <p className="garage-sub">
+              Libretto digitale offline, manutenzione, scadenze e storico interventi.
+              Tutto salvato sul dispositivo.
+            </p>
+          </div>
+        </div>
+
+        <div className="garage-stats">
+          <HeroStat value={bikes.length} label="Moto salvate" />
+          <HeroStat value={garageStats.docsCount} label="Documenti moto" />
+          <HeroStat value={garageStats.svcCount} label="Interventi" />
+          <HeroStat
+            value={garageStats.expired + garageStats.due}
+            label="Alert scadenze"
+          />
         </div>
       </div>
 
       <div className="card">
-        <strong>Aggiungi moto</strong>
+        <div className="section-title">
+          <strong>➕ Aggiungi moto</strong>
+          <span className="small-muted">Marca e modello sono obbligatori</span>
+        </div>
+
         <div className="bike-form">
           <input
             className="in"
@@ -585,8 +898,8 @@ export default function Garage() {
           />
 
           <div className="full">
-            <button type="button" onClick={addBike} className="btn">
-              Aggiungi
+            <button type="button" onClick={addBike} className="btn btnGold">
+              Aggiungi al Garage
             </button>
           </div>
         </div>
@@ -594,27 +907,51 @@ export default function Garage() {
 
       <div className="garage-grid">
         <div className="card" style={{ height: "fit-content" }}>
-          <strong>Le tue moto</strong>
+          <div className="section-title">
+            <strong>🏍️ Le tue moto</strong>
+          </div>
+
           <div style={{ marginTop: 10, display: "grid", gap: 10 }}>
-            {bikes.length === 0 && <div className="mutedBox">Nessuna moto. Aggiungine una sopra.</div>}
+            {bikes.length === 0 && (
+              <div className="mutedBox">Nessuna moto. Aggiungine una sopra.</div>
+            )}
+
             {bikes.map((b) => (
               <div
                 key={b.id}
                 onClick={() => setActiveId(b.id)}
                 className={`listItem ${b.id === activeId ? "listItemActive" : ""}`}
               >
-                <div style={{ display: "flex", justifyContent: "space-between", gap: 10 }}>
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    gap: 10,
+                    alignItems: "flex-start",
+                  }}
+                >
                   <div>
-                    <div style={{ fontWeight: 800 }}>{b.brand} {b.model}</div>
-                    <div style={{ fontSize: 12, opacity: 0.75 }}>
-                      {b.year ? `${b.year} · ` : ""}{parseKm(b.km, 0).toLocaleString()} km
+                    <div style={{ fontWeight: 950 }}>
+                      {b.brand} {b.model}
+                    </div>
+                    <div style={{ fontSize: 12, opacity: 0.75, marginTop: 3 }}>
+                      {b.year ? `${b.year} · ` : ""}
+                      {parseKm(b.km, 0).toLocaleString()} km
                     </div>
                   </div>
+
                   <button
                     type="button"
-                    onClick={(e) => { e.stopPropagation(); deleteBike(b.id); }}
-                    className="btn btnWhite"
-                    style={{ width: "auto", padding: "6px 10px", height: "fit-content" }}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      deleteBike(b.id);
+                    }}
+                    className="btn btnDanger"
+                    style={{
+                      width: "auto",
+                      padding: "7px 10px",
+                      height: "fit-content",
+                    }}
                   >
                     Elimina
                   </button>
@@ -626,41 +963,64 @@ export default function Garage() {
 
         <div className="card">
           {!activeBike ? (
-            <div className="mutedBox">Seleziona una moto per vedere manutenzione e libretto.</div>
+            <div className="mutedBox">
+              Seleziona una moto per vedere manutenzione e libretto.
+            </div>
           ) : (
             <>
-              <div style={{ display: "flex", alignItems: "baseline", gap: 10, flexWrap: "wrap" }}>
-                <h2 style={{ margin: 0 }}>
-                  {activeBike.brand} {activeBike.model}
-                </h2>
-                <span style={{ opacity: 0.75, fontSize: 13 }}>
-                  {activeBike.year ? `${activeBike.year} · ` : ""}
-                  {parseKm(activeBike.km, 0).toLocaleString()} km
-                </span>
-              </div>
+              <div className="active-bike-hero">
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "baseline",
+                    justifyContent: "space-between",
+                    gap: 10,
+                    flexWrap: "wrap",
+                  }}
+                >
+                  <div>
+                    <div className="small-muted">Moto selezionata</div>
+                    <h2 style={{ margin: "4px 0 0", fontSize: 28 }}>
+                      {activeBike.brand} {activeBike.model}
+                    </h2>
+                  </div>
 
-              <div style={{ marginTop: 12, padding: 12, borderRadius: 14, border: "1px solid rgba(0,0,0,0.12)", background: "rgba(0,0,0,0.02)" }}>
-                <div style={{ display: "flex", alignItems: "baseline", justifyContent: "space-between", gap: 10, flexWrap: "wrap" }}>
-                  <strong>📅 Scadenze in arrivo (45gg)</strong>
-                  <span style={{ fontSize: 12, opacity: 0.75 }}>
-                    {expiryLists.expired.length > 0 ? `Scaduti: ${expiryLists.expired.length} · ` : ""}
-                    In arrivo: {expiryLists.dueSoon.length}
+                  <span style={heroPillStyle()}>
+                    {activeBike.year ? `${activeBike.year} · ` : ""}
+                    {parseKm(activeBike.km, 0).toLocaleString()} km
                   </span>
                 </div>
 
-                {(expiryLists.expired.length === 0 && expiryLists.dueSoon.length === 0) ? (
-                  <div style={{ marginTop: 8, fontSize: 13, opacity: 0.8 }}>
-                    Nessuna scadenza imminente. 🔥
-                  </div>
+                <div className="mini-grid">
+                  <MiniStat label="Documenti" value={garageStats.docsCount} />
+                  <MiniStat label="Interventi" value={garageStats.svcCount} />
+                  <MiniStat label="Scaduti" value={garageStats.expired} />
+                  <MiniStat label="In arrivo" value={garageStats.due} />
+                </div>
+              </div>
+
+              <div className="premium-panel">
+                <div className="section-title">
+                  <strong>📅 Scadenze in arrivo</strong>
+                  <span className="small-muted">Controllo automatico 45 giorni</span>
+                </div>
+
+                {expiryLists.expired.length === 0 &&
+                expiryLists.dueSoon.length === 0 ? (
+                  <div className="mutedBox">Nessuna scadenza imminente. 🔥</div>
                 ) : (
-                  <div style={{ marginTop: 10, display: "grid", gap: 8 }}>
-                    {expiryLists.expired.map((d) => <ExpiryRow key={d.id} doc={d} />)}
-                    {expiryLists.dueSoon.map((d) => <ExpiryRow key={d.id} doc={d} />)}
+                  <div style={{ display: "grid", gap: 8 }}>
+                    {expiryLists.expired.map((d) => (
+                      <ExpiryRow key={d.id} doc={d} />
+                    ))}
+                    {expiryLists.dueSoon.map((d) => (
+                      <ExpiryRow key={d.id} doc={d} />
+                    ))}
                   </div>
                 )}
               </div>
 
-              <div className="row" style={{ marginTop: 12 }}>
+              <div className="row" style={{ marginTop: 14 }}>
                 <input
                   value={kmUpdate}
                   onChange={(e) => setKmUpdate(e.target.value)}
@@ -668,7 +1028,12 @@ export default function Garage() {
                   inputMode="numeric"
                   className="in"
                 />
-                <button type="button" onClick={updateBikeKm} className="btn btnWhite" style={{ width: "auto" }}>
+                <button
+                  type="button"
+                  onClick={updateBikeKm}
+                  className="btn btnWhite inline-btn"
+                  style={{ width: "auto" }}
+                >
                   Salva km
                 </button>
               </div>
@@ -681,73 +1046,138 @@ export default function Garage() {
                 </div>
               )}
 
-              <div style={{ marginTop: 16, paddingTop: 14, borderTop: "1px solid rgba(0,0,0,0.10)" }}>
-                <strong>Intervalli (km)</strong>
-                <div style={{ marginTop: 10, display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(180px, 1fr))", gap: 10 }}>
-                <IntervalInput
-  label="Olio ogni"
-  value={String(activeBike.maintenance?.oilEveryKm ?? DEFAULTS.oilEveryKm)}
-  min={500}
-  max={50000}
-  onCommit={(v) => updateIntervals({ oilEveryKm: v })}
-/>
-<IntervalInput
-  label="Catena ogni"
-  value={String(activeBike.maintenance?.chainEveryKm ?? DEFAULTS.chainEveryKm)}
-  min={100}
-  max={10000}
-  onCommit={(v) => updateIntervals({ chainEveryKm: v })}
-/>
-<IntervalInput
-  label="Gomme ogni"
-  value={String(activeBike.maintenance?.tiresEveryKm ?? DEFAULTS.tiresEveryKm)}
-  min={1000}
-  max={50000}
-  onCommit={(v) => updateIntervals({ tiresEveryKm: v })}
-/>
+              <div className="premium-panel">
+                <div className="section-title">
+                  <strong>⚙️ Intervalli manutenzione</strong>
+                  <span className="small-muted">Personalizzabili per ogni moto</span>
                 </div>
-                <div style={{ marginTop: 8, fontSize: 12, opacity: 0.72 }}>
-                  Suggerimento: registra un intervento nello storico per avere scadenze davvero precise su olio, catena e gomme.
+
+                <div className="form-grid">
+                  <IntervalInput
+                    label="Olio ogni"
+                    value={String(
+                      activeBike.maintenance?.oilEveryKm ?? DEFAULTS.oilEveryKm
+                    )}
+                    min={500}
+                    max={50000}
+                    onCommit={(v) => updateIntervals({ oilEveryKm: v })}
+                  />
+
+                  <IntervalInput
+                    label="Catena ogni"
+                    value={String(
+                      activeBike.maintenance?.chainEveryKm ??
+                        DEFAULTS.chainEveryKm
+                    )}
+                    min={100}
+                    max={10000}
+                    onCommit={(v) => updateIntervals({ chainEveryKm: v })}
+                  />
+
+                  <IntervalInput
+                    label="Gomme ogni"
+                    value={String(
+                      activeBike.maintenance?.tiresEveryKm ??
+                        DEFAULTS.tiresEveryKm
+                    )}
+                    min={1000}
+                    max={50000}
+                    onCommit={(v) => updateIntervals({ tiresEveryKm: v })}
+                  />
+                </div>
+
+                <div style={{ marginTop: 10 }} className="small-muted">
+                  Registra un intervento nello storico per avere calcoli più
+                  precisi su olio, catena e gomme.
                 </div>
               </div>
 
-              <div style={{ marginTop: 16, paddingTop: 14, borderTop: "1px solid rgba(0,0,0,0.10)" }}>
-                <strong>📒 Storico Tagliandi / Interventi</strong>
+              <div className="premium-panel">
+                <div className="section-title">
+                  <strong>📒 Storico Tagliandi / Interventi</strong>
+                  <span className="small-muted">Base reale per le prossime scadenze</span>
+                </div>
 
-                <div style={{ marginTop: 10, border: "1px solid rgba(0,0,0,0.12)", borderRadius: 14, padding: 12, background: "rgba(0,0,0,0.02)" }}>
-                  <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(180px, 1fr))", gap: 10 }}>
+                <div className="soft-card">
+                  <div className="form-grid">
                     <label style={{ display: "grid", gap: 6 }}>
-                      <span style={{ fontSize: 12, opacity: 0.8 }}>Data</span>
-                      <input type="date" value={svcDate} onChange={(e) => setSvcDate(e.target.value)} className="in" />
+                      <span className="small-muted">Data</span>
+                      <input
+                        type="date"
+                        value={svcDate}
+                        onChange={(e) => setSvcDate(e.target.value)}
+                        className="in"
+                      />
                     </label>
 
                     <label style={{ display: "grid", gap: 6 }}>
-                      <span style={{ fontSize: 12, opacity: 0.8 }}>Km</span>
-                      <input value={svcKm} onChange={(e) => setSvcKm(e.target.value)} inputMode="numeric" placeholder="es. 12500" className="in" />
+                      <span className="small-muted">Km</span>
+                      <input
+                        value={svcKm}
+                        onChange={(e) => setSvcKm(e.target.value)}
+                        inputMode="numeric"
+                        placeholder="es. 12500"
+                        className="in"
+                      />
                     </label>
 
                     <label style={{ display: "grid", gap: 6 }}>
-                      <span style={{ fontSize: 12, opacity: 0.8 }}>Tipo</span>
-                      <input value={svcType} onChange={(e) => setSvcType(e.target.value)} placeholder="Tagliando / Olio / Gomme..." className="in" />
+                      <span className="small-muted">Tipo</span>
+                      <input
+                        value={svcType}
+                        onChange={(e) => setSvcType(e.target.value)}
+                        placeholder="Tagliando / Olio / Gomme..."
+                        className="in"
+                      />
                     </label>
 
                     <label style={{ display: "grid", gap: 6 }}>
-                      <span style={{ fontSize: 12, opacity: 0.8 }}>Costo € (opz.)</span>
-                      <input value={svcCost} onChange={(e) => setSvcCost(e.target.value)} inputMode="decimal" placeholder="es. 180" className="in" />
+                      <span className="small-muted">Costo € (opz.)</span>
+                      <input
+                        value={svcCost}
+                        onChange={(e) => setSvcCost(e.target.value)}
+                        inputMode="decimal"
+                        placeholder="es. 180"
+                        className="in"
+                      />
                     </label>
 
-                    <label style={{ display: "grid", gap: 6, gridColumn: "1 / -1" }}>
-                      <span style={{ fontSize: 12, opacity: 0.8 }}>Note (opz.)</span>
-                      <input value={svcNote} onChange={(e) => setSvcNote(e.target.value)} placeholder="es. Olio Motul 7100, filtro…" className="in" />
+                    <label
+                      style={{
+                        display: "grid",
+                        gap: 6,
+                        gridColumn: "1 / -1",
+                      }}
+                    >
+                      <span className="small-muted">Note (opz.)</span>
+                      <input
+                        value={svcNote}
+                        onChange={(e) => setSvcNote(e.target.value)}
+                        placeholder="es. Olio Motul 7100, filtro…"
+                        className="in"
+                      />
                     </label>
                   </div>
 
-                  <div style={{ marginTop: 10, display: "flex", gap: 10, flexWrap: "wrap" }}>
-                    <button type="button" onClick={addServiceEntry} className="btn btnWhite" style={{ width: "auto" }}>
+                  <div
+                    style={{
+                      marginTop: 10,
+                      display: "flex",
+                      gap: 10,
+                      flexWrap: "wrap",
+                      alignItems: "center",
+                    }}
+                  >
+                    <button
+                      type="button"
+                      onClick={addServiceEntry}
+                      className="btn btnGold section-action"
+                      style={{ width: "auto" }}
+                    >
                       Aggiungi intervento
                     </button>
-                    <span style={{ fontSize: 12, opacity: 0.75 }}>
-                      Inserisci sempre data + km, il resto è opzionale.
+                    <span className="small-muted">
+                      Data + km obbligatori. Il resto è opzionale.
                     </span>
                   </div>
                 </div>
@@ -757,14 +1187,24 @@ export default function Garage() {
                     <div className="mutedBox">Nessun intervento registrato.</div>
                   ) : (
                     serviceSorted.map((s) => (
-                      <div key={s.id} style={{ border: "1px solid rgba(0,0,0,0.12)", borderRadius: 14, padding: 12, background: "white" }}>
-                        <div style={{ display: "flex", justifyContent: "space-between", gap: 10, flexWrap: "wrap" }}>
+                      <div key={s.id} className="soft-card">
+                        <div
+                          style={{
+                            display: "flex",
+                            justifyContent: "space-between",
+                            gap: 10,
+                            flexWrap: "wrap",
+                          }}
+                        >
                           <div>
-                            <div style={{ fontWeight: 800 }}>
-                              {s.type} · {s.date} · {parseKm(s.km, 0).toLocaleString()} km
+                            <div style={{ fontWeight: 900 }}>
+                              {s.type} · {s.date} ·{" "}
+                              {parseKm(s.km, 0).toLocaleString()} km
                             </div>
-                            <div style={{ fontSize: 12, opacity: 0.75 }}>
-                              {s.cost !== "" ? `Costo: €${Number(s.cost).toLocaleString()} · ` : ""}
+                            <div className="small-muted" style={{ marginTop: 4 }}>
+                              {s.cost !== ""
+                                ? `Costo: €${Number(s.cost).toLocaleString()} · `
+                                : ""}
                               {s.note ? s.note : "—"}
                             </div>
                           </div>
@@ -772,8 +1212,12 @@ export default function Garage() {
                           <button
                             type="button"
                             onClick={() => deleteServiceEntry(s.id)}
-                            className="btn btnWhite"
-                            style={{ width: "auto", padding: "6px 10px", height: "fit-content" }}
+                            className="btn btnDanger inline-btn"
+                            style={{
+                              width: "auto",
+                              padding: "7px 10px",
+                              height: "fit-content",
+                            }}
                           >
                             Elimina
                           </button>
@@ -784,61 +1228,100 @@ export default function Garage() {
                 </div>
               </div>
 
-              <div style={{ marginTop: 16, paddingTop: 14, borderTop: "1px solid rgba(0,0,0,0.10)" }}>
-                <strong>Libretto & Documenti (offline)</strong>
+              <div className="premium-panel">
+                <div className="section-title">
+                  <strong>📂 Libretto & Documenti offline</strong>
+                  <span className="small-muted">
+                    Foto, PDF, scadenze o solo note
+                  </span>
+                </div>
 
-                <div style={{ marginTop: 10, display: "grid", gap: 10 }}>
-                  <div style={{ border: "1px solid rgba(0,0,0,0.12)", borderRadius: 14, padding: 12, background: "rgba(0,0,0,0.02)" }}>
-                    <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(180px, 1fr))", gap: 10 }}>
-                      <label style={{ display: "grid", gap: 6 }}>
-                        <span style={{ fontSize: 12, opacity: 0.8 }}>Tipo</span>
-                        <select value={docType} onChange={(e) => setDocType(e.target.value)} className="in">
-                          {DOC_TYPES.map((d) => (
-                            <option key={d.key} value={d.key}>
-                              {d.label}
-                            </option>
-                          ))}
-                        </select>
-                      </label>
+                <div className="soft-card">
+                  <div className="form-grid">
+                    <label style={{ display: "grid", gap: 6 }}>
+                      <span className="small-muted">Tipo</span>
+                      <select
+                        value={docType}
+                        onChange={(e) => setDocType(e.target.value)}
+                        className="in"
+                      >
+                        {DOC_TYPES.map((d) => (
+                          <option key={d.key} value={d.key}>
+                            {d.label}
+                          </option>
+                        ))}
+                      </select>
+                    </label>
 
-                      <label style={{ display: "grid", gap: 6 }}>
-                        <span style={{ fontSize: 12, opacity: 0.8 }}>Scadenza (opz.)</span>
-                        <input type="date" value={docExpiry} onChange={(e) => setDocExpiry(e.target.value)} className="in" />
-                      </label>
+                    <label style={{ display: "grid", gap: 6 }}>
+                      <span className="small-muted">Scadenza (opz.)</span>
+                      <input
+                        type="date"
+                        value={docExpiry}
+                        onChange={(e) => setDocExpiry(e.target.value)}
+                        className="in"
+                      />
+                    </label>
 
-                      <label style={{ display: "grid", gap: 6 }}>
-                        <span style={{ fontSize: 12, opacity: 0.8 }}>Note (opz.)</span>
-                        <input value={docNote} onChange={(e) => setDocNote(e.target.value)} placeholder="Es. polizza, compagnia, ecc." className="in" />
-                      </label>
+                    <label style={{ display: "grid", gap: 6 }}>
+                      <span className="small-muted">Note (opz.)</span>
+                      <input
+                        value={docNote}
+                        onChange={(e) => setDocNote(e.target.value)}
+                        placeholder="Es. polizza, compagnia, ecc."
+                        className="in"
+                      />
+                    </label>
 
-                      <label style={{ display: "grid", gap: 6 }}>
-                        <span style={{ fontSize: 12, opacity: 0.8 }}>Foto/PDF (opz.)</span>
-                        <input
-                          id="docFileInput"
-                          type="file"
-                          accept="image/*,application/pdf"
-                          onChange={(e) => setDocFile(e.target.files?.[0] || null)}
-                          style={{ padding: "8px 0" }}
-                        />
-                      </label>
-                    </div>
-
-                    <div style={{ marginTop: 10, display: "flex", gap: 10, flexWrap: "wrap", alignItems: "center" }}>
-                      <button type="button" onClick={addDocument} disabled={docBusy} className="btn btnWhite" style={{ width: "auto" }}>
-                        {docBusy ? "Salvataggio..." : "Aggiungi documento"}
-                      </button>
-                      <span style={{ fontSize: 12, opacity: 0.75 }}>
-                        ✅ Ora puoi salvare anche senza allegato (solo dati).
-                      </span>
-                    </div>
+                    <label style={{ display: "grid", gap: 6 }}>
+                      <span className="small-muted">Foto/PDF (opz.)</span>
+                      <input
+                        id="docFileInput"
+                        type="file"
+                        accept="image/*,application/pdf"
+                        onChange={(e) => setDocFile(e.target.files?.[0] || null)}
+                        style={{ padding: "10px 0" }}
+                      />
+                    </label>
                   </div>
 
+                  <div
+                    style={{
+                      marginTop: 10,
+                      display: "flex",
+                      gap: 10,
+                      flexWrap: "wrap",
+                      alignItems: "center",
+                    }}
+                  >
+                    <button
+                      type="button"
+                      onClick={addDocument}
+                      disabled={docBusy}
+                      className="btn btnGold section-action"
+                      style={{ width: "auto" }}
+                    >
+                      {docBusy ? "Salvataggio..." : "Aggiungi documento"}
+                    </button>
+                    <span className="small-muted">
+                      Puoi salvare anche senza allegato.
+                    </span>
+                  </div>
+                </div>
+
+                <div style={{ marginTop: 10 }}>
                   {docsSorted.length === 0 ? (
-                    <div className="mutedBox">Nessun documento salvato per questa moto.</div>
+                    <div className="mutedBox">
+                      Nessun documento salvato per questa moto.
+                    </div>
                   ) : (
                     <div style={{ display: "grid", gap: 10 }}>
                       {docsSorted.map((d) => (
-                        <DocCard key={d.id} doc={d} onDelete={() => deleteDocument(d.id)} />
+                        <DocCard
+                          key={d.id}
+                          doc={d}
+                          onDelete={() => deleteDocument(d.id)}
+                        />
                       ))}
                     </div>
                   )}
@@ -852,20 +1335,48 @@ export default function Garage() {
   );
 }
 
+function HeroStat({ value, label }) {
+  return (
+    <div className="stat-card">
+      <div className="stat-num">{value}</div>
+      <div className="stat-label">{label}</div>
+    </div>
+  );
+}
+
+function MiniStat({ value, label }) {
+  return (
+    <div className="mini-card">
+      <div style={{ fontWeight: 950, fontSize: 20 }}>{value}</div>
+      <div className="small-muted">{label}</div>
+    </div>
+  );
+}
+
 function ExpiryRow({ doc }) {
   const days = doc.days;
   const st = doc.st || { label: "OK", level: "ok" };
 
   return (
-    <div style={{ display: "flex", justifyContent: "space-between", gap: 10, flexWrap: "wrap", alignItems: "center", padding: "8px 10px", borderRadius: 12, border: "1px solid rgba(0,0,0,0.12)", background: "white" }}>
-      <div style={{ fontSize: 13 }}>
-        <strong>{doc.label}</strong>{" "}
-        <span style={{ opacity: 0.75 }}>
-          · {doc.expiry} · {days < 0 ? "scaduto" : `${days} giorni`}
-        </span>
-        {doc.note ? <span style={{ opacity: 0.7 }}> · {doc.note}</span> : null}
+    <div className="soft-card">
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+          gap: 10,
+          flexWrap: "wrap",
+          alignItems: "center",
+        }}
+      >
+        <div style={{ fontSize: 13 }}>
+          <strong>{doc.label}</strong>{" "}
+          <span style={{ opacity: 0.75 }}>
+            · {doc.expiry} · {days < 0 ? "scaduto" : `${days} giorni`}
+          </span>
+          {doc.note ? <span style={{ opacity: 0.7 }}> · {doc.note}</span> : null}
+        </div>
+        <span style={pillStyle(st.level)}>{st.label}</span>
       </div>
-      <span style={pillStyle(st.level)}>{st.label}</span>
     </div>
   );
 }
@@ -873,36 +1384,43 @@ function ExpiryRow({ doc }) {
 function HealthRow({ title, item }) {
   const lastText =
     item.lastKm !== null
-      ? `${item.lastKm.toLocaleString()} km${item.lastType ? ` · ${item.lastType}` : ""}`
+      ? `${item.lastKm.toLocaleString()} km${
+          item.lastType ? ` · ${item.lastType}` : ""
+        }`
       : "non registrato";
 
   const modeText =
     item.calcMode === "from-service-log"
       ? "Calcolo da ultimo intervento"
-      : "Calcolo da km attuali (nessuno storico trovato)";
+      : "Calcolo da km attuali";
 
   return (
-    <div style={{ border: "1px solid rgba(0,0,0,0.12)", borderRadius: 14, padding: 12, background: "white" }}>
-      <div style={{ display: "flex", alignItems: "baseline", justifyContent: "space-between", gap: 10, flexWrap: "wrap" }}>
+    <div className="soft-card">
+      <div
+        style={{
+          display: "flex",
+          alignItems: "baseline",
+          justifyContent: "space-between",
+          gap: 10,
+          flexWrap: "wrap",
+        }}
+      >
         <strong>{title}</strong>
-        <span style={{ opacity: 0.8, fontSize: 12 }}>
-          Prossima: <strong>{item.next.toLocaleString()} km</strong> · Mancano{" "}
-          <strong>{item.left.toLocaleString()} km</strong>
-        </span>
-      </div>
-
-      <div style={{ marginTop: 6, fontSize: 12, opacity: 0.75 }}>
-        Intervallo: {item.interval.toLocaleString()} km
-      </div>
-      <div style={{ marginTop: 4, fontSize: 12, opacity: 0.75 }}>
-        Ultimo intervento: {lastText}
-      </div>
-      <div style={{ marginTop: 4, fontSize: 12, opacity: 0.65 }}>
-        {modeText}
-      </div>
-
-      <div style={{ marginTop: 8 }}>
         <span style={pillStyle(item.level)}>{item.label}</span>
+      </div>
+
+      <div style={{ marginTop: 10, display: "grid", gap: 6 }}>
+        <div style={{ fontSize: 13 }}>
+          Prossima: <strong>{item.next.toLocaleString()} km</strong>
+        </div>
+        <div style={{ fontSize: 13 }}>
+          Mancano: <strong>{item.left.toLocaleString()} km</strong>
+        </div>
+        <div className="small-muted">
+          Intervallo: {item.interval.toLocaleString()} km
+        </div>
+        <div className="small-muted">Ultimo intervento: {lastText}</div>
+        <div className="small-muted">{modeText}</div>
       </div>
     </div>
   );
@@ -918,7 +1436,6 @@ function IntervalInput({ label, value, min = 0, max = 9999999, onCommit }) {
   const commit = () => {
     const raw = String(draft ?? "").trim();
 
-    // se l’utente lascia vuoto, ripristina il valore attuale senza salvare schifezze
     if (!raw) {
       setDraft(String(value ?? ""));
       return;
@@ -931,7 +1448,7 @@ function IntervalInput({ label, value, min = 0, max = 9999999, onCommit }) {
 
   return (
     <label style={{ display: "grid", gap: 6 }}>
-      <span style={{ fontSize: 12, opacity: 0.8 }}>{label}</span>
+      <span className="small-muted">{label}</span>
       <input
         value={draft}
         onChange={(e) => setDraft(e.target.value)}
@@ -943,25 +1460,23 @@ function IntervalInput({ label, value, min = 0, max = 9999999, onCommit }) {
           }
         }}
         inputMode="numeric"
-        style={{
-          padding: "10px 12px",
-          borderRadius: 12,
-          border: "1px solid rgba(0,0,0,0.15)",
-          outline: "none",
-        }}
+        className="in"
       />
     </label>
   );
 }
+
 function DocCard({ doc, onDelete }) {
   const dataUrl = doc.dataUrl || null;
   const isPdf = dataUrl ? String(dataUrl).startsWith("data:application/pdf") : false;
   const hasAttachment = !!dataUrl;
 
   let expiryBadge = null;
+
   if (doc.expiry) {
     const diffDays = diffDaysFromToday(doc.expiry);
     const st = expiryStatus(diffDays) || { label: "OK", level: "ok" };
+
     expiryBadge = (
       <span style={{ ...pillStyle(st.level), marginLeft: 8 }}>
         Scade: {doc.expiry} ({diffDays < 0 ? "scaduto" : `${diffDays}gg`})
@@ -970,30 +1485,57 @@ function DocCard({ doc, onDelete }) {
   }
 
   return (
-    <div style={{ border: "1px solid rgba(0,0,0,0.12)", borderRadius: 14, padding: 12, background: "white" }}>
-      <div style={{ display: "flex", justifyContent: "space-between", gap: 10, flexWrap: "wrap", alignItems: "center" }}>
+    <div className="soft-card">
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+          gap: 10,
+          flexWrap: "wrap",
+          alignItems: "center",
+        }}
+      >
         <div>
-          <div style={{ fontWeight: 800 }}>
+          <div style={{ fontWeight: 900 }}>
             {doc.label}
             {expiryBadge}
           </div>
-          <div style={{ fontSize: 12, opacity: 0.75 }}>
+
+          <div className="small-muted" style={{ marginTop: 4 }}>
             {doc.fileName ? `${doc.fileName} · ` : ""}
-            {hasAttachment ? "" : "Solo dati (nessun allegato) · "}
+            {hasAttachment ? "" : "Solo dati · "}
             Salvato: {String(doc.createdAt || "").slice(0, 10)}
             {doc.note ? ` · ${doc.note}` : ""}
           </div>
         </div>
 
-        <button type="button" onClick={onDelete} style={{ padding: "6px 10px", borderRadius: 12, border: "1px solid rgba(0,0,0,0.15)", background: "white", cursor: "pointer", height: "fit-content" }}>
+        <button
+          type="button"
+          onClick={onDelete}
+          className="btn btnDanger inline-btn"
+          style={{
+            width: "auto",
+            padding: "7px 10px",
+            height: "fit-content",
+          }}
+        >
           Elimina
         </button>
       </div>
 
       <div style={{ marginTop: 10 }}>
         {!hasAttachment ? (
-          <div style={{ padding: 12, borderRadius: 12, border: "1px dashed rgba(0,0,0,0.18)", background: "rgba(0,0,0,0.02)", fontSize: 13, opacity: 0.85 }}>
-            Nessun file allegato. (Documento salvato solo con dati.)
+          <div
+            style={{
+              padding: 12,
+              borderRadius: 14,
+              border: "1px dashed rgba(17,24,39,0.18)",
+              background: "rgba(17,24,39,0.03)",
+              fontSize: 13,
+              opacity: 0.85,
+            }}
+          >
+            Nessun file allegato. Documento salvato solo con dati.
           </div>
         ) : isPdf ? (
           <a href={dataUrl} target="_blank" rel="noreferrer" style={{ fontSize: 13 }}>
@@ -1003,7 +1545,14 @@ function DocCard({ doc, onDelete }) {
           <img
             src={dataUrl}
             alt={doc.label}
-            style={{ width: "100%", maxHeight: 360, objectFit: "contain", borderRadius: 12, border: "1px solid rgba(0,0,0,0.10)", background: "rgba(0,0,0,0.02)" }}
+            style={{
+              width: "100%",
+              maxHeight: 380,
+              objectFit: "contain",
+              borderRadius: 16,
+              border: "1px solid rgba(17,24,39,0.10)",
+              background: "rgba(17,24,39,0.03)",
+            }}
           />
         )}
       </div>
@@ -1011,17 +1560,60 @@ function DocCard({ doc, onDelete }) {
   );
 }
 
+function heroPillStyle() {
+  return {
+    display: "inline-block",
+    padding: "7px 12px",
+    borderRadius: 999,
+    fontSize: 13,
+    fontWeight: 900,
+    border: "1px solid rgba(255,255,255,0.18)",
+    background: "rgba(255,255,255,0.12)",
+  };
+}
+
 function pillStyle(level) {
   const base = {
     display: "inline-block",
-    padding: "4px 10px",
+    padding: "5px 10px",
     borderRadius: 999,
     fontSize: 12,
-    border: "1px solid rgba(0,0,0,0.15)",
-    background: "rgba(0,0,0,0.04)",
+    fontWeight: 900,
+    border: "1px solid rgba(17,24,39,0.12)",
+    background: "rgba(17,24,39,0.05)",
   };
-  if (level === "bad") return { ...base, background: "rgba(255,0,0,0.10)" };
-  if (level === "warn") return { ...base, background: "rgba(255,140,0,0.12)" };
-  if (level === "soon") return { ...base, background: "rgba(255,215,0,0.18)" };
-  return base;
+
+  if (level === "bad") {
+    return {
+      ...base,
+      color: "#991b1b",
+      background: "rgba(239,68,68,0.12)",
+      borderColor: "rgba(239,68,68,0.22)",
+    };
+  }
+
+  if (level === "warn") {
+    return {
+      ...base,
+      color: "#92400e",
+      background: "rgba(245,158,11,0.15)",
+      borderColor: "rgba(245,158,11,0.28)",
+    };
+  }
+
+  if (level === "soon") {
+    return {
+      ...base,
+      color: "#854d0e",
+      background: "rgba(250,204,21,0.18)",
+      borderColor: "rgba(250,204,21,0.30)",
+    };
+  }
+
+  return {
+    ...base,
+    color: "#166534",
+    background: "rgba(34,197,94,0.11)",
+    borderColor: "rgba(34,197,94,0.22)",
+  };
 }
