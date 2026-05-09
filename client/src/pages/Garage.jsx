@@ -148,16 +148,20 @@ function buildMaintenanceItem({
   currentKm,
   interval,
   lastEntry,
+  baseKm,
   categoryLabel,
 }) {
   const safeCurrent = parseKm(currentKm, 0);
   const safeInterval = Math.max(1, parseKm(interval, 1));
+
   const lastKm = lastEntry ? parseKm(lastEntry.km, 0) : null;
 
-  const nextDueKm =
-    lastKm !== null ? lastKm + safeInterval : safeCurrent + safeInterval;
+  // 🔥 NUOVA LOGICA
+  const base = lastKm !== null ? lastKm : parseKm(baseKm, 0);
 
+  const nextDueKm = base + safeInterval;
   const left = nextDueKm - safeCurrent;
+
   const status = statusFor(nextDueKm, safeCurrent);
 
   return {
@@ -167,7 +171,8 @@ function buildMaintenanceItem({
     lastKm,
     lastType: lastEntry?.type || "",
     categoryLabel,
-    calcMode: lastKm !== null ? "from-service-log" : "from-current-km",
+    calcMode:
+      lastKm !== null ? "from-service-log" : "from-initial-km",
     ...status,
   };
 }
@@ -232,7 +237,8 @@ export default function Garage() {
 
     const currentKm = parseKm(activeBike.km, 0);
     const maintenance = activeBike.maintenance || {};
-
+    const baseKm = activeBike.baseKm ?? activeBike.createdKm ?? activeBike.km;
+    const baseKm = activeBike.baseKm ?? activeBike.km;
     const oilInterval = parseKm(
       maintenance.oilEveryKm ?? DEFAULTS.oilEveryKm,
       DEFAULTS.oilEveryKm
@@ -264,33 +270,36 @@ export default function Garage() {
 
     return {
       currentKm,
-      oil: buildMaintenanceItem({
-        currentKm,
-        interval: oilInterval,
-        lastEntry: getLastServiceKm(log, "oil"),
-        categoryLabel: "Olio",
-      }),
-      chain: buildMaintenanceItem({
-        currentKm,
-        interval: chainInterval,
-        lastEntry: getLastServiceKm(log, "chain"),
-        categoryLabel: "Catena",
-      }),
-      frontTire: buildMaintenanceItem({
-        currentKm,
-        interval: frontTireInterval,
-        lastEntry: getLastServiceKm(log, "frontTire"),
-        categoryLabel: "Gomma anteriore",
-      }),
-      rearTire: buildMaintenanceItem({
-        currentKm,
-        interval: rearTireInterval,
-        lastEntry: getLastServiceKm(log, "rearTire"),
-        categoryLabel: "Gomma posteriore",
-      }),
-    };
+oil: buildMaintenanceItem({
+  currentKm,
+  interval: oilInterval,
+  lastEntry: getLastServiceKm(log, "oil"),
+  baseKm,
+  categoryLabel: "Olio",
+}),
+chain: buildMaintenanceItem({
+  currentKm,
+  interval: chainInterval,
+  lastEntry: getLastServiceKm(log, "chain"),
+  baseKm,
+  categoryLabel: "Catena",
+}),
+frontTire: buildMaintenanceItem({
+  currentKm,
+  interval: frontTireInterval,
+  lastEntry: getLastServiceKm(log, "frontTire"),
+  baseKm,
+  categoryLabel: "Gomma anteriore",
+}),
+rearTire: buildMaintenanceItem({
+  currentKm,
+  interval: rearTireInterval,
+  lastEntry: getLastServiceKm(log, "rearTire"),
+  baseKm,
+  categoryLabel: "Gomma posteriore",
+}),
+};
   }, [activeBike]);
-
   const maintenanceAlerts = useMemo(() => {
     if (!computed) return [];
 
@@ -331,18 +340,18 @@ export default function Garage() {
       : "";
     const k = km ? parseKm(km, 0) : 0;
 
-    const newBike = {
-      id: uid(),
-      brand: b,
-      model: m,
-      year: y,
-      km: k,
-      createdAt: new Date().toISOString(),
-      maintenance: { ...DEFAULTS },
-      documents: [],
-      serviceLog: [],
-    };
-
+const newBike = {
+  id: uid(),
+  brand: b,
+  model: m,
+  year: y,
+  km: k,
+  baseKm: k, // 👈 NUOVO (fondamentale)
+  createdAt: new Date().toISOString(),
+  maintenance: { ...DEFAULTS },
+  documents: [],
+  serviceLog: [],
+};
     const next = [newBike, ...bikes];
     setBikesAndPersist(next);
     setActiveId(newBike.id);
